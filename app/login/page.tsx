@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 
 import { Button } from "@/components/ui/button";
@@ -11,11 +13,20 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
 import { PasswordInput } from "@/components/ui/passwordInput";
 import { TextSeparator } from "@/components/ui/textSeparator";
 
 const Login = () => {
+  function connectMyECL(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    console.log("The link was clicked.");
+  }
+
+  function connectOther(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+    console.log("The link was clicked.");
+  }
+
   return (
     <div className="flex [&>div]:w-full h-screen">
       <Card className="rounded-xl border bg-card text-card-foreground shadow max-w-[700px] m-auto">
@@ -28,8 +39,10 @@ const Login = () => {
         <CardContent>
           <form>
             <div className="grid w-full items-center gap-4">
-              <Button variant="outline">MyECL</Button>
-              <TextSeparator text="Ou continuez par email"/>
+              <Button variant="outline" onClick={connectMyECL}>
+                MyECL
+              </Button>
+              <TextSeparator text="Ou continuez par email" />
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
                 <Input placeholder="raid@exemple.com" id="email"></Input>
@@ -41,7 +54,7 @@ const Login = () => {
           </form>
         </CardContent>
         <CardFooter className="flex justify-between">
-          <Button className="w-full">Se connecter</Button>
+          <Button className="w-full" onClick={connectOther}>Se connecter</Button>
         </CardFooter>
       </Card>
     </div>
