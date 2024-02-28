@@ -1,23 +1,19 @@
 "use client";
 
 import * as React from "react";
-import * as LabelPrimitive from "@radix-ui/react-label";
 
-const TextSeparator = React.forwardRef<
-  React.ElementRef<typeof LabelPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> & {
-    text: string;
-  }
->(({ text }) => (
-  <div className="relative">
-    <div className="absolute inset-0 flex items-center">
-      <span className="w-full border-t"></span>
+const TextSeparator = React.forwardRef<HTMLInputElement, { text: string }>(
+  ({ text }) => (
+    <div className="relative">
+      <div className="absolute inset-0 flex items-center">
+        <span className="w-full border-t"></span>
+      </div>
+      <div className="relative flex justify-center text-xs uppercase">
+        <span className="bg-background px-2 text-muted-foreground">{text}</span>
+      </div>
     </div>
-    <div className="relative flex justify-center text-xs uppercase">
-      <span className="bg-background px-2 text-muted-foreground">{text}</span>
-    </div>
-  </div>
-));
+  )
+);
 
 TextSeparator.displayName = "TextSeparator";
 
