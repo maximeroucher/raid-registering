@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate": "openapi -i https://hyperion-1.dev.eclair.ec-lyon.fr/openapi.json -o api typescript-axios"
   },
   "dependencies": {
     "@radix-ui/react-label": "^2.0.2",
