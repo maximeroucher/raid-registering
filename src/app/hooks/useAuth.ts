@@ -148,7 +148,6 @@ export const useAuth = () => {
             refresh_token: refresh_token,
           };
           await getToken(params);
-          console.log("refreshing token");
         }
       } else {
         setToken(access_token);
