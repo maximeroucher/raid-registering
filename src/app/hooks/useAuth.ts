@@ -58,17 +58,18 @@ export const useAuth = () => {
       "Content-Type": "application/x-www-form-urlencoded",
       Accept: "application/json",
     };
-    axios
-      .post(`${scheme}://${backUrl}/auth/token`, body, {
-        headers: headers,
-      })
-      .then((result) => {
-        const tokenResponse: TokenResponse = result.data;
-        localStorage.setItem(tokenKey, tokenResponse.access_token);
-        localStorage.setItem(refreshTokenKey, tokenResponse.refresh_token);
-        setIsLoading(false);
-        setToken(tokenResponse.access_token);
-      });
+    const result = await axios.post(`${scheme}://${backUrl}/auth/token`, body, {
+      headers: headers,
+    });
+    if (result.status != 200) {
+      setIsLoading(false);
+      return;
+    }
+    const tokenResponse: TokenResponse = result.data;
+    localStorage.setItem(tokenKey, tokenResponse.access_token);
+    localStorage.setItem(refreshTokenKey, tokenResponse.refresh_token);
+    setIsLoading(false);
+    setToken(tokenResponse.access_token);
   }
 
   async function getTokenFromRequest(popupWindow: Window | null) {
@@ -134,7 +135,7 @@ export const useAuth = () => {
     });
   }
 
-  async function getTokenFromStorage(): Promise<string | null>{
+  async function getTokenFromStorage(): Promise<string | null> {
     setIsLoading(true);
     if (typeof window === "undefined") return null;
     const access_token = localStorage.getItem(tokenKey);
@@ -151,20 +152,23 @@ export const useAuth = () => {
             client_id: clientId,
             refresh_token: refresh_token,
           };
-          getToken(params);
+          await getToken(params);
           console.log("refreshing token");
         }
       } else {
         setToken(access_token);
         setIsLoading(false);
       }
+    } else {
+      setIsLoading(false);
     }
     return access_token;
   }
 
   useQuery({
-    queryKey: ['getTokenFromStorage'],
+    queryKey: ["getTokenFromStorage"],
     queryFn: () => getTokenFromStorage(),
+    retry: 0,
   });
 
   return { getTokenFromRequest, isLoading, token };

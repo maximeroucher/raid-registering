@@ -21,7 +21,7 @@ const Login = () => {
       {token && token != undefined ? (
         <div>Logged in</div>
       ) : (
-        <Button variant="outline" onClick={connectMyECL}>
+        <Button variant="outline" onClick={connectMyECL} disabled={isLoading}>
           {isLoading ? (
             <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
           ) : (
