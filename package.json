@@ -33,6 +33,7 @@
     "@types/base-64": "^1.0.2",
     "@types/crypto-js": "^4.2.2",
     "@types/node": "^20",
+    "@types/qs": "^6.9.12",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/utf8": "^3.0.3",

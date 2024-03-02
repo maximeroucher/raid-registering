@@ -1,7 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
-
 import { Button } from "@/src/components/ui/button";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useAuth } from "../hooks/useAuth";

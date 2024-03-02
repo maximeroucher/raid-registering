@@ -7,15 +7,11 @@ import {
   BodyTokenAuthTokenPost,
   TokenResponse,
 } from "@/src/api/hyperionSchemas";
-import { get } from "http";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-// import { useTokenAuthTokenPost } from "@/src/api/hyperionComponents";
+import { useQuery } from "@tanstack/react-query";
 
-const tokenName: string = "my_ecl_auth_token";
 const clientId: string = "Titan";
 const tokenKey: string = "token";
 const refreshTokenKey: string = "refresh_token";
-const redirectUrl: string = "fr.myecl.titan://authorized";
 const redirectUrlHost: string = "myecl.fr";
 const backUrl: string = "hyperion.myecl.fr";
 const scopes: string[] = ["API"];
@@ -24,7 +20,6 @@ const scheme = "https";
 export const useAuth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [token, setToken] = useState<string | null>(null);
-  //   const { mutate: tokenAuthTokenPost } = useTokenAuthTokenPost();
 
   function generateRandomString(length: number): string {
     var result = "";
