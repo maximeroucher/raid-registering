@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/src/components/ui/button";
 import {
   Card,
   CardContent,
@@ -10,54 +10,51 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { PasswordInput } from "@/components/ui/passwordInput";
-import { TextSeparator } from "@/components/ui/textSeparator";
+} from "@/src/components/ui/card";
+import { Input } from "@/src/components/ui/input";
+import { Label } from "@/src/components/ui/label";
+import { PasswordInput } from "@/src/components/ui/passwordInput";
+import { TextSeparator } from "@/src/components/ui/textSeparator";
+import MyECLButton from "./MyECLButton";
+
 
 const Login = () => {
-  function connectMyECL(e: React.MouseEvent<HTMLButtonElement>) {
-    e.preventDefault();
-    console.log("The link was clicked.");
-  }
-
   function connectOther(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     console.log("The link was clicked.");
   }
 
   return (
-    <div className="flex [&>div]:w-full h-screen">
-      <Card className="rounded-xl border bg-card text-card-foreground shadow max-w-[700px] m-auto">
-        <CardHeader>
-          <CardTitle>Créer un compte</CardTitle>
-          <CardDescription>
-            Connectez-vous avec MyECL ou inscrivez-vous par mail
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form>
-            <div className="grid w-full items-center gap-4">
-              <Button variant="outline" onClick={connectMyECL}>
-                MyECL
-              </Button>
-              <TextSeparator text="Ou continuez par email" />
-              <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
-                <Input placeholder="raid@exemple.com" id="email"></Input>
-                <div className="h-2"></div>
-                <Label htmlFor="password">Mot de passe</Label>
-                <PasswordInput type="password" hidden></PasswordInput>
+      <div className="flex [&>div]:w-full h-screen">
+        <Card className="rounded-xl border bg-card text-card-foreground shadow max-w-[700px] m-auto">
+          <CardHeader>
+            <CardTitle>Créer un compte</CardTitle>
+            <CardDescription>
+              Connectez-vous avec MyECL ou inscrivez-vous par mail
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form>
+              <div className="grid w-full items-center gap-4">
+                <MyECLButton />
+                <TextSeparator text="Ou continuez par email" />
+                <div className="grid gap-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input placeholder="raid@exemple.com" id="email"></Input>
+                  <div className="h-2"></div>
+                  <Label htmlFor="password">Mot de passe</Label>
+                  <PasswordInput type="password" hidden></PasswordInput>
+                </div>
               </div>
-            </div>
-          </form>
-        </CardContent>
-        <CardFooter className="flex justify-between">
-          <Button className="w-full" onClick={connectOther}>Se connecter</Button>
-        </CardFooter>
-      </Card>
-    </div>
+            </form>
+          </CardContent>
+          <CardFooter className="flex justify-between">
+            <Button className="w-full" onClick={connectOther}>
+              Se connecter
+            </Button>
+          </CardFooter>
+        </Card>
+      </div>
   );
 };
 
