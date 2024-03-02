@@ -8,6 +8,7 @@ import {
   TokenResponse,
 } from "@/src/api/hyperionSchemas";
 import { useQuery } from "@tanstack/react-query";
+import { useTokenStore } from "@/src/stores/token";
 
 const clientId: string = "Titan";
 const tokenKey: string = "token";
@@ -19,7 +20,7 @@ const scheme = "https";
 
 export const useAuth = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [token, setToken] = useState<string | null>(null);
+  const { token, setToken } = useTokenStore();
   const [isTokenQueried, setIsTokenQueried] = useState(false);
 
   function generateRandomString(length: number): string {
@@ -169,3 +170,8 @@ export const useAuth = () => {
 
   return { getTokenFromRequest, isLoading, token, isTokenQueried };
 };
+function useShallow(
+  arg0: (s: any) => { token: any; setToken: any }
+): (state: unknown) => unknown {
+  throw new Error("Function not implemented.");
+}
