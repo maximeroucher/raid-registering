@@ -161,7 +161,7 @@ export const useAuth = () => {
 
   useQuery({
     queryKey: ["getTokenFromStorage"],
-    queryFn: () => getTokenFromStorage(),
+    queryFn: getTokenFromStorage,
     retry: 0,
   });
 
