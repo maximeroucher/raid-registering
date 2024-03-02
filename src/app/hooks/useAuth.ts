@@ -7,6 +7,8 @@ import {
   BodyTokenAuthTokenPost,
   TokenResponse,
 } from "@/src/api/hyperionSchemas";
+import { get } from "http";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 // import { useTokenAuthTokenPost } from "@/src/api/hyperionComponents";
 
 const tokenName: string = "my_ecl_auth_token";
@@ -17,6 +19,7 @@ const redirectUrl: string = "fr.myecl.titan://authorized";
 const redirectUrlHost: string = "myecl.fr";
 const backUrl: string = "hyperion.myecl.fr";
 const scopes: string[] = ["API"];
+const scheme = "https";
 
 export const useAuth = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -30,7 +33,9 @@ export const useAuth = () => {
     var charactersLength = characters.length;
     var values = crypto.getRandomValues(new Uint8Array(length));
     for (var i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(values[i] / length * charactersLength));
+      result += characters.charAt(
+        Math.floor((values[i] / length) * charactersLength)
+      );
     }
     return result;
   }
@@ -47,8 +52,26 @@ export const useAuth = () => {
     });
   }
 
+  async function getToken(params: BodyTokenAuthTokenPost) {
+    const body = stringify(params);
+    const headers = {
+      "Content-Type": "application/x-www-form-urlencoded",
+      Accept: "application/json",
+    };
+    axios
+      .post(`${scheme}://${backUrl}/auth/token`, body, {
+        headers: headers,
+      })
+      .then((result) => {
+        const tokenResponse: TokenResponse = result.data;
+        localStorage.setItem(tokenKey, tokenResponse.access_token);
+        localStorage.setItem(refreshTokenKey, tokenResponse.refresh_token);
+        setIsLoading(false);
+        setToken(tokenResponse.access_token);
+      });
+  }
+
   async function getTokenFromRequest(popupWindow: Window | null) {
-    const scheme = "https";
     const host = redirectUrlHost;
     const path = "/static.html";
     const redirectUri = `${scheme}://${host}${path}`;
@@ -100,22 +123,7 @@ export const useAuth = () => {
         redirect_uri: redirectUri,
         code_verifier: codeVerifier,
       };
-      const body = stringify(params);
-      const headers = {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "Accept": "application/json",
-      };
-      axios
-        .post(`${scheme}://${backUrl}/auth/token`, body, {
-          headers: headers,
-        })
-        .then((result) => {
-          const tokenResponse: TokenResponse = result.data;
-          localStorage.setItem(tokenKey, tokenResponse.access_token);
-          localStorage.setItem(refreshTokenKey, tokenResponse.refresh_token);
-          setIsLoading(false);
-          setToken(tokenResponse.access_token);
-        });
+      getToken(params);
     }
 
     window.addEventListener("message", (event) => {
@@ -125,6 +133,39 @@ export const useAuth = () => {
       }
     });
   }
+
+  async function getTokenFromStorage(): Promise<string | null>{
+    setIsLoading(true);
+    if (typeof window === "undefined") return null;
+    const access_token = localStorage.getItem(tokenKey);
+    if (access_token) {
+      const access_token_expires = access_token
+        ? JSON.parse(atob(access_token.split(".")[1])).exp
+        : 0;
+      const now = Math.floor(Date.now() / 1000);
+      if (access_token_expires < now) {
+        const refresh_token = localStorage.getItem(refreshTokenKey);
+        if (refresh_token) {
+          const params: BodyTokenAuthTokenPost = {
+            grant_type: "refresh_token",
+            client_id: clientId,
+            refresh_token: refresh_token,
+          };
+          getToken(params);
+          console.log("refreshing token");
+        }
+      } else {
+        setToken(access_token);
+        setIsLoading(false);
+      }
+    }
+    return access_token;
+  }
+
+  useQuery({
+    queryKey: ['getTokenFromStorage'],
+    queryFn: () => getTokenFromStorage(),
+  });
 
   return { getTokenFromRequest, isLoading, token };
 };
