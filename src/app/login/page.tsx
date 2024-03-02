@@ -25,11 +25,11 @@ const Login = () => {
 
   return (
     <div className="flex [&>div]:w-full h-screen">
-      <Card className="rounded-xl border bg-card text-card-foreground shadow max-w-[700px] m-auto">
+      <Card className="rounded-xl border bg-card text-card-foreground shadow max-w-[700px] m-auto text-zinc-700">
         <CardHeader>
           <CardTitle>Créer un compte</CardTitle>
           <CardDescription>
-            Connectez-vous avec MyECL ou inscrivez-vous par mail
+            Connectez-vous avec MyECL ou par mail
           </CardDescription>
         </CardHeader>
         <CardContent>
