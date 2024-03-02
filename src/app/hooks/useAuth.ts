@@ -142,6 +142,7 @@ export const useAuth = () => {
         : 0;
       const now = Math.floor(Date.now() / 1000);
       if (access_token_expires < now) {
+        setToken(null);
         const refresh_token = localStorage.getItem(refreshTokenKey);
         if (refresh_token) {
           const params: BodyTokenAuthTokenPost = {
