@@ -3,21 +3,24 @@
 import { Button } from "@/src/components/ui/button";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useAuth } from "../hooks/useAuth";
+import { useUser } from "../hooks/useUser";
 
 const Login = () => {
-  const { getTokenFromRequest, isLoading, token } =
-    useAuth();
+  const { getTokenFromRequest, token, isLoading } = useAuth();
+
+  const { me } = useUser(token);
 
   function connectMyECL(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     getTokenFromRequest(window);
   }
 
-
   return (
     <>
-      {token && token != undefined ? (
-        <div>Logged in</div>
+      {me && me != undefined ? (
+        <div>
+          <div>{me?.firstname}</div>
+        </div>
       ) : (
         <Button variant="outline" onClick={connectMyECL} disabled={isLoading}>
           {isLoading ? (
