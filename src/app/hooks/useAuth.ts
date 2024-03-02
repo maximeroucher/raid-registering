@@ -20,6 +20,7 @@ const scheme = "https";
 export const useAuth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [token, setToken] = useState<string | null>(null);
+  const [isTokenQueried, setIsTokenQueried] = useState(false);
 
   function generateRandomString(length: number): string {
     var result = "";
@@ -156,6 +157,7 @@ export const useAuth = () => {
     } else {
       setIsLoading(false);
     }
+    setIsTokenQueried(true);
     return access_token;
   }
 
@@ -165,5 +167,5 @@ export const useAuth = () => {
     retry: 0,
   });
 
-  return { getTokenFromRequest, isLoading, token };
+  return { getTokenFromRequest, isLoading, token, isTokenQueried };
 };
