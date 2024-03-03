@@ -7,9 +7,9 @@ export default defineConfig({
   hyperion: {
     from: {
       source: "url",
-      url: "https://hyperion-1.dev.eclair.ec-lyon.fr/openapi.json",
+      url: "http://127.0.0.1:8000/openapi.json",
     },
-    outputDir: "api",
+    outputDir: "src/api",
     to: async (context) => {
       const filenamePrefix = "hyperion";
       const { schemasFiles } = await generateSchemaTypes(context, {
