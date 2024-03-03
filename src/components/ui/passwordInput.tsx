@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { EyeIcon, EyeOffIcon } from "lucide-react"
+import { HiEye, HiEyeOff } from "react-icons/hi"
 
 import { cn } from "@/lib/utils";
 
@@ -24,12 +24,12 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         />
            <div className="absolute inset-y-0 right-0 flex cursor-pointer items-center pr-3 text-gray-400">
         {showPassword ? (
-          <EyeIcon
+          <HiEye
             className="h-4 w-4"
             onClick={togglePasswordVisibility}
           />
         ) : (
-          <EyeOffIcon
+          <HiEyeOff
             className="h-4 w-4"
             onClick={togglePasswordVisibility}
           />
