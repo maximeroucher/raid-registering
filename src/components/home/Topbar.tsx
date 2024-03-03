@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { UserButton } from "./UserButton";
-export const Nav = () => {
+export const TopBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (

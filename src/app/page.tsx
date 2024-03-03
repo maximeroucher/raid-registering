@@ -1,6 +1,6 @@
 "use client";
 
-import { Nav } from "../components/home/Topbar";
+import { TopBar } from "../components/home/TopBar";
 import { useAuth } from "./hooks/useAuth";
 import { useUser } from "./hooks/useUser";
 import { useRouter } from "next/navigation";
@@ -17,7 +17,7 @@ const Home = () => {
 
   return (
     <>
-      <Nav />
+      <TopBar />
       <main className="flex min-h-screen flex-col items-center justify-between p-24">
         {me && (
           <div>
