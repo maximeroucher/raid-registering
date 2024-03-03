@@ -13,45 +13,15 @@ import { Button } from "../ui/button";
 import { HiPencil } from "react-icons/hi";
 import { toast } from "../ui/use-toast";
 
-export const ParticipantCard = () => {
-  const participant: Participant = {
-    id: "1",
-    validation_progress: 0.4,
-    name: "Name",
-    firstname: "Firstname",
-    birthday: "2021-10-10",
-    address: "Address",
-    phone: "Phone",
-    email: "Email",
-    bike_size: "M",
-    t_shirt_size: "M",
-    situation: null,
-    other_school: null,
-    company: null,
-    diet: null,
-    id_card: {
-      id: "1",
-      name: "carte identité.png",
-      type: "idCard",
-      uploaded_at: "2021-10-10",
-      validated: true,
-    },
-    medical_certificate: null,
-    security_file: {
-      id: "1",
-      name: "Security",
-      firstname: "Firstname",
-      birthday: "2021-10-10",
-      address: "Address",
-      phone: "03135686",
-      asthma: false,
-    },
-    student_card: null,
-    raid_rules: null,
-    attestation_on_honour: true,
-    payment: false,
-  };
+interface ParticipantCardProps {
+  participant: Participant;
+  isCaptain: boolean;
+}
 
+export const ParticipantCard = ({
+  participant,
+  isCaptain,
+}: ParticipantCardProps) => {
   function showToast() {
     toast({
       title: "Profil mis à jour",
@@ -67,7 +37,7 @@ export const ParticipantCard = () => {
             <CardTitle>
               {participant.firstname} {participant.name}
             </CardTitle>
-            <CardDescription>Capitaine</CardDescription>
+            <CardDescription>{isCaptain ? "Capitaine" : " "}</CardDescription>
           </div>
           <Button variant="outline" onClick={showToast}>
             <HiPencil className="mr-2 h-4 w-4" />
