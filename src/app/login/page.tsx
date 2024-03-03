@@ -27,7 +27,7 @@ const Login = () => {
     <div className="flex [&>div]:w-full h-screen">
       <Card className="rounded-xl border bg-card text-card-foreground shadow max-w-[700px] m-auto text-zinc-700">
         <CardHeader>
-          <CardTitle>Créer un compte</CardTitle>
+          <CardTitle>Se connecter</CardTitle>
           <CardDescription>
             Connectez-vous avec MyECL ou par mail
           </CardDescription>
@@ -44,13 +44,16 @@ const Login = () => {
                 <Label htmlFor="password">Mot de passe</Label>
                 <PasswordInput type="password" hidden></PasswordInput>
               </div>
+              <div/>
+              <Button className="w-full" onClick={connectOther}>
+                Se connecter
+              </Button>
             </div>
           </form>
         </CardContent>
-        <CardFooter className="flex justify-between">
-          <Button className="w-full" onClick={connectOther}>
-            Se connecter
-          </Button>
+        <CardFooter className="flex flex-row justify-between">
+          <Button variant="link">Créer un compte</Button>
+          <Button variant="link">Mot de passe oublié ?</Button>
         </CardFooter>
       </Card>
     </div>
