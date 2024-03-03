@@ -1,27 +1,48 @@
 import { useUser } from "@/src/app/hooks/useUser";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "../ui/sheet";
 import { Button } from "../ui/button";
+import { useAuth } from "@/src/app/hooks/useAuth";
 
 export const UserButton = () => {
   const { me } = useUser();
+  const { logout } = useAuth();
   return (
     me && (
-      <Popover>
-        <PopoverTrigger asChild>
+      <Sheet>
+        <SheetTrigger asChild>
           <Button variant="ghost">
-            {me.firstname + " " + me.name + (
-              me.nickname ? ` (${me.nickname})` : ""
-            )}
+            {me.firstname +
+              " " +
+              me.name +
+              (me.nickname ? ` (${me.nickname})` : "")}
           </Button>
-        </PopoverTrigger>
-        <PopoverContent className="w-40">
-          <div className="flex flex-col space-y-2">
-            <Button variant="ghost">Profile</Button>
-            <Button variant="ghost">Settings</Button>
-            <Button variant="ghost" className="text-red-700">Logout</Button>
-          </div>
-        </PopoverContent>
-      </Popover>
+        </SheetTrigger>
+        <SheetContent className="flex flex-col">
+          <SheetHeader>
+            <SheetTitle>{me.nickname ?? me.firstname}</SheetTitle>
+            <SheetDescription>
+              {me.nickname ? me.firstname + " " + me.name : me.name}
+            </SheetDescription>
+          </SheetHeader>
+
+          <SheetFooter>
+            <SheetClose asChild>
+              <Button variant="ghost" className="text-red-700" onClick={logout}>
+                Logout
+              </Button>
+            </SheetClose>
+          </SheetFooter>
+        </SheetContent>
+      </Sheet>
     )
   );
 };

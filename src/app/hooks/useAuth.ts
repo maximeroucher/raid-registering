@@ -9,6 +9,7 @@ import {
 } from "@/src/api/hyperionSchemas";
 import { useQuery } from "@tanstack/react-query";
 import { useTokenStore } from "@/src/stores/token";
+import { useRouter } from "next/navigation";
 
 const clientId: string = "Titan";
 const tokenKey: string = "token";
@@ -22,6 +23,7 @@ export const useAuth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { token, setToken } = useTokenStore();
   const [isTokenQueried, setIsTokenQueried] = useState(false);
+  const router = useRouter();
 
   function generateRandomString(length: number): string {
     var result = "";
@@ -132,11 +134,19 @@ export const useAuth = () => {
     });
   }
 
+  function logout() {
+    localStorage.removeItem(tokenKey);
+    localStorage.removeItem(refreshTokenKey);
+    setToken(null);
+    setIsTokenQueried(true);
+    router.replace("/login");
+  }
+
   async function getTokenFromStorage(): Promise<string | null> {
     setIsLoading(true);
     if (typeof window === "undefined") return null;
     const access_token = localStorage.getItem(tokenKey);
-    if (access_token) {
+    if (access_token !== null) {
       const access_token_expires = access_token
         ? JSON.parse(atob(access_token.split(".")[1])).exp
         : 0;
@@ -158,6 +168,7 @@ export const useAuth = () => {
       }
     } else {
       setIsLoading(false);
+      router.replace("/login");
     }
     setIsTokenQueried(true);
     return access_token;
@@ -169,10 +180,6 @@ export const useAuth = () => {
     retry: 0,
   });
 
-  return { getTokenFromRequest, isLoading, token, isTokenQueried };
+  return { getTokenFromRequest, isLoading, token, isTokenQueried, logout };
 };
-function useShallow(
-  arg0: (s: any) => { token: any; setToken: any }
-): (state: unknown) => unknown {
-  throw new Error("Function not implemented.");
-}
+
