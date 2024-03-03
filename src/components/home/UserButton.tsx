@@ -13,14 +13,12 @@ import { Button } from "../ui/button";
 import { useAuth } from "@/src/app/hooks/useAuth";
 import { HiLogout, HiPencil } from "react-icons/hi";
 import { UserInfoView } from "./UserInfoView";
-import { useToast } from "../ui/use-toast";
+import { toast } from "../ui/use-toast";
 import { useState } from "react";
 
 export const UserButton = () => {
   const { me } = useUser();
   const { logout } = useAuth();
-
-  const { toast } = useToast();
 
   const [isOpened, setIsOpened] = useState(false);
 
