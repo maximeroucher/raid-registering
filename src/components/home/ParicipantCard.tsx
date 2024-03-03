@@ -29,6 +29,29 @@ export const ParticipantCard = ({
     });
   }
 
+  function getSituation() {
+    switch (participant.situation) {
+      case "otherSchool":
+        return (
+          <ParticipantCardItem
+            label="Situation"
+            value={participant.other_school}
+          />
+        );
+      case "corporatePartner":
+        return (
+          <ParticipantCardItem label="Situation" value={participant.company} />
+        );
+      default:
+        return (
+          <ParticipantCardItem
+            label="Situation"
+            value={participant.situation}
+          />
+        );
+    }
+  }
+
   return (
     <Card className="w-full m-14">
       <CardHeader>
@@ -55,12 +78,7 @@ export const ParticipantCard = ({
           label="Taille de t-shirt"
           value={participant.t_shirt_size}
         />
-        <ParticipantCardItem label="Situation" value={participant.situation} />
-        <ParticipantCardItem
-          label="Autre école"
-          value={participant.other_school}
-        />
-        <ParticipantCardItem label="Entreprise" value={participant.company} />
+        {getSituation()}
         <ParticipantCardItem
           label="Régime alimentaire"
           value={participant.diet}
