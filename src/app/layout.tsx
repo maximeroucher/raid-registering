@@ -3,6 +3,7 @@
 import { Outfit } from "next/font/google";
 import "./globals.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "../components/ui/toaster";
 
 const inter = Outfit({ subsets: ["latin-ext"] });
 
@@ -18,6 +19,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <QueryClientProvider client={queryClient}>
           {children}
+          <Toaster />
         </QueryClientProvider>
       </body>
     </html>
