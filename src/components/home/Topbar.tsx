@@ -32,8 +32,8 @@ export const TopBar = () => {
             Inscription Raid 2024
           </span>
         </a>
-        <div className="flex items-center hidden space-x-8 lg:flex">
-          <Button>Admin</Button>
+        <div className="items-center hidden space-x-8 lg:flex">
+          {/* <Button>Admin</Button> */}
           <UserButton />
         </div>
         <div className="lg:hidden">
@@ -105,7 +105,7 @@ export const TopBar = () => {
                     </button>
                   </div>
                 </div>
-                <Button>Admin</Button>
+                {/* <Button>Admin</Button> */}
                 <UserButton />
               </div>
             </div>
