@@ -1,11 +1,11 @@
 "use client";
 
 import { Participant, Team } from "../api/hyperionSchemas";
+import { EmptyParticipantCard } from "../components/home/EmptyParticipantCard";
 import { ParticipantCard } from "../components/home/ParicipantCard";
 import { TeamCard } from "../components/home/TeamCard";
 import { TopBar } from "../components/home/TopBar";
 import { useAuth } from "./hooks/useAuth";
-import { useUser } from "./hooks/useUser";
 import { useRouter } from "next/navigation";
 
 const Home = () => {
@@ -97,7 +97,7 @@ const Home = () => {
     difficulty: null,
     validation_progress: 0.4,
     captain: captain,
-    second: second,
+    second: null,
   };
 
   return (
@@ -108,8 +108,12 @@ const Home = () => {
           <TeamCard team={team} />
         </div>
         <div className="flex flex-row w-full justify-evenly">
-          <ParticipantCard participant={captain} isCaptain />
-          <ParticipantCard participant={second} isCaptain={false} />
+          <ParticipantCard participant={team.captain} isCaptain />
+          {team.second ? (
+            <ParticipantCard participant={team.second} isCaptain={false} />
+          ) : (
+            <EmptyParticipantCard />
+          )}
         </div>
       </main>
     </>
