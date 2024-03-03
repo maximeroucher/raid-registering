@@ -11,6 +11,7 @@ import {
 } from "../ui/sheet";
 import { Button } from "../ui/button";
 import { useAuth } from "@/src/app/hooks/useAuth";
+import { HiLogout } from "react-icons/hi";
 
 export const UserButton = () => {
   const { me } = useUser();
@@ -26,7 +27,7 @@ export const UserButton = () => {
               (me.nickname ? ` (${me.nickname})` : "")}
           </Button>
         </SheetTrigger>
-        <SheetContent className="flex flex-col">
+        <SheetContent className="flex flex-col justify-between">
           <SheetHeader>
             <SheetTitle>{me.nickname ?? me.firstname}</SheetTitle>
             <SheetDescription>
@@ -36,8 +37,9 @@ export const UserButton = () => {
 
           <SheetFooter>
             <SheetClose asChild>
-              <Button variant="ghost" className="text-red-700" onClick={logout}>
-                Logout
+              <Button variant="destructive" onClick={logout}>
+              <HiLogout className="mr-2 h-4 w-4" />
+                Se déconnecter
               </Button>
             </SheetClose>
           </SheetFooter>
