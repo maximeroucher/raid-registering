@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import axios from "axios";
+import { stringify } from "qs";
 import {
   BodyTokenAuthTokenPost,
   TokenResponse,
@@ -8,7 +10,6 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { useTokenStore } from "@/src/stores/token";
 import { useRouter } from "next/navigation";
-import { getAuthToken } from "../api/hyperionAuth";
 
 const clientId: string = "Titan";
 const tokenKey: string = "token";
@@ -50,7 +51,14 @@ export const useAuth = () => {
   }
 
   async function getToken(params: BodyTokenAuthTokenPost) {
-    const result = await getAuthToken(params);
+    const body = stringify(params);
+    const headers = {
+      "Content-Type": "application/x-www-form-urlencoded",
+      Accept: "application/json",
+    };
+    const result = await axios.post(`${backUrl}/auth/token`, body, {
+      headers: headers,
+    });
     if (result.status != 200) {
       setIsLoading(false);
       return;
