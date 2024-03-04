@@ -1,4 +1,4 @@
-import { useUser } from "@/src/app/hooks/useUser";
+import { useUser } from "@/src/hooks/useUser";
 import {
   Sheet,
   SheetClose,
@@ -10,7 +10,7 @@ import {
   SheetTrigger,
 } from "../ui/sheet";
 import { Button } from "../ui/button";
-import { useAuth } from "@/src/app/hooks/useAuth";
+import { useAuth } from "@/src/hooks/useAuth";
 import { HiLogout, HiPencil } from "react-icons/hi";
 import { UserInfoView } from "./UserInfoView";
 import { toast } from "../ui/use-toast";

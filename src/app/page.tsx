@@ -5,7 +5,7 @@ import { EmptyParticipantCard } from "../components/home/EmptyParticipantCard";
 import { ParticipantCard } from "../components/home/ParicipantCard";
 import { TeamCard } from "../components/home/TeamCard";
 import { TopBar } from "../components/home/TopBar";
-import { useAuth } from "./hooks/useAuth";
+import { useAuth } from "../hooks/useAuth";
 import { useRouter } from "next/navigation";
 
 const Home = () => {
@@ -97,7 +97,7 @@ const Home = () => {
     difficulty: null,
     validation_progress: 0.4,
     captain: captain,
-    second: null,
+    second: second,
   };
 
   return (
