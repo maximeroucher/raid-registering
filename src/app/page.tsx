@@ -26,16 +26,14 @@ const Home = () => {
           <TeamCard team={team} />
         </div>
         <div className="flex flex-row w-full justify-evenly">
-          {team && (
             <>
-              <ParticipantCard participant={team.captain} isCaptain />
-              {team.second ? (
-                <ParticipantCard participant={team.second} isCaptain={false} />
+              <ParticipantCard participant={team?.captain} isCaptain />
+              {team?.second && team?.second !== null ? (
+                <ParticipantCard participant={team?.second} isCaptain={false} />
               ) : (
                 <EmptyParticipantCard />
               )}
             </>
-          )}
         </div>
       </main>
     </>

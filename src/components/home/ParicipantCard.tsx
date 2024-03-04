@@ -12,9 +12,10 @@ import { Progress } from "../ui/progress";
 import { Button } from "../ui/button";
 import { HiPencil } from "react-icons/hi";
 import { toast } from "../ui/use-toast";
+import { Skeleton } from "../ui/skeleton";
 
 interface ParticipantCardProps {
-  participant: Participant;
+  participant?: Participant;
   isCaptain: boolean;
 }
 
@@ -30,23 +31,23 @@ export const ParticipantCard = ({
   }
 
   function getSituation() {
-    switch (participant.situation) {
+    switch (participant?.situation) {
       case "otherSchool":
         return (
           <ParticipantCardItem
             label="Situation"
-            value={participant.other_school}
+            value={participant?.other_school}
           />
         );
       case "corporatePartner":
         return (
-          <ParticipantCardItem label="Situation" value={participant.company} />
+          <ParticipantCardItem label="Situation" value={participant?.company} />
         );
       default:
         return (
           <ParticipantCardItem
             label="Situation"
-            value={participant.situation}
+            value={participant?.situation}
           />
         );
     }
@@ -58,7 +59,14 @@ export const ParticipantCard = ({
         <div className="flex flex-row justify-between">
           <div>
             <CardTitle>
-              {participant.firstname} {participant.name}
+              {participant?.firstname && participant?.firstname ? (
+                participant?.firstname + " " + participant?.name
+              ) : (
+                <div className="flex flex-row gap-2">
+                  <Skeleton className="w-24 h-8" />
+                  <Skeleton className="w-24 h-8" />
+                </div>
+              )}
             </CardTitle>
             <CardDescription>{isCaptain ? "Capitaine" : " "}</CardDescription>
           </div>
@@ -69,49 +77,49 @@ export const ParticipantCard = ({
         </div>
       </CardHeader>
       <CardContent>
-        <ParticipantCardItem label="Addresse" value={participant.address} />
+        <ParticipantCardItem label="Addresse" value={participant?.address} />
         <ParticipantCardItem
           label="Taille de vélo"
-          value={participant.bike_size}
+          value={participant?.bike_size}
         />
         <ParticipantCardItem
           label="Taille de t-shirt"
-          value={participant.t_shirt_size}
+          value={participant?.t_shirt_size}
         />
         {getSituation()}
         <ParticipantCardItem
           label="Régime alimentaire"
-          value={participant.diet}
+          value={participant?.diet}
         />
         <ParticipantCardItem
           label="Carte d'identité"
-          value={participant.id_card}
+          value={participant?.id_card}
         />
         <ParticipantCardItem
           label="Certificat médical"
-          value={participant.medical_certificate}
+          value={participant?.medical_certificate}
         />
         <ParticipantCardItem
           label="Fiche de sécurité"
-          value={participant.security_file}
+          value={participant?.security_file}
         />
         <ParticipantCardItem
           label="Carte étudiante"
-          value={participant.student_card}
+          value={participant?.student_card}
         />
         <ParticipantCardItem
           label="Règlement du raid"
-          value={participant.raid_rules}
+          value={participant?.raid_rules}
         />
       </CardContent>
       <CardFooter className="flex flex-col">
         <ParticipantCardItem
           label="Attestation sur l'honneur"
-          value={participant.attestation_on_honour}
+          value={participant?.attestation_on_honour}
         />
-        <ParticipantCardItem label="Paiement" value={participant.payment} />
+        <ParticipantCardItem label="Paiement" value={participant?.payment} />
       </CardFooter>
-      <Progress value={participant.validation_progress * 100} />
+      <Progress value={participant?.validation_progress ? participant!.validation_progress * 100 : 0} />
     </Card>
   );
 };

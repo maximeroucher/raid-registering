@@ -1,5 +1,6 @@
 import { SecurityFile, Size, Document } from "@/src/api/hyperionSchemas";
 import { Checkbox } from "../ui/checkbox";
+import { Skeleton } from "../ui/skeleton";
 
 type ValueType =
   | string
@@ -40,6 +41,10 @@ export const ParticipantCardItem = ({
     return typeof (value as SecurityFile)?.name === "string";
   };
 
+  const isString = (value: ValueType): value is string => {
+    return typeof value === "string";
+  }
+
   const valueComponent = (value: ValueType) => {
     switch (true) {
       case isBoolean(value):
@@ -68,10 +73,13 @@ export const ParticipantCardItem = ({
             <Checkbox checked={true} />
           </>
         );
+      case isString(value):
+        return <span>{value}</span>;
+  
       case isNull(value):
         return <span className="text-zinc-400">Non renseigné</span>;
       default:
-        return <span>{value}</span>;
+        return <Skeleton className="w-24 h-6" />;
     }
   };
 

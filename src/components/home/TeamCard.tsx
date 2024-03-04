@@ -1,8 +1,9 @@
+"use client";
+
 import { Team } from "@/src/api/hyperionSchemas";
 import { Card, CardHeader, CardTitle, CardDescription } from "../ui/card";
 import { Progress } from "../ui/progress";
-import { Suspense } from "react";
-import { Loader } from "lucide-react";
+import { Skeleton } from "../ui/skeleton";
 
 interface TeamCardProps {
   team?: Team;
@@ -10,27 +11,37 @@ interface TeamCardProps {
 
 export const TeamCard = ({ team }: TeamCardProps) => {
   return (
-    <Suspense fallback={<Loader />}>
-      <Card className="w-full mt-5">
-        {team && (
-          <div className="flex flex-col">
-            <div className="flex flex-row justify-between">
-              <CardHeader>
-                <CardTitle>{team.name}</CardTitle>
-              </CardHeader>
-              <CardHeader>
-                <CardDescription>{`Numéro d'équipe: ${team.number}`}</CardDescription>
-              </CardHeader>
-              <CardHeader>
-                <CardDescription>
-                  Parcours: {team.difficulty ?? "Non renseigné"}
-                </CardDescription>
-              </CardHeader>
-            </div>
-            <Progress value={team.validation_progress * 100} />
+    <Card className="w-full mt-5">
+      <div className="flex flex-col">
+        <CardHeader>
+          <div className="flex flex-row justify-between">
+            <CardTitle>
+              {team?.name ? (
+                <div>{team?.name}</div>
+              ) : (
+                <Skeleton className="w-24 h-8" />
+              )}
+            </CardTitle>
+            {team?.number !== undefined ? (
+              <CardDescription>
+                <div>{`Numéro d'équipe: ${team?.number}`}</div>
+              </CardDescription>
+            ) : (
+              <Skeleton className="w-24 h-6" />
+            )}
+            {team?.difficulty !== undefined ? (
+              <CardDescription>
+                <div>Parcours: {team?.difficulty ?? "Non renseigné"}</div>
+              </CardDescription>
+            ) : (
+              <Skeleton className="w-24 h-6" />
+            )}
           </div>
-        )}
-      </Card>
-    </Suspense>
+        </CardHeader>
+        <Progress
+          value={team?.validation_progress ? team.validation_progress * 100 : 0}
+        />
+      </div>
+    </Card>
   );
 };
