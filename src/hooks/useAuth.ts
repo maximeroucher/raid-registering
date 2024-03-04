@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import axios from "axios";
-import { stringify } from "qs";
 import {
   BodyTokenAuthTokenPost,
   TokenResponse,
@@ -10,14 +8,14 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { useTokenStore } from "@/src/stores/token";
 import { useRouter } from "next/navigation";
+import { getAuthToken } from "../api/hyperionAuth";
 
 const clientId: string = "Titan";
 const tokenKey: string = "token";
 const refreshTokenKey: string = "refresh_token";
-const redirectUrlHost: string = "myecl.fr";
-const backUrl: string = "hyperion.myecl.fr";
+const redirectUrlHost: string = process.env.NEXT_PUBLIC_REDIRECT_URL || "https://myecl.fr/static.html";
+const backUrl: string = process.env.NEXT_PUBLIC_BACKEND_URL || "https://hyperion.myecl.fr";
 const scopes: string[] = ["API"];
-const scheme = "https";
 
 export const useAuth = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -52,14 +50,7 @@ export const useAuth = () => {
   }
 
   async function getToken(params: BodyTokenAuthTokenPost) {
-    const body = stringify(params);
-    const headers = {
-      "Content-Type": "application/x-www-form-urlencoded",
-      Accept: "application/json",
-    };
-    const result = await axios.post(`${scheme}://${backUrl}/auth/token`, body, {
-      headers: headers,
-    });
+    const result = await getAuthToken(params);
     if (result.status != 200) {
       setIsLoading(false);
       return;
@@ -72,15 +63,11 @@ export const useAuth = () => {
   }
 
   async function getTokenFromRequest(popupWindow: Window | null) {
-    const host = redirectUrlHost;
-    const path = "/static.html";
-    const redirectUri = `${scheme}://${host}${path}`;
-
     const codeVerifier = generateRandomString(128);
 
-    const authUrl = `${scheme}://${backUrl}/auth/authorize?client_id=${clientId}&response_type=code&scope=${scopes.join(
+    const authUrl = `${backUrl}/auth/authorize?client_id=${clientId}&response_type=code&scope=${scopes.join(
       " "
-    )}&redirect_uri=${redirectUri}&code_challenge=${await hash(
+    )}&redirect_uri=${redirectUrlHost}&code_challenge=${await hash(
       codeVerifier
     )}&code_challenge_method=S256`;
 
@@ -120,7 +107,7 @@ export const useAuth = () => {
         grant_type: "authorization_code",
         client_id: clientId,
         code: code,
-        redirect_uri: redirectUri,
+        redirect_uri: redirectUrlHost,
         code_verifier: codeVerifier,
       };
       getToken(params);
@@ -128,7 +115,7 @@ export const useAuth = () => {
 
     window.addEventListener("message", (event) => {
       const data = event.data;
-      if (data && data != undefined && data.includes("code=")) {
+      if (data !== null && data !== undefined && data.includes("code=")) {
         login(data);
       }
     });
