@@ -15,9 +15,10 @@ import { HiLogout, HiPencil } from "react-icons/hi";
 import { UserInfoView } from "./UserInfoView";
 import { toast } from "../ui/use-toast";
 import { useState } from "react";
+import { useParticipant } from "@/src/hooks/useParticipant";
 
 export const UserButton = () => {
-  const { me } = useUser();
+  const { me } = useParticipant();
   const { logout } = useAuth();
 
   const [isOpened, setIsOpened] = useState(false);
@@ -34,12 +35,7 @@ export const UserButton = () => {
     me && (
       <Sheet open={isOpened} onOpenChange={setIsOpened}>
         <SheetTrigger asChild>
-          <Button variant="ghost">
-            {me.firstname +
-              " " +
-              me.name +
-              (me.nickname ? ` (${me.nickname})` : "")}
-          </Button>
+          <Button variant="ghost">{me.firstname + " " + me.name}</Button>
         </SheetTrigger>
         <SheetContent className="flex flex-col justify-between">
           <SheetHeader>
