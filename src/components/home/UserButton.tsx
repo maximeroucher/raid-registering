@@ -16,6 +16,7 @@ import { UserInfoView } from "./UserInfoView";
 import { toast } from "../ui/use-toast";
 import { useState } from "react";
 import { useParticipant } from "@/src/hooks/useParticipant";
+import { Skeleton } from "../ui/skeleton";
 
 export const UserButton = () => {
   const { me } = useParticipant();
@@ -32,45 +33,46 @@ export const UserButton = () => {
   }
 
   return (
-    me && (
-      <Sheet open={isOpened} onOpenChange={setIsOpened}>
-        <SheetTrigger asChild>
-          <Button variant="ghost">{me.firstname + " " + me.name}</Button>
-        </SheetTrigger>
-        <SheetContent className="flex flex-col justify-between">
-          <SheetHeader>
-            <SheetTitle>Paramètres</SheetTitle>
-            <SheetDescription>Information du compte</SheetDescription>
-          </SheetHeader>
-          <div className="grid w-full items-center gap-6">
-            <UserInfoView label="Prénom" value={me.firstname} />
-            <UserInfoView label="Nom" value={me.name} />
-            <UserInfoView label="Email" value={me.email} />
-            <UserInfoView
-              label="Téléphone"
-              value={me.phone ?? "Non renseigné"}
-            />
-            <UserInfoView
-              label="Date de naissance"
-              value={me.birthday ?? "Non renseigné"}
-            />
-          </div>
-          <SheetFooter>
-            <div className="flex flex-row justify-between items-center w-full">
-              <Button variant="ghost" onClick={showToast}>
-                <HiPencil className="mr-2 h-4 w-4" />
-                Éditer
+    <Sheet open={isOpened} onOpenChange={setIsOpened}>
+      <SheetTrigger asChild>
+        <Button variant="ghost">
+          {me?.firstname === undefined || me?.name === undefined ? (
+            <Skeleton className="w-24 h-6" />
+          ) : (
+            <>{me.firstname + " " + me.name}</>
+          )}
+        </Button>
+      </SheetTrigger>
+      <SheetContent className="flex flex-col justify-between">
+        <SheetHeader>
+          <SheetTitle>Paramètres</SheetTitle>
+          <SheetDescription>Information du compte</SheetDescription>
+        </SheetHeader>
+        <div className="grid w-full items-center gap-6">
+          <UserInfoView label="Prénom" value={me?.firstname} />
+          <UserInfoView label="Nom" value={me?.name} />
+          <UserInfoView label="Email" value={me?.email} />
+          <UserInfoView label="Téléphone" value={me?.phone ?? "Non renseigné"} />
+          <UserInfoView
+            label="Date de naissance"
+            value={me?.birthday ?? "Non renseigné"}
+          />
+        </div>
+        <SheetFooter>
+          <div className="flex flex-row justify-between items-center w-full">
+            <Button variant="ghost" onClick={showToast}>
+              <HiPencil className="mr-2 h-4 w-4" />
+              Éditer
+            </Button>
+            <SheetClose asChild>
+              <Button variant="destructive" onClick={logout}>
+                <HiLogout className="mr-2 h-4 w-4" />
+                Se déconnecter
               </Button>
-              <SheetClose asChild>
-                <Button variant="destructive" onClick={logout}>
-                  <HiLogout className="mr-2 h-4 w-4" />
-                  Se déconnecter
-                </Button>
-              </SheetClose>
-            </div>
-          </SheetFooter>
-        </SheetContent>
-      </Sheet>
-    )
+            </SheetClose>
+          </div>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
   );
 };

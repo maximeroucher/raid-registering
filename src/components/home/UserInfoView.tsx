@@ -1,8 +1,9 @@
 import { Label } from "../ui/label";
+import { Skeleton } from "../ui/skeleton";
 
 interface UserInfoViewProps {
   label: string;
-  value: string;
+  value?: string;
 }
 
 export const UserInfoView = ({ label, value }: UserInfoViewProps) => {
@@ -11,7 +12,13 @@ export const UserInfoView = ({ label, value }: UserInfoViewProps) => {
       <Label htmlFor={label} className="font-bold">
         {label} :
       </Label>
-      <span id={label}>{value}</span>
+      {
+        label ? (
+          <span id={label}>{value}</span>
+        ) : (
+          <Skeleton className="w-24 h-6" />
+        )
+      }
     </div>
   );
 };
