@@ -4,7 +4,7 @@ import { useTokenStore } from "@/src/stores/token";
 export const useParticipant = () => {
   const { token, userId } = useTokenStore();
 
-  const { data: me, isLoading } =
+  const { data: me, isLoading, isFetched, ...props } =
     useGetParticipantByIdRaidParticipantParticipantIdGet(
       {
         headers: {
@@ -20,5 +20,5 @@ export const useParticipant = () => {
       }
     );
 
-  return { me, isLoading };
+  return { me, isLoading, isFetched, props };
 };
