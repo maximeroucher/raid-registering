@@ -1,4 +1,3 @@
-import { useUser } from "@/src/hooks/useUser";
 import {
   Sheet,
   SheetClose,
@@ -52,7 +51,10 @@ export const UserButton = () => {
           <UserInfoView label="Prénom" value={me?.firstname} />
           <UserInfoView label="Nom" value={me?.name} />
           <UserInfoView label="Email" value={me?.email} />
-          <UserInfoView label="Téléphone" value={me?.phone ?? "Non renseigné"} />
+          <UserInfoView
+            label="Téléphone"
+            value={me?.phone ?? "Non renseigné"}
+          />
           <UserInfoView
             label="Date de naissance"
             value={me?.birthday ?? "Non renseigné"}
