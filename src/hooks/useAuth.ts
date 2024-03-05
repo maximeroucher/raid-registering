@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { use, useState } from "react";
 import axios from "axios";
 import { stringify } from "qs";
 import {
@@ -10,6 +10,7 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { useTokenStore } from "@/src/stores/token";
 import { useRouter } from "next/navigation";
+import { access } from "fs";
 
 const clientId: string = "Titan";
 const tokenKey: string = "token";
@@ -68,6 +69,27 @@ export const useAuth = () => {
     localStorage.setItem(refreshTokenKey, tokenResponse.refresh_token);
     setIsLoading(false);
     setToken(tokenResponse.access_token);
+  }
+
+  async function refreshToken() {
+    const refresh_token = localStorage.getItem(refreshTokenKey);
+    if (refresh_token) {
+      const params: BodyTokenAuthTokenPost = {
+        grant_type: "refresh_token",
+        client_id: clientId,
+        refresh_token: refresh_token,
+      };
+      await getToken(params);
+    }
+  }
+
+  function isTokenExpired(token: string | null) {
+    if (!token) return true;
+    const access_token_expires = token
+      ? JSON.parse(atob(token.split(".")[1])).exp
+      : 0;
+    const now = Math.floor(Date.now() / 1000);
+    return access_token_expires < now;
   }
 
   async function getTokenFromRequest(popupWindow: Window | null) {
@@ -147,16 +169,8 @@ export const useAuth = () => {
         : 0;
       const now = Math.floor(Date.now() / 1000);
       if (access_token_expires < now) {
-        setToken(null);
-        const refresh_token = localStorage.getItem(refreshTokenKey);
-        if (refresh_token) {
-          const params: BodyTokenAuthTokenPost = {
-            grant_type: "refresh_token",
-            client_id: clientId,
-            refresh_token: refresh_token,
-          };
-          await getToken(params);
-        }
+        refreshToken();
+        
       } else {
         setToken(access_token);
         setIsLoading(false);
@@ -173,6 +187,13 @@ export const useAuth = () => {
     queryKey: ["getTokenFromStorage"],
     queryFn: getTokenFromStorage,
     retry: 0,
+  });
+
+  useQuery({
+    queryKey: ["refreshToken"],
+    queryFn: refreshToken,
+    retry: 0,
+    enabled: isTokenExpired(token),
   });
 
   return { getTokenFromRequest, isLoading, token, isTokenQueried, logout };
