@@ -15,6 +15,9 @@ import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import { CoreUser } from "@/src/api/hyperionSchemas";
 import { toDate } from "date-fns";
+import { toast } from "../ui/use-toast";
+import { useParticipant } from "@/src/hooks/useParticipant";
+import { ReloadIcon } from "@radix-ui/react-icons";
 
 interface CreateParticipantProps {
   user: CoreUser;
@@ -27,6 +30,16 @@ export const CreateParticipant = ({
   isOpened,
   setIsOpened,
 }: CreateParticipantProps) => {
+  const { createParticipant, me, isCreationLoading } =
+    useParticipant();
+
+  if (me !== undefined) {
+    setIsOpened(false);
+    toast({
+      title: "Votre profil a été créé avec succès",
+    });
+  }
+
   const phoneRegex = new RegExp(
     /^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/
   );
@@ -37,9 +50,14 @@ export const CreateParticipant = ({
     email: z.string().email({
       message: "Veuillez renseigner une adresse email valide",
     }),
-    phone: z.string().regex(phoneRegex, {
-      message: "Veuillez renseigner un numéro de téléphone valide",
-    }),
+    phone: z
+      .string({
+        required_error: "Veuillez renseigner un numéro de téléphone",
+        invalid_type_error: "Veuillez renseigner un numéro de téléphone",
+      })
+      .regex(phoneRegex, {
+        message: "Veuillez renseigner un numéro de téléphone valide",
+      }),
     birthday: z.date({
       required_error: "Veuillez renseigner votre date de naissance",
       invalid_type_error: "Veuillez renseigner une date de naissance valide",
@@ -58,17 +76,16 @@ export const CreateParticipant = ({
     placeholder: true,
   });
 
-  console.log(user);
-
-  // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+    const dateString = values.birthday.toISOString().split("T")[0];
+    createParticipant({
+      ...values,
+      birthday: dateString,
+    });
   }
 
   return (
-    <Dialog open={isOpened} onOpenChange={setIsOpened}>
+    <Dialog open={isOpened} onOpenChange={setIsOpened} >
       <DialogContent className="sm:max-w-[600px]">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -133,7 +150,13 @@ export const CreateParticipant = ({
               />
             </div>
             <DialogFooter>
-              <Button type="submit">Save changes</Button>
+              <Button type="submit" className="w-full mt-4">
+                {isCreationLoading ? (
+                  <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                ) : (
+                  "Valider"
+                )}
+              </Button>
             </DialogFooter>
           </form>
         </Form>
