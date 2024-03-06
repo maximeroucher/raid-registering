@@ -11,6 +11,8 @@ import { useParticipant } from "@/src/hooks/useParticipant";
 import { useState } from "react";
 import { CreateParticipantField } from "./CreateParticipantField";
 import { useUser } from "@/src/hooks/useUser";
+import { Label } from "../ui/label";
+import { DatePicker } from "../ui/datePicker";
 
 export const CreateParticipant = () => {
   const { me: user } = useUser();
@@ -54,12 +56,12 @@ export const CreateParticipant = () => {
             defaultValue={user?.phone ?? ""}
             placeholder="06 06 06 06 06"
           />
-          <CreateParticipantField
-            label="Date de naissance"
-            id="birthday"
-            defaultValue={user?.birthday ?? ""}
-            placeholder="06/06/2006"
-          />
+          <div className="grid grid-cols-4 items-center gap-4">
+      <Label htmlFor="birthday" className="text-right">
+        Date de naissance
+      </Label>
+      <DatePicker />
+    </div>
         </div>
         <DialogFooter>
           <Button type="submit">Save changes</Button>
