@@ -1,25 +1,42 @@
+import {
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  FormControl,
+} from "../ui/form";
 import { Input } from "../ui/input";
-import { Label } from "../ui/label";
 
 interface CreateParticipantFieldProps {
   label: string;
   id: string;
-  defaultValue: string | undefined;
   placeholder?: string;
+  form: any;
 }
 
 export const CreateParticipantField = ({
+  form,
   label,
   id,
-  defaultValue,
-  placeholder
+  placeholder,
 }: CreateParticipantFieldProps) => {
   return (
-    <div className="grid grid-cols-4 items-center gap-4">
-      <Label htmlFor={id} className="text-right">
-        {label}
-      </Label>
-      <Input id={id} defaultValue={defaultValue} className="col-span-3" placeholder={placeholder} />
-    </div>
+    <FormField
+      control={form.control}
+      name={id}
+      render={({ field }) => (
+        <FormItem>
+          <div className="grid grid-cols-5 items-center gap-4">
+            <FormLabel className="text-right">{label}</FormLabel>
+            <div className="col-span-4">
+              <FormMessage />
+              <FormControl>
+                <Input placeholder={placeholder} {...field} />
+              </FormControl>
+            </div>
+          </div>
+        </FormItem>
+      )}
+    />
   );
 };

@@ -8,10 +8,16 @@ import { useAuth } from "../hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { useTeam } from "../hooks/useTeam";
 import { CreateParticipant } from "../components/home/CreateParticipant";
+import { useUser } from "../hooks/useUser";
+import { useParticipant } from "../hooks/useParticipant";
+import { useState } from "react";
 
 const Home = () => {
   const { isTokenQueried, token } = useAuth();
+  const { me, isFetched } = useParticipant();
+  const { me: user } = useUser();
   const { team } = useTeam();
+  const [isOpened, setIsOpened] = useState(false);
 
   const router = useRouter();
 
@@ -19,9 +25,19 @@ const Home = () => {
     router.replace("/login");
   }
 
+  if (isFetched && me === undefined && !isOpened) {
+    setIsOpened(true);
+  }
+
   return (
     <>
-      <CreateParticipant />
+      {isFetched && me === undefined && isOpened && user && (
+        <CreateParticipant
+          isOpened={isOpened}
+          setIsOpened={setIsOpened}
+          user={user}
+        />
+      )}
       <TopBar />
       <main className="flex flex-col items-center">
         <div className="w-full px-24">
