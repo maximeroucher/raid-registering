@@ -16,6 +16,8 @@ import { toast } from "../ui/use-toast";
 import { useState } from "react";
 import { useParticipant } from "@/src/hooks/useParticipant";
 import { Skeleton } from "../ui/skeleton";
+import { formatDate, toDate } from "date-fns";
+import { fr } from "date-fns/locale";
 
 export const UserButton = () => {
   const { me } = useParticipant();
@@ -57,7 +59,7 @@ export const UserButton = () => {
           />
           <UserInfoView
             label="Date de naissance"
-            value={me?.birthday ?? "Non renseigné"}
+            value={me?.birthday ? formatDate(toDate(me!.birthday), 'PPP', {locale: fr}) : "Non renseigné"}
           />
         </div>
         <SheetFooter>
