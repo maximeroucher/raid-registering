@@ -14,7 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import { CoreUser } from "@/src/api/hyperionSchemas";
-import { toDate } from "date-fns";
+import { addYears, toDate } from "date-fns";
 import { toast } from "../ui/use-toast";
 import { useParticipant } from "@/src/hooks/useParticipant";
 import { ReloadIcon } from "@radix-ui/react-icons";
@@ -30,8 +30,7 @@ export const CreateParticipant = ({
   isOpened,
   setIsOpened,
 }: CreateParticipantProps) => {
-  const { createParticipant, me, isCreationLoading } =
-    useParticipant();
+  const { createParticipant, me, isCreationLoading } = useParticipant();
 
   if (me !== undefined) {
     setIsOpened(false);
@@ -84,12 +83,12 @@ export const CreateParticipant = ({
   }
 
   return (
-    <Dialog open={isOpened} onOpenChange={setIsOpened} >
+    <Dialog open={isOpened} onOpenChange={setIsOpened}>
       <DialogContent className="sm:max-w-[600px]" hideClose>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <DialogHeader>
-              <DialogTitle>Avant de continuer</DialogTitle>
+              <DialogTitle>Informations personnelles</DialogTitle>
               <DialogDescription>
                 Veuillez renseigner vos information pour pouvoir créer une
                 équipe
@@ -138,6 +137,7 @@ export const CreateParticipant = ({
                             <DatePicker
                               date={value}
                               setDate={onChange}
+                              defaultDate={value || addYears(new Date(), -21)}
                               {...field}
                             />
                           )}

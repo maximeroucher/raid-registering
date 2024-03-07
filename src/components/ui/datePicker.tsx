@@ -12,10 +12,11 @@ import { Calendar } from "./calendar";
 
 interface DatePickerProps {
   date?: Date;
+  defaultDate?: Date;
   setDate: (date?: Date) => void;
 }
 
-export function DatePicker({ date, setDate }: DatePickerProps) {
+export function DatePicker({ date, setDate, defaultDate }: DatePickerProps) {
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -40,6 +41,7 @@ export function DatePicker({ date, setDate }: DatePickerProps) {
           selected={date}
           onSelect={setDate}
           locale={fr}
+          defaultMonth={defaultDate}
           initialFocus
         />
       </PopoverContent>
