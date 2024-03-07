@@ -70,10 +70,9 @@ export const CreateParticipant = ({
       firstname: user.firstname,
       name: user.name,
       email: user.email,
-      phone: user.phone,
+      phone: user?.phone ?? "",
       birthday: user.birthday ? toDate(user.birthday) : undefined,
     },
-    placeholder: true,
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -86,7 +85,7 @@ export const CreateParticipant = ({
 
   return (
     <Dialog open={isOpened} onOpenChange={setIsOpened} >
-      <DialogContent className="sm:max-w-[600px]">
+      <DialogContent className="sm:max-w-[600px]" hideClose>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <DialogHeader>
