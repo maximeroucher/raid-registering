@@ -31,16 +31,19 @@ export const useParticipant = () => {
     }
   );
 
-  const { mutate: mutateCreateParticipant, isSuccess: isCreationSuccess, isPending: isCreationLoading } =
-    useCreateParticipantRaidParticipantPost({
-      onSuccess(data, variables, context) {
-        queryClient.invalidateQueries({
-          predicate: (query) => {
-            return query.queryHash === "getParticipantById";
-          },
-        });
-      },
-    });
+  const {
+    mutate: mutateCreateParticipant,
+    isSuccess: isCreationSuccess,
+    isPending: isCreationLoading,
+  } = useCreateParticipantRaidParticipantPost({
+    onSuccess(data, variables, context) {
+      queryClient.invalidateQueries({
+        predicate: (query) => {
+          return query.queryHash === "getParticipantById";
+        },
+      });
+    },
+  });
 
   const createParticipant = (participant: ParticipantBase) => {
     const body: CreateParticipantRaidParticipantPostVariables = {
@@ -52,5 +55,12 @@ export const useParticipant = () => {
     mutateCreateParticipant(body);
   };
 
-  return { me, isLoading, isFetched, createParticipant, isCreationSuccess, isCreationLoading };
+  return {
+    me,
+    isLoading,
+    isFetched,
+    createParticipant,
+    isCreationSuccess,
+    isCreationLoading,
+  };
 };
