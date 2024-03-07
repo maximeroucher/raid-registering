@@ -39,9 +39,7 @@ export const CreateParticipant = ({
     });
   }
 
-  const phoneRegex = new RegExp(
-    /^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/
-  );
+  const phoneRegex = new RegExp(/^(\+|00)[1-9][0-9 \-\(\)\.]{7,32}$/);
 
   const formSchema = z.object({
     firstname: z.string(),
