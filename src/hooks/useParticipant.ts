@@ -6,10 +6,12 @@ import {
 import { useTokenStore } from "@/src/stores/token";
 import { useQueryClient } from "@tanstack/react-query";
 import { ParticipantBase } from "../api/hyperionSchemas";
+import { useParticipantStore } from "../stores/particpant";
 
 export const useParticipant = () => {
   const { token, userId } = useTokenStore();
   const queryClient = useQueryClient();
+  const { participant, setParticipant } = useParticipantStore();
 
   const {
     data: me,
@@ -25,7 +27,7 @@ export const useParticipant = () => {
       },
     },
     {
-      enabled: userId !== null,
+      enabled: userId !== null && participant === undefined,
       retry: 0,
       queryHash: "getParticipantById",
     }
@@ -57,8 +59,12 @@ export const useParticipant = () => {
     });
   };
 
+  if (me !== undefined && participant === undefined) {
+    setParticipant(me);
+  }
+
   return {
-    me,
+    me: participant,
     isLoading,
     isFetched,
     createParticipant,
