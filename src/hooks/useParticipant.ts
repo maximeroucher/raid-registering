@@ -36,23 +36,25 @@ export const useParticipant = () => {
     isSuccess: isCreationSuccess,
     isPending: isCreationLoading,
   } = useCreateParticipantRaidParticipantPost({
-    onSuccess(data, variables, context) {
-      queryClient.invalidateQueries({
-        predicate: (query) => {
-          return query.queryHash === "getParticipantById";
-        },
-      });
-    },
   });
 
-  const createParticipant = (participant: ParticipantBase) => {
+  const createParticipant = (participant: ParticipantBase, callback: () => void) => {
     const body: CreateParticipantRaidParticipantPostVariables = {
       body: participant,
       headers: {
         Authorization: `Bearer ${token}`,
       },
     };
-    mutateCreateParticipant(body);
+    mutateCreateParticipant(body, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          predicate: (query) => {
+            return query.queryHash === "getParticipantById";
+          },
+        });
+        callback();
+      }
+    });
   };
 
   return {

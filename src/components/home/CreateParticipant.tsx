@@ -27,6 +27,7 @@ import { useParticipant } from "@/src/hooks/useParticipant";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
 import PhoneInput from "react-phone-input-2";
+import { useTeam } from "@/src/hooks/useTeam";
 
 interface CreateParticipantProps {
   user: CoreUser;
@@ -40,6 +41,7 @@ export const CreateParticipant = ({
   setIsOpened,
 }: CreateParticipantProps) => {
   const { createParticipant, me, isCreationLoading } = useParticipant();
+  const { createTeam } = useTeam();
 
   if (me !== undefined) {
     setIsOpened(false);
@@ -47,8 +49,6 @@ export const CreateParticipant = ({
       title: "Votre profil a été créé avec succès",
     });
   }
-
-  const phoneRegex = new RegExp(/^(\+|00)[1-9][0-9 \-\(\)\.]{7,32}$/);
 
   const formSchema = z.object({
     firstname: z.string(),
@@ -96,10 +96,17 @@ export const CreateParticipant = ({
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     const dateString = values.birthday.toISOString().split("T")[0];
-    createParticipant({
-      ...values,
-      birthday: dateString,
-    });
+    createParticipant(
+      {
+        ...values,
+        birthday: dateString,
+      },
+      () => {
+        createTeam({
+          name: `Équipe de ${values.firstname} ${values.name}`,
+        });
+      }
+    );
   }
 
   return (
