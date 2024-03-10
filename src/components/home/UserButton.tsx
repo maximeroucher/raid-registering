@@ -18,6 +18,8 @@ import { useParticipant } from "@/src/hooks/useParticipant";
 import { Skeleton } from "../ui/skeleton";
 import { formatDate, toDate } from "date-fns";
 import { fr } from "date-fns/locale";
+import PhoneInput from "react-phone-input-2";
+import { Label } from "../ui/label";
 
 export const UserButton = () => {
   const { me } = useParticipant();
@@ -53,13 +55,24 @@ export const UserButton = () => {
           <UserInfoView label="Prénom" value={me?.firstname} />
           <UserInfoView label="Nom" value={me?.name} />
           <UserInfoView label="Email" value={me?.email} />
-          <UserInfoView
-            label="Téléphone"
-            value={me?.phone ?? "Non renseigné"}
-          />
+          <div className="flex flex-col space-y-1.5">
+            <Label htmlFor="phone" className="font-bold">
+              Téléphone :
+            </Label>
+            <PhoneInput
+              value={me?.phone}
+              country={"fr"}
+              specialLabel=""
+              disabled
+            />
+          </div>
           <UserInfoView
             label="Date de naissance"
-            value={me?.birthday ? formatDate(toDate(me!.birthday), 'PPP', {locale: fr}) : "Non renseigné"}
+            value={
+              me?.birthday
+                ? formatDate(toDate(me!.birthday), "PPP", { locale: fr })
+                : "Non renseigné"
+            }
           />
         </div>
         <SheetFooter>
