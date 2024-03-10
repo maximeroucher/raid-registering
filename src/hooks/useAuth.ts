@@ -71,7 +71,7 @@ export const useAuth = () => {
     setToken(tokenResponse.access_token);
   }
 
-  async function refreshToken() {
+  async function refreshToken(): Promise<string | null>{
     const refresh_token = localStorage.getItem(refreshTokenKey);
     if (refresh_token) {
       const params: BodyTokenAuthTokenPost = {
@@ -80,7 +80,9 @@ export const useAuth = () => {
         refresh_token: refresh_token,
       };
       await getToken(params);
+      return refresh_token;
     }
+    return null;
   }
 
   function isTokenExpired(token: string | null) {
@@ -164,13 +166,8 @@ export const useAuth = () => {
     if (typeof window === "undefined") return null;
     const access_token = localStorage.getItem(tokenKey);
     if (access_token !== null) {
-      const access_token_expires = access_token
-        ? JSON.parse(atob(access_token.split(".")[1])).exp
-        : 0;
-      const now = Math.floor(Date.now() / 1000);
-      if (access_token_expires < now) {
+      if (isTokenExpired(access_token)) {
         refreshToken();
-        
       } else {
         setToken(access_token);
         setIsLoading(false);
