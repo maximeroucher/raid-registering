@@ -1,8 +1,10 @@
 import { useReadCurrentUserUsersMeGet } from "@/src/api/hyperionComponents";
 import { useTokenStore } from "@/src/stores/token";
+import { useUserStore } from "../stores/user";
 
 export const useUser = () => {
   const { token } = useTokenStore();
+  const { user, setUser } = useUserStore();
 
   const { data: me, isLoading } = useReadCurrentUserUsersMeGet(
     {
@@ -11,10 +13,14 @@ export const useUser = () => {
       },
     },
     {
-      enabled: token !== null,
+      enabled: token !== null && user === undefined,
       retry: 0,
     }
   );
 
-  return { me, isLoading };
+  if (me !== undefined && user === undefined) {
+    setUser(me);
+  }
+
+  return { me: user, isLoading };
 };
