@@ -29,7 +29,7 @@ export const EditUserInfoField = ({
       render={({ field }) => (
         <FormItem>
           <div className="flex flex-col space-y-1.5">
-            <FormLabel className="text-left font-bold">{label}</FormLabel>
+            <FormLabel className="text-left font-bold">{label} :</FormLabel>
             <div>
               <FormMessage />
               <FormControl>

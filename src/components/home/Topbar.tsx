@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "../ui/button";
-import { UserButton } from "./UserButton";
+import { UserButton } from "../userSheet/UserButton";
 export const TopBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
