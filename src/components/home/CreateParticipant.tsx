@@ -51,8 +51,12 @@ export const CreateParticipant = ({
   }
 
   const formSchema = z.object({
-    firstname: z.string(),
-    name: z.string(),
+    firstname: z.string().min(1, {
+      message: "Veuillez renseigner votre prénom",
+    }),
+    name: z.string().min(1, {
+      message: "Veuillez renseigner votre nom",
+    }),
     email: z.string().email({
       message: "Veuillez renseigner une adresse email valide",
     }),

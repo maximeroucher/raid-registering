@@ -34,8 +34,12 @@ export const ViewEditUserInfo = ({
   const { updateParticipant, isUpdateLoading } = useParticipant();
 
   const formSchema = z.object({
-    firstname: z.string(),
-    name: z.string(),
+    firstname: z.string().min(1, {
+      message: "Veuillez renseigner votre prénom",
+    }),
+    name: z.string().min(1, {
+      message: "Veuillez renseigner votre nom",
+    }),
     email: z.string().email({
       message: "Veuillez renseigner une adresse email valide",
     }),
@@ -258,7 +262,7 @@ export const ViewEditUserInfo = ({
                   onClick={() => form.reset()}
                   className="w-full"
                 >
-                <HiX className="mr-2 h-4 w-4" />
+                  <HiX className="mr-2 h-4 w-4" />
                   Annuler
                 </Button>
               ) : (
