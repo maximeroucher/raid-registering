@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { stringify } from "qs";
 import {
@@ -10,18 +10,17 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { useTokenStore } from "@/src/stores/token";
 import { useRouter } from "next/navigation";
-import { access } from "fs";
 
 const clientId: string = "Titan";
-const tokenKey: string = "token";
-const refreshTokenKey: string = "refresh_token";
-const redirectUrlHost: string = process.env.NEXT_PUBLIC_REDIRECT_URL || "https://myecl.fr/static.html";
-const backUrl: string = process.env.NEXT_PUBLIC_BACKEND_URL || "https://hyperion.myecl.fr";
+const redirectUrlHost: string =
+  process.env.NEXT_PUBLIC_REDIRECT_URL || "https://myecl.fr/static.html";
+const backUrl: string =
+  process.env.NEXT_PUBLIC_BACKEND_URL || "https://hyperion.myecl.fr";
 const scopes: string[] = ["API"];
 
 export const useAuth = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { token, setToken } = useTokenStore();
+  const { token, setToken, refreshToken, setRefreshToken } = useTokenStore();
   const [isTokenQueried, setIsTokenQueried] = useState(false);
   const router = useRouter();
 
@@ -65,32 +64,32 @@ export const useAuth = () => {
       return;
     }
     const tokenResponse: TokenResponse = result.data;
-    localStorage.setItem(tokenKey, tokenResponse.access_token);
-    localStorage.setItem(refreshTokenKey, tokenResponse.refresh_token);
     setIsLoading(false);
     setToken(tokenResponse.access_token);
+    setRefreshToken(tokenResponse.refresh_token);
   }
 
-  async function refreshToken(): Promise<string | null>{
-    const refresh_token = localStorage.getItem(refreshTokenKey);
-    if (refresh_token) {
+  async function refreshTokens(): Promise<string | null> {
+    console.log("refreshing tokens");
+    if (refreshToken) {
       const params: BodyTokenAuthTokenPost = {
         grant_type: "refresh_token",
         client_id: clientId,
-        refresh_token: refresh_token,
+        refresh_token: refreshToken,
       };
       await getToken(params);
-      return refresh_token;
+      return refreshToken;
     }
     return null;
   }
 
-  function isTokenExpired(token: string | null) {
-    if (!token) return true;
+  function isTokenExpired() {
+    if (!token) return false;
     const access_token_expires = token
       ? JSON.parse(atob(token.split(".")[1])).exp
       : 0;
     const now = Math.floor(Date.now() / 1000);
+    console.log(access_token_expires < now);
     return access_token_expires < now;
   }
 
@@ -154,9 +153,8 @@ export const useAuth = () => {
   }
 
   function logout() {
-    localStorage.removeItem(tokenKey);
-    localStorage.removeItem(refreshTokenKey);
     setToken(null);
+    setRefreshToken(null);
     setIsTokenQueried(true);
     router.replace("/login");
   }
@@ -164,12 +162,11 @@ export const useAuth = () => {
   async function getTokenFromStorage(): Promise<string | null> {
     setIsLoading(true);
     if (typeof window === "undefined") return null;
-    const access_token = localStorage.getItem(tokenKey);
-    if (access_token !== null) {
-      if (isTokenExpired(access_token)) {
-        refreshToken();
+    if (token !== null) {
+      if (isTokenExpired()) {
+        refreshTokens();
       } else {
-        setToken(access_token);
+        setToken(token);
         setIsLoading(false);
       }
     } else {
@@ -177,7 +174,7 @@ export const useAuth = () => {
       router.replace("/login");
     }
     setIsTokenQueried(true);
-    return access_token;
+    return token;
   }
 
   useQuery({
@@ -188,11 +185,10 @@ export const useAuth = () => {
 
   useQuery({
     queryKey: ["refreshToken"],
-    queryFn: refreshToken,
+    queryFn: refreshTokens,
     retry: 0,
-    enabled: isTokenExpired(token),
+    enabled: isTokenExpired(),
   });
 
   return { getTokenFromRequest, isLoading, token, isTokenQueried, logout };
 };
-

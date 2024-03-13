@@ -2,10 +2,12 @@ import {
   useGetParticipantByIdRaidParticipantParticipantIdGet,
   useCreateParticipantRaidParticipantPost,
   CreateParticipantRaidParticipantPostVariables,
+  useUpdateParticipantRaidParticipantParticipantIdPatch,
+  UpdateParticipantRaidParticipantParticipantIdPatchVariables,
 } from "@/src/api/hyperionComponents";
 import { useTokenStore } from "@/src/stores/token";
 import { useQueryClient } from "@tanstack/react-query";
-import { ParticipantBase } from "../api/hyperionSchemas";
+import { ParticipantBase, ParticipantUpdate } from "../api/hyperionSchemas";
 import { useParticipantStore } from "../stores/particpant";
 
 export const useParticipant = () => {
@@ -37,10 +39,12 @@ export const useParticipant = () => {
     mutate: mutateCreateParticipant,
     isSuccess: isCreationSuccess,
     isPending: isCreationLoading,
-  } = useCreateParticipantRaidParticipantPost({
-  });
+  } = useCreateParticipantRaidParticipantPost({});
 
-  const createParticipant = (participant: ParticipantBase, callback: () => void) => {
+  const createParticipant = (
+    participant: ParticipantBase,
+    callback: () => void
+  ) => {
     const body: CreateParticipantRaidParticipantPostVariables = {
       body: participant,
       headers: {
@@ -55,11 +59,44 @@ export const useParticipant = () => {
           },
         });
         callback();
-      }
+      },
     });
   };
 
-  if (me !== undefined && participant === undefined) {
+  const {
+    mutate: mutateUpdateParticipant,
+    isSuccess: isUpdateSuccess,
+    isPending: isUpdateLoading,
+  } = useUpdateParticipantRaidParticipantParticipantIdPatch({});
+
+  const updateParticipant = (
+    participant: ParticipantUpdate,
+    callback: () => void
+  ) => {
+    const body: UpdateParticipantRaidParticipantParticipantIdPatchVariables = {
+      body: participant,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      pathParams: {
+        participantId: userId!,
+      },
+    };
+    mutateUpdateParticipant(body, {
+      onSuccess: () => {
+        console.log("success");
+        queryClient.invalidateQueries({
+          predicate: (query) => {
+            console.log(query.queryHash);
+            return query.queryHash === "getParticipantById";
+          },
+        });
+        callback();
+      },
+    });
+  };
+
+  if (me !== undefined && participant !== me) {
     setParticipant(me);
   }
 
@@ -70,5 +107,8 @@ export const useParticipant = () => {
     createParticipant,
     isCreationSuccess,
     isCreationLoading,
+    updateParticipant,
+    isUpdateSuccess,
+    isUpdateLoading,
   };
 };
