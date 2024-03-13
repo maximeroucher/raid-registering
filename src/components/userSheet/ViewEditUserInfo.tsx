@@ -33,8 +33,6 @@ export const ViewEditUserInfo = ({
 }: UserButtonProps) => {
   const { updateParticipant, isUpdateLoading } = useParticipant();
 
-  console.log("isUpdateLoading", isUpdateLoading);
-
   const formSchema = z.object({
     firstname: z.string(),
     name: z.string(),
