@@ -19,6 +19,7 @@ export const useParticipant = () => {
     data: me,
     isLoading,
     isFetched,
+    refetch,
   } = useGetParticipantByIdRaidParticipantParticipantIdGet(
     {
       headers: {
@@ -83,20 +84,20 @@ export const useParticipant = () => {
       },
     };
     mutateUpdateParticipant(body, {
-      onSuccess: () => {
-        console.log("success");
-        queryClient.invalidateQueries({
-          predicate: (query) => {
-            console.log(query.queryHash);
-            return query.queryHash === "getParticipantById";
-          },
-        });
+      // Not using onSucess because of : https://github.com/TanStack/query/discussions/2878
+      onSettled: (
+      ) => {
+        // Assuming success in all cases
+        // For unknown reasons, the invalidation of the query does not work
+        refetch();
         callback();
       },
     });
   };
 
   if (me !== undefined && participant !== me) {
+    console.log("setParticipant");
+    console.log(me);
     setParticipant(me);
   }
 

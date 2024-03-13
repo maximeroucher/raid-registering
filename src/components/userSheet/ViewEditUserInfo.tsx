@@ -4,19 +4,37 @@ import { fr } from "date-fns/locale";
 import PhoneInput from "react-phone-input-2";
 import { Label } from "../ui/label";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Controller, Form, FormProvider, useForm } from "react-hook-form";
+import { Controller, FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 import { DatePicker } from "../ui/datePicker";
 import { FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { UserInfoView } from "./UserInfoView";
-import { Participant } from "@/src/api/hyperionSchemas";
+import { Participant, ParticipantUpdate } from "@/src/api/hyperionSchemas";
+import { Button } from "../ui/button";
+import { SheetClose, SheetFooter } from "../ui/sheet";
+import { LogoutButton } from "./logoutButton";
+import { HiPencil, HiCheck, HiX } from "react-icons/hi";
+import { useParticipant } from "@/src/hooks/useParticipant";
+import { toast } from "../ui/use-toast";
+import { ReloadIcon } from "@radix-ui/react-icons";
 
 interface UserButtonProps {
   me: Participant;
   isEdit: boolean;
+  setIsEdit: (value: boolean) => void;
+  setIsOpen: (value: boolean) => void;
 }
 
-export const ViewEditUserInfo = ({ me, isEdit }: UserButtonProps) => {
+export const ViewEditUserInfo = ({
+  me,
+  isEdit,
+  setIsEdit,
+  setIsOpen,
+}: UserButtonProps) => {
+  const { updateParticipant, isUpdateLoading } = useParticipant();
+
+  console.log("isUpdateLoading", isUpdateLoading);
+
   const formSchema = z.object({
     firstname: z.string(),
     name: z.string(),
@@ -62,24 +80,40 @@ export const ViewEditUserInfo = ({ me, isEdit }: UserButtonProps) => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
+    if (!form.formState.isDirty) {
+      setIsEdit(!isEdit);
+      return;
+    }
     const dateString = values.birthday.toISOString().split("T")[0];
-    // createParticipant(
-    //   {
-    //     ...values,
-    //     birthday: dateString,
-    //   },
-    //   () => {
-    //     createTeam({
-    //       name: `Équipe de ${values.firstname} ${values.name}`,
-    //     });
-    //   }
-    // );
+    const updatedParticipant: ParticipantUpdate = {
+      ...values,
+      birthday: dateString,
+    };
+    updateParticipant(updatedParticipant, () => {
+      toast({
+        title: "Profil mis à jour",
+        description: "Vos informations ont été mises à jour avec succès",
+      });
+      setIsEdit(!isEdit);
+      setIsOpen(false);
+    });
   }
+
+  function toggle() {
+    if ((isEdit && form.formState.isDirty) || !isEdit) {
+      setIsEdit(!isEdit);
+    }
+  }
+
   return (
-    <div>
-      {isEdit ? (
-        <FormProvider {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}>
+    <div className="h-full">
+      <FormProvider {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="flex flex-col justify-between h-full"
+        >
+          <div></div>
+          {isEdit ? (
             <div className="grid w-full items-center gap-6">
               <EditUserInfoField
                 form={form}
@@ -159,36 +193,85 @@ export const ViewEditUserInfo = ({ me, isEdit }: UserButtonProps) => {
                 )}
               />
             </div>
-          </form>
-        </FormProvider>
-      ) : (
-        <div className="grid w-full items-center gap-10">
-          <UserInfoView label="Prénom" value={me?.firstname} />
-          <UserInfoView label="Nom" value={me?.name} />
-          <UserInfoView label="Email" value={me?.email} />
-          <div className="flex flex-col space-y-1.5">
-            <Label htmlFor="phone" className="font-bold">
-              Téléphone :
-            </Label>
-            <PhoneInput
-              value={me?.phone}
-              country={"fr"}
-              specialLabel=""
-              disabled
-            />
-          </div>
-          <UserInfoView
-            label="Date de naissance"
-            value={
-              me?.birthday
-                ? formatDate(toDate(me!.birthday), "PPP", {
-                    locale: fr,
-                  })
-                : "Non renseigné"
-            }
-          />
-        </div>
-      )}
+          ) : (
+            <div className="grid w-full items-center gap-10">
+              <UserInfoView label="Prénom" value={me?.firstname} />
+              <UserInfoView label="Nom" value={me?.name} />
+              <UserInfoView label="Email" value={me?.email} />
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="phone" className="font-bold">
+                  Téléphone :
+                </Label>
+                <PhoneInput
+                  value={me?.phone}
+                  country={"fr"}
+                  specialLabel=""
+                  disabled
+                />
+              </div>
+              <UserInfoView
+                label="Date de naissance"
+                value={
+                  me?.birthday
+                    ? formatDate(toDate(me!.birthday), "PPP", {
+                        locale: fr,
+                      })
+                    : "Non renseigné"
+                }
+              />
+            </div>
+          )}
+          <SheetFooter className="mt-8">
+            <div className="flex flex-row justify-between items-center w-full gap-6">
+              {isEdit ? (
+                <>
+                  {isUpdateLoading ? (
+                    <Button variant="default" disabled className="w-full">
+                      <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                    </Button>
+                  ) : (
+                    <Button
+                      className="w-full"
+                      type="submit"
+                      disabled={!form.formState.isDirty}
+                    >
+                      <HiCheck className="mr-2 h-4 w-4" />
+                      Enregistrer
+                    </Button>
+                  )}
+                </>
+              ) : (
+                <>
+                  {me && (
+                    <Button
+                      variant="outline"
+                      onClick={toggle}
+                      className="w-full"
+                    >
+                      <HiPencil className="mr-2 h-4 w-4" />
+                      Éditer
+                    </Button>
+                  )}
+                </>
+              )}
+              {isEdit ? (
+                <Button
+                  variant="destructive"
+                  onClick={() => form.reset()}
+                  className="w-full"
+                >
+                <HiX className="mr-2 h-4 w-4" />
+                  Annuler
+                </Button>
+              ) : (
+                <SheetClose asChild>
+                  <LogoutButton />
+                </SheetClose>
+              )}
+            </div>
+          </SheetFooter>
+        </form>
+      </FormProvider>
     </div>
   );
 };

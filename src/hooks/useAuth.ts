@@ -89,7 +89,6 @@ export const useAuth = () => {
       ? JSON.parse(atob(token.split(".")[1])).exp
       : 0;
     const now = Math.floor(Date.now() / 1000);
-    console.log(access_token_expires < now);
     return access_token_expires < now;
   }
 
