@@ -22,7 +22,13 @@ export const ParticipantCardItem = ({
   value,
 }: ParticipantCardItemProps) => {
   const isSize = (value: ValueType): value is Size => {
-    return value === "S" || value === "M" || value === "L" || value === "XL";
+    return (
+      value === "XS" ||
+      value === "S" ||
+      value === "M" ||
+      value === "L" ||
+      value === "XL"
+    );
   };
 
   const isBoolean = (value: ValueType): value is boolean => {
@@ -43,7 +49,7 @@ export const ParticipantCardItem = ({
 
   const isString = (value: ValueType): value is string => {
     return typeof value === "string";
-  }
+  };
 
   const valueComponent = (value: ValueType) => {
     switch (true) {
@@ -75,7 +81,7 @@ export const ParticipantCardItem = ({
         );
       case isString(value):
         return <span>{value}</span>;
-  
+
       case isNull(value):
         return <span className="text-zinc-400">Non renseigné</span>;
       default:

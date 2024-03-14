@@ -1,7 +1,7 @@
 "use client";
 
-import { EmptyParticipantCard } from "../components/home/EmptyParticipantCard";
-import { ParticipantCard } from "../components/home/ParicipantCard";
+import { EmptyParticipantCard } from "../components/participantView/EmptyParticipantCard";
+import { ParticipantCard } from "../components/participantView/ParicipantCard";
 import { TeamCard } from "../components/home/TeamCard";
 import { TopBar } from "../components/home/TopBar";
 import { useAuth } from "../hooks/useAuth";
