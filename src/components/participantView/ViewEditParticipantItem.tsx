@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 import { Value } from "@radix-ui/react-select";
+import { Button } from "../ui/button";
 
 interface ViewEditParticipantItemProps {
   me: Participant;
@@ -78,14 +79,14 @@ export const ViewEditParticipantItem = ({
   }
 
   return (
-    <FormProvider {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col justify-between h-full"
-      >
-        {isEdit ? (
-          <>
-            <CardContent>
+    <CardContent>
+      <FormProvider {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="flex flex-col justify-between h-full"
+        >
+          {isEdit ? (
+            <>
               <EditParticipantCardItem
                 label="Addresse"
                 id="address"
@@ -105,10 +106,40 @@ export const ViewEditParticipantItem = ({
                 type={ValueTypes.SIZE}
               />
               <EditParticipantCardItem
+                label="Situation"
+                id="situation"
+                form={form}
+                type={ValueTypes.STRING}
+              />
+              <EditParticipantCardItem
                 label="Régime alimentaire"
                 id="diet"
                 form={form}
                 type={ValueTypes.STRING}
+              />
+              <EditParticipantCardItem
+                label="Carte d'identité"
+                id="idCard"
+                form={form}
+                type={ValueTypes.DOCUMENT}
+              />
+              <EditParticipantCardItem
+                label="Certificat médical"
+                id="medicalCertificate"
+                form={form}
+                type={ValueTypes.DOCUMENT}
+              />
+              <EditParticipantCardItem
+                label="Fiche de sécurité"
+                id="securityFile"
+                form={form}
+                type={ValueTypes.SECURITYFILE}
+              />
+              <EditParticipantCardItem
+                label="Carte étudiante"
+                id="studentCard"
+                form={form}
+                type={ValueTypes.DOCUMENT}
               />
               <EditParticipantCardItem
                 label="Attestation sur l'honneur"
@@ -116,15 +147,9 @@ export const ViewEditParticipantItem = ({
                 form={form}
                 type={ValueTypes.BOOLEAN}
               />
-            </CardContent>
-
-            <CardFooter className="flex flex-col">
-              <ParticipantCardItem label="Paiement" value={me.payment} />
-            </CardFooter>
-          </>
-        ) : (
-          <>
-            <CardContent>
+            </>
+          ) : (
+            <>
               <ParticipantCardItem label="Addresse" value={me.address} />
               <ParticipantCardItem
                 label="Taille de vélo"
@@ -160,13 +185,15 @@ export const ViewEditParticipantItem = ({
                 label="Attestation sur l'honneur"
                 value={me.attestation_on_honour}
               />
-            </CardContent>
-              <CardFooter className="flex flex-col">
-                <ParticipantCardItem label="Paiement" value={me.payment} />
-              </CardFooter>
-          </>
-        )}
-      </form>
-    </FormProvider>
+            </>
+          )}
+          {isEdit && (
+            <Button type="submit" className="mt-6">
+              Enregistrer
+            </Button>
+          )}
+        </form>
+      </FormProvider>
+    </CardContent>
   );
 };

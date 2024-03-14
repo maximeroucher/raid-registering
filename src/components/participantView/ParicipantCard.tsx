@@ -77,13 +77,23 @@ export const ParticipantCard = ({
           setIsEdit={setIsEdit}
         />
       )}
-      <Progress
-        value={
-          participant?.validation_progress
-            ? participant!.validation_progress * 100
-            : 0
-        }
-      />
+      {!isEdit && (
+        <>
+          <CardFooter className="flex flex-col">
+            <ParticipantCardItem
+              label="Paiement"
+              value={participant?.payment}
+            />
+          </CardFooter>
+          <Progress
+            value={
+              participant?.validation_progress
+                ? participant!.validation_progress * 100
+                : 0
+            }
+          />
+        </>
+      )}
     </Card>
   );
 };

@@ -83,10 +83,10 @@ export function EditParticipantCardItem<T extends ValueType>({
       case ValueTypes.SECURITYFILE:
         return (
           <>
-            <div className="bg-zinc-200 px-2 rounded-md">
+            {/* <div className="bg-zinc-200 px-2 rounded-md">
               <span>Fiche de sécurité</span>
             </div>
-            <Checkbox checked={true} />
+            <Checkbox checked={true} /> */}
           </>
         );
       case ValueTypes.STRING:
@@ -111,7 +111,7 @@ export function EditParticipantCardItem<T extends ValueType>({
       render={({ field }) => (
         <FormItem>
           <div className="grid p-2 grid-cols-6">
-            <FormLabel className="font-bold text-left my-auto text-md col-span-2">
+            <FormLabel className="font-semibold text-left my-auto text-md col-span-2">
               {label}
             </FormLabel>
             {valueComponent(field)}
