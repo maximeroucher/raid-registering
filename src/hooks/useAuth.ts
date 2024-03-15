@@ -32,7 +32,7 @@ export const useAuth = () => {
     var values = crypto.getRandomValues(new Uint8Array(length));
     for (var i = 0; i < length; i++) {
       result += characters.charAt(
-        Math.floor((values[i] / length) * charactersLength)
+        Math.floor((values[i] / length) * charactersLength),
       );
     }
     return result;
@@ -96,9 +96,9 @@ export const useAuth = () => {
     const codeVerifier = generateRandomString(128);
 
     const authUrl = `${backUrl}/auth/authorize?client_id=${clientId}&response_type=code&scope=${scopes.join(
-      " "
+      " ",
     )}&redirect_uri=${redirectUrlHost}&code_challenge=${await hash(
-      codeVerifier
+      codeVerifier,
     )}&code_challenge_method=S256`;
 
     setIsLoading(true);
@@ -111,7 +111,7 @@ export const useAuth = () => {
     popupWindow = window.open(
       authUrl,
       "Hyperion",
-      `height=${POPUP_HEIGHT},width=${POPUP_WIDTH},top=${top},left=${left},scrollbars=yes`
+      `height=${POPUP_HEIGHT},width=${POPUP_WIDTH},top=${top},left=${left},scrollbars=yes`,
     );
 
     const interval = setInterval(() => {

@@ -26,7 +26,7 @@ export type SendEmailBackgroundtasksSendEmailPostVariables = {
 
 export const fetchSendEmailBackgroundtasksSendEmailPost = (
   variables: SendEmailBackgroundtasksSendEmailPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     void,
@@ -45,7 +45,7 @@ export const useSendEmailBackgroundtasksSendEmailPost = (
       SendEmailBackgroundtasksSendEmailPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -76,7 +76,7 @@ export type ReadAdvertisersAdvertAdvertisersGetVariables =
  */
 export const fetchReadAdvertisersAdvertAdvertisersGet = (
   variables: ReadAdvertisersAdvertAdvertisersGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     ReadAdvertisersAdvertAdvertisersGetResponse,
@@ -91,7 +91,7 @@ export const fetchReadAdvertisersAdvertAdvertisersGet = (
  * Get existing advertisers.
  */
 export const useReadAdvertisersAdvertAdvertisersGet = <
-  TData = ReadAdvertisersAdvertAdvertisersGetResponse
+  TData = ReadAdvertisersAdvertAdvertisersGetResponse,
 >(
   variables: ReadAdvertisersAdvertAdvertisersGetVariables,
   options?: Omit<
@@ -101,7 +101,7 @@ export const useReadAdvertisersAdvertAdvertisersGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -118,7 +118,7 @@ export const useReadAdvertisersAdvertAdvertisersGet = <
     queryFn: ({ signal }) =>
       fetchReadAdvertisersAdvertAdvertisersGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -143,7 +143,7 @@ export type CreateAdvertiserAdvertAdvertisersPostVariables = {
  */
 export const fetchCreateAdvertiserAdvertAdvertisersPost = (
   variables: CreateAdvertiserAdvertAdvertisersPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.AdvertiserComplete,
@@ -169,7 +169,7 @@ export const useCreateAdvertiserAdvertAdvertisersPost = (
       CreateAdvertiserAdvertAdvertisersPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -207,7 +207,7 @@ export type DeleteAdvertiserAdvertAdvertisersAdvertiserIdDeleteVariables = {
  */
 export const fetchDeleteAdvertiserAdvertAdvertisersAdvertiserIdDelete = (
   variables: DeleteAdvertiserAdvertAdvertisersAdvertiserIdDeleteVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -236,7 +236,7 @@ export const useDeleteAdvertiserAdvertAdvertisersAdvertiserIdDelete = (
       DeleteAdvertiserAdvertAdvertisersAdvertiserIdDeleteVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -245,7 +245,7 @@ export const useDeleteAdvertiserAdvertAdvertisersAdvertiserIdDelete = (
     DeleteAdvertiserAdvertAdvertisersAdvertiserIdDeleteVariables
   >({
     mutationFn: (
-      variables: DeleteAdvertiserAdvertAdvertisersAdvertiserIdDeleteVariables
+      variables: DeleteAdvertiserAdvertAdvertisersAdvertiserIdDeleteVariables,
     ) =>
       fetchDeleteAdvertiserAdvertAdvertisersAdvertiserIdDelete({
         ...fetcherOptions,
@@ -277,7 +277,7 @@ export type UpdateAdvertiserAdvertAdvertisersAdvertiserIdPatchVariables = {
  */
 export const fetchUpdateAdvertiserAdvertAdvertisersAdvertiserIdPatch = (
   variables: UpdateAdvertiserAdvertAdvertisersAdvertiserIdPatchVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -306,7 +306,7 @@ export const useUpdateAdvertiserAdvertAdvertisersAdvertiserIdPatch = (
       UpdateAdvertiserAdvertAdvertisersAdvertiserIdPatchVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -315,7 +315,7 @@ export const useUpdateAdvertiserAdvertAdvertisersAdvertiserIdPatch = (
     UpdateAdvertiserAdvertAdvertisersAdvertiserIdPatchVariables
   >({
     mutationFn: (
-      variables: UpdateAdvertiserAdvertAdvertisersAdvertiserIdPatchVariables
+      variables: UpdateAdvertiserAdvertAdvertisersAdvertiserIdPatchVariables,
     ) =>
       fetchUpdateAdvertiserAdvertAdvertisersAdvertiserIdPatch({
         ...fetcherOptions,
@@ -341,7 +341,7 @@ export type GetCurrentUserAdvertisersAdvertMeAdvertisersGetVariables =
  */
 export const fetchGetCurrentUserAdvertisersAdvertMeAdvertisersGet = (
   variables: GetCurrentUserAdvertisersAdvertMeAdvertisersGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetCurrentUserAdvertisersAdvertMeAdvertisersGetResponse,
@@ -358,7 +358,7 @@ export const fetchGetCurrentUserAdvertisersAdvertMeAdvertisersGet = (
  * **The user must be authenticated to use this endpoint**
  */
 export const useGetCurrentUserAdvertisersAdvertMeAdvertisersGet = <
-  TData = GetCurrentUserAdvertisersAdvertMeAdvertisersGetResponse
+  TData = GetCurrentUserAdvertisersAdvertMeAdvertisersGetResponse,
 >(
   variables: GetCurrentUserAdvertisersAdvertMeAdvertisersGetVariables,
   options?: Omit<
@@ -368,7 +368,7 @@ export const useGetCurrentUserAdvertisersAdvertMeAdvertisersGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -385,7 +385,7 @@ export const useGetCurrentUserAdvertisersAdvertMeAdvertisersGet = <
     queryFn: ({ signal }) =>
       fetchGetCurrentUserAdvertisersAdvertMeAdvertisersGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -415,7 +415,7 @@ export type ReadAdvertsAdvertAdvertsGetVariables = {
  */
 export const fetchReadAdvertsAdvertAdvertsGet = (
   variables: ReadAdvertsAdvertAdvertsGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     ReadAdvertsAdvertAdvertsGetResponse,
@@ -432,7 +432,7 @@ export const fetchReadAdvertsAdvertAdvertsGet = (
  * **The user must be authenticated to use this endpoint**
  */
 export const useReadAdvertsAdvertAdvertsGet = <
-  TData = ReadAdvertsAdvertAdvertsGetResponse
+  TData = ReadAdvertsAdvertAdvertsGetResponse,
 >(
   variables: ReadAdvertsAdvertAdvertsGetVariables,
   options?: Omit<
@@ -442,7 +442,7 @@ export const useReadAdvertsAdvertAdvertsGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -459,7 +459,7 @@ export const useReadAdvertsAdvertAdvertsGet = <
     queryFn: ({ signal }) =>
       fetchReadAdvertsAdvertAdvertsGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -482,7 +482,7 @@ export type CreateAdvertAdvertAdvertsPostVariables = {
  */
 export const fetchCreateAdvertAdvertAdvertsPost = (
   variables: CreateAdvertAdvertAdvertsPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.AdvertReturnComplete,
@@ -506,7 +506,7 @@ export const useCreateAdvertAdvertAdvertsPost = (
       CreateAdvertAdvertAdvertsPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -540,7 +540,7 @@ export type ReadAdvertAdvertAdvertsAdvertIdGetVariables = {
  */
 export const fetchReadAdvertAdvertAdvertsAdvertIdGet = (
   variables: ReadAdvertAdvertAdvertsAdvertIdGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.AdvertReturnComplete,
@@ -557,7 +557,7 @@ export const fetchReadAdvertAdvertAdvertsAdvertIdGet = (
  * **The user must be authenticated to use this endpoint**
  */
 export const useReadAdvertAdvertAdvertsAdvertIdGet = <
-  TData = Schemas.AdvertReturnComplete
+  TData = Schemas.AdvertReturnComplete,
 >(
   variables: ReadAdvertAdvertAdvertsAdvertIdGetVariables,
   options?: Omit<
@@ -567,7 +567,7 @@ export const useReadAdvertAdvertAdvertsAdvertIdGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -584,7 +584,7 @@ export const useReadAdvertAdvertAdvertsAdvertIdGet = <
     queryFn: ({ signal }) =>
       fetchReadAdvertAdvertAdvertsAdvertIdGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -612,7 +612,7 @@ export type UpdateAdvertAdvertAdvertsAdvertIdPatchVariables = {
  */
 export const fetchUpdateAdvertAdvertAdvertsAdvertIdPatch = (
   variables: UpdateAdvertAdvertAdvertsAdvertIdPatchVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -641,7 +641,7 @@ export const useUpdateAdvertAdvertAdvertsAdvertIdPatch = (
       UpdateAdvertAdvertAdvertsAdvertIdPatchVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -679,7 +679,7 @@ export type DeleteAdvertAdvertAdvertsAdvertIdDeleteVariables = {
  */
 export const fetchDeleteAdvertAdvertAdvertsAdvertIdDelete = (
   variables: DeleteAdvertAdvertAdvertsAdvertIdDeleteVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -708,7 +708,7 @@ export const useDeleteAdvertAdvertAdvertsAdvertIdDelete = (
       DeleteAdvertAdvertAdvertsAdvertIdDeleteVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -746,7 +746,7 @@ export type ReadAdvertImageAdvertAdvertsAdvertIdPictureGetVariables = {
  */
 export const fetchReadAdvertImageAdvertAdvertsAdvertIdPictureGet = (
   variables: ReadAdvertImageAdvertAdvertsAdvertIdPictureGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -768,7 +768,7 @@ export const fetchReadAdvertImageAdvertAdvertsAdvertIdPictureGet = (
  * **The user must be authenticated to use this endpoint**
  */
 export const useReadAdvertImageAdvertAdvertsAdvertIdPictureGet = <
-  TData = undefined
+  TData = undefined,
 >(
   variables: ReadAdvertImageAdvertAdvertsAdvertIdPictureGetVariables,
   options?: Omit<
@@ -778,7 +778,7 @@ export const useReadAdvertImageAdvertAdvertsAdvertIdPictureGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -795,7 +795,7 @@ export const useReadAdvertImageAdvertAdvertsAdvertIdPictureGet = <
     queryFn: ({ signal }) =>
       fetchReadAdvertImageAdvertAdvertsAdvertIdPictureGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -824,7 +824,7 @@ export type CreateAdvertImageAdvertAdvertsAdvertIdPicturePostVariables = {
  */
 export const fetchCreateAdvertImageAdvertAdvertsAdvertIdPicturePost = (
   variables: CreateAdvertImageAdvertAdvertsAdvertIdPicturePostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.AppUtilsTypesStandardResponsesResult,
@@ -853,7 +853,7 @@ export const useCreateAdvertImageAdvertAdvertsAdvertIdPicturePost = (
       CreateAdvertImageAdvertAdvertsAdvertIdPicturePostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -862,7 +862,7 @@ export const useCreateAdvertImageAdvertAdvertsAdvertIdPicturePost = (
     CreateAdvertImageAdvertAdvertsAdvertIdPicturePostVariables
   >({
     mutationFn: (
-      variables: CreateAdvertImageAdvertAdvertsAdvertIdPicturePostVariables
+      variables: CreateAdvertImageAdvertAdvertsAdvertIdPicturePostVariables,
     ) =>
       fetchCreateAdvertImageAdvertAdvertsAdvertIdPicturePost({
         ...fetcherOptions,
@@ -886,7 +886,7 @@ export type GetProductsAmapProductsGetVariables =
  */
 export const fetchGetProductsAmapProductsGet = (
   variables: GetProductsAmapProductsGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetProductsAmapProductsGetResponse,
@@ -903,7 +903,7 @@ export const fetchGetProductsAmapProductsGet = (
  * **The user must be a member of the group AMAP to use this endpoint**
  */
 export const useGetProductsAmapProductsGet = <
-  TData = GetProductsAmapProductsGetResponse
+  TData = GetProductsAmapProductsGetResponse,
 >(
   variables: GetProductsAmapProductsGetVariables,
   options?: Omit<
@@ -913,7 +913,7 @@ export const useGetProductsAmapProductsGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -930,7 +930,7 @@ export const useGetProductsAmapProductsGet = <
     queryFn: ({ signal }) =>
       fetchGetProductsAmapProductsGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -953,7 +953,7 @@ export type CreateProductAmapProductsPostVariables = {
  */
 export const fetchCreateProductAmapProductsPost = (
   variables: CreateProductAmapProductsPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.ProductComplete,
@@ -977,7 +977,7 @@ export const useCreateProductAmapProductsPost = (
       CreateProductAmapProductsPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -1009,7 +1009,7 @@ export type GetProductByIdAmapProductsProductIdGetVariables = {
  */
 export const fetchGetProductByIdAmapProductsProductIdGet = (
   variables: GetProductByIdAmapProductsProductIdGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.ProductComplete,
@@ -1024,7 +1024,7 @@ export const fetchGetProductByIdAmapProductsProductIdGet = (
  * Get a specific product
  */
 export const useGetProductByIdAmapProductsProductIdGet = <
-  TData = Schemas.ProductComplete
+  TData = Schemas.ProductComplete,
 >(
   variables: GetProductByIdAmapProductsProductIdGetVariables,
   options?: Omit<
@@ -1034,7 +1034,7 @@ export const useGetProductByIdAmapProductsProductIdGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -1051,7 +1051,7 @@ export const useGetProductByIdAmapProductsProductIdGet = <
     queryFn: ({ signal }) =>
       fetchGetProductByIdAmapProductsProductIdGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -1079,7 +1079,7 @@ export type EditProductAmapProductsProductIdPatchVariables = {
  */
 export const fetchEditProductAmapProductsProductIdPatch = (
   variables: EditProductAmapProductsProductIdPatchVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -1108,7 +1108,7 @@ export const useEditProductAmapProductsProductIdPatch = (
       EditProductAmapProductsProductIdPatchVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -1146,7 +1146,7 @@ export type DeleteProductAmapProductsProductIdDeleteVariables = {
  */
 export const fetchDeleteProductAmapProductsProductIdDelete = (
   variables: DeleteProductAmapProductsProductIdDeleteVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -1175,7 +1175,7 @@ export const useDeleteProductAmapProductsProductIdDelete = (
       DeleteProductAmapProductsProductIdDeleteVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -1184,7 +1184,7 @@ export const useDeleteProductAmapProductsProductIdDelete = (
     DeleteProductAmapProductsProductIdDeleteVariables
   >({
     mutationFn: (
-      variables: DeleteProductAmapProductsProductIdDeleteVariables
+      variables: DeleteProductAmapProductsProductIdDeleteVariables,
     ) =>
       fetchDeleteProductAmapProductsProductIdDelete({
         ...fetcherOptions,
@@ -1207,7 +1207,7 @@ export type GetDeliveriesAmapDeliveriesGetVariables =
  */
 export const fetchGetDeliveriesAmapDeliveriesGet = (
   variables: GetDeliveriesAmapDeliveriesGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetDeliveriesAmapDeliveriesGetResponse,
@@ -1222,7 +1222,7 @@ export const fetchGetDeliveriesAmapDeliveriesGet = (
  * Get all deliveries.
  */
 export const useGetDeliveriesAmapDeliveriesGet = <
-  TData = GetDeliveriesAmapDeliveriesGetResponse
+  TData = GetDeliveriesAmapDeliveriesGetResponse,
 >(
   variables: GetDeliveriesAmapDeliveriesGetVariables,
   options?: Omit<
@@ -1232,7 +1232,7 @@ export const useGetDeliveriesAmapDeliveriesGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -1249,7 +1249,7 @@ export const useGetDeliveriesAmapDeliveriesGet = <
     queryFn: ({ signal }) =>
       fetchGetDeliveriesAmapDeliveriesGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -1272,7 +1272,7 @@ export type CreateDeliveryAmapDeliveriesPostVariables = {
  */
 export const fetchCreateDeliveryAmapDeliveriesPost = (
   variables: CreateDeliveryAmapDeliveriesPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.DeliveryReturn,
@@ -1296,7 +1296,7 @@ export const useCreateDeliveryAmapDeliveriesPost = (
       CreateDeliveryAmapDeliveriesPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -1334,7 +1334,7 @@ export type DeleteDeliveryAmapDeliveriesDeliveryIdDeleteVariables = {
  */
 export const fetchDeleteDeliveryAmapDeliveriesDeliveryIdDelete = (
   variables: DeleteDeliveryAmapDeliveriesDeliveryIdDeleteVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -1363,7 +1363,7 @@ export const useDeleteDeliveryAmapDeliveriesDeliveryIdDelete = (
       DeleteDeliveryAmapDeliveriesDeliveryIdDeleteVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -1372,7 +1372,7 @@ export const useDeleteDeliveryAmapDeliveriesDeliveryIdDelete = (
     DeleteDeliveryAmapDeliveriesDeliveryIdDeleteVariables
   >({
     mutationFn: (
-      variables: DeleteDeliveryAmapDeliveriesDeliveryIdDeleteVariables
+      variables: DeleteDeliveryAmapDeliveriesDeliveryIdDeleteVariables,
     ) =>
       fetchDeleteDeliveryAmapDeliveriesDeliveryIdDelete({
         ...fetcherOptions,
@@ -1404,7 +1404,7 @@ export type EditDeliveryAmapDeliveriesDeliveryIdPatchVariables = {
  */
 export const fetchEditDeliveryAmapDeliveriesDeliveryIdPatch = (
   variables: EditDeliveryAmapDeliveriesDeliveryIdPatchVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -1433,7 +1433,7 @@ export const useEditDeliveryAmapDeliveriesDeliveryIdPatch = (
       EditDeliveryAmapDeliveriesDeliveryIdPatchVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -1442,7 +1442,7 @@ export const useEditDeliveryAmapDeliveriesDeliveryIdPatch = (
     EditDeliveryAmapDeliveriesDeliveryIdPatchVariables
   >({
     mutationFn: (
-      variables: EditDeliveryAmapDeliveriesDeliveryIdPatchVariables
+      variables: EditDeliveryAmapDeliveriesDeliveryIdPatchVariables,
     ) =>
       fetchEditDeliveryAmapDeliveriesDeliveryIdPatch({
         ...fetcherOptions,
@@ -1476,7 +1476,7 @@ export type AddProductToDeliveryAmapDeliveriesDeliveryIdProductsPostVariables =
  */
 export const fetchAddProductToDeliveryAmapDeliveriesDeliveryIdProductsPost = (
   variables: AddProductToDeliveryAmapDeliveriesDeliveryIdProductsPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     void,
@@ -1505,7 +1505,7 @@ export const useAddProductToDeliveryAmapDeliveriesDeliveryIdProductsPost = (
       AddProductToDeliveryAmapDeliveriesDeliveryIdProductsPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -1514,7 +1514,7 @@ export const useAddProductToDeliveryAmapDeliveriesDeliveryIdProductsPost = (
     AddProductToDeliveryAmapDeliveriesDeliveryIdProductsPostVariables
   >({
     mutationFn: (
-      variables: AddProductToDeliveryAmapDeliveriesDeliveryIdProductsPostVariables
+      variables: AddProductToDeliveryAmapDeliveriesDeliveryIdProductsPostVariables,
     ) =>
       fetchAddProductToDeliveryAmapDeliveriesDeliveryIdProductsPost({
         ...fetcherOptions,
@@ -1549,7 +1549,7 @@ export type RemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDeleteVaria
 export const fetchRemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDelete =
   (
     variables: RemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDeleteVariables,
-    signal?: AbortSignal
+    signal?: AbortSignal,
   ) =>
     hyperionFetch<
       undefined,
@@ -1579,7 +1579,7 @@ export const useRemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDelete 
         RemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDeleteVariables
       >,
       "mutationFn"
-    >
+    >,
   ) => {
     const { fetcherOptions } = useHyperionContext();
     return reactQuery.useMutation<
@@ -1588,7 +1588,7 @@ export const useRemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDelete 
       RemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDeleteVariables
     >({
       mutationFn: (
-        variables: RemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDeleteVariables
+        variables: RemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDeleteVariables,
       ) =>
         fetchRemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDelete({
           ...fetcherOptions,
@@ -1622,7 +1622,7 @@ export type GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetVariables = {
  */
 export const fetchGetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGet = (
   variables: GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetResponse,
@@ -1644,7 +1644,7 @@ export const fetchGetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGet = (
  * **The user must be a member of the group AMAP to use this endpoint**
  */
 export const useGetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGet = <
-  TData = GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetResponse
+  TData = GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetResponse,
 >(
   variables: GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetVariables,
   options?: Omit<
@@ -1654,7 +1654,7 @@ export const useGetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -1671,7 +1671,7 @@ export const useGetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGet = <
     queryFn: ({ signal }) =>
       fetchGetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -1698,7 +1698,7 @@ export type GetOrderByIdAmapOrdersOrderIdGetVariables = {
  */
 export const fetchGetOrderByIdAmapOrdersOrderIdGet = (
   variables: GetOrderByIdAmapOrdersOrderIdGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.OrderReturn,
@@ -1715,7 +1715,7 @@ export const fetchGetOrderByIdAmapOrdersOrderIdGet = (
  * **The user must be a member of the group AMAP to use this endpoint**
  */
 export const useGetOrderByIdAmapOrdersOrderIdGet = <
-  TData = Schemas.OrderReturn
+  TData = Schemas.OrderReturn,
 >(
   variables: GetOrderByIdAmapOrdersOrderIdGetVariables,
   options?: Omit<
@@ -1725,7 +1725,7 @@ export const useGetOrderByIdAmapOrdersOrderIdGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -1742,7 +1742,7 @@ export const useGetOrderByIdAmapOrdersOrderIdGet = <
     queryFn: ({ signal }) =>
       fetchGetOrderByIdAmapOrdersOrderIdGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -1771,7 +1771,7 @@ export type EditOrderFromDeliveryAmapOrdersOrderIdPatchVariables = {
  */
 export const fetchEditOrderFromDeliveryAmapOrdersOrderIdPatch = (
   variables: EditOrderFromDeliveryAmapOrdersOrderIdPatchVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -1795,7 +1795,7 @@ export const useEditOrderFromDeliveryAmapOrdersOrderIdPatch = (
       EditOrderFromDeliveryAmapOrdersOrderIdPatchVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -1804,7 +1804,7 @@ export const useEditOrderFromDeliveryAmapOrdersOrderIdPatch = (
     EditOrderFromDeliveryAmapOrdersOrderIdPatchVariables
   >({
     mutationFn: (
-      variables: EditOrderFromDeliveryAmapOrdersOrderIdPatchVariables
+      variables: EditOrderFromDeliveryAmapOrdersOrderIdPatchVariables,
     ) =>
       fetchEditOrderFromDeliveryAmapOrdersOrderIdPatch({
         ...fetcherOptions,
@@ -1834,7 +1834,7 @@ export type RemoveOrderAmapOrdersOrderIdDeleteVariables = {
  */
 export const fetchRemoveOrderAmapOrdersOrderIdDelete = (
   variables: RemoveOrderAmapOrdersOrderIdDeleteVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -1858,7 +1858,7 @@ export const useRemoveOrderAmapOrdersOrderIdDelete = (
       RemoveOrderAmapOrdersOrderIdDeleteVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -1891,7 +1891,7 @@ export type AddOrderToDelieveryAmapOrdersPostVariables = {
  */
 export const fetchAddOrderToDelieveryAmapOrdersPost = (
   variables: AddOrderToDelieveryAmapOrdersPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.OrderReturn,
@@ -1915,7 +1915,7 @@ export const useAddOrderToDelieveryAmapOrdersPost = (
       AddOrderToDelieveryAmapOrdersPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -1951,7 +1951,7 @@ export type OpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPostVariab
 export const fetchOpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPost =
   (
     variables: OpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPostVariables,
-    signal?: AbortSignal
+    signal?: AbortSignal,
   ) =>
     hyperionFetch<
       undefined,
@@ -1976,7 +1976,7 @@ export const useOpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPost =
         OpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPostVariables
       >,
       "mutationFn"
-    >
+    >,
   ) => {
     const { fetcherOptions } = useHyperionContext();
     return reactQuery.useMutation<
@@ -1985,7 +1985,7 @@ export const useOpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPost =
       OpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPostVariables
     >({
       mutationFn: (
-        variables: OpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPostVariables
+        variables: OpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPostVariables,
       ) =>
         fetchOpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPost({
           ...fetcherOptions,
@@ -2011,7 +2011,7 @@ export type LockDeliveryAmapDeliveriesDeliveryIdLockPostVariables = {
 
 export const fetchLockDeliveryAmapDeliveriesDeliveryIdLockPost = (
   variables: LockDeliveryAmapDeliveriesDeliveryIdLockPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -2035,7 +2035,7 @@ export const useLockDeliveryAmapDeliveriesDeliveryIdLockPost = (
       LockDeliveryAmapDeliveriesDeliveryIdLockPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -2044,7 +2044,7 @@ export const useLockDeliveryAmapDeliveriesDeliveryIdLockPost = (
     LockDeliveryAmapDeliveriesDeliveryIdLockPostVariables
   >({
     mutationFn: (
-      variables: LockDeliveryAmapDeliveriesDeliveryIdLockPostVariables
+      variables: LockDeliveryAmapDeliveriesDeliveryIdLockPostVariables,
     ) =>
       fetchLockDeliveryAmapDeliveriesDeliveryIdLockPost({
         ...fetcherOptions,
@@ -2073,7 +2073,7 @@ export type MarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPostVariable
 export const fetchMarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPost =
   (
     variables: MarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPostVariables,
-    signal?: AbortSignal
+    signal?: AbortSignal,
   ) =>
     hyperionFetch<
       undefined,
@@ -2097,7 +2097,7 @@ export const useMarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPost = (
       MarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -2106,7 +2106,7 @@ export const useMarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPost = (
     MarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPostVariables
   >({
     mutationFn: (
-      variables: MarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPostVariables
+      variables: MarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPostVariables,
     ) =>
       fetchMarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPost({
         ...fetcherOptions,
@@ -2132,7 +2132,7 @@ export type ArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePostVariables = {
 
 export const fetchArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePost = (
   variables: ArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -2156,7 +2156,7 @@ export const useArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePost = (
       ArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -2165,7 +2165,7 @@ export const useArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePost = (
     ArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePostVariables
   >({
     mutationFn: (
-      variables: ArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePostVariables
+      variables: ArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePostVariables,
     ) =>
       fetchArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePost({
         ...fetcherOptions,
@@ -2189,7 +2189,7 @@ export type GetUsersCashAmapUsersCashGetVariables =
  */
 export const fetchGetUsersCashAmapUsersCashGet = (
   variables: GetUsersCashAmapUsersCashGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetUsersCashAmapUsersCashGetResponse,
@@ -2206,7 +2206,7 @@ export const fetchGetUsersCashAmapUsersCashGet = (
  * **The user must be a member of the group AMAP to use this endpoint**
  */
 export const useGetUsersCashAmapUsersCashGet = <
-  TData = GetUsersCashAmapUsersCashGetResponse
+  TData = GetUsersCashAmapUsersCashGetResponse,
 >(
   variables: GetUsersCashAmapUsersCashGetVariables,
   options?: Omit<
@@ -2216,7 +2216,7 @@ export const useGetUsersCashAmapUsersCashGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -2233,7 +2233,7 @@ export const useGetUsersCashAmapUsersCashGet = <
     queryFn: ({ signal }) =>
       fetchGetUsersCashAmapUsersCashGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -2260,7 +2260,7 @@ export type GetCashByIdAmapUsersUserIdCashGetVariables = {
  */
 export const fetchGetCashByIdAmapUsersUserIdCashGet = (
   variables: GetCashByIdAmapUsersUserIdCashGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.CashComplete,
@@ -2277,7 +2277,7 @@ export const fetchGetCashByIdAmapUsersUserIdCashGet = (
  * **The user must be a member of the group AMAP to use this endpoint or can only access the endpoint for its own user_id**
  */
 export const useGetCashByIdAmapUsersUserIdCashGet = <
-  TData = Schemas.CashComplete
+  TData = Schemas.CashComplete,
 >(
   variables: GetCashByIdAmapUsersUserIdCashGetVariables,
   options?: Omit<
@@ -2287,7 +2287,7 @@ export const useGetCashByIdAmapUsersUserIdCashGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -2304,7 +2304,7 @@ export const useGetCashByIdAmapUsersUserIdCashGet = <
     queryFn: ({ signal }) =>
       fetchGetCashByIdAmapUsersUserIdCashGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -2333,7 +2333,7 @@ export type CreateCashOfUserAmapUsersUserIdCashPostVariables = {
  */
 export const fetchCreateCashOfUserAmapUsersUserIdCashPost = (
   variables: CreateCashOfUserAmapUsersUserIdCashPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.CashComplete,
@@ -2357,7 +2357,7 @@ export const useCreateCashOfUserAmapUsersUserIdCashPost = (
       CreateCashOfUserAmapUsersUserIdCashPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -2396,7 +2396,7 @@ export type EditCashByIdAmapUsersUserIdCashPatchVariables = {
  */
 export const fetchEditCashByIdAmapUsersUserIdCashPatch = (
   variables: EditCashByIdAmapUsersUserIdCashPatchVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -2426,7 +2426,7 @@ export const useEditCashByIdAmapUsersUserIdCashPatch = (
       EditCashByIdAmapUsersUserIdCashPatchVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -2467,7 +2467,7 @@ export type GetOrdersOfUserAmapUsersUserIdOrdersGetVariables = {
  */
 export const fetchGetOrdersOfUserAmapUsersUserIdOrdersGet = (
   variables: GetOrdersOfUserAmapUsersUserIdOrdersGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetOrdersOfUserAmapUsersUserIdOrdersGetResponse,
@@ -2489,7 +2489,7 @@ export const fetchGetOrdersOfUserAmapUsersUserIdOrdersGet = (
  * **The user must be a member of the group AMAP to use this endpoint or can only access the endpoint for its own user_id**
  */
 export const useGetOrdersOfUserAmapUsersUserIdOrdersGet = <
-  TData = GetOrdersOfUserAmapUsersUserIdOrdersGetResponse
+  TData = GetOrdersOfUserAmapUsersUserIdOrdersGetResponse,
 >(
   variables: GetOrdersOfUserAmapUsersUserIdOrdersGetVariables,
   options?: Omit<
@@ -2499,7 +2499,7 @@ export const useGetOrdersOfUserAmapUsersUserIdOrdersGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -2516,7 +2516,7 @@ export const useGetOrdersOfUserAmapUsersUserIdOrdersGet = <
     queryFn: ({ signal }) =>
       fetchGetOrdersOfUserAmapUsersUserIdOrdersGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -2534,7 +2534,7 @@ export type GetInformationAmapInformationGetVariables =
  */
 export const fetchGetInformationAmapInformationGet = (
   variables: GetInformationAmapInformationGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.Information,
@@ -2549,7 +2549,7 @@ export const fetchGetInformationAmapInformationGet = (
  * Return all information
  */
 export const useGetInformationAmapInformationGet = <
-  TData = Schemas.Information
+  TData = Schemas.Information,
 >(
   variables: GetInformationAmapInformationGetVariables,
   options?: Omit<
@@ -2559,7 +2559,7 @@ export const useGetInformationAmapInformationGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -2576,7 +2576,7 @@ export const useGetInformationAmapInformationGet = <
     queryFn: ({ signal }) =>
       fetchGetInformationAmapInformationGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -2599,7 +2599,7 @@ export type EditInformationAmapInformationPatchVariables = {
  */
 export const fetchEditInformationAmapInformationPatch = (
   variables: EditInformationAmapInformationPatchVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -2623,7 +2623,7 @@ export const useEditInformationAmapInformationPatch = (
       EditInformationAmapInformationPatchVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -2648,7 +2648,7 @@ export type GetAssociationsAssociationsGetVariables =
 
 export const fetchGetAssociationsAssociationsGet = (
   variables: GetAssociationsAssociationsGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     void,
@@ -2668,7 +2668,7 @@ export const useGetAssociationsAssociationsGet = <TData = void>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -2681,7 +2681,7 @@ export const useGetAssociationsAssociationsGet = <TData = void>(
     queryFn: ({ signal }) =>
       fetchGetAssociationsAssociationsGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -2696,7 +2696,7 @@ export type EditAssociationAssociationsPutVariables =
 
 export const fetchEditAssociationAssociationsPut = (
   variables: EditAssociationAssociationsPutVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     void,
@@ -2715,7 +2715,7 @@ export const useEditAssociationAssociationsPut = (
       EditAssociationAssociationsPutVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -2737,7 +2737,7 @@ export type CreateAssociationAssociationsPostVariables =
 
 export const fetchCreateAssociationAssociationsPost = (
   variables: CreateAssociationAssociationsPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     void,
@@ -2756,7 +2756,7 @@ export const useCreateAssociationAssociationsPost = (
       CreateAssociationAssociationsPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -2789,7 +2789,7 @@ export type GetAssociationAssociationsAssociationIdGetVariables = {
 
 export const fetchGetAssociationAssociationsAssociationIdGet = (
   variables: GetAssociationAssociationsAssociationIdGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     void,
@@ -2814,7 +2814,7 @@ export const useGetAssociationAssociationsAssociationIdGet = <TData = void>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -2831,7 +2831,7 @@ export const useGetAssociationAssociationsAssociationIdGet = <TData = void>(
     queryFn: ({ signal }) =>
       fetchGetAssociationAssociationsAssociationIdGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -2854,7 +2854,7 @@ export type GetUsersAssociationAssociationsAssociationIdUsersGetVariables = {
 
 export const fetchGetUsersAssociationAssociationsAssociationIdUsersGet = (
   variables: GetUsersAssociationAssociationsAssociationIdUsersGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     void,
@@ -2871,7 +2871,7 @@ export const fetchGetUsersAssociationAssociationsAssociationIdUsersGet = (
   });
 
 export const useGetUsersAssociationAssociationsAssociationIdUsersGet = <
-  TData = void
+  TData = void,
 >(
   variables: GetUsersAssociationAssociationsAssociationIdUsersGetVariables,
   options?: Omit<
@@ -2881,7 +2881,7 @@ export const useGetUsersAssociationAssociationsAssociationIdUsersGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -2898,7 +2898,7 @@ export const useGetUsersAssociationAssociationsAssociationIdUsersGet = <
     queryFn: ({ signal }) =>
       fetchGetUsersAssociationAssociationsAssociationIdUsersGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -2925,7 +2925,7 @@ export type CreateUserAssociationAssociationsAssociationIdUsersUserIdPostVariabl
 export const fetchCreateUserAssociationAssociationsAssociationIdUsersUserIdPost =
   (
     variables: CreateUserAssociationAssociationsAssociationIdUsersUserIdPostVariables,
-    signal?: AbortSignal
+    signal?: AbortSignal,
   ) =>
     hyperionFetch<
       void,
@@ -2950,7 +2950,7 @@ export const useCreateUserAssociationAssociationsAssociationIdUsersUserIdPost =
         CreateUserAssociationAssociationsAssociationIdUsersUserIdPostVariables
       >,
       "mutationFn"
-    >
+    >,
   ) => {
     const { fetcherOptions } = useHyperionContext();
     return reactQuery.useMutation<
@@ -2959,7 +2959,7 @@ export const useCreateUserAssociationAssociationsAssociationIdUsersUserIdPost =
       CreateUserAssociationAssociationsAssociationIdUsersUserIdPostVariables
     >({
       mutationFn: (
-        variables: CreateUserAssociationAssociationsAssociationIdUsersUserIdPostVariables
+        variables: CreateUserAssociationAssociationsAssociationIdUsersUserIdPostVariables,
       ) =>
         fetchCreateUserAssociationAssociationsAssociationIdUsersUserIdPost({
           ...fetcherOptions,
@@ -2989,7 +2989,7 @@ export type DeleteUserAssociationAssociationsAssociationIdUsersUserIdDeleteVaria
 export const fetchDeleteUserAssociationAssociationsAssociationIdUsersUserIdDelete =
   (
     variables: DeleteUserAssociationAssociationsAssociationIdUsersUserIdDeleteVariables,
-    signal?: AbortSignal
+    signal?: AbortSignal,
   ) =>
     hyperionFetch<
       void,
@@ -3014,7 +3014,7 @@ export const useDeleteUserAssociationAssociationsAssociationIdUsersUserIdDelete 
         DeleteUserAssociationAssociationsAssociationIdUsersUserIdDeleteVariables
       >,
       "mutationFn"
-    >
+    >,
   ) => {
     const { fetcherOptions } = useHyperionContext();
     return reactQuery.useMutation<
@@ -3023,7 +3023,7 @@ export const useDeleteUserAssociationAssociationsAssociationIdUsersUserIdDelete 
       DeleteUserAssociationAssociationsAssociationIdUsersUserIdDeleteVariables
     >({
       mutationFn: (
-        variables: DeleteUserAssociationAssociationsAssociationIdUsersUserIdDeleteVariables
+        variables: DeleteUserAssociationAssociationsAssociationIdUsersUserIdDeleteVariables,
       ) =>
         fetchDeleteUserAssociationAssociationsAssociationIdUsersUserIdDelete({
           ...fetcherOptions,
@@ -3053,7 +3053,7 @@ export type CreateAdminAssociationAssociationsAssociationIdAdminsUserIdPostVaria
 export const fetchCreateAdminAssociationAssociationsAssociationIdAdminsUserIdPost =
   (
     variables: CreateAdminAssociationAssociationsAssociationIdAdminsUserIdPostVariables,
-    signal?: AbortSignal
+    signal?: AbortSignal,
   ) =>
     hyperionFetch<
       void,
@@ -3078,7 +3078,7 @@ export const useCreateAdminAssociationAssociationsAssociationIdAdminsUserIdPost 
         CreateAdminAssociationAssociationsAssociationIdAdminsUserIdPostVariables
       >,
       "mutationFn"
-    >
+    >,
   ) => {
     const { fetcherOptions } = useHyperionContext();
     return reactQuery.useMutation<
@@ -3087,7 +3087,7 @@ export const useCreateAdminAssociationAssociationsAssociationIdAdminsUserIdPost 
       CreateAdminAssociationAssociationsAssociationIdAdminsUserIdPostVariables
     >({
       mutationFn: (
-        variables: CreateAdminAssociationAssociationsAssociationIdAdminsUserIdPostVariables
+        variables: CreateAdminAssociationAssociationsAssociationIdAdminsUserIdPostVariables,
       ) =>
         fetchCreateAdminAssociationAssociationsAssociationIdAdminsUserIdPost({
           ...fetcherOptions,
@@ -3117,7 +3117,7 @@ export type DeleteAdminAssociationAssociationsAssociationIdAdminsUserIdDeleteVar
 export const fetchDeleteAdminAssociationAssociationsAssociationIdAdminsUserIdDelete =
   (
     variables: DeleteAdminAssociationAssociationsAssociationIdAdminsUserIdDeleteVariables,
-    signal?: AbortSignal
+    signal?: AbortSignal,
   ) =>
     hyperionFetch<
       void,
@@ -3142,7 +3142,7 @@ export const useDeleteAdminAssociationAssociationsAssociationIdAdminsUserIdDelet
         DeleteAdminAssociationAssociationsAssociationIdAdminsUserIdDeleteVariables
       >,
       "mutationFn"
-    >
+    >,
   ) => {
     const { fetcherOptions } = useHyperionContext();
     return reactQuery.useMutation<
@@ -3151,7 +3151,7 @@ export const useDeleteAdminAssociationAssociationsAssociationIdAdminsUserIdDelet
       DeleteAdminAssociationAssociationsAssociationIdAdminsUserIdDeleteVariables
     >({
       mutationFn: (
-        variables: DeleteAdminAssociationAssociationsAssociationIdAdminsUserIdDeleteVariables
+        variables: DeleteAdminAssociationAssociationsAssociationIdAdminsUserIdDeleteVariables,
       ) =>
         fetchDeleteAdminAssociationAssociationsAssociationIdAdminsUserIdDelete({
           ...fetcherOptions,
@@ -3178,7 +3178,7 @@ export type LoginForAccessTokenAuthSimpleTokenPostVariables =
  */
 export const fetchLoginForAccessTokenAuthSimpleTokenPost = (
   variables: LoginForAccessTokenAuthSimpleTokenPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.AccessToken,
@@ -3204,7 +3204,7 @@ export const useLoginForAccessTokenAuthSimpleTokenPost = (
       LoginForAccessTokenAuthSimpleTokenPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -3257,7 +3257,7 @@ export type GetAuthorizePageAuthAuthorizeGetVariables = {
  */
 export const fetchGetAuthorizePageAuthAuthorizeGet = (
   variables: GetAuthorizePageAuthAuthorizeGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -3291,7 +3291,7 @@ export const useGetAuthorizePageAuthAuthorizeGet = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -3308,7 +3308,7 @@ export const useGetAuthorizePageAuthAuthorizeGet = <TData = undefined>(
     queryFn: ({ signal }) =>
       fetchGetAuthorizePageAuthAuthorizeGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -3339,7 +3339,7 @@ export type PostAuthorizePageAuthAuthorizePostVariables =
  */
 export const fetchPostAuthorizePageAuthAuthorizePost = (
   variables: PostAuthorizePageAuthAuthorizePostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -3372,7 +3372,7 @@ export const usePostAuthorizePageAuthAuthorizePost = (
       PostAuthorizePageAuthAuthorizePostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -3429,7 +3429,7 @@ export type AuthorizeValidationAuthAuthorizationFlowAuthorizeValidationPostVaria
 export const fetchAuthorizeValidationAuthAuthorizationFlowAuthorizeValidationPost =
   (
     variables: AuthorizeValidationAuthAuthorizationFlowAuthorizeValidationPostVariables,
-    signal?: AbortSignal
+    signal?: AbortSignal,
   ) =>
     hyperionFetch<
       undefined,
@@ -3482,7 +3482,7 @@ export const useAuthorizeValidationAuthAuthorizationFlowAuthorizeValidationPost 
         AuthorizeValidationAuthAuthorizationFlowAuthorizeValidationPostVariables
       >,
       "mutationFn"
-    >
+    >,
   ) => {
     const { fetcherOptions } = useHyperionContext();
     return reactQuery.useMutation<
@@ -3491,7 +3491,7 @@ export const useAuthorizeValidationAuthAuthorizationFlowAuthorizeValidationPost 
       AuthorizeValidationAuthAuthorizationFlowAuthorizeValidationPostVariables
     >({
       mutationFn: (
-        variables: AuthorizeValidationAuthAuthorizationFlowAuthorizeValidationPostVariables
+        variables: AuthorizeValidationAuthAuthorizationFlowAuthorizeValidationPostVariables,
       ) =>
         fetchAuthorizeValidationAuthAuthorizationFlowAuthorizeValidationPost({
           ...fetcherOptions,
@@ -3537,7 +3537,7 @@ export type TokenAuthTokenPostVariables = {
  */
 export const fetchTokenAuthTokenPost = (
   variables: TokenAuthTokenPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.TokenResponse,
@@ -3577,7 +3577,7 @@ export const useTokenAuthTokenPost = (
       TokenAuthTokenPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -3613,7 +3613,7 @@ export type AuthGetUserinfoAuthUserinfoGetVariables =
  */
 export const fetchAuthGetUserinfoAuthUserinfoGet = (
   variables: AuthGetUserinfoAuthUserinfoGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     void,
@@ -3647,7 +3647,7 @@ export const useAuthGetUserinfoAuthUserinfoGet = <TData = void>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -3660,7 +3660,7 @@ export const useAuthGetUserinfoAuthUserinfoGet = <TData = void>(
     queryFn: ({ signal }) =>
       fetchAuthGetUserinfoAuthUserinfoGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -3675,7 +3675,7 @@ export type JwksUriOidcAuthorizationFlowJwksUriGetVariables =
 
 export const fetchJwksUriOidcAuthorizationFlowJwksUriGet = (
   variables: JwksUriOidcAuthorizationFlowJwksUriGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     void,
@@ -3700,7 +3700,7 @@ export const useJwksUriOidcAuthorizationFlowJwksUriGet = <TData = void>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -3717,7 +3717,7 @@ export const useJwksUriOidcAuthorizationFlowJwksUriGet = <TData = void>(
     queryFn: ({ signal }) =>
       fetchJwksUriOidcAuthorizationFlowJwksUriGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -3732,7 +3732,7 @@ export type OidcConfigurationWellKnownOpenidConfigurationGetVariables =
 
 export const fetchOidcConfigurationWellKnownOpenidConfigurationGet = (
   variables: OidcConfigurationWellKnownOpenidConfigurationGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     void,
@@ -3749,7 +3749,7 @@ export const fetchOidcConfigurationWellKnownOpenidConfigurationGet = (
   });
 
 export const useOidcConfigurationWellKnownOpenidConfigurationGet = <
-  TData = void
+  TData = void,
 >(
   variables: OidcConfigurationWellKnownOpenidConfigurationGetVariables,
   options?: Omit<
@@ -3759,7 +3759,7 @@ export const useOidcConfigurationWellKnownOpenidConfigurationGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -3776,7 +3776,7 @@ export const useOidcConfigurationWellKnownOpenidConfigurationGet = <
     queryFn: ({ signal }) =>
       fetchOidcConfigurationWellKnownOpenidConfigurationGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -3798,7 +3798,7 @@ export type GetManagersBookingManagersGetVariables =
  */
 export const fetchGetManagersBookingManagersGet = (
   variables: GetManagersBookingManagersGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetManagersBookingManagersGetResponse,
@@ -3815,7 +3815,7 @@ export const fetchGetManagersBookingManagersGet = (
  * **This endpoint is only usable by administrators**
  */
 export const useGetManagersBookingManagersGet = <
-  TData = GetManagersBookingManagersGetResponse
+  TData = GetManagersBookingManagersGetResponse,
 >(
   variables: GetManagersBookingManagersGetVariables,
   options?: Omit<
@@ -3825,7 +3825,7 @@ export const useGetManagersBookingManagersGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -3842,7 +3842,7 @@ export const useGetManagersBookingManagersGet = <
     queryFn: ({ signal }) =>
       fetchGetManagersBookingManagersGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -3865,7 +3865,7 @@ export type CreateManagerBookingManagersPostVariables = {
  */
 export const fetchCreateManagerBookingManagersPost = (
   variables: CreateManagerBookingManagersPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.Manager,
@@ -3889,7 +3889,7 @@ export const useCreateManagerBookingManagersPost = (
       CreateManagerBookingManagersPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -3928,7 +3928,7 @@ export type UpdateManagerBookingManagersManagerIdPatchVariables = {
  */
 export const fetchUpdateManagerBookingManagersManagerIdPatch = (
   variables: UpdateManagerBookingManagersManagerIdPatchVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -3957,7 +3957,7 @@ export const useUpdateManagerBookingManagersManagerIdPatch = (
       UpdateManagerBookingManagersManagerIdPatchVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -3966,7 +3966,7 @@ export const useUpdateManagerBookingManagersManagerIdPatch = (
     UpdateManagerBookingManagersManagerIdPatchVariables
   >({
     mutationFn: (
-      variables: UpdateManagerBookingManagersManagerIdPatchVariables
+      variables: UpdateManagerBookingManagersManagerIdPatchVariables,
     ) =>
       fetchUpdateManagerBookingManagersManagerIdPatch({
         ...fetcherOptions,
@@ -3997,7 +3997,7 @@ export type DeleteManagerBookingManagersManagerIdDeleteVariables = {
  */
 export const fetchDeleteManagerBookingManagersManagerIdDelete = (
   variables: DeleteManagerBookingManagersManagerIdDeleteVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -4026,7 +4026,7 @@ export const useDeleteManagerBookingManagersManagerIdDelete = (
       DeleteManagerBookingManagersManagerIdDeleteVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -4035,7 +4035,7 @@ export const useDeleteManagerBookingManagersManagerIdDelete = (
     DeleteManagerBookingManagersManagerIdDeleteVariables
   >({
     mutationFn: (
-      variables: DeleteManagerBookingManagersManagerIdDeleteVariables
+      variables: DeleteManagerBookingManagersManagerIdDeleteVariables,
     ) =>
       fetchDeleteManagerBookingManagersManagerIdDelete({
         ...fetcherOptions,
@@ -4061,7 +4061,7 @@ export type GetCurrentUserManagersBookingManagersUsersMeGetVariables =
  */
 export const fetchGetCurrentUserManagersBookingManagersUsersMeGet = (
   variables: GetCurrentUserManagersBookingManagersUsersMeGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetCurrentUserManagersBookingManagersUsersMeGetResponse,
@@ -4078,7 +4078,7 @@ export const fetchGetCurrentUserManagersBookingManagersUsersMeGet = (
  * **The user must be authenticated to use this endpoint**
  */
 export const useGetCurrentUserManagersBookingManagersUsersMeGet = <
-  TData = GetCurrentUserManagersBookingManagersUsersMeGetResponse
+  TData = GetCurrentUserManagersBookingManagersUsersMeGetResponse,
 >(
   variables: GetCurrentUserManagersBookingManagersUsersMeGetVariables,
   options?: Omit<
@@ -4088,7 +4088,7 @@ export const useGetCurrentUserManagersBookingManagersUsersMeGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -4105,7 +4105,7 @@ export const useGetCurrentUserManagersBookingManagersUsersMeGet = <
     queryFn: ({ signal }) =>
       fetchGetCurrentUserManagersBookingManagersUsersMeGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -4128,7 +4128,7 @@ export type GetBookingsForManagerBookingBookingsUsersMeManageGetVariables =
  */
 export const fetchGetBookingsForManagerBookingBookingsUsersMeManageGet = (
   variables: GetBookingsForManagerBookingBookingsUsersMeManageGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetBookingsForManagerBookingBookingsUsersMeManageGetResponse,
@@ -4150,7 +4150,7 @@ export const fetchGetBookingsForManagerBookingBookingsUsersMeManageGet = (
  * **The user must be authenticated to use this endpoint**
  */
 export const useGetBookingsForManagerBookingBookingsUsersMeManageGet = <
-  TData = GetBookingsForManagerBookingBookingsUsersMeManageGetResponse
+  TData = GetBookingsForManagerBookingBookingsUsersMeManageGetResponse,
 >(
   variables: GetBookingsForManagerBookingBookingsUsersMeManageGetVariables,
   options?: Omit<
@@ -4160,7 +4160,7 @@ export const useGetBookingsForManagerBookingBookingsUsersMeManageGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -4177,7 +4177,7 @@ export const useGetBookingsForManagerBookingBookingsUsersMeManageGet = <
     queryFn: ({ signal }) =>
       fetchGetBookingsForManagerBookingBookingsUsersMeManageGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -4200,7 +4200,7 @@ export type GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageG
 export const fetchGetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGet =
   (
     variables: GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGetVariables,
-    signal?: AbortSignal
+    signal?: AbortSignal,
   ) =>
     hyperionFetch<
       GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGetResponse,
@@ -4222,7 +4222,7 @@ export const fetchGetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeM
  */
 export const useGetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGet =
   <
-    TData = GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGetResponse
+    TData = GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGetResponse,
   >(
     variables: GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGetVariables,
     options?: Omit<
@@ -4232,7 +4232,7 @@ export const useGetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeMan
         TData
       >,
       "queryKey" | "queryFn" | "initialData"
-    >
+    >,
   ) => {
     const { fetcherOptions, queryOptions, queryKeyFn } =
       useHyperionContext(options);
@@ -4250,7 +4250,7 @@ export const useGetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeMan
       queryFn: ({ signal }) =>
         fetchGetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGet(
           { ...fetcherOptions, ...variables },
-          signal
+          signal,
         ),
       ...options,
       ...queryOptions,
@@ -4273,7 +4273,7 @@ export type GetConfirmedBookingsBookingBookingsConfirmedGetVariables =
  */
 export const fetchGetConfirmedBookingsBookingBookingsConfirmedGet = (
   variables: GetConfirmedBookingsBookingBookingsConfirmedGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetConfirmedBookingsBookingBookingsConfirmedGetResponse,
@@ -4295,7 +4295,7 @@ export const fetchGetConfirmedBookingsBookingBookingsConfirmedGet = (
  * **The user must be authenticated to use this endpoint**
  */
 export const useGetConfirmedBookingsBookingBookingsConfirmedGet = <
-  TData = GetConfirmedBookingsBookingBookingsConfirmedGetResponse
+  TData = GetConfirmedBookingsBookingBookingsConfirmedGetResponse,
 >(
   variables: GetConfirmedBookingsBookingBookingsConfirmedGetVariables,
   options?: Omit<
@@ -4305,7 +4305,7 @@ export const useGetConfirmedBookingsBookingBookingsConfirmedGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -4322,7 +4322,7 @@ export const useGetConfirmedBookingsBookingBookingsConfirmedGet = <
     queryFn: ({ signal }) =>
       fetchGetConfirmedBookingsBookingBookingsConfirmedGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -4345,7 +4345,7 @@ export type GetApplicantBookingsBookingBookingsUsersMeGetVariables =
  */
 export const fetchGetApplicantBookingsBookingBookingsUsersMeGet = (
   variables: GetApplicantBookingsBookingBookingsUsersMeGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetApplicantBookingsBookingBookingsUsersMeGetResponse,
@@ -4362,7 +4362,7 @@ export const fetchGetApplicantBookingsBookingBookingsUsersMeGet = (
  * **Only usable by the user**
  */
 export const useGetApplicantBookingsBookingBookingsUsersMeGet = <
-  TData = GetApplicantBookingsBookingBookingsUsersMeGetResponse
+  TData = GetApplicantBookingsBookingBookingsUsersMeGetResponse,
 >(
   variables: GetApplicantBookingsBookingBookingsUsersMeGetVariables,
   options?: Omit<
@@ -4372,7 +4372,7 @@ export const useGetApplicantBookingsBookingBookingsUsersMeGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -4389,7 +4389,7 @@ export const useGetApplicantBookingsBookingBookingsUsersMeGet = <
     queryFn: ({ signal }) =>
       fetchGetApplicantBookingsBookingBookingsUsersMeGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -4412,7 +4412,7 @@ export type CreateBookingBookingBookingsPostVariables = {
  */
 export const fetchCreateBookingBookingBookingsPost = (
   variables: CreateBookingBookingBookingsPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.BookingReturn,
@@ -4436,7 +4436,7 @@ export const useCreateBookingBookingBookingsPost = (
       CreateBookingBookingBookingsPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -4475,7 +4475,7 @@ export type EditBookingBookingBookingsBookingIdPatchVariables = {
  */
 export const fetchEditBookingBookingBookingsBookingIdPatch = (
   variables: EditBookingBookingBookingsBookingIdPatchVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -4504,7 +4504,7 @@ export const useEditBookingBookingBookingsBookingIdPatch = (
       EditBookingBookingBookingsBookingIdPatchVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -4513,7 +4513,7 @@ export const useEditBookingBookingBookingsBookingIdPatch = (
     EditBookingBookingBookingsBookingIdPatchVariables
   >({
     mutationFn: (
-      variables: EditBookingBookingBookingsBookingIdPatchVariables
+      variables: EditBookingBookingBookingsBookingIdPatchVariables,
     ) =>
       fetchEditBookingBookingBookingsBookingIdPatch({
         ...fetcherOptions,
@@ -4544,7 +4544,7 @@ export type DeleteBookingBookingBookingsBookingIdDeleteVariables = {
  */
 export const fetchDeleteBookingBookingBookingsBookingIdDelete = (
   variables: DeleteBookingBookingBookingsBookingIdDeleteVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -4573,7 +4573,7 @@ export const useDeleteBookingBookingBookingsBookingIdDelete = (
       DeleteBookingBookingBookingsBookingIdDeleteVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -4582,7 +4582,7 @@ export const useDeleteBookingBookingBookingsBookingIdDelete = (
     DeleteBookingBookingBookingsBookingIdDeleteVariables
   >({
     mutationFn: (
-      variables: DeleteBookingBookingBookingsBookingIdDeleteVariables
+      variables: DeleteBookingBookingBookingsBookingIdDeleteVariables,
     ) =>
       fetchDeleteBookingBookingBookingsBookingIdDelete({
         ...fetcherOptions,
@@ -4616,7 +4616,7 @@ export type ConfirmBookingBookingBookingsBookingIdReplyDecisionPatchVariables =
  */
 export const fetchConfirmBookingBookingBookingsBookingIdReplyDecisionPatch = (
   variables: ConfirmBookingBookingBookingsBookingIdReplyDecisionPatchVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -4645,7 +4645,7 @@ export const useConfirmBookingBookingBookingsBookingIdReplyDecisionPatch = (
       ConfirmBookingBookingBookingsBookingIdReplyDecisionPatchVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -4654,7 +4654,7 @@ export const useConfirmBookingBookingBookingsBookingIdReplyDecisionPatch = (
     ConfirmBookingBookingBookingsBookingIdReplyDecisionPatchVariables
   >({
     mutationFn: (
-      variables: ConfirmBookingBookingBookingsBookingIdReplyDecisionPatchVariables
+      variables: ConfirmBookingBookingBookingsBookingIdReplyDecisionPatchVariables,
     ) =>
       fetchConfirmBookingBookingBookingsBookingIdReplyDecisionPatch({
         ...fetcherOptions,
@@ -4678,7 +4678,7 @@ export type GetRoomsBookingRoomsGetVariables =
  */
 export const fetchGetRoomsBookingRoomsGet = (
   variables: GetRoomsBookingRoomsGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetRoomsBookingRoomsGetResponse,
@@ -4695,7 +4695,7 @@ export const fetchGetRoomsBookingRoomsGet = (
  * **The user must be authenticated to use this endpoint**
  */
 export const useGetRoomsBookingRoomsGet = <
-  TData = GetRoomsBookingRoomsGetResponse
+  TData = GetRoomsBookingRoomsGetResponse,
 >(
   variables: GetRoomsBookingRoomsGetVariables,
   options?: Omit<
@@ -4705,7 +4705,7 @@ export const useGetRoomsBookingRoomsGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -4742,7 +4742,7 @@ export type CreateRoomBookingRoomsPostVariables = {
  */
 export const fetchCreateRoomBookingRoomsPost = (
   variables: CreateRoomBookingRoomsPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.RoomComplete,
@@ -4766,7 +4766,7 @@ export const useCreateRoomBookingRoomsPost = (
       CreateRoomBookingRoomsPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -4801,7 +4801,7 @@ export type EditRoomBookingRoomsRoomIdPatchVariables = {
  */
 export const fetchEditRoomBookingRoomsRoomIdPatch = (
   variables: EditRoomBookingRoomsRoomIdPatchVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -4825,7 +4825,7 @@ export const useEditRoomBookingRoomsRoomIdPatch = (
       EditRoomBookingRoomsRoomIdPatchVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -4859,7 +4859,7 @@ export type DeleteRoomBookingRoomsRoomIdDeleteVariables = {
  */
 export const fetchDeleteRoomBookingRoomsRoomIdDelete = (
   variables: DeleteRoomBookingRoomsRoomIdDeleteVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -4883,7 +4883,7 @@ export const useDeleteRoomBookingRoomsRoomIdDelete = (
       DeleteRoomBookingRoomsRoomIdDeleteVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -4912,7 +4912,7 @@ export type GetEventsCalendarEventsGetVariables =
  */
 export const fetchGetEventsCalendarEventsGet = (
   variables: GetEventsCalendarEventsGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetEventsCalendarEventsGetResponse,
@@ -4927,7 +4927,7 @@ export const fetchGetEventsCalendarEventsGet = (
  * Get all events from the database.
  */
 export const useGetEventsCalendarEventsGet = <
-  TData = GetEventsCalendarEventsGetResponse
+  TData = GetEventsCalendarEventsGetResponse,
 >(
   variables: GetEventsCalendarEventsGetVariables,
   options?: Omit<
@@ -4937,7 +4937,7 @@ export const useGetEventsCalendarEventsGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -4954,7 +4954,7 @@ export const useGetEventsCalendarEventsGet = <
     queryFn: ({ signal }) =>
       fetchGetEventsCalendarEventsGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -4975,7 +4975,7 @@ export type AddEventCalendarEventsPostVariables = {
  */
 export const fetchAddEventCalendarEventsPost = (
   variables: AddEventCalendarEventsPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.EventReturn,
@@ -4997,7 +4997,7 @@ export const useAddEventCalendarEventsPost = (
       AddEventCalendarEventsPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -5027,7 +5027,7 @@ export type GetConfirmedEventsCalendarEventsConfirmedGetVariables =
  */
 export const fetchGetConfirmedEventsCalendarEventsConfirmedGet = (
   variables: GetConfirmedEventsCalendarEventsConfirmedGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetConfirmedEventsCalendarEventsConfirmedGetResponse,
@@ -5044,7 +5044,7 @@ export const fetchGetConfirmedEventsCalendarEventsConfirmedGet = (
  * **Usable by every member**
  */
 export const useGetConfirmedEventsCalendarEventsConfirmedGet = <
-  TData = GetConfirmedEventsCalendarEventsConfirmedGetResponse
+  TData = GetConfirmedEventsCalendarEventsConfirmedGetResponse,
 >(
   variables: GetConfirmedEventsCalendarEventsConfirmedGetVariables,
   options?: Omit<
@@ -5054,7 +5054,7 @@ export const useGetConfirmedEventsCalendarEventsConfirmedGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -5071,7 +5071,7 @@ export const useGetConfirmedEventsCalendarEventsConfirmedGet = <
     queryFn: ({ signal }) =>
       fetchGetConfirmedEventsCalendarEventsConfirmedGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -5102,7 +5102,7 @@ export type GetApplicantBookingsCalendarEventsUserApplicantIdGetVariables = {
  */
 export const fetchGetApplicantBookingsCalendarEventsUserApplicantIdGet = (
   variables: GetApplicantBookingsCalendarEventsUserApplicantIdGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetApplicantBookingsCalendarEventsUserApplicantIdGetResponse,
@@ -5124,7 +5124,7 @@ export const fetchGetApplicantBookingsCalendarEventsUserApplicantIdGet = (
  * **Usable by the user or admins**
  */
 export const useGetApplicantBookingsCalendarEventsUserApplicantIdGet = <
-  TData = GetApplicantBookingsCalendarEventsUserApplicantIdGetResponse
+  TData = GetApplicantBookingsCalendarEventsUserApplicantIdGetResponse,
 >(
   variables: GetApplicantBookingsCalendarEventsUserApplicantIdGetVariables,
   options?: Omit<
@@ -5134,7 +5134,7 @@ export const useGetApplicantBookingsCalendarEventsUserApplicantIdGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -5151,7 +5151,7 @@ export const useGetApplicantBookingsCalendarEventsUserApplicantIdGet = <
     queryFn: ({ signal }) =>
       fetchGetApplicantBookingsCalendarEventsUserApplicantIdGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -5176,7 +5176,7 @@ export type GetEventByIdCalendarEventsEventIdGetVariables = {
  */
 export const fetchGetEventByIdCalendarEventsEventIdGet = (
   variables: GetEventByIdCalendarEventsEventIdGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.EventComplete,
@@ -5191,7 +5191,7 @@ export const fetchGetEventByIdCalendarEventsEventIdGet = (
  * Get an event's information by its id.
  */
 export const useGetEventByIdCalendarEventsEventIdGet = <
-  TData = Schemas.EventComplete
+  TData = Schemas.EventComplete,
 >(
   variables: GetEventByIdCalendarEventsEventIdGetVariables,
   options?: Omit<
@@ -5201,7 +5201,7 @@ export const useGetEventByIdCalendarEventsEventIdGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -5218,7 +5218,7 @@ export const useGetEventByIdCalendarEventsEventIdGet = <
     queryFn: ({ signal }) =>
       fetchGetEventByIdCalendarEventsEventIdGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -5247,7 +5247,7 @@ export type EditBookingsIdCalendarEventsEventIdPatchVariables = {
  */
 export const fetchEditBookingsIdCalendarEventsEventIdPatch = (
   variables: EditBookingsIdCalendarEventsEventIdPatchVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -5276,7 +5276,7 @@ export const useEditBookingsIdCalendarEventsEventIdPatch = (
       EditBookingsIdCalendarEventsEventIdPatchVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -5285,7 +5285,7 @@ export const useEditBookingsIdCalendarEventsEventIdPatch = (
     EditBookingsIdCalendarEventsEventIdPatchVariables
   >({
     mutationFn: (
-      variables: EditBookingsIdCalendarEventsEventIdPatchVariables
+      variables: EditBookingsIdCalendarEventsEventIdPatchVariables,
     ) =>
       fetchEditBookingsIdCalendarEventsEventIdPatch({
         ...fetcherOptions,
@@ -5316,7 +5316,7 @@ export type DeleteBookingsIdCalendarEventsEventIdDeleteVariables = {
  */
 export const fetchDeleteBookingsIdCalendarEventsEventIdDelete = (
   variables: DeleteBookingsIdCalendarEventsEventIdDeleteVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -5345,7 +5345,7 @@ export const useDeleteBookingsIdCalendarEventsEventIdDelete = (
       DeleteBookingsIdCalendarEventsEventIdDeleteVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -5354,7 +5354,7 @@ export const useDeleteBookingsIdCalendarEventsEventIdDelete = (
     DeleteBookingsIdCalendarEventsEventIdDeleteVariables
   >({
     mutationFn: (
-      variables: DeleteBookingsIdCalendarEventsEventIdDeleteVariables
+      variables: DeleteBookingsIdCalendarEventsEventIdDeleteVariables,
     ) =>
       fetchDeleteBookingsIdCalendarEventsEventIdDelete({
         ...fetcherOptions,
@@ -5380,7 +5380,7 @@ export type GetEventApplicantcalendarEventsEventIdApplicantGetVariables = {
 
 export const fetchGetEventApplicantcalendarEventsEventIdApplicantGet = (
   variables: GetEventApplicantcalendarEventsEventIdApplicantGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.EventApplicant,
@@ -5397,7 +5397,7 @@ export const fetchGetEventApplicantcalendarEventsEventIdApplicantGet = (
   });
 
 export const useGetEventApplicantcalendarEventsEventIdApplicantGet = <
-  TData = Schemas.EventApplicant
+  TData = Schemas.EventApplicant,
 >(
   variables: GetEventApplicantcalendarEventsEventIdApplicantGetVariables,
   options?: Omit<
@@ -5407,7 +5407,7 @@ export const useGetEventApplicantcalendarEventsEventIdApplicantGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -5424,7 +5424,7 @@ export const useGetEventApplicantcalendarEventsEventIdApplicantGet = <
     queryFn: ({ signal }) =>
       fetchGetEventApplicantcalendarEventsEventIdApplicantGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -5453,7 +5453,7 @@ export type ConfirmBookingCalendarEventsEventIdReplyDecisionPatchVariables = {
  */
 export const fetchConfirmBookingCalendarEventsEventIdReplyDecisionPatch = (
   variables: ConfirmBookingCalendarEventsEventIdReplyDecisionPatchVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -5482,7 +5482,7 @@ export const useConfirmBookingCalendarEventsEventIdReplyDecisionPatch = (
       ConfirmBookingCalendarEventsEventIdReplyDecisionPatchVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -5491,7 +5491,7 @@ export const useConfirmBookingCalendarEventsEventIdReplyDecisionPatch = (
     ConfirmBookingCalendarEventsEventIdReplyDecisionPatchVariables
   >({
     mutationFn: (
-      variables: ConfirmBookingCalendarEventsEventIdReplyDecisionPatchVariables
+      variables: ConfirmBookingCalendarEventsEventIdReplyDecisionPatchVariables,
     ) =>
       fetchConfirmBookingCalendarEventsEventIdReplyDecisionPatch({
         ...fetcherOptions,
@@ -5514,7 +5514,7 @@ export type RecreateIcalFileCalendarIcalCreatePostVariables =
  */
 export const fetchRecreateIcalFileCalendarIcalCreatePost = (
   variables: RecreateIcalFileCalendarIcalCreatePostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -5538,7 +5538,7 @@ export const useRecreateIcalFileCalendarIcalCreatePost = (
       RecreateIcalFileCalendarIcalCreatePostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -5566,7 +5566,7 @@ export type GetIcalendarFileCalendarIcalGetVariables =
  */
 export const fetchGetIcalendarFileCalendarIcalGet = (
   variables: GetIcalendarFileCalendarIcalGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -5589,7 +5589,7 @@ export const useGetIcalendarFileCalendarIcalGet = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -5606,7 +5606,7 @@ export const useGetIcalendarFileCalendarIcalGet = <TData = undefined>(
     queryFn: ({ signal }) =>
       fetchGetIcalendarFileCalendarIcalGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -5628,7 +5628,7 @@ export type GetSectionsCampaignSectionsGetVariables =
  */
 export const fetchGetSectionsCampaignSectionsGet = (
   variables: GetSectionsCampaignSectionsGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetSectionsCampaignSectionsGetResponse,
@@ -5645,7 +5645,7 @@ export const fetchGetSectionsCampaignSectionsGet = (
  * **The user must be a member of a group authorised to vote (voters) or a member of the group CAA to use this endpoint**
  */
 export const useGetSectionsCampaignSectionsGet = <
-  TData = GetSectionsCampaignSectionsGetResponse
+  TData = GetSectionsCampaignSectionsGetResponse,
 >(
   variables: GetSectionsCampaignSectionsGetVariables,
   options?: Omit<
@@ -5655,7 +5655,7 @@ export const useGetSectionsCampaignSectionsGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -5672,7 +5672,7 @@ export const useGetSectionsCampaignSectionsGet = <
     queryFn: ({ signal }) =>
       fetchGetSectionsCampaignSectionsGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -5697,7 +5697,7 @@ export type AddSectionCampaignSectionsPostVariables = {
  */
 export const fetchAddSectionCampaignSectionsPost = (
   variables: AddSectionCampaignSectionsPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.SectionComplete,
@@ -5723,7 +5723,7 @@ export const useAddSectionCampaignSectionsPost = (
       AddSectionCampaignSectionsPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -5760,7 +5760,7 @@ export type DeleteSectionCampaignSectionsSectionIdDeleteVariables = {
  */
 export const fetchDeleteSectionCampaignSectionsSectionIdDelete = (
   variables: DeleteSectionCampaignSectionsSectionIdDeleteVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -5791,7 +5791,7 @@ export const useDeleteSectionCampaignSectionsSectionIdDelete = (
       DeleteSectionCampaignSectionsSectionIdDeleteVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -5800,7 +5800,7 @@ export const useDeleteSectionCampaignSectionsSectionIdDelete = (
     DeleteSectionCampaignSectionsSectionIdDeleteVariables
   >({
     mutationFn: (
-      variables: DeleteSectionCampaignSectionsSectionIdDeleteVariables
+      variables: DeleteSectionCampaignSectionsSectionIdDeleteVariables,
     ) =>
       fetchDeleteSectionCampaignSectionsSectionIdDelete({
         ...fetcherOptions,
@@ -5824,7 +5824,7 @@ export type GetListsCampaignListsGetVariables =
  */
 export const fetchGetListsCampaignListsGet = (
   variables: GetListsCampaignListsGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetListsCampaignListsGetResponse,
@@ -5841,7 +5841,7 @@ export const fetchGetListsCampaignListsGet = (
  * **The user must be a member of a group authorised to vote (voters) or a member of the group CAA to use this endpoint**
  */
 export const useGetListsCampaignListsGet = <
-  TData = GetListsCampaignListsGetResponse
+  TData = GetListsCampaignListsGetResponse,
 >(
   variables: GetListsCampaignListsGetVariables,
   options?: Omit<
@@ -5851,7 +5851,7 @@ export const useGetListsCampaignListsGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -5868,7 +5868,7 @@ export const useGetListsCampaignListsGet = <
     queryFn: ({ signal }) =>
       fetchGetListsCampaignListsGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -5893,7 +5893,7 @@ export type AddListCampaignListsPostVariables = {
  */
 export const fetchAddListCampaignListsPost = (
   variables: AddListCampaignListsPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.ListReturn,
@@ -5919,7 +5919,7 @@ export const useAddListCampaignListsPost = (
       AddListCampaignListsPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -5955,7 +5955,7 @@ export type DeleteListCampaignListsListIdDeleteVariables = {
  */
 export const fetchDeleteListCampaignListsListIdDelete = (
   variables: DeleteListCampaignListsListIdDeleteVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -5986,7 +5986,7 @@ export const useDeleteListCampaignListsListIdDelete = (
       DeleteListCampaignListsListIdDeleteVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -6026,7 +6026,7 @@ export type UpdateListCampaignListsListIdPatchVariables = {
  */
 export const fetchUpdateListCampaignListsListIdPatch = (
   variables: UpdateListCampaignListsListIdPatchVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -6052,7 +6052,7 @@ export const useUpdateListCampaignListsListIdPatch = (
       UpdateListCampaignListsListIdPatchVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -6091,7 +6091,7 @@ export type DeleteListsByTypeCampaignListsDeleteVariables = {
  */
 export const fetchDeleteListsByTypeCampaignListsDelete = (
   variables: DeleteListsByTypeCampaignListsDeleteVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -6117,7 +6117,7 @@ export const useDeleteListsByTypeCampaignListsDelete = (
       DeleteListsByTypeCampaignListsDeleteVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -6146,7 +6146,7 @@ export type GetVotersCampaignVotersGetVariables =
  */
 export const fetchGetVotersCampaignVotersGet = (
   variables: GetVotersCampaignVotersGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetVotersCampaignVotersGetResponse,
@@ -6161,7 +6161,7 @@ export const fetchGetVotersCampaignVotersGet = (
  * Return the voters (groups allowed to vorte) for the current campaign.
  */
 export const useGetVotersCampaignVotersGet = <
-  TData = GetVotersCampaignVotersGetResponse
+  TData = GetVotersCampaignVotersGetResponse,
 >(
   variables: GetVotersCampaignVotersGetVariables,
   options?: Omit<
@@ -6171,7 +6171,7 @@ export const useGetVotersCampaignVotersGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -6188,7 +6188,7 @@ export const useGetVotersCampaignVotersGet = <
     queryFn: ({ signal }) =>
       fetchGetVotersCampaignVotersGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -6211,7 +6211,7 @@ export type AddVoterCampaignVotersPostVariables = {
  */
 export const fetchAddVoterCampaignVotersPost = (
   variables: AddVoterCampaignVotersPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.VoterGroup,
@@ -6235,7 +6235,7 @@ export const useAddVoterCampaignVotersPost = (
       AddVoterCampaignVotersPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -6262,7 +6262,7 @@ export type DeleteVotersCampaignVotersDeleteVariables =
  */
 export const fetchDeleteVotersCampaignVotersDelete = (
   variables: DeleteVotersCampaignVotersDeleteVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -6286,7 +6286,7 @@ export const useDeleteVotersCampaignVotersDelete = (
       DeleteVotersCampaignVotersDeleteVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -6324,7 +6324,7 @@ export type DeleteVoterByGroupIdCampaignVotersGroupIdDeleteVariables = {
  */
 export const fetchDeleteVoterByGroupIdCampaignVotersGroupIdDelete = (
   variables: DeleteVoterByGroupIdCampaignVotersGroupIdDeleteVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -6353,7 +6353,7 @@ export const useDeleteVoterByGroupIdCampaignVotersGroupIdDelete = (
       DeleteVoterByGroupIdCampaignVotersGroupIdDeleteVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -6362,7 +6362,7 @@ export const useDeleteVoterByGroupIdCampaignVotersGroupIdDelete = (
     DeleteVoterByGroupIdCampaignVotersGroupIdDeleteVariables
   >({
     mutationFn: (
-      variables: DeleteVoterByGroupIdCampaignVotersGroupIdDeleteVariables
+      variables: DeleteVoterByGroupIdCampaignVotersGroupIdDeleteVariables,
     ) =>
       fetchDeleteVoterByGroupIdCampaignVotersGroupIdDelete({
         ...fetcherOptions,
@@ -6388,7 +6388,7 @@ export type OpenVoteCampaignStatusOpenPostVariables =
  */
 export const fetchOpenVoteCampaignStatusOpenPost = (
   variables: OpenVoteCampaignStatusOpenPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -6415,7 +6415,7 @@ export const useOpenVoteCampaignStatusOpenPost = (
       OpenVoteCampaignStatusOpenPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -6445,7 +6445,7 @@ export type CloseVoteCampaignStatusClosePostVariables =
  */
 export const fetchCloseVoteCampaignStatusClosePost = (
   variables: CloseVoteCampaignStatusClosePostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -6472,7 +6472,7 @@ export const useCloseVoteCampaignStatusClosePost = (
       CloseVoteCampaignStatusClosePostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -6505,7 +6505,7 @@ export type CountVotingCampaignStatusCountingPostVariables =
  */
 export const fetchCountVotingCampaignStatusCountingPost = (
   variables: CountVotingCampaignStatusCountingPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -6532,7 +6532,7 @@ export const useCountVotingCampaignStatusCountingPost = (
       CountVotingCampaignStatusCountingPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -6565,7 +6565,7 @@ export type PublishVoteCampaignStatusPublishedPostVariables =
  */
 export const fetchPublishVoteCampaignStatusPublishedPost = (
   variables: PublishVoteCampaignStatusPublishedPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -6597,7 +6597,7 @@ export const usePublishVoteCampaignStatusPublishedPost = (
       PublishVoteCampaignStatusPublishedPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -6629,7 +6629,7 @@ export type ResetVoteCampaignStatusResetPostVariables =
  */
 export const fetchResetVoteCampaignStatusResetPost = (
   variables: ResetVoteCampaignStatusResetPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -6655,7 +6655,7 @@ export const useResetVoteCampaignStatusResetPost = (
       ResetVoteCampaignStatusResetPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -6687,7 +6687,7 @@ export type GetSectionsAlreadyVotedCampaignVotesGetVariables =
  */
 export const fetchGetSectionsAlreadyVotedCampaignVotesGet = (
   variables: GetSectionsAlreadyVotedCampaignVotesGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetSectionsAlreadyVotedCampaignVotesGetResponse,
@@ -6704,7 +6704,7 @@ export const fetchGetSectionsAlreadyVotedCampaignVotesGet = (
  * **The user must be a member of a group authorised to vote (voters) to use this endpoint**
  */
 export const useGetSectionsAlreadyVotedCampaignVotesGet = <
-  TData = GetSectionsAlreadyVotedCampaignVotesGetResponse
+  TData = GetSectionsAlreadyVotedCampaignVotesGetResponse,
 >(
   variables: GetSectionsAlreadyVotedCampaignVotesGetVariables,
   options?: Omit<
@@ -6714,7 +6714,7 @@ export const useGetSectionsAlreadyVotedCampaignVotesGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -6731,7 +6731,7 @@ export const useGetSectionsAlreadyVotedCampaignVotesGet = <
     queryFn: ({ signal }) =>
       fetchGetSectionsAlreadyVotedCampaignVotesGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -6756,7 +6756,7 @@ export type VoteCampaignVotesPostVariables = {
  */
 export const fetchVoteCampaignVotesPost = (
   variables: VoteCampaignVotesPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -6782,7 +6782,7 @@ export const useVoteCampaignVotesPost = (
       VoteCampaignVotesPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -6811,7 +6811,7 @@ export type GetResultsCampaignResultsGetVariables =
  */
 export const fetchGetResultsCampaignResultsGet = (
   variables: GetResultsCampaignResultsGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetResultsCampaignResultsGetResponse,
@@ -6828,7 +6828,7 @@ export const fetchGetResultsCampaignResultsGet = (
  * **The user must be a member of a group authorised to vote (voters) or a member of the group CAA to use this endpoint**
  */
 export const useGetResultsCampaignResultsGet = <
-  TData = GetResultsCampaignResultsGetResponse
+  TData = GetResultsCampaignResultsGetResponse,
 >(
   variables: GetResultsCampaignResultsGetVariables,
   options?: Omit<
@@ -6838,7 +6838,7 @@ export const useGetResultsCampaignResultsGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -6855,7 +6855,7 @@ export const useGetResultsCampaignResultsGet = <
     queryFn: ({ signal }) =>
       fetchGetResultsCampaignResultsGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -6875,7 +6875,7 @@ export type GetStatusVoteCampaignStatusGetVariables =
  */
 export const fetchGetStatusVoteCampaignStatusGet = (
   variables: GetStatusVoteCampaignStatusGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.VoteStatus,
@@ -6900,7 +6900,7 @@ export const useGetStatusVoteCampaignStatusGet = <TData = Schemas.VoteStatus>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -6917,7 +6917,7 @@ export const useGetStatusVoteCampaignStatusGet = <TData = Schemas.VoteStatus>(
     queryFn: ({ signal }) =>
       fetchGetStatusVoteCampaignStatusGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -6945,7 +6945,7 @@ export type GetStatsForSectionCampaignStatsSectionIdGetVariables = {
  */
 export const fetchGetStatsForSectionCampaignStatsSectionIdGet = (
   variables: GetStatsForSectionCampaignStatsSectionIdGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.VoteStats,
@@ -6967,7 +6967,7 @@ export const fetchGetStatsForSectionCampaignStatsSectionIdGet = (
  * **The user must be a member of the group CAA to use this endpoint**
  */
 export const useGetStatsForSectionCampaignStatsSectionIdGet = <
-  TData = Schemas.VoteStats
+  TData = Schemas.VoteStats,
 >(
   variables: GetStatsForSectionCampaignStatsSectionIdGetVariables,
   options?: Omit<
@@ -6977,7 +6977,7 @@ export const useGetStatsForSectionCampaignStatsSectionIdGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -6994,7 +6994,7 @@ export const useGetStatsForSectionCampaignStatsSectionIdGet = <
     queryFn: ({ signal }) =>
       fetchGetStatsForSectionCampaignStatsSectionIdGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -7023,7 +7023,7 @@ export type CreateCampaignsLogoCampaignListsListIdLogoPostVariables = {
  */
 export const fetchCreateCampaignsLogoCampaignListsListIdLogoPost = (
   variables: CreateCampaignsLogoCampaignListsListIdLogoPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.AppUtilsTypesStandardResponsesResult,
@@ -7052,7 +7052,7 @@ export const useCreateCampaignsLogoCampaignListsListIdLogoPost = (
       CreateCampaignsLogoCampaignListsListIdLogoPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -7061,7 +7061,7 @@ export const useCreateCampaignsLogoCampaignListsListIdLogoPost = (
     CreateCampaignsLogoCampaignListsListIdLogoPostVariables
   >({
     mutationFn: (
-      variables: CreateCampaignsLogoCampaignListsListIdLogoPostVariables
+      variables: CreateCampaignsLogoCampaignListsListIdLogoPostVariables,
     ) =>
       fetchCreateCampaignsLogoCampaignListsListIdLogoPost({
         ...fetcherOptions,
@@ -7091,7 +7091,7 @@ export type ReadCampaignsLogoCampaignListsListIdLogoGetVariables = {
  */
 export const fetchReadCampaignsLogoCampaignListsListIdLogoGet = (
   variables: ReadCampaignsLogoCampaignListsListIdLogoGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -7112,7 +7112,7 @@ export const fetchReadCampaignsLogoCampaignListsListIdLogoGet = (
  * **The user must be a member of a group authorised to vote (voters) or a member of the group CAA to use this endpoint**
  */
 export const useReadCampaignsLogoCampaignListsListIdLogoGet = <
-  TData = undefined
+  TData = undefined,
 >(
   variables: ReadCampaignsLogoCampaignListsListIdLogoGetVariables,
   options?: Omit<
@@ -7122,7 +7122,7 @@ export const useReadCampaignsLogoCampaignListsListIdLogoGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -7139,7 +7139,7 @@ export const useReadCampaignsLogoCampaignListsListIdLogoGet = <
     queryFn: ({ signal }) =>
       fetchReadCampaignsLogoCampaignListsListIdLogoGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -7156,7 +7156,7 @@ export type GetSessionsCinemaSessionsGetVariables =
 
 export const fetchGetSessionsCinemaSessionsGet = (
   variables: GetSessionsCinemaSessionsGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetSessionsCinemaSessionsGetResponse,
@@ -7168,7 +7168,7 @@ export const fetchGetSessionsCinemaSessionsGet = (
   >({ url: "/cinema/sessions", method: "get", ...variables, signal });
 
 export const useGetSessionsCinemaSessionsGet = <
-  TData = GetSessionsCinemaSessionsGetResponse
+  TData = GetSessionsCinemaSessionsGetResponse,
 >(
   variables: GetSessionsCinemaSessionsGetVariables,
   options?: Omit<
@@ -7178,7 +7178,7 @@ export const useGetSessionsCinemaSessionsGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -7195,7 +7195,7 @@ export const useGetSessionsCinemaSessionsGet = <
     queryFn: ({ signal }) =>
       fetchGetSessionsCinemaSessionsGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -7213,7 +7213,7 @@ export type CreateSessionCinemaSessionsPostVariables = {
 
 export const fetchCreateSessionCinemaSessionsPost = (
   variables: CreateSessionCinemaSessionsPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.CineSessionComplete,
@@ -7232,7 +7232,7 @@ export const useCreateSessionCinemaSessionsPost = (
       CreateSessionCinemaSessionsPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -7263,7 +7263,7 @@ export type UpdateSessionCinemaSessionsSessionIdPatchVariables = {
 
 export const fetchUpdateSessionCinemaSessionsSessionIdPatch = (
   variables: UpdateSessionCinemaSessionsSessionIdPatchVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     void,
@@ -7287,7 +7287,7 @@ export const useUpdateSessionCinemaSessionsSessionIdPatch = (
       UpdateSessionCinemaSessionsSessionIdPatchVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -7296,7 +7296,7 @@ export const useUpdateSessionCinemaSessionsSessionIdPatch = (
     UpdateSessionCinemaSessionsSessionIdPatchVariables
   >({
     mutationFn: (
-      variables: UpdateSessionCinemaSessionsSessionIdPatchVariables
+      variables: UpdateSessionCinemaSessionsSessionIdPatchVariables,
     ) =>
       fetchUpdateSessionCinemaSessionsSessionIdPatch({
         ...fetcherOptions,
@@ -7322,7 +7322,7 @@ export type DeleteSessionCinemaSessionsSessionIdDeleteVariables = {
 
 export const fetchDeleteSessionCinemaSessionsSessionIdDelete = (
   variables: DeleteSessionCinemaSessionsSessionIdDeleteVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -7346,7 +7346,7 @@ export const useDeleteSessionCinemaSessionsSessionIdDelete = (
       DeleteSessionCinemaSessionsSessionIdDeleteVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -7355,7 +7355,7 @@ export const useDeleteSessionCinemaSessionsSessionIdDelete = (
     DeleteSessionCinemaSessionsSessionIdDeleteVariables
   >({
     mutationFn: (
-      variables: DeleteSessionCinemaSessionsSessionIdDeleteVariables
+      variables: DeleteSessionCinemaSessionsSessionIdDeleteVariables,
     ) =>
       fetchDeleteSessionCinemaSessionsSessionIdDelete({
         ...fetcherOptions,
@@ -7382,7 +7382,7 @@ export type CreateCampaignsLogoCinemaSessionsSessionIdPosterPostVariables = {
 
 export const fetchCreateCampaignsLogoCinemaSessionsSessionIdPosterPost = (
   variables: CreateCampaignsLogoCinemaSessionsSessionIdPosterPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.AppUtilsTypesStandardResponsesResult,
@@ -7406,7 +7406,7 @@ export const useCreateCampaignsLogoCinemaSessionsSessionIdPosterPost = (
       CreateCampaignsLogoCinemaSessionsSessionIdPosterPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -7415,7 +7415,7 @@ export const useCreateCampaignsLogoCinemaSessionsSessionIdPosterPost = (
     CreateCampaignsLogoCinemaSessionsSessionIdPosterPostVariables
   >({
     mutationFn: (
-      variables: CreateCampaignsLogoCinemaSessionsSessionIdPosterPostVariables
+      variables: CreateCampaignsLogoCinemaSessionsSessionIdPosterPostVariables,
     ) =>
       fetchCreateCampaignsLogoCinemaSessionsSessionIdPosterPost({
         ...fetcherOptions,
@@ -7441,7 +7441,7 @@ export type ReadSessionPosterCinemaSessionsSessionIdPosterGetVariables = {
 
 export const fetchReadSessionPosterCinemaSessionsSessionIdPosterGet = (
   variables: ReadSessionPosterCinemaSessionsSessionIdPosterGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -7458,7 +7458,7 @@ export const fetchReadSessionPosterCinemaSessionsSessionIdPosterGet = (
   });
 
 export const useReadSessionPosterCinemaSessionsSessionIdPosterGet = <
-  TData = undefined
+  TData = undefined,
 >(
   variables: ReadSessionPosterCinemaSessionsSessionIdPosterGetVariables,
   options?: Omit<
@@ -7468,7 +7468,7 @@ export const useReadSessionPosterCinemaSessionsSessionIdPosterGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -7485,7 +7485,7 @@ export const useReadSessionPosterCinemaSessionsSessionIdPosterGet = <
     queryFn: ({ signal }) =>
       fetchReadSessionPosterCinemaSessionsSessionIdPosterGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -7503,7 +7503,7 @@ export type ReadInformationInformationGetVariables =
  */
 export const fetchReadInformationInformationGet = (
   variables: ReadInformationInformationGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.CoreInformation,
@@ -7518,7 +7518,7 @@ export const fetchReadInformationInformationGet = (
  * Return information about Hyperion. This endpoint can be used to check if the API is up.
  */
 export const useReadInformationInformationGet = <
-  TData = Schemas.CoreInformation
+  TData = Schemas.CoreInformation,
 >(
   variables: ReadInformationInformationGetVariables,
   options?: Omit<
@@ -7528,7 +7528,7 @@ export const useReadInformationInformationGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -7545,7 +7545,7 @@ export const useReadInformationInformationGet = <
     queryFn: ({ signal }) =>
       fetchReadInformationInformationGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -7561,7 +7561,7 @@ export type ReadPrivacyPrivacyGetVariables = HyperionContext["fetcherOptions"];
  */
 export const fetchReadPrivacyPrivacyGet = (
   variables: ReadPrivacyPrivacyGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<undefined, ReadPrivacyPrivacyGetError, undefined, {}, {}, {}>({
     url: "/privacy",
@@ -7578,7 +7578,7 @@ export const useReadPrivacyPrivacyGet = <TData = undefined>(
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, ReadPrivacyPrivacyGetError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -7606,7 +7606,7 @@ export type ReadTermsAndConditionsTermsAndConditionsGetVariables =
  */
 export const fetchReadTermsAndConditionsTermsAndConditionsGet = (
   variables: ReadTermsAndConditionsTermsAndConditionsGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -7621,7 +7621,7 @@ export const fetchReadTermsAndConditionsTermsAndConditionsGet = (
  * Return Hyperion terms and conditions pages
  */
 export const useReadTermsAndConditionsTermsAndConditionsGet = <
-  TData = undefined
+  TData = undefined,
 >(
   variables: ReadTermsAndConditionsTermsAndConditionsGetVariables,
   options?: Omit<
@@ -7631,7 +7631,7 @@ export const useReadTermsAndConditionsTermsAndConditionsGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -7648,7 +7648,7 @@ export const useReadTermsAndConditionsTermsAndConditionsGet = <
     queryFn: ({ signal }) =>
       fetchReadTermsAndConditionsTermsAndConditionsGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -7664,7 +7664,7 @@ export type ReadSupportSupportGetVariables = HyperionContext["fetcherOptions"];
  */
 export const fetchReadSupportSupportGet = (
   variables: ReadSupportSupportGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<undefined, ReadSupportSupportGetError, undefined, {}, {}, {}>({
     url: "/support",
@@ -7681,7 +7681,7 @@ export const useReadSupportSupportGet = <TData = undefined>(
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, ReadSupportSupportGetError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -7709,7 +7709,7 @@ export type ReadSecurityTxtSecurityTxtGetVariables =
  */
 export const fetchReadSecurityTxtSecurityTxtGet = (
   variables: ReadSecurityTxtSecurityTxtGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -7732,7 +7732,7 @@ export const useReadSecurityTxtSecurityTxtGet = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -7749,7 +7749,7 @@ export const useReadSecurityTxtSecurityTxtGet = <TData = undefined>(
     queryFn: ({ signal }) =>
       fetchReadSecurityTxtSecurityTxtGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -7767,7 +7767,7 @@ export type ReadWellknownSecurityTxtWellKnownSecurityTxtGetVariables =
  */
 export const fetchReadWellknownSecurityTxtWellKnownSecurityTxtGet = (
   variables: ReadWellknownSecurityTxtWellKnownSecurityTxtGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -7782,7 +7782,7 @@ export const fetchReadWellknownSecurityTxtWellKnownSecurityTxtGet = (
  * Return Hyperion security.txt file
  */
 export const useReadWellknownSecurityTxtWellKnownSecurityTxtGet = <
-  TData = undefined
+  TData = undefined,
 >(
   variables: ReadWellknownSecurityTxtWellKnownSecurityTxtGetVariables,
   options?: Omit<
@@ -7792,7 +7792,7 @@ export const useReadWellknownSecurityTxtWellKnownSecurityTxtGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -7809,7 +7809,7 @@ export const useReadWellknownSecurityTxtWellKnownSecurityTxtGet = <
     queryFn: ({ signal }) =>
       fetchReadWellknownSecurityTxtWellKnownSecurityTxtGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -7826,7 +7826,7 @@ export type ReadRobotsTxtRobotsTxtGetVariables =
  */
 export const fetchReadRobotsTxtRobotsTxtGet = (
   variables: ReadRobotsTxtRobotsTxtGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -7849,7 +7849,7 @@ export const useReadRobotsTxtRobotsTxtGet = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -7862,7 +7862,7 @@ export const useReadRobotsTxtRobotsTxtGet = <TData = undefined>(
     queryFn: ({ signal }) =>
       fetchReadRobotsTxtRobotsTxtGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -7887,7 +7887,7 @@ export type GetStyleFileStyleFileCssGetVariables = {
  */
 export const fetchGetStyleFileStyleFileCssGet = (
   variables: GetStyleFileStyleFileCssGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -7910,7 +7910,7 @@ export const useGetStyleFileStyleFileCssGet = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -7927,7 +7927,7 @@ export const useGetStyleFileStyleFileCssGet = <TData = undefined>(
     queryFn: ({ signal }) =>
       fetchGetStyleFileStyleFileCssGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -7941,10 +7941,10 @@ export type GetFaviconFaviconIcoGetVariables =
 
 export const fetchGetFaviconFaviconIcoGet = (
   variables: GetFaviconFaviconIcoGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<undefined, GetFaviconFaviconIcoGetError, undefined, {}, {}, {}>(
-    { url: "/favicon.ico", method: "get", ...variables, signal }
+    { url: "/favicon.ico", method: "get", ...variables, signal },
   );
 
 export const useGetFaviconFaviconIcoGet = <TData = undefined>(
@@ -7952,7 +7952,7 @@ export const useGetFaviconFaviconIcoGet = <TData = undefined>(
   options?: Omit<
     reactQuery.UseQueryOptions<undefined, GetFaviconFaviconIcoGetError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -7985,7 +7985,7 @@ export type GetModuleVisibilityModuleVisibilityGetVariables =
  */
 export const fetchGetModuleVisibilityModuleVisibilityGet = (
   variables: GetModuleVisibilityModuleVisibilityGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetModuleVisibilityModuleVisibilityGetResponse,
@@ -8002,7 +8002,7 @@ export const fetchGetModuleVisibilityModuleVisibilityGet = (
  * **This endpoint is only usable by administrators**
  */
 export const useGetModuleVisibilityModuleVisibilityGet = <
-  TData = GetModuleVisibilityModuleVisibilityGetResponse
+  TData = GetModuleVisibilityModuleVisibilityGetResponse,
 >(
   variables: GetModuleVisibilityModuleVisibilityGetVariables,
   options?: Omit<
@@ -8012,7 +8012,7 @@ export const useGetModuleVisibilityModuleVisibilityGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -8029,7 +8029,7 @@ export const useGetModuleVisibilityModuleVisibilityGet = <
     queryFn: ({ signal }) =>
       fetchGetModuleVisibilityModuleVisibilityGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -8053,7 +8053,7 @@ export type AddModuleVisibilityModuleVisibilityPostVariables = {
  */
 export const fetchAddModuleVisibilityModuleVisibilityPost = (
   variables: AddModuleVisibilityModuleVisibilityPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.ModuleVisibilityCreate,
@@ -8077,7 +8077,7 @@ export const useAddModuleVisibilityModuleVisibilityPost = (
       AddModuleVisibilityModuleVisibilityPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -8109,7 +8109,7 @@ export type GetUserModulesVisibilityModuleVisibilityMeGetVariables =
  */
 export const fetchGetUserModulesVisibilityModuleVisibilityMeGet = (
   variables: GetUserModulesVisibilityModuleVisibilityMeGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetUserModulesVisibilityModuleVisibilityMeGetResponse,
@@ -8126,7 +8126,7 @@ export const fetchGetUserModulesVisibilityModuleVisibilityMeGet = (
  * **This endpoint is only usable by everyone**
  */
 export const useGetUserModulesVisibilityModuleVisibilityMeGet = <
-  TData = GetUserModulesVisibilityModuleVisibilityMeGetResponse
+  TData = GetUserModulesVisibilityModuleVisibilityMeGetResponse,
 >(
   variables: GetUserModulesVisibilityModuleVisibilityMeGetVariables,
   options?: Omit<
@@ -8136,7 +8136,7 @@ export const useGetUserModulesVisibilityModuleVisibilityMeGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -8153,7 +8153,7 @@ export const useGetUserModulesVisibilityModuleVisibilityMeGet = <
     queryFn: ({ signal }) =>
       fetchGetUserModulesVisibilityModuleVisibilityMeGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -8177,7 +8177,7 @@ export type DeleteSessionModuleVisibilityRootGroupIdDeleteVariables = {
 
 export const fetchDeleteSessionModuleVisibilityRootGroupIdDelete = (
   variables: DeleteSessionModuleVisibilityRootGroupIdDeleteVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -8201,7 +8201,7 @@ export const useDeleteSessionModuleVisibilityRootGroupIdDelete = (
       DeleteSessionModuleVisibilityRootGroupIdDeleteVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -8210,7 +8210,7 @@ export const useDeleteSessionModuleVisibilityRootGroupIdDelete = (
     DeleteSessionModuleVisibilityRootGroupIdDeleteVariables
   >({
     mutationFn: (
-      variables: DeleteSessionModuleVisibilityRootGroupIdDeleteVariables
+      variables: DeleteSessionModuleVisibilityRootGroupIdDeleteVariables,
     ) =>
       fetchDeleteSessionModuleVisibilityRootGroupIdDelete({
         ...fetcherOptions,
@@ -8233,7 +8233,7 @@ export type ReadGroupsGroupsGetVariables = HyperionContext["fetcherOptions"];
  */
 export const fetchReadGroupsGroupsGet = (
   variables: ReadGroupsGroupsGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     ReadGroupsGroupsGetResponse,
@@ -8258,7 +8258,7 @@ export const useReadGroupsGroupsGet = <TData = ReadGroupsGroupsGetResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -8295,7 +8295,7 @@ export type CreateGroupGroupsPostVariables = {
  */
 export const fetchCreateGroupGroupsPost = (
   variables: CreateGroupGroupsPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.CoreGroupSimple,
@@ -8319,7 +8319,7 @@ export const useCreateGroupGroupsPost = (
       CreateGroupGroupsPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -8353,7 +8353,7 @@ export type ReadGroupGroupsGroupIdGetVariables = {
  */
 export const fetchReadGroupGroupsGroupIdGet = (
   variables: ReadGroupGroupsGroupIdGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.CoreGroup,
@@ -8378,7 +8378,7 @@ export const useReadGroupGroupsGroupIdGet = <TData = Schemas.CoreGroup>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -8395,7 +8395,7 @@ export const useReadGroupGroupsGroupIdGet = <TData = Schemas.CoreGroup>(
     queryFn: ({ signal }) =>
       fetchReadGroupGroupsGroupIdGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -8423,7 +8423,7 @@ export type UpdateGroupGroupsGroupIdPatchVariables = {
  */
 export const fetchUpdateGroupGroupsGroupIdPatch = (
   variables: UpdateGroupGroupsGroupIdPatchVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -8447,7 +8447,7 @@ export const useUpdateGroupGroupsGroupIdPatch = (
       UpdateGroupGroupsGroupIdPatchVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -8484,7 +8484,7 @@ export type DeleteGroupGroupsGroupIdDeleteVariables = {
  */
 export const fetchDeleteGroupGroupsGroupIdDelete = (
   variables: DeleteGroupGroupsGroupIdDeleteVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -8511,7 +8511,7 @@ export const useDeleteGroupGroupsGroupIdDelete = (
       DeleteGroupGroupsGroupIdDeleteVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -8541,7 +8541,7 @@ export type CreateMembershipGroupsMembershipPostVariables = {
  */
 export const fetchCreateMembershipGroupsMembershipPost = (
   variables: CreateMembershipGroupsMembershipPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.CoreGroup,
@@ -8565,7 +8565,7 @@ export const useCreateMembershipGroupsMembershipPost = (
       CreateMembershipGroupsMembershipPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -8598,7 +8598,7 @@ export type DeleteMembershipGroupsMembershipDeleteVariables = {
  */
 export const fetchDeleteMembershipGroupsMembershipDelete = (
   variables: DeleteMembershipGroupsMembershipDeleteVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -8622,7 +8622,7 @@ export const useDeleteMembershipGroupsMembershipDelete = (
       DeleteMembershipGroupsMembershipDeleteVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -8657,7 +8657,7 @@ export type CreateBatchMembershipGroupsBatchMembershipPostVariables = {
  */
 export const fetchCreateBatchMembershipGroupsBatchMembershipPost = (
   variables: CreateBatchMembershipGroupsBatchMembershipPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -8682,7 +8682,7 @@ export const useCreateBatchMembershipGroupsBatchMembershipPost = (
       CreateBatchMembershipGroupsBatchMembershipPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -8691,7 +8691,7 @@ export const useCreateBatchMembershipGroupsBatchMembershipPost = (
     CreateBatchMembershipGroupsBatchMembershipPostVariables
   >({
     mutationFn: (
-      variables: CreateBatchMembershipGroupsBatchMembershipPostVariables
+      variables: CreateBatchMembershipGroupsBatchMembershipPostVariables,
     ) =>
       fetchCreateBatchMembershipGroupsBatchMembershipPost({
         ...fetcherOptions,
@@ -8718,7 +8718,7 @@ export type DeleteBatchMembershipGroupsBatchMembershipDeleteVariables = {
  */
 export const fetchDeleteBatchMembershipGroupsBatchMembershipDelete = (
   variables: DeleteBatchMembershipGroupsBatchMembershipDeleteVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -8747,7 +8747,7 @@ export const useDeleteBatchMembershipGroupsBatchMembershipDelete = (
       DeleteBatchMembershipGroupsBatchMembershipDeleteVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -8756,7 +8756,7 @@ export const useDeleteBatchMembershipGroupsBatchMembershipDelete = (
     DeleteBatchMembershipGroupsBatchMembershipDeleteVariables
   >({
     mutationFn: (
-      variables: DeleteBatchMembershipGroupsBatchMembershipDeleteVariables
+      variables: DeleteBatchMembershipGroupsBatchMembershipDeleteVariables,
     ) =>
       fetchDeleteBatchMembershipGroupsBatchMembershipDelete({
         ...fetcherOptions,
@@ -8780,7 +8780,7 @@ export type ReadLoanersLoansLoanersGetVariables =
  */
 export const fetchReadLoanersLoansLoanersGet = (
   variables: ReadLoanersLoansLoanersGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     ReadLoanersLoansLoanersGetResponse,
@@ -8797,7 +8797,7 @@ export const fetchReadLoanersLoansLoanersGet = (
  * **This endpoint is only usable by administrators**
  */
 export const useReadLoanersLoansLoanersGet = <
-  TData = ReadLoanersLoansLoanersGetResponse
+  TData = ReadLoanersLoansLoanersGetResponse,
 >(
   variables: ReadLoanersLoansLoanersGetVariables,
   options?: Omit<
@@ -8807,7 +8807,7 @@ export const useReadLoanersLoansLoanersGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -8824,7 +8824,7 @@ export const useReadLoanersLoansLoanersGet = <
     queryFn: ({ signal }) =>
       fetchReadLoanersLoansLoanersGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -8849,7 +8849,7 @@ export type CreateLoanerLoansLoanersPostVariables = {
  */
 export const fetchCreateLoanerLoansLoanersPost = (
   variables: CreateLoanerLoansLoanersPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.Loaner,
@@ -8875,7 +8875,7 @@ export const useCreateLoanerLoansLoanersPost = (
       CreateLoanerLoansLoanersPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -8909,7 +8909,7 @@ export type DeleteLoanerLoansLoanersLoanerIdDeleteVariables = {
  */
 export const fetchDeleteLoanerLoansLoanersLoanerIdDelete = (
   variables: DeleteLoanerLoansLoanersLoanerIdDeleteVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -8938,7 +8938,7 @@ export const useDeleteLoanerLoansLoanersLoanerIdDelete = (
       DeleteLoanerLoansLoanersLoanerIdDeleteVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -8976,7 +8976,7 @@ export type UpdateLoanerLoansLoanersLoanerIdPatchVariables = {
  */
 export const fetchUpdateLoanerLoansLoanersLoanerIdPatch = (
   variables: UpdateLoanerLoansLoanersLoanerIdPatchVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -9005,7 +9005,7 @@ export const useUpdateLoanerLoansLoanersLoanerIdPatch = (
       UpdateLoanerLoansLoanersLoanerIdPatchVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -9055,7 +9055,7 @@ export type GetLoansByLoanerLoansLoanersLoanerIdLoansGetVariables = {
  */
 export const fetchGetLoansByLoanerLoansLoanersLoanerIdLoansGet = (
   variables: GetLoansByLoanerLoansLoanersLoanerIdLoansGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetLoansByLoanerLoansLoanersLoanerIdLoansGetResponse,
@@ -9081,7 +9081,7 @@ export const fetchGetLoansByLoanerLoansLoanersLoanerIdLoansGet = (
  * **The user must be a member of the loaner group_manager to use this endpoint**
  */
 export const useGetLoansByLoanerLoansLoanersLoanerIdLoansGet = <
-  TData = GetLoansByLoanerLoansLoanersLoanerIdLoansGetResponse
+  TData = GetLoansByLoanerLoansLoanersLoanerIdLoansGetResponse,
 >(
   variables: GetLoansByLoanerLoansLoanersLoanerIdLoansGetVariables,
   options?: Omit<
@@ -9091,7 +9091,7 @@ export const useGetLoansByLoanerLoansLoanersLoanerIdLoansGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -9108,7 +9108,7 @@ export const useGetLoansByLoanerLoansLoanersLoanerIdLoansGet = <
     queryFn: ({ signal }) =>
       fetchGetLoansByLoanerLoansLoanersLoanerIdLoansGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -9139,7 +9139,7 @@ export type GetItemsByLoanerLoansLoanersLoanerIdItemsGetVariables = {
  */
 export const fetchGetItemsByLoanerLoansLoanersLoanerIdItemsGet = (
   variables: GetItemsByLoanerLoansLoanersLoanerIdItemsGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetItemsByLoanerLoansLoanersLoanerIdItemsGetResponse,
@@ -9161,7 +9161,7 @@ export const fetchGetItemsByLoanerLoansLoanersLoanerIdItemsGet = (
  * **The user must be a member of the loaner group_manager to use this endpoint**
  */
 export const useGetItemsByLoanerLoansLoanersLoanerIdItemsGet = <
-  TData = GetItemsByLoanerLoansLoanersLoanerIdItemsGetResponse
+  TData = GetItemsByLoanerLoansLoanersLoanerIdItemsGetResponse,
 >(
   variables: GetItemsByLoanerLoansLoanersLoanerIdItemsGetVariables,
   options?: Omit<
@@ -9171,7 +9171,7 @@ export const useGetItemsByLoanerLoansLoanersLoanerIdItemsGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -9188,7 +9188,7 @@ export const useGetItemsByLoanerLoansLoanersLoanerIdItemsGet = <
     queryFn: ({ signal }) =>
       fetchGetItemsByLoanerLoansLoanersLoanerIdItemsGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -9217,7 +9217,7 @@ export type CreateItemsForLoanerLoansLoanersLoanerIdItemsPostVariables = {
  */
 export const fetchCreateItemsForLoanerLoansLoanersLoanerIdItemsPost = (
   variables: CreateItemsForLoanerLoansLoanersLoanerIdItemsPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.Item,
@@ -9246,7 +9246,7 @@ export const useCreateItemsForLoanerLoansLoanersLoanerIdItemsPost = (
       CreateItemsForLoanerLoansLoanersLoanerIdItemsPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -9255,7 +9255,7 @@ export const useCreateItemsForLoanerLoansLoanersLoanerIdItemsPost = (
     CreateItemsForLoanerLoansLoanersLoanerIdItemsPostVariables
   >({
     mutationFn: (
-      variables: CreateItemsForLoanerLoansLoanersLoanerIdItemsPostVariables
+      variables: CreateItemsForLoanerLoansLoanersLoanerIdItemsPostVariables,
     ) =>
       fetchCreateItemsForLoanerLoansLoanersLoanerIdItemsPost({
         ...fetcherOptions,
@@ -9290,7 +9290,7 @@ export type UpdateItemsForLoanerLoansLoanersLoanerIdItemsItemIdPatchVariables =
  */
 export const fetchUpdateItemsForLoanerLoansLoanersLoanerIdItemsItemIdPatch = (
   variables: UpdateItemsForLoanerLoansLoanersLoanerIdItemsItemIdPatchVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -9319,7 +9319,7 @@ export const useUpdateItemsForLoanerLoansLoanersLoanerIdItemsItemIdPatch = (
       UpdateItemsForLoanerLoansLoanersLoanerIdItemsItemIdPatchVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -9328,7 +9328,7 @@ export const useUpdateItemsForLoanerLoansLoanersLoanerIdItemsItemIdPatch = (
     UpdateItemsForLoanerLoansLoanersLoanerIdItemsItemIdPatchVariables
   >({
     mutationFn: (
-      variables: UpdateItemsForLoanerLoansLoanersLoanerIdItemsItemIdPatchVariables
+      variables: UpdateItemsForLoanerLoansLoanersLoanerIdItemsItemIdPatchVariables,
     ) =>
       fetchUpdateItemsForLoanerLoansLoanersLoanerIdItemsItemIdPatch({
         ...fetcherOptions,
@@ -9361,7 +9361,7 @@ export type DeleteLoanerItemLoansLoanersLoanerIdItemsItemIdDeleteVariables = {
  */
 export const fetchDeleteLoanerItemLoansLoanersLoanerIdItemsItemIdDelete = (
   variables: DeleteLoanerItemLoansLoanersLoanerIdItemsItemIdDeleteVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -9391,7 +9391,7 @@ export const useDeleteLoanerItemLoansLoanersLoanerIdItemsItemIdDelete = (
       DeleteLoanerItemLoansLoanersLoanerIdItemsItemIdDeleteVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -9400,7 +9400,7 @@ export const useDeleteLoanerItemLoansLoanersLoanerIdItemsItemIdDelete = (
     DeleteLoanerItemLoansLoanersLoanerIdItemsItemIdDeleteVariables
   >({
     mutationFn: (
-      variables: DeleteLoanerItemLoansLoanersLoanerIdItemsItemIdDeleteVariables
+      variables: DeleteLoanerItemLoansLoanersLoanerIdItemsItemIdDeleteVariables,
     ) =>
       fetchDeleteLoanerItemLoansLoanersLoanerIdItemsItemIdDelete({
         ...fetcherOptions,
@@ -9434,7 +9434,7 @@ export type GetCurrentUserLoansLoansUsersMeGetVariables = {
  */
 export const fetchGetCurrentUserLoansLoansUsersMeGet = (
   variables: GetCurrentUserLoansLoansUsersMeGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetCurrentUserLoansLoansUsersMeGetResponse,
@@ -9453,7 +9453,7 @@ export const fetchGetCurrentUserLoansLoansUsersMeGet = (
  * **The user must be authenticated to use this endpoint**
  */
 export const useGetCurrentUserLoansLoansUsersMeGet = <
-  TData = GetCurrentUserLoansLoansUsersMeGetResponse
+  TData = GetCurrentUserLoansLoansUsersMeGetResponse,
 >(
   variables: GetCurrentUserLoansLoansUsersMeGetVariables,
   options?: Omit<
@@ -9463,7 +9463,7 @@ export const useGetCurrentUserLoansLoansUsersMeGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -9480,7 +9480,7 @@ export const useGetCurrentUserLoansLoansUsersMeGet = <
     queryFn: ({ signal }) =>
       fetchGetCurrentUserLoansLoansUsersMeGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -9503,7 +9503,7 @@ export type GetCurrentUserLoanersLoansUsersMeLoanersGetVariables =
  */
 export const fetchGetCurrentUserLoanersLoansUsersMeLoanersGet = (
   variables: GetCurrentUserLoanersLoansUsersMeLoanersGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetCurrentUserLoanersLoansUsersMeLoanersGetResponse,
@@ -9520,7 +9520,7 @@ export const fetchGetCurrentUserLoanersLoansUsersMeLoanersGet = (
  * **The user must be authenticated to use this endpoint**
  */
 export const useGetCurrentUserLoanersLoansUsersMeLoanersGet = <
-  TData = GetCurrentUserLoanersLoansUsersMeLoanersGetResponse
+  TData = GetCurrentUserLoanersLoansUsersMeLoanersGetResponse,
 >(
   variables: GetCurrentUserLoanersLoansUsersMeLoanersGetVariables,
   options?: Omit<
@@ -9530,7 +9530,7 @@ export const useGetCurrentUserLoanersLoansUsersMeLoanersGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -9547,7 +9547,7 @@ export const useGetCurrentUserLoanersLoansUsersMeLoanersGet = <
     queryFn: ({ signal }) =>
       fetchGetCurrentUserLoanersLoansUsersMeLoanersGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -9570,7 +9570,7 @@ export type CreateLoanLoansPostVariables = {
  */
 export const fetchCreateLoanLoansPost = (
   variables: CreateLoanLoansPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.Loan,
@@ -9594,7 +9594,7 @@ export const useCreateLoanLoansPost = (
       CreateLoanLoansPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -9632,7 +9632,7 @@ export type UpdateLoanLoansLoanIdPatchVariables = {
  */
 export const fetchUpdateLoanLoansLoanIdPatch = (
   variables: UpdateLoanLoansLoanIdPatchVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -9659,7 +9659,7 @@ export const useUpdateLoanLoansLoanIdPatch = (
       UpdateLoanLoansLoanIdPatchVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -9694,7 +9694,7 @@ export type DeleteLoanLoansLoanIdDeleteVariables = {
  */
 export const fetchDeleteLoanLoansLoanIdDelete = (
   variables: DeleteLoanLoansLoanIdDeleteVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -9719,7 +9719,7 @@ export const useDeleteLoanLoansLoanIdDelete = (
       DeleteLoanLoansLoanIdDeleteVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -9753,7 +9753,7 @@ export type ReturnLoanLoansLoanIdReturnPostVariables = {
  */
 export const fetchReturnLoanLoansLoanIdReturnPost = (
   variables: ReturnLoanLoansLoanIdReturnPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -9777,7 +9777,7 @@ export const useReturnLoanLoansLoanIdReturnPost = (
       ReturnLoanLoansLoanIdReturnPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -9812,7 +9812,7 @@ export type ExtendLoanLoansLoanIdExtendPostVariables = {
  */
 export const fetchExtendLoanLoansLoanIdExtendPost = (
   variables: ExtendLoanLoansLoanIdExtendPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -9836,7 +9836,7 @@ export const useExtendLoanLoansLoanIdExtendPost = (
       ExtendLoanLoansLoanIdExtendPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -9866,7 +9866,7 @@ export type GetDevicesNotificationDevicesGetVariables =
  */
 export const fetchGetDevicesNotificationDevicesGet = (
   variables: GetDevicesNotificationDevicesGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetDevicesNotificationDevicesGetResponse,
@@ -9884,7 +9884,7 @@ export const fetchGetDevicesNotificationDevicesGet = (
  * **Only admins can use this endpoint**
  */
 export const useGetDevicesNotificationDevicesGet = <
-  TData = GetDevicesNotificationDevicesGetResponse
+  TData = GetDevicesNotificationDevicesGetResponse,
 >(
   variables: GetDevicesNotificationDevicesGetVariables,
   options?: Omit<
@@ -9894,7 +9894,7 @@ export const useGetDevicesNotificationDevicesGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -9911,7 +9911,7 @@ export const useGetDevicesNotificationDevicesGet = <
     queryFn: ({ signal }) =>
       fetchGetDevicesNotificationDevicesGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -9936,7 +9936,7 @@ export type RegisterFirebaseDeviceNotificationDevicesPostVariables = {
  */
 export const fetchRegisterFirebaseDeviceNotificationDevicesPost = (
   variables: RegisterFirebaseDeviceNotificationDevicesPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -9961,7 +9961,7 @@ export const useRegisterFirebaseDeviceNotificationDevicesPost = (
       RegisterFirebaseDeviceNotificationDevicesPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -9970,7 +9970,7 @@ export const useRegisterFirebaseDeviceNotificationDevicesPost = (
     RegisterFirebaseDeviceNotificationDevicesPostVariables
   >({
     mutationFn: (
-      variables: RegisterFirebaseDeviceNotificationDevicesPostVariables
+      variables: RegisterFirebaseDeviceNotificationDevicesPostVariables,
     ) =>
       fetchRegisterFirebaseDeviceNotificationDevicesPost({
         ...fetcherOptions,
@@ -10004,7 +10004,7 @@ export type UnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDeleteVariab
 export const fetchUnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDelete =
   (
     variables: UnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDeleteVariables,
-    signal?: AbortSignal
+    signal?: AbortSignal,
   ) =>
     hyperionFetch<
       undefined,
@@ -10034,7 +10034,7 @@ export const useUnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDelete =
         UnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDeleteVariables
       >,
       "mutationFn"
-    >
+    >,
   ) => {
     const { fetcherOptions } = useHyperionContext();
     return reactQuery.useMutation<
@@ -10043,7 +10043,7 @@ export const useUnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDelete =
       UnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDeleteVariables
     >({
       mutationFn: (
-        variables: UnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDeleteVariables
+        variables: UnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDeleteVariables,
       ) =>
         fetchUnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDelete({
           ...fetcherOptions,
@@ -10077,7 +10077,7 @@ export type GetMessagesNotificationMessagesFirebaseTokenGetVariables = {
  */
 export const fetchGetMessagesNotificationMessagesFirebaseTokenGet = (
   variables: GetMessagesNotificationMessagesFirebaseTokenGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetMessagesNotificationMessagesFirebaseTokenGetResponse,
@@ -10099,7 +10099,7 @@ export const fetchGetMessagesNotificationMessagesFirebaseTokenGet = (
  * **The user must be authenticated to use this endpoint**
  */
 export const useGetMessagesNotificationMessagesFirebaseTokenGet = <
-  TData = GetMessagesNotificationMessagesFirebaseTokenGetResponse
+  TData = GetMessagesNotificationMessagesFirebaseTokenGetResponse,
 >(
   variables: GetMessagesNotificationMessagesFirebaseTokenGetVariables,
   options?: Omit<
@@ -10109,7 +10109,7 @@ export const useGetMessagesNotificationMessagesFirebaseTokenGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -10126,7 +10126,7 @@ export const useGetMessagesNotificationMessagesFirebaseTokenGet = <
     queryFn: ({ signal }) =>
       fetchGetMessagesNotificationMessagesFirebaseTokenGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -10158,7 +10158,7 @@ export type SubscribeToTopicNotificationTopicsTopicStrSubscribePostVariables = {
  */
 export const fetchSubscribeToTopicNotificationTopicsTopicStrSubscribePost = (
   variables: SubscribeToTopicNotificationTopicsTopicStrSubscribePostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -10187,7 +10187,7 @@ export const useSubscribeToTopicNotificationTopicsTopicStrSubscribePost = (
       SubscribeToTopicNotificationTopicsTopicStrSubscribePostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -10196,7 +10196,7 @@ export const useSubscribeToTopicNotificationTopicsTopicStrSubscribePost = (
     SubscribeToTopicNotificationTopicsTopicStrSubscribePostVariables
   >({
     mutationFn: (
-      variables: SubscribeToTopicNotificationTopicsTopicStrSubscribePostVariables
+      variables: SubscribeToTopicNotificationTopicsTopicStrSubscribePostVariables,
     ) =>
       fetchSubscribeToTopicNotificationTopicsTopicStrSubscribePost({
         ...fetcherOptions,
@@ -10230,7 +10230,7 @@ export type UnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePostVariables
 export const fetchUnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePost =
   (
     variables: UnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePostVariables,
-    signal?: AbortSignal
+    signal?: AbortSignal,
   ) =>
     hyperionFetch<
       undefined,
@@ -10259,7 +10259,7 @@ export const useUnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePost = (
       UnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -10268,7 +10268,7 @@ export const useUnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePost = (
     UnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePostVariables
   >({
     mutationFn: (
-      variables: UnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePostVariables
+      variables: UnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePostVariables,
     ) =>
       fetchUnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePost({
         ...fetcherOptions,
@@ -10294,7 +10294,7 @@ export type GetTopicNotificationTopicsGetVariables =
  */
 export const fetchGetTopicNotificationTopicsGet = (
   variables: GetTopicNotificationTopicsGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetTopicNotificationTopicsGetResponse,
@@ -10312,7 +10312,7 @@ export const fetchGetTopicNotificationTopicsGet = (
  * **The user must be authenticated to use this endpoint**
  */
 export const useGetTopicNotificationTopicsGet = <
-  TData = GetTopicNotificationTopicsGetResponse
+  TData = GetTopicNotificationTopicsGetResponse,
 >(
   variables: GetTopicNotificationTopicsGetVariables,
   options?: Omit<
@@ -10322,7 +10322,7 @@ export const useGetTopicNotificationTopicsGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -10339,7 +10339,7 @@ export const useGetTopicNotificationTopicsGet = <
     queryFn: ({ signal }) =>
       fetchGetTopicNotificationTopicsGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -10369,7 +10369,7 @@ export type GetTopicIdentifierNotificationTopicsTopicStrGetVariables = {
  */
 export const fetchGetTopicIdentifierNotificationTopicsTopicStrGet = (
   variables: GetTopicIdentifierNotificationTopicsTopicStrGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetTopicIdentifierNotificationTopicsTopicStrGetResponse,
@@ -10391,7 +10391,7 @@ export const fetchGetTopicIdentifierNotificationTopicsTopicStrGet = (
  * **The user must be authenticated to use this endpoint**
  */
 export const useGetTopicIdentifierNotificationTopicsTopicStrGet = <
-  TData = GetTopicIdentifierNotificationTopicsTopicStrGetResponse
+  TData = GetTopicIdentifierNotificationTopicsTopicStrGetResponse,
 >(
   variables: GetTopicIdentifierNotificationTopicsTopicStrGetVariables,
   options?: Omit<
@@ -10401,7 +10401,7 @@ export const useGetTopicIdentifierNotificationTopicsTopicStrGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -10418,7 +10418,7 @@ export const useGetTopicIdentifierNotificationTopicsTopicStrGet = <
     queryFn: ({ signal }) =>
       fetchGetTopicIdentifierNotificationTopicsTopicStrGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -10441,7 +10441,7 @@ export type SendNotificationNotificationSendPostVariables = {
  */
 export const fetchSendNotificationNotificationSendPost = (
   variables: SendNotificationNotificationSendPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     void,
@@ -10465,7 +10465,7 @@ export const useSendNotificationNotificationSendPost = (
       SendNotificationNotificationSendPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -10494,7 +10494,7 @@ export type GetRaffleTombolaRafflesGetVariables =
  */
 export const fetchGetRaffleTombolaRafflesGet = (
   variables: GetRaffleTombolaRafflesGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetRaffleTombolaRafflesGetResponse,
@@ -10509,7 +10509,7 @@ export const fetchGetRaffleTombolaRafflesGet = (
  * Return all raffles
  */
 export const useGetRaffleTombolaRafflesGet = <
-  TData = GetRaffleTombolaRafflesGetResponse
+  TData = GetRaffleTombolaRafflesGetResponse,
 >(
   variables: GetRaffleTombolaRafflesGetVariables,
   options?: Omit<
@@ -10519,7 +10519,7 @@ export const useGetRaffleTombolaRafflesGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -10536,7 +10536,7 @@ export const useGetRaffleTombolaRafflesGet = <
     queryFn: ({ signal }) =>
       fetchGetRaffleTombolaRafflesGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -10559,7 +10559,7 @@ export type CreateRaffleTombolaRafflesPostVariables = {
  */
 export const fetchCreateRaffleTombolaRafflesPost = (
   variables: CreateRaffleTombolaRafflesPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.RaffleComplete,
@@ -10583,7 +10583,7 @@ export const useCreateRaffleTombolaRafflesPost = (
       CreateRaffleTombolaRafflesPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -10618,7 +10618,7 @@ export type EditRaffleTombolaRafflesRaffleIdPatchVariables = {
  */
 export const fetchEditRaffleTombolaRafflesRaffleIdPatch = (
   variables: EditRaffleTombolaRafflesRaffleIdPatchVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -10647,7 +10647,7 @@ export const useEditRaffleTombolaRafflesRaffleIdPatch = (
       EditRaffleTombolaRafflesRaffleIdPatchVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -10685,7 +10685,7 @@ export type DeleteRaffleTombolaRafflesRaffleIdDeleteVariables = {
  */
 export const fetchDeleteRaffleTombolaRafflesRaffleIdDelete = (
   variables: DeleteRaffleTombolaRafflesRaffleIdDeleteVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -10714,7 +10714,7 @@ export const useDeleteRaffleTombolaRafflesRaffleIdDelete = (
       DeleteRaffleTombolaRafflesRaffleIdDeleteVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -10723,7 +10723,7 @@ export const useDeleteRaffleTombolaRafflesRaffleIdDelete = (
     DeleteRaffleTombolaRafflesRaffleIdDeleteVariables
   >({
     mutationFn: (
-      variables: DeleteRaffleTombolaRafflesRaffleIdDeleteVariables
+      variables: DeleteRaffleTombolaRafflesRaffleIdDeleteVariables,
     ) =>
       fetchDeleteRaffleTombolaRafflesRaffleIdDelete({
         ...fetcherOptions,
@@ -10755,7 +10755,7 @@ export type GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetVariables = {
  */
 export const fetchGetRafflesByGroupIdTombolaGroupGroupIdRafflesGet = (
   variables: GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetResponse,
@@ -10775,7 +10775,7 @@ export const fetchGetRafflesByGroupIdTombolaGroupGroupIdRafflesGet = (
  * Return all raffles from a group
  */
 export const useGetRafflesByGroupIdTombolaGroupGroupIdRafflesGet = <
-  TData = GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetResponse
+  TData = GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetResponse,
 >(
   variables: GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetVariables,
   options?: Omit<
@@ -10785,7 +10785,7 @@ export const useGetRafflesByGroupIdTombolaGroupGroupIdRafflesGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -10802,7 +10802,7 @@ export const useGetRafflesByGroupIdTombolaGroupGroupIdRafflesGet = <
     queryFn: ({ signal }) =>
       fetchGetRafflesByGroupIdTombolaGroupGroupIdRafflesGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -10828,7 +10828,7 @@ export type GetRaffleStatsTombolaRafflesRaffleIdStatsGetVariables = {
  */
 export const fetchGetRaffleStatsTombolaRafflesRaffleIdStatsGet = (
   variables: GetRaffleStatsTombolaRafflesRaffleIdStatsGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.RaffleStats,
@@ -10848,7 +10848,7 @@ export const fetchGetRaffleStatsTombolaRafflesRaffleIdStatsGet = (
  * Return the number of ticket sold and the total amount recollected for a raffle
  */
 export const useGetRaffleStatsTombolaRafflesRaffleIdStatsGet = <
-  TData = Schemas.RaffleStats
+  TData = Schemas.RaffleStats,
 >(
   variables: GetRaffleStatsTombolaRafflesRaffleIdStatsGetVariables,
   options?: Omit<
@@ -10858,7 +10858,7 @@ export const useGetRaffleStatsTombolaRafflesRaffleIdStatsGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -10875,7 +10875,7 @@ export const useGetRaffleStatsTombolaRafflesRaffleIdStatsGet = <
     queryFn: ({ signal }) =>
       fetchGetRaffleStatsTombolaRafflesRaffleIdStatsGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -10904,7 +10904,7 @@ export type CreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPostVariables = {
  */
 export const fetchCreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPost = (
   variables: CreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.AppUtilsTypesStandardResponsesResult,
@@ -10933,7 +10933,7 @@ export const useCreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPost = (
       CreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -10942,7 +10942,7 @@ export const useCreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPost = (
     CreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPostVariables
   >({
     mutationFn: (
-      variables: CreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPostVariables
+      variables: CreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPostVariables,
     ) =>
       fetchCreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPost({
         ...fetcherOptions,
@@ -10971,7 +10971,7 @@ export type ReadRaffleLogoTombolaRafflesRaffleIdLogoGetVariables = {
  */
 export const fetchReadRaffleLogoTombolaRafflesRaffleIdLogoGet = (
   variables: ReadRaffleLogoTombolaRafflesRaffleIdLogoGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -10991,7 +10991,7 @@ export const fetchReadRaffleLogoTombolaRafflesRaffleIdLogoGet = (
  * Get the logo of a specific raffle.
  */
 export const useReadRaffleLogoTombolaRafflesRaffleIdLogoGet = <
-  TData = undefined
+  TData = undefined,
 >(
   variables: ReadRaffleLogoTombolaRafflesRaffleIdLogoGetVariables,
   options?: Omit<
@@ -11001,7 +11001,7 @@ export const useReadRaffleLogoTombolaRafflesRaffleIdLogoGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -11018,7 +11018,7 @@ export const useReadRaffleLogoTombolaRafflesRaffleIdLogoGet = <
     queryFn: ({ signal }) =>
       fetchReadRaffleLogoTombolaRafflesRaffleIdLogoGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -11039,7 +11039,7 @@ export type GetPackTicketsTombolaPackTicketsGetVariables =
  */
 export const fetchGetPackTicketsTombolaPackTicketsGet = (
   variables: GetPackTicketsTombolaPackTicketsGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetPackTicketsTombolaPackTicketsGetResponse,
@@ -11054,7 +11054,7 @@ export const fetchGetPackTicketsTombolaPackTicketsGet = (
  * Return all tickets
  */
 export const useGetPackTicketsTombolaPackTicketsGet = <
-  TData = GetPackTicketsTombolaPackTicketsGetResponse
+  TData = GetPackTicketsTombolaPackTicketsGetResponse,
 >(
   variables: GetPackTicketsTombolaPackTicketsGetVariables,
   options?: Omit<
@@ -11064,7 +11064,7 @@ export const useGetPackTicketsTombolaPackTicketsGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -11081,7 +11081,7 @@ export const useGetPackTicketsTombolaPackTicketsGet = <
     queryFn: ({ signal }) =>
       fetchGetPackTicketsTombolaPackTicketsGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -11104,7 +11104,7 @@ export type CreatePackticketTombolaPackTicketsPostVariables = {
  */
 export const fetchCreatePackticketTombolaPackTicketsPost = (
   variables: CreatePackticketTombolaPackTicketsPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.PackTicketSimple,
@@ -11128,7 +11128,7 @@ export const useCreatePackticketTombolaPackTicketsPost = (
       CreatePackticketTombolaPackTicketsPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -11167,7 +11167,7 @@ export type EditPackticketTombolaPackTicketsPackticketIdPatchVariables = {
  */
 export const fetchEditPackticketTombolaPackTicketsPackticketIdPatch = (
   variables: EditPackticketTombolaPackTicketsPackticketIdPatchVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -11196,7 +11196,7 @@ export const useEditPackticketTombolaPackTicketsPackticketIdPatch = (
       EditPackticketTombolaPackTicketsPackticketIdPatchVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -11205,7 +11205,7 @@ export const useEditPackticketTombolaPackTicketsPackticketIdPatch = (
     EditPackticketTombolaPackTicketsPackticketIdPatchVariables
   >({
     mutationFn: (
-      variables: EditPackticketTombolaPackTicketsPackticketIdPatchVariables
+      variables: EditPackticketTombolaPackTicketsPackticketIdPatchVariables,
     ) =>
       fetchEditPackticketTombolaPackTicketsPackticketIdPatch({
         ...fetcherOptions,
@@ -11236,7 +11236,7 @@ export type DeletePackticketTombolaPackTicketsPackticketIdDeleteVariables = {
  */
 export const fetchDeletePackticketTombolaPackTicketsPackticketIdDelete = (
   variables: DeletePackticketTombolaPackTicketsPackticketIdDeleteVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -11265,7 +11265,7 @@ export const useDeletePackticketTombolaPackTicketsPackticketIdDelete = (
       DeletePackticketTombolaPackTicketsPackticketIdDeleteVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -11274,7 +11274,7 @@ export const useDeletePackticketTombolaPackTicketsPackticketIdDelete = (
     DeletePackticketTombolaPackTicketsPackticketIdDeleteVariables
   >({
     mutationFn: (
-      variables: DeletePackticketTombolaPackTicketsPackticketIdDeleteVariables
+      variables: DeletePackticketTombolaPackTicketsPackticketIdDeleteVariables,
     ) =>
       fetchDeletePackticketTombolaPackTicketsPackticketIdDelete({
         ...fetcherOptions,
@@ -11309,7 +11309,7 @@ export type GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetVariable
 export const fetchGetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGet =
   (
     variables: GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetVariables,
-    signal?: AbortSignal
+    signal?: AbortSignal,
   ) =>
     hyperionFetch<
       GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetResponse,
@@ -11329,7 +11329,7 @@ export const fetchGetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGet =
  * Return all pack_tickets associated to a raffle
  */
 export const useGetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGet = <
-  TData = GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetResponse
+  TData = GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetResponse,
 >(
   variables: GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetVariables,
   options?: Omit<
@@ -11339,7 +11339,7 @@ export const useGetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -11357,7 +11357,7 @@ export const useGetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGet = <
     queryFn: ({ signal }) =>
       fetchGetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -11378,7 +11378,7 @@ export type GetTicketsTombolaTicketsGetVariables =
  */
 export const fetchGetTicketsTombolaTicketsGet = (
   variables: GetTicketsTombolaTicketsGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetTicketsTombolaTicketsGetResponse,
@@ -11395,7 +11395,7 @@ export const fetchGetTicketsTombolaTicketsGet = (
  * **The user must be a member of the group admin to use this endpoint**
  */
 export const useGetTicketsTombolaTicketsGet = <
-  TData = GetTicketsTombolaTicketsGetResponse
+  TData = GetTicketsTombolaTicketsGetResponse,
 >(
   variables: GetTicketsTombolaTicketsGetVariables,
   options?: Omit<
@@ -11405,7 +11405,7 @@ export const useGetTicketsTombolaTicketsGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -11422,7 +11422,7 @@ export const useGetTicketsTombolaTicketsGet = <
     queryFn: ({ signal }) =>
       fetchGetTicketsTombolaTicketsGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -11450,7 +11450,7 @@ export type BuyTicketTombolaTicketsBuyPackIdPostVariables = {
  */
 export const fetchBuyTicketTombolaTicketsBuyPackIdPost = (
   variables: BuyTicketTombolaTicketsBuyPackIdPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     BuyTicketTombolaTicketsBuyPackIdPostResponse,
@@ -11477,7 +11477,7 @@ export const useBuyTicketTombolaTicketsBuyPackIdPost = (
       BuyTicketTombolaTicketsBuyPackIdPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -11518,7 +11518,7 @@ export type GetTicketsByUseridTombolaUsersUserIdTicketsGetVariables = {
  */
 export const fetchGetTicketsByUseridTombolaUsersUserIdTicketsGet = (
   variables: GetTicketsByUseridTombolaUsersUserIdTicketsGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetTicketsByUseridTombolaUsersUserIdTicketsGetResponse,
@@ -11540,7 +11540,7 @@ export const fetchGetTicketsByUseridTombolaUsersUserIdTicketsGet = (
  * **Only admin users can get tickets of another user**
  */
 export const useGetTicketsByUseridTombolaUsersUserIdTicketsGet = <
-  TData = GetTicketsByUseridTombolaUsersUserIdTicketsGetResponse
+  TData = GetTicketsByUseridTombolaUsersUserIdTicketsGetResponse,
 >(
   variables: GetTicketsByUseridTombolaUsersUserIdTicketsGetVariables,
   options?: Omit<
@@ -11550,7 +11550,7 @@ export const useGetTicketsByUseridTombolaUsersUserIdTicketsGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -11567,7 +11567,7 @@ export const useGetTicketsByUseridTombolaUsersUserIdTicketsGet = <
     queryFn: ({ signal }) =>
       fetchGetTicketsByUseridTombolaUsersUserIdTicketsGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -11598,7 +11598,7 @@ export type GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetVariables = {
  */
 export const fetchGetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGet = (
   variables: GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetResponse,
@@ -11620,7 +11620,7 @@ export const fetchGetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGet = (
  * **The user must be a member of the raffle's group to use this endpoint
  */
 export const useGetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGet = <
-  TData = GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetResponse
+  TData = GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetResponse,
 >(
   variables: GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetVariables,
   options?: Omit<
@@ -11630,7 +11630,7 @@ export const useGetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -11647,7 +11647,7 @@ export const useGetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGet = <
     queryFn: ({ signal }) =>
       fetchGetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -11666,7 +11666,7 @@ export type GetPrizesTombolaPrizesGetVariables =
  */
 export const fetchGetPrizesTombolaPrizesGet = (
   variables: GetPrizesTombolaPrizesGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetPrizesTombolaPrizesGetResponse,
@@ -11681,7 +11681,7 @@ export const fetchGetPrizesTombolaPrizesGet = (
  * Return all prizes
  */
 export const useGetPrizesTombolaPrizesGet = <
-  TData = GetPrizesTombolaPrizesGetResponse
+  TData = GetPrizesTombolaPrizesGetResponse,
 >(
   variables: GetPrizesTombolaPrizesGetVariables,
   options?: Omit<
@@ -11691,7 +11691,7 @@ export const useGetPrizesTombolaPrizesGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -11708,7 +11708,7 @@ export const useGetPrizesTombolaPrizesGet = <
     queryFn: ({ signal }) =>
       fetchGetPrizesTombolaPrizesGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -11731,7 +11731,7 @@ export type CreatePrizeTombolaPrizesPostVariables = {
  */
 export const fetchCreatePrizeTombolaPrizesPost = (
   variables: CreatePrizeTombolaPrizesPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.PrizeSimple,
@@ -11755,7 +11755,7 @@ export const useCreatePrizeTombolaPrizesPost = (
       CreatePrizeTombolaPrizesPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -11790,7 +11790,7 @@ export type EditPrizeTombolaPrizesPrizeIdPatchVariables = {
  */
 export const fetchEditPrizeTombolaPrizesPrizeIdPatch = (
   variables: EditPrizeTombolaPrizesPrizeIdPatchVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -11819,7 +11819,7 @@ export const useEditPrizeTombolaPrizesPrizeIdPatch = (
       EditPrizeTombolaPrizesPrizeIdPatchVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -11856,7 +11856,7 @@ export type DeletePrizeTombolaPrizesPrizeIdDeleteVariables = {
  */
 export const fetchDeletePrizeTombolaPrizesPrizeIdDelete = (
   variables: DeletePrizeTombolaPrizesPrizeIdDeleteVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -11885,7 +11885,7 @@ export const useDeletePrizeTombolaPrizesPrizeIdDelete = (
       DeletePrizeTombolaPrizesPrizeIdDeleteVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -11924,7 +11924,7 @@ export type GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetVariables = {
  */
 export const fetchGetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGet = (
   variables: GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetResponse,
@@ -11944,7 +11944,7 @@ export const fetchGetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGet = (
  * Get prizes from a specific raffle.
  */
 export const useGetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGet = <
-  TData = GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetResponse
+  TData = GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetResponse,
 >(
   variables: GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetVariables,
   options?: Omit<
@@ -11954,7 +11954,7 @@ export const useGetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -11971,7 +11971,7 @@ export const useGetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGet = <
     queryFn: ({ signal }) =>
       fetchGetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -12000,7 +12000,7 @@ export type CreatePrizePictureTombolaPrizesPrizeIdPicturePostVariables = {
  */
 export const fetchCreatePrizePictureTombolaPrizesPrizeIdPicturePost = (
   variables: CreatePrizePictureTombolaPrizesPrizeIdPicturePostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.AppUtilsTypesStandardResponsesResult,
@@ -12029,7 +12029,7 @@ export const useCreatePrizePictureTombolaPrizesPrizeIdPicturePost = (
       CreatePrizePictureTombolaPrizesPrizeIdPicturePostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -12038,7 +12038,7 @@ export const useCreatePrizePictureTombolaPrizesPrizeIdPicturePost = (
     CreatePrizePictureTombolaPrizesPrizeIdPicturePostVariables
   >({
     mutationFn: (
-      variables: CreatePrizePictureTombolaPrizesPrizeIdPicturePostVariables
+      variables: CreatePrizePictureTombolaPrizesPrizeIdPicturePostVariables,
     ) =>
       fetchCreatePrizePictureTombolaPrizesPrizeIdPicturePost({
         ...fetcherOptions,
@@ -12067,7 +12067,7 @@ export type ReadPrizeLogoTombolaPrizesPrizeIdPictureGetVariables = {
  */
 export const fetchReadPrizeLogoTombolaPrizesPrizeIdPictureGet = (
   variables: ReadPrizeLogoTombolaPrizesPrizeIdPictureGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -12087,7 +12087,7 @@ export const fetchReadPrizeLogoTombolaPrizesPrizeIdPictureGet = (
  * Get the logo of a specific prize.
  */
 export const useReadPrizeLogoTombolaPrizesPrizeIdPictureGet = <
-  TData = undefined
+  TData = undefined,
 >(
   variables: ReadPrizeLogoTombolaPrizesPrizeIdPictureGetVariables,
   options?: Omit<
@@ -12097,7 +12097,7 @@ export const useReadPrizeLogoTombolaPrizesPrizeIdPictureGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -12114,7 +12114,7 @@ export const useReadPrizeLogoTombolaPrizesPrizeIdPictureGet = <
     queryFn: ({ signal }) =>
       fetchReadPrizeLogoTombolaPrizesPrizeIdPictureGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -12136,7 +12136,7 @@ export type GetUsersCashTombolaUsersCashGetVariables =
  */
 export const fetchGetUsersCashTombolaUsersCashGet = (
   variables: GetUsersCashTombolaUsersCashGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetUsersCashTombolaUsersCashGetResponse,
@@ -12153,7 +12153,7 @@ export const fetchGetUsersCashTombolaUsersCashGet = (
  * **The user must be a member of the group admin to use this endpoint
  */
 export const useGetUsersCashTombolaUsersCashGet = <
-  TData = GetUsersCashTombolaUsersCashGetResponse
+  TData = GetUsersCashTombolaUsersCashGetResponse,
 >(
   variables: GetUsersCashTombolaUsersCashGetVariables,
   options?: Omit<
@@ -12163,7 +12163,7 @@ export const useGetUsersCashTombolaUsersCashGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -12180,7 +12180,7 @@ export const useGetUsersCashTombolaUsersCashGet = <
     queryFn: ({ signal }) =>
       fetchGetUsersCashTombolaUsersCashGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -12207,7 +12207,7 @@ export type GetCashByIdTombolaUsersUserIdCashGetVariables = {
  */
 export const fetchGetCashByIdTombolaUsersUserIdCashGet = (
   variables: GetCashByIdTombolaUsersUserIdCashGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.CashComplete,
@@ -12229,7 +12229,7 @@ export const fetchGetCashByIdTombolaUsersUserIdCashGet = (
  * **The user must be a member of the group admin to use this endpoint or can only access the endpoint for its own user_id**
  */
 export const useGetCashByIdTombolaUsersUserIdCashGet = <
-  TData = Schemas.CashComplete
+  TData = Schemas.CashComplete,
 >(
   variables: GetCashByIdTombolaUsersUserIdCashGetVariables,
   options?: Omit<
@@ -12239,7 +12239,7 @@ export const useGetCashByIdTombolaUsersUserIdCashGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -12256,7 +12256,7 @@ export const useGetCashByIdTombolaUsersUserIdCashGet = <
     queryFn: ({ signal }) =>
       fetchGetCashByIdTombolaUsersUserIdCashGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -12285,7 +12285,7 @@ export type CreateCashOfUserTombolaUsersUserIdCashPostVariables = {
  */
 export const fetchCreateCashOfUserTombolaUsersUserIdCashPost = (
   variables: CreateCashOfUserTombolaUsersUserIdCashPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.CashComplete,
@@ -12314,7 +12314,7 @@ export const useCreateCashOfUserTombolaUsersUserIdCashPost = (
       CreateCashOfUserTombolaUsersUserIdCashPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -12323,7 +12323,7 @@ export const useCreateCashOfUserTombolaUsersUserIdCashPost = (
     CreateCashOfUserTombolaUsersUserIdCashPostVariables
   >({
     mutationFn: (
-      variables: CreateCashOfUserTombolaUsersUserIdCashPostVariables
+      variables: CreateCashOfUserTombolaUsersUserIdCashPostVariables,
     ) =>
       fetchCreateCashOfUserTombolaUsersUserIdCashPost({
         ...fetcherOptions,
@@ -12356,7 +12356,7 @@ export type EditCashByIdTombolaUsersUserIdCashPatchVariables = {
  */
 export const fetchEditCashByIdTombolaUsersUserIdCashPatch = (
   variables: EditCashByIdTombolaUsersUserIdCashPatchVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -12386,7 +12386,7 @@ export const useEditCashByIdTombolaUsersUserIdCashPatch = (
       EditCashByIdTombolaUsersUserIdCashPatchVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -12421,7 +12421,7 @@ export type DrawWinnerTombolaPrizesPrizeIdDrawPostVariables = {
 
 export const fetchDrawWinnerTombolaPrizesPrizeIdDrawPost = (
   variables: DrawWinnerTombolaPrizesPrizeIdDrawPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     DrawWinnerTombolaPrizesPrizeIdDrawPostResponse,
@@ -12445,7 +12445,7 @@ export const useDrawWinnerTombolaPrizesPrizeIdDrawPost = (
       DrawWinnerTombolaPrizesPrizeIdDrawPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -12483,7 +12483,7 @@ export type OpenRaffleTombolaRafflesRaffleIdOpenPatchVariables = {
  */
 export const fetchOpenRaffleTombolaRafflesRaffleIdOpenPatch = (
   variables: OpenRaffleTombolaRafflesRaffleIdOpenPatchVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -12512,7 +12512,7 @@ export const useOpenRaffleTombolaRafflesRaffleIdOpenPatch = (
       OpenRaffleTombolaRafflesRaffleIdOpenPatchVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -12521,7 +12521,7 @@ export const useOpenRaffleTombolaRafflesRaffleIdOpenPatch = (
     OpenRaffleTombolaRafflesRaffleIdOpenPatchVariables
   >({
     mutationFn: (
-      variables: OpenRaffleTombolaRafflesRaffleIdOpenPatchVariables
+      variables: OpenRaffleTombolaRafflesRaffleIdOpenPatchVariables,
     ) =>
       fetchOpenRaffleTombolaRafflesRaffleIdOpenPatch({
         ...fetcherOptions,
@@ -12552,7 +12552,7 @@ export type LockRaffleTombolaRafflesRaffleIdLockPatchVariables = {
  */
 export const fetchLockRaffleTombolaRafflesRaffleIdLockPatch = (
   variables: LockRaffleTombolaRafflesRaffleIdLockPatchVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -12581,7 +12581,7 @@ export const useLockRaffleTombolaRafflesRaffleIdLockPatch = (
       LockRaffleTombolaRafflesRaffleIdLockPatchVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -12590,7 +12590,7 @@ export const useLockRaffleTombolaRafflesRaffleIdLockPatch = (
     LockRaffleTombolaRafflesRaffleIdLockPatchVariables
   >({
     mutationFn: (
-      variables: LockRaffleTombolaRafflesRaffleIdLockPatchVariables
+      variables: LockRaffleTombolaRafflesRaffleIdLockPatchVariables,
     ) =>
       fetchLockRaffleTombolaRafflesRaffleIdLockPatch({
         ...fetcherOptions,
@@ -12613,7 +12613,7 @@ export type ReadUsersUsersGetVariables = HyperionContext["fetcherOptions"];
  */
 export const fetchReadUsersUsersGet = (
   variables: ReadUsersUsersGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     ReadUsersUsersGetResponse,
@@ -12638,7 +12638,7 @@ export const useReadUsersUsersGet = <TData = ReadUsersUsersGetResponse>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -12671,7 +12671,7 @@ export type CountUsersUsersCountGetVariables =
  */
 export const fetchCountUsersUsersCountGet = (
   variables: CountUsersUsersCountGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<number, CountUsersUsersCountGetError, undefined, {}, {}, {}>({
     url: "/users/count",
@@ -12690,7 +12690,7 @@ export const useCountUsersUsersCountGet = <TData = number>(
   options?: Omit<
     reactQuery.UseQueryOptions<number, CountUsersUsersCountGetError, TData>,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -12733,7 +12733,7 @@ export type SearchUsersUsersSearchGetVariables = {
  */
 export const fetchSearchUsersUsersSearchGet = (
   variables: SearchUsersUsersSearchGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     SearchUsersUsersSearchGetResponse,
@@ -12752,7 +12752,7 @@ export const fetchSearchUsersUsersSearchGet = (
  * **The user must be authenticated to use this endpoint**
  */
 export const useSearchUsersUsersSearchGet = <
-  TData = SearchUsersUsersSearchGetResponse
+  TData = SearchUsersUsersSearchGetResponse,
 >(
   variables: SearchUsersUsersSearchGetVariables,
   options?: Omit<
@@ -12762,7 +12762,7 @@ export const useSearchUsersUsersSearchGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -12779,7 +12779,7 @@ export const useSearchUsersUsersSearchGet = <
     queryFn: ({ signal }) =>
       fetchSearchUsersUsersSearchGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -12798,7 +12798,7 @@ export type ReadCurrentUserUsersMeGetVariables =
  */
 export const fetchReadCurrentUserUsersMeGet = (
   variables: ReadCurrentUserUsersMeGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.CoreUser,
@@ -12823,7 +12823,7 @@ export const useReadCurrentUserUsersMeGet = <TData = Schemas.CoreUser>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -12840,7 +12840,7 @@ export const useReadCurrentUserUsersMeGet = <TData = Schemas.CoreUser>(
     queryFn: ({ signal }) =>
       fetchReadCurrentUserUsersMeGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -12863,7 +12863,7 @@ export type UpdateCurrentUserUsersMePatchVariables = {
  */
 export const fetchUpdateCurrentUserUsersMePatch = (
   variables: UpdateCurrentUserUsersMePatchVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -12887,7 +12887,7 @@ export const useUpdateCurrentUserUsersMePatch = (
       UpdateCurrentUserUsersMePatchVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -12921,7 +12921,7 @@ export type CreateUserByUserUsersCreatePostVariables = {
  */
 export const fetchCreateUserByUserUsersCreatePost = (
   variables: CreateUserByUserUsersCreatePostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.AppUtilsTypesStandardResponsesResult,
@@ -12949,7 +12949,7 @@ export const useCreateUserByUserUsersCreatePost = (
       CreateUserByUserUsersCreatePostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -12987,7 +12987,7 @@ export type BatchCreateUsersUsersBatchCreationPostVariables = {
  */
 export const fetchBatchCreateUsersUsersBatchCreationPost = (
   variables: BatchCreateUsersUsersBatchCreationPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.BatchResult,
@@ -13016,7 +13016,7 @@ export const useBatchCreateUsersUsersBatchCreationPost = (
       BatchCreateUsersUsersBatchCreationPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -13053,7 +13053,7 @@ export type GetUserActivationPageUsersActivateGetVariables = {
  */
 export const fetchGetUserActivationPageUsersActivateGet = (
   variables: GetUserActivationPageUsersActivateGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -13078,7 +13078,7 @@ export const useGetUserActivationPageUsersActivateGet = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -13095,7 +13095,7 @@ export const useGetUserActivationPageUsersActivateGet = <TData = undefined>(
     queryFn: ({ signal }) =>
       fetchGetUserActivationPageUsersActivateGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -13120,7 +13120,7 @@ export type ActivateUserUsersActivatePostVariables = {
  */
 export const fetchActivateUserUsersActivatePost = (
   variables: ActivateUserUsersActivatePostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.AppUtilsTypesStandardResponsesResult,
@@ -13146,7 +13146,7 @@ export const useActivateUserUsersActivatePost = (
       ActivateUserUsersActivatePostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -13171,7 +13171,7 @@ export type MakeAdminUsersMakeAdminPostVariables =
  */
 export const fetchMakeAdminUsersMakeAdminPost = (
   variables: MakeAdminUsersMakeAdminPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.AppUtilsTypesStandardResponsesResult,
@@ -13194,7 +13194,7 @@ export const useMakeAdminUsersMakeAdminPost = (
       MakeAdminUsersMakeAdminPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -13225,7 +13225,7 @@ export type RecoverUserUsersRecoverPostVariables = {
  */
 export const fetchRecoverUserUsersRecoverPost = (
   variables: RecoverUserUsersRecoverPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.AppUtilsTypesStandardResponsesResult,
@@ -13250,7 +13250,7 @@ export const useRecoverUserUsersRecoverPost = (
       RecoverUserUsersRecoverPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -13278,7 +13278,7 @@ export type ResetPasswordUsersResetPasswordPostVariables = {
  */
 export const fetchResetPasswordUsersResetPasswordPost = (
   variables: ResetPasswordUsersResetPasswordPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.AppUtilsTypesStandardResponsesResult,
@@ -13300,7 +13300,7 @@ export const useResetPasswordUsersResetPasswordPost = (
       ResetPasswordUsersResetPasswordPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -13332,7 +13332,7 @@ export type MigrateMailUsersMigrateMailPostVariables = {
  */
 export const fetchMigrateMailUsersMigrateMailPost = (
   variables: MigrateMailUsersMigrateMailPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -13355,7 +13355,7 @@ export const useMigrateMailUsersMigrateMailPost = (
       MigrateMailUsersMigrateMailPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -13389,7 +13389,7 @@ export type MigrateMailConfirmUsersMigrateMailConfirmGetVariables = {
  */
 export const fetchMigrateMailConfirmUsersMigrateMailConfirmGet = (
   variables: MigrateMailConfirmUsersMigrateMailConfirmGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     void,
@@ -13418,7 +13418,7 @@ export const useMigrateMailConfirmUsersMigrateMailConfirmGet = <TData = void>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -13435,7 +13435,7 @@ export const useMigrateMailConfirmUsersMigrateMailConfirmGet = <TData = void>(
     queryFn: ({ signal }) =>
       fetchMigrateMailConfirmUsersMigrateMailConfirmGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -13458,7 +13458,7 @@ export type ChangePasswordUsersChangePasswordPostVariables = {
  */
 export const fetchChangePasswordUsersChangePasswordPost = (
   variables: ChangePasswordUsersChangePasswordPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.AppUtilsTypesStandardResponsesResult,
@@ -13482,7 +13482,7 @@ export const useChangePasswordUsersChangePasswordPost = (
       ChangePasswordUsersChangePasswordPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -13519,7 +13519,7 @@ export type ReadUserUsersUserIdGetVariables = {
  */
 export const fetchReadUserUsersUserIdGet = (
   variables: ReadUserUsersUserIdGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.CoreUser,
@@ -13544,7 +13544,7 @@ export const useReadUserUsersUserIdGet = <TData = Schemas.CoreUser>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -13586,7 +13586,7 @@ export type UpdateUserUsersUserIdPatchVariables = {
  */
 export const fetchUpdateUserUsersUserIdPatch = (
   variables: UpdateUserUsersUserIdPatchVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -13610,7 +13610,7 @@ export const useUpdateUserUsersUserIdPatch = (
       UpdateUserUsersUserIdPatchVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -13636,7 +13636,7 @@ export type DeleteUserUsersMeAskDeletionPostVariables =
  */
 export const fetchDeleteUserUsersMeAskDeletionPost = (
   variables: DeleteUserUsersMeAskDeletionPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -13659,7 +13659,7 @@ export const useDeleteUserUsersMeAskDeletionPost = (
       DeleteUserUsersMeAskDeletionPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -13687,7 +13687,7 @@ export type ReadOwnProfilePictureUsersMeProfilePictureGetVariables =
  */
 export const fetchReadOwnProfilePictureUsersMeProfilePictureGet = (
   variables: ReadOwnProfilePictureUsersMeProfilePictureGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -13702,7 +13702,7 @@ export const fetchReadOwnProfilePictureUsersMeProfilePictureGet = (
  * Get the profile picture of the authenticated user.
  */
 export const useReadOwnProfilePictureUsersMeProfilePictureGet = <
-  TData = undefined
+  TData = undefined,
 >(
   variables: ReadOwnProfilePictureUsersMeProfilePictureGetVariables,
   options?: Omit<
@@ -13712,7 +13712,7 @@ export const useReadOwnProfilePictureUsersMeProfilePictureGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -13729,7 +13729,7 @@ export const useReadOwnProfilePictureUsersMeProfilePictureGet = <
     queryFn: ({ signal }) =>
       fetchReadOwnProfilePictureUsersMeProfilePictureGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -13754,7 +13754,7 @@ export type CreateCurrentUserProfilePictureUsersMeProfilePicturePostVariables =
  */
 export const fetchCreateCurrentUserProfilePictureUsersMeProfilePicturePost = (
   variables: CreateCurrentUserProfilePictureUsersMeProfilePicturePostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.AppUtilsTypesStandardResponsesResult,
@@ -13778,7 +13778,7 @@ export const useCreateCurrentUserProfilePictureUsersMeProfilePicturePost = (
       CreateCurrentUserProfilePictureUsersMeProfilePicturePostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -13787,7 +13787,7 @@ export const useCreateCurrentUserProfilePictureUsersMeProfilePicturePost = (
     CreateCurrentUserProfilePictureUsersMeProfilePicturePostVariables
   >({
     mutationFn: (
-      variables: CreateCurrentUserProfilePictureUsersMeProfilePicturePostVariables
+      variables: CreateCurrentUserProfilePictureUsersMeProfilePicturePostVariables,
     ) =>
       fetchCreateCurrentUserProfilePictureUsersMeProfilePicturePost({
         ...fetcherOptions,
@@ -13818,7 +13818,7 @@ export type ReadUserProfilePictureUsersUserIdProfilePictureGetVariables = {
  */
 export const fetchReadUserProfilePictureUsersUserIdProfilePictureGet = (
   variables: ReadUserProfilePictureUsersUserIdProfilePictureGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -13840,7 +13840,7 @@ export const fetchReadUserProfilePictureUsersUserIdProfilePictureGet = (
  * Unauthenticated users can use this endpoint (needed for some OIDC services)
  */
 export const useReadUserProfilePictureUsersUserIdProfilePictureGet = <
-  TData = undefined
+  TData = undefined,
 >(
   variables: ReadUserProfilePictureUsersUserIdProfilePictureGetVariables,
   options?: Omit<
@@ -13850,7 +13850,7 @@ export const useReadUserProfilePictureUsersUserIdProfilePictureGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -13867,7 +13867,7 @@ export const useReadUserProfilePictureUsersUserIdProfilePictureGet = <
     queryFn: ({ signal }) =>
       fetchReadUserProfilePictureUsersUserIdProfilePictureGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -13893,7 +13893,7 @@ export type GetParticipantByIdRaidParticipantParticipantIdGetVariables = {
  */
 export const fetchGetParticipantByIdRaidParticipantParticipantIdGet = (
   variables: GetParticipantByIdRaidParticipantParticipantIdGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.Participant,
@@ -13913,7 +13913,7 @@ export const fetchGetParticipantByIdRaidParticipantParticipantIdGet = (
  * Get a participant by id
  */
 export const useGetParticipantByIdRaidParticipantParticipantIdGet = <
-  TData = Schemas.Participant
+  TData = Schemas.Participant,
 >(
   variables: GetParticipantByIdRaidParticipantParticipantIdGetVariables,
   options?: Omit<
@@ -13923,7 +13923,7 @@ export const useGetParticipantByIdRaidParticipantParticipantIdGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -13940,7 +13940,7 @@ export const useGetParticipantByIdRaidParticipantParticipantIdGet = <
     queryFn: ({ signal }) =>
       fetchGetParticipantByIdRaidParticipantParticipantIdGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -13967,7 +13967,7 @@ export type UpdateParticipantRaidParticipantParticipantIdPatchVariables = {
  */
 export const fetchUpdateParticipantRaidParticipantParticipantIdPatch = (
   variables: UpdateParticipantRaidParticipantParticipantIdPatchVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -13994,7 +13994,7 @@ export const useUpdateParticipantRaidParticipantParticipantIdPatch = (
       UpdateParticipantRaidParticipantParticipantIdPatchVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -14003,7 +14003,7 @@ export const useUpdateParticipantRaidParticipantParticipantIdPatch = (
     UpdateParticipantRaidParticipantParticipantIdPatchVariables
   >({
     mutationFn: (
-      variables: UpdateParticipantRaidParticipantParticipantIdPatchVariables
+      variables: UpdateParticipantRaidParticipantParticipantIdPatchVariables,
     ) =>
       fetchUpdateParticipantRaidParticipantParticipantIdPatch({
         ...fetcherOptions,
@@ -14027,7 +14027,7 @@ export type CreateParticipantRaidParticipantPostVariables = {
  */
 export const fetchCreateParticipantRaidParticipantPost = (
   variables: CreateParticipantRaidParticipantPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.Participant,
@@ -14049,7 +14049,7 @@ export const useCreateParticipantRaidParticipantPost = (
       CreateParticipantRaidParticipantPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -14080,7 +14080,7 @@ export type CreateTeamRaidTeamPostVariables = {
  */
 export const fetchCreateTeamRaidTeamPost = (
   variables: CreateTeamRaidTeamPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.TeamBase,
@@ -14102,7 +14102,7 @@ export const useCreateTeamRaidTeamPost = (
       CreateTeamRaidTeamPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -14137,7 +14137,7 @@ export type GetTeamByParticipantIdRaidParticipantParticipantIdTeamGetVariables =
  */
 export const fetchGetTeamByParticipantIdRaidParticipantParticipantIdTeamGet = (
   variables: GetTeamByParticipantIdRaidParticipantParticipantIdTeamGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.Team,
@@ -14157,7 +14157,7 @@ export const fetchGetTeamByParticipantIdRaidParticipantParticipantIdTeamGet = (
  * Get a team by participant id
  */
 export const useGetTeamByParticipantIdRaidParticipantParticipantIdTeamGet = <
-  TData = Schemas.Team
+  TData = Schemas.Team,
 >(
   variables: GetTeamByParticipantIdRaidParticipantParticipantIdTeamGetVariables,
   options?: Omit<
@@ -14167,7 +14167,7 @@ export const useGetTeamByParticipantIdRaidParticipantParticipantIdTeamGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -14184,7 +14184,7 @@ export const useGetTeamByParticipantIdRaidParticipantParticipantIdTeamGet = <
     queryFn: ({ signal }) =>
       fetchGetTeamByParticipantIdRaidParticipantParticipantIdTeamGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -14203,7 +14203,7 @@ export type GetAllTeamsRaidTeamAllGetVariables =
  */
 export const fetchGetAllTeamsRaidTeamAllGet = (
   variables: GetAllTeamsRaidTeamAllGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     GetAllTeamsRaidTeamAllGetResponse,
@@ -14218,7 +14218,7 @@ export const fetchGetAllTeamsRaidTeamAllGet = (
  * Get all teams
  */
 export const useGetAllTeamsRaidTeamAllGet = <
-  TData = GetAllTeamsRaidTeamAllGetResponse
+  TData = GetAllTeamsRaidTeamAllGetResponse,
 >(
   variables: GetAllTeamsRaidTeamAllGetVariables,
   options?: Omit<
@@ -14228,7 +14228,7 @@ export const useGetAllTeamsRaidTeamAllGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -14245,7 +14245,7 @@ export const useGetAllTeamsRaidTeamAllGet = <
     queryFn: ({ signal }) =>
       fetchGetAllTeamsRaidTeamAllGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -14263,7 +14263,7 @@ export type DeleteAllTeamsRaidTeamAllDeleteVariables =
  */
 export const fetchDeleteAllTeamsRaidTeamAllDelete = (
   variables: DeleteAllTeamsRaidTeamAllDeleteVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -14285,7 +14285,7 @@ export const useDeleteAllTeamsRaidTeamAllDelete = (
       DeleteAllTeamsRaidTeamAllDeleteVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -14317,7 +14317,7 @@ export type GetTeamByIdRaidTeamTeamIdGetVariables = {
  */
 export const fetchGetTeamByIdRaidTeamTeamIdGet = (
   variables: GetTeamByIdRaidTeamTeamIdGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.Team,
@@ -14340,7 +14340,7 @@ export const useGetTeamByIdRaidTeamTeamIdGet = <TData = Schemas.Team>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -14357,7 +14357,7 @@ export const useGetTeamByIdRaidTeamTeamIdGet = <TData = Schemas.Team>(
     queryFn: ({ signal }) =>
       fetchGetTeamByIdRaidTeamTeamIdGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -14383,7 +14383,7 @@ export type UpdateTeamRaidTeamTeamIdPatchVariables = {
  */
 export const fetchUpdateTeamRaidTeamTeamIdPatch = (
   variables: UpdateTeamRaidTeamTeamIdPatchVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -14405,7 +14405,7 @@ export const useUpdateTeamRaidTeamTeamIdPatch = (
       UpdateTeamRaidTeamTeamIdPatchVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -14437,7 +14437,7 @@ export type DeleteTeamRaidTeamTeamIdDeleteVariables = {
  */
 export const fetchDeleteTeamRaidTeamTeamIdDelete = (
   variables: DeleteTeamRaidTeamTeamIdDeleteVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -14459,7 +14459,7 @@ export const useDeleteTeamRaidTeamTeamIdDelete = (
       DeleteTeamRaidTeamTeamIdDeleteVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -14488,7 +14488,7 @@ export type CreateDocumentRaidParticipantParticipantIdDocumentPostVariables = {
  */
 export const fetchCreateDocumentRaidParticipantParticipantIdDocumentPost = (
   variables: CreateDocumentRaidParticipantParticipantIdDocumentPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -14515,7 +14515,7 @@ export const useCreateDocumentRaidParticipantParticipantIdDocumentPost = (
       CreateDocumentRaidParticipantParticipantIdDocumentPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -14524,7 +14524,7 @@ export const useCreateDocumentRaidParticipantParticipantIdDocumentPost = (
     CreateDocumentRaidParticipantParticipantIdDocumentPostVariables
   >({
     mutationFn: (
-      variables: CreateDocumentRaidParticipantParticipantIdDocumentPostVariables
+      variables: CreateDocumentRaidParticipantParticipantIdDocumentPostVariables,
     ) =>
       fetchCreateDocumentRaidParticipantParticipantIdDocumentPost({
         ...fetcherOptions,
@@ -14554,7 +14554,7 @@ export type UploadDocumentRaidDocumentDocumentIdPostVariables = {
  */
 export const fetchUploadDocumentRaidDocumentDocumentIdPost = (
   variables: UploadDocumentRaidDocumentDocumentIdPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.AppUtilsTypesStandardResponsesResult,
@@ -14581,7 +14581,7 @@ export const useUploadDocumentRaidDocumentDocumentIdPost = (
       UploadDocumentRaidDocumentDocumentIdPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -14590,7 +14590,7 @@ export const useUploadDocumentRaidDocumentDocumentIdPost = (
     UploadDocumentRaidDocumentDocumentIdPostVariables
   >({
     mutationFn: (
-      variables: UploadDocumentRaidDocumentDocumentIdPostVariables
+      variables: UploadDocumentRaidDocumentDocumentIdPostVariables,
     ) =>
       fetchUploadDocumentRaidDocumentDocumentIdPost({
         ...fetcherOptions,
@@ -14618,7 +14618,7 @@ export type ReadDocumentRaidDocumentDocumentIdGetVariables = {
  */
 export const fetchReadDocumentRaidDocumentDocumentIdGet = (
   variables: ReadDocumentRaidDocumentDocumentIdGetVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -14646,7 +14646,7 @@ export const useReadDocumentRaidDocumentDocumentIdGet = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >
+  >,
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -14663,7 +14663,7 @@ export const useReadDocumentRaidDocumentDocumentIdGet = <TData = undefined>(
     queryFn: ({ signal }) =>
       fetchReadDocumentRaidDocumentDocumentIdGet(
         { ...fetcherOptions, ...variables },
-        signal
+        signal,
       ),
     ...options,
     ...queryOptions,
@@ -14693,7 +14693,7 @@ export type UpdateDocumentRaidParticipantParticipantIdDocumentDocumentIdPatchVar
 export const fetchUpdateDocumentRaidParticipantParticipantIdDocumentDocumentIdPatch =
   (
     variables: UpdateDocumentRaidParticipantParticipantIdDocumentDocumentIdPatchVariables,
-    signal?: AbortSignal
+    signal?: AbortSignal,
   ) =>
     hyperionFetch<
       undefined,
@@ -14721,7 +14721,7 @@ export const useUpdateDocumentRaidParticipantParticipantIdDocumentDocumentIdPatc
         UpdateDocumentRaidParticipantParticipantIdDocumentDocumentIdPatchVariables
       >,
       "mutationFn"
-    >
+    >,
   ) => {
     const { fetcherOptions } = useHyperionContext();
     return reactQuery.useMutation<
@@ -14730,7 +14730,7 @@ export const useUpdateDocumentRaidParticipantParticipantIdDocumentDocumentIdPatc
       UpdateDocumentRaidParticipantParticipantIdDocumentDocumentIdPatchVariables
     >({
       mutationFn: (
-        variables: UpdateDocumentRaidParticipantParticipantIdDocumentDocumentIdPatchVariables
+        variables: UpdateDocumentRaidParticipantParticipantIdDocumentDocumentIdPatchVariables,
       ) =>
         fetchUpdateDocumentRaidParticipantParticipantIdDocumentDocumentIdPatch({
           ...fetcherOptions,
@@ -14762,7 +14762,7 @@ export type DeleteDocumentRaidParticipantParticipantIdDocumentDocumentIdDeleteVa
 export const fetchDeleteDocumentRaidParticipantParticipantIdDocumentDocumentIdDelete =
   (
     variables: DeleteDocumentRaidParticipantParticipantIdDocumentDocumentIdDeleteVariables,
-    signal?: AbortSignal
+    signal?: AbortSignal,
   ) =>
     hyperionFetch<
       undefined,
@@ -14790,7 +14790,7 @@ export const useDeleteDocumentRaidParticipantParticipantIdDocumentDocumentIdDele
         DeleteDocumentRaidParticipantParticipantIdDocumentDocumentIdDeleteVariables
       >,
       "mutationFn"
-    >
+    >,
   ) => {
     const { fetcherOptions } = useHyperionContext();
     return reactQuery.useMutation<
@@ -14799,10 +14799,10 @@ export const useDeleteDocumentRaidParticipantParticipantIdDocumentDocumentIdDele
       DeleteDocumentRaidParticipantParticipantIdDocumentDocumentIdDeleteVariables
     >({
       mutationFn: (
-        variables: DeleteDocumentRaidParticipantParticipantIdDocumentDocumentIdDeleteVariables
+        variables: DeleteDocumentRaidParticipantParticipantIdDocumentDocumentIdDeleteVariables,
       ) =>
         fetchDeleteDocumentRaidParticipantParticipantIdDocumentDocumentIdDelete(
-          { ...fetcherOptions, ...variables }
+          { ...fetcherOptions, ...variables },
         ),
       ...options,
     });
@@ -14827,7 +14827,7 @@ export type ConfirmPaymentRaidParticipantParticipantIdPaymentPostVariables = {
  */
 export const fetchConfirmPaymentRaidParticipantParticipantIdPaymentPost = (
   variables: ConfirmPaymentRaidParticipantParticipantIdPaymentPostVariables,
-  signal?: AbortSignal
+  signal?: AbortSignal,
 ) =>
   hyperionFetch<
     undefined,
@@ -14854,7 +14854,7 @@ export const useConfirmPaymentRaidParticipantParticipantIdPaymentPost = (
       ConfirmPaymentRaidParticipantParticipantIdPaymentPostVariables
     >,
     "mutationFn"
-  >
+  >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -14863,7 +14863,7 @@ export const useConfirmPaymentRaidParticipantParticipantIdPaymentPost = (
     ConfirmPaymentRaidParticipantParticipantIdPaymentPostVariables
   >({
     mutationFn: (
-      variables: ConfirmPaymentRaidParticipantParticipantIdPaymentPostVariables
+      variables: ConfirmPaymentRaidParticipantParticipantIdPaymentPostVariables,
     ) =>
       fetchConfirmPaymentRaidParticipantParticipantIdPaymentPost({
         ...fetcherOptions,
@@ -14895,7 +14895,7 @@ export type ValidateAttestationOnHonourRaidParticipantParticipantIdHonourPostVar
 export const fetchValidateAttestationOnHonourRaidParticipantParticipantIdHonourPost =
   (
     variables: ValidateAttestationOnHonourRaidParticipantParticipantIdHonourPostVariables,
-    signal?: AbortSignal
+    signal?: AbortSignal,
   ) =>
     hyperionFetch<
       undefined,
@@ -14923,7 +14923,7 @@ export const useValidateAttestationOnHonourRaidParticipantParticipantIdHonourPos
         ValidateAttestationOnHonourRaidParticipantParticipantIdHonourPostVariables
       >,
       "mutationFn"
-    >
+    >,
   ) => {
     const { fetcherOptions } = useHyperionContext();
     return reactQuery.useMutation<
@@ -14932,7 +14932,7 @@ export const useValidateAttestationOnHonourRaidParticipantParticipantIdHonourPos
       ValidateAttestationOnHonourRaidParticipantParticipantIdHonourPostVariables
     >({
       mutationFn: (
-        variables: ValidateAttestationOnHonourRaidParticipantParticipantIdHonourPostVariables
+        variables: ValidateAttestationOnHonourRaidParticipantParticipantIdHonourPostVariables,
       ) =>
         fetchValidateAttestationOnHonourRaidParticipantParticipantIdHonourPost({
           ...fetcherOptions,

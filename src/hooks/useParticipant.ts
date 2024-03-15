@@ -33,7 +33,7 @@ export const useParticipant = () => {
       enabled: userId !== null && participant === undefined,
       retry: 0,
       queryHash: "getParticipantById",
-    }
+    },
   );
 
   const {
@@ -44,7 +44,7 @@ export const useParticipant = () => {
 
   const createParticipant = (
     participant: ParticipantBase,
-    callback: () => void
+    callback: () => void,
   ) => {
     const body: CreateParticipantRaidParticipantPostVariables = {
       body: participant,
@@ -72,7 +72,7 @@ export const useParticipant = () => {
 
   const updateParticipant = (
     participant: ParticipantUpdate,
-    callback: () => void
+    callback: () => void,
   ) => {
     const body: UpdateParticipantRaidParticipantParticipantIdPatchVariables = {
       body: participant,
@@ -85,8 +85,7 @@ export const useParticipant = () => {
     };
     mutateUpdateParticipant(body, {
       // Not using onSucess because of : https://github.com/TanStack/query/discussions/2878
-      onSettled: (
-      ) => {
+      onSettled: () => {
         // Assuming success in all cases
         // For unknown reasons, the invalidation of the query does not work
         refetch();

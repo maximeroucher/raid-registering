@@ -44,7 +44,7 @@ const Login = () => {
                 <Label htmlFor="password">Mot de passe</Label>
                 <PasswordInput type="password" hidden></PasswordInput>
               </div>
-              <div/>
+              <div />
               <Button className="w-full" onClick={connectOther}>
                 Se connecter
               </Button>

@@ -18,7 +18,7 @@ export const useParticipantStore = create<ParticipantStore>()(
       }),
       {
         name: "raid-participant-storage",
-      }
-    )
-  )
+      },
+    ),
+  ),
 );

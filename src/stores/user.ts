@@ -18,7 +18,7 @@ export const useUserStore = create<UserStore>()(
       }),
       {
         name: "raid-user-storage",
-      }
-    )
-  )
+      },
+    ),
+  ),
 );

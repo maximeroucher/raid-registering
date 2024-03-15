@@ -28,13 +28,13 @@ export const ViewEditParticipantItem = ({
       (value) => {
         return ["XS", "S", "M", "L", "XL"].includes(value);
       },
-      { message: "Veuillez renseigner une taille de vélo valide" }
+      { message: "Veuillez renseigner une taille de vélo valide" },
     ),
     tShirtSize: z.string().refine(
       (value) => {
         return ["XS", "S", "M", "L", "XL"].includes(value);
       },
-      { message: "Veuillez renseigner une taille de t-shirt valide" }
+      { message: "Veuillez renseigner une taille de t-shirt valide" },
     ),
     diet: z.string(),
     attestationHonour: z.boolean(),

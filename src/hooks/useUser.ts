@@ -15,7 +15,7 @@ export const useUser = () => {
     {
       enabled: token !== null && user === undefined,
       retry: 0,
-    }
+    },
   );
 
   if (me !== undefined && user === undefined) {

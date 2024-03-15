@@ -109,7 +109,7 @@ export const CreateParticipant = ({
         createTeam({
           name: `Équipe de ${values.firstname} ${values.name}`,
         });
-      }
+      },
     );
   }
 

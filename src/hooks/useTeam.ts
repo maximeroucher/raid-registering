@@ -25,7 +25,7 @@ export const useTeam = () => {
         enabled: userId !== null,
         retry: 0,
         queryHash: "getTeamByParticipantId",
-      }
+      },
     );
 
   const {

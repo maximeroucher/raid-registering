@@ -25,11 +25,11 @@ export const useTokenStore = create<TokenStore>()(
         },
         setRefreshToken: (refreshToken: string | null) => {
           set({ refreshToken: refreshToken });
-        }
+        },
       }),
       {
         name: "token-storage",
-      }
-    )
-  )
+      },
+    ),
+  ),
 );

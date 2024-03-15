@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { HiEye, HiEyeOff } from "react-icons/hi"
+import { HiEye, HiEyeOff } from "react-icons/hi";
 
 import { cn } from "@/lib/utils";
 
@@ -10,7 +10,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, ...props }, ref) => {
     const [showPassword, setShowPassword] = React.useState(false);
     const togglePasswordVisibility = () => setShowPassword(!showPassword);
-  
+
     return (
       <div className="relative">
         <input
@@ -22,23 +22,17 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           {...props}
         />
-           <div className="absolute inset-y-0 right-0 flex cursor-pointer items-center pr-3 text-gray-400">
-        {showPassword ? (
-          <HiEye
-            className="h-4 w-4"
-            onClick={togglePasswordVisibility}
-          />
-        ) : (
-          <HiEyeOff
-            className="h-4 w-4"
-            onClick={togglePasswordVisibility}
-          />
-        )}
-      </div>
+        <div className="absolute inset-y-0 right-0 flex cursor-pointer items-center pr-3 text-gray-400">
+          {showPassword ? (
+            <HiEye className="h-4 w-4" onClick={togglePasswordVisibility} />
+          ) : (
+            <HiEyeOff className="h-4 w-4" onClick={togglePasswordVisibility} />
+          )}
+        </div>
       </div>
     );
   },
 );
 Input.displayName = "Input";
 
-export { Input as PasswordInput }
+export { Input as PasswordInput };

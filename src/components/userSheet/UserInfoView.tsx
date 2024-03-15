@@ -12,13 +12,11 @@ export const UserInfoView = ({ label, value }: UserInfoViewProps) => {
       <Label htmlFor={label} className="font-bold">
         {label} :
       </Label>
-      {
-        label ? (
-          <span id={label}>{value}</span>
-        ) : (
-          <Skeleton className="w-24 h-6" />
-        )
-      }
+      {label ? (
+        <span id={label}>{value}</span>
+      ) : (
+        <Skeleton className="w-24 h-6" />
+      )}
     </div>
   );
 };

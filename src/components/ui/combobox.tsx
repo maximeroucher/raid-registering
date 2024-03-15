@@ -40,7 +40,7 @@ export function Combobox({
           aria-expanded={open}
           className={cn(
             "w-full justify-between",
-            !value && "text-muted-foreground"
+            !value && "text-muted-foreground",
           )}
         >
           <span>
@@ -73,7 +73,7 @@ export function Combobox({
                 <Check
                   className={cn(
                     "mr-2 h-4 w-4",
-                    value === v.value ? "opacity-100" : "opacity-0"
+                    value === v.value ? "opacity-100" : "opacity-0",
                   )}
                 />
                 {v.label}

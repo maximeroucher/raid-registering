@@ -40,7 +40,7 @@ export function EditParticipantCardItem<T extends ValueType>({
   const sizeArray: Size[] = ["XS", "S", "M", "L", "XL"];
 
   const valueComponent = (
-    field: ControllerRenderProps<FieldValues, string>
+    field: ControllerRenderProps<FieldValues, string>,
   ) => {
     switch (type) {
       case ValueTypes.BOOLEAN:

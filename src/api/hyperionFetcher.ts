@@ -1,6 +1,7 @@
 import { HyperionContext } from "./hyperionContext";
 
-const baseUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "https://hyperion.myecl.fr"; // TODO add your baseUrl
+const baseUrl =
+  process.env.NEXT_PUBLIC_BACKEND_URL || "https://hyperion.myecl.fr"; // TODO add your baseUrl
 
 export type ErrorWrapper<TError> =
   | TError
@@ -23,7 +24,7 @@ export async function hyperionFetch<
   TBody extends {} | FormData | undefined | null,
   THeaders extends {},
   TQueryParams extends {},
-  TPathParams extends {}
+  TPathParams extends {},
 >({
   url,
   method,
@@ -69,7 +70,7 @@ export async function hyperionFetch<
             : JSON.stringify(body)
           : undefined,
         headers: requestHeaders,
-      }
+      },
     );
     if (!response.ok) {
       let error: ErrorWrapper<TError>;
@@ -108,7 +109,7 @@ export async function hyperionFetch<
 const resolveUrl = (
   url: string,
   queryParams: Record<string, string> = {},
-  pathParams: Record<string, string> = {}
+  pathParams: Record<string, string> = {},
 ) => {
   let query = new URLSearchParams(queryParams).toString();
   if (query) query = `?${query}`;
