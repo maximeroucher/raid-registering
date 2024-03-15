@@ -10,7 +10,7 @@ updates:
       interval: "monthly"
 
   # Maintain Python dependencies
-  - package-ecosystem: "yarn"
+  - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "monthly"
