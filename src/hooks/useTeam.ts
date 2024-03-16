@@ -1,7 +1,7 @@
 import {
-  useGetTeamByParticipantIdRaidParticipantParticipantIdTeamGet,
-  useCreateTeamRaidTeamPost,
-  CreateTeamRaidTeamPostVariables,
+  useGetTeamByParticipantIdRaidParticipantsParticipantIdTeamGet,
+  useCreateTeamRaidTeamsPost,
+  CreateTeamRaidTeamsPostVariables,
 } from "@/src/api/hyperionComponents";
 import { useTokenStore } from "@/src/stores/token";
 import { TeamBase } from "../api/hyperionSchemas";
@@ -15,7 +15,7 @@ export const useTeam = () => {
     data: team,
     isLoading,
     refetch: refetchTeam,
-  } = useGetTeamByParticipantIdRaidParticipantParticipantIdTeamGet(
+  } = useGetTeamByParticipantIdRaidParticipantsParticipantIdTeamGet(
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -35,10 +35,10 @@ export const useTeam = () => {
     mutate: mutateCreateTeam,
     isSuccess: isCreationSuccess,
     isPending: isCreationLoading,
-  } = useCreateTeamRaidTeamPost({});
+  } = useCreateTeamRaidTeamsPost({});
 
   const createTeam = (team: TeamBase) => {
-    const body: CreateTeamRaidTeamPostVariables = {
+    const body: CreateTeamRaidTeamsPostVariables = {
       body: team,
       headers: {
         Authorization: `Bearer ${token}`,

@@ -11,6 +11,8 @@ import {
   FormControl,
 } from "../ui/form";
 import { ControllerRenderProps, FieldValues } from "react-hook-form";
+import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
+import { Button } from "../ui/button";
 
 type ValueType = string | Size | boolean | Document | SecurityFile;
 
@@ -40,7 +42,7 @@ export function EditParticipantCardItem<T extends ValueType>({
   const sizeArray: Size[] = ["XS", "S", "M", "L", "XL"];
 
   const valueComponent = (
-    field: ControllerRenderProps<FieldValues, string>,
+    field: ControllerRenderProps<FieldValues, string>
   ) => {
     switch (type) {
       case ValueTypes.BOOLEAN:
@@ -73,21 +75,44 @@ export function EditParticipantCardItem<T extends ValueType>({
         );
       case ValueTypes.DOCUMENT:
         return (
-          <>
-            {/* <div className="bg-zinc-200 px-2 rounded-md">
-              <span>{(value as Document).name}</span>
-            </div>
-            <Checkbox checked={(value as Document).validated} /> */}
-          </>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="outline" className="col-span-4">
+                <div className="flex flex-row items-start w-full">
+                  <span className="font-semibold  mr-6">
+                    Choisir un fichier
+                  </span>
+                  <span className="text-gray-500">{field.value ?? "Aucun fichier séléctionné"}</span>
+                </div>
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="w-80">
+              <FormMessage />
+              <FormControl>
+                <Input type="file" {...field} />
+              </FormControl>
+            </DialogContent>
+          </Dialog>
         );
       case ValueTypes.SECURITYFILE:
         return (
-          <>
-            {/* <div className="bg-zinc-200 px-2 rounded-md">
-              <span>Fiche de sécurité</span>
-            </div>
-            <Checkbox checked={true} /> */}
-          </>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="outline" className="col-span-4">
+                <div className="flex flex-row items-start w-full">
+                  <span className="font-semibold  mr-6">
+                    {field.value ? "Modifier" : "Remplir"} la fiche de sécurité
+                  </span>
+                </div>
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="w-80">
+              <FormMessage />
+              <FormControl>
+                <Input type="file" {...field} />
+              </FormControl>
+            </DialogContent>
+          </Dialog>
         );
       case ValueTypes.STRING:
         return (

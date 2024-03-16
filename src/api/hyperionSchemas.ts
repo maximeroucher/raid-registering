@@ -1009,9 +1009,9 @@ export type Participant = {
    * @format date
    */
   birthday: string;
-  address: string;
   phone: string;
   email: string;
+  address: string | null;
   bike_size: Size | null;
   t_shirt_size: Size | null;
   situation: string | null;
@@ -1035,7 +1035,6 @@ export type ParticipantBase = {
    * @format date
    */
   birthday: string;
-  address: string;
   phone: string;
   email: string;
 };
@@ -1203,7 +1202,6 @@ export type Team = {
   captain: Participant;
   second: Participant | null;
   difficulty: Difficulty | null;
-  validation_progress: number;
   meeting_place: MeetingPlace | null;
 };
 

@@ -1,9 +1,9 @@
 import {
-  useGetParticipantByIdRaidParticipantParticipantIdGet,
-  useCreateParticipantRaidParticipantPost,
-  CreateParticipantRaidParticipantPostVariables,
-  useUpdateParticipantRaidParticipantParticipantIdPatch,
-  UpdateParticipantRaidParticipantParticipantIdPatchVariables,
+  useGetParticipantByIdRaidParticipantsParticipantIdGet,
+  useCreateParticipantRaidParticipantsPost,
+  CreateParticipantRaidParticipantsPostVariables,
+  useUpdateParticipantRaidParticipantsParticipantIdPatch,
+  UpdateParticipantRaidParticipantsParticipantIdPatchVariables,
 } from "@/src/api/hyperionComponents";
 import { useTokenStore } from "@/src/stores/token";
 import { useQueryClient } from "@tanstack/react-query";
@@ -22,7 +22,7 @@ export const useParticipant = () => {
     isLoading,
     isFetched,
     refetch,
-  } = useGetParticipantByIdRaidParticipantParticipantIdGet(
+  } = useGetParticipantByIdRaidParticipantsParticipantIdGet(
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -42,13 +42,13 @@ export const useParticipant = () => {
     mutate: mutateCreateParticipant,
     isSuccess: isCreationSuccess,
     isPending: isCreationLoading,
-  } = useCreateParticipantRaidParticipantPost({});
+  } = useCreateParticipantRaidParticipantsPost({});
 
   const createParticipant = (
     participant: ParticipantBase,
     callback: () => void
   ) => {
-    const body: CreateParticipantRaidParticipantPostVariables = {
+    const body: CreateParticipantRaidParticipantsPostVariables = {
       body: participant,
       headers: {
         Authorization: `Bearer ${token}`,
@@ -73,13 +73,13 @@ export const useParticipant = () => {
     mutate: mutateUpdateParticipant,
     isSuccess: isUpdateSuccess,
     isPending: isUpdateLoading,
-  } = useUpdateParticipantRaidParticipantParticipantIdPatch({});
+  } = useUpdateParticipantRaidParticipantsParticipantIdPatch({});
 
   const updateParticipant = (
     participant: ParticipantUpdate,
     callback: () => void
   ) => {
-    const body: UpdateParticipantRaidParticipantParticipantIdPatchVariables = {
+    const body: UpdateParticipantRaidParticipantsParticipantIdPatchVariables = {
       body: participant,
       headers: {
         Authorization: `Bearer ${token}`,
