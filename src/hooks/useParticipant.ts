@@ -9,11 +9,13 @@ import { useTokenStore } from "@/src/stores/token";
 import { useQueryClient } from "@tanstack/react-query";
 import { ParticipantBase, ParticipantUpdate } from "../api/hyperionSchemas";
 import { useParticipantStore } from "../stores/particpant";
+import { useTeam } from "./useTeam";
 
 export const useParticipant = () => {
   const { token, userId } = useTokenStore();
   const queryClient = useQueryClient();
   const { participant, setParticipant } = useParticipantStore();
+  const { refetchTeam } = useTeam();
 
   const {
     data: me,
@@ -33,7 +35,7 @@ export const useParticipant = () => {
       enabled: userId !== null && participant === undefined,
       retry: 0,
       queryHash: "getParticipantById",
-    },
+    }
   );
 
   const {
@@ -44,7 +46,7 @@ export const useParticipant = () => {
 
   const createParticipant = (
     participant: ParticipantBase,
-    callback: () => void,
+    callback: () => void
   ) => {
     const body: CreateParticipantRaidParticipantPostVariables = {
       body: participant,
@@ -56,7 +58,10 @@ export const useParticipant = () => {
       onSuccess: () => {
         queryClient.invalidateQueries({
           predicate: (query) => {
-            return query.queryHash === "getParticipantById";
+            return (
+              query.queryHash === "getParticipantById" ||
+              query.queryHash === "getTeamByParticipantId"
+            );
           },
         });
         callback();
@@ -72,7 +77,7 @@ export const useParticipant = () => {
 
   const updateParticipant = (
     participant: ParticipantUpdate,
-    callback: () => void,
+    callback: () => void
   ) => {
     const body: UpdateParticipantRaidParticipantParticipantIdPatchVariables = {
       body: participant,
@@ -89,14 +94,13 @@ export const useParticipant = () => {
         // Assuming success in all cases
         // For unknown reasons, the invalidation of the query does not work
         refetch();
+        refetchTeam();
         callback();
       },
     });
   };
 
   if (me !== undefined && participant !== me) {
-    console.log("setParticipant");
-    console.log(me);
     setParticipant(me);
   }
 

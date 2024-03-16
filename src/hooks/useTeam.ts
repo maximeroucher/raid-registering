@@ -11,22 +11,25 @@ export const useTeam = () => {
   const { token, userId } = useTokenStore();
   const queryClient = useQueryClient();
 
-  const { data: team, isLoading } =
-    useGetTeamByParticipantIdRaidParticipantParticipantIdTeamGet(
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        pathParams: {
-          participantId: userId!,
-        },
+  const {
+    data: team,
+    isLoading,
+    refetch: refetchTeam,
+  } = useGetTeamByParticipantIdRaidParticipantParticipantIdTeamGet(
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
       },
-      {
-        enabled: userId !== null,
-        retry: 0,
-        queryHash: "getTeamByParticipantId",
+      pathParams: {
+        participantId: userId!,
       },
-    );
+    },
+    {
+      enabled: userId !== null,
+      retry: 0,
+      queryHash: "getTeamByParticipantId",
+    }
+  );
 
   const {
     mutate: mutateCreateTeam,
@@ -52,5 +55,12 @@ export const useTeam = () => {
     });
   };
 
-  return { team, isLoading, createTeam, isCreationLoading, isCreationSuccess };
+  return {
+    team,
+    isLoading,
+    createTeam,
+    isCreationLoading,
+    isCreationSuccess,
+    refetchTeam,
+  };
 };

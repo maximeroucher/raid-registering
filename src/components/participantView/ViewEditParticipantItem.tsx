@@ -1,4 +1,8 @@
-import { Participant, Size } from "@/src/api/hyperionSchemas";
+import {
+  Participant,
+  ParticipantUpdate,
+  Size,
+} from "@/src/api/hyperionSchemas";
 import { CardContent, CardFooter } from "../ui/card";
 import { EditParticipantCardItem, ValueTypes } from "./EditParticipantCardItem";
 import { ParticipantCardItem } from "./ParticipantCardItem";
@@ -8,6 +12,10 @@ import { Controller, FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 import { Value } from "@radix-ui/react-select";
 import { Button } from "../ui/button";
+import { toast } from "../ui/use-toast";
+import { useParticipant } from "@/src/hooks/useParticipant";
+import { ReloadIcon } from "@radix-ui/react-icons";
+import { HiPencil, HiCheck, HiX } from "react-icons/hi";
 
 interface ViewEditParticipantItemProps {
   me: Participant;
@@ -20,49 +28,64 @@ export const ViewEditParticipantItem = ({
   isEdit,
   setIsEdit,
 }: ViewEditParticipantItemProps) => {
+  const { updateParticipant, isUpdateLoading } = useParticipant();
   const formSchema = z.object({
-    address: z.string().min(1, {
-      message: "Veuillez renseigner votre adresse",
-    }),
-    bikeSize: z.string().refine(
-      (value) => {
-        return ["XS", "S", "M", "L", "XL"].includes(value);
-      },
-      { message: "Veuillez renseigner une taille de vélo valide" },
-    ),
-    tShirtSize: z.string().refine(
-      (value) => {
-        return ["XS", "S", "M", "L", "XL"].includes(value);
-      },
-      { message: "Veuillez renseigner une taille de t-shirt valide" },
-    ),
-    diet: z.string(),
-    attestationHonour: z.boolean(),
+    address: z
+      .string()
+      .min(1, {
+        message: "Veuillez renseigner votre adresse",
+      })
+      .optional(),
+    bikeSize: z
+      .string()
+      .refine(
+        (value) => {
+          return ["XS", "S", "M", "L", "XL"].includes(value.toUpperCase());
+        },
+        { message: "Veuillez renseigner une taille de vélo valide" }
+      )
+      .optional(),
+    tShirtSize: z
+      .string()
+      .refine(
+        (value) => {
+          return ["XS", "S", "M", "L", "XL"].includes(value.toUpperCase());
+        },
+        { message: "Veuillez renseigner une taille de t-shirt valide" }
+      )
+      .optional(),
+    diet: z.string().optional(),
+    attestationHonour: z.boolean().optional(),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {},
+    defaultValues: {
+      address: me.address ?? undefined,
+      bikeSize: me.bike_size ?? undefined,
+      tShirtSize: me.t_shirt_size ?? undefined,
+      diet: me.diet ?? undefined,
+      attestationHonour: me.attestation_on_honour,
+    },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // if (!form.formState.isDirty) {
-    //   setIsEdit(!isEdit);
-    //   return;
-    // }
-    // const dateString = values.birthday.toISOString().split("T")[0];
-    // const updatedParticipant: ParticipantUpdate = {
-    //   ...values,
-    //   birthday: dateString,
-    // };
-    // updateParticipant(updatedParticipant, () => {
-    //   toast({
-    //     title: "Profil mis à jour",
-    //     description: "Vos informations ont été mises à jour avec succès",
-    //   });
-    //   setIsEdit(!isEdit);
-    //   setIsOpen(false);
-    // });
+    if (!form.formState.isDirty) {
+      setIsEdit(!isEdit);
+      return;
+    }
+    const updatedParticipant: ParticipantUpdate = {
+      bike_size: values.bikeSize?.toUpperCase() as Size ?? null,
+      t_shirt_size: values.tShirtSize?.toUpperCase() as Size ?? null,
+      ...values,
+    };
+    updateParticipant(updatedParticipant, () => {
+      toast({
+        title: "Profil mis à jour",
+        description: "Vos informations ont été mises à jour avec succès",
+      });
+      setIsEdit(!isEdit);
+    });
   }
 
   function getSituation() {
@@ -188,9 +211,22 @@ export const ViewEditParticipantItem = ({
             </>
           )}
           {isEdit && (
-            <Button type="submit" className="mt-6">
-              Enregistrer
-            </Button>
+            <>
+              {isUpdateLoading ? (
+                <Button variant="default" disabled className="w-full mt-6">
+                  <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                </Button>
+              ) : (
+                <Button
+                  className="w-full mt-6"
+                  type="submit"
+                  disabled={!form.formState.isDirty}
+                >
+                  <HiCheck className="mr-2 h-4 w-4" />
+                  Enregistrer
+                </Button>
+              )}
+            </>
           )}
         </form>
       </FormProvider>
