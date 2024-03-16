@@ -40,15 +40,9 @@ export const CreateParticipant = ({
   isOpened,
   setIsOpened,
 }: CreateParticipantProps) => {
-  const { createParticipant, me, isCreationLoading } = useParticipant();
+  const { createParticipant } = useParticipant();
   const { createTeam } = useTeam();
-
-  if (me !== undefined) {
-    setIsOpened(false);
-    toast({
-      title: "Votre profil a été créé avec succès",
-    });
-  }
+  const [isLoading, setIsLoading] = useState(false);
 
   const formSchema = z.object({
     firstname: z.string().min(1, {
@@ -100,16 +94,26 @@ export const CreateParticipant = ({
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     const dateString = values.birthday.toISOString().split("T")[0];
+    setIsLoading(true);
     createParticipant(
       {
         ...values,
         birthday: dateString,
       },
       () => {
-        createTeam({
-          name: `Équipe de ${values.firstname} ${values.name}`,
-        });
-      },
+        createTeam(
+          {
+            name: `Équipe de ${values.firstname} ${values.name}`,
+          },
+          () => {
+            setIsOpened(false);
+            setIsLoading(false);
+            toast({
+              title: "Votre profil a été créé avec succès",
+            });
+          }
+        );
+      }
     );
   }
 
@@ -204,7 +208,7 @@ export const CreateParticipant = ({
             </div>
             <DialogFooter>
               <Button type="submit" className="w-full mt-4">
-                {isCreationLoading ? (
+                {isLoading ? (
                   <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
                 ) : (
                   "Valider"

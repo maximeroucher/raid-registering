@@ -37,7 +37,7 @@ export const useTeam = () => {
     isPending: isCreationLoading,
   } = useCreateTeamRaidTeamsPost({});
 
-  const createTeam = (team: TeamBase) => {
+  const createTeam = (team: TeamBase, callback: () => void) => {
     const body: CreateTeamRaidTeamsPostVariables = {
       body: team,
       headers: {
@@ -51,6 +51,7 @@ export const useTeam = () => {
             return query.queryHash === "getTeamByParticipantId";
           },
         });
+        callback();
       },
     });
   };
