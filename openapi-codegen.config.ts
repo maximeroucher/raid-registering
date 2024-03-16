@@ -7,7 +7,7 @@ export default defineConfig({
   hyperion: {
     from: {
       source: "url",
-      url: "http://127.0.0.1:8000/openapi.json",
+      url: `https://hyperion-3.dev.eclair.ec-lyon.fr/openapi.json`,
     },
     outputDir: "src/api",
     to: async (context) => {

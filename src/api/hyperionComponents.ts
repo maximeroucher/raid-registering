@@ -9,3158 +9,6 @@ import type * as Fetcher from "./hyperionFetcher";
 import { hyperionFetch } from "./hyperionFetcher";
 import type * as Schemas from "./hyperionSchemas";
 
-export type SendEmailBackgroundtasksSendEmailPostQueryParams = {
-  email: string;
-  subject: string;
-  content: string;
-};
-
-export type SendEmailBackgroundtasksSendEmailPostError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type SendEmailBackgroundtasksSendEmailPostVariables = {
-  queryParams: SendEmailBackgroundtasksSendEmailPostQueryParams;
-} & HyperionContext["fetcherOptions"];
-
-export const fetchSendEmailBackgroundtasksSendEmailPost = (
-  variables: SendEmailBackgroundtasksSendEmailPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    void,
-    SendEmailBackgroundtasksSendEmailPostError,
-    undefined,
-    {},
-    SendEmailBackgroundtasksSendEmailPostQueryParams,
-    {}
-  >({ url: "/send-email/", method: "post", ...variables, signal });
-
-export const useSendEmailBackgroundtasksSendEmailPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      void,
-      SendEmailBackgroundtasksSendEmailPostError,
-      SendEmailBackgroundtasksSendEmailPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    void,
-    SendEmailBackgroundtasksSendEmailPostError,
-    SendEmailBackgroundtasksSendEmailPostVariables
-  >({
-    mutationFn: (variables: SendEmailBackgroundtasksSendEmailPostVariables) =>
-      fetchSendEmailBackgroundtasksSendEmailPost({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type ReadAdvertisersAdvertAdvertisersGetError =
-  Fetcher.ErrorWrapper<undefined>;
-
-export type ReadAdvertisersAdvertAdvertisersGetResponse =
-  Schemas.AdvertiserComplete[];
-
-export type ReadAdvertisersAdvertAdvertisersGetVariables =
-  HyperionContext["fetcherOptions"];
-
-/**
- * Get existing advertisers.
- */
-export const fetchReadAdvertisersAdvertAdvertisersGet = (
-  variables: ReadAdvertisersAdvertAdvertisersGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    ReadAdvertisersAdvertAdvertisersGetResponse,
-    ReadAdvertisersAdvertAdvertisersGetError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/advert/advertisers", method: "get", ...variables, signal });
-
-/**
- * Get existing advertisers.
- */
-export const useReadAdvertisersAdvertAdvertisersGet = <
-  TData = ReadAdvertisersAdvertAdvertisersGetResponse,
->(
-  variables: ReadAdvertisersAdvertAdvertisersGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      ReadAdvertisersAdvertAdvertisersGetResponse,
-      ReadAdvertisersAdvertAdvertisersGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    ReadAdvertisersAdvertAdvertisersGetResponse,
-    ReadAdvertisersAdvertAdvertisersGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/advert/advertisers",
-      operationId: "readAdvertisersAdvertAdvertisersGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchReadAdvertisersAdvertAdvertisersGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type CreateAdvertiserAdvertAdvertisersPostError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type CreateAdvertiserAdvertAdvertisersPostVariables = {
-  body: Schemas.AdvertiserBase;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Create a new advertiser.
- *
- * Each advertiser is associated with a `manager_group`. Users belonging to this group are able to manage the adverts related to the advertiser.
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const fetchCreateAdvertiserAdvertAdvertisersPost = (
-  variables: CreateAdvertiserAdvertAdvertisersPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.AdvertiserComplete,
-    CreateAdvertiserAdvertAdvertisersPostError,
-    Schemas.AdvertiserBase,
-    {},
-    {},
-    {}
-  >({ url: "/advert/advertisers", method: "post", ...variables, signal });
-
-/**
- * Create a new advertiser.
- *
- * Each advertiser is associated with a `manager_group`. Users belonging to this group are able to manage the adverts related to the advertiser.
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const useCreateAdvertiserAdvertAdvertisersPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.AdvertiserComplete,
-      CreateAdvertiserAdvertAdvertisersPostError,
-      CreateAdvertiserAdvertAdvertisersPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.AdvertiserComplete,
-    CreateAdvertiserAdvertAdvertisersPostError,
-    CreateAdvertiserAdvertAdvertisersPostVariables
-  >({
-    mutationFn: (variables: CreateAdvertiserAdvertAdvertisersPostVariables) =>
-      fetchCreateAdvertiserAdvertAdvertisersPost({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type DeleteAdvertiserAdvertAdvertisersAdvertiserIdDeletePathParams = {
-  advertiserId: string;
-};
-
-export type DeleteAdvertiserAdvertAdvertisersAdvertiserIdDeleteError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type DeleteAdvertiserAdvertAdvertisersAdvertiserIdDeleteVariables = {
-  pathParams: DeleteAdvertiserAdvertAdvertisersAdvertiserIdDeletePathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Delete an advertiser. All adverts associated with the advertiser will also be deleted from the database.
- *
- * **This endpoint is only usable by administrators**
- */
-export const fetchDeleteAdvertiserAdvertAdvertisersAdvertiserIdDelete = (
-  variables: DeleteAdvertiserAdvertAdvertisersAdvertiserIdDeleteVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    DeleteAdvertiserAdvertAdvertisersAdvertiserIdDeleteError,
-    undefined,
-    {},
-    {},
-    DeleteAdvertiserAdvertAdvertisersAdvertiserIdDeletePathParams
-  >({
-    url: "/advert/advertisers/{advertiserId}",
-    method: "delete",
-    ...variables,
-    signal,
-  });
-
-/**
- * Delete an advertiser. All adverts associated with the advertiser will also be deleted from the database.
- *
- * **This endpoint is only usable by administrators**
- */
-export const useDeleteAdvertiserAdvertAdvertisersAdvertiserIdDelete = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      DeleteAdvertiserAdvertAdvertisersAdvertiserIdDeleteError,
-      DeleteAdvertiserAdvertAdvertisersAdvertiserIdDeleteVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    DeleteAdvertiserAdvertAdvertisersAdvertiserIdDeleteError,
-    DeleteAdvertiserAdvertAdvertisersAdvertiserIdDeleteVariables
-  >({
-    mutationFn: (
-      variables: DeleteAdvertiserAdvertAdvertisersAdvertiserIdDeleteVariables,
-    ) =>
-      fetchDeleteAdvertiserAdvertAdvertisersAdvertiserIdDelete({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type UpdateAdvertiserAdvertAdvertisersAdvertiserIdPatchPathParams = {
-  advertiserId: string;
-};
-
-export type UpdateAdvertiserAdvertAdvertisersAdvertiserIdPatchError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type UpdateAdvertiserAdvertAdvertisersAdvertiserIdPatchVariables = {
-  body?: Schemas.AdvertiserUpdate;
-  pathParams: UpdateAdvertiserAdvertAdvertisersAdvertiserIdPatchPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Update an advertiser
- *
- * **This endpoint is only usable by administrators**
- */
-export const fetchUpdateAdvertiserAdvertAdvertisersAdvertiserIdPatch = (
-  variables: UpdateAdvertiserAdvertAdvertisersAdvertiserIdPatchVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    UpdateAdvertiserAdvertAdvertisersAdvertiserIdPatchError,
-    Schemas.AdvertiserUpdate,
-    {},
-    {},
-    UpdateAdvertiserAdvertAdvertisersAdvertiserIdPatchPathParams
-  >({
-    url: "/advert/advertisers/{advertiserId}",
-    method: "patch",
-    ...variables,
-    signal,
-  });
-
-/**
- * Update an advertiser
- *
- * **This endpoint is only usable by administrators**
- */
-export const useUpdateAdvertiserAdvertAdvertisersAdvertiserIdPatch = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      UpdateAdvertiserAdvertAdvertisersAdvertiserIdPatchError,
-      UpdateAdvertiserAdvertAdvertisersAdvertiserIdPatchVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    UpdateAdvertiserAdvertAdvertisersAdvertiserIdPatchError,
-    UpdateAdvertiserAdvertAdvertisersAdvertiserIdPatchVariables
-  >({
-    mutationFn: (
-      variables: UpdateAdvertiserAdvertAdvertisersAdvertiserIdPatchVariables,
-    ) =>
-      fetchUpdateAdvertiserAdvertAdvertisersAdvertiserIdPatch({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type GetCurrentUserAdvertisersAdvertMeAdvertisersGetError =
-  Fetcher.ErrorWrapper<undefined>;
-
-export type GetCurrentUserAdvertisersAdvertMeAdvertisersGetResponse =
-  Schemas.AdvertiserComplete[];
-
-export type GetCurrentUserAdvertisersAdvertMeAdvertisersGetVariables =
-  HyperionContext["fetcherOptions"];
-
-/**
- * Return all advertisers the current user can manage.
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const fetchGetCurrentUserAdvertisersAdvertMeAdvertisersGet = (
-  variables: GetCurrentUserAdvertisersAdvertMeAdvertisersGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetCurrentUserAdvertisersAdvertMeAdvertisersGetResponse,
-    GetCurrentUserAdvertisersAdvertMeAdvertisersGetError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/advert/me/advertisers", method: "get", ...variables, signal });
-
-/**
- * Return all advertisers the current user can manage.
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const useGetCurrentUserAdvertisersAdvertMeAdvertisersGet = <
-  TData = GetCurrentUserAdvertisersAdvertMeAdvertisersGetResponse,
->(
-  variables: GetCurrentUserAdvertisersAdvertMeAdvertisersGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetCurrentUserAdvertisersAdvertMeAdvertisersGetResponse,
-      GetCurrentUserAdvertisersAdvertMeAdvertisersGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetCurrentUserAdvertisersAdvertMeAdvertisersGetResponse,
-    GetCurrentUserAdvertisersAdvertMeAdvertisersGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/advert/me/advertisers",
-      operationId: "getCurrentUserAdvertisersAdvertMeAdvertisersGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetCurrentUserAdvertisersAdvertMeAdvertisersGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type ReadAdvertsAdvertAdvertsGetQueryParams = {
-  advertisers?: string[];
-};
-
-export type ReadAdvertsAdvertAdvertsGetError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type ReadAdvertsAdvertAdvertsGetResponse =
-  Schemas.AdvertReturnComplete[];
-
-export type ReadAdvertsAdvertAdvertsGetVariables = {
-  queryParams?: ReadAdvertsAdvertAdvertsGetQueryParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Get existing adverts. If advertisers optional parameter is used, search adverts by advertisers
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const fetchReadAdvertsAdvertAdvertsGet = (
-  variables: ReadAdvertsAdvertAdvertsGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    ReadAdvertsAdvertAdvertsGetResponse,
-    ReadAdvertsAdvertAdvertsGetError,
-    undefined,
-    {},
-    ReadAdvertsAdvertAdvertsGetQueryParams,
-    {}
-  >({ url: "/advert/adverts", method: "get", ...variables, signal });
-
-/**
- * Get existing adverts. If advertisers optional parameter is used, search adverts by advertisers
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const useReadAdvertsAdvertAdvertsGet = <
-  TData = ReadAdvertsAdvertAdvertsGetResponse,
->(
-  variables: ReadAdvertsAdvertAdvertsGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      ReadAdvertsAdvertAdvertsGetResponse,
-      ReadAdvertsAdvertAdvertsGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    ReadAdvertsAdvertAdvertsGetResponse,
-    ReadAdvertsAdvertAdvertsGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/advert/adverts",
-      operationId: "readAdvertsAdvertAdvertsGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchReadAdvertsAdvertAdvertsGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type CreateAdvertAdvertAdvertsPostError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type CreateAdvertAdvertAdvertsPostVariables = {
-  body: Schemas.AdvertBase;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Create a new advert
- *
- * **The user must be a member of the advertiser group_manager to use this endpoint**
- */
-export const fetchCreateAdvertAdvertAdvertsPost = (
-  variables: CreateAdvertAdvertAdvertsPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.AdvertReturnComplete,
-    CreateAdvertAdvertAdvertsPostError,
-    Schemas.AdvertBase,
-    {},
-    {},
-    {}
-  >({ url: "/advert/adverts", method: "post", ...variables, signal });
-
-/**
- * Create a new advert
- *
- * **The user must be a member of the advertiser group_manager to use this endpoint**
- */
-export const useCreateAdvertAdvertAdvertsPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.AdvertReturnComplete,
-      CreateAdvertAdvertAdvertsPostError,
-      CreateAdvertAdvertAdvertsPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.AdvertReturnComplete,
-    CreateAdvertAdvertAdvertsPostError,
-    CreateAdvertAdvertAdvertsPostVariables
-  >({
-    mutationFn: (variables: CreateAdvertAdvertAdvertsPostVariables) =>
-      fetchCreateAdvertAdvertAdvertsPost({ ...fetcherOptions, ...variables }),
-    ...options,
-  });
-};
-
-export type ReadAdvertAdvertAdvertsAdvertIdGetPathParams = {
-  advertId: string;
-};
-
-export type ReadAdvertAdvertAdvertsAdvertIdGetError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type ReadAdvertAdvertAdvertsAdvertIdGetVariables = {
-  pathParams: ReadAdvertAdvertAdvertsAdvertIdGetPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Get an advert
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const fetchReadAdvertAdvertAdvertsAdvertIdGet = (
-  variables: ReadAdvertAdvertAdvertsAdvertIdGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.AdvertReturnComplete,
-    ReadAdvertAdvertAdvertsAdvertIdGetError,
-    undefined,
-    {},
-    {},
-    ReadAdvertAdvertAdvertsAdvertIdGetPathParams
-  >({ url: "/advert/adverts/{advertId}", method: "get", ...variables, signal });
-
-/**
- * Get an advert
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const useReadAdvertAdvertAdvertsAdvertIdGet = <
-  TData = Schemas.AdvertReturnComplete,
->(
-  variables: ReadAdvertAdvertAdvertsAdvertIdGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      Schemas.AdvertReturnComplete,
-      ReadAdvertAdvertAdvertsAdvertIdGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    Schemas.AdvertReturnComplete,
-    ReadAdvertAdvertAdvertsAdvertIdGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/advert/adverts/{advertId}",
-      operationId: "readAdvertAdvertAdvertsAdvertIdGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchReadAdvertAdvertAdvertsAdvertIdGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type UpdateAdvertAdvertAdvertsAdvertIdPatchPathParams = {
-  advertId: string;
-};
-
-export type UpdateAdvertAdvertAdvertsAdvertIdPatchError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type UpdateAdvertAdvertAdvertsAdvertIdPatchVariables = {
-  body?: Schemas.AdvertUpdate;
-  pathParams: UpdateAdvertAdvertAdvertsAdvertIdPatchPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Edit an advert
- *
- * **The user must be a member of the advertiser group_manager to use this endpoint**
- */
-export const fetchUpdateAdvertAdvertAdvertsAdvertIdPatch = (
-  variables: UpdateAdvertAdvertAdvertsAdvertIdPatchVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    UpdateAdvertAdvertAdvertsAdvertIdPatchError,
-    Schemas.AdvertUpdate,
-    {},
-    {},
-    UpdateAdvertAdvertAdvertsAdvertIdPatchPathParams
-  >({
-    url: "/advert/adverts/{advertId}",
-    method: "patch",
-    ...variables,
-    signal,
-  });
-
-/**
- * Edit an advert
- *
- * **The user must be a member of the advertiser group_manager to use this endpoint**
- */
-export const useUpdateAdvertAdvertAdvertsAdvertIdPatch = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      UpdateAdvertAdvertAdvertsAdvertIdPatchError,
-      UpdateAdvertAdvertAdvertsAdvertIdPatchVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    UpdateAdvertAdvertAdvertsAdvertIdPatchError,
-    UpdateAdvertAdvertAdvertsAdvertIdPatchVariables
-  >({
-    mutationFn: (variables: UpdateAdvertAdvertAdvertsAdvertIdPatchVariables) =>
-      fetchUpdateAdvertAdvertAdvertsAdvertIdPatch({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type DeleteAdvertAdvertAdvertsAdvertIdDeletePathParams = {
-  advertId: string;
-};
-
-export type DeleteAdvertAdvertAdvertsAdvertIdDeleteError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type DeleteAdvertAdvertAdvertsAdvertIdDeleteVariables = {
-  pathParams: DeleteAdvertAdvertAdvertsAdvertIdDeletePathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Delete an advert
- *
- * **The user must be admin or a member of the advertiser group_manager to use this endpoint**
- */
-export const fetchDeleteAdvertAdvertAdvertsAdvertIdDelete = (
-  variables: DeleteAdvertAdvertAdvertsAdvertIdDeleteVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    DeleteAdvertAdvertAdvertsAdvertIdDeleteError,
-    undefined,
-    {},
-    {},
-    DeleteAdvertAdvertAdvertsAdvertIdDeletePathParams
-  >({
-    url: "/advert/adverts/{advertId}",
-    method: "delete",
-    ...variables,
-    signal,
-  });
-
-/**
- * Delete an advert
- *
- * **The user must be admin or a member of the advertiser group_manager to use this endpoint**
- */
-export const useDeleteAdvertAdvertAdvertsAdvertIdDelete = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      DeleteAdvertAdvertAdvertsAdvertIdDeleteError,
-      DeleteAdvertAdvertAdvertsAdvertIdDeleteVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    DeleteAdvertAdvertAdvertsAdvertIdDeleteError,
-    DeleteAdvertAdvertAdvertsAdvertIdDeleteVariables
-  >({
-    mutationFn: (variables: DeleteAdvertAdvertAdvertsAdvertIdDeleteVariables) =>
-      fetchDeleteAdvertAdvertAdvertsAdvertIdDelete({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type ReadAdvertImageAdvertAdvertsAdvertIdPictureGetPathParams = {
-  advertId: string;
-};
-
-export type ReadAdvertImageAdvertAdvertsAdvertIdPictureGetError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type ReadAdvertImageAdvertAdvertsAdvertIdPictureGetVariables = {
-  pathParams: ReadAdvertImageAdvertAdvertsAdvertIdPictureGetPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Get the image of an advert
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const fetchReadAdvertImageAdvertAdvertsAdvertIdPictureGet = (
-  variables: ReadAdvertImageAdvertAdvertsAdvertIdPictureGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    ReadAdvertImageAdvertAdvertsAdvertIdPictureGetError,
-    undefined,
-    {},
-    {},
-    ReadAdvertImageAdvertAdvertsAdvertIdPictureGetPathParams
-  >({
-    url: "/advert/adverts/{advertId}/picture",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-/**
- * Get the image of an advert
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const useReadAdvertImageAdvertAdvertsAdvertIdPictureGet = <
-  TData = undefined,
->(
-  variables: ReadAdvertImageAdvertAdvertsAdvertIdPictureGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      undefined,
-      ReadAdvertImageAdvertAdvertsAdvertIdPictureGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    undefined,
-    ReadAdvertImageAdvertAdvertsAdvertIdPictureGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/advert/adverts/{advertId}/picture",
-      operationId: "readAdvertImageAdvertAdvertsAdvertIdPictureGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchReadAdvertImageAdvertAdvertsAdvertIdPictureGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type CreateAdvertImageAdvertAdvertsAdvertIdPicturePostPathParams = {
-  advertId: string;
-};
-
-export type CreateAdvertImageAdvertAdvertsAdvertIdPicturePostError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type CreateAdvertImageAdvertAdvertsAdvertIdPicturePostVariables = {
-  body: Schemas.BodyCreateAdvertImageAdvertAdvertsAdvertIdPicturePost;
-  pathParams: CreateAdvertImageAdvertAdvertsAdvertIdPicturePostPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Add an image to an advert
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const fetchCreateAdvertImageAdvertAdvertsAdvertIdPicturePost = (
-  variables: CreateAdvertImageAdvertAdvertsAdvertIdPicturePostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.AppUtilsTypesStandardResponsesResult,
-    CreateAdvertImageAdvertAdvertsAdvertIdPicturePostError,
-    Schemas.BodyCreateAdvertImageAdvertAdvertsAdvertIdPicturePost,
-    {},
-    {},
-    CreateAdvertImageAdvertAdvertsAdvertIdPicturePostPathParams
-  >({
-    url: "/advert/adverts/{advertId}/picture",
-    method: "post",
-    ...variables,
-    signal,
-  });
-
-/**
- * Add an image to an advert
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const useCreateAdvertImageAdvertAdvertsAdvertIdPicturePost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.AppUtilsTypesStandardResponsesResult,
-      CreateAdvertImageAdvertAdvertsAdvertIdPicturePostError,
-      CreateAdvertImageAdvertAdvertsAdvertIdPicturePostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.AppUtilsTypesStandardResponsesResult,
-    CreateAdvertImageAdvertAdvertsAdvertIdPicturePostError,
-    CreateAdvertImageAdvertAdvertsAdvertIdPicturePostVariables
-  >({
-    mutationFn: (
-      variables: CreateAdvertImageAdvertAdvertsAdvertIdPicturePostVariables,
-    ) =>
-      fetchCreateAdvertImageAdvertAdvertsAdvertIdPicturePost({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type GetProductsAmapProductsGetError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetProductsAmapProductsGetResponse = Schemas.ProductComplete[];
-
-export type GetProductsAmapProductsGetVariables =
-  HyperionContext["fetcherOptions"];
-
-/**
- * Return all products
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const fetchGetProductsAmapProductsGet = (
-  variables: GetProductsAmapProductsGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetProductsAmapProductsGetResponse,
-    GetProductsAmapProductsGetError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/amap/products", method: "get", ...variables, signal });
-
-/**
- * Return all products
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const useGetProductsAmapProductsGet = <
-  TData = GetProductsAmapProductsGetResponse,
->(
-  variables: GetProductsAmapProductsGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetProductsAmapProductsGetResponse,
-      GetProductsAmapProductsGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetProductsAmapProductsGetResponse,
-    GetProductsAmapProductsGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/amap/products",
-      operationId: "getProductsAmapProductsGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetProductsAmapProductsGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type CreateProductAmapProductsPostError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type CreateProductAmapProductsPostVariables = {
-  body: Schemas.ProductSimple;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Create a new product
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const fetchCreateProductAmapProductsPost = (
-  variables: CreateProductAmapProductsPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.ProductComplete,
-    CreateProductAmapProductsPostError,
-    Schemas.ProductSimple,
-    {},
-    {},
-    {}
-  >({ url: "/amap/products", method: "post", ...variables, signal });
-
-/**
- * Create a new product
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const useCreateProductAmapProductsPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.ProductComplete,
-      CreateProductAmapProductsPostError,
-      CreateProductAmapProductsPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.ProductComplete,
-    CreateProductAmapProductsPostError,
-    CreateProductAmapProductsPostVariables
-  >({
-    mutationFn: (variables: CreateProductAmapProductsPostVariables) =>
-      fetchCreateProductAmapProductsPost({ ...fetcherOptions, ...variables }),
-    ...options,
-  });
-};
-
-export type GetProductByIdAmapProductsProductIdGetPathParams = {
-  productId: string;
-};
-
-export type GetProductByIdAmapProductsProductIdGetError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type GetProductByIdAmapProductsProductIdGetVariables = {
-  pathParams: GetProductByIdAmapProductsProductIdGetPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Get a specific product
- */
-export const fetchGetProductByIdAmapProductsProductIdGet = (
-  variables: GetProductByIdAmapProductsProductIdGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.ProductComplete,
-    GetProductByIdAmapProductsProductIdGetError,
-    undefined,
-    {},
-    {},
-    GetProductByIdAmapProductsProductIdGetPathParams
-  >({ url: "/amap/products/{productId}", method: "get", ...variables, signal });
-
-/**
- * Get a specific product
- */
-export const useGetProductByIdAmapProductsProductIdGet = <
-  TData = Schemas.ProductComplete,
->(
-  variables: GetProductByIdAmapProductsProductIdGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      Schemas.ProductComplete,
-      GetProductByIdAmapProductsProductIdGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    Schemas.ProductComplete,
-    GetProductByIdAmapProductsProductIdGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/amap/products/{productId}",
-      operationId: "getProductByIdAmapProductsProductIdGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetProductByIdAmapProductsProductIdGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type EditProductAmapProductsProductIdPatchPathParams = {
-  productId: string;
-};
-
-export type EditProductAmapProductsProductIdPatchError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type EditProductAmapProductsProductIdPatchVariables = {
-  body?: Schemas.ProductEdit;
-  pathParams: EditProductAmapProductsProductIdPatchPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Edit a product
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const fetchEditProductAmapProductsProductIdPatch = (
-  variables: EditProductAmapProductsProductIdPatchVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    EditProductAmapProductsProductIdPatchError,
-    Schemas.ProductEdit,
-    {},
-    {},
-    EditProductAmapProductsProductIdPatchPathParams
-  >({
-    url: "/amap/products/{productId}",
-    method: "patch",
-    ...variables,
-    signal,
-  });
-
-/**
- * Edit a product
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const useEditProductAmapProductsProductIdPatch = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      EditProductAmapProductsProductIdPatchError,
-      EditProductAmapProductsProductIdPatchVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    EditProductAmapProductsProductIdPatchError,
-    EditProductAmapProductsProductIdPatchVariables
-  >({
-    mutationFn: (variables: EditProductAmapProductsProductIdPatchVariables) =>
-      fetchEditProductAmapProductsProductIdPatch({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type DeleteProductAmapProductsProductIdDeletePathParams = {
-  productId: string;
-};
-
-export type DeleteProductAmapProductsProductIdDeleteError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type DeleteProductAmapProductsProductIdDeleteVariables = {
-  pathParams: DeleteProductAmapProductsProductIdDeletePathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Delete a product. A product can not be deleted if it is already used in a delivery.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const fetchDeleteProductAmapProductsProductIdDelete = (
-  variables: DeleteProductAmapProductsProductIdDeleteVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    DeleteProductAmapProductsProductIdDeleteError,
-    undefined,
-    {},
-    {},
-    DeleteProductAmapProductsProductIdDeletePathParams
-  >({
-    url: "/amap/products/{productId}",
-    method: "delete",
-    ...variables,
-    signal,
-  });
-
-/**
- * Delete a product. A product can not be deleted if it is already used in a delivery.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const useDeleteProductAmapProductsProductIdDelete = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      DeleteProductAmapProductsProductIdDeleteError,
-      DeleteProductAmapProductsProductIdDeleteVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    DeleteProductAmapProductsProductIdDeleteError,
-    DeleteProductAmapProductsProductIdDeleteVariables
-  >({
-    mutationFn: (
-      variables: DeleteProductAmapProductsProductIdDeleteVariables,
-    ) =>
-      fetchDeleteProductAmapProductsProductIdDelete({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type GetDeliveriesAmapDeliveriesGetError =
-  Fetcher.ErrorWrapper<undefined>;
-
-export type GetDeliveriesAmapDeliveriesGetResponse = Schemas.DeliveryReturn[];
-
-export type GetDeliveriesAmapDeliveriesGetVariables =
-  HyperionContext["fetcherOptions"];
-
-/**
- * Get all deliveries.
- */
-export const fetchGetDeliveriesAmapDeliveriesGet = (
-  variables: GetDeliveriesAmapDeliveriesGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetDeliveriesAmapDeliveriesGetResponse,
-    GetDeliveriesAmapDeliveriesGetError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/amap/deliveries", method: "get", ...variables, signal });
-
-/**
- * Get all deliveries.
- */
-export const useGetDeliveriesAmapDeliveriesGet = <
-  TData = GetDeliveriesAmapDeliveriesGetResponse,
->(
-  variables: GetDeliveriesAmapDeliveriesGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetDeliveriesAmapDeliveriesGetResponse,
-      GetDeliveriesAmapDeliveriesGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetDeliveriesAmapDeliveriesGetResponse,
-    GetDeliveriesAmapDeliveriesGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/amap/deliveries",
-      operationId: "getDeliveriesAmapDeliveriesGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetDeliveriesAmapDeliveriesGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type CreateDeliveryAmapDeliveriesPostError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type CreateDeliveryAmapDeliveriesPostVariables = {
-  body: Schemas.DeliveryBase;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Create a new delivery.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const fetchCreateDeliveryAmapDeliveriesPost = (
-  variables: CreateDeliveryAmapDeliveriesPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.DeliveryReturn,
-    CreateDeliveryAmapDeliveriesPostError,
-    Schemas.DeliveryBase,
-    {},
-    {},
-    {}
-  >({ url: "/amap/deliveries", method: "post", ...variables, signal });
-
-/**
- * Create a new delivery.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const useCreateDeliveryAmapDeliveriesPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.DeliveryReturn,
-      CreateDeliveryAmapDeliveriesPostError,
-      CreateDeliveryAmapDeliveriesPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.DeliveryReturn,
-    CreateDeliveryAmapDeliveriesPostError,
-    CreateDeliveryAmapDeliveriesPostVariables
-  >({
-    mutationFn: (variables: CreateDeliveryAmapDeliveriesPostVariables) =>
-      fetchCreateDeliveryAmapDeliveriesPost({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type DeleteDeliveryAmapDeliveriesDeliveryIdDeletePathParams = {
-  deliveryId: string;
-};
-
-export type DeleteDeliveryAmapDeliveriesDeliveryIdDeleteError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type DeleteDeliveryAmapDeliveriesDeliveryIdDeleteVariables = {
-  pathParams: DeleteDeliveryAmapDeliveriesDeliveryIdDeletePathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Delete a delivery.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const fetchDeleteDeliveryAmapDeliveriesDeliveryIdDelete = (
-  variables: DeleteDeliveryAmapDeliveriesDeliveryIdDeleteVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    DeleteDeliveryAmapDeliveriesDeliveryIdDeleteError,
-    undefined,
-    {},
-    {},
-    DeleteDeliveryAmapDeliveriesDeliveryIdDeletePathParams
-  >({
-    url: "/amap/deliveries/{deliveryId}",
-    method: "delete",
-    ...variables,
-    signal,
-  });
-
-/**
- * Delete a delivery.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const useDeleteDeliveryAmapDeliveriesDeliveryIdDelete = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      DeleteDeliveryAmapDeliveriesDeliveryIdDeleteError,
-      DeleteDeliveryAmapDeliveriesDeliveryIdDeleteVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    DeleteDeliveryAmapDeliveriesDeliveryIdDeleteError,
-    DeleteDeliveryAmapDeliveriesDeliveryIdDeleteVariables
-  >({
-    mutationFn: (
-      variables: DeleteDeliveryAmapDeliveriesDeliveryIdDeleteVariables,
-    ) =>
-      fetchDeleteDeliveryAmapDeliveriesDeliveryIdDelete({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type EditDeliveryAmapDeliveriesDeliveryIdPatchPathParams = {
-  deliveryId: string;
-};
-
-export type EditDeliveryAmapDeliveriesDeliveryIdPatchError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type EditDeliveryAmapDeliveriesDeliveryIdPatchVariables = {
-  body?: Schemas.DeliveryUpdate;
-  pathParams: EditDeliveryAmapDeliveriesDeliveryIdPatchPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Edit a delivery.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const fetchEditDeliveryAmapDeliveriesDeliveryIdPatch = (
-  variables: EditDeliveryAmapDeliveriesDeliveryIdPatchVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    EditDeliveryAmapDeliveriesDeliveryIdPatchError,
-    Schemas.DeliveryUpdate,
-    {},
-    {},
-    EditDeliveryAmapDeliveriesDeliveryIdPatchPathParams
-  >({
-    url: "/amap/deliveries/{deliveryId}",
-    method: "patch",
-    ...variables,
-    signal,
-  });
-
-/**
- * Edit a delivery.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const useEditDeliveryAmapDeliveriesDeliveryIdPatch = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      EditDeliveryAmapDeliveriesDeliveryIdPatchError,
-      EditDeliveryAmapDeliveriesDeliveryIdPatchVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    EditDeliveryAmapDeliveriesDeliveryIdPatchError,
-    EditDeliveryAmapDeliveriesDeliveryIdPatchVariables
-  >({
-    mutationFn: (
-      variables: EditDeliveryAmapDeliveriesDeliveryIdPatchVariables,
-    ) =>
-      fetchEditDeliveryAmapDeliveriesDeliveryIdPatch({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type AddProductToDeliveryAmapDeliveriesDeliveryIdProductsPostPathParams =
-  {
-    deliveryId: string;
-  };
-
-export type AddProductToDeliveryAmapDeliveriesDeliveryIdProductsPostError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type AddProductToDeliveryAmapDeliveriesDeliveryIdProductsPostVariables =
-  {
-    body: Schemas.DeliveryProductsUpdate;
-    pathParams: AddProductToDeliveryAmapDeliveriesDeliveryIdProductsPostPathParams;
-  } & HyperionContext["fetcherOptions"];
-
-/**
- * Add `product_id` product to `delivery_id` delivery. This endpoint will only add a membership between the two objects.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const fetchAddProductToDeliveryAmapDeliveriesDeliveryIdProductsPost = (
-  variables: AddProductToDeliveryAmapDeliveriesDeliveryIdProductsPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    void,
-    AddProductToDeliveryAmapDeliveriesDeliveryIdProductsPostError,
-    Schemas.DeliveryProductsUpdate,
-    {},
-    {},
-    AddProductToDeliveryAmapDeliveriesDeliveryIdProductsPostPathParams
-  >({
-    url: "/amap/deliveries/{deliveryId}/products",
-    method: "post",
-    ...variables,
-    signal,
-  });
-
-/**
- * Add `product_id` product to `delivery_id` delivery. This endpoint will only add a membership between the two objects.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const useAddProductToDeliveryAmapDeliveriesDeliveryIdProductsPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      void,
-      AddProductToDeliveryAmapDeliveriesDeliveryIdProductsPostError,
-      AddProductToDeliveryAmapDeliveriesDeliveryIdProductsPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    void,
-    AddProductToDeliveryAmapDeliveriesDeliveryIdProductsPostError,
-    AddProductToDeliveryAmapDeliveriesDeliveryIdProductsPostVariables
-  >({
-    mutationFn: (
-      variables: AddProductToDeliveryAmapDeliveriesDeliveryIdProductsPostVariables,
-    ) =>
-      fetchAddProductToDeliveryAmapDeliveriesDeliveryIdProductsPost({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type RemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDeletePathParams =
-  {
-    deliveryId: string;
-  };
-
-export type RemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDeleteError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type RemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDeleteVariables =
-  {
-    body: Schemas.DeliveryProductsUpdate;
-    pathParams: RemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDeletePathParams;
-  } & HyperionContext["fetcherOptions"];
-
-/**
- * Remove a given product from a delivery. This won't delete the product nor the delivery.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const fetchRemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDelete =
-  (
-    variables: RemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDeleteVariables,
-    signal?: AbortSignal,
-  ) =>
-    hyperionFetch<
-      undefined,
-      RemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDeleteError,
-      Schemas.DeliveryProductsUpdate,
-      {},
-      {},
-      RemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDeletePathParams
-    >({
-      url: "/amap/deliveries/{deliveryId}/products",
-      method: "delete",
-      ...variables,
-      signal,
-    });
-
-/**
- * Remove a given product from a delivery. This won't delete the product nor the delivery.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const useRemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDelete =
-  (
-    options?: Omit<
-      reactQuery.UseMutationOptions<
-        undefined,
-        RemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDeleteError,
-        RemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDeleteVariables
-      >,
-      "mutationFn"
-    >,
-  ) => {
-    const { fetcherOptions } = useHyperionContext();
-    return reactQuery.useMutation<
-      undefined,
-      RemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDeleteError,
-      RemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDeleteVariables
-    >({
-      mutationFn: (
-        variables: RemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDeleteVariables,
-      ) =>
-        fetchRemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDelete({
-          ...fetcherOptions,
-          ...variables,
-        }),
-      ...options,
-    });
-  };
-
-export type GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetPathParams = {
-  deliveryId: string;
-};
-
-export type GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetResponse =
-  Schemas.OrderReturn[];
-
-export type GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetVariables = {
-  pathParams: GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Get orders from a delivery.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const fetchGetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGet = (
-  variables: GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetResponse,
-    GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetError,
-    undefined,
-    {},
-    {},
-    GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetPathParams
-  >({
-    url: "/amap/deliveries/{deliveryId}/orders",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-/**
- * Get orders from a delivery.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const useGetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGet = <
-  TData = GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetResponse,
->(
-  variables: GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetResponse,
-      GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetResponse,
-    GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/amap/deliveries/{deliveryId}/orders",
-      operationId: "getOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type GetOrderByIdAmapOrdersOrderIdGetPathParams = {
-  orderId: string;
-};
-
-export type GetOrderByIdAmapOrdersOrderIdGetError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type GetOrderByIdAmapOrdersOrderIdGetVariables = {
-  pathParams: GetOrderByIdAmapOrdersOrderIdGetPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Get content of an order.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const fetchGetOrderByIdAmapOrdersOrderIdGet = (
-  variables: GetOrderByIdAmapOrdersOrderIdGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.OrderReturn,
-    GetOrderByIdAmapOrdersOrderIdGetError,
-    undefined,
-    {},
-    {},
-    GetOrderByIdAmapOrdersOrderIdGetPathParams
-  >({ url: "/amap/orders/{orderId}", method: "get", ...variables, signal });
-
-/**
- * Get content of an order.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const useGetOrderByIdAmapOrdersOrderIdGet = <
-  TData = Schemas.OrderReturn,
->(
-  variables: GetOrderByIdAmapOrdersOrderIdGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      Schemas.OrderReturn,
-      GetOrderByIdAmapOrdersOrderIdGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    Schemas.OrderReturn,
-    GetOrderByIdAmapOrdersOrderIdGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/amap/orders/{orderId}",
-      operationId: "getOrderByIdAmapOrdersOrderIdGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetOrderByIdAmapOrdersOrderIdGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type EditOrderFromDeliveryAmapOrdersOrderIdPatchPathParams = {
-  orderId: string;
-};
-
-export type EditOrderFromDeliveryAmapOrdersOrderIdPatchError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type EditOrderFromDeliveryAmapOrdersOrderIdPatchVariables = {
-  body?: Schemas.OrderEdit;
-  pathParams: EditOrderFromDeliveryAmapOrdersOrderIdPatchPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Edit an order.
- *
- * **A member of the group AMAP can edit orders of other users**
- */
-export const fetchEditOrderFromDeliveryAmapOrdersOrderIdPatch = (
-  variables: EditOrderFromDeliveryAmapOrdersOrderIdPatchVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    EditOrderFromDeliveryAmapOrdersOrderIdPatchError,
-    Schemas.OrderEdit,
-    {},
-    {},
-    EditOrderFromDeliveryAmapOrdersOrderIdPatchPathParams
-  >({ url: "/amap/orders/{orderId}", method: "patch", ...variables, signal });
-
-/**
- * Edit an order.
- *
- * **A member of the group AMAP can edit orders of other users**
- */
-export const useEditOrderFromDeliveryAmapOrdersOrderIdPatch = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      EditOrderFromDeliveryAmapOrdersOrderIdPatchError,
-      EditOrderFromDeliveryAmapOrdersOrderIdPatchVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    EditOrderFromDeliveryAmapOrdersOrderIdPatchError,
-    EditOrderFromDeliveryAmapOrdersOrderIdPatchVariables
-  >({
-    mutationFn: (
-      variables: EditOrderFromDeliveryAmapOrdersOrderIdPatchVariables,
-    ) =>
-      fetchEditOrderFromDeliveryAmapOrdersOrderIdPatch({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type RemoveOrderAmapOrdersOrderIdDeletePathParams = {
-  orderId: string;
-};
-
-export type RemoveOrderAmapOrdersOrderIdDeleteError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type RemoveOrderAmapOrdersOrderIdDeleteVariables = {
-  pathParams: RemoveOrderAmapOrdersOrderIdDeletePathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Delete an order.
- *
- * **A member of the group AMAP can delete orders of other users**
- */
-export const fetchRemoveOrderAmapOrdersOrderIdDelete = (
-  variables: RemoveOrderAmapOrdersOrderIdDeleteVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    RemoveOrderAmapOrdersOrderIdDeleteError,
-    undefined,
-    {},
-    {},
-    RemoveOrderAmapOrdersOrderIdDeletePathParams
-  >({ url: "/amap/orders/{orderId}", method: "delete", ...variables, signal });
-
-/**
- * Delete an order.
- *
- * **A member of the group AMAP can delete orders of other users**
- */
-export const useRemoveOrderAmapOrdersOrderIdDelete = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      RemoveOrderAmapOrdersOrderIdDeleteError,
-      RemoveOrderAmapOrdersOrderIdDeleteVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    RemoveOrderAmapOrdersOrderIdDeleteError,
-    RemoveOrderAmapOrdersOrderIdDeleteVariables
-  >({
-    mutationFn: (variables: RemoveOrderAmapOrdersOrderIdDeleteVariables) =>
-      fetchRemoveOrderAmapOrdersOrderIdDelete({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type AddOrderToDelieveryAmapOrdersPostError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type AddOrderToDelieveryAmapOrdersPostVariables = {
-  body: Schemas.OrderBase;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Add an order to a delivery.
- *
- * **A member of the group AMAP can create an order for every user**
- */
-export const fetchAddOrderToDelieveryAmapOrdersPost = (
-  variables: AddOrderToDelieveryAmapOrdersPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.OrderReturn,
-    AddOrderToDelieveryAmapOrdersPostError,
-    Schemas.OrderBase,
-    {},
-    {},
-    {}
-  >({ url: "/amap/orders", method: "post", ...variables, signal });
-
-/**
- * Add an order to a delivery.
- *
- * **A member of the group AMAP can create an order for every user**
- */
-export const useAddOrderToDelieveryAmapOrdersPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.OrderReturn,
-      AddOrderToDelieveryAmapOrdersPostError,
-      AddOrderToDelieveryAmapOrdersPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.OrderReturn,
-    AddOrderToDelieveryAmapOrdersPostError,
-    AddOrderToDelieveryAmapOrdersPostVariables
-  >({
-    mutationFn: (variables: AddOrderToDelieveryAmapOrdersPostVariables) =>
-      fetchAddOrderToDelieveryAmapOrdersPost({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type OpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPostPathParams =
-  {
-    deliveryId: string;
-  };
-
-export type OpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPostError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type OpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPostVariables =
-  {
-    pathParams: OpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPostPathParams;
-  } & HyperionContext["fetcherOptions"];
-
-export const fetchOpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPost =
-  (
-    variables: OpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPostVariables,
-    signal?: AbortSignal,
-  ) =>
-    hyperionFetch<
-      undefined,
-      OpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPostError,
-      undefined,
-      {},
-      {},
-      OpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPostPathParams
-    >({
-      url: "/amap/deliveries/{deliveryId}/openordering",
-      method: "post",
-      ...variables,
-      signal,
-    });
-
-export const useOpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPost =
-  (
-    options?: Omit<
-      reactQuery.UseMutationOptions<
-        undefined,
-        OpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPostError,
-        OpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPostVariables
-      >,
-      "mutationFn"
-    >,
-  ) => {
-    const { fetcherOptions } = useHyperionContext();
-    return reactQuery.useMutation<
-      undefined,
-      OpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPostError,
-      OpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPostVariables
-    >({
-      mutationFn: (
-        variables: OpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPostVariables,
-      ) =>
-        fetchOpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPost({
-          ...fetcherOptions,
-          ...variables,
-        }),
-      ...options,
-    });
-  };
-
-export type LockDeliveryAmapDeliveriesDeliveryIdLockPostPathParams = {
-  deliveryId: string;
-};
-
-export type LockDeliveryAmapDeliveriesDeliveryIdLockPostError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type LockDeliveryAmapDeliveriesDeliveryIdLockPostVariables = {
-  pathParams: LockDeliveryAmapDeliveriesDeliveryIdLockPostPathParams;
-} & HyperionContext["fetcherOptions"];
-
-export const fetchLockDeliveryAmapDeliveriesDeliveryIdLockPost = (
-  variables: LockDeliveryAmapDeliveriesDeliveryIdLockPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    LockDeliveryAmapDeliveriesDeliveryIdLockPostError,
-    undefined,
-    {},
-    {},
-    LockDeliveryAmapDeliveriesDeliveryIdLockPostPathParams
-  >({
-    url: "/amap/deliveries/{deliveryId}/lock",
-    method: "post",
-    ...variables,
-    signal,
-  });
-
-export const useLockDeliveryAmapDeliveriesDeliveryIdLockPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      LockDeliveryAmapDeliveriesDeliveryIdLockPostError,
-      LockDeliveryAmapDeliveriesDeliveryIdLockPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    LockDeliveryAmapDeliveriesDeliveryIdLockPostError,
-    LockDeliveryAmapDeliveriesDeliveryIdLockPostVariables
-  >({
-    mutationFn: (
-      variables: LockDeliveryAmapDeliveriesDeliveryIdLockPostVariables,
-    ) =>
-      fetchLockDeliveryAmapDeliveriesDeliveryIdLockPost({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type MarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPostPathParams =
-  {
-    deliveryId: string;
-  };
-
-export type MarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPostError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type MarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPostVariables =
-  {
-    pathParams: MarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPostPathParams;
-  } & HyperionContext["fetcherOptions"];
-
-export const fetchMarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPost =
-  (
-    variables: MarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPostVariables,
-    signal?: AbortSignal,
-  ) =>
-    hyperionFetch<
-      undefined,
-      MarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPostError,
-      undefined,
-      {},
-      {},
-      MarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPostPathParams
-    >({
-      url: "/amap/deliveries/{deliveryId}/delivered",
-      method: "post",
-      ...variables,
-      signal,
-    });
-
-export const useMarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      MarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPostError,
-      MarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    MarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPostError,
-    MarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPostVariables
-  >({
-    mutationFn: (
-      variables: MarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPostVariables,
-    ) =>
-      fetchMarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPost({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type ArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePostPathParams = {
-  deliveryId: string;
-};
-
-export type ArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePostError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type ArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePostVariables = {
-  pathParams: ArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePostPathParams;
-} & HyperionContext["fetcherOptions"];
-
-export const fetchArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePost = (
-  variables: ArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    ArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePostError,
-    undefined,
-    {},
-    {},
-    ArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePostPathParams
-  >({
-    url: "/amap/deliveries/{deliveryId}/archive",
-    method: "post",
-    ...variables,
-    signal,
-  });
-
-export const useArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      ArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePostError,
-      ArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    ArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePostError,
-    ArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePostVariables
-  >({
-    mutationFn: (
-      variables: ArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePostVariables,
-    ) =>
-      fetchArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePost({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type GetUsersCashAmapUsersCashGetError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetUsersCashAmapUsersCashGetResponse = Schemas.CashComplete[];
-
-export type GetUsersCashAmapUsersCashGetVariables =
-  HyperionContext["fetcherOptions"];
-
-/**
- * Get cash from all users.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const fetchGetUsersCashAmapUsersCashGet = (
-  variables: GetUsersCashAmapUsersCashGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetUsersCashAmapUsersCashGetResponse,
-    GetUsersCashAmapUsersCashGetError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/amap/users/cash", method: "get", ...variables, signal });
-
-/**
- * Get cash from all users.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const useGetUsersCashAmapUsersCashGet = <
-  TData = GetUsersCashAmapUsersCashGetResponse,
->(
-  variables: GetUsersCashAmapUsersCashGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetUsersCashAmapUsersCashGetResponse,
-      GetUsersCashAmapUsersCashGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetUsersCashAmapUsersCashGetResponse,
-    GetUsersCashAmapUsersCashGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/amap/users/cash",
-      operationId: "getUsersCashAmapUsersCashGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetUsersCashAmapUsersCashGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type GetCashByIdAmapUsersUserIdCashGetPathParams = {
-  userId: string;
-};
-
-export type GetCashByIdAmapUsersUserIdCashGetError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type GetCashByIdAmapUsersUserIdCashGetVariables = {
-  pathParams: GetCashByIdAmapUsersUserIdCashGetPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Get cash from a specific user.
- *
- * **The user must be a member of the group AMAP to use this endpoint or can only access the endpoint for its own user_id**
- */
-export const fetchGetCashByIdAmapUsersUserIdCashGet = (
-  variables: GetCashByIdAmapUsersUserIdCashGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.CashComplete,
-    GetCashByIdAmapUsersUserIdCashGetError,
-    undefined,
-    {},
-    {},
-    GetCashByIdAmapUsersUserIdCashGetPathParams
-  >({ url: "/amap/users/{userId}/cash", method: "get", ...variables, signal });
-
-/**
- * Get cash from a specific user.
- *
- * **The user must be a member of the group AMAP to use this endpoint or can only access the endpoint for its own user_id**
- */
-export const useGetCashByIdAmapUsersUserIdCashGet = <
-  TData = Schemas.CashComplete,
->(
-  variables: GetCashByIdAmapUsersUserIdCashGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      Schemas.CashComplete,
-      GetCashByIdAmapUsersUserIdCashGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    Schemas.CashComplete,
-    GetCashByIdAmapUsersUserIdCashGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/amap/users/{userId}/cash",
-      operationId: "getCashByIdAmapUsersUserIdCashGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetCashByIdAmapUsersUserIdCashGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type CreateCashOfUserAmapUsersUserIdCashPostPathParams = {
-  userId: string;
-};
-
-export type CreateCashOfUserAmapUsersUserIdCashPostError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type CreateCashOfUserAmapUsersUserIdCashPostVariables = {
-  body: Schemas.CashEdit;
-  pathParams: CreateCashOfUserAmapUsersUserIdCashPostPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Create cash for an user.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const fetchCreateCashOfUserAmapUsersUserIdCashPost = (
-  variables: CreateCashOfUserAmapUsersUserIdCashPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.CashComplete,
-    CreateCashOfUserAmapUsersUserIdCashPostError,
-    Schemas.CashEdit,
-    {},
-    {},
-    CreateCashOfUserAmapUsersUserIdCashPostPathParams
-  >({ url: "/amap/users/{userId}/cash", method: "post", ...variables, signal });
-
-/**
- * Create cash for an user.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const useCreateCashOfUserAmapUsersUserIdCashPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.CashComplete,
-      CreateCashOfUserAmapUsersUserIdCashPostError,
-      CreateCashOfUserAmapUsersUserIdCashPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.CashComplete,
-    CreateCashOfUserAmapUsersUserIdCashPostError,
-    CreateCashOfUserAmapUsersUserIdCashPostVariables
-  >({
-    mutationFn: (variables: CreateCashOfUserAmapUsersUserIdCashPostVariables) =>
-      fetchCreateCashOfUserAmapUsersUserIdCashPost({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type EditCashByIdAmapUsersUserIdCashPatchPathParams = {
-  userId: string;
-};
-
-export type EditCashByIdAmapUsersUserIdCashPatchError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type EditCashByIdAmapUsersUserIdCashPatchVariables = {
-  body: Schemas.CashEdit;
-  pathParams: EditCashByIdAmapUsersUserIdCashPatchPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Edit cash for an user. This will add the balance to the current balance.
- * A negative value can be provided to remove money from the user.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const fetchEditCashByIdAmapUsersUserIdCashPatch = (
-  variables: EditCashByIdAmapUsersUserIdCashPatchVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    EditCashByIdAmapUsersUserIdCashPatchError,
-    Schemas.CashEdit,
-    {},
-    {},
-    EditCashByIdAmapUsersUserIdCashPatchPathParams
-  >({
-    url: "/amap/users/{userId}/cash",
-    method: "patch",
-    ...variables,
-    signal,
-  });
-
-/**
- * Edit cash for an user. This will add the balance to the current balance.
- * A negative value can be provided to remove money from the user.
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const useEditCashByIdAmapUsersUserIdCashPatch = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      EditCashByIdAmapUsersUserIdCashPatchError,
-      EditCashByIdAmapUsersUserIdCashPatchVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    EditCashByIdAmapUsersUserIdCashPatchError,
-    EditCashByIdAmapUsersUserIdCashPatchVariables
-  >({
-    mutationFn: (variables: EditCashByIdAmapUsersUserIdCashPatchVariables) =>
-      fetchEditCashByIdAmapUsersUserIdCashPatch({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type GetOrdersOfUserAmapUsersUserIdOrdersGetPathParams = {
-  userId: string;
-};
-
-export type GetOrdersOfUserAmapUsersUserIdOrdersGetError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type GetOrdersOfUserAmapUsersUserIdOrdersGetResponse =
-  Schemas.OrderReturn[];
-
-export type GetOrdersOfUserAmapUsersUserIdOrdersGetVariables = {
-  pathParams: GetOrdersOfUserAmapUsersUserIdOrdersGetPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Get orders from an user.
- *
- * **The user must be a member of the group AMAP to use this endpoint or can only access the endpoint for its own user_id**
- */
-export const fetchGetOrdersOfUserAmapUsersUserIdOrdersGet = (
-  variables: GetOrdersOfUserAmapUsersUserIdOrdersGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetOrdersOfUserAmapUsersUserIdOrdersGetResponse,
-    GetOrdersOfUserAmapUsersUserIdOrdersGetError,
-    undefined,
-    {},
-    {},
-    GetOrdersOfUserAmapUsersUserIdOrdersGetPathParams
-  >({
-    url: "/amap/users/{userId}/orders",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-/**
- * Get orders from an user.
- *
- * **The user must be a member of the group AMAP to use this endpoint or can only access the endpoint for its own user_id**
- */
-export const useGetOrdersOfUserAmapUsersUserIdOrdersGet = <
-  TData = GetOrdersOfUserAmapUsersUserIdOrdersGetResponse,
->(
-  variables: GetOrdersOfUserAmapUsersUserIdOrdersGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetOrdersOfUserAmapUsersUserIdOrdersGetResponse,
-      GetOrdersOfUserAmapUsersUserIdOrdersGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetOrdersOfUserAmapUsersUserIdOrdersGetResponse,
-    GetOrdersOfUserAmapUsersUserIdOrdersGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/amap/users/{userId}/orders",
-      operationId: "getOrdersOfUserAmapUsersUserIdOrdersGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetOrdersOfUserAmapUsersUserIdOrdersGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type GetInformationAmapInformationGetError =
-  Fetcher.ErrorWrapper<undefined>;
-
-export type GetInformationAmapInformationGetVariables =
-  HyperionContext["fetcherOptions"];
-
-/**
- * Return all information
- */
-export const fetchGetInformationAmapInformationGet = (
-  variables: GetInformationAmapInformationGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.Information,
-    GetInformationAmapInformationGetError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/amap/information", method: "get", ...variables, signal });
-
-/**
- * Return all information
- */
-export const useGetInformationAmapInformationGet = <
-  TData = Schemas.Information,
->(
-  variables: GetInformationAmapInformationGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      Schemas.Information,
-      GetInformationAmapInformationGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    Schemas.Information,
-    GetInformationAmapInformationGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/amap/information",
-      operationId: "getInformationAmapInformationGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetInformationAmapInformationGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type EditInformationAmapInformationPatchError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type EditInformationAmapInformationPatchVariables = {
-  body?: Schemas.InformationEdit;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Update information
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const fetchEditInformationAmapInformationPatch = (
-  variables: EditInformationAmapInformationPatchVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    EditInformationAmapInformationPatchError,
-    Schemas.InformationEdit,
-    {},
-    {},
-    {}
-  >({ url: "/amap/information", method: "patch", ...variables, signal });
-
-/**
- * Update information
- *
- * **The user must be a member of the group AMAP to use this endpoint**
- */
-export const useEditInformationAmapInformationPatch = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      EditInformationAmapInformationPatchError,
-      EditInformationAmapInformationPatchVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    EditInformationAmapInformationPatchError,
-    EditInformationAmapInformationPatchVariables
-  >({
-    mutationFn: (variables: EditInformationAmapInformationPatchVariables) =>
-      fetchEditInformationAmapInformationPatch({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type GetAssociationsAssociationsGetError =
-  Fetcher.ErrorWrapper<undefined>;
-
-export type GetAssociationsAssociationsGetVariables =
-  HyperionContext["fetcherOptions"];
-
-export const fetchGetAssociationsAssociationsGet = (
-  variables: GetAssociationsAssociationsGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    void,
-    GetAssociationsAssociationsGetError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/associations", method: "get", ...variables, signal });
-
-export const useGetAssociationsAssociationsGet = <TData = void>(
-  variables: GetAssociationsAssociationsGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      void,
-      GetAssociationsAssociationsGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<void, GetAssociationsAssociationsGetError, TData>({
-    queryKey: queryKeyFn({
-      path: "/associations",
-      operationId: "getAssociationsAssociationsGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetAssociationsAssociationsGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type EditAssociationAssociationsPutError =
-  Fetcher.ErrorWrapper<undefined>;
-
-export type EditAssociationAssociationsPutVariables =
-  HyperionContext["fetcherOptions"];
-
-export const fetchEditAssociationAssociationsPut = (
-  variables: EditAssociationAssociationsPutVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    void,
-    EditAssociationAssociationsPutError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/associations", method: "put", ...variables, signal });
-
-export const useEditAssociationAssociationsPut = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      void,
-      EditAssociationAssociationsPutError,
-      EditAssociationAssociationsPutVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    void,
-    EditAssociationAssociationsPutError,
-    EditAssociationAssociationsPutVariables
-  >({
-    mutationFn: (variables: EditAssociationAssociationsPutVariables) =>
-      fetchEditAssociationAssociationsPut({ ...fetcherOptions, ...variables }),
-    ...options,
-  });
-};
-
-export type CreateAssociationAssociationsPostError =
-  Fetcher.ErrorWrapper<undefined>;
-
-export type CreateAssociationAssociationsPostVariables =
-  HyperionContext["fetcherOptions"];
-
-export const fetchCreateAssociationAssociationsPost = (
-  variables: CreateAssociationAssociationsPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    void,
-    CreateAssociationAssociationsPostError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/associations", method: "post", ...variables, signal });
-
-export const useCreateAssociationAssociationsPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      void,
-      CreateAssociationAssociationsPostError,
-      CreateAssociationAssociationsPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    void,
-    CreateAssociationAssociationsPostError,
-    CreateAssociationAssociationsPostVariables
-  >({
-    mutationFn: (variables: CreateAssociationAssociationsPostVariables) =>
-      fetchCreateAssociationAssociationsPost({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type GetAssociationAssociationsAssociationIdGetPathParams = {
-  associationId: void;
-};
-
-export type GetAssociationAssociationsAssociationIdGetError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type GetAssociationAssociationsAssociationIdGetVariables = {
-  pathParams: GetAssociationAssociationsAssociationIdGetPathParams;
-} & HyperionContext["fetcherOptions"];
-
-export const fetchGetAssociationAssociationsAssociationIdGet = (
-  variables: GetAssociationAssociationsAssociationIdGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    void,
-    GetAssociationAssociationsAssociationIdGetError,
-    undefined,
-    {},
-    {},
-    GetAssociationAssociationsAssociationIdGetPathParams
-  >({
-    url: "/associations/{associationId}",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-export const useGetAssociationAssociationsAssociationIdGet = <TData = void>(
-  variables: GetAssociationAssociationsAssociationIdGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      void,
-      GetAssociationAssociationsAssociationIdGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    void,
-    GetAssociationAssociationsAssociationIdGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/associations/{associationId}",
-      operationId: "getAssociationAssociationsAssociationIdGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetAssociationAssociationsAssociationIdGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type GetUsersAssociationAssociationsAssociationIdUsersGetPathParams = {
-  associationId: void;
-};
-
-export type GetUsersAssociationAssociationsAssociationIdUsersGetError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type GetUsersAssociationAssociationsAssociationIdUsersGetVariables = {
-  pathParams: GetUsersAssociationAssociationsAssociationIdUsersGetPathParams;
-} & HyperionContext["fetcherOptions"];
-
-export const fetchGetUsersAssociationAssociationsAssociationIdUsersGet = (
-  variables: GetUsersAssociationAssociationsAssociationIdUsersGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    void,
-    GetUsersAssociationAssociationsAssociationIdUsersGetError,
-    undefined,
-    {},
-    {},
-    GetUsersAssociationAssociationsAssociationIdUsersGetPathParams
-  >({
-    url: "/associations/{associationId}/users",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-export const useGetUsersAssociationAssociationsAssociationIdUsersGet = <
-  TData = void,
->(
-  variables: GetUsersAssociationAssociationsAssociationIdUsersGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      void,
-      GetUsersAssociationAssociationsAssociationIdUsersGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    void,
-    GetUsersAssociationAssociationsAssociationIdUsersGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/associations/{associationId}/users",
-      operationId: "getUsersAssociationAssociationsAssociationIdUsersGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetUsersAssociationAssociationsAssociationIdUsersGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type CreateUserAssociationAssociationsAssociationIdUsersUserIdPostPathParams =
-  {
-    associationId: void;
-    userId: void;
-  };
-
-export type CreateUserAssociationAssociationsAssociationIdUsersUserIdPostError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type CreateUserAssociationAssociationsAssociationIdUsersUserIdPostVariables =
-  {
-    pathParams: CreateUserAssociationAssociationsAssociationIdUsersUserIdPostPathParams;
-  } & HyperionContext["fetcherOptions"];
-
-export const fetchCreateUserAssociationAssociationsAssociationIdUsersUserIdPost =
-  (
-    variables: CreateUserAssociationAssociationsAssociationIdUsersUserIdPostVariables,
-    signal?: AbortSignal,
-  ) =>
-    hyperionFetch<
-      void,
-      CreateUserAssociationAssociationsAssociationIdUsersUserIdPostError,
-      undefined,
-      {},
-      {},
-      CreateUserAssociationAssociationsAssociationIdUsersUserIdPostPathParams
-    >({
-      url: "/associations/{associationId}/users/{userId}",
-      method: "post",
-      ...variables,
-      signal,
-    });
-
-export const useCreateUserAssociationAssociationsAssociationIdUsersUserIdPost =
-  (
-    options?: Omit<
-      reactQuery.UseMutationOptions<
-        void,
-        CreateUserAssociationAssociationsAssociationIdUsersUserIdPostError,
-        CreateUserAssociationAssociationsAssociationIdUsersUserIdPostVariables
-      >,
-      "mutationFn"
-    >,
-  ) => {
-    const { fetcherOptions } = useHyperionContext();
-    return reactQuery.useMutation<
-      void,
-      CreateUserAssociationAssociationsAssociationIdUsersUserIdPostError,
-      CreateUserAssociationAssociationsAssociationIdUsersUserIdPostVariables
-    >({
-      mutationFn: (
-        variables: CreateUserAssociationAssociationsAssociationIdUsersUserIdPostVariables,
-      ) =>
-        fetchCreateUserAssociationAssociationsAssociationIdUsersUserIdPost({
-          ...fetcherOptions,
-          ...variables,
-        }),
-      ...options,
-    });
-  };
-
-export type DeleteUserAssociationAssociationsAssociationIdUsersUserIdDeletePathParams =
-  {
-    associationId: void;
-    userId: void;
-  };
-
-export type DeleteUserAssociationAssociationsAssociationIdUsersUserIdDeleteError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type DeleteUserAssociationAssociationsAssociationIdUsersUserIdDeleteVariables =
-  {
-    pathParams: DeleteUserAssociationAssociationsAssociationIdUsersUserIdDeletePathParams;
-  } & HyperionContext["fetcherOptions"];
-
-export const fetchDeleteUserAssociationAssociationsAssociationIdUsersUserIdDelete =
-  (
-    variables: DeleteUserAssociationAssociationsAssociationIdUsersUserIdDeleteVariables,
-    signal?: AbortSignal,
-  ) =>
-    hyperionFetch<
-      void,
-      DeleteUserAssociationAssociationsAssociationIdUsersUserIdDeleteError,
-      undefined,
-      {},
-      {},
-      DeleteUserAssociationAssociationsAssociationIdUsersUserIdDeletePathParams
-    >({
-      url: "/associations/{associationId}/users/{userId}",
-      method: "delete",
-      ...variables,
-      signal,
-    });
-
-export const useDeleteUserAssociationAssociationsAssociationIdUsersUserIdDelete =
-  (
-    options?: Omit<
-      reactQuery.UseMutationOptions<
-        void,
-        DeleteUserAssociationAssociationsAssociationIdUsersUserIdDeleteError,
-        DeleteUserAssociationAssociationsAssociationIdUsersUserIdDeleteVariables
-      >,
-      "mutationFn"
-    >,
-  ) => {
-    const { fetcherOptions } = useHyperionContext();
-    return reactQuery.useMutation<
-      void,
-      DeleteUserAssociationAssociationsAssociationIdUsersUserIdDeleteError,
-      DeleteUserAssociationAssociationsAssociationIdUsersUserIdDeleteVariables
-    >({
-      mutationFn: (
-        variables: DeleteUserAssociationAssociationsAssociationIdUsersUserIdDeleteVariables,
-      ) =>
-        fetchDeleteUserAssociationAssociationsAssociationIdUsersUserIdDelete({
-          ...fetcherOptions,
-          ...variables,
-        }),
-      ...options,
-    });
-  };
-
-export type CreateAdminAssociationAssociationsAssociationIdAdminsUserIdPostPathParams =
-  {
-    associationId: void;
-    userId: void;
-  };
-
-export type CreateAdminAssociationAssociationsAssociationIdAdminsUserIdPostError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type CreateAdminAssociationAssociationsAssociationIdAdminsUserIdPostVariables =
-  {
-    pathParams: CreateAdminAssociationAssociationsAssociationIdAdminsUserIdPostPathParams;
-  } & HyperionContext["fetcherOptions"];
-
-export const fetchCreateAdminAssociationAssociationsAssociationIdAdminsUserIdPost =
-  (
-    variables: CreateAdminAssociationAssociationsAssociationIdAdminsUserIdPostVariables,
-    signal?: AbortSignal,
-  ) =>
-    hyperionFetch<
-      void,
-      CreateAdminAssociationAssociationsAssociationIdAdminsUserIdPostError,
-      undefined,
-      {},
-      {},
-      CreateAdminAssociationAssociationsAssociationIdAdminsUserIdPostPathParams
-    >({
-      url: "/associations/{associationId}/admins/{userId}",
-      method: "post",
-      ...variables,
-      signal,
-    });
-
-export const useCreateAdminAssociationAssociationsAssociationIdAdminsUserIdPost =
-  (
-    options?: Omit<
-      reactQuery.UseMutationOptions<
-        void,
-        CreateAdminAssociationAssociationsAssociationIdAdminsUserIdPostError,
-        CreateAdminAssociationAssociationsAssociationIdAdminsUserIdPostVariables
-      >,
-      "mutationFn"
-    >,
-  ) => {
-    const { fetcherOptions } = useHyperionContext();
-    return reactQuery.useMutation<
-      void,
-      CreateAdminAssociationAssociationsAssociationIdAdminsUserIdPostError,
-      CreateAdminAssociationAssociationsAssociationIdAdminsUserIdPostVariables
-    >({
-      mutationFn: (
-        variables: CreateAdminAssociationAssociationsAssociationIdAdminsUserIdPostVariables,
-      ) =>
-        fetchCreateAdminAssociationAssociationsAssociationIdAdminsUserIdPost({
-          ...fetcherOptions,
-          ...variables,
-        }),
-      ...options,
-    });
-  };
-
-export type DeleteAdminAssociationAssociationsAssociationIdAdminsUserIdDeletePathParams =
-  {
-    associationId: void;
-    userId: void;
-  };
-
-export type DeleteAdminAssociationAssociationsAssociationIdAdminsUserIdDeleteError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type DeleteAdminAssociationAssociationsAssociationIdAdminsUserIdDeleteVariables =
-  {
-    pathParams: DeleteAdminAssociationAssociationsAssociationIdAdminsUserIdDeletePathParams;
-  } & HyperionContext["fetcherOptions"];
-
-export const fetchDeleteAdminAssociationAssociationsAssociationIdAdminsUserIdDelete =
-  (
-    variables: DeleteAdminAssociationAssociationsAssociationIdAdminsUserIdDeleteVariables,
-    signal?: AbortSignal,
-  ) =>
-    hyperionFetch<
-      void,
-      DeleteAdminAssociationAssociationsAssociationIdAdminsUserIdDeleteError,
-      undefined,
-      {},
-      {},
-      DeleteAdminAssociationAssociationsAssociationIdAdminsUserIdDeletePathParams
-    >({
-      url: "/associations/{associationId}/admins/{userId}",
-      method: "delete",
-      ...variables,
-      signal,
-    });
-
-export const useDeleteAdminAssociationAssociationsAssociationIdAdminsUserIdDelete =
-  (
-    options?: Omit<
-      reactQuery.UseMutationOptions<
-        void,
-        DeleteAdminAssociationAssociationsAssociationIdAdminsUserIdDeleteError,
-        DeleteAdminAssociationAssociationsAssociationIdAdminsUserIdDeleteVariables
-      >,
-      "mutationFn"
-    >,
-  ) => {
-    const { fetcherOptions } = useHyperionContext();
-    return reactQuery.useMutation<
-      void,
-      DeleteAdminAssociationAssociationsAssociationIdAdminsUserIdDeleteError,
-      DeleteAdminAssociationAssociationsAssociationIdAdminsUserIdDeleteVariables
-    >({
-      mutationFn: (
-        variables: DeleteAdminAssociationAssociationsAssociationIdAdminsUserIdDeleteVariables,
-      ) =>
-        fetchDeleteAdminAssociationAssociationsAssociationIdAdminsUserIdDelete({
-          ...fetcherOptions,
-          ...variables,
-        }),
-      ...options,
-    });
-  };
-
 export type LoginForAccessTokenAuthSimpleTokenPostError = Fetcher.ErrorWrapper<{
   status: 422;
   payload: Schemas.HTTPValidationError;
@@ -3178,7 +26,7 @@ export type LoginForAccessTokenAuthSimpleTokenPostVariables =
  */
 export const fetchLoginForAccessTokenAuthSimpleTokenPost = (
   variables: LoginForAccessTokenAuthSimpleTokenPostVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     Schemas.AccessToken,
@@ -3204,7 +52,7 @@ export const useLoginForAccessTokenAuthSimpleTokenPost = (
       LoginForAccessTokenAuthSimpleTokenPostVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -3257,7 +105,7 @@ export type GetAuthorizePageAuthAuthorizeGetVariables = {
  */
 export const fetchGetAuthorizePageAuthAuthorizeGet = (
   variables: GetAuthorizePageAuthAuthorizeGetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
@@ -3291,7 +139,7 @@ export const useGetAuthorizePageAuthAuthorizeGet = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -3308,7 +156,7 @@ export const useGetAuthorizePageAuthAuthorizeGet = <TData = undefined>(
     queryFn: ({ signal }) =>
       fetchGetAuthorizePageAuthAuthorizeGet(
         { ...fetcherOptions, ...variables },
-        signal,
+        signal
       ),
     ...options,
     ...queryOptions,
@@ -3339,7 +187,7 @@ export type PostAuthorizePageAuthAuthorizePostVariables =
  */
 export const fetchPostAuthorizePageAuthAuthorizePost = (
   variables: PostAuthorizePageAuthAuthorizePostVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
@@ -3372,7 +220,7 @@ export const usePostAuthorizePageAuthAuthorizePost = (
       PostAuthorizePageAuthAuthorizePostVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -3429,7 +277,7 @@ export type AuthorizeValidationAuthAuthorizationFlowAuthorizeValidationPostVaria
 export const fetchAuthorizeValidationAuthAuthorizationFlowAuthorizeValidationPost =
   (
     variables: AuthorizeValidationAuthAuthorizationFlowAuthorizeValidationPostVariables,
-    signal?: AbortSignal,
+    signal?: AbortSignal
   ) =>
     hyperionFetch<
       undefined,
@@ -3482,7 +330,7 @@ export const useAuthorizeValidationAuthAuthorizationFlowAuthorizeValidationPost 
         AuthorizeValidationAuthAuthorizationFlowAuthorizeValidationPostVariables
       >,
       "mutationFn"
-    >,
+    >
   ) => {
     const { fetcherOptions } = useHyperionContext();
     return reactQuery.useMutation<
@@ -3491,7 +339,7 @@ export const useAuthorizeValidationAuthAuthorizationFlowAuthorizeValidationPost 
       AuthorizeValidationAuthAuthorizationFlowAuthorizeValidationPostVariables
     >({
       mutationFn: (
-        variables: AuthorizeValidationAuthAuthorizationFlowAuthorizeValidationPostVariables,
+        variables: AuthorizeValidationAuthAuthorizationFlowAuthorizeValidationPostVariables
       ) =>
         fetchAuthorizeValidationAuthAuthorizationFlowAuthorizeValidationPost({
           ...fetcherOptions,
@@ -3537,7 +385,7 @@ export type TokenAuthTokenPostVariables = {
  */
 export const fetchTokenAuthTokenPost = (
   variables: TokenAuthTokenPostVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     Schemas.TokenResponse,
@@ -3577,7 +425,7 @@ export const useTokenAuthTokenPost = (
       TokenAuthTokenPostVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -3613,7 +461,7 @@ export type AuthGetUserinfoAuthUserinfoGetVariables =
  */
 export const fetchAuthGetUserinfoAuthUserinfoGet = (
   variables: AuthGetUserinfoAuthUserinfoGetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     void,
@@ -3647,7 +495,7 @@ export const useAuthGetUserinfoAuthUserinfoGet = <TData = void>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -3660,7 +508,7 @@ export const useAuthGetUserinfoAuthUserinfoGet = <TData = void>(
     queryFn: ({ signal }) =>
       fetchAuthGetUserinfoAuthUserinfoGet(
         { ...fetcherOptions, ...variables },
-        signal,
+        signal
       ),
     ...options,
     ...queryOptions,
@@ -3675,7 +523,7 @@ export type JwksUriOidcAuthorizationFlowJwksUriGetVariables =
 
 export const fetchJwksUriOidcAuthorizationFlowJwksUriGet = (
   variables: JwksUriOidcAuthorizationFlowJwksUriGetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     void,
@@ -3700,7 +548,7 @@ export const useJwksUriOidcAuthorizationFlowJwksUriGet = <TData = void>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -3717,7 +565,7 @@ export const useJwksUriOidcAuthorizationFlowJwksUriGet = <TData = void>(
     queryFn: ({ signal }) =>
       fetchJwksUriOidcAuthorizationFlowJwksUriGet(
         { ...fetcherOptions, ...variables },
-        signal,
+        signal
       ),
     ...options,
     ...queryOptions,
@@ -3732,7 +580,7 @@ export type OidcConfigurationWellKnownOpenidConfigurationGetVariables =
 
 export const fetchOidcConfigurationWellKnownOpenidConfigurationGet = (
   variables: OidcConfigurationWellKnownOpenidConfigurationGetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     void,
@@ -3749,7 +597,7 @@ export const fetchOidcConfigurationWellKnownOpenidConfigurationGet = (
   });
 
 export const useOidcConfigurationWellKnownOpenidConfigurationGet = <
-  TData = void,
+  TData = void
 >(
   variables: OidcConfigurationWellKnownOpenidConfigurationGetVariables,
   options?: Omit<
@@ -3759,7 +607,7 @@ export const useOidcConfigurationWellKnownOpenidConfigurationGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -3776,887 +624,1708 @@ export const useOidcConfigurationWellKnownOpenidConfigurationGet = <
     queryFn: ({ signal }) =>
       fetchOidcConfigurationWellKnownOpenidConfigurationGet(
         { ...fetcherOptions, ...variables },
-        signal,
+        signal
       ),
     ...options,
     ...queryOptions,
   });
 };
 
-export type GetManagersBookingManagersGetError =
+export type ReadInformationInformationGetError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type GetManagersBookingManagersGetResponse = Schemas.Manager[];
-
-export type GetManagersBookingManagersGetVariables =
+export type ReadInformationInformationGetVariables =
   HyperionContext["fetcherOptions"];
 
 /**
- * Get existing managers.
- *
- * **This endpoint is only usable by administrators**
+ * Return information about Hyperion. This endpoint can be used to check if the API is up.
  */
-export const fetchGetManagersBookingManagersGet = (
-  variables: GetManagersBookingManagersGetVariables,
-  signal?: AbortSignal,
+export const fetchReadInformationInformationGet = (
+  variables: ReadInformationInformationGetVariables,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
-    GetManagersBookingManagersGetResponse,
-    GetManagersBookingManagersGetError,
+    Schemas.CoreInformation,
+    ReadInformationInformationGetError,
     undefined,
     {},
     {},
     {}
-  >({ url: "/booking/managers", method: "get", ...variables, signal });
+  >({ url: "/information", method: "get", ...variables, signal });
 
 /**
- * Get existing managers.
- *
- * **This endpoint is only usable by administrators**
+ * Return information about Hyperion. This endpoint can be used to check if the API is up.
  */
-export const useGetManagersBookingManagersGet = <
-  TData = GetManagersBookingManagersGetResponse,
+export const useReadInformationInformationGet = <
+  TData = Schemas.CoreInformation
 >(
-  variables: GetManagersBookingManagersGetVariables,
+  variables: ReadInformationInformationGetVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
-      GetManagersBookingManagersGetResponse,
-      GetManagersBookingManagersGetError,
+      Schemas.CoreInformation,
+      ReadInformationInformationGetError,
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
   return reactQuery.useQuery<
-    GetManagersBookingManagersGetResponse,
-    GetManagersBookingManagersGetError,
+    Schemas.CoreInformation,
+    ReadInformationInformationGetError,
     TData
   >({
     queryKey: queryKeyFn({
-      path: "/booking/managers",
-      operationId: "getManagersBookingManagersGet",
+      path: "/information",
+      operationId: "readInformationInformationGet",
       variables,
     }),
     queryFn: ({ signal }) =>
-      fetchGetManagersBookingManagersGet(
+      fetchReadInformationInformationGet(
         { ...fetcherOptions, ...variables },
-        signal,
+        signal
       ),
     ...options,
     ...queryOptions,
   });
 };
 
-export type CreateManagerBookingManagersPostError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
+export type ReadPrivacyPrivacyGetError = Fetcher.ErrorWrapper<undefined>;
 
-export type CreateManagerBookingManagersPostVariables = {
-  body: Schemas.ManagerBase;
-} & HyperionContext["fetcherOptions"];
+export type ReadPrivacyPrivacyGetVariables = HyperionContext["fetcherOptions"];
 
 /**
- * Create a manager.
- *
- * **This endpoint is only usable by administrators**
+ * Return Hyperion privacy
  */
-export const fetchCreateManagerBookingManagersPost = (
-  variables: CreateManagerBookingManagersPostVariables,
-  signal?: AbortSignal,
+export const fetchReadPrivacyPrivacyGet = (
+  variables: ReadPrivacyPrivacyGetVariables,
+  signal?: AbortSignal
 ) =>
-  hyperionFetch<
-    Schemas.Manager,
-    CreateManagerBookingManagersPostError,
-    Schemas.ManagerBase,
-    {},
-    {},
-    {}
-  >({ url: "/booking/managers", method: "post", ...variables, signal });
-
-/**
- * Create a manager.
- *
- * **This endpoint is only usable by administrators**
- */
-export const useCreateManagerBookingManagersPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.Manager,
-      CreateManagerBookingManagersPostError,
-      CreateManagerBookingManagersPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.Manager,
-    CreateManagerBookingManagersPostError,
-    CreateManagerBookingManagersPostVariables
-  >({
-    mutationFn: (variables: CreateManagerBookingManagersPostVariables) =>
-      fetchCreateManagerBookingManagersPost({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type UpdateManagerBookingManagersManagerIdPatchPathParams = {
-  managerId: string;
-};
-
-export type UpdateManagerBookingManagersManagerIdPatchError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type UpdateManagerBookingManagersManagerIdPatchVariables = {
-  body?: Schemas.ManagerUpdate;
-  pathParams: UpdateManagerBookingManagersManagerIdPatchPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Update a manager, the request should contain a JSON with the fields to change (not necessarily all fields) and their new value.
- *
- * **This endpoint is only usable by administrators**
- */
-export const fetchUpdateManagerBookingManagersManagerIdPatch = (
-  variables: UpdateManagerBookingManagersManagerIdPatchVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    UpdateManagerBookingManagersManagerIdPatchError,
-    Schemas.ManagerUpdate,
-    {},
-    {},
-    UpdateManagerBookingManagersManagerIdPatchPathParams
-  >({
-    url: "/booking/managers/{managerId}",
-    method: "patch",
-    ...variables,
-    signal,
-  });
-
-/**
- * Update a manager, the request should contain a JSON with the fields to change (not necessarily all fields) and their new value.
- *
- * **This endpoint is only usable by administrators**
- */
-export const useUpdateManagerBookingManagersManagerIdPatch = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      UpdateManagerBookingManagersManagerIdPatchError,
-      UpdateManagerBookingManagersManagerIdPatchVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    UpdateManagerBookingManagersManagerIdPatchError,
-    UpdateManagerBookingManagersManagerIdPatchVariables
-  >({
-    mutationFn: (
-      variables: UpdateManagerBookingManagersManagerIdPatchVariables,
-    ) =>
-      fetchUpdateManagerBookingManagersManagerIdPatch({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type DeleteManagerBookingManagersManagerIdDeletePathParams = {
-  managerId: string;
-};
-
-export type DeleteManagerBookingManagersManagerIdDeleteError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type DeleteManagerBookingManagersManagerIdDeleteVariables = {
-  pathParams: DeleteManagerBookingManagersManagerIdDeletePathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Delete a manager only if the manager is not linked to any room
- *
- * **This endpoint is only usable by administrators**
- */
-export const fetchDeleteManagerBookingManagersManagerIdDelete = (
-  variables: DeleteManagerBookingManagersManagerIdDeleteVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    DeleteManagerBookingManagersManagerIdDeleteError,
-    undefined,
-    {},
-    {},
-    DeleteManagerBookingManagersManagerIdDeletePathParams
-  >({
-    url: "/booking/managers/{managerId}",
-    method: "delete",
-    ...variables,
-    signal,
-  });
-
-/**
- * Delete a manager only if the manager is not linked to any room
- *
- * **This endpoint is only usable by administrators**
- */
-export const useDeleteManagerBookingManagersManagerIdDelete = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      DeleteManagerBookingManagersManagerIdDeleteError,
-      DeleteManagerBookingManagersManagerIdDeleteVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    DeleteManagerBookingManagersManagerIdDeleteError,
-    DeleteManagerBookingManagersManagerIdDeleteVariables
-  >({
-    mutationFn: (
-      variables: DeleteManagerBookingManagersManagerIdDeleteVariables,
-    ) =>
-      fetchDeleteManagerBookingManagersManagerIdDelete({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type GetCurrentUserManagersBookingManagersUsersMeGetError =
-  Fetcher.ErrorWrapper<undefined>;
-
-export type GetCurrentUserManagersBookingManagersUsersMeGetResponse =
-  Schemas.Manager[];
-
-export type GetCurrentUserManagersBookingManagersUsersMeGetVariables =
-  HyperionContext["fetcherOptions"];
-
-/**
- * Return all managers the current user is a member.
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const fetchGetCurrentUserManagersBookingManagersUsersMeGet = (
-  variables: GetCurrentUserManagersBookingManagersUsersMeGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetCurrentUserManagersBookingManagersUsersMeGetResponse,
-    GetCurrentUserManagersBookingManagersUsersMeGetError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/booking/managers/users/me", method: "get", ...variables, signal });
-
-/**
- * Return all managers the current user is a member.
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const useGetCurrentUserManagersBookingManagersUsersMeGet = <
-  TData = GetCurrentUserManagersBookingManagersUsersMeGetResponse,
->(
-  variables: GetCurrentUserManagersBookingManagersUsersMeGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetCurrentUserManagersBookingManagersUsersMeGetResponse,
-      GetCurrentUserManagersBookingManagersUsersMeGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetCurrentUserManagersBookingManagersUsersMeGetResponse,
-    GetCurrentUserManagersBookingManagersUsersMeGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/booking/managers/users/me",
-      operationId: "getCurrentUserManagersBookingManagersUsersMeGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetCurrentUserManagersBookingManagersUsersMeGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type GetBookingsForManagerBookingBookingsUsersMeManageGetError =
-  Fetcher.ErrorWrapper<undefined>;
-
-export type GetBookingsForManagerBookingBookingsUsersMeManageGetResponse =
-  Schemas.BookingReturnApplicant[];
-
-export type GetBookingsForManagerBookingBookingsUsersMeManageGetVariables =
-  HyperionContext["fetcherOptions"];
-
-/**
- * Return all bookings a user can manage.
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const fetchGetBookingsForManagerBookingBookingsUsersMeManageGet = (
-  variables: GetBookingsForManagerBookingBookingsUsersMeManageGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetBookingsForManagerBookingBookingsUsersMeManageGetResponse,
-    GetBookingsForManagerBookingBookingsUsersMeManageGetError,
-    undefined,
-    {},
-    {},
-    {}
-  >({
-    url: "/booking/bookings/users/me/manage",
+  hyperionFetch<undefined, ReadPrivacyPrivacyGetError, undefined, {}, {}, {}>({
+    url: "/privacy",
     method: "get",
     ...variables,
     signal,
   });
 
 /**
- * Return all bookings a user can manage.
- *
- * **The user must be authenticated to use this endpoint**
+ * Return Hyperion privacy
  */
-export const useGetBookingsForManagerBookingBookingsUsersMeManageGet = <
-  TData = GetBookingsForManagerBookingBookingsUsersMeManageGetResponse,
+export const useReadPrivacyPrivacyGet = <TData = undefined>(
+  variables: ReadPrivacyPrivacyGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<undefined, ReadPrivacyPrivacyGetError, TData>,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<undefined, ReadPrivacyPrivacyGetError, TData>({
+    queryKey: queryKeyFn({
+      path: "/privacy",
+      operationId: "readPrivacyPrivacyGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchReadPrivacyPrivacyGet({ ...fetcherOptions, ...variables }, signal),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type ReadTermsAndConditionsTermsAndConditionsGetError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type ReadTermsAndConditionsTermsAndConditionsGetVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * Return Hyperion terms and conditions pages
+ */
+export const fetchReadTermsAndConditionsTermsAndConditionsGet = (
+  variables: ReadTermsAndConditionsTermsAndConditionsGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    ReadTermsAndConditionsTermsAndConditionsGetError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/terms-and-conditions", method: "get", ...variables, signal });
+
+/**
+ * Return Hyperion terms and conditions pages
+ */
+export const useReadTermsAndConditionsTermsAndConditionsGet = <
+  TData = undefined
 >(
-  variables: GetBookingsForManagerBookingBookingsUsersMeManageGetVariables,
+  variables: ReadTermsAndConditionsTermsAndConditionsGetVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
-      GetBookingsForManagerBookingBookingsUsersMeManageGetResponse,
-      GetBookingsForManagerBookingBookingsUsersMeManageGetError,
+      undefined,
+      ReadTermsAndConditionsTermsAndConditionsGetError,
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
   return reactQuery.useQuery<
-    GetBookingsForManagerBookingBookingsUsersMeManageGetResponse,
-    GetBookingsForManagerBookingBookingsUsersMeManageGetError,
+    undefined,
+    ReadTermsAndConditionsTermsAndConditionsGetError,
     TData
   >({
     queryKey: queryKeyFn({
-      path: "/booking/bookings/users/me/manage",
-      operationId: "getBookingsForManagerBookingBookingsUsersMeManageGet",
+      path: "/terms-and-conditions",
+      operationId: "readTermsAndConditionsTermsAndConditionsGet",
       variables,
     }),
     queryFn: ({ signal }) =>
-      fetchGetBookingsForManagerBookingBookingsUsersMeManageGet(
+      fetchReadTermsAndConditionsTermsAndConditionsGet(
         { ...fetcherOptions, ...variables },
-        signal,
+        signal
       ),
     ...options,
     ...queryOptions,
   });
 };
 
-export type GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGetError =
+export type ReadSupportSupportGetError = Fetcher.ErrorWrapper<undefined>;
+
+export type ReadSupportSupportGetVariables = HyperionContext["fetcherOptions"];
+
+/**
+ * Return Hyperion terms and conditions pages
+ */
+export const fetchReadSupportSupportGet = (
+  variables: ReadSupportSupportGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<undefined, ReadSupportSupportGetError, undefined, {}, {}, {}>({
+    url: "/support",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Return Hyperion terms and conditions pages
+ */
+export const useReadSupportSupportGet = <TData = undefined>(
+  variables: ReadSupportSupportGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<undefined, ReadSupportSupportGetError, TData>,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<undefined, ReadSupportSupportGetError, TData>({
+    queryKey: queryKeyFn({
+      path: "/support",
+      operationId: "readSupportSupportGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchReadSupportSupportGet({ ...fetcherOptions, ...variables }, signal),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type ReadSecurityTxtSecurityTxtGetError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGetResponse =
-  Schemas.BookingReturnApplicant[];
-
-export type GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGetVariables =
+export type ReadSecurityTxtSecurityTxtGetVariables =
   HyperionContext["fetcherOptions"];
 
 /**
- * Return all confirmed bookings a user can manage.
+ * Return Hyperion security.txt file
+ */
+export const fetchReadSecurityTxtSecurityTxtGet = (
+  variables: ReadSecurityTxtSecurityTxtGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    ReadSecurityTxtSecurityTxtGetError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/security.txt", method: "get", ...variables, signal });
+
+/**
+ * Return Hyperion security.txt file
+ */
+export const useReadSecurityTxtSecurityTxtGet = <TData = undefined>(
+  variables: ReadSecurityTxtSecurityTxtGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      undefined,
+      ReadSecurityTxtSecurityTxtGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    undefined,
+    ReadSecurityTxtSecurityTxtGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/security.txt",
+      operationId: "readSecurityTxtSecurityTxtGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchReadSecurityTxtSecurityTxtGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type ReadWellknownSecurityTxtWellKnownSecurityTxtGetError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type ReadWellknownSecurityTxtWellKnownSecurityTxtGetVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * Return Hyperion security.txt file
+ */
+export const fetchReadWellknownSecurityTxtWellKnownSecurityTxtGet = (
+  variables: ReadWellknownSecurityTxtWellKnownSecurityTxtGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    ReadWellknownSecurityTxtWellKnownSecurityTxtGetError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/.well-known/security.txt", method: "get", ...variables, signal });
+
+/**
+ * Return Hyperion security.txt file
+ */
+export const useReadWellknownSecurityTxtWellKnownSecurityTxtGet = <
+  TData = undefined
+>(
+  variables: ReadWellknownSecurityTxtWellKnownSecurityTxtGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      undefined,
+      ReadWellknownSecurityTxtWellKnownSecurityTxtGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    undefined,
+    ReadWellknownSecurityTxtWellKnownSecurityTxtGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/.well-known/security.txt",
+      operationId: "readWellknownSecurityTxtWellKnownSecurityTxtGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchReadWellknownSecurityTxtWellKnownSecurityTxtGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type ReadRobotsTxtRobotsTxtGetError = Fetcher.ErrorWrapper<undefined>;
+
+export type ReadRobotsTxtRobotsTxtGetVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * Return Hyperion robots.txt file
+ */
+export const fetchReadRobotsTxtRobotsTxtGet = (
+  variables: ReadRobotsTxtRobotsTxtGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    ReadRobotsTxtRobotsTxtGetError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/robots.txt", method: "get", ...variables, signal });
+
+/**
+ * Return Hyperion robots.txt file
+ */
+export const useReadRobotsTxtRobotsTxtGet = <TData = undefined>(
+  variables: ReadRobotsTxtRobotsTxtGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      undefined,
+      ReadRobotsTxtRobotsTxtGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<undefined, ReadRobotsTxtRobotsTxtGetError, TData>({
+    queryKey: queryKeyFn({
+      path: "/robots.txt",
+      operationId: "readRobotsTxtRobotsTxtGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchReadRobotsTxtRobotsTxtGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type GetStyleFileStyleFileCssGetPathParams = {
+  file: string;
+};
+
+export type GetStyleFileStyleFileCssGetError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type GetStyleFileStyleFileCssGetVariables = {
+  pathParams: GetStyleFileStyleFileCssGetPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Return a style file from the assets folder
+ */
+export const fetchGetStyleFileStyleFileCssGet = (
+  variables: GetStyleFileStyleFileCssGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    GetStyleFileStyleFileCssGetError,
+    undefined,
+    {},
+    {},
+    GetStyleFileStyleFileCssGetPathParams
+  >({ url: "/style/{file}.css", method: "get", ...variables, signal });
+
+/**
+ * Return a style file from the assets folder
+ */
+export const useGetStyleFileStyleFileCssGet = <TData = undefined>(
+  variables: GetStyleFileStyleFileCssGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      undefined,
+      GetStyleFileStyleFileCssGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    undefined,
+    GetStyleFileStyleFileCssGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/style/{file}.css",
+      operationId: "getStyleFileStyleFileCssGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetStyleFileStyleFileCssGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type GetFaviconFaviconIcoGetError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetFaviconFaviconIcoGetVariables =
+  HyperionContext["fetcherOptions"];
+
+export const fetchGetFaviconFaviconIcoGet = (
+  variables: GetFaviconFaviconIcoGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<undefined, GetFaviconFaviconIcoGetError, undefined, {}, {}, {}>(
+    { url: "/favicon.ico", method: "get", ...variables, signal }
+  );
+
+export const useGetFaviconFaviconIcoGet = <TData = undefined>(
+  variables: GetFaviconFaviconIcoGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<undefined, GetFaviconFaviconIcoGetError, TData>,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<undefined, GetFaviconFaviconIcoGetError, TData>({
+    queryKey: queryKeyFn({
+      path: "/favicon.ico",
+      operationId: "getFaviconFaviconIcoGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetFaviconFaviconIcoGet({ ...fetcherOptions, ...variables }, signal),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type GetModuleVisibilityModuleVisibilityGetError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type GetModuleVisibilityModuleVisibilityGetResponse =
+  Schemas.ModuleVisibility[];
+
+export type GetModuleVisibilityModuleVisibilityGetVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * Get all existing module_visibility.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const fetchGetModuleVisibilityModuleVisibilityGet = (
+  variables: GetModuleVisibilityModuleVisibilityGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    GetModuleVisibilityModuleVisibilityGetResponse,
+    GetModuleVisibilityModuleVisibilityGetError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/module-visibility/", method: "get", ...variables, signal });
+
+/**
+ * Get all existing module_visibility.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const useGetModuleVisibilityModuleVisibilityGet = <
+  TData = GetModuleVisibilityModuleVisibilityGetResponse
+>(
+  variables: GetModuleVisibilityModuleVisibilityGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      GetModuleVisibilityModuleVisibilityGetResponse,
+      GetModuleVisibilityModuleVisibilityGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    GetModuleVisibilityModuleVisibilityGetResponse,
+    GetModuleVisibilityModuleVisibilityGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/module-visibility/",
+      operationId: "getModuleVisibilityModuleVisibilityGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetModuleVisibilityModuleVisibilityGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type AddModuleVisibilityModuleVisibilityPostError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type AddModuleVisibilityModuleVisibilityPostVariables = {
+  body: Schemas.ModuleVisibilityCreate;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Add a new group to a module
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const fetchAddModuleVisibilityModuleVisibilityPost = (
+  variables: AddModuleVisibilityModuleVisibilityPostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.ModuleVisibilityCreate,
+    AddModuleVisibilityModuleVisibilityPostError,
+    Schemas.ModuleVisibilityCreate,
+    {},
+    {},
+    {}
+  >({ url: "/module-visibility/", method: "post", ...variables, signal });
+
+/**
+ * Add a new group to a module
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const useAddModuleVisibilityModuleVisibilityPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.ModuleVisibilityCreate,
+      AddModuleVisibilityModuleVisibilityPostError,
+      AddModuleVisibilityModuleVisibilityPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.ModuleVisibilityCreate,
+    AddModuleVisibilityModuleVisibilityPostError,
+    AddModuleVisibilityModuleVisibilityPostVariables
+  >({
+    mutationFn: (variables: AddModuleVisibilityModuleVisibilityPostVariables) =>
+      fetchAddModuleVisibilityModuleVisibilityPost({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type GetUserModulesVisibilityModuleVisibilityMeGetError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type GetUserModulesVisibilityModuleVisibilityMeGetResponse = string[];
+
+export type GetUserModulesVisibilityModuleVisibilityMeGetVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * Get group user accessible root
+ *
+ * **This endpoint is only usable by everyone**
+ */
+export const fetchGetUserModulesVisibilityModuleVisibilityMeGet = (
+  variables: GetUserModulesVisibilityModuleVisibilityMeGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    GetUserModulesVisibilityModuleVisibilityMeGetResponse,
+    GetUserModulesVisibilityModuleVisibilityMeGetError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/module-visibility/me", method: "get", ...variables, signal });
+
+/**
+ * Get group user accessible root
+ *
+ * **This endpoint is only usable by everyone**
+ */
+export const useGetUserModulesVisibilityModuleVisibilityMeGet = <
+  TData = GetUserModulesVisibilityModuleVisibilityMeGetResponse
+>(
+  variables: GetUserModulesVisibilityModuleVisibilityMeGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      GetUserModulesVisibilityModuleVisibilityMeGetResponse,
+      GetUserModulesVisibilityModuleVisibilityMeGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    GetUserModulesVisibilityModuleVisibilityMeGetResponse,
+    GetUserModulesVisibilityModuleVisibilityMeGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/module-visibility/me",
+      operationId: "getUserModulesVisibilityModuleVisibilityMeGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetUserModulesVisibilityModuleVisibilityMeGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type DeleteSessionModuleVisibilityRootGroupIdDeletePathParams = {
+  root: string;
+  groupId: string;
+};
+
+export type DeleteSessionModuleVisibilityRootGroupIdDeleteError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type DeleteSessionModuleVisibilityRootGroupIdDeleteVariables = {
+  pathParams: DeleteSessionModuleVisibilityRootGroupIdDeletePathParams;
+} & HyperionContext["fetcherOptions"];
+
+export const fetchDeleteSessionModuleVisibilityRootGroupIdDelete = (
+  variables: DeleteSessionModuleVisibilityRootGroupIdDeleteVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    DeleteSessionModuleVisibilityRootGroupIdDeleteError,
+    undefined,
+    {},
+    {},
+    DeleteSessionModuleVisibilityRootGroupIdDeletePathParams
+  >({
+    url: "/module-visibility/{root}/{groupId}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
+
+export const useDeleteSessionModuleVisibilityRootGroupIdDelete = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      DeleteSessionModuleVisibilityRootGroupIdDeleteError,
+      DeleteSessionModuleVisibilityRootGroupIdDeleteVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    DeleteSessionModuleVisibilityRootGroupIdDeleteError,
+    DeleteSessionModuleVisibilityRootGroupIdDeleteVariables
+  >({
+    mutationFn: (
+      variables: DeleteSessionModuleVisibilityRootGroupIdDeleteVariables
+    ) =>
+      fetchDeleteSessionModuleVisibilityRootGroupIdDelete({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type ReadGroupsGroupsGetError = Fetcher.ErrorWrapper<undefined>;
+
+export type ReadGroupsGroupsGetResponse = Schemas.CoreGroupSimple[];
+
+export type ReadGroupsGroupsGetVariables = HyperionContext["fetcherOptions"];
+
+/**
+ * Return all groups from database as a list of dictionaries
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const fetchReadGroupsGroupsGet = (
+  variables: ReadGroupsGroupsGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    ReadGroupsGroupsGetResponse,
+    ReadGroupsGroupsGetError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/groups/", method: "get", ...variables, signal });
+
+/**
+ * Return all groups from database as a list of dictionaries
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const useReadGroupsGroupsGet = <TData = ReadGroupsGroupsGetResponse>(
+  variables: ReadGroupsGroupsGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      ReadGroupsGroupsGetResponse,
+      ReadGroupsGroupsGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    ReadGroupsGroupsGetResponse,
+    ReadGroupsGroupsGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/groups/",
+      operationId: "readGroupsGroupsGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchReadGroupsGroupsGet({ ...fetcherOptions, ...variables }, signal),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type CreateGroupGroupsPostError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type CreateGroupGroupsPostVariables = {
+  body: Schemas.CoreGroupCreate;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Create a new group.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const fetchCreateGroupGroupsPost = (
+  variables: CreateGroupGroupsPostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.CoreGroupSimple,
+    CreateGroupGroupsPostError,
+    Schemas.CoreGroupCreate,
+    {},
+    {},
+    {}
+  >({ url: "/groups/", method: "post", ...variables, signal });
+
+/**
+ * Create a new group.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const useCreateGroupGroupsPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.CoreGroupSimple,
+      CreateGroupGroupsPostError,
+      CreateGroupGroupsPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.CoreGroupSimple,
+    CreateGroupGroupsPostError,
+    CreateGroupGroupsPostVariables
+  >({
+    mutationFn: (variables: CreateGroupGroupsPostVariables) =>
+      fetchCreateGroupGroupsPost({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
+export type ReadGroupGroupsGroupIdGetPathParams = {
+  groupId: string;
+};
+
+export type ReadGroupGroupsGroupIdGetError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type ReadGroupGroupsGroupIdGetVariables = {
+  pathParams: ReadGroupGroupsGroupIdGetPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Return group with id from database as a dictionary. This includes a list of users being members of the group.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const fetchReadGroupGroupsGroupIdGet = (
+  variables: ReadGroupGroupsGroupIdGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.CoreGroup,
+    ReadGroupGroupsGroupIdGetError,
+    undefined,
+    {},
+    {},
+    ReadGroupGroupsGroupIdGetPathParams
+  >({ url: "/groups/{groupId}", method: "get", ...variables, signal });
+
+/**
+ * Return group with id from database as a dictionary. This includes a list of users being members of the group.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const useReadGroupGroupsGroupIdGet = <TData = Schemas.CoreGroup>(
+  variables: ReadGroupGroupsGroupIdGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      Schemas.CoreGroup,
+      ReadGroupGroupsGroupIdGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    Schemas.CoreGroup,
+    ReadGroupGroupsGroupIdGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/groups/{groupId}",
+      operationId: "readGroupGroupsGroupIdGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchReadGroupGroupsGroupIdGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type UpdateGroupGroupsGroupIdPatchPathParams = {
+  groupId: string;
+};
+
+export type UpdateGroupGroupsGroupIdPatchError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type UpdateGroupGroupsGroupIdPatchVariables = {
+  body?: Schemas.CoreGroupUpdate;
+  pathParams: UpdateGroupGroupsGroupIdPatchPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Update the name or the description of a group.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const fetchUpdateGroupGroupsGroupIdPatch = (
+  variables: UpdateGroupGroupsGroupIdPatchVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    UpdateGroupGroupsGroupIdPatchError,
+    Schemas.CoreGroupUpdate,
+    {},
+    {},
+    UpdateGroupGroupsGroupIdPatchPathParams
+  >({ url: "/groups/{groupId}", method: "patch", ...variables, signal });
+
+/**
+ * Update the name or the description of a group.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const useUpdateGroupGroupsGroupIdPatch = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      UpdateGroupGroupsGroupIdPatchError,
+      UpdateGroupGroupsGroupIdPatchVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    UpdateGroupGroupsGroupIdPatchError,
+    UpdateGroupGroupsGroupIdPatchVariables
+  >({
+    mutationFn: (variables: UpdateGroupGroupsGroupIdPatchVariables) =>
+      fetchUpdateGroupGroupsGroupIdPatch({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
+export type DeleteGroupGroupsGroupIdDeletePathParams = {
+  groupId: string;
+};
+
+export type DeleteGroupGroupsGroupIdDeleteError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type DeleteGroupGroupsGroupIdDeleteVariables = {
+  pathParams: DeleteGroupGroupsGroupIdDeletePathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Delete group from database.
+ * This will remove the group from all users but won't delete any user.
+ *
+ * `GroupTypes` groups can not be deleted.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const fetchDeleteGroupGroupsGroupIdDelete = (
+  variables: DeleteGroupGroupsGroupIdDeleteVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    DeleteGroupGroupsGroupIdDeleteError,
+    undefined,
+    {},
+    {},
+    DeleteGroupGroupsGroupIdDeletePathParams
+  >({ url: "/groups/{groupId}", method: "delete", ...variables, signal });
+
+/**
+ * Delete group from database.
+ * This will remove the group from all users but won't delete any user.
+ *
+ * `GroupTypes` groups can not be deleted.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const useDeleteGroupGroupsGroupIdDelete = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      DeleteGroupGroupsGroupIdDeleteError,
+      DeleteGroupGroupsGroupIdDeleteVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    DeleteGroupGroupsGroupIdDeleteError,
+    DeleteGroupGroupsGroupIdDeleteVariables
+  >({
+    mutationFn: (variables: DeleteGroupGroupsGroupIdDeleteVariables) =>
+      fetchDeleteGroupGroupsGroupIdDelete({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
+export type CreateMembershipGroupsMembershipPostError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type CreateMembershipGroupsMembershipPostVariables = {
+  body: Schemas.CoreMembership;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Create a new membership in database and return the group. This allows to "add a user to a group".
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const fetchCreateMembershipGroupsMembershipPost = (
+  variables: CreateMembershipGroupsMembershipPostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.CoreGroup,
+    CreateMembershipGroupsMembershipPostError,
+    Schemas.CoreMembership,
+    {},
+    {},
+    {}
+  >({ url: "/groups/membership", method: "post", ...variables, signal });
+
+/**
+ * Create a new membership in database and return the group. This allows to "add a user to a group".
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const useCreateMembershipGroupsMembershipPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.CoreGroup,
+      CreateMembershipGroupsMembershipPostError,
+      CreateMembershipGroupsMembershipPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.CoreGroup,
+    CreateMembershipGroupsMembershipPostError,
+    CreateMembershipGroupsMembershipPostVariables
+  >({
+    mutationFn: (variables: CreateMembershipGroupsMembershipPostVariables) =>
+      fetchCreateMembershipGroupsMembershipPost({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type DeleteMembershipGroupsMembershipDeleteError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type DeleteMembershipGroupsMembershipDeleteVariables = {
+  body: Schemas.CoreMembershipDelete;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Delete a membership using the user and group ids.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const fetchDeleteMembershipGroupsMembershipDelete = (
+  variables: DeleteMembershipGroupsMembershipDeleteVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    DeleteMembershipGroupsMembershipDeleteError,
+    Schemas.CoreMembershipDelete,
+    {},
+    {},
+    {}
+  >({ url: "/groups/membership", method: "delete", ...variables, signal });
+
+/**
+ * Delete a membership using the user and group ids.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const useDeleteMembershipGroupsMembershipDelete = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      DeleteMembershipGroupsMembershipDeleteError,
+      DeleteMembershipGroupsMembershipDeleteVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    DeleteMembershipGroupsMembershipDeleteError,
+    DeleteMembershipGroupsMembershipDeleteVariables
+  >({
+    mutationFn: (variables: DeleteMembershipGroupsMembershipDeleteVariables) =>
+      fetchDeleteMembershipGroupsMembershipDelete({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type CreateBatchMembershipGroupsBatchMembershipPostError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type CreateBatchMembershipGroupsBatchMembershipPostVariables = {
+  body: Schemas.CoreBatchMembership;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Add a list of user to a group, using a list of email.
+ * If an user does not exist it will be ignored.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const fetchCreateBatchMembershipGroupsBatchMembershipPost = (
+  variables: CreateBatchMembershipGroupsBatchMembershipPostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    CreateBatchMembershipGroupsBatchMembershipPostError,
+    Schemas.CoreBatchMembership,
+    {},
+    {},
+    {}
+  >({ url: "/groups/batch-membership", method: "post", ...variables, signal });
+
+/**
+ * Add a list of user to a group, using a list of email.
+ * If an user does not exist it will be ignored.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const useCreateBatchMembershipGroupsBatchMembershipPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      CreateBatchMembershipGroupsBatchMembershipPostError,
+      CreateBatchMembershipGroupsBatchMembershipPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    CreateBatchMembershipGroupsBatchMembershipPostError,
+    CreateBatchMembershipGroupsBatchMembershipPostVariables
+  >({
+    mutationFn: (
+      variables: CreateBatchMembershipGroupsBatchMembershipPostVariables
+    ) =>
+      fetchCreateBatchMembershipGroupsBatchMembershipPost({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type DeleteBatchMembershipGroupsBatchMembershipDeleteError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type DeleteBatchMembershipGroupsBatchMembershipDeleteVariables = {
+  body: Schemas.CoreBatchDeleteMembership;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * This endpoint removes all users from a given group.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const fetchDeleteBatchMembershipGroupsBatchMembershipDelete = (
+  variables: DeleteBatchMembershipGroupsBatchMembershipDeleteVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    DeleteBatchMembershipGroupsBatchMembershipDeleteError,
+    Schemas.CoreBatchDeleteMembership,
+    {},
+    {},
+    {}
+  >({
+    url: "/groups/batch-membership",
+    method: "delete",
+    ...variables,
+    signal,
+  });
+
+/**
+ * This endpoint removes all users from a given group.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const useDeleteBatchMembershipGroupsBatchMembershipDelete = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      DeleteBatchMembershipGroupsBatchMembershipDeleteError,
+      DeleteBatchMembershipGroupsBatchMembershipDeleteVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    DeleteBatchMembershipGroupsBatchMembershipDeleteError,
+    DeleteBatchMembershipGroupsBatchMembershipDeleteVariables
+  >({
+    mutationFn: (
+      variables: DeleteBatchMembershipGroupsBatchMembershipDeleteVariables
+    ) =>
+      fetchDeleteBatchMembershipGroupsBatchMembershipDelete({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type GetDevicesNotificationDevicesGetError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type GetDevicesNotificationDevicesGetResponse = Schemas.FirebaseDevice[];
+
+export type GetDevicesNotificationDevicesGetVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * Get all devices a user have registered.
+ * This endpoint is useful to get firebase tokens for debugging purposes.
+ *
+ * **Only admins can use this endpoint**
+ */
+export const fetchGetDevicesNotificationDevicesGet = (
+  variables: GetDevicesNotificationDevicesGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    GetDevicesNotificationDevicesGetResponse,
+    GetDevicesNotificationDevicesGetError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/notification/devices", method: "get", ...variables, signal });
+
+/**
+ * Get all devices a user have registered.
+ * This endpoint is useful to get firebase tokens for debugging purposes.
+ *
+ * **Only admins can use this endpoint**
+ */
+export const useGetDevicesNotificationDevicesGet = <
+  TData = GetDevicesNotificationDevicesGetResponse
+>(
+  variables: GetDevicesNotificationDevicesGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      GetDevicesNotificationDevicesGetResponse,
+      GetDevicesNotificationDevicesGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    GetDevicesNotificationDevicesGetResponse,
+    GetDevicesNotificationDevicesGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/notification/devices",
+      operationId: "getDevicesNotificationDevicesGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetDevicesNotificationDevicesGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type RegisterFirebaseDeviceNotificationDevicesPostError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type RegisterFirebaseDeviceNotificationDevicesPostVariables = {
+  body: Schemas.BodyRegisterFirebaseDeviceNotificationDevicesPost;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Register a firebase device for the user, if the device already exists, this will update the creation date.
+ * This endpoint should be called once a month to ensure that the token is still valide.
+ *
  * **The user must be authenticated to use this endpoint**
  */
-export const fetchGetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGet =
+export const fetchRegisterFirebaseDeviceNotificationDevicesPost = (
+  variables: RegisterFirebaseDeviceNotificationDevicesPostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    RegisterFirebaseDeviceNotificationDevicesPostError,
+    Schemas.BodyRegisterFirebaseDeviceNotificationDevicesPost,
+    {},
+    {},
+    {}
+  >({ url: "/notification/devices", method: "post", ...variables, signal });
+
+/**
+ * Register a firebase device for the user, if the device already exists, this will update the creation date.
+ * This endpoint should be called once a month to ensure that the token is still valide.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const useRegisterFirebaseDeviceNotificationDevicesPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      RegisterFirebaseDeviceNotificationDevicesPostError,
+      RegisterFirebaseDeviceNotificationDevicesPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    RegisterFirebaseDeviceNotificationDevicesPostError,
+    RegisterFirebaseDeviceNotificationDevicesPostVariables
+  >({
+    mutationFn: (
+      variables: RegisterFirebaseDeviceNotificationDevicesPostVariables
+    ) =>
+      fetchRegisterFirebaseDeviceNotificationDevicesPost({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type UnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDeletePathParams =
+  {
+    firebaseToken: string;
+  };
+
+export type UnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDeleteError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type UnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDeleteVariables =
+  {
+    pathParams: UnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDeletePathParams;
+  } & HyperionContext["fetcherOptions"];
+
+/**
+ * Unregister a new firebase device for the user
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const fetchUnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDelete =
   (
-    variables: GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGetVariables,
-    signal?: AbortSignal,
+    variables: UnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDeleteVariables,
+    signal?: AbortSignal
   ) =>
     hyperionFetch<
-      GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGetResponse,
-      GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGetError,
+      undefined,
+      UnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDeleteError,
       undefined,
       {},
       {},
-      {}
+      UnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDeletePathParams
     >({
-      url: "/booking/bookings/confirmed/users/me/manage",
-      method: "get",
+      url: "/notification/devices/{firebaseToken}",
+      method: "delete",
       ...variables,
       signal,
     });
 
 /**
- * Return all confirmed bookings a user can manage.
+ * Unregister a new firebase device for the user
+ *
  * **The user must be authenticated to use this endpoint**
  */
-export const useGetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGet =
-  <
-    TData = GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGetResponse,
-  >(
-    variables: GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGetVariables,
+export const useUnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDelete =
+  (
     options?: Omit<
-      reactQuery.UseQueryOptions<
-        GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGetResponse,
-        GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGetError,
-        TData
+      reactQuery.UseMutationOptions<
+        undefined,
+        UnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDeleteError,
+        UnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDeleteVariables
       >,
-      "queryKey" | "queryFn" | "initialData"
-    >,
+      "mutationFn"
+    >
   ) => {
-    const { fetcherOptions, queryOptions, queryKeyFn } =
-      useHyperionContext(options);
-    return reactQuery.useQuery<
-      GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGetResponse,
-      GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGetError,
-      TData
+    const { fetcherOptions } = useHyperionContext();
+    return reactQuery.useMutation<
+      undefined,
+      UnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDeleteError,
+      UnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDeleteVariables
     >({
-      queryKey: queryKeyFn({
-        path: "/booking/bookings/confirmed/users/me/manage",
-        operationId:
-          "getConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGet",
-        variables,
-      }),
-      queryFn: ({ signal }) =>
-        fetchGetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGet(
-          { ...fetcherOptions, ...variables },
-          signal,
-        ),
+      mutationFn: (
+        variables: UnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDeleteVariables
+      ) =>
+        fetchUnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDelete({
+          ...fetcherOptions,
+          ...variables,
+        }),
       ...options,
-      ...queryOptions,
     });
   };
 
-export type GetConfirmedBookingsBookingBookingsConfirmedGetError =
-  Fetcher.ErrorWrapper<undefined>;
+export type GetMessagesNotificationMessagesFirebaseTokenGetPathParams = {
+  firebaseToken: string;
+};
 
-export type GetConfirmedBookingsBookingBookingsConfirmedGetResponse =
-  Schemas.BookingReturnSimpleApplicant[];
+export type GetMessagesNotificationMessagesFirebaseTokenGetError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
 
-export type GetConfirmedBookingsBookingBookingsConfirmedGetVariables =
-  HyperionContext["fetcherOptions"];
+export type GetMessagesNotificationMessagesFirebaseTokenGetResponse =
+  Schemas.Message[];
+
+export type GetMessagesNotificationMessagesFirebaseTokenGetVariables = {
+  pathParams: GetMessagesNotificationMessagesFirebaseTokenGetPathParams;
+} & HyperionContext["fetcherOptions"];
 
 /**
- * Return all confirmed bookings.
+ * Get all messages for a specific device from the user
  *
  * **The user must be authenticated to use this endpoint**
  */
-export const fetchGetConfirmedBookingsBookingBookingsConfirmedGet = (
-  variables: GetConfirmedBookingsBookingBookingsConfirmedGetVariables,
-  signal?: AbortSignal,
+export const fetchGetMessagesNotificationMessagesFirebaseTokenGet = (
+  variables: GetMessagesNotificationMessagesFirebaseTokenGetVariables,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
-    GetConfirmedBookingsBookingBookingsConfirmedGetResponse,
-    GetConfirmedBookingsBookingBookingsConfirmedGetError,
+    GetMessagesNotificationMessagesFirebaseTokenGetResponse,
+    GetMessagesNotificationMessagesFirebaseTokenGetError,
     undefined,
     {},
     {},
-    {}
+    GetMessagesNotificationMessagesFirebaseTokenGetPathParams
   >({
-    url: "/booking/bookings/confirmed",
+    url: "/notification/messages/{firebaseToken}",
     method: "get",
     ...variables,
     signal,
   });
 
 /**
- * Return all confirmed bookings.
+ * Get all messages for a specific device from the user
  *
  * **The user must be authenticated to use this endpoint**
  */
-export const useGetConfirmedBookingsBookingBookingsConfirmedGet = <
-  TData = GetConfirmedBookingsBookingBookingsConfirmedGetResponse,
+export const useGetMessagesNotificationMessagesFirebaseTokenGet = <
+  TData = GetMessagesNotificationMessagesFirebaseTokenGetResponse
 >(
-  variables: GetConfirmedBookingsBookingBookingsConfirmedGetVariables,
+  variables: GetMessagesNotificationMessagesFirebaseTokenGetVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
-      GetConfirmedBookingsBookingBookingsConfirmedGetResponse,
-      GetConfirmedBookingsBookingBookingsConfirmedGetError,
+      GetMessagesNotificationMessagesFirebaseTokenGetResponse,
+      GetMessagesNotificationMessagesFirebaseTokenGetError,
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
   return reactQuery.useQuery<
-    GetConfirmedBookingsBookingBookingsConfirmedGetResponse,
-    GetConfirmedBookingsBookingBookingsConfirmedGetError,
+    GetMessagesNotificationMessagesFirebaseTokenGetResponse,
+    GetMessagesNotificationMessagesFirebaseTokenGetError,
     TData
   >({
     queryKey: queryKeyFn({
-      path: "/booking/bookings/confirmed",
-      operationId: "getConfirmedBookingsBookingBookingsConfirmedGet",
+      path: "/notification/messages/{firebaseToken}",
+      operationId: "getMessagesNotificationMessagesFirebaseTokenGet",
       variables,
     }),
     queryFn: ({ signal }) =>
-      fetchGetConfirmedBookingsBookingBookingsConfirmedGet(
+      fetchGetMessagesNotificationMessagesFirebaseTokenGet(
         { ...fetcherOptions, ...variables },
-        signal,
+        signal
       ),
     ...options,
     ...queryOptions,
   });
 };
 
-export type GetApplicantBookingsBookingBookingsUsersMeGetError =
-  Fetcher.ErrorWrapper<undefined>;
-
-export type GetApplicantBookingsBookingBookingsUsersMeGetResponse =
-  Schemas.BookingReturn[];
-
-export type GetApplicantBookingsBookingBookingsUsersMeGetVariables =
-  HyperionContext["fetcherOptions"];
-
-/**
- * Get the user bookings.
- *
- * **Only usable by the user**
- */
-export const fetchGetApplicantBookingsBookingBookingsUsersMeGet = (
-  variables: GetApplicantBookingsBookingBookingsUsersMeGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetApplicantBookingsBookingBookingsUsersMeGetResponse,
-    GetApplicantBookingsBookingBookingsUsersMeGetError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/booking/bookings/users/me", method: "get", ...variables, signal });
-
-/**
- * Get the user bookings.
- *
- * **Only usable by the user**
- */
-export const useGetApplicantBookingsBookingBookingsUsersMeGet = <
-  TData = GetApplicantBookingsBookingBookingsUsersMeGetResponse,
->(
-  variables: GetApplicantBookingsBookingBookingsUsersMeGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetApplicantBookingsBookingBookingsUsersMeGetResponse,
-      GetApplicantBookingsBookingBookingsUsersMeGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetApplicantBookingsBookingBookingsUsersMeGetResponse,
-    GetApplicantBookingsBookingBookingsUsersMeGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/booking/bookings/users/me",
-      operationId: "getApplicantBookingsBookingBookingsUsersMeGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetApplicantBookingsBookingBookingsUsersMeGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type CreateBookingBookingBookingsPostError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type CreateBookingBookingBookingsPostVariables = {
-  body: Schemas.BookingBase;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Create a booking.
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const fetchCreateBookingBookingBookingsPost = (
-  variables: CreateBookingBookingBookingsPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.BookingReturn,
-    CreateBookingBookingBookingsPostError,
-    Schemas.BookingBase,
-    {},
-    {},
-    {}
-  >({ url: "/booking/bookings", method: "post", ...variables, signal });
-
-/**
- * Create a booking.
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const useCreateBookingBookingBookingsPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.BookingReturn,
-      CreateBookingBookingBookingsPostError,
-      CreateBookingBookingBookingsPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.BookingReturn,
-    CreateBookingBookingBookingsPostError,
-    CreateBookingBookingBookingsPostVariables
-  >({
-    mutationFn: (variables: CreateBookingBookingBookingsPostVariables) =>
-      fetchCreateBookingBookingBookingsPost({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type EditBookingBookingBookingsBookingIdPatchPathParams = {
-  bookingId: string;
-};
-
-export type EditBookingBookingBookingsBookingIdPatchError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type EditBookingBookingBookingsBookingIdPatchVariables = {
-  body?: Schemas.BookingEdit;
-  pathParams: EditBookingBookingBookingsBookingIdPatchPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Edit a booking.
- *
- * **Only usable by a user in the manager group of the booking or applicant before decision**
- */
-export const fetchEditBookingBookingBookingsBookingIdPatch = (
-  variables: EditBookingBookingBookingsBookingIdPatchVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    EditBookingBookingBookingsBookingIdPatchError,
-    Schemas.BookingEdit,
-    {},
-    {},
-    EditBookingBookingBookingsBookingIdPatchPathParams
-  >({
-    url: "/booking/bookings/{bookingId}",
-    method: "patch",
-    ...variables,
-    signal,
-  });
-
-/**
- * Edit a booking.
- *
- * **Only usable by a user in the manager group of the booking or applicant before decision**
- */
-export const useEditBookingBookingBookingsBookingIdPatch = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      EditBookingBookingBookingsBookingIdPatchError,
-      EditBookingBookingBookingsBookingIdPatchVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    EditBookingBookingBookingsBookingIdPatchError,
-    EditBookingBookingBookingsBookingIdPatchVariables
-  >({
-    mutationFn: (
-      variables: EditBookingBookingBookingsBookingIdPatchVariables,
-    ) =>
-      fetchEditBookingBookingBookingsBookingIdPatch({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type DeleteBookingBookingBookingsBookingIdDeletePathParams = {
-  bookingId: string;
-};
-
-export type DeleteBookingBookingBookingsBookingIdDeleteError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type DeleteBookingBookingBookingsBookingIdDeleteVariables = {
-  pathParams: DeleteBookingBookingBookingsBookingIdDeletePathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Remove a booking.
- *
- * **Only usable by the applicant before decision**
- */
-export const fetchDeleteBookingBookingBookingsBookingIdDelete = (
-  variables: DeleteBookingBookingBookingsBookingIdDeleteVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    DeleteBookingBookingBookingsBookingIdDeleteError,
-    undefined,
-    {},
-    {},
-    DeleteBookingBookingBookingsBookingIdDeletePathParams
-  >({
-    url: "/booking/bookings/{bookingId}",
-    method: "delete",
-    ...variables,
-    signal,
-  });
-
-/**
- * Remove a booking.
- *
- * **Only usable by the applicant before decision**
- */
-export const useDeleteBookingBookingBookingsBookingIdDelete = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      DeleteBookingBookingBookingsBookingIdDeleteError,
-      DeleteBookingBookingBookingsBookingIdDeleteVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    DeleteBookingBookingBookingsBookingIdDeleteError,
-    DeleteBookingBookingBookingsBookingIdDeleteVariables
-  >({
-    mutationFn: (
-      variables: DeleteBookingBookingBookingsBookingIdDeleteVariables,
-    ) =>
-      fetchDeleteBookingBookingBookingsBookingIdDelete({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type ConfirmBookingBookingBookingsBookingIdReplyDecisionPatchPathParams =
+export type SubscribeToTopicNotificationTopicsTopicStrSubscribePostPathParams =
   {
-    bookingId: string;
-    decision: Schemas.Decision;
+    /**
+     * The topic to subscribe to. The Topic may be followed by an additional identifier (ex: cinema_4c029b5f-2bf7-4b70-85d4-340a4bd28653)
+     */
+    topicStr: string;
   };
 
-export type ConfirmBookingBookingBookingsBookingIdReplyDecisionPatchError =
+export type SubscribeToTopicNotificationTopicsTopicStrSubscribePostError =
   Fetcher.ErrorWrapper<{
     status: 422;
     payload: Schemas.HTTPValidationError;
   }>;
 
-export type ConfirmBookingBookingBookingsBookingIdReplyDecisionPatchVariables =
+export type SubscribeToTopicNotificationTopicsTopicStrSubscribePostVariables = {
+  pathParams: SubscribeToTopicNotificationTopicsTopicStrSubscribePostPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Subscribe to a topic
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const fetchSubscribeToTopicNotificationTopicsTopicStrSubscribePost = (
+  variables: SubscribeToTopicNotificationTopicsTopicStrSubscribePostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    SubscribeToTopicNotificationTopicsTopicStrSubscribePostError,
+    undefined,
+    {},
+    {},
+    SubscribeToTopicNotificationTopicsTopicStrSubscribePostPathParams
+  >({
+    url: "/notification/topics/{topicStr}/subscribe",
+    method: "post",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Subscribe to a topic
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const useSubscribeToTopicNotificationTopicsTopicStrSubscribePost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      SubscribeToTopicNotificationTopicsTopicStrSubscribePostError,
+      SubscribeToTopicNotificationTopicsTopicStrSubscribePostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    SubscribeToTopicNotificationTopicsTopicStrSubscribePostError,
+    SubscribeToTopicNotificationTopicsTopicStrSubscribePostVariables
+  >({
+    mutationFn: (
+      variables: SubscribeToTopicNotificationTopicsTopicStrSubscribePostVariables
+    ) =>
+      fetchSubscribeToTopicNotificationTopicsTopicStrSubscribePost({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type UnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePostPathParams =
   {
-    pathParams: ConfirmBookingBookingBookingsBookingIdReplyDecisionPatchPathParams;
+    topicStr: string;
+  };
+
+export type UnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePostError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type UnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePostVariables =
+  {
+    pathParams: UnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePostPathParams;
   } & HyperionContext["fetcherOptions"];
 
 /**
- * Give a decision to a booking.
+ * Unsubscribe to a topic
  *
- * **Only usable by a user in the manager group of the booking**
+ * **The user must be authenticated to use this endpoint**
  */
-export const fetchConfirmBookingBookingBookingsBookingIdReplyDecisionPatch = (
-  variables: ConfirmBookingBookingBookingsBookingIdReplyDecisionPatchVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    ConfirmBookingBookingBookingsBookingIdReplyDecisionPatchError,
-    undefined,
-    {},
-    {},
-    ConfirmBookingBookingBookingsBookingIdReplyDecisionPatchPathParams
-  >({
-    url: "/booking/bookings/{bookingId}/reply/{decision}",
-    method: "patch",
-    ...variables,
-    signal,
-  });
+export const fetchUnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePost =
+  (
+    variables: UnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePostVariables,
+    signal?: AbortSignal
+  ) =>
+    hyperionFetch<
+      undefined,
+      UnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePostError,
+      undefined,
+      {},
+      {},
+      UnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePostPathParams
+    >({
+      url: "/notification/topics/{topicStr}/unsubscribe",
+      method: "post",
+      ...variables,
+      signal,
+    });
 
 /**
- * Give a decision to a booking.
+ * Unsubscribe to a topic
  *
- * **Only usable by a user in the manager group of the booking**
+ * **The user must be authenticated to use this endpoint**
  */
-export const useConfirmBookingBookingBookingsBookingIdReplyDecisionPatch = (
+export const useUnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePost = (
   options?: Omit<
     reactQuery.UseMutationOptions<
       undefined,
-      ConfirmBookingBookingBookingsBookingIdReplyDecisionPatchError,
-      ConfirmBookingBookingBookingsBookingIdReplyDecisionPatchVariables
+      UnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePostError,
+      UnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePostVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
     undefined,
-    ConfirmBookingBookingBookingsBookingIdReplyDecisionPatchError,
-    ConfirmBookingBookingBookingsBookingIdReplyDecisionPatchVariables
+    UnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePostError,
+    UnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePostVariables
   >({
     mutationFn: (
-      variables: ConfirmBookingBookingBookingsBookingIdReplyDecisionPatchVariables,
+      variables: UnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePostVariables
     ) =>
-      fetchConfirmBookingBookingBookingsBookingIdReplyDecisionPatch({
+      fetchUnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePost({
         ...fetcherOptions,
         ...variables,
       }),
@@ -4664,949 +2333,1478 @@ export const useConfirmBookingBookingBookingsBookingIdReplyDecisionPatch = (
   });
 };
 
-export type GetRoomsBookingRoomsGetError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetRoomsBookingRoomsGetResponse = Schemas.RoomComplete[];
-
-export type GetRoomsBookingRoomsGetVariables =
-  HyperionContext["fetcherOptions"];
-
-/**
- * Get all rooms.
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const fetchGetRoomsBookingRoomsGet = (
-  variables: GetRoomsBookingRoomsGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetRoomsBookingRoomsGetResponse,
-    GetRoomsBookingRoomsGetError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/booking/rooms", method: "get", ...variables, signal });
-
-/**
- * Get all rooms.
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const useGetRoomsBookingRoomsGet = <
-  TData = GetRoomsBookingRoomsGetResponse,
->(
-  variables: GetRoomsBookingRoomsGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetRoomsBookingRoomsGetResponse,
-      GetRoomsBookingRoomsGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetRoomsBookingRoomsGetResponse,
-    GetRoomsBookingRoomsGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/booking/rooms",
-      operationId: "getRoomsBookingRoomsGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetRoomsBookingRoomsGet({ ...fetcherOptions, ...variables }, signal),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type CreateRoomBookingRoomsPostError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type CreateRoomBookingRoomsPostVariables = {
-  body: Schemas.RoomBase;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Create a new room in database.
- *
- * **This endpoint is only usable by admins**
- */
-export const fetchCreateRoomBookingRoomsPost = (
-  variables: CreateRoomBookingRoomsPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.RoomComplete,
-    CreateRoomBookingRoomsPostError,
-    Schemas.RoomBase,
-    {},
-    {},
-    {}
-  >({ url: "/booking/rooms", method: "post", ...variables, signal });
-
-/**
- * Create a new room in database.
- *
- * **This endpoint is only usable by admins**
- */
-export const useCreateRoomBookingRoomsPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.RoomComplete,
-      CreateRoomBookingRoomsPostError,
-      CreateRoomBookingRoomsPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.RoomComplete,
-    CreateRoomBookingRoomsPostError,
-    CreateRoomBookingRoomsPostVariables
-  >({
-    mutationFn: (variables: CreateRoomBookingRoomsPostVariables) =>
-      fetchCreateRoomBookingRoomsPost({ ...fetcherOptions, ...variables }),
-    ...options,
-  });
-};
-
-export type EditRoomBookingRoomsRoomIdPatchPathParams = {
-  roomId: string;
-};
-
-export type EditRoomBookingRoomsRoomIdPatchError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type EditRoomBookingRoomsRoomIdPatchVariables = {
-  body: Schemas.RoomBase;
-  pathParams: EditRoomBookingRoomsRoomIdPatchPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Edit a room.
- *
- * **This endpoint is only usable by admins**
- */
-export const fetchEditRoomBookingRoomsRoomIdPatch = (
-  variables: EditRoomBookingRoomsRoomIdPatchVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    EditRoomBookingRoomsRoomIdPatchError,
-    Schemas.RoomBase,
-    {},
-    {},
-    EditRoomBookingRoomsRoomIdPatchPathParams
-  >({ url: "/booking/rooms/{roomId}", method: "patch", ...variables, signal });
-
-/**
- * Edit a room.
- *
- * **This endpoint is only usable by admins**
- */
-export const useEditRoomBookingRoomsRoomIdPatch = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      EditRoomBookingRoomsRoomIdPatchError,
-      EditRoomBookingRoomsRoomIdPatchVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    EditRoomBookingRoomsRoomIdPatchError,
-    EditRoomBookingRoomsRoomIdPatchVariables
-  >({
-    mutationFn: (variables: EditRoomBookingRoomsRoomIdPatchVariables) =>
-      fetchEditRoomBookingRoomsRoomIdPatch({ ...fetcherOptions, ...variables }),
-    ...options,
-  });
-};
-
-export type DeleteRoomBookingRoomsRoomIdDeletePathParams = {
-  roomId: string;
-};
-
-export type DeleteRoomBookingRoomsRoomIdDeleteError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type DeleteRoomBookingRoomsRoomIdDeleteVariables = {
-  pathParams: DeleteRoomBookingRoomsRoomIdDeletePathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Delete a room only if there are not future or ongoing bookings of this room
- *
- * **This endpoint is only usable by admins**
- */
-export const fetchDeleteRoomBookingRoomsRoomIdDelete = (
-  variables: DeleteRoomBookingRoomsRoomIdDeleteVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    DeleteRoomBookingRoomsRoomIdDeleteError,
-    undefined,
-    {},
-    {},
-    DeleteRoomBookingRoomsRoomIdDeletePathParams
-  >({ url: "/booking/rooms/{roomId}", method: "delete", ...variables, signal });
-
-/**
- * Delete a room only if there are not future or ongoing bookings of this room
- *
- * **This endpoint is only usable by admins**
- */
-export const useDeleteRoomBookingRoomsRoomIdDelete = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      DeleteRoomBookingRoomsRoomIdDeleteError,
-      DeleteRoomBookingRoomsRoomIdDeleteVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    DeleteRoomBookingRoomsRoomIdDeleteError,
-    DeleteRoomBookingRoomsRoomIdDeleteVariables
-  >({
-    mutationFn: (variables: DeleteRoomBookingRoomsRoomIdDeleteVariables) =>
-      fetchDeleteRoomBookingRoomsRoomIdDelete({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type GetEventsCalendarEventsGetError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetEventsCalendarEventsGetResponse = Schemas.EventReturn[];
-
-export type GetEventsCalendarEventsGetVariables =
-  HyperionContext["fetcherOptions"];
-
-/**
- * Get all events from the database.
- */
-export const fetchGetEventsCalendarEventsGet = (
-  variables: GetEventsCalendarEventsGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetEventsCalendarEventsGetResponse,
-    GetEventsCalendarEventsGetError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/calendar/events/", method: "get", ...variables, signal });
-
-/**
- * Get all events from the database.
- */
-export const useGetEventsCalendarEventsGet = <
-  TData = GetEventsCalendarEventsGetResponse,
->(
-  variables: GetEventsCalendarEventsGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetEventsCalendarEventsGetResponse,
-      GetEventsCalendarEventsGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetEventsCalendarEventsGetResponse,
-    GetEventsCalendarEventsGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/calendar/events/",
-      operationId: "getEventsCalendarEventsGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetEventsCalendarEventsGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type AddEventCalendarEventsPostError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type AddEventCalendarEventsPostVariables = {
-  body: Schemas.EventBase;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Add an event to the calendar.
- */
-export const fetchAddEventCalendarEventsPost = (
-  variables: AddEventCalendarEventsPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.EventReturn,
-    AddEventCalendarEventsPostError,
-    Schemas.EventBase,
-    {},
-    {},
-    {}
-  >({ url: "/calendar/events/", method: "post", ...variables, signal });
-
-/**
- * Add an event to the calendar.
- */
-export const useAddEventCalendarEventsPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.EventReturn,
-      AddEventCalendarEventsPostError,
-      AddEventCalendarEventsPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.EventReturn,
-    AddEventCalendarEventsPostError,
-    AddEventCalendarEventsPostVariables
-  >({
-    mutationFn: (variables: AddEventCalendarEventsPostVariables) =>
-      fetchAddEventCalendarEventsPost({ ...fetcherOptions, ...variables }),
-    ...options,
-  });
-};
-
-export type GetConfirmedEventsCalendarEventsConfirmedGetError =
+export type GetTopicNotificationTopicsGetError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type GetConfirmedEventsCalendarEventsConfirmedGetResponse =
-  Schemas.EventComplete[];
+export type GetTopicNotificationTopicsGetResponse = string[];
 
-export type GetConfirmedEventsCalendarEventsConfirmedGetVariables =
+export type GetTopicNotificationTopicsGetVariables =
   HyperionContext["fetcherOptions"];
 
 /**
- * Get all confirmed events.
+ * Get topics the user is subscribed to
+ * Does not return session topics (those with a topic_identifier)
  *
- * **Usable by every member**
+ * **The user must be authenticated to use this endpoint**
  */
-export const fetchGetConfirmedEventsCalendarEventsConfirmedGet = (
-  variables: GetConfirmedEventsCalendarEventsConfirmedGetVariables,
-  signal?: AbortSignal,
+export const fetchGetTopicNotificationTopicsGet = (
+  variables: GetTopicNotificationTopicsGetVariables,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
-    GetConfirmedEventsCalendarEventsConfirmedGetResponse,
-    GetConfirmedEventsCalendarEventsConfirmedGetError,
+    GetTopicNotificationTopicsGetResponse,
+    GetTopicNotificationTopicsGetError,
     undefined,
     {},
     {},
     {}
-  >({ url: "/calendar/events/confirmed", method: "get", ...variables, signal });
+  >({ url: "/notification/topics", method: "get", ...variables, signal });
 
 /**
- * Get all confirmed events.
+ * Get topics the user is subscribed to
+ * Does not return session topics (those with a topic_identifier)
  *
- * **Usable by every member**
+ * **The user must be authenticated to use this endpoint**
  */
-export const useGetConfirmedEventsCalendarEventsConfirmedGet = <
-  TData = GetConfirmedEventsCalendarEventsConfirmedGetResponse,
+export const useGetTopicNotificationTopicsGet = <
+  TData = GetTopicNotificationTopicsGetResponse
 >(
-  variables: GetConfirmedEventsCalendarEventsConfirmedGetVariables,
+  variables: GetTopicNotificationTopicsGetVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
-      GetConfirmedEventsCalendarEventsConfirmedGetResponse,
-      GetConfirmedEventsCalendarEventsConfirmedGetError,
+      GetTopicNotificationTopicsGetResponse,
+      GetTopicNotificationTopicsGetError,
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
   return reactQuery.useQuery<
-    GetConfirmedEventsCalendarEventsConfirmedGetResponse,
-    GetConfirmedEventsCalendarEventsConfirmedGetError,
+    GetTopicNotificationTopicsGetResponse,
+    GetTopicNotificationTopicsGetError,
     TData
   >({
     queryKey: queryKeyFn({
-      path: "/calendar/events/confirmed",
-      operationId: "getConfirmedEventsCalendarEventsConfirmedGet",
+      path: "/notification/topics",
+      operationId: "getTopicNotificationTopicsGet",
       variables,
     }),
     queryFn: ({ signal }) =>
-      fetchGetConfirmedEventsCalendarEventsConfirmedGet(
+      fetchGetTopicNotificationTopicsGet(
         { ...fetcherOptions, ...variables },
-        signal,
+        signal
       ),
     ...options,
     ...queryOptions,
   });
 };
 
-export type GetApplicantBookingsCalendarEventsUserApplicantIdGetPathParams = {
-  applicantId: string;
+export type GetTopicIdentifierNotificationTopicsTopicStrGetPathParams = {
+  topicStr: string;
 };
 
-export type GetApplicantBookingsCalendarEventsUserApplicantIdGetError =
+export type GetTopicIdentifierNotificationTopicsTopicStrGetError =
   Fetcher.ErrorWrapper<{
     status: 422;
     payload: Schemas.HTTPValidationError;
   }>;
 
-export type GetApplicantBookingsCalendarEventsUserApplicantIdGetResponse =
-  Schemas.EventReturn[];
+export type GetTopicIdentifierNotificationTopicsTopicStrGetResponse = string[];
 
-export type GetApplicantBookingsCalendarEventsUserApplicantIdGetVariables = {
-  pathParams: GetApplicantBookingsCalendarEventsUserApplicantIdGetPathParams;
+export type GetTopicIdentifierNotificationTopicsTopicStrGetVariables = {
+  pathParams: GetTopicIdentifierNotificationTopicsTopicStrGetPathParams;
 } & HyperionContext["fetcherOptions"];
 
 /**
- * Get one user bookings.
+ * Get custom topic (with identifiers) the user is subscribed to
  *
- * **Usable by the user or admins**
+ * **The user must be authenticated to use this endpoint**
  */
-export const fetchGetApplicantBookingsCalendarEventsUserApplicantIdGet = (
-  variables: GetApplicantBookingsCalendarEventsUserApplicantIdGetVariables,
-  signal?: AbortSignal,
+export const fetchGetTopicIdentifierNotificationTopicsTopicStrGet = (
+  variables: GetTopicIdentifierNotificationTopicsTopicStrGetVariables,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
-    GetApplicantBookingsCalendarEventsUserApplicantIdGetResponse,
-    GetApplicantBookingsCalendarEventsUserApplicantIdGetError,
+    GetTopicIdentifierNotificationTopicsTopicStrGetResponse,
+    GetTopicIdentifierNotificationTopicsTopicStrGetError,
     undefined,
     {},
     {},
-    GetApplicantBookingsCalendarEventsUserApplicantIdGetPathParams
+    GetTopicIdentifierNotificationTopicsTopicStrGetPathParams
   >({
-    url: "/calendar/events/user/{applicantId}",
+    url: "/notification/topics/{topicStr}",
     method: "get",
     ...variables,
     signal,
   });
 
 /**
- * Get one user bookings.
+ * Get custom topic (with identifiers) the user is subscribed to
  *
- * **Usable by the user or admins**
+ * **The user must be authenticated to use this endpoint**
  */
-export const useGetApplicantBookingsCalendarEventsUserApplicantIdGet = <
-  TData = GetApplicantBookingsCalendarEventsUserApplicantIdGetResponse,
+export const useGetTopicIdentifierNotificationTopicsTopicStrGet = <
+  TData = GetTopicIdentifierNotificationTopicsTopicStrGetResponse
 >(
-  variables: GetApplicantBookingsCalendarEventsUserApplicantIdGetVariables,
+  variables: GetTopicIdentifierNotificationTopicsTopicStrGetVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
-      GetApplicantBookingsCalendarEventsUserApplicantIdGetResponse,
-      GetApplicantBookingsCalendarEventsUserApplicantIdGetError,
+      GetTopicIdentifierNotificationTopicsTopicStrGetResponse,
+      GetTopicIdentifierNotificationTopicsTopicStrGetError,
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
   return reactQuery.useQuery<
-    GetApplicantBookingsCalendarEventsUserApplicantIdGetResponse,
-    GetApplicantBookingsCalendarEventsUserApplicantIdGetError,
+    GetTopicIdentifierNotificationTopicsTopicStrGetResponse,
+    GetTopicIdentifierNotificationTopicsTopicStrGetError,
     TData
   >({
     queryKey: queryKeyFn({
-      path: "/calendar/events/user/{applicantId}",
-      operationId: "getApplicantBookingsCalendarEventsUserApplicantIdGet",
+      path: "/notification/topics/{topicStr}",
+      operationId: "getTopicIdentifierNotificationTopicsTopicStrGet",
       variables,
     }),
     queryFn: ({ signal }) =>
-      fetchGetApplicantBookingsCalendarEventsUserApplicantIdGet(
+      fetchGetTopicIdentifierNotificationTopicsTopicStrGet(
         { ...fetcherOptions, ...variables },
-        signal,
+        signal
       ),
     ...options,
     ...queryOptions,
   });
 };
 
-export type GetEventByIdCalendarEventsEventIdGetPathParams = {
-  eventId: string;
-};
-
-export type GetEventByIdCalendarEventsEventIdGetError = Fetcher.ErrorWrapper<{
+export type SendNotificationNotificationSendPostError = Fetcher.ErrorWrapper<{
   status: 422;
   payload: Schemas.HTTPValidationError;
 }>;
 
-export type GetEventByIdCalendarEventsEventIdGetVariables = {
-  pathParams: GetEventByIdCalendarEventsEventIdGetPathParams;
+export type SendNotificationNotificationSendPostVariables = {
+  body: Schemas.Message;
 } & HyperionContext["fetcherOptions"];
 
 /**
- * Get an event's information by its id.
+ * Send ourself a test notification.
+ *
+ * **Only admins can use this endpoint**
  */
-export const fetchGetEventByIdCalendarEventsEventIdGet = (
-  variables: GetEventByIdCalendarEventsEventIdGetVariables,
-  signal?: AbortSignal,
+export const fetchSendNotificationNotificationSendPost = (
+  variables: SendNotificationNotificationSendPostVariables,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
-    Schemas.EventComplete,
-    GetEventByIdCalendarEventsEventIdGetError,
+    void,
+    SendNotificationNotificationSendPostError,
+    Schemas.Message,
+    {},
+    {},
+    {}
+  >({ url: "/notification/send", method: "post", ...variables, signal });
+
+/**
+ * Send ourself a test notification.
+ *
+ * **Only admins can use this endpoint**
+ */
+export const useSendNotificationNotificationSendPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      void,
+      SendNotificationNotificationSendPostError,
+      SendNotificationNotificationSendPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    void,
+    SendNotificationNotificationSendPostError,
+    SendNotificationNotificationSendPostVariables
+  >({
+    mutationFn: (variables: SendNotificationNotificationSendPostVariables) =>
+      fetchSendNotificationNotificationSendPost({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type ReadUsersUsersGetError = Fetcher.ErrorWrapper<undefined>;
+
+export type ReadUsersUsersGetResponse = Schemas.CoreUserSimple[];
+
+export type ReadUsersUsersGetVariables = HyperionContext["fetcherOptions"];
+
+/**
+ * Return all users from database as a list of `CoreUserSimple`
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const fetchReadUsersUsersGet = (
+  variables: ReadUsersUsersGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    ReadUsersUsersGetResponse,
+    ReadUsersUsersGetError,
     undefined,
     {},
     {},
-    GetEventByIdCalendarEventsEventIdGetPathParams
-  >({ url: "/calendar/events/{eventId}", method: "get", ...variables, signal });
+    {}
+  >({ url: "/users/", method: "get", ...variables, signal });
 
 /**
- * Get an event's information by its id.
+ * Return all users from database as a list of `CoreUserSimple`
+ *
+ * **This endpoint is only usable by administrators**
  */
-export const useGetEventByIdCalendarEventsEventIdGet = <
-  TData = Schemas.EventComplete,
->(
-  variables: GetEventByIdCalendarEventsEventIdGetVariables,
+export const useReadUsersUsersGet = <TData = ReadUsersUsersGetResponse>(
+  variables: ReadUsersUsersGetVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
-      Schemas.EventComplete,
-      GetEventByIdCalendarEventsEventIdGetError,
+      ReadUsersUsersGetResponse,
+      ReadUsersUsersGetError,
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
   return reactQuery.useQuery<
-    Schemas.EventComplete,
-    GetEventByIdCalendarEventsEventIdGetError,
+    ReadUsersUsersGetResponse,
+    ReadUsersUsersGetError,
     TData
   >({
     queryKey: queryKeyFn({
-      path: "/calendar/events/{eventId}",
-      operationId: "getEventByIdCalendarEventsEventIdGet",
+      path: "/users/",
+      operationId: "readUsersUsersGet",
       variables,
     }),
     queryFn: ({ signal }) =>
-      fetchGetEventByIdCalendarEventsEventIdGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
+      fetchReadUsersUsersGet({ ...fetcherOptions, ...variables }, signal),
     ...options,
     ...queryOptions,
   });
 };
 
-export type EditBookingsIdCalendarEventsEventIdPatchPathParams = {
-  eventId: string;
-};
+export type CountUsersUsersCountGetError = Fetcher.ErrorWrapper<undefined>;
 
-export type EditBookingsIdCalendarEventsEventIdPatchError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type EditBookingsIdCalendarEventsEventIdPatchVariables = {
-  body?: Schemas.EventEdit;
-  pathParams: EditBookingsIdCalendarEventsEventIdPatchPathParams;
-} & HyperionContext["fetcherOptions"];
+export type CountUsersUsersCountGetVariables =
+  HyperionContext["fetcherOptions"];
 
 /**
- * Edit an event.
+ * Return all users from database as a list of `CoreUserSimple`
  *
- * **Only usable by admins or applicant before decision**
+ * **This endpoint is only usable by administrators**
  */
-export const fetchEditBookingsIdCalendarEventsEventIdPatch = (
-  variables: EditBookingsIdCalendarEventsEventIdPatchVariables,
-  signal?: AbortSignal,
+export const fetchCountUsersUsersCountGet = (
+  variables: CountUsersUsersCountGetVariables,
+  signal?: AbortSignal
 ) =>
-  hyperionFetch<
-    undefined,
-    EditBookingsIdCalendarEventsEventIdPatchError,
-    Schemas.EventEdit,
-    {},
-    {},
-    EditBookingsIdCalendarEventsEventIdPatchPathParams
-  >({
-    url: "/calendar/events/{eventId}",
-    method: "patch",
-    ...variables,
-    signal,
-  });
-
-/**
- * Edit an event.
- *
- * **Only usable by admins or applicant before decision**
- */
-export const useEditBookingsIdCalendarEventsEventIdPatch = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      EditBookingsIdCalendarEventsEventIdPatchError,
-      EditBookingsIdCalendarEventsEventIdPatchVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    EditBookingsIdCalendarEventsEventIdPatchError,
-    EditBookingsIdCalendarEventsEventIdPatchVariables
-  >({
-    mutationFn: (
-      variables: EditBookingsIdCalendarEventsEventIdPatchVariables,
-    ) =>
-      fetchEditBookingsIdCalendarEventsEventIdPatch({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type DeleteBookingsIdCalendarEventsEventIdDeletePathParams = {
-  eventId: void;
-};
-
-export type DeleteBookingsIdCalendarEventsEventIdDeleteError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type DeleteBookingsIdCalendarEventsEventIdDeleteVariables = {
-  pathParams: DeleteBookingsIdCalendarEventsEventIdDeletePathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Remove an event.
- *
- * **Only usable by admins or applicant before decision**
- */
-export const fetchDeleteBookingsIdCalendarEventsEventIdDelete = (
-  variables: DeleteBookingsIdCalendarEventsEventIdDeleteVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    DeleteBookingsIdCalendarEventsEventIdDeleteError,
-    undefined,
-    {},
-    {},
-    DeleteBookingsIdCalendarEventsEventIdDeletePathParams
-  >({
-    url: "/calendar/events/{eventId}",
-    method: "delete",
-    ...variables,
-    signal,
-  });
-
-/**
- * Remove an event.
- *
- * **Only usable by admins or applicant before decision**
- */
-export const useDeleteBookingsIdCalendarEventsEventIdDelete = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      DeleteBookingsIdCalendarEventsEventIdDeleteError,
-      DeleteBookingsIdCalendarEventsEventIdDeleteVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    DeleteBookingsIdCalendarEventsEventIdDeleteError,
-    DeleteBookingsIdCalendarEventsEventIdDeleteVariables
-  >({
-    mutationFn: (
-      variables: DeleteBookingsIdCalendarEventsEventIdDeleteVariables,
-    ) =>
-      fetchDeleteBookingsIdCalendarEventsEventIdDelete({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type GetEventApplicantcalendarEventsEventIdApplicantGetPathParams = {
-  eventId: string;
-};
-
-export type GetEventApplicantcalendarEventsEventIdApplicantGetError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type GetEventApplicantcalendarEventsEventIdApplicantGetVariables = {
-  pathParams: GetEventApplicantcalendarEventsEventIdApplicantGetPathParams;
-} & HyperionContext["fetcherOptions"];
-
-export const fetchGetEventApplicantcalendarEventsEventIdApplicantGet = (
-  variables: GetEventApplicantcalendarEventsEventIdApplicantGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.EventApplicant,
-    GetEventApplicantcalendarEventsEventIdApplicantGetError,
-    undefined,
-    {},
-    {},
-    GetEventApplicantcalendarEventsEventIdApplicantGetPathParams
-  >({
-    url: "calendar/events/{eventId}/applicant",
+  hyperionFetch<number, CountUsersUsersCountGetError, undefined, {}, {}, {}>({
+    url: "/users/count",
     method: "get",
     ...variables,
     signal,
   });
 
-export const useGetEventApplicantcalendarEventsEventIdApplicantGet = <
-  TData = Schemas.EventApplicant,
+/**
+ * Return all users from database as a list of `CoreUserSimple`
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const useCountUsersUsersCountGet = <TData = number>(
+  variables: CountUsersUsersCountGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<number, CountUsersUsersCountGetError, TData>,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<number, CountUsersUsersCountGetError, TData>({
+    queryKey: queryKeyFn({
+      path: "/users/count",
+      operationId: "countUsersUsersCountGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchCountUsersUsersCountGet({ ...fetcherOptions, ...variables }, signal),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type SearchUsersUsersSearchGetQueryParams = {
+  query: string;
+  includedGroups?: string[];
+  excludedGroups?: string[];
+};
+
+export type SearchUsersUsersSearchGetError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type SearchUsersUsersSearchGetResponse = Schemas.CoreUserSimple[];
+
+export type SearchUsersUsersSearchGetVariables = {
+  queryParams: SearchUsersUsersSearchGetQueryParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Search for a user using Fuzzy String Matching
+ *
+ * `query` will be compared against users name, firstname and nickname
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const fetchSearchUsersUsersSearchGet = (
+  variables: SearchUsersUsersSearchGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    SearchUsersUsersSearchGetResponse,
+    SearchUsersUsersSearchGetError,
+    undefined,
+    {},
+    SearchUsersUsersSearchGetQueryParams,
+    {}
+  >({ url: "/users/search", method: "get", ...variables, signal });
+
+/**
+ * Search for a user using Fuzzy String Matching
+ *
+ * `query` will be compared against users name, firstname and nickname
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const useSearchUsersUsersSearchGet = <
+  TData = SearchUsersUsersSearchGetResponse
 >(
-  variables: GetEventApplicantcalendarEventsEventIdApplicantGetVariables,
+  variables: SearchUsersUsersSearchGetVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
-      Schemas.EventApplicant,
-      GetEventApplicantcalendarEventsEventIdApplicantGetError,
+      SearchUsersUsersSearchGetResponse,
+      SearchUsersUsersSearchGetError,
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
   return reactQuery.useQuery<
-    Schemas.EventApplicant,
-    GetEventApplicantcalendarEventsEventIdApplicantGetError,
+    SearchUsersUsersSearchGetResponse,
+    SearchUsersUsersSearchGetError,
     TData
   >({
     queryKey: queryKeyFn({
-      path: "calendar/events/{eventId}/applicant",
-      operationId: "getEventApplicantcalendarEventsEventIdApplicantGet",
+      path: "/users/search",
+      operationId: "searchUsersUsersSearchGet",
       variables,
     }),
     queryFn: ({ signal }) =>
-      fetchGetEventApplicantcalendarEventsEventIdApplicantGet(
+      fetchSearchUsersUsersSearchGet(
         { ...fetcherOptions, ...variables },
-        signal,
+        signal
       ),
     ...options,
     ...queryOptions,
   });
 };
 
-export type ConfirmBookingCalendarEventsEventIdReplyDecisionPatchPathParams = {
-  eventId: string;
-  decision: Schemas.Decision;
-};
+export type ReadCurrentUserUsersMeGetError = Fetcher.ErrorWrapper<undefined>;
 
-export type ConfirmBookingCalendarEventsEventIdReplyDecisionPatchError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type ConfirmBookingCalendarEventsEventIdReplyDecisionPatchVariables = {
-  pathParams: ConfirmBookingCalendarEventsEventIdReplyDecisionPatchPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Give a decision to an event.
- *
- * **Only usable by admins**
- */
-export const fetchConfirmBookingCalendarEventsEventIdReplyDecisionPatch = (
-  variables: ConfirmBookingCalendarEventsEventIdReplyDecisionPatchVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    ConfirmBookingCalendarEventsEventIdReplyDecisionPatchError,
-    undefined,
-    {},
-    {},
-    ConfirmBookingCalendarEventsEventIdReplyDecisionPatchPathParams
-  >({
-    url: "/calendar/events/{eventId}/reply/{decision}",
-    method: "patch",
-    ...variables,
-    signal,
-  });
-
-/**
- * Give a decision to an event.
- *
- * **Only usable by admins**
- */
-export const useConfirmBookingCalendarEventsEventIdReplyDecisionPatch = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      ConfirmBookingCalendarEventsEventIdReplyDecisionPatchError,
-      ConfirmBookingCalendarEventsEventIdReplyDecisionPatchVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    ConfirmBookingCalendarEventsEventIdReplyDecisionPatchError,
-    ConfirmBookingCalendarEventsEventIdReplyDecisionPatchVariables
-  >({
-    mutationFn: (
-      variables: ConfirmBookingCalendarEventsEventIdReplyDecisionPatchVariables,
-    ) =>
-      fetchConfirmBookingCalendarEventsEventIdReplyDecisionPatch({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type RecreateIcalFileCalendarIcalCreatePostError =
-  Fetcher.ErrorWrapper<undefined>;
-
-export type RecreateIcalFileCalendarIcalCreatePostVariables =
+export type ReadCurrentUserUsersMeGetVariables =
   HyperionContext["fetcherOptions"];
 
 /**
- * Create manually the icalendar file
+ * Return `CoreUser` representation of current user
  *
- * **Only usable by global admins**
+ * **The user must be authenticated to use this endpoint**
  */
-export const fetchRecreateIcalFileCalendarIcalCreatePost = (
-  variables: RecreateIcalFileCalendarIcalCreatePostVariables,
-  signal?: AbortSignal,
+export const fetchReadCurrentUserUsersMeGet = (
+  variables: ReadCurrentUserUsersMeGetVariables,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
-    undefined,
-    RecreateIcalFileCalendarIcalCreatePostError,
+    Schemas.CoreUser,
+    ReadCurrentUserUsersMeGetError,
     undefined,
     {},
     {},
     {}
-  >({ url: "/calendar/ical/create", method: "post", ...variables, signal });
+  >({ url: "/users/me", method: "get", ...variables, signal });
 
 /**
- * Create manually the icalendar file
+ * Return `CoreUser` representation of current user
  *
- * **Only usable by global admins**
+ * **The user must be authenticated to use this endpoint**
  */
-export const useRecreateIcalFileCalendarIcalCreatePost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      RecreateIcalFileCalendarIcalCreatePostError,
-      RecreateIcalFileCalendarIcalCreatePostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    RecreateIcalFileCalendarIcalCreatePostError,
-    RecreateIcalFileCalendarIcalCreatePostVariables
-  >({
-    mutationFn: (variables: RecreateIcalFileCalendarIcalCreatePostVariables) =>
-      fetchRecreateIcalFileCalendarIcalCreatePost({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type GetIcalendarFileCalendarIcalGetError =
-  Fetcher.ErrorWrapper<undefined>;
-
-export type GetIcalendarFileCalendarIcalGetVariables =
-  HyperionContext["fetcherOptions"];
-
-/**
- * Get the icalendar file corresponding to the event in the database.
- */
-export const fetchGetIcalendarFileCalendarIcalGet = (
-  variables: GetIcalendarFileCalendarIcalGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    GetIcalendarFileCalendarIcalGetError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/calendar/ical", method: "get", ...variables, signal });
-
-/**
- * Get the icalendar file corresponding to the event in the database.
- */
-export const useGetIcalendarFileCalendarIcalGet = <TData = undefined>(
-  variables: GetIcalendarFileCalendarIcalGetVariables,
+export const useReadCurrentUserUsersMeGet = <TData = Schemas.CoreUser>(
+  variables: ReadCurrentUserUsersMeGetVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
-      undefined,
-      GetIcalendarFileCalendarIcalGetError,
+      Schemas.CoreUser,
+      ReadCurrentUserUsersMeGetError,
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    Schemas.CoreUser,
+    ReadCurrentUserUsersMeGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/users/me",
+      operationId: "readCurrentUserUsersMeGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchReadCurrentUserUsersMeGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type UpdateCurrentUserUsersMePatchError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type UpdateCurrentUserUsersMePatchVariables = {
+  body?: Schemas.CoreUserUpdate;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Update the current user, the request should contain a JSON with the fields to change (not necessarily all fields) and their new value
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const fetchUpdateCurrentUserUsersMePatch = (
+  variables: UpdateCurrentUserUsersMePatchVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    UpdateCurrentUserUsersMePatchError,
+    Schemas.CoreUserUpdate,
+    {},
+    {},
+    {}
+  >({ url: "/users/me", method: "patch", ...variables, signal });
+
+/**
+ * Update the current user, the request should contain a JSON with the fields to change (not necessarily all fields) and their new value
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const useUpdateCurrentUserUsersMePatch = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      UpdateCurrentUserUsersMePatchError,
+      UpdateCurrentUserUsersMePatchVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    UpdateCurrentUserUsersMePatchError,
+    UpdateCurrentUserUsersMePatchVariables
+  >({
+    mutationFn: (variables: UpdateCurrentUserUsersMePatchVariables) =>
+      fetchUpdateCurrentUserUsersMePatch({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
+export type CreateUserByUserUsersCreatePostError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type CreateUserByUserUsersCreatePostVariables = {
+  body: Schemas.CoreUserCreateRequest;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Start the user account creation process. The user will be sent an email with a link to activate his account.
+ * > The received token needs to be sent to the `/users/activate` endpoint to activate the account.
+ *
+ * If the **password** is not provided, it will be required during the activation process. Don't submit a password if you are creating an account for someone else.
+ *
+ * When creating **student** or **staff** account a valid ECL email is required.
+ * Only admin users can create other **account types**, contact ÉCLAIR for more information.
+ */
+export const fetchCreateUserByUserUsersCreatePost = (
+  variables: CreateUserByUserUsersCreatePostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.AppCoreStandardResponsesResult,
+    CreateUserByUserUsersCreatePostError,
+    Schemas.CoreUserCreateRequest,
+    {},
+    {},
+    {}
+  >({ url: "/users/create", method: "post", ...variables, signal });
+
+/**
+ * Start the user account creation process. The user will be sent an email with a link to activate his account.
+ * > The received token needs to be sent to the `/users/activate` endpoint to activate the account.
+ *
+ * If the **password** is not provided, it will be required during the activation process. Don't submit a password if you are creating an account for someone else.
+ *
+ * When creating **student** or **staff** account a valid ECL email is required.
+ * Only admin users can create other **account types**, contact ÉCLAIR for more information.
+ */
+export const useCreateUserByUserUsersCreatePost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.AppCoreStandardResponsesResult,
+      CreateUserByUserUsersCreatePostError,
+      CreateUserByUserUsersCreatePostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.AppCoreStandardResponsesResult,
+    CreateUserByUserUsersCreatePostError,
+    CreateUserByUserUsersCreatePostVariables
+  >({
+    mutationFn: (variables: CreateUserByUserUsersCreatePostVariables) =>
+      fetchCreateUserByUserUsersCreatePost({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
+export type BatchCreateUsersUsersBatchCreationPostError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type BatchCreateUsersUsersBatchCreationPostRequestBody =
+  Schemas.CoreBatchUserCreateRequest[];
+
+export type BatchCreateUsersUsersBatchCreationPostVariables = {
+  body?: BatchCreateUsersUsersBatchCreationPostRequestBody;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Batch user account creation process. All users will be sent an email with a link to activate their account.
+ * > The received token needs to be send to `/users/activate` endpoint to activate the account.
+ *
+ * Even for creating **student** or **staff** account a valid ECL email is not required but should preferably be used.
+ *
+ * The endpoint return a dictionary of unsuccessful user creation: `{email: error message}`.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const fetchBatchCreateUsersUsersBatchCreationPost = (
+  variables: BatchCreateUsersUsersBatchCreationPostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.BatchResult,
+    BatchCreateUsersUsersBatchCreationPostError,
+    BatchCreateUsersUsersBatchCreationPostRequestBody,
+    {},
+    {},
+    {}
+  >({ url: "/users/batch-creation", method: "post", ...variables, signal });
+
+/**
+ * Batch user account creation process. All users will be sent an email with a link to activate their account.
+ * > The received token needs to be send to `/users/activate` endpoint to activate the account.
+ *
+ * Even for creating **student** or **staff** account a valid ECL email is not required but should preferably be used.
+ *
+ * The endpoint return a dictionary of unsuccessful user creation: `{email: error message}`.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const useBatchCreateUsersUsersBatchCreationPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.BatchResult,
+      BatchCreateUsersUsersBatchCreationPostError,
+      BatchCreateUsersUsersBatchCreationPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.BatchResult,
+    BatchCreateUsersUsersBatchCreationPostError,
+    BatchCreateUsersUsersBatchCreationPostVariables
+  >({
+    mutationFn: (variables: BatchCreateUsersUsersBatchCreationPostVariables) =>
+      fetchBatchCreateUsersUsersBatchCreationPost({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type GetUserActivationPageUsersActivateGetQueryParams = {
+  activation_token: string;
+};
+
+export type GetUserActivationPageUsersActivateGetError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type GetUserActivationPageUsersActivateGetVariables = {
+  queryParams: GetUserActivationPageUsersActivateGetQueryParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Return a HTML page to activate an account. The activation token is passed as a query string.
+ *
+ * **This endpoint is an UI endpoint which send and html page response.
+ */
+export const fetchGetUserActivationPageUsersActivateGet = (
+  variables: GetUserActivationPageUsersActivateGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    GetUserActivationPageUsersActivateGetError,
+    undefined,
+    {},
+    GetUserActivationPageUsersActivateGetQueryParams,
+    {}
+  >({ url: "/users/activate", method: "get", ...variables, signal });
+
+/**
+ * Return a HTML page to activate an account. The activation token is passed as a query string.
+ *
+ * **This endpoint is an UI endpoint which send and html page response.
+ */
+export const useGetUserActivationPageUsersActivateGet = <TData = undefined>(
+  variables: GetUserActivationPageUsersActivateGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      undefined,
+      GetUserActivationPageUsersActivateGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
   return reactQuery.useQuery<
     undefined,
-    GetIcalendarFileCalendarIcalGetError,
+    GetUserActivationPageUsersActivateGetError,
     TData
   >({
     queryKey: queryKeyFn({
-      path: "/calendar/ical",
-      operationId: "getIcalendarFileCalendarIcalGet",
+      path: "/users/activate",
+      operationId: "getUserActivationPageUsersActivateGet",
       variables,
     }),
     queryFn: ({ signal }) =>
-      fetchGetIcalendarFileCalendarIcalGet(
+      fetchGetUserActivationPageUsersActivateGet(
         { ...fetcherOptions, ...variables },
-        signal,
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type ActivateUserUsersActivatePostError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type ActivateUserUsersActivatePostVariables = {
+  body: Schemas.CoreUserActivateRequest;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Activate the previously created account.
+ *
+ * **token**: the activation token sent by email to the user
+ *
+ * **password**: user password, required if it was not provided previously
+ */
+export const fetchActivateUserUsersActivatePost = (
+  variables: ActivateUserUsersActivatePostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.AppCoreStandardResponsesResult,
+    ActivateUserUsersActivatePostError,
+    Schemas.CoreUserActivateRequest,
+    {},
+    {},
+    {}
+  >({ url: "/users/activate", method: "post", ...variables, signal });
+
+/**
+ * Activate the previously created account.
+ *
+ * **token**: the activation token sent by email to the user
+ *
+ * **password**: user password, required if it was not provided previously
+ */
+export const useActivateUserUsersActivatePost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.AppCoreStandardResponsesResult,
+      ActivateUserUsersActivatePostError,
+      ActivateUserUsersActivatePostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.AppCoreStandardResponsesResult,
+    ActivateUserUsersActivatePostError,
+    ActivateUserUsersActivatePostVariables
+  >({
+    mutationFn: (variables: ActivateUserUsersActivatePostVariables) =>
+      fetchActivateUserUsersActivatePost({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
+export type MakeAdminUsersMakeAdminPostError = Fetcher.ErrorWrapper<undefined>;
+
+export type MakeAdminUsersMakeAdminPostVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * This endpoint is only usable if the database contains exactly one user.
+ * It will add this user to the `admin` group.
+ */
+export const fetchMakeAdminUsersMakeAdminPost = (
+  variables: MakeAdminUsersMakeAdminPostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.AppCoreStandardResponsesResult,
+    MakeAdminUsersMakeAdminPostError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/users/make-admin", method: "post", ...variables, signal });
+
+/**
+ * This endpoint is only usable if the database contains exactly one user.
+ * It will add this user to the `admin` group.
+ */
+export const useMakeAdminUsersMakeAdminPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.AppCoreStandardResponsesResult,
+      MakeAdminUsersMakeAdminPostError,
+      MakeAdminUsersMakeAdminPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.AppCoreStandardResponsesResult,
+    MakeAdminUsersMakeAdminPostError,
+    MakeAdminUsersMakeAdminPostVariables
+  >({
+    mutationFn: (variables: MakeAdminUsersMakeAdminPostVariables) =>
+      fetchMakeAdminUsersMakeAdminPost({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
+export type RecoverUserUsersRecoverPostError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type RecoverUserUsersRecoverPostVariables = {
+  body: Schemas.BodyRecoverUserUsersRecoverPost;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Allow a user to start a password reset process.
+ *
+ * If the provided **email** corresponds to an existing account, a password reset token will be sent.
+ * Using this token, the password can be changed with `/users/reset-password` endpoint
+ */
+export const fetchRecoverUserUsersRecoverPost = (
+  variables: RecoverUserUsersRecoverPostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.AppCoreStandardResponsesResult,
+    RecoverUserUsersRecoverPostError,
+    Schemas.BodyRecoverUserUsersRecoverPost,
+    {},
+    {},
+    {}
+  >({ url: "/users/recover", method: "post", ...variables, signal });
+
+/**
+ * Allow a user to start a password reset process.
+ *
+ * If the provided **email** corresponds to an existing account, a password reset token will be sent.
+ * Using this token, the password can be changed with `/users/reset-password` endpoint
+ */
+export const useRecoverUserUsersRecoverPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.AppCoreStandardResponsesResult,
+      RecoverUserUsersRecoverPostError,
+      RecoverUserUsersRecoverPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.AppCoreStandardResponsesResult,
+    RecoverUserUsersRecoverPostError,
+    RecoverUserUsersRecoverPostVariables
+  >({
+    mutationFn: (variables: RecoverUserUsersRecoverPostVariables) =>
+      fetchRecoverUserUsersRecoverPost({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
+export type ResetPasswordUsersResetPasswordPostError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type ResetPasswordUsersResetPasswordPostVariables = {
+  body: Schemas.ResetPasswordRequest;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Reset the user password, using a **reset_token** provided by `/users/recover` endpoint.
+ */
+export const fetchResetPasswordUsersResetPasswordPost = (
+  variables: ResetPasswordUsersResetPasswordPostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.AppCoreStandardResponsesResult,
+    ResetPasswordUsersResetPasswordPostError,
+    Schemas.ResetPasswordRequest,
+    {},
+    {},
+    {}
+  >({ url: "/users/reset-password", method: "post", ...variables, signal });
+
+/**
+ * Reset the user password, using a **reset_token** provided by `/users/recover` endpoint.
+ */
+export const useResetPasswordUsersResetPasswordPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.AppCoreStandardResponsesResult,
+      ResetPasswordUsersResetPasswordPostError,
+      ResetPasswordUsersResetPasswordPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.AppCoreStandardResponsesResult,
+    ResetPasswordUsersResetPasswordPostError,
+    ResetPasswordUsersResetPasswordPostVariables
+  >({
+    mutationFn: (variables: ResetPasswordUsersResetPasswordPostVariables) =>
+      fetchResetPasswordUsersResetPasswordPost({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type MigrateMailUsersMigrateMailPostError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type MigrateMailUsersMigrateMailPostVariables = {
+  body: Schemas.MailMigrationRequest;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Due to a change in the email format, all student users need to migrate their email address.
+ * This endpoint will send a confirmation code to the user's new email address. He will need to use this code to confirm the change with `/users/confirm-mail-migration` endpoint.
+ */
+export const fetchMigrateMailUsersMigrateMailPost = (
+  variables: MigrateMailUsersMigrateMailPostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    MigrateMailUsersMigrateMailPostError,
+    Schemas.MailMigrationRequest,
+    {},
+    {},
+    {}
+  >({ url: "/users/migrate-mail", method: "post", ...variables, signal });
+
+/**
+ * Due to a change in the email format, all student users need to migrate their email address.
+ * This endpoint will send a confirmation code to the user's new email address. He will need to use this code to confirm the change with `/users/confirm-mail-migration` endpoint.
+ */
+export const useMigrateMailUsersMigrateMailPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      MigrateMailUsersMigrateMailPostError,
+      MigrateMailUsersMigrateMailPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    MigrateMailUsersMigrateMailPostError,
+    MigrateMailUsersMigrateMailPostVariables
+  >({
+    mutationFn: (variables: MigrateMailUsersMigrateMailPostVariables) =>
+      fetchMigrateMailUsersMigrateMailPost({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
+export type MigrateMailConfirmUsersMigrateMailConfirmGetQueryParams = {
+  token: string;
+};
+
+export type MigrateMailConfirmUsersMigrateMailConfirmGetError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type MigrateMailConfirmUsersMigrateMailConfirmGetVariables = {
+  queryParams: MigrateMailConfirmUsersMigrateMailConfirmGetQueryParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Due to a change in the email format, all student users need to migrate their email address.
+ * This endpoint will updates the user new email address.
+ */
+export const fetchMigrateMailConfirmUsersMigrateMailConfirmGet = (
+  variables: MigrateMailConfirmUsersMigrateMailConfirmGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    void,
+    MigrateMailConfirmUsersMigrateMailConfirmGetError,
+    undefined,
+    {},
+    MigrateMailConfirmUsersMigrateMailConfirmGetQueryParams,
+    {}
+  >({
+    url: "/users/migrate-mail-confirm",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Due to a change in the email format, all student users need to migrate their email address.
+ * This endpoint will updates the user new email address.
+ */
+export const useMigrateMailConfirmUsersMigrateMailConfirmGet = <TData = void>(
+  variables: MigrateMailConfirmUsersMigrateMailConfirmGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      void,
+      MigrateMailConfirmUsersMigrateMailConfirmGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    void,
+    MigrateMailConfirmUsersMigrateMailConfirmGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/users/migrate-mail-confirm",
+      operationId: "migrateMailConfirmUsersMigrateMailConfirmGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchMigrateMailConfirmUsersMigrateMailConfirmGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type ChangePasswordUsersChangePasswordPostError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type ChangePasswordUsersChangePasswordPostVariables = {
+  body: Schemas.ChangePasswordRequest;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Change a user password.
+ *
+ * This endpoint will check the **old_password**, see also the `/users/reset-password` endpoint if the user forgot their password.
+ */
+export const fetchChangePasswordUsersChangePasswordPost = (
+  variables: ChangePasswordUsersChangePasswordPostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.AppCoreStandardResponsesResult,
+    ChangePasswordUsersChangePasswordPostError,
+    Schemas.ChangePasswordRequest,
+    {},
+    {},
+    {}
+  >({ url: "/users/change-password", method: "post", ...variables, signal });
+
+/**
+ * Change a user password.
+ *
+ * This endpoint will check the **old_password**, see also the `/users/reset-password` endpoint if the user forgot their password.
+ */
+export const useChangePasswordUsersChangePasswordPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.AppCoreStandardResponsesResult,
+      ChangePasswordUsersChangePasswordPostError,
+      ChangePasswordUsersChangePasswordPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.AppCoreStandardResponsesResult,
+    ChangePasswordUsersChangePasswordPostError,
+    ChangePasswordUsersChangePasswordPostVariables
+  >({
+    mutationFn: (variables: ChangePasswordUsersChangePasswordPostVariables) =>
+      fetchChangePasswordUsersChangePasswordPost({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type ReadUserUsersUserIdGetPathParams = {
+  userId: string;
+};
+
+export type ReadUserUsersUserIdGetError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type ReadUserUsersUserIdGetVariables = {
+  pathParams: ReadUserUsersUserIdGetPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Return `CoreUserSimple` representation of user with id `user_id`
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const fetchReadUserUsersUserIdGet = (
+  variables: ReadUserUsersUserIdGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.CoreUser,
+    ReadUserUsersUserIdGetError,
+    undefined,
+    {},
+    {},
+    ReadUserUsersUserIdGetPathParams
+  >({ url: "/users/{userId}", method: "get", ...variables, signal });
+
+/**
+ * Return `CoreUserSimple` representation of user with id `user_id`
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const useReadUserUsersUserIdGet = <TData = Schemas.CoreUser>(
+  variables: ReadUserUsersUserIdGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      Schemas.CoreUser,
+      ReadUserUsersUserIdGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    Schemas.CoreUser,
+    ReadUserUsersUserIdGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/users/{userId}",
+      operationId: "readUserUsersUserIdGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchReadUserUsersUserIdGet({ ...fetcherOptions, ...variables }, signal),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type UpdateUserUsersUserIdPatchPathParams = {
+  userId: string;
+};
+
+export type UpdateUserUsersUserIdPatchError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type UpdateUserUsersUserIdPatchVariables = {
+  body?: Schemas.CoreUserUpdateAdmin;
+  pathParams: UpdateUserUsersUserIdPatchPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Update an user, the request should contain a JSON with the fields to change (not necessarily all fields) and their new value
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const fetchUpdateUserUsersUserIdPatch = (
+  variables: UpdateUserUsersUserIdPatchVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    UpdateUserUsersUserIdPatchError,
+    Schemas.CoreUserUpdateAdmin,
+    {},
+    {},
+    UpdateUserUsersUserIdPatchPathParams
+  >({ url: "/users/{userId}", method: "patch", ...variables, signal });
+
+/**
+ * Update an user, the request should contain a JSON with the fields to change (not necessarily all fields) and their new value
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const useUpdateUserUsersUserIdPatch = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      UpdateUserUsersUserIdPatchError,
+      UpdateUserUsersUserIdPatchVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    UpdateUserUsersUserIdPatchError,
+    UpdateUserUsersUserIdPatchVariables
+  >({
+    mutationFn: (variables: UpdateUserUsersUserIdPatchVariables) =>
+      fetchUpdateUserUsersUserIdPatch({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
+export type DeleteUserUsersMeAskDeletionPostError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteUserUsersMeAskDeletionPostVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * This endpoint will ask administrators to process to the user deletion.
+ * This manual verification is needed to prevent data from being deleting for other users
+ */
+export const fetchDeleteUserUsersMeAskDeletionPost = (
+  variables: DeleteUserUsersMeAskDeletionPostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    DeleteUserUsersMeAskDeletionPostError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/users/me/ask-deletion", method: "post", ...variables, signal });
+
+/**
+ * This endpoint will ask administrators to process to the user deletion.
+ * This manual verification is needed to prevent data from being deleting for other users
+ */
+export const useDeleteUserUsersMeAskDeletionPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      DeleteUserUsersMeAskDeletionPostError,
+      DeleteUserUsersMeAskDeletionPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    DeleteUserUsersMeAskDeletionPostError,
+    DeleteUserUsersMeAskDeletionPostVariables
+  >({
+    mutationFn: (variables: DeleteUserUsersMeAskDeletionPostVariables) =>
+      fetchDeleteUserUsersMeAskDeletionPost({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type ReadOwnProfilePictureUsersMeProfilePictureGetError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type ReadOwnProfilePictureUsersMeProfilePictureGetVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * Get the profile picture of the authenticated user.
+ */
+export const fetchReadOwnProfilePictureUsersMeProfilePictureGet = (
+  variables: ReadOwnProfilePictureUsersMeProfilePictureGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    ReadOwnProfilePictureUsersMeProfilePictureGetError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/users/me/profile-picture", method: "get", ...variables, signal });
+
+/**
+ * Get the profile picture of the authenticated user.
+ */
+export const useReadOwnProfilePictureUsersMeProfilePictureGet = <
+  TData = undefined
+>(
+  variables: ReadOwnProfilePictureUsersMeProfilePictureGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      undefined,
+      ReadOwnProfilePictureUsersMeProfilePictureGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    undefined,
+    ReadOwnProfilePictureUsersMeProfilePictureGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/users/me/profile-picture",
+      operationId: "readOwnProfilePictureUsersMeProfilePictureGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchReadOwnProfilePictureUsersMeProfilePictureGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type CreateCurrentUserProfilePictureUsersMeProfilePicturePostError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type CreateCurrentUserProfilePictureUsersMeProfilePicturePostVariables =
+  {
+    body: Schemas.BodyCreateCurrentUserProfilePictureUsersMeProfilePicturePost;
+  } & HyperionContext["fetcherOptions"];
+
+/**
+ * Upload a profile picture for the current user.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const fetchCreateCurrentUserProfilePictureUsersMeProfilePicturePost = (
+  variables: CreateCurrentUserProfilePictureUsersMeProfilePicturePostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.AppCoreStandardResponsesResult,
+    CreateCurrentUserProfilePictureUsersMeProfilePicturePostError,
+    Schemas.BodyCreateCurrentUserProfilePictureUsersMeProfilePicturePost,
+    {},
+    {},
+    {}
+  >({ url: "/users/me/profile-picture", method: "post", ...variables, signal });
+
+/**
+ * Upload a profile picture for the current user.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const useCreateCurrentUserProfilePictureUsersMeProfilePicturePost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.AppCoreStandardResponsesResult,
+      CreateCurrentUserProfilePictureUsersMeProfilePicturePostError,
+      CreateCurrentUserProfilePictureUsersMeProfilePicturePostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.AppCoreStandardResponsesResult,
+    CreateCurrentUserProfilePictureUsersMeProfilePicturePostError,
+    CreateCurrentUserProfilePictureUsersMeProfilePicturePostVariables
+  >({
+    mutationFn: (
+      variables: CreateCurrentUserProfilePictureUsersMeProfilePicturePostVariables
+    ) =>
+      fetchCreateCurrentUserProfilePictureUsersMeProfilePicturePost({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type ReadUserProfilePictureUsersUserIdProfilePictureGetPathParams = {
+  userId: string;
+};
+
+export type ReadUserProfilePictureUsersUserIdProfilePictureGetError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type ReadUserProfilePictureUsersUserIdProfilePictureGetVariables = {
+  pathParams: ReadUserProfilePictureUsersUserIdProfilePictureGetPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Get the profile picture of an user.
+ *
+ * Unauthenticated users can use this endpoint (needed for some OIDC services)
+ */
+export const fetchReadUserProfilePictureUsersUserIdProfilePictureGet = (
+  variables: ReadUserProfilePictureUsersUserIdProfilePictureGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    ReadUserProfilePictureUsersUserIdProfilePictureGetError,
+    undefined,
+    {},
+    {},
+    ReadUserProfilePictureUsersUserIdProfilePictureGetPathParams
+  >({
+    url: "/users/{userId}/profile-picture",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Get the profile picture of an user.
+ *
+ * Unauthenticated users can use this endpoint (needed for some OIDC services)
+ */
+export const useReadUserProfilePictureUsersUserIdProfilePictureGet = <
+  TData = undefined
+>(
+  variables: ReadUserProfilePictureUsersUserIdProfilePictureGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      undefined,
+      ReadUserProfilePictureUsersUserIdProfilePictureGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    undefined,
+    ReadUserProfilePictureUsersUserIdProfilePictureGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/users/{userId}/profile-picture",
+      operationId: "readUserProfilePictureUsersUserIdProfilePictureGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchReadUserProfilePictureUsersUserIdProfilePictureGet(
+        { ...fetcherOptions, ...variables },
+        signal
       ),
     ...options,
     ...queryOptions,
@@ -5628,7 +3826,7 @@ export type GetSectionsCampaignSectionsGetVariables =
  */
 export const fetchGetSectionsCampaignSectionsGet = (
   variables: GetSectionsCampaignSectionsGetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     GetSectionsCampaignSectionsGetResponse,
@@ -5645,7 +3843,7 @@ export const fetchGetSectionsCampaignSectionsGet = (
  * **The user must be a member of a group authorised to vote (voters) or a member of the group CAA to use this endpoint**
  */
 export const useGetSectionsCampaignSectionsGet = <
-  TData = GetSectionsCampaignSectionsGetResponse,
+  TData = GetSectionsCampaignSectionsGetResponse
 >(
   variables: GetSectionsCampaignSectionsGetVariables,
   options?: Omit<
@@ -5655,7 +3853,7 @@ export const useGetSectionsCampaignSectionsGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -5672,7 +3870,7 @@ export const useGetSectionsCampaignSectionsGet = <
     queryFn: ({ signal }) =>
       fetchGetSectionsCampaignSectionsGet(
         { ...fetcherOptions, ...variables },
-        signal,
+        signal
       ),
     ...options,
     ...queryOptions,
@@ -5697,7 +3895,7 @@ export type AddSectionCampaignSectionsPostVariables = {
  */
 export const fetchAddSectionCampaignSectionsPost = (
   variables: AddSectionCampaignSectionsPostVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     Schemas.SectionComplete,
@@ -5723,7 +3921,7 @@ export const useAddSectionCampaignSectionsPost = (
       AddSectionCampaignSectionsPostVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -5760,7 +3958,7 @@ export type DeleteSectionCampaignSectionsSectionIdDeleteVariables = {
  */
 export const fetchDeleteSectionCampaignSectionsSectionIdDelete = (
   variables: DeleteSectionCampaignSectionsSectionIdDeleteVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
@@ -5791,7 +3989,7 @@ export const useDeleteSectionCampaignSectionsSectionIdDelete = (
       DeleteSectionCampaignSectionsSectionIdDeleteVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -5800,7 +3998,7 @@ export const useDeleteSectionCampaignSectionsSectionIdDelete = (
     DeleteSectionCampaignSectionsSectionIdDeleteVariables
   >({
     mutationFn: (
-      variables: DeleteSectionCampaignSectionsSectionIdDeleteVariables,
+      variables: DeleteSectionCampaignSectionsSectionIdDeleteVariables
     ) =>
       fetchDeleteSectionCampaignSectionsSectionIdDelete({
         ...fetcherOptions,
@@ -5824,7 +4022,7 @@ export type GetListsCampaignListsGetVariables =
  */
 export const fetchGetListsCampaignListsGet = (
   variables: GetListsCampaignListsGetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     GetListsCampaignListsGetResponse,
@@ -5841,7 +4039,7 @@ export const fetchGetListsCampaignListsGet = (
  * **The user must be a member of a group authorised to vote (voters) or a member of the group CAA to use this endpoint**
  */
 export const useGetListsCampaignListsGet = <
-  TData = GetListsCampaignListsGetResponse,
+  TData = GetListsCampaignListsGetResponse
 >(
   variables: GetListsCampaignListsGetVariables,
   options?: Omit<
@@ -5851,7 +4049,7 @@ export const useGetListsCampaignListsGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -5868,7 +4066,7 @@ export const useGetListsCampaignListsGet = <
     queryFn: ({ signal }) =>
       fetchGetListsCampaignListsGet(
         { ...fetcherOptions, ...variables },
-        signal,
+        signal
       ),
     ...options,
     ...queryOptions,
@@ -5893,7 +4091,7 @@ export type AddListCampaignListsPostVariables = {
  */
 export const fetchAddListCampaignListsPost = (
   variables: AddListCampaignListsPostVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     Schemas.ListReturn,
@@ -5919,7 +4117,7 @@ export const useAddListCampaignListsPost = (
       AddListCampaignListsPostVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -5955,7 +4153,7 @@ export type DeleteListCampaignListsListIdDeleteVariables = {
  */
 export const fetchDeleteListCampaignListsListIdDelete = (
   variables: DeleteListCampaignListsListIdDeleteVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
@@ -5986,7 +4184,7 @@ export const useDeleteListCampaignListsListIdDelete = (
       DeleteListCampaignListsListIdDeleteVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -6026,7 +4224,7 @@ export type UpdateListCampaignListsListIdPatchVariables = {
  */
 export const fetchUpdateListCampaignListsListIdPatch = (
   variables: UpdateListCampaignListsListIdPatchVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
@@ -6052,7 +4250,7 @@ export const useUpdateListCampaignListsListIdPatch = (
       UpdateListCampaignListsListIdPatchVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -6091,7 +4289,7 @@ export type DeleteListsByTypeCampaignListsDeleteVariables = {
  */
 export const fetchDeleteListsByTypeCampaignListsDelete = (
   variables: DeleteListsByTypeCampaignListsDeleteVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
@@ -6117,7 +4315,7 @@ export const useDeleteListsByTypeCampaignListsDelete = (
       DeleteListsByTypeCampaignListsDeleteVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -6146,7 +4344,7 @@ export type GetVotersCampaignVotersGetVariables =
  */
 export const fetchGetVotersCampaignVotersGet = (
   variables: GetVotersCampaignVotersGetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     GetVotersCampaignVotersGetResponse,
@@ -6161,7 +4359,7 @@ export const fetchGetVotersCampaignVotersGet = (
  * Return the voters (groups allowed to vorte) for the current campaign.
  */
 export const useGetVotersCampaignVotersGet = <
-  TData = GetVotersCampaignVotersGetResponse,
+  TData = GetVotersCampaignVotersGetResponse
 >(
   variables: GetVotersCampaignVotersGetVariables,
   options?: Omit<
@@ -6171,7 +4369,7 @@ export const useGetVotersCampaignVotersGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -6188,7 +4386,7 @@ export const useGetVotersCampaignVotersGet = <
     queryFn: ({ signal }) =>
       fetchGetVotersCampaignVotersGet(
         { ...fetcherOptions, ...variables },
-        signal,
+        signal
       ),
     ...options,
     ...queryOptions,
@@ -6211,7 +4409,7 @@ export type AddVoterCampaignVotersPostVariables = {
  */
 export const fetchAddVoterCampaignVotersPost = (
   variables: AddVoterCampaignVotersPostVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     Schemas.VoterGroup,
@@ -6235,7 +4433,7 @@ export const useAddVoterCampaignVotersPost = (
       AddVoterCampaignVotersPostVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -6262,7 +4460,7 @@ export type DeleteVotersCampaignVotersDeleteVariables =
  */
 export const fetchDeleteVotersCampaignVotersDelete = (
   variables: DeleteVotersCampaignVotersDeleteVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
@@ -6286,7 +4484,7 @@ export const useDeleteVotersCampaignVotersDelete = (
       DeleteVotersCampaignVotersDeleteVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -6324,7 +4522,7 @@ export type DeleteVoterByGroupIdCampaignVotersGroupIdDeleteVariables = {
  */
 export const fetchDeleteVoterByGroupIdCampaignVotersGroupIdDelete = (
   variables: DeleteVoterByGroupIdCampaignVotersGroupIdDeleteVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
@@ -6353,7 +4551,7 @@ export const useDeleteVoterByGroupIdCampaignVotersGroupIdDelete = (
       DeleteVoterByGroupIdCampaignVotersGroupIdDeleteVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -6362,7 +4560,7 @@ export const useDeleteVoterByGroupIdCampaignVotersGroupIdDelete = (
     DeleteVoterByGroupIdCampaignVotersGroupIdDeleteVariables
   >({
     mutationFn: (
-      variables: DeleteVoterByGroupIdCampaignVotersGroupIdDeleteVariables,
+      variables: DeleteVoterByGroupIdCampaignVotersGroupIdDeleteVariables
     ) =>
       fetchDeleteVoterByGroupIdCampaignVotersGroupIdDelete({
         ...fetcherOptions,
@@ -6388,7 +4586,7 @@ export type OpenVoteCampaignStatusOpenPostVariables =
  */
 export const fetchOpenVoteCampaignStatusOpenPost = (
   variables: OpenVoteCampaignStatusOpenPostVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
@@ -6415,7 +4613,7 @@ export const useOpenVoteCampaignStatusOpenPost = (
       OpenVoteCampaignStatusOpenPostVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -6445,7 +4643,7 @@ export type CloseVoteCampaignStatusClosePostVariables =
  */
 export const fetchCloseVoteCampaignStatusClosePost = (
   variables: CloseVoteCampaignStatusClosePostVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
@@ -6472,7 +4670,7 @@ export const useCloseVoteCampaignStatusClosePost = (
       CloseVoteCampaignStatusClosePostVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -6505,7 +4703,7 @@ export type CountVotingCampaignStatusCountingPostVariables =
  */
 export const fetchCountVotingCampaignStatusCountingPost = (
   variables: CountVotingCampaignStatusCountingPostVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
@@ -6532,7 +4730,7 @@ export const useCountVotingCampaignStatusCountingPost = (
       CountVotingCampaignStatusCountingPostVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -6565,7 +4763,7 @@ export type PublishVoteCampaignStatusPublishedPostVariables =
  */
 export const fetchPublishVoteCampaignStatusPublishedPost = (
   variables: PublishVoteCampaignStatusPublishedPostVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
@@ -6597,7 +4795,7 @@ export const usePublishVoteCampaignStatusPublishedPost = (
       PublishVoteCampaignStatusPublishedPostVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -6629,7 +4827,7 @@ export type ResetVoteCampaignStatusResetPostVariables =
  */
 export const fetchResetVoteCampaignStatusResetPost = (
   variables: ResetVoteCampaignStatusResetPostVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
@@ -6655,7 +4853,7 @@ export const useResetVoteCampaignStatusResetPost = (
       ResetVoteCampaignStatusResetPostVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -6687,7 +4885,7 @@ export type GetSectionsAlreadyVotedCampaignVotesGetVariables =
  */
 export const fetchGetSectionsAlreadyVotedCampaignVotesGet = (
   variables: GetSectionsAlreadyVotedCampaignVotesGetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     GetSectionsAlreadyVotedCampaignVotesGetResponse,
@@ -6704,7 +4902,7 @@ export const fetchGetSectionsAlreadyVotedCampaignVotesGet = (
  * **The user must be a member of a group authorised to vote (voters) to use this endpoint**
  */
 export const useGetSectionsAlreadyVotedCampaignVotesGet = <
-  TData = GetSectionsAlreadyVotedCampaignVotesGetResponse,
+  TData = GetSectionsAlreadyVotedCampaignVotesGetResponse
 >(
   variables: GetSectionsAlreadyVotedCampaignVotesGetVariables,
   options?: Omit<
@@ -6714,7 +4912,7 @@ export const useGetSectionsAlreadyVotedCampaignVotesGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -6731,7 +4929,7 @@ export const useGetSectionsAlreadyVotedCampaignVotesGet = <
     queryFn: ({ signal }) =>
       fetchGetSectionsAlreadyVotedCampaignVotesGet(
         { ...fetcherOptions, ...variables },
-        signal,
+        signal
       ),
     ...options,
     ...queryOptions,
@@ -6756,7 +4954,7 @@ export type VoteCampaignVotesPostVariables = {
  */
 export const fetchVoteCampaignVotesPost = (
   variables: VoteCampaignVotesPostVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
@@ -6782,7 +4980,7 @@ export const useVoteCampaignVotesPost = (
       VoteCampaignVotesPostVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -6799,7 +4997,7 @@ export const useVoteCampaignVotesPost = (
 export type GetResultsCampaignResultsGetError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetResultsCampaignResultsGetResponse =
-  Schemas.AppSchemasSchemasCampaignResult[];
+  Schemas.AppModulesCampaignSchemasCampaignResult[];
 
 export type GetResultsCampaignResultsGetVariables =
   HyperionContext["fetcherOptions"];
@@ -6811,7 +5009,7 @@ export type GetResultsCampaignResultsGetVariables =
  */
 export const fetchGetResultsCampaignResultsGet = (
   variables: GetResultsCampaignResultsGetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     GetResultsCampaignResultsGetResponse,
@@ -6828,7 +5026,7 @@ export const fetchGetResultsCampaignResultsGet = (
  * **The user must be a member of a group authorised to vote (voters) or a member of the group CAA to use this endpoint**
  */
 export const useGetResultsCampaignResultsGet = <
-  TData = GetResultsCampaignResultsGetResponse,
+  TData = GetResultsCampaignResultsGetResponse
 >(
   variables: GetResultsCampaignResultsGetVariables,
   options?: Omit<
@@ -6838,7 +5036,7 @@ export const useGetResultsCampaignResultsGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -6855,7 +5053,7 @@ export const useGetResultsCampaignResultsGet = <
     queryFn: ({ signal }) =>
       fetchGetResultsCampaignResultsGet(
         { ...fetcherOptions, ...variables },
-        signal,
+        signal
       ),
     ...options,
     ...queryOptions,
@@ -6875,7 +5073,7 @@ export type GetStatusVoteCampaignStatusGetVariables =
  */
 export const fetchGetStatusVoteCampaignStatusGet = (
   variables: GetStatusVoteCampaignStatusGetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     Schemas.VoteStatus,
@@ -6900,7 +5098,7 @@ export const useGetStatusVoteCampaignStatusGet = <TData = Schemas.VoteStatus>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -6917,7 +5115,7 @@ export const useGetStatusVoteCampaignStatusGet = <TData = Schemas.VoteStatus>(
     queryFn: ({ signal }) =>
       fetchGetStatusVoteCampaignStatusGet(
         { ...fetcherOptions, ...variables },
-        signal,
+        signal
       ),
     ...options,
     ...queryOptions,
@@ -6945,7 +5143,7 @@ export type GetStatsForSectionCampaignStatsSectionIdGetVariables = {
  */
 export const fetchGetStatsForSectionCampaignStatsSectionIdGet = (
   variables: GetStatsForSectionCampaignStatsSectionIdGetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     Schemas.VoteStats,
@@ -6967,7 +5165,7 @@ export const fetchGetStatsForSectionCampaignStatsSectionIdGet = (
  * **The user must be a member of the group CAA to use this endpoint**
  */
 export const useGetStatsForSectionCampaignStatsSectionIdGet = <
-  TData = Schemas.VoteStats,
+  TData = Schemas.VoteStats
 >(
   variables: GetStatsForSectionCampaignStatsSectionIdGetVariables,
   options?: Omit<
@@ -6977,7 +5175,7 @@ export const useGetStatsForSectionCampaignStatsSectionIdGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -6994,7 +5192,7 @@ export const useGetStatsForSectionCampaignStatsSectionIdGet = <
     queryFn: ({ signal }) =>
       fetchGetStatsForSectionCampaignStatsSectionIdGet(
         { ...fetcherOptions, ...variables },
-        signal,
+        signal
       ),
     ...options,
     ...queryOptions,
@@ -7023,10 +5221,10 @@ export type CreateCampaignsLogoCampaignListsListIdLogoPostVariables = {
  */
 export const fetchCreateCampaignsLogoCampaignListsListIdLogoPost = (
   variables: CreateCampaignsLogoCampaignListsListIdLogoPostVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
-    Schemas.AppUtilsTypesStandardResponsesResult,
+    Schemas.AppCoreStandardResponsesResult,
     CreateCampaignsLogoCampaignListsListIdLogoPostError,
     Schemas.BodyCreateCampaignsLogoCampaignListsListIdLogoPost,
     {},
@@ -7047,21 +5245,21 @@ export const fetchCreateCampaignsLogoCampaignListsListIdLogoPost = (
 export const useCreateCampaignsLogoCampaignListsListIdLogoPost = (
   options?: Omit<
     reactQuery.UseMutationOptions<
-      Schemas.AppUtilsTypesStandardResponsesResult,
+      Schemas.AppCoreStandardResponsesResult,
       CreateCampaignsLogoCampaignListsListIdLogoPostError,
       CreateCampaignsLogoCampaignListsListIdLogoPostVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
-    Schemas.AppUtilsTypesStandardResponsesResult,
+    Schemas.AppCoreStandardResponsesResult,
     CreateCampaignsLogoCampaignListsListIdLogoPostError,
     CreateCampaignsLogoCampaignListsListIdLogoPostVariables
   >({
     mutationFn: (
-      variables: CreateCampaignsLogoCampaignListsListIdLogoPostVariables,
+      variables: CreateCampaignsLogoCampaignListsListIdLogoPostVariables
     ) =>
       fetchCreateCampaignsLogoCampaignListsListIdLogoPost({
         ...fetcherOptions,
@@ -7091,7 +5289,7 @@ export type ReadCampaignsLogoCampaignListsListIdLogoGetVariables = {
  */
 export const fetchReadCampaignsLogoCampaignListsListIdLogoGet = (
   variables: ReadCampaignsLogoCampaignListsListIdLogoGetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
@@ -7112,7 +5310,7 @@ export const fetchReadCampaignsLogoCampaignListsListIdLogoGet = (
  * **The user must be a member of a group authorised to vote (voters) or a member of the group CAA to use this endpoint**
  */
 export const useReadCampaignsLogoCampaignListsListIdLogoGet = <
-  TData = undefined,
+  TData = undefined
 >(
   variables: ReadCampaignsLogoCampaignListsListIdLogoGetVariables,
   options?: Omit<
@@ -7122,7 +5320,7 @@ export const useReadCampaignsLogoCampaignListsListIdLogoGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -7139,166 +5337,269 @@ export const useReadCampaignsLogoCampaignListsListIdLogoGet = <
     queryFn: ({ signal }) =>
       fetchReadCampaignsLogoCampaignListsListIdLogoGet(
         { ...fetcherOptions, ...variables },
-        signal,
+        signal
       ),
     ...options,
     ...queryOptions,
   });
 };
 
-export type GetSessionsCinemaSessionsGetError = Fetcher.ErrorWrapper<undefined>;
+export type ReadAdvertisersAdvertAdvertisersGetError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type GetSessionsCinemaSessionsGetResponse =
-  Schemas.CineSessionComplete[];
+export type ReadAdvertisersAdvertAdvertisersGetResponse =
+  Schemas.AdvertiserComplete[];
 
-export type GetSessionsCinemaSessionsGetVariables =
+export type ReadAdvertisersAdvertAdvertisersGetVariables =
   HyperionContext["fetcherOptions"];
 
-export const fetchGetSessionsCinemaSessionsGet = (
-  variables: GetSessionsCinemaSessionsGetVariables,
-  signal?: AbortSignal,
+/**
+ * Get existing advertisers.
+ */
+export const fetchReadAdvertisersAdvertAdvertisersGet = (
+  variables: ReadAdvertisersAdvertAdvertisersGetVariables,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
-    GetSessionsCinemaSessionsGetResponse,
-    GetSessionsCinemaSessionsGetError,
+    ReadAdvertisersAdvertAdvertisersGetResponse,
+    ReadAdvertisersAdvertAdvertisersGetError,
     undefined,
     {},
     {},
     {}
-  >({ url: "/cinema/sessions", method: "get", ...variables, signal });
+  >({ url: "/advert/advertisers", method: "get", ...variables, signal });
 
-export const useGetSessionsCinemaSessionsGet = <
-  TData = GetSessionsCinemaSessionsGetResponse,
+/**
+ * Get existing advertisers.
+ */
+export const useReadAdvertisersAdvertAdvertisersGet = <
+  TData = ReadAdvertisersAdvertAdvertisersGetResponse
 >(
-  variables: GetSessionsCinemaSessionsGetVariables,
+  variables: ReadAdvertisersAdvertAdvertisersGetVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
-      GetSessionsCinemaSessionsGetResponse,
-      GetSessionsCinemaSessionsGetError,
+      ReadAdvertisersAdvertAdvertisersGetResponse,
+      ReadAdvertisersAdvertAdvertisersGetError,
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
   return reactQuery.useQuery<
-    GetSessionsCinemaSessionsGetResponse,
-    GetSessionsCinemaSessionsGetError,
+    ReadAdvertisersAdvertAdvertisersGetResponse,
+    ReadAdvertisersAdvertAdvertisersGetError,
     TData
   >({
     queryKey: queryKeyFn({
-      path: "/cinema/sessions",
-      operationId: "getSessionsCinemaSessionsGet",
+      path: "/advert/advertisers",
+      operationId: "readAdvertisersAdvertAdvertisersGet",
       variables,
     }),
     queryFn: ({ signal }) =>
-      fetchGetSessionsCinemaSessionsGet(
+      fetchReadAdvertisersAdvertAdvertisersGet(
         { ...fetcherOptions, ...variables },
-        signal,
+        signal
       ),
     ...options,
     ...queryOptions,
   });
 };
 
-export type CreateSessionCinemaSessionsPostError = Fetcher.ErrorWrapper<{
+export type CreateAdvertiserAdvertAdvertisersPostError = Fetcher.ErrorWrapper<{
   status: 422;
   payload: Schemas.HTTPValidationError;
 }>;
 
-export type CreateSessionCinemaSessionsPostVariables = {
-  body: Schemas.CineSessionBase;
+export type CreateAdvertiserAdvertAdvertisersPostVariables = {
+  body: Schemas.AdvertiserBase;
 } & HyperionContext["fetcherOptions"];
 
-export const fetchCreateSessionCinemaSessionsPost = (
-  variables: CreateSessionCinemaSessionsPostVariables,
-  signal?: AbortSignal,
+/**
+ * Create a new advertiser.
+ *
+ * Each advertiser is associated with a `manager_group`. Users belonging to this group are able to manage the adverts related to the advertiser.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const fetchCreateAdvertiserAdvertAdvertisersPost = (
+  variables: CreateAdvertiserAdvertAdvertisersPostVariables,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
-    Schemas.CineSessionComplete,
-    CreateSessionCinemaSessionsPostError,
-    Schemas.CineSessionBase,
+    Schemas.AdvertiserComplete,
+    CreateAdvertiserAdvertAdvertisersPostError,
+    Schemas.AdvertiserBase,
     {},
     {},
     {}
-  >({ url: "/cinema/sessions", method: "post", ...variables, signal });
+  >({ url: "/advert/advertisers", method: "post", ...variables, signal });
 
-export const useCreateSessionCinemaSessionsPost = (
+/**
+ * Create a new advertiser.
+ *
+ * Each advertiser is associated with a `manager_group`. Users belonging to this group are able to manage the adverts related to the advertiser.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const useCreateAdvertiserAdvertAdvertisersPost = (
   options?: Omit<
     reactQuery.UseMutationOptions<
-      Schemas.CineSessionComplete,
-      CreateSessionCinemaSessionsPostError,
-      CreateSessionCinemaSessionsPostVariables
+      Schemas.AdvertiserComplete,
+      CreateAdvertiserAdvertAdvertisersPostError,
+      CreateAdvertiserAdvertAdvertisersPostVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
-    Schemas.CineSessionComplete,
-    CreateSessionCinemaSessionsPostError,
-    CreateSessionCinemaSessionsPostVariables
+    Schemas.AdvertiserComplete,
+    CreateAdvertiserAdvertAdvertisersPostError,
+    CreateAdvertiserAdvertAdvertisersPostVariables
   >({
-    mutationFn: (variables: CreateSessionCinemaSessionsPostVariables) =>
-      fetchCreateSessionCinemaSessionsPost({ ...fetcherOptions, ...variables }),
+    mutationFn: (variables: CreateAdvertiserAdvertAdvertisersPostVariables) =>
+      fetchCreateAdvertiserAdvertAdvertisersPost({
+        ...fetcherOptions,
+        ...variables,
+      }),
     ...options,
   });
 };
 
-export type UpdateSessionCinemaSessionsSessionIdPatchPathParams = {
-  sessionId: string;
+export type DeleteAdvertiserAdvertAdvertisersAdvertiserIdDeletePathParams = {
+  advertiserId: string;
 };
 
-export type UpdateSessionCinemaSessionsSessionIdPatchError =
+export type DeleteAdvertiserAdvertAdvertisersAdvertiserIdDeleteError =
   Fetcher.ErrorWrapper<{
     status: 422;
     payload: Schemas.HTTPValidationError;
   }>;
 
-export type UpdateSessionCinemaSessionsSessionIdPatchVariables = {
-  body?: Schemas.CineSessionUpdate;
-  pathParams: UpdateSessionCinemaSessionsSessionIdPatchPathParams;
+export type DeleteAdvertiserAdvertAdvertisersAdvertiserIdDeleteVariables = {
+  pathParams: DeleteAdvertiserAdvertAdvertisersAdvertiserIdDeletePathParams;
 } & HyperionContext["fetcherOptions"];
 
-export const fetchUpdateSessionCinemaSessionsSessionIdPatch = (
-  variables: UpdateSessionCinemaSessionsSessionIdPatchVariables,
-  signal?: AbortSignal,
+/**
+ * Delete an advertiser. All adverts associated with the advertiser will also be deleted from the database.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const fetchDeleteAdvertiserAdvertAdvertisersAdvertiserIdDelete = (
+  variables: DeleteAdvertiserAdvertAdvertisersAdvertiserIdDeleteVariables,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
-    void,
-    UpdateSessionCinemaSessionsSessionIdPatchError,
-    Schemas.CineSessionUpdate,
+    undefined,
+    DeleteAdvertiserAdvertAdvertisersAdvertiserIdDeleteError,
+    undefined,
     {},
     {},
-    UpdateSessionCinemaSessionsSessionIdPatchPathParams
+    DeleteAdvertiserAdvertAdvertisersAdvertiserIdDeletePathParams
   >({
-    url: "/cinema/sessions/{sessionId}",
+    url: "/advert/advertisers/{advertiserId}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Delete an advertiser. All adverts associated with the advertiser will also be deleted from the database.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const useDeleteAdvertiserAdvertAdvertisersAdvertiserIdDelete = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      DeleteAdvertiserAdvertAdvertisersAdvertiserIdDeleteError,
+      DeleteAdvertiserAdvertAdvertisersAdvertiserIdDeleteVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    DeleteAdvertiserAdvertAdvertisersAdvertiserIdDeleteError,
+    DeleteAdvertiserAdvertAdvertisersAdvertiserIdDeleteVariables
+  >({
+    mutationFn: (
+      variables: DeleteAdvertiserAdvertAdvertisersAdvertiserIdDeleteVariables
+    ) =>
+      fetchDeleteAdvertiserAdvertAdvertisersAdvertiserIdDelete({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type UpdateAdvertiserAdvertAdvertisersAdvertiserIdPatchPathParams = {
+  advertiserId: string;
+};
+
+export type UpdateAdvertiserAdvertAdvertisersAdvertiserIdPatchError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type UpdateAdvertiserAdvertAdvertisersAdvertiserIdPatchVariables = {
+  body?: Schemas.AdvertiserUpdate;
+  pathParams: UpdateAdvertiserAdvertAdvertisersAdvertiserIdPatchPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Update an advertiser
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const fetchUpdateAdvertiserAdvertAdvertisersAdvertiserIdPatch = (
+  variables: UpdateAdvertiserAdvertAdvertisersAdvertiserIdPatchVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    UpdateAdvertiserAdvertAdvertisersAdvertiserIdPatchError,
+    Schemas.AdvertiserUpdate,
+    {},
+    {},
+    UpdateAdvertiserAdvertAdvertisersAdvertiserIdPatchPathParams
+  >({
+    url: "/advert/advertisers/{advertiserId}",
     method: "patch",
     ...variables,
     signal,
   });
 
-export const useUpdateSessionCinemaSessionsSessionIdPatch = (
+/**
+ * Update an advertiser
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const useUpdateAdvertiserAdvertAdvertisersAdvertiserIdPatch = (
   options?: Omit<
     reactQuery.UseMutationOptions<
-      void,
-      UpdateSessionCinemaSessionsSessionIdPatchError,
-      UpdateSessionCinemaSessionsSessionIdPatchVariables
+      undefined,
+      UpdateAdvertiserAdvertAdvertisersAdvertiserIdPatchError,
+      UpdateAdvertiserAdvertAdvertisersAdvertiserIdPatchVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
-    void,
-    UpdateSessionCinemaSessionsSessionIdPatchError,
-    UpdateSessionCinemaSessionsSessionIdPatchVariables
+    undefined,
+    UpdateAdvertiserAdvertAdvertisersAdvertiserIdPatchError,
+    UpdateAdvertiserAdvertAdvertisersAdvertiserIdPatchVariables
   >({
     mutationFn: (
-      variables: UpdateSessionCinemaSessionsSessionIdPatchVariables,
+      variables: UpdateAdvertiserAdvertAdvertisersAdvertiserIdPatchVariables
     ) =>
-      fetchUpdateSessionCinemaSessionsSessionIdPatch({
+      fetchUpdateAdvertiserAdvertAdvertisersAdvertiserIdPatch({
         ...fetcherOptions,
         ...variables,
       }),
@@ -7306,58 +5607,399 @@ export const useUpdateSessionCinemaSessionsSessionIdPatch = (
   });
 };
 
-export type DeleteSessionCinemaSessionsSessionIdDeletePathParams = {
-  sessionId: string;
+export type GetCurrentUserAdvertisersAdvertMeAdvertisersGetError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type GetCurrentUserAdvertisersAdvertMeAdvertisersGetResponse =
+  Schemas.AdvertiserComplete[];
+
+export type GetCurrentUserAdvertisersAdvertMeAdvertisersGetVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * Return all advertisers the current user can manage.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const fetchGetCurrentUserAdvertisersAdvertMeAdvertisersGet = (
+  variables: GetCurrentUserAdvertisersAdvertMeAdvertisersGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    GetCurrentUserAdvertisersAdvertMeAdvertisersGetResponse,
+    GetCurrentUserAdvertisersAdvertMeAdvertisersGetError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/advert/me/advertisers", method: "get", ...variables, signal });
+
+/**
+ * Return all advertisers the current user can manage.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const useGetCurrentUserAdvertisersAdvertMeAdvertisersGet = <
+  TData = GetCurrentUserAdvertisersAdvertMeAdvertisersGetResponse
+>(
+  variables: GetCurrentUserAdvertisersAdvertMeAdvertisersGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      GetCurrentUserAdvertisersAdvertMeAdvertisersGetResponse,
+      GetCurrentUserAdvertisersAdvertMeAdvertisersGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    GetCurrentUserAdvertisersAdvertMeAdvertisersGetResponse,
+    GetCurrentUserAdvertisersAdvertMeAdvertisersGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/advert/me/advertisers",
+      operationId: "getCurrentUserAdvertisersAdvertMeAdvertisersGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetCurrentUserAdvertisersAdvertMeAdvertisersGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
 };
 
-export type DeleteSessionCinemaSessionsSessionIdDeleteError =
+export type ReadAdvertsAdvertAdvertsGetQueryParams = {
+  advertisers?: string[];
+};
+
+export type ReadAdvertsAdvertAdvertsGetError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type ReadAdvertsAdvertAdvertsGetResponse =
+  Schemas.AdvertReturnComplete[];
+
+export type ReadAdvertsAdvertAdvertsGetVariables = {
+  queryParams?: ReadAdvertsAdvertAdvertsGetQueryParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Get existing adverts. If advertisers optional parameter is used, search adverts by advertisers
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const fetchReadAdvertsAdvertAdvertsGet = (
+  variables: ReadAdvertsAdvertAdvertsGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    ReadAdvertsAdvertAdvertsGetResponse,
+    ReadAdvertsAdvertAdvertsGetError,
+    undefined,
+    {},
+    ReadAdvertsAdvertAdvertsGetQueryParams,
+    {}
+  >({ url: "/advert/adverts", method: "get", ...variables, signal });
+
+/**
+ * Get existing adverts. If advertisers optional parameter is used, search adverts by advertisers
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const useReadAdvertsAdvertAdvertsGet = <
+  TData = ReadAdvertsAdvertAdvertsGetResponse
+>(
+  variables: ReadAdvertsAdvertAdvertsGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      ReadAdvertsAdvertAdvertsGetResponse,
+      ReadAdvertsAdvertAdvertsGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    ReadAdvertsAdvertAdvertsGetResponse,
+    ReadAdvertsAdvertAdvertsGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/advert/adverts",
+      operationId: "readAdvertsAdvertAdvertsGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchReadAdvertsAdvertAdvertsGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type CreateAdvertAdvertAdvertsPostError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type CreateAdvertAdvertAdvertsPostVariables = {
+  body: Schemas.AdvertBase;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Create a new advert
+ *
+ * **The user must be a member of the advertiser group_manager to use this endpoint**
+ */
+export const fetchCreateAdvertAdvertAdvertsPost = (
+  variables: CreateAdvertAdvertAdvertsPostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.AdvertReturnComplete,
+    CreateAdvertAdvertAdvertsPostError,
+    Schemas.AdvertBase,
+    {},
+    {},
+    {}
+  >({ url: "/advert/adverts", method: "post", ...variables, signal });
+
+/**
+ * Create a new advert
+ *
+ * **The user must be a member of the advertiser group_manager to use this endpoint**
+ */
+export const useCreateAdvertAdvertAdvertsPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.AdvertReturnComplete,
+      CreateAdvertAdvertAdvertsPostError,
+      CreateAdvertAdvertAdvertsPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.AdvertReturnComplete,
+    CreateAdvertAdvertAdvertsPostError,
+    CreateAdvertAdvertAdvertsPostVariables
+  >({
+    mutationFn: (variables: CreateAdvertAdvertAdvertsPostVariables) =>
+      fetchCreateAdvertAdvertAdvertsPost({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
+export type ReadAdvertAdvertAdvertsAdvertIdGetPathParams = {
+  advertId: string;
+};
+
+export type ReadAdvertAdvertAdvertsAdvertIdGetError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type ReadAdvertAdvertAdvertsAdvertIdGetVariables = {
+  pathParams: ReadAdvertAdvertAdvertsAdvertIdGetPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Get an advert
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const fetchReadAdvertAdvertAdvertsAdvertIdGet = (
+  variables: ReadAdvertAdvertAdvertsAdvertIdGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.AdvertReturnComplete,
+    ReadAdvertAdvertAdvertsAdvertIdGetError,
+    undefined,
+    {},
+    {},
+    ReadAdvertAdvertAdvertsAdvertIdGetPathParams
+  >({ url: "/advert/adverts/{advertId}", method: "get", ...variables, signal });
+
+/**
+ * Get an advert
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const useReadAdvertAdvertAdvertsAdvertIdGet = <
+  TData = Schemas.AdvertReturnComplete
+>(
+  variables: ReadAdvertAdvertAdvertsAdvertIdGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      Schemas.AdvertReturnComplete,
+      ReadAdvertAdvertAdvertsAdvertIdGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    Schemas.AdvertReturnComplete,
+    ReadAdvertAdvertAdvertsAdvertIdGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/advert/adverts/{advertId}",
+      operationId: "readAdvertAdvertAdvertsAdvertIdGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchReadAdvertAdvertAdvertsAdvertIdGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type UpdateAdvertAdvertAdvertsAdvertIdPatchPathParams = {
+  advertId: string;
+};
+
+export type UpdateAdvertAdvertAdvertsAdvertIdPatchError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type UpdateAdvertAdvertAdvertsAdvertIdPatchVariables = {
+  body?: Schemas.AdvertUpdate;
+  pathParams: UpdateAdvertAdvertAdvertsAdvertIdPatchPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Edit an advert
+ *
+ * **The user must be a member of the advertiser group_manager to use this endpoint**
+ */
+export const fetchUpdateAdvertAdvertAdvertsAdvertIdPatch = (
+  variables: UpdateAdvertAdvertAdvertsAdvertIdPatchVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    UpdateAdvertAdvertAdvertsAdvertIdPatchError,
+    Schemas.AdvertUpdate,
+    {},
+    {},
+    UpdateAdvertAdvertAdvertsAdvertIdPatchPathParams
+  >({
+    url: "/advert/adverts/{advertId}",
+    method: "patch",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Edit an advert
+ *
+ * **The user must be a member of the advertiser group_manager to use this endpoint**
+ */
+export const useUpdateAdvertAdvertAdvertsAdvertIdPatch = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      UpdateAdvertAdvertAdvertsAdvertIdPatchError,
+      UpdateAdvertAdvertAdvertsAdvertIdPatchVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    UpdateAdvertAdvertAdvertsAdvertIdPatchError,
+    UpdateAdvertAdvertAdvertsAdvertIdPatchVariables
+  >({
+    mutationFn: (variables: UpdateAdvertAdvertAdvertsAdvertIdPatchVariables) =>
+      fetchUpdateAdvertAdvertAdvertsAdvertIdPatch({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type DeleteAdvertAdvertAdvertsAdvertIdDeletePathParams = {
+  advertId: string;
+};
+
+export type DeleteAdvertAdvertAdvertsAdvertIdDeleteError =
   Fetcher.ErrorWrapper<{
     status: 422;
     payload: Schemas.HTTPValidationError;
   }>;
 
-export type DeleteSessionCinemaSessionsSessionIdDeleteVariables = {
-  pathParams: DeleteSessionCinemaSessionsSessionIdDeletePathParams;
+export type DeleteAdvertAdvertAdvertsAdvertIdDeleteVariables = {
+  pathParams: DeleteAdvertAdvertAdvertsAdvertIdDeletePathParams;
 } & HyperionContext["fetcherOptions"];
 
-export const fetchDeleteSessionCinemaSessionsSessionIdDelete = (
-  variables: DeleteSessionCinemaSessionsSessionIdDeleteVariables,
-  signal?: AbortSignal,
+/**
+ * Delete an advert
+ *
+ * **The user must be admin or a member of the advertiser group_manager to use this endpoint**
+ */
+export const fetchDeleteAdvertAdvertAdvertsAdvertIdDelete = (
+  variables: DeleteAdvertAdvertAdvertsAdvertIdDeleteVariables,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
-    DeleteSessionCinemaSessionsSessionIdDeleteError,
+    DeleteAdvertAdvertAdvertsAdvertIdDeleteError,
     undefined,
     {},
     {},
-    DeleteSessionCinemaSessionsSessionIdDeletePathParams
+    DeleteAdvertAdvertAdvertsAdvertIdDeletePathParams
   >({
-    url: "/cinema/sessions/{sessionId}",
+    url: "/advert/adverts/{advertId}",
     method: "delete",
     ...variables,
     signal,
   });
 
-export const useDeleteSessionCinemaSessionsSessionIdDelete = (
+/**
+ * Delete an advert
+ *
+ * **The user must be admin or a member of the advertiser group_manager to use this endpoint**
+ */
+export const useDeleteAdvertAdvertAdvertsAdvertIdDelete = (
   options?: Omit<
     reactQuery.UseMutationOptions<
       undefined,
-      DeleteSessionCinemaSessionsSessionIdDeleteError,
-      DeleteSessionCinemaSessionsSessionIdDeleteVariables
+      DeleteAdvertAdvertAdvertsAdvertIdDeleteError,
+      DeleteAdvertAdvertAdvertsAdvertIdDeleteVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
     undefined,
-    DeleteSessionCinemaSessionsSessionIdDeleteError,
-    DeleteSessionCinemaSessionsSessionIdDeleteVariables
+    DeleteAdvertAdvertAdvertsAdvertIdDeleteError,
+    DeleteAdvertAdvertAdvertsAdvertIdDeleteVariables
   >({
-    mutationFn: (
-      variables: DeleteSessionCinemaSessionsSessionIdDeleteVariables,
-    ) =>
-      fetchDeleteSessionCinemaSessionsSessionIdDelete({
+    mutationFn: (variables: DeleteAdvertAdvertAdvertsAdvertIdDeleteVariables) =>
+      fetchDeleteAdvertAdvertAdvertsAdvertIdDelete({
         ...fetcherOptions,
         ...variables,
       }),
@@ -7365,59 +6007,146 @@ export const useDeleteSessionCinemaSessionsSessionIdDelete = (
   });
 };
 
-export type CreateCampaignsLogoCinemaSessionsSessionIdPosterPostPathParams = {
-  sessionId: string;
+export type ReadAdvertImageAdvertAdvertsAdvertIdPictureGetPathParams = {
+  advertId: string;
 };
 
-export type CreateCampaignsLogoCinemaSessionsSessionIdPosterPostError =
+export type ReadAdvertImageAdvertAdvertsAdvertIdPictureGetError =
   Fetcher.ErrorWrapper<{
     status: 422;
     payload: Schemas.HTTPValidationError;
   }>;
 
-export type CreateCampaignsLogoCinemaSessionsSessionIdPosterPostVariables = {
-  body: Schemas.BodyCreateCampaignsLogoCinemaSessionsSessionIdPosterPost;
-  pathParams: CreateCampaignsLogoCinemaSessionsSessionIdPosterPostPathParams;
+export type ReadAdvertImageAdvertAdvertsAdvertIdPictureGetVariables = {
+  pathParams: ReadAdvertImageAdvertAdvertsAdvertIdPictureGetPathParams;
 } & HyperionContext["fetcherOptions"];
 
-export const fetchCreateCampaignsLogoCinemaSessionsSessionIdPosterPost = (
-  variables: CreateCampaignsLogoCinemaSessionsSessionIdPosterPostVariables,
-  signal?: AbortSignal,
+/**
+ * Get the image of an advert
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const fetchReadAdvertImageAdvertAdvertsAdvertIdPictureGet = (
+  variables: ReadAdvertImageAdvertAdvertsAdvertIdPictureGetVariables,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
-    Schemas.AppUtilsTypesStandardResponsesResult,
-    CreateCampaignsLogoCinemaSessionsSessionIdPosterPostError,
-    Schemas.BodyCreateCampaignsLogoCinemaSessionsSessionIdPosterPost,
+    undefined,
+    ReadAdvertImageAdvertAdvertsAdvertIdPictureGetError,
+    undefined,
     {},
     {},
-    CreateCampaignsLogoCinemaSessionsSessionIdPosterPostPathParams
+    ReadAdvertImageAdvertAdvertsAdvertIdPictureGetPathParams
   >({
-    url: "/cinema/sessions/{sessionId}/poster",
+    url: "/advert/adverts/{advertId}/picture",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Get the image of an advert
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const useReadAdvertImageAdvertAdvertsAdvertIdPictureGet = <
+  TData = undefined
+>(
+  variables: ReadAdvertImageAdvertAdvertsAdvertIdPictureGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      undefined,
+      ReadAdvertImageAdvertAdvertsAdvertIdPictureGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    undefined,
+    ReadAdvertImageAdvertAdvertsAdvertIdPictureGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/advert/adverts/{advertId}/picture",
+      operationId: "readAdvertImageAdvertAdvertsAdvertIdPictureGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchReadAdvertImageAdvertAdvertsAdvertIdPictureGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type CreateAdvertImageAdvertAdvertsAdvertIdPicturePostPathParams = {
+  advertId: string;
+};
+
+export type CreateAdvertImageAdvertAdvertsAdvertIdPicturePostError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type CreateAdvertImageAdvertAdvertsAdvertIdPicturePostVariables = {
+  body: Schemas.BodyCreateAdvertImageAdvertAdvertsAdvertIdPicturePost;
+  pathParams: CreateAdvertImageAdvertAdvertsAdvertIdPicturePostPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Add an image to an advert
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const fetchCreateAdvertImageAdvertAdvertsAdvertIdPicturePost = (
+  variables: CreateAdvertImageAdvertAdvertsAdvertIdPicturePostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.AppCoreStandardResponsesResult,
+    CreateAdvertImageAdvertAdvertsAdvertIdPicturePostError,
+    Schemas.BodyCreateAdvertImageAdvertAdvertsAdvertIdPicturePost,
+    {},
+    {},
+    CreateAdvertImageAdvertAdvertsAdvertIdPicturePostPathParams
+  >({
+    url: "/advert/adverts/{advertId}/picture",
     method: "post",
     ...variables,
     signal,
   });
 
-export const useCreateCampaignsLogoCinemaSessionsSessionIdPosterPost = (
+/**
+ * Add an image to an advert
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const useCreateAdvertImageAdvertAdvertsAdvertIdPicturePost = (
   options?: Omit<
     reactQuery.UseMutationOptions<
-      Schemas.AppUtilsTypesStandardResponsesResult,
-      CreateCampaignsLogoCinemaSessionsSessionIdPosterPostError,
-      CreateCampaignsLogoCinemaSessionsSessionIdPosterPostVariables
+      Schemas.AppCoreStandardResponsesResult,
+      CreateAdvertImageAdvertAdvertsAdvertIdPicturePostError,
+      CreateAdvertImageAdvertAdvertsAdvertIdPicturePostVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
-    Schemas.AppUtilsTypesStandardResponsesResult,
-    CreateCampaignsLogoCinemaSessionsSessionIdPosterPostError,
-    CreateCampaignsLogoCinemaSessionsSessionIdPosterPostVariables
+    Schemas.AppCoreStandardResponsesResult,
+    CreateAdvertImageAdvertAdvertsAdvertIdPicturePostError,
+    CreateAdvertImageAdvertAdvertsAdvertIdPicturePostVariables
   >({
     mutationFn: (
-      variables: CreateCampaignsLogoCinemaSessionsSessionIdPosterPostVariables,
+      variables: CreateAdvertImageAdvertAdvertsAdvertIdPicturePostVariables
     ) =>
-      fetchCreateCampaignsLogoCinemaSessionsSessionIdPosterPost({
+      fetchCreateAdvertImageAdvertAdvertsAdvertIdPicturePost({
         ...fetcherOptions,
         ...variables,
       }),
@@ -7425,1340 +6154,5002 @@ export const useCreateCampaignsLogoCinemaSessionsSessionIdPosterPost = (
   });
 };
 
-export type ReadSessionPosterCinemaSessionsSessionIdPosterGetPathParams = {
-  sessionId: string;
+export type GetRaffleTombolaRafflesGetError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetRaffleTombolaRafflesGetResponse = Schemas.RaffleComplete[];
+
+export type GetRaffleTombolaRafflesGetVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * Return all raffles
+ */
+export const fetchGetRaffleTombolaRafflesGet = (
+  variables: GetRaffleTombolaRafflesGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    GetRaffleTombolaRafflesGetResponse,
+    GetRaffleTombolaRafflesGetError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/tombola/raffles", method: "get", ...variables, signal });
+
+/**
+ * Return all raffles
+ */
+export const useGetRaffleTombolaRafflesGet = <
+  TData = GetRaffleTombolaRafflesGetResponse
+>(
+  variables: GetRaffleTombolaRafflesGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      GetRaffleTombolaRafflesGetResponse,
+      GetRaffleTombolaRafflesGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    GetRaffleTombolaRafflesGetResponse,
+    GetRaffleTombolaRafflesGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/tombola/raffles",
+      operationId: "getRaffleTombolaRafflesGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetRaffleTombolaRafflesGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
 };
 
-export type ReadSessionPosterCinemaSessionsSessionIdPosterGetError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
+export type CreateRaffleTombolaRafflesPostError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
 
-export type ReadSessionPosterCinemaSessionsSessionIdPosterGetVariables = {
-  pathParams: ReadSessionPosterCinemaSessionsSessionIdPosterGetPathParams;
+export type CreateRaffleTombolaRafflesPostVariables = {
+  body: Schemas.RaffleBase;
 } & HyperionContext["fetcherOptions"];
 
-export const fetchReadSessionPosterCinemaSessionsSessionIdPosterGet = (
-  variables: ReadSessionPosterCinemaSessionsSessionIdPosterGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    ReadSessionPosterCinemaSessionsSessionIdPosterGetError,
-    undefined,
-    {},
-    {},
-    ReadSessionPosterCinemaSessionsSessionIdPosterGetPathParams
-  >({
-    url: "/cinema/sessions/{sessionId}/poster",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-export const useReadSessionPosterCinemaSessionsSessionIdPosterGet = <
-  TData = undefined,
->(
-  variables: ReadSessionPosterCinemaSessionsSessionIdPosterGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      undefined,
-      ReadSessionPosterCinemaSessionsSessionIdPosterGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    undefined,
-    ReadSessionPosterCinemaSessionsSessionIdPosterGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/cinema/sessions/{sessionId}/poster",
-      operationId: "readSessionPosterCinemaSessionsSessionIdPosterGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchReadSessionPosterCinemaSessionsSessionIdPosterGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type ReadInformationInformationGetError =
-  Fetcher.ErrorWrapper<undefined>;
-
-export type ReadInformationInformationGetVariables =
-  HyperionContext["fetcherOptions"];
-
 /**
- * Return information about Hyperion. This endpoint can be used to check if the API is up.
+ * Create a new raffle
+ *
+ * **The user must be a member of the group admin to use this endpoint**
  */
-export const fetchReadInformationInformationGet = (
-  variables: ReadInformationInformationGetVariables,
-  signal?: AbortSignal,
+export const fetchCreateRaffleTombolaRafflesPost = (
+  variables: CreateRaffleTombolaRafflesPostVariables,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
-    Schemas.CoreInformation,
-    ReadInformationInformationGetError,
-    undefined,
+    Schemas.RaffleComplete,
+    CreateRaffleTombolaRafflesPostError,
+    Schemas.RaffleBase,
     {},
     {},
     {}
-  >({ url: "/information", method: "get", ...variables, signal });
+  >({ url: "/tombola/raffles", method: "post", ...variables, signal });
 
 /**
- * Return information about Hyperion. This endpoint can be used to check if the API is up.
+ * Create a new raffle
+ *
+ * **The user must be a member of the group admin to use this endpoint**
  */
-export const useReadInformationInformationGet = <
-  TData = Schemas.CoreInformation,
->(
-  variables: ReadInformationInformationGetVariables,
+export const useCreateRaffleTombolaRafflesPost = (
   options?: Omit<
-    reactQuery.UseQueryOptions<
-      Schemas.CoreInformation,
-      ReadInformationInformationGetError,
-      TData
+    reactQuery.UseMutationOptions<
+      Schemas.RaffleComplete,
+      CreateRaffleTombolaRafflesPostError,
+      CreateRaffleTombolaRafflesPostVariables
     >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
+    "mutationFn"
+  >
 ) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    Schemas.CoreInformation,
-    ReadInformationInformationGetError,
-    TData
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.RaffleComplete,
+    CreateRaffleTombolaRafflesPostError,
+    CreateRaffleTombolaRafflesPostVariables
   >({
-    queryKey: queryKeyFn({
-      path: "/information",
-      operationId: "readInformationInformationGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchReadInformationInformationGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
+    mutationFn: (variables: CreateRaffleTombolaRafflesPostVariables) =>
+      fetchCreateRaffleTombolaRafflesPost({ ...fetcherOptions, ...variables }),
     ...options,
-    ...queryOptions,
   });
 };
 
-export type ReadPrivacyPrivacyGetError = Fetcher.ErrorWrapper<undefined>;
-
-export type ReadPrivacyPrivacyGetVariables = HyperionContext["fetcherOptions"];
-
-/**
- * Return Hyperion privacy
- */
-export const fetchReadPrivacyPrivacyGet = (
-  variables: ReadPrivacyPrivacyGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<undefined, ReadPrivacyPrivacyGetError, undefined, {}, {}, {}>({
-    url: "/privacy",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-/**
- * Return Hyperion privacy
- */
-export const useReadPrivacyPrivacyGet = <TData = undefined>(
-  variables: ReadPrivacyPrivacyGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<undefined, ReadPrivacyPrivacyGetError, TData>,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<undefined, ReadPrivacyPrivacyGetError, TData>({
-    queryKey: queryKeyFn({
-      path: "/privacy",
-      operationId: "readPrivacyPrivacyGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchReadPrivacyPrivacyGet({ ...fetcherOptions, ...variables }, signal),
-    ...options,
-    ...queryOptions,
-  });
+export type EditRaffleTombolaRafflesRaffleIdPatchPathParams = {
+  raffleId: string;
 };
 
-export type ReadTermsAndConditionsTermsAndConditionsGetError =
-  Fetcher.ErrorWrapper<undefined>;
+export type EditRaffleTombolaRafflesRaffleIdPatchError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
 
-export type ReadTermsAndConditionsTermsAndConditionsGetVariables =
-  HyperionContext["fetcherOptions"];
+export type EditRaffleTombolaRafflesRaffleIdPatchVariables = {
+  body?: Schemas.RaffleEdit;
+  pathParams: EditRaffleTombolaRafflesRaffleIdPatchPathParams;
+} & HyperionContext["fetcherOptions"];
 
 /**
- * Return Hyperion terms and conditions pages
+ * Edit a raffle
+ *
+ * **The user must be a member of the raffle's group to use this endpoint**
  */
-export const fetchReadTermsAndConditionsTermsAndConditionsGet = (
-  variables: ReadTermsAndConditionsTermsAndConditionsGetVariables,
-  signal?: AbortSignal,
+export const fetchEditRaffleTombolaRafflesRaffleIdPatch = (
+  variables: EditRaffleTombolaRafflesRaffleIdPatchVariables,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
-    ReadTermsAndConditionsTermsAndConditionsGetError,
-    undefined,
+    EditRaffleTombolaRafflesRaffleIdPatchError,
+    Schemas.RaffleEdit,
     {},
     {},
-    {}
-  >({ url: "/terms-and-conditions", method: "get", ...variables, signal });
-
-/**
- * Return Hyperion terms and conditions pages
- */
-export const useReadTermsAndConditionsTermsAndConditionsGet = <
-  TData = undefined,
->(
-  variables: ReadTermsAndConditionsTermsAndConditionsGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      undefined,
-      ReadTermsAndConditionsTermsAndConditionsGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    undefined,
-    ReadTermsAndConditionsTermsAndConditionsGetError,
-    TData
+    EditRaffleTombolaRafflesRaffleIdPatchPathParams
   >({
-    queryKey: queryKeyFn({
-      path: "/terms-and-conditions",
-      operationId: "readTermsAndConditionsTermsAndConditionsGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchReadTermsAndConditionsTermsAndConditionsGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type ReadSupportSupportGetError = Fetcher.ErrorWrapper<undefined>;
-
-export type ReadSupportSupportGetVariables = HyperionContext["fetcherOptions"];
-
-/**
- * Return Hyperion terms and conditions pages
- */
-export const fetchReadSupportSupportGet = (
-  variables: ReadSupportSupportGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<undefined, ReadSupportSupportGetError, undefined, {}, {}, {}>({
-    url: "/support",
-    method: "get",
+    url: "/tombola/raffles/{raffleId}",
+    method: "patch",
     ...variables,
     signal,
   });
 
 /**
- * Return Hyperion terms and conditions pages
- */
-export const useReadSupportSupportGet = <TData = undefined>(
-  variables: ReadSupportSupportGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<undefined, ReadSupportSupportGetError, TData>,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<undefined, ReadSupportSupportGetError, TData>({
-    queryKey: queryKeyFn({
-      path: "/support",
-      operationId: "readSupportSupportGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchReadSupportSupportGet({ ...fetcherOptions, ...variables }, signal),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type ReadSecurityTxtSecurityTxtGetError =
-  Fetcher.ErrorWrapper<undefined>;
-
-export type ReadSecurityTxtSecurityTxtGetVariables =
-  HyperionContext["fetcherOptions"];
-
-/**
- * Return Hyperion security.txt file
- */
-export const fetchReadSecurityTxtSecurityTxtGet = (
-  variables: ReadSecurityTxtSecurityTxtGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    ReadSecurityTxtSecurityTxtGetError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/security.txt", method: "get", ...variables, signal });
-
-/**
- * Return Hyperion security.txt file
- */
-export const useReadSecurityTxtSecurityTxtGet = <TData = undefined>(
-  variables: ReadSecurityTxtSecurityTxtGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      undefined,
-      ReadSecurityTxtSecurityTxtGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    undefined,
-    ReadSecurityTxtSecurityTxtGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/security.txt",
-      operationId: "readSecurityTxtSecurityTxtGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchReadSecurityTxtSecurityTxtGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type ReadWellknownSecurityTxtWellKnownSecurityTxtGetError =
-  Fetcher.ErrorWrapper<undefined>;
-
-export type ReadWellknownSecurityTxtWellKnownSecurityTxtGetVariables =
-  HyperionContext["fetcherOptions"];
-
-/**
- * Return Hyperion security.txt file
- */
-export const fetchReadWellknownSecurityTxtWellKnownSecurityTxtGet = (
-  variables: ReadWellknownSecurityTxtWellKnownSecurityTxtGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    ReadWellknownSecurityTxtWellKnownSecurityTxtGetError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/.well-known/security.txt", method: "get", ...variables, signal });
-
-/**
- * Return Hyperion security.txt file
- */
-export const useReadWellknownSecurityTxtWellKnownSecurityTxtGet = <
-  TData = undefined,
->(
-  variables: ReadWellknownSecurityTxtWellKnownSecurityTxtGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      undefined,
-      ReadWellknownSecurityTxtWellKnownSecurityTxtGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    undefined,
-    ReadWellknownSecurityTxtWellKnownSecurityTxtGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/.well-known/security.txt",
-      operationId: "readWellknownSecurityTxtWellKnownSecurityTxtGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchReadWellknownSecurityTxtWellKnownSecurityTxtGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type ReadRobotsTxtRobotsTxtGetError = Fetcher.ErrorWrapper<undefined>;
-
-export type ReadRobotsTxtRobotsTxtGetVariables =
-  HyperionContext["fetcherOptions"];
-
-/**
- * Return Hyperion robots.txt file
- */
-export const fetchReadRobotsTxtRobotsTxtGet = (
-  variables: ReadRobotsTxtRobotsTxtGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    ReadRobotsTxtRobotsTxtGetError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/robots.txt", method: "get", ...variables, signal });
-
-/**
- * Return Hyperion robots.txt file
- */
-export const useReadRobotsTxtRobotsTxtGet = <TData = undefined>(
-  variables: ReadRobotsTxtRobotsTxtGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      undefined,
-      ReadRobotsTxtRobotsTxtGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<undefined, ReadRobotsTxtRobotsTxtGetError, TData>({
-    queryKey: queryKeyFn({
-      path: "/robots.txt",
-      operationId: "readRobotsTxtRobotsTxtGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchReadRobotsTxtRobotsTxtGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type GetStyleFileStyleFileCssGetPathParams = {
-  file: string;
-};
-
-export type GetStyleFileStyleFileCssGetError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type GetStyleFileStyleFileCssGetVariables = {
-  pathParams: GetStyleFileStyleFileCssGetPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Return a style file from the assets folder
- */
-export const fetchGetStyleFileStyleFileCssGet = (
-  variables: GetStyleFileStyleFileCssGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    GetStyleFileStyleFileCssGetError,
-    undefined,
-    {},
-    {},
-    GetStyleFileStyleFileCssGetPathParams
-  >({ url: "/style/{file}.css", method: "get", ...variables, signal });
-
-/**
- * Return a style file from the assets folder
- */
-export const useGetStyleFileStyleFileCssGet = <TData = undefined>(
-  variables: GetStyleFileStyleFileCssGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      undefined,
-      GetStyleFileStyleFileCssGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    undefined,
-    GetStyleFileStyleFileCssGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/style/{file}.css",
-      operationId: "getStyleFileStyleFileCssGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetStyleFileStyleFileCssGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type GetFaviconFaviconIcoGetError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetFaviconFaviconIcoGetVariables =
-  HyperionContext["fetcherOptions"];
-
-export const fetchGetFaviconFaviconIcoGet = (
-  variables: GetFaviconFaviconIcoGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<undefined, GetFaviconFaviconIcoGetError, undefined, {}, {}, {}>(
-    { url: "/favicon.ico", method: "get", ...variables, signal },
-  );
-
-export const useGetFaviconFaviconIcoGet = <TData = undefined>(
-  variables: GetFaviconFaviconIcoGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<undefined, GetFaviconFaviconIcoGetError, TData>,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<undefined, GetFaviconFaviconIcoGetError, TData>({
-    queryKey: queryKeyFn({
-      path: "/favicon.ico",
-      operationId: "getFaviconFaviconIcoGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetFaviconFaviconIcoGet({ ...fetcherOptions, ...variables }, signal),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type GetModuleVisibilityModuleVisibilityGetError =
-  Fetcher.ErrorWrapper<undefined>;
-
-export type GetModuleVisibilityModuleVisibilityGetResponse =
-  Schemas.ModuleVisibility[];
-
-export type GetModuleVisibilityModuleVisibilityGetVariables =
-  HyperionContext["fetcherOptions"];
-
-/**
- * Get all existing module_visibility.
+ * Edit a raffle
  *
- * **This endpoint is only usable by administrators**
+ * **The user must be a member of the raffle's group to use this endpoint**
  */
-export const fetchGetModuleVisibilityModuleVisibilityGet = (
-  variables: GetModuleVisibilityModuleVisibilityGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetModuleVisibilityModuleVisibilityGetResponse,
-    GetModuleVisibilityModuleVisibilityGetError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/module-visibility/", method: "get", ...variables, signal });
-
-/**
- * Get all existing module_visibility.
- *
- * **This endpoint is only usable by administrators**
- */
-export const useGetModuleVisibilityModuleVisibilityGet = <
-  TData = GetModuleVisibilityModuleVisibilityGetResponse,
->(
-  variables: GetModuleVisibilityModuleVisibilityGetVariables,
+export const useEditRaffleTombolaRafflesRaffleIdPatch = (
   options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetModuleVisibilityModuleVisibilityGetResponse,
-      GetModuleVisibilityModuleVisibilityGetError,
-      TData
+    reactQuery.UseMutationOptions<
+      undefined,
+      EditRaffleTombolaRafflesRaffleIdPatchError,
+      EditRaffleTombolaRafflesRaffleIdPatchVariables
     >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
+    "mutationFn"
+  >
 ) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetModuleVisibilityModuleVisibilityGetResponse,
-    GetModuleVisibilityModuleVisibilityGetError,
-    TData
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    EditRaffleTombolaRafflesRaffleIdPatchError,
+    EditRaffleTombolaRafflesRaffleIdPatchVariables
   >({
-    queryKey: queryKeyFn({
-      path: "/module-visibility/",
-      operationId: "getModuleVisibilityModuleVisibilityGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetModuleVisibilityModuleVisibilityGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
+    mutationFn: (variables: EditRaffleTombolaRafflesRaffleIdPatchVariables) =>
+      fetchEditRaffleTombolaRafflesRaffleIdPatch({
+        ...fetcherOptions,
+        ...variables,
+      }),
     ...options,
-    ...queryOptions,
   });
 };
 
-export type AddModuleVisibilityModuleVisibilityPostError =
+export type DeleteRaffleTombolaRafflesRaffleIdDeletePathParams = {
+  raffleId: string;
+};
+
+export type DeleteRaffleTombolaRafflesRaffleIdDeleteError =
   Fetcher.ErrorWrapper<{
     status: 422;
     payload: Schemas.HTTPValidationError;
   }>;
 
-export type AddModuleVisibilityModuleVisibilityPostVariables = {
-  body: Schemas.ModuleVisibilityCreate;
+export type DeleteRaffleTombolaRafflesRaffleIdDeleteVariables = {
+  pathParams: DeleteRaffleTombolaRafflesRaffleIdDeletePathParams;
 } & HyperionContext["fetcherOptions"];
 
 /**
- * Add a new group to a module
+ * Delete a raffle.
  *
- * **This endpoint is only usable by administrators**
+ * **The user must be a member of the raffle's group to use this endpoint**
  */
-export const fetchAddModuleVisibilityModuleVisibilityPost = (
-  variables: AddModuleVisibilityModuleVisibilityPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.ModuleVisibilityCreate,
-    AddModuleVisibilityModuleVisibilityPostError,
-    Schemas.ModuleVisibilityCreate,
-    {},
-    {},
-    {}
-  >({ url: "/module-visibility/", method: "post", ...variables, signal });
-
-/**
- * Add a new group to a module
- *
- * **This endpoint is only usable by administrators**
- */
-export const useAddModuleVisibilityModuleVisibilityPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.ModuleVisibilityCreate,
-      AddModuleVisibilityModuleVisibilityPostError,
-      AddModuleVisibilityModuleVisibilityPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.ModuleVisibilityCreate,
-    AddModuleVisibilityModuleVisibilityPostError,
-    AddModuleVisibilityModuleVisibilityPostVariables
-  >({
-    mutationFn: (variables: AddModuleVisibilityModuleVisibilityPostVariables) =>
-      fetchAddModuleVisibilityModuleVisibilityPost({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type GetUserModulesVisibilityModuleVisibilityMeGetError =
-  Fetcher.ErrorWrapper<undefined>;
-
-export type GetUserModulesVisibilityModuleVisibilityMeGetResponse = string[];
-
-export type GetUserModulesVisibilityModuleVisibilityMeGetVariables =
-  HyperionContext["fetcherOptions"];
-
-/**
- * Get group user accessible root
- *
- * **This endpoint is only usable by everyone**
- */
-export const fetchGetUserModulesVisibilityModuleVisibilityMeGet = (
-  variables: GetUserModulesVisibilityModuleVisibilityMeGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetUserModulesVisibilityModuleVisibilityMeGetResponse,
-    GetUserModulesVisibilityModuleVisibilityMeGetError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/module-visibility/me", method: "get", ...variables, signal });
-
-/**
- * Get group user accessible root
- *
- * **This endpoint is only usable by everyone**
- */
-export const useGetUserModulesVisibilityModuleVisibilityMeGet = <
-  TData = GetUserModulesVisibilityModuleVisibilityMeGetResponse,
->(
-  variables: GetUserModulesVisibilityModuleVisibilityMeGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetUserModulesVisibilityModuleVisibilityMeGetResponse,
-      GetUserModulesVisibilityModuleVisibilityMeGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetUserModulesVisibilityModuleVisibilityMeGetResponse,
-    GetUserModulesVisibilityModuleVisibilityMeGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/module-visibility/me",
-      operationId: "getUserModulesVisibilityModuleVisibilityMeGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetUserModulesVisibilityModuleVisibilityMeGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type DeleteSessionModuleVisibilityRootGroupIdDeletePathParams = {
-  root: string;
-  groupId: string;
-};
-
-export type DeleteSessionModuleVisibilityRootGroupIdDeleteError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type DeleteSessionModuleVisibilityRootGroupIdDeleteVariables = {
-  pathParams: DeleteSessionModuleVisibilityRootGroupIdDeletePathParams;
-} & HyperionContext["fetcherOptions"];
-
-export const fetchDeleteSessionModuleVisibilityRootGroupIdDelete = (
-  variables: DeleteSessionModuleVisibilityRootGroupIdDeleteVariables,
-  signal?: AbortSignal,
+export const fetchDeleteRaffleTombolaRafflesRaffleIdDelete = (
+  variables: DeleteRaffleTombolaRafflesRaffleIdDeleteVariables,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
-    DeleteSessionModuleVisibilityRootGroupIdDeleteError,
+    DeleteRaffleTombolaRafflesRaffleIdDeleteError,
     undefined,
     {},
     {},
-    DeleteSessionModuleVisibilityRootGroupIdDeletePathParams
+    DeleteRaffleTombolaRafflesRaffleIdDeletePathParams
   >({
-    url: "/module-visibility/{root}/{groupId}",
-    method: "delete",
-    ...variables,
-    signal,
-  });
-
-export const useDeleteSessionModuleVisibilityRootGroupIdDelete = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      DeleteSessionModuleVisibilityRootGroupIdDeleteError,
-      DeleteSessionModuleVisibilityRootGroupIdDeleteVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    DeleteSessionModuleVisibilityRootGroupIdDeleteError,
-    DeleteSessionModuleVisibilityRootGroupIdDeleteVariables
-  >({
-    mutationFn: (
-      variables: DeleteSessionModuleVisibilityRootGroupIdDeleteVariables,
-    ) =>
-      fetchDeleteSessionModuleVisibilityRootGroupIdDelete({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type ReadGroupsGroupsGetError = Fetcher.ErrorWrapper<undefined>;
-
-export type ReadGroupsGroupsGetResponse = Schemas.CoreGroupSimple[];
-
-export type ReadGroupsGroupsGetVariables = HyperionContext["fetcherOptions"];
-
-/**
- * Return all groups from database as a list of dictionaries
- *
- * **This endpoint is only usable by administrators**
- */
-export const fetchReadGroupsGroupsGet = (
-  variables: ReadGroupsGroupsGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    ReadGroupsGroupsGetResponse,
-    ReadGroupsGroupsGetError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/groups/", method: "get", ...variables, signal });
-
-/**
- * Return all groups from database as a list of dictionaries
- *
- * **This endpoint is only usable by administrators**
- */
-export const useReadGroupsGroupsGet = <TData = ReadGroupsGroupsGetResponse>(
-  variables: ReadGroupsGroupsGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      ReadGroupsGroupsGetResponse,
-      ReadGroupsGroupsGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    ReadGroupsGroupsGetResponse,
-    ReadGroupsGroupsGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/groups/",
-      operationId: "readGroupsGroupsGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchReadGroupsGroupsGet({ ...fetcherOptions, ...variables }, signal),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type CreateGroupGroupsPostError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type CreateGroupGroupsPostVariables = {
-  body: Schemas.CoreGroupCreate;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Create a new group.
- *
- * **This endpoint is only usable by administrators**
- */
-export const fetchCreateGroupGroupsPost = (
-  variables: CreateGroupGroupsPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.CoreGroupSimple,
-    CreateGroupGroupsPostError,
-    Schemas.CoreGroupCreate,
-    {},
-    {},
-    {}
-  >({ url: "/groups/", method: "post", ...variables, signal });
-
-/**
- * Create a new group.
- *
- * **This endpoint is only usable by administrators**
- */
-export const useCreateGroupGroupsPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.CoreGroupSimple,
-      CreateGroupGroupsPostError,
-      CreateGroupGroupsPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.CoreGroupSimple,
-    CreateGroupGroupsPostError,
-    CreateGroupGroupsPostVariables
-  >({
-    mutationFn: (variables: CreateGroupGroupsPostVariables) =>
-      fetchCreateGroupGroupsPost({ ...fetcherOptions, ...variables }),
-    ...options,
-  });
-};
-
-export type ReadGroupGroupsGroupIdGetPathParams = {
-  groupId: string;
-};
-
-export type ReadGroupGroupsGroupIdGetError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type ReadGroupGroupsGroupIdGetVariables = {
-  pathParams: ReadGroupGroupsGroupIdGetPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Return group with id from database as a dictionary. This includes a list of users being members of the group.
- *
- * **This endpoint is only usable by administrators**
- */
-export const fetchReadGroupGroupsGroupIdGet = (
-  variables: ReadGroupGroupsGroupIdGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.CoreGroup,
-    ReadGroupGroupsGroupIdGetError,
-    undefined,
-    {},
-    {},
-    ReadGroupGroupsGroupIdGetPathParams
-  >({ url: "/groups/{groupId}", method: "get", ...variables, signal });
-
-/**
- * Return group with id from database as a dictionary. This includes a list of users being members of the group.
- *
- * **This endpoint is only usable by administrators**
- */
-export const useReadGroupGroupsGroupIdGet = <TData = Schemas.CoreGroup>(
-  variables: ReadGroupGroupsGroupIdGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      Schemas.CoreGroup,
-      ReadGroupGroupsGroupIdGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    Schemas.CoreGroup,
-    ReadGroupGroupsGroupIdGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/groups/{groupId}",
-      operationId: "readGroupGroupsGroupIdGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchReadGroupGroupsGroupIdGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type UpdateGroupGroupsGroupIdPatchPathParams = {
-  groupId: string;
-};
-
-export type UpdateGroupGroupsGroupIdPatchError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type UpdateGroupGroupsGroupIdPatchVariables = {
-  body?: Schemas.CoreGroupUpdate;
-  pathParams: UpdateGroupGroupsGroupIdPatchPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Update the name or the description of a group.
- *
- * **This endpoint is only usable by administrators**
- */
-export const fetchUpdateGroupGroupsGroupIdPatch = (
-  variables: UpdateGroupGroupsGroupIdPatchVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    UpdateGroupGroupsGroupIdPatchError,
-    Schemas.CoreGroupUpdate,
-    {},
-    {},
-    UpdateGroupGroupsGroupIdPatchPathParams
-  >({ url: "/groups/{groupId}", method: "patch", ...variables, signal });
-
-/**
- * Update the name or the description of a group.
- *
- * **This endpoint is only usable by administrators**
- */
-export const useUpdateGroupGroupsGroupIdPatch = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      UpdateGroupGroupsGroupIdPatchError,
-      UpdateGroupGroupsGroupIdPatchVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    UpdateGroupGroupsGroupIdPatchError,
-    UpdateGroupGroupsGroupIdPatchVariables
-  >({
-    mutationFn: (variables: UpdateGroupGroupsGroupIdPatchVariables) =>
-      fetchUpdateGroupGroupsGroupIdPatch({ ...fetcherOptions, ...variables }),
-    ...options,
-  });
-};
-
-export type DeleteGroupGroupsGroupIdDeletePathParams = {
-  groupId: string;
-};
-
-export type DeleteGroupGroupsGroupIdDeleteError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type DeleteGroupGroupsGroupIdDeleteVariables = {
-  pathParams: DeleteGroupGroupsGroupIdDeletePathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Delete group from database.
- * This will remove the group from all users but won't delete any user.
- *
- * `GroupTypes` groups can not be deleted.
- *
- * **This endpoint is only usable by administrators**
- */
-export const fetchDeleteGroupGroupsGroupIdDelete = (
-  variables: DeleteGroupGroupsGroupIdDeleteVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    DeleteGroupGroupsGroupIdDeleteError,
-    undefined,
-    {},
-    {},
-    DeleteGroupGroupsGroupIdDeletePathParams
-  >({ url: "/groups/{groupId}", method: "delete", ...variables, signal });
-
-/**
- * Delete group from database.
- * This will remove the group from all users but won't delete any user.
- *
- * `GroupTypes` groups can not be deleted.
- *
- * **This endpoint is only usable by administrators**
- */
-export const useDeleteGroupGroupsGroupIdDelete = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      DeleteGroupGroupsGroupIdDeleteError,
-      DeleteGroupGroupsGroupIdDeleteVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    DeleteGroupGroupsGroupIdDeleteError,
-    DeleteGroupGroupsGroupIdDeleteVariables
-  >({
-    mutationFn: (variables: DeleteGroupGroupsGroupIdDeleteVariables) =>
-      fetchDeleteGroupGroupsGroupIdDelete({ ...fetcherOptions, ...variables }),
-    ...options,
-  });
-};
-
-export type CreateMembershipGroupsMembershipPostError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type CreateMembershipGroupsMembershipPostVariables = {
-  body: Schemas.CoreMembership;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Create a new membership in database and return the group. This allows to "add a user to a group".
- *
- * **This endpoint is only usable by administrators**
- */
-export const fetchCreateMembershipGroupsMembershipPost = (
-  variables: CreateMembershipGroupsMembershipPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.CoreGroup,
-    CreateMembershipGroupsMembershipPostError,
-    Schemas.CoreMembership,
-    {},
-    {},
-    {}
-  >({ url: "/groups/membership", method: "post", ...variables, signal });
-
-/**
- * Create a new membership in database and return the group. This allows to "add a user to a group".
- *
- * **This endpoint is only usable by administrators**
- */
-export const useCreateMembershipGroupsMembershipPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.CoreGroup,
-      CreateMembershipGroupsMembershipPostError,
-      CreateMembershipGroupsMembershipPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.CoreGroup,
-    CreateMembershipGroupsMembershipPostError,
-    CreateMembershipGroupsMembershipPostVariables
-  >({
-    mutationFn: (variables: CreateMembershipGroupsMembershipPostVariables) =>
-      fetchCreateMembershipGroupsMembershipPost({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type DeleteMembershipGroupsMembershipDeleteError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type DeleteMembershipGroupsMembershipDeleteVariables = {
-  body: Schemas.CoreMembershipDelete;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Delete a membership using the user and group ids.
- *
- * **This endpoint is only usable by administrators**
- */
-export const fetchDeleteMembershipGroupsMembershipDelete = (
-  variables: DeleteMembershipGroupsMembershipDeleteVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    DeleteMembershipGroupsMembershipDeleteError,
-    Schemas.CoreMembershipDelete,
-    {},
-    {},
-    {}
-  >({ url: "/groups/membership", method: "delete", ...variables, signal });
-
-/**
- * Delete a membership using the user and group ids.
- *
- * **This endpoint is only usable by administrators**
- */
-export const useDeleteMembershipGroupsMembershipDelete = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      DeleteMembershipGroupsMembershipDeleteError,
-      DeleteMembershipGroupsMembershipDeleteVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    DeleteMembershipGroupsMembershipDeleteError,
-    DeleteMembershipGroupsMembershipDeleteVariables
-  >({
-    mutationFn: (variables: DeleteMembershipGroupsMembershipDeleteVariables) =>
-      fetchDeleteMembershipGroupsMembershipDelete({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type CreateBatchMembershipGroupsBatchMembershipPostError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type CreateBatchMembershipGroupsBatchMembershipPostVariables = {
-  body: Schemas.CoreBatchMembership;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Add a list of user to a group, using a list of email.
- * If an user does not exist it will be ignored.
- *
- * **This endpoint is only usable by administrators**
- */
-export const fetchCreateBatchMembershipGroupsBatchMembershipPost = (
-  variables: CreateBatchMembershipGroupsBatchMembershipPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    CreateBatchMembershipGroupsBatchMembershipPostError,
-    Schemas.CoreBatchMembership,
-    {},
-    {},
-    {}
-  >({ url: "/groups/batch-membership", method: "post", ...variables, signal });
-
-/**
- * Add a list of user to a group, using a list of email.
- * If an user does not exist it will be ignored.
- *
- * **This endpoint is only usable by administrators**
- */
-export const useCreateBatchMembershipGroupsBatchMembershipPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      CreateBatchMembershipGroupsBatchMembershipPostError,
-      CreateBatchMembershipGroupsBatchMembershipPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    CreateBatchMembershipGroupsBatchMembershipPostError,
-    CreateBatchMembershipGroupsBatchMembershipPostVariables
-  >({
-    mutationFn: (
-      variables: CreateBatchMembershipGroupsBatchMembershipPostVariables,
-    ) =>
-      fetchCreateBatchMembershipGroupsBatchMembershipPost({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type DeleteBatchMembershipGroupsBatchMembershipDeleteError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type DeleteBatchMembershipGroupsBatchMembershipDeleteVariables = {
-  body: Schemas.CoreBatchDeleteMembership;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * This endpoint removes all users from a given group.
- *
- * **This endpoint is only usable by administrators**
- */
-export const fetchDeleteBatchMembershipGroupsBatchMembershipDelete = (
-  variables: DeleteBatchMembershipGroupsBatchMembershipDeleteVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    DeleteBatchMembershipGroupsBatchMembershipDeleteError,
-    Schemas.CoreBatchDeleteMembership,
-    {},
-    {},
-    {}
-  >({
-    url: "/groups/batch-membership",
+    url: "/tombola/raffles/{raffleId}",
     method: "delete",
     ...variables,
     signal,
   });
 
 /**
- * This endpoint removes all users from a given group.
+ * Delete a raffle.
  *
- * **This endpoint is only usable by administrators**
+ * **The user must be a member of the raffle's group to use this endpoint**
  */
-export const useDeleteBatchMembershipGroupsBatchMembershipDelete = (
+export const useDeleteRaffleTombolaRafflesRaffleIdDelete = (
   options?: Omit<
     reactQuery.UseMutationOptions<
       undefined,
-      DeleteBatchMembershipGroupsBatchMembershipDeleteError,
-      DeleteBatchMembershipGroupsBatchMembershipDeleteVariables
+      DeleteRaffleTombolaRafflesRaffleIdDeleteError,
+      DeleteRaffleTombolaRafflesRaffleIdDeleteVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
     undefined,
-    DeleteBatchMembershipGroupsBatchMembershipDeleteError,
-    DeleteBatchMembershipGroupsBatchMembershipDeleteVariables
+    DeleteRaffleTombolaRafflesRaffleIdDeleteError,
+    DeleteRaffleTombolaRafflesRaffleIdDeleteVariables
   >({
     mutationFn: (
-      variables: DeleteBatchMembershipGroupsBatchMembershipDeleteVariables,
+      variables: DeleteRaffleTombolaRafflesRaffleIdDeleteVariables
     ) =>
-      fetchDeleteBatchMembershipGroupsBatchMembershipDelete({
+      fetchDeleteRaffleTombolaRafflesRaffleIdDelete({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetPathParams = {
+  groupId: string;
+};
+
+export type GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetResponse =
+  Schemas.RaffleComplete[];
+
+export type GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetVariables = {
+  pathParams: GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Return all raffles from a group
+ */
+export const fetchGetRafflesByGroupIdTombolaGroupGroupIdRafflesGet = (
+  variables: GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetResponse,
+    GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetError,
+    undefined,
+    {},
+    {},
+    GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetPathParams
+  >({
+    url: "/tombola/group/{groupId}/raffles",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Return all raffles from a group
+ */
+export const useGetRafflesByGroupIdTombolaGroupGroupIdRafflesGet = <
+  TData = GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetResponse
+>(
+  variables: GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetResponse,
+      GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetResponse,
+    GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/tombola/group/{groupId}/raffles",
+      operationId: "getRafflesByGroupIdTombolaGroupGroupIdRafflesGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetRafflesByGroupIdTombolaGroupGroupIdRafflesGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type GetRaffleStatsTombolaRafflesRaffleIdStatsGetPathParams = {
+  raffleId: string;
+};
+
+export type GetRaffleStatsTombolaRafflesRaffleIdStatsGetError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type GetRaffleStatsTombolaRafflesRaffleIdStatsGetVariables = {
+  pathParams: GetRaffleStatsTombolaRafflesRaffleIdStatsGetPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Return the number of ticket sold and the total amount recollected for a raffle
+ */
+export const fetchGetRaffleStatsTombolaRafflesRaffleIdStatsGet = (
+  variables: GetRaffleStatsTombolaRafflesRaffleIdStatsGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.RaffleStats,
+    GetRaffleStatsTombolaRafflesRaffleIdStatsGetError,
+    undefined,
+    {},
+    {},
+    GetRaffleStatsTombolaRafflesRaffleIdStatsGetPathParams
+  >({
+    url: "/tombola/raffles/{raffleId}/stats",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Return the number of ticket sold and the total amount recollected for a raffle
+ */
+export const useGetRaffleStatsTombolaRafflesRaffleIdStatsGet = <
+  TData = Schemas.RaffleStats
+>(
+  variables: GetRaffleStatsTombolaRafflesRaffleIdStatsGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      Schemas.RaffleStats,
+      GetRaffleStatsTombolaRafflesRaffleIdStatsGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    Schemas.RaffleStats,
+    GetRaffleStatsTombolaRafflesRaffleIdStatsGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/tombola/raffles/{raffleId}/stats",
+      operationId: "getRaffleStatsTombolaRafflesRaffleIdStatsGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetRaffleStatsTombolaRafflesRaffleIdStatsGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type CreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPostPathParams = {
+  raffleId: string;
+};
+
+export type CreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPostError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type CreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPostVariables = {
+  body: Schemas.BodyCreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPost;
+  pathParams: CreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPostPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Upload a logo for a specific raffle.
+ *
+ * **The user must be a member of the raffle's group to use this endpoint**
+ */
+export const fetchCreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPost = (
+  variables: CreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.AppCoreStandardResponsesResult,
+    CreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPostError,
+    Schemas.BodyCreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPost,
+    {},
+    {},
+    CreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPostPathParams
+  >({
+    url: "/tombola/raffles/{raffleId}/logo",
+    method: "post",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Upload a logo for a specific raffle.
+ *
+ * **The user must be a member of the raffle's group to use this endpoint**
+ */
+export const useCreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.AppCoreStandardResponsesResult,
+      CreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPostError,
+      CreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.AppCoreStandardResponsesResult,
+    CreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPostError,
+    CreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPostVariables
+  >({
+    mutationFn: (
+      variables: CreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPostVariables
+    ) =>
+      fetchCreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPost({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type ReadRaffleLogoTombolaRafflesRaffleIdLogoGetPathParams = {
+  raffleId: string;
+};
+
+export type ReadRaffleLogoTombolaRafflesRaffleIdLogoGetError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type ReadRaffleLogoTombolaRafflesRaffleIdLogoGetVariables = {
+  pathParams: ReadRaffleLogoTombolaRafflesRaffleIdLogoGetPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Get the logo of a specific raffle.
+ */
+export const fetchReadRaffleLogoTombolaRafflesRaffleIdLogoGet = (
+  variables: ReadRaffleLogoTombolaRafflesRaffleIdLogoGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    ReadRaffleLogoTombolaRafflesRaffleIdLogoGetError,
+    undefined,
+    {},
+    {},
+    ReadRaffleLogoTombolaRafflesRaffleIdLogoGetPathParams
+  >({
+    url: "/tombola/raffles/{raffleId}/logo",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Get the logo of a specific raffle.
+ */
+export const useReadRaffleLogoTombolaRafflesRaffleIdLogoGet = <
+  TData = undefined
+>(
+  variables: ReadRaffleLogoTombolaRafflesRaffleIdLogoGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      undefined,
+      ReadRaffleLogoTombolaRafflesRaffleIdLogoGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    undefined,
+    ReadRaffleLogoTombolaRafflesRaffleIdLogoGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/tombola/raffles/{raffleId}/logo",
+      operationId: "readRaffleLogoTombolaRafflesRaffleIdLogoGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchReadRaffleLogoTombolaRafflesRaffleIdLogoGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type GetPackTicketsTombolaPackTicketsGetError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type GetPackTicketsTombolaPackTicketsGetResponse =
+  Schemas.PackTicketSimple[];
+
+export type GetPackTicketsTombolaPackTicketsGetVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * Return all tickets
+ */
+export const fetchGetPackTicketsTombolaPackTicketsGet = (
+  variables: GetPackTicketsTombolaPackTicketsGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    GetPackTicketsTombolaPackTicketsGetResponse,
+    GetPackTicketsTombolaPackTicketsGetError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/tombola/pack_tickets", method: "get", ...variables, signal });
+
+/**
+ * Return all tickets
+ */
+export const useGetPackTicketsTombolaPackTicketsGet = <
+  TData = GetPackTicketsTombolaPackTicketsGetResponse
+>(
+  variables: GetPackTicketsTombolaPackTicketsGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      GetPackTicketsTombolaPackTicketsGetResponse,
+      GetPackTicketsTombolaPackTicketsGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    GetPackTicketsTombolaPackTicketsGetResponse,
+    GetPackTicketsTombolaPackTicketsGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/tombola/pack_tickets",
+      operationId: "getPackTicketsTombolaPackTicketsGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetPackTicketsTombolaPackTicketsGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type CreatePackticketTombolaPackTicketsPostError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type CreatePackticketTombolaPackTicketsPostVariables = {
+  body: Schemas.PackTicketBase;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Create a new packticket
+ *
+ * **The user must be a member of the raffle's group to use this endpoint**
+ */
+export const fetchCreatePackticketTombolaPackTicketsPost = (
+  variables: CreatePackticketTombolaPackTicketsPostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.PackTicketSimple,
+    CreatePackticketTombolaPackTicketsPostError,
+    Schemas.PackTicketBase,
+    {},
+    {},
+    {}
+  >({ url: "/tombola/pack_tickets", method: "post", ...variables, signal });
+
+/**
+ * Create a new packticket
+ *
+ * **The user must be a member of the raffle's group to use this endpoint**
+ */
+export const useCreatePackticketTombolaPackTicketsPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.PackTicketSimple,
+      CreatePackticketTombolaPackTicketsPostError,
+      CreatePackticketTombolaPackTicketsPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.PackTicketSimple,
+    CreatePackticketTombolaPackTicketsPostError,
+    CreatePackticketTombolaPackTicketsPostVariables
+  >({
+    mutationFn: (variables: CreatePackticketTombolaPackTicketsPostVariables) =>
+      fetchCreatePackticketTombolaPackTicketsPost({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type EditPackticketTombolaPackTicketsPackticketIdPatchPathParams = {
+  packticketId: string;
+};
+
+export type EditPackticketTombolaPackTicketsPackticketIdPatchError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type EditPackticketTombolaPackTicketsPackticketIdPatchVariables = {
+  body?: Schemas.PackTicketEdit;
+  pathParams: EditPackticketTombolaPackTicketsPackticketIdPatchPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Edit a packticket
+ *
+ * **The user must be a member of the raffle's group to use this endpoint**
+ */
+export const fetchEditPackticketTombolaPackTicketsPackticketIdPatch = (
+  variables: EditPackticketTombolaPackTicketsPackticketIdPatchVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    EditPackticketTombolaPackTicketsPackticketIdPatchError,
+    Schemas.PackTicketEdit,
+    {},
+    {},
+    EditPackticketTombolaPackTicketsPackticketIdPatchPathParams
+  >({
+    url: "/tombola/pack_tickets/{packticketId}",
+    method: "patch",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Edit a packticket
+ *
+ * **The user must be a member of the raffle's group to use this endpoint**
+ */
+export const useEditPackticketTombolaPackTicketsPackticketIdPatch = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      EditPackticketTombolaPackTicketsPackticketIdPatchError,
+      EditPackticketTombolaPackTicketsPackticketIdPatchVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    EditPackticketTombolaPackTicketsPackticketIdPatchError,
+    EditPackticketTombolaPackTicketsPackticketIdPatchVariables
+  >({
+    mutationFn: (
+      variables: EditPackticketTombolaPackTicketsPackticketIdPatchVariables
+    ) =>
+      fetchEditPackticketTombolaPackTicketsPackticketIdPatch({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type DeletePackticketTombolaPackTicketsPackticketIdDeletePathParams = {
+  packticketId: string;
+};
+
+export type DeletePackticketTombolaPackTicketsPackticketIdDeleteError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type DeletePackticketTombolaPackTicketsPackticketIdDeleteVariables = {
+  pathParams: DeletePackticketTombolaPackTicketsPackticketIdDeletePathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Delete a packticket.
+ *
+ * **The user must be a member of the raffle's group to use this endpoint**
+ */
+export const fetchDeletePackticketTombolaPackTicketsPackticketIdDelete = (
+  variables: DeletePackticketTombolaPackTicketsPackticketIdDeleteVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    DeletePackticketTombolaPackTicketsPackticketIdDeleteError,
+    undefined,
+    {},
+    {},
+    DeletePackticketTombolaPackTicketsPackticketIdDeletePathParams
+  >({
+    url: "/tombola/pack_tickets/{packticketId}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Delete a packticket.
+ *
+ * **The user must be a member of the raffle's group to use this endpoint**
+ */
+export const useDeletePackticketTombolaPackTicketsPackticketIdDelete = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      DeletePackticketTombolaPackTicketsPackticketIdDeleteError,
+      DeletePackticketTombolaPackTicketsPackticketIdDeleteVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    DeletePackticketTombolaPackTicketsPackticketIdDeleteError,
+    DeletePackticketTombolaPackTicketsPackticketIdDeleteVariables
+  >({
+    mutationFn: (
+      variables: DeletePackticketTombolaPackTicketsPackticketIdDeleteVariables
+    ) =>
+      fetchDeletePackticketTombolaPackTicketsPackticketIdDelete({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetPathParams =
+  {
+    raffleId: string;
+  };
+
+export type GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetResponse =
+  Schemas.PackTicketSimple[];
+
+export type GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetVariables =
+  {
+    pathParams: GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetPathParams;
+  } & HyperionContext["fetcherOptions"];
+
+/**
+ * Return all pack_tickets associated to a raffle
+ */
+export const fetchGetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGet =
+  (
+    variables: GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetVariables,
+    signal?: AbortSignal
+  ) =>
+    hyperionFetch<
+      GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetResponse,
+      GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetError,
+      undefined,
+      {},
+      {},
+      GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetPathParams
+    >({
+      url: "/tombola/raffles/{raffleId}/pack_tickets",
+      method: "get",
+      ...variables,
+      signal,
+    });
+
+/**
+ * Return all pack_tickets associated to a raffle
+ */
+export const useGetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGet = <
+  TData = GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetResponse
+>(
+  variables: GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetResponse,
+      GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetResponse,
+    GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/tombola/raffles/{raffleId}/pack_tickets",
+      operationId:
+        "getPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type GetTicketsTombolaTicketsGetError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetTicketsTombolaTicketsGetResponse = Schemas.TicketSimple[];
+
+export type GetTicketsTombolaTicketsGetVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * Return all tickets
+ *
+ * **The user must be a member of the group admin to use this endpoint**
+ */
+export const fetchGetTicketsTombolaTicketsGet = (
+  variables: GetTicketsTombolaTicketsGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    GetTicketsTombolaTicketsGetResponse,
+    GetTicketsTombolaTicketsGetError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/tombola/tickets", method: "get", ...variables, signal });
+
+/**
+ * Return all tickets
+ *
+ * **The user must be a member of the group admin to use this endpoint**
+ */
+export const useGetTicketsTombolaTicketsGet = <
+  TData = GetTicketsTombolaTicketsGetResponse
+>(
+  variables: GetTicketsTombolaTicketsGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      GetTicketsTombolaTicketsGetResponse,
+      GetTicketsTombolaTicketsGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    GetTicketsTombolaTicketsGetResponse,
+    GetTicketsTombolaTicketsGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/tombola/tickets",
+      operationId: "getTicketsTombolaTicketsGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetTicketsTombolaTicketsGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type BuyTicketTombolaTicketsBuyPackIdPostPathParams = {
+  packId: string;
+};
+
+export type BuyTicketTombolaTicketsBuyPackIdPostError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type BuyTicketTombolaTicketsBuyPackIdPostResponse =
+  Schemas.TicketComplete[];
+
+export type BuyTicketTombolaTicketsBuyPackIdPostVariables = {
+  pathParams: BuyTicketTombolaTicketsBuyPackIdPostPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Buy a ticket
+ */
+export const fetchBuyTicketTombolaTicketsBuyPackIdPost = (
+  variables: BuyTicketTombolaTicketsBuyPackIdPostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    BuyTicketTombolaTicketsBuyPackIdPostResponse,
+    BuyTicketTombolaTicketsBuyPackIdPostError,
+    undefined,
+    {},
+    {},
+    BuyTicketTombolaTicketsBuyPackIdPostPathParams
+  >({
+    url: "/tombola/tickets/buy/{packId}",
+    method: "post",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Buy a ticket
+ */
+export const useBuyTicketTombolaTicketsBuyPackIdPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      BuyTicketTombolaTicketsBuyPackIdPostResponse,
+      BuyTicketTombolaTicketsBuyPackIdPostError,
+      BuyTicketTombolaTicketsBuyPackIdPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    BuyTicketTombolaTicketsBuyPackIdPostResponse,
+    BuyTicketTombolaTicketsBuyPackIdPostError,
+    BuyTicketTombolaTicketsBuyPackIdPostVariables
+  >({
+    mutationFn: (variables: BuyTicketTombolaTicketsBuyPackIdPostVariables) =>
+      fetchBuyTicketTombolaTicketsBuyPackIdPost({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type GetTicketsByUseridTombolaUsersUserIdTicketsGetPathParams = {
+  userId: string;
+};
+
+export type GetTicketsByUseridTombolaUsersUserIdTicketsGetError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type GetTicketsByUseridTombolaUsersUserIdTicketsGetResponse =
+  Schemas.TicketComplete[];
+
+export type GetTicketsByUseridTombolaUsersUserIdTicketsGetVariables = {
+  pathParams: GetTicketsByUseridTombolaUsersUserIdTicketsGetPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Get tickets of a specific user.
+ *
+ * **Only admin users can get tickets of another user**
+ */
+export const fetchGetTicketsByUseridTombolaUsersUserIdTicketsGet = (
+  variables: GetTicketsByUseridTombolaUsersUserIdTicketsGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    GetTicketsByUseridTombolaUsersUserIdTicketsGetResponse,
+    GetTicketsByUseridTombolaUsersUserIdTicketsGetError,
+    undefined,
+    {},
+    {},
+    GetTicketsByUseridTombolaUsersUserIdTicketsGetPathParams
+  >({
+    url: "/tombola/users/{userId}/tickets",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Get tickets of a specific user.
+ *
+ * **Only admin users can get tickets of another user**
+ */
+export const useGetTicketsByUseridTombolaUsersUserIdTicketsGet = <
+  TData = GetTicketsByUseridTombolaUsersUserIdTicketsGetResponse
+>(
+  variables: GetTicketsByUseridTombolaUsersUserIdTicketsGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      GetTicketsByUseridTombolaUsersUserIdTicketsGetResponse,
+      GetTicketsByUseridTombolaUsersUserIdTicketsGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    GetTicketsByUseridTombolaUsersUserIdTicketsGetResponse,
+    GetTicketsByUseridTombolaUsersUserIdTicketsGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/tombola/users/{userId}/tickets",
+      operationId: "getTicketsByUseridTombolaUsersUserIdTicketsGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetTicketsByUseridTombolaUsersUserIdTicketsGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetPathParams = {
+  raffleId: string;
+};
+
+export type GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetResponse =
+  Schemas.TicketComplete[];
+
+export type GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetVariables = {
+  pathParams: GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Get tickets from a specific raffle.
+ *
+ * **The user must be a member of the raffle's group to use this endpoint
+ */
+export const fetchGetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGet = (
+  variables: GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetResponse,
+    GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetError,
+    undefined,
+    {},
+    {},
+    GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetPathParams
+  >({
+    url: "/tombola/raffles/{raffleId}/tickets",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Get tickets from a specific raffle.
+ *
+ * **The user must be a member of the raffle's group to use this endpoint
+ */
+export const useGetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGet = <
+  TData = GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetResponse
+>(
+  variables: GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetResponse,
+      GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetResponse,
+    GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/tombola/raffles/{raffleId}/tickets",
+      operationId: "getTicketsByRaffleidTombolaRafflesRaffleIdTicketsGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type GetPrizesTombolaPrizesGetError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetPrizesTombolaPrizesGetResponse = Schemas.PrizeSimple[];
+
+export type GetPrizesTombolaPrizesGetVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * Return all prizes
+ */
+export const fetchGetPrizesTombolaPrizesGet = (
+  variables: GetPrizesTombolaPrizesGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    GetPrizesTombolaPrizesGetResponse,
+    GetPrizesTombolaPrizesGetError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/tombola/prizes", method: "get", ...variables, signal });
+
+/**
+ * Return all prizes
+ */
+export const useGetPrizesTombolaPrizesGet = <
+  TData = GetPrizesTombolaPrizesGetResponse
+>(
+  variables: GetPrizesTombolaPrizesGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      GetPrizesTombolaPrizesGetResponse,
+      GetPrizesTombolaPrizesGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    GetPrizesTombolaPrizesGetResponse,
+    GetPrizesTombolaPrizesGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/tombola/prizes",
+      operationId: "getPrizesTombolaPrizesGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetPrizesTombolaPrizesGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type CreatePrizeTombolaPrizesPostError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type CreatePrizeTombolaPrizesPostVariables = {
+  body: Schemas.PrizeBase;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Create a new prize
+ *
+ * **The user must be a member of the raffle's group to use this endpoint
+ */
+export const fetchCreatePrizeTombolaPrizesPost = (
+  variables: CreatePrizeTombolaPrizesPostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.PrizeSimple,
+    CreatePrizeTombolaPrizesPostError,
+    Schemas.PrizeBase,
+    {},
+    {},
+    {}
+  >({ url: "/tombola/prizes", method: "post", ...variables, signal });
+
+/**
+ * Create a new prize
+ *
+ * **The user must be a member of the raffle's group to use this endpoint
+ */
+export const useCreatePrizeTombolaPrizesPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.PrizeSimple,
+      CreatePrizeTombolaPrizesPostError,
+      CreatePrizeTombolaPrizesPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.PrizeSimple,
+    CreatePrizeTombolaPrizesPostError,
+    CreatePrizeTombolaPrizesPostVariables
+  >({
+    mutationFn: (variables: CreatePrizeTombolaPrizesPostVariables) =>
+      fetchCreatePrizeTombolaPrizesPost({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
+export type EditPrizeTombolaPrizesPrizeIdPatchPathParams = {
+  prizeId: string;
+};
+
+export type EditPrizeTombolaPrizesPrizeIdPatchError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type EditPrizeTombolaPrizesPrizeIdPatchVariables = {
+  body?: Schemas.PrizeEdit;
+  pathParams: EditPrizeTombolaPrizesPrizeIdPatchPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Edit a prize
+ *
+ * **The user must be a member of the group raffle's to use this endpoint
+ */
+export const fetchEditPrizeTombolaPrizesPrizeIdPatch = (
+  variables: EditPrizeTombolaPrizesPrizeIdPatchVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    EditPrizeTombolaPrizesPrizeIdPatchError,
+    Schemas.PrizeEdit,
+    {},
+    {},
+    EditPrizeTombolaPrizesPrizeIdPatchPathParams
+  >({
+    url: "/tombola/prizes/{prizeId}",
+    method: "patch",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Edit a prize
+ *
+ * **The user must be a member of the group raffle's to use this endpoint
+ */
+export const useEditPrizeTombolaPrizesPrizeIdPatch = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      EditPrizeTombolaPrizesPrizeIdPatchError,
+      EditPrizeTombolaPrizesPrizeIdPatchVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    EditPrizeTombolaPrizesPrizeIdPatchError,
+    EditPrizeTombolaPrizesPrizeIdPatchVariables
+  >({
+    mutationFn: (variables: EditPrizeTombolaPrizesPrizeIdPatchVariables) =>
+      fetchEditPrizeTombolaPrizesPrizeIdPatch({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type DeletePrizeTombolaPrizesPrizeIdDeletePathParams = {
+  prizeId: string;
+};
+
+export type DeletePrizeTombolaPrizesPrizeIdDeleteError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type DeletePrizeTombolaPrizesPrizeIdDeleteVariables = {
+  pathParams: DeletePrizeTombolaPrizesPrizeIdDeletePathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Delete a prize.
+ *
+ * **The user must be a member of the group raffle's to use this endpoint
+ */
+export const fetchDeletePrizeTombolaPrizesPrizeIdDelete = (
+  variables: DeletePrizeTombolaPrizesPrizeIdDeleteVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    DeletePrizeTombolaPrizesPrizeIdDeleteError,
+    undefined,
+    {},
+    {},
+    DeletePrizeTombolaPrizesPrizeIdDeletePathParams
+  >({
+    url: "/tombola/prizes/{prizeId}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Delete a prize.
+ *
+ * **The user must be a member of the group raffle's to use this endpoint
+ */
+export const useDeletePrizeTombolaPrizesPrizeIdDelete = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      DeletePrizeTombolaPrizesPrizeIdDeleteError,
+      DeletePrizeTombolaPrizesPrizeIdDeleteVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    DeletePrizeTombolaPrizesPrizeIdDeleteError,
+    DeletePrizeTombolaPrizesPrizeIdDeleteVariables
+  >({
+    mutationFn: (variables: DeletePrizeTombolaPrizesPrizeIdDeleteVariables) =>
+      fetchDeletePrizeTombolaPrizesPrizeIdDelete({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetPathParams = {
+  raffleId: string;
+};
+
+export type GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetResponse =
+  Schemas.PrizeSimple[];
+
+export type GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetVariables = {
+  pathParams: GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Get prizes from a specific raffle.
+ */
+export const fetchGetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGet = (
+  variables: GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetResponse,
+    GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetError,
+    undefined,
+    {},
+    {},
+    GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetPathParams
+  >({
+    url: "/tombola/raffles/{raffleId}/prizes",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Get prizes from a specific raffle.
+ */
+export const useGetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGet = <
+  TData = GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetResponse
+>(
+  variables: GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetResponse,
+      GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetResponse,
+    GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/tombola/raffles/{raffleId}/prizes",
+      operationId: "getPrizesByRaffleidTombolaRafflesRaffleIdPrizesGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type CreatePrizePictureTombolaPrizesPrizeIdPicturePostPathParams = {
+  prizeId: string;
+};
+
+export type CreatePrizePictureTombolaPrizesPrizeIdPicturePostError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type CreatePrizePictureTombolaPrizesPrizeIdPicturePostVariables = {
+  body: Schemas.BodyCreatePrizePictureTombolaPrizesPrizeIdPicturePost;
+  pathParams: CreatePrizePictureTombolaPrizesPrizeIdPicturePostPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Upload a logo for a specific prize.
+ *
+ * **The user must be a member of the raffle's group to use this endpoint**
+ */
+export const fetchCreatePrizePictureTombolaPrizesPrizeIdPicturePost = (
+  variables: CreatePrizePictureTombolaPrizesPrizeIdPicturePostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.AppCoreStandardResponsesResult,
+    CreatePrizePictureTombolaPrizesPrizeIdPicturePostError,
+    Schemas.BodyCreatePrizePictureTombolaPrizesPrizeIdPicturePost,
+    {},
+    {},
+    CreatePrizePictureTombolaPrizesPrizeIdPicturePostPathParams
+  >({
+    url: "/tombola/prizes/{prizeId}/picture",
+    method: "post",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Upload a logo for a specific prize.
+ *
+ * **The user must be a member of the raffle's group to use this endpoint**
+ */
+export const useCreatePrizePictureTombolaPrizesPrizeIdPicturePost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.AppCoreStandardResponsesResult,
+      CreatePrizePictureTombolaPrizesPrizeIdPicturePostError,
+      CreatePrizePictureTombolaPrizesPrizeIdPicturePostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.AppCoreStandardResponsesResult,
+    CreatePrizePictureTombolaPrizesPrizeIdPicturePostError,
+    CreatePrizePictureTombolaPrizesPrizeIdPicturePostVariables
+  >({
+    mutationFn: (
+      variables: CreatePrizePictureTombolaPrizesPrizeIdPicturePostVariables
+    ) =>
+      fetchCreatePrizePictureTombolaPrizesPrizeIdPicturePost({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type ReadPrizeLogoTombolaPrizesPrizeIdPictureGetPathParams = {
+  prizeId: string;
+};
+
+export type ReadPrizeLogoTombolaPrizesPrizeIdPictureGetError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type ReadPrizeLogoTombolaPrizesPrizeIdPictureGetVariables = {
+  pathParams: ReadPrizeLogoTombolaPrizesPrizeIdPictureGetPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Get the logo of a specific prize.
+ */
+export const fetchReadPrizeLogoTombolaPrizesPrizeIdPictureGet = (
+  variables: ReadPrizeLogoTombolaPrizesPrizeIdPictureGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    ReadPrizeLogoTombolaPrizesPrizeIdPictureGetError,
+    undefined,
+    {},
+    {},
+    ReadPrizeLogoTombolaPrizesPrizeIdPictureGetPathParams
+  >({
+    url: "/tombola/prizes/{prizeId}/picture",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Get the logo of a specific prize.
+ */
+export const useReadPrizeLogoTombolaPrizesPrizeIdPictureGet = <
+  TData = undefined
+>(
+  variables: ReadPrizeLogoTombolaPrizesPrizeIdPictureGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      undefined,
+      ReadPrizeLogoTombolaPrizesPrizeIdPictureGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    undefined,
+    ReadPrizeLogoTombolaPrizesPrizeIdPictureGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/tombola/prizes/{prizeId}/picture",
+      operationId: "readPrizeLogoTombolaPrizesPrizeIdPictureGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchReadPrizeLogoTombolaPrizesPrizeIdPictureGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type GetUsersCashTombolaUsersCashGetError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type GetUsersCashTombolaUsersCashGetResponse = Schemas.CashComplete[];
+
+export type GetUsersCashTombolaUsersCashGetVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * Get cash from all users.
+ *
+ * **The user must be a member of the group admin to use this endpoint
+ */
+export const fetchGetUsersCashTombolaUsersCashGet = (
+  variables: GetUsersCashTombolaUsersCashGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    GetUsersCashTombolaUsersCashGetResponse,
+    GetUsersCashTombolaUsersCashGetError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/tombola/users/cash", method: "get", ...variables, signal });
+
+/**
+ * Get cash from all users.
+ *
+ * **The user must be a member of the group admin to use this endpoint
+ */
+export const useGetUsersCashTombolaUsersCashGet = <
+  TData = GetUsersCashTombolaUsersCashGetResponse
+>(
+  variables: GetUsersCashTombolaUsersCashGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      GetUsersCashTombolaUsersCashGetResponse,
+      GetUsersCashTombolaUsersCashGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    GetUsersCashTombolaUsersCashGetResponse,
+    GetUsersCashTombolaUsersCashGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/tombola/users/cash",
+      operationId: "getUsersCashTombolaUsersCashGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetUsersCashTombolaUsersCashGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type GetCashByIdTombolaUsersUserIdCashGetPathParams = {
+  userId: string;
+};
+
+export type GetCashByIdTombolaUsersUserIdCashGetError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type GetCashByIdTombolaUsersUserIdCashGetVariables = {
+  pathParams: GetCashByIdTombolaUsersUserIdCashGetPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Get cash from a specific user.
+ *
+ * **The user must be a member of the group admin to use this endpoint or can only access the endpoint for its own user_id**
+ */
+export const fetchGetCashByIdTombolaUsersUserIdCashGet = (
+  variables: GetCashByIdTombolaUsersUserIdCashGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.CashComplete,
+    GetCashByIdTombolaUsersUserIdCashGetError,
+    undefined,
+    {},
+    {},
+    GetCashByIdTombolaUsersUserIdCashGetPathParams
+  >({
+    url: "/tombola/users/{userId}/cash",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Get cash from a specific user.
+ *
+ * **The user must be a member of the group admin to use this endpoint or can only access the endpoint for its own user_id**
+ */
+export const useGetCashByIdTombolaUsersUserIdCashGet = <
+  TData = Schemas.CashComplete
+>(
+  variables: GetCashByIdTombolaUsersUserIdCashGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      Schemas.CashComplete,
+      GetCashByIdTombolaUsersUserIdCashGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    Schemas.CashComplete,
+    GetCashByIdTombolaUsersUserIdCashGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/tombola/users/{userId}/cash",
+      operationId: "getCashByIdTombolaUsersUserIdCashGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetCashByIdTombolaUsersUserIdCashGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type CreateCashOfUserTombolaUsersUserIdCashPostPathParams = {
+  userId: string;
+};
+
+export type CreateCashOfUserTombolaUsersUserIdCashPostError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type CreateCashOfUserTombolaUsersUserIdCashPostVariables = {
+  body: Schemas.CashEdit;
+  pathParams: CreateCashOfUserTombolaUsersUserIdCashPostPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Create cash for a user.
+ *
+ * **The user must be a member of the group admin to use this endpoint**
+ */
+export const fetchCreateCashOfUserTombolaUsersUserIdCashPost = (
+  variables: CreateCashOfUserTombolaUsersUserIdCashPostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.CashComplete,
+    CreateCashOfUserTombolaUsersUserIdCashPostError,
+    Schemas.CashEdit,
+    {},
+    {},
+    CreateCashOfUserTombolaUsersUserIdCashPostPathParams
+  >({
+    url: "/tombola/users/{userId}/cash",
+    method: "post",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Create cash for a user.
+ *
+ * **The user must be a member of the group admin to use this endpoint**
+ */
+export const useCreateCashOfUserTombolaUsersUserIdCashPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.CashComplete,
+      CreateCashOfUserTombolaUsersUserIdCashPostError,
+      CreateCashOfUserTombolaUsersUserIdCashPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.CashComplete,
+    CreateCashOfUserTombolaUsersUserIdCashPostError,
+    CreateCashOfUserTombolaUsersUserIdCashPostVariables
+  >({
+    mutationFn: (
+      variables: CreateCashOfUserTombolaUsersUserIdCashPostVariables
+    ) =>
+      fetchCreateCashOfUserTombolaUsersUserIdCashPost({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type EditCashByIdTombolaUsersUserIdCashPatchPathParams = {
+  userId: string;
+};
+
+export type EditCashByIdTombolaUsersUserIdCashPatchError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type EditCashByIdTombolaUsersUserIdCashPatchVariables = {
+  body: Schemas.CashEdit;
+  pathParams: EditCashByIdTombolaUsersUserIdCashPatchPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Edit cash for an user. This will add the balance to the current balance.
+ * A negative value can be provided to remove money from the user.
+ *
+ * **The user must be a member of the group admin to use this endpoint**
+ */
+export const fetchEditCashByIdTombolaUsersUserIdCashPatch = (
+  variables: EditCashByIdTombolaUsersUserIdCashPatchVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    EditCashByIdTombolaUsersUserIdCashPatchError,
+    Schemas.CashEdit,
+    {},
+    {},
+    EditCashByIdTombolaUsersUserIdCashPatchPathParams
+  >({
+    url: "/tombola/users/{userId}/cash",
+    method: "patch",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Edit cash for an user. This will add the balance to the current balance.
+ * A negative value can be provided to remove money from the user.
+ *
+ * **The user must be a member of the group admin to use this endpoint**
+ */
+export const useEditCashByIdTombolaUsersUserIdCashPatch = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      EditCashByIdTombolaUsersUserIdCashPatchError,
+      EditCashByIdTombolaUsersUserIdCashPatchVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    EditCashByIdTombolaUsersUserIdCashPatchError,
+    EditCashByIdTombolaUsersUserIdCashPatchVariables
+  >({
+    mutationFn: (variables: EditCashByIdTombolaUsersUserIdCashPatchVariables) =>
+      fetchEditCashByIdTombolaUsersUserIdCashPatch({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type DrawWinnerTombolaPrizesPrizeIdDrawPostPathParams = {
+  prizeId: string;
+};
+
+export type DrawWinnerTombolaPrizesPrizeIdDrawPostError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type DrawWinnerTombolaPrizesPrizeIdDrawPostResponse =
+  Schemas.TicketComplete[];
+
+export type DrawWinnerTombolaPrizesPrizeIdDrawPostVariables = {
+  pathParams: DrawWinnerTombolaPrizesPrizeIdDrawPostPathParams;
+} & HyperionContext["fetcherOptions"];
+
+export const fetchDrawWinnerTombolaPrizesPrizeIdDrawPost = (
+  variables: DrawWinnerTombolaPrizesPrizeIdDrawPostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    DrawWinnerTombolaPrizesPrizeIdDrawPostResponse,
+    DrawWinnerTombolaPrizesPrizeIdDrawPostError,
+    undefined,
+    {},
+    {},
+    DrawWinnerTombolaPrizesPrizeIdDrawPostPathParams
+  >({
+    url: "/tombola/prizes/{prizeId}/draw",
+    method: "post",
+    ...variables,
+    signal,
+  });
+
+export const useDrawWinnerTombolaPrizesPrizeIdDrawPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      DrawWinnerTombolaPrizesPrizeIdDrawPostResponse,
+      DrawWinnerTombolaPrizesPrizeIdDrawPostError,
+      DrawWinnerTombolaPrizesPrizeIdDrawPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    DrawWinnerTombolaPrizesPrizeIdDrawPostResponse,
+    DrawWinnerTombolaPrizesPrizeIdDrawPostError,
+    DrawWinnerTombolaPrizesPrizeIdDrawPostVariables
+  >({
+    mutationFn: (variables: DrawWinnerTombolaPrizesPrizeIdDrawPostVariables) =>
+      fetchDrawWinnerTombolaPrizesPrizeIdDrawPost({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type OpenRaffleTombolaRafflesRaffleIdOpenPatchPathParams = {
+  raffleId: string;
+};
+
+export type OpenRaffleTombolaRafflesRaffleIdOpenPatchError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type OpenRaffleTombolaRafflesRaffleIdOpenPatchVariables = {
+  pathParams: OpenRaffleTombolaRafflesRaffleIdOpenPatchPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Open a raffle
+ *
+ * **The user must be a member of the raffle's group to use this endpoint**
+ */
+export const fetchOpenRaffleTombolaRafflesRaffleIdOpenPatch = (
+  variables: OpenRaffleTombolaRafflesRaffleIdOpenPatchVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    OpenRaffleTombolaRafflesRaffleIdOpenPatchError,
+    undefined,
+    {},
+    {},
+    OpenRaffleTombolaRafflesRaffleIdOpenPatchPathParams
+  >({
+    url: "/tombola/raffles/{raffleId}/open",
+    method: "patch",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Open a raffle
+ *
+ * **The user must be a member of the raffle's group to use this endpoint**
+ */
+export const useOpenRaffleTombolaRafflesRaffleIdOpenPatch = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      OpenRaffleTombolaRafflesRaffleIdOpenPatchError,
+      OpenRaffleTombolaRafflesRaffleIdOpenPatchVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    OpenRaffleTombolaRafflesRaffleIdOpenPatchError,
+    OpenRaffleTombolaRafflesRaffleIdOpenPatchVariables
+  >({
+    mutationFn: (
+      variables: OpenRaffleTombolaRafflesRaffleIdOpenPatchVariables
+    ) =>
+      fetchOpenRaffleTombolaRafflesRaffleIdOpenPatch({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type LockRaffleTombolaRafflesRaffleIdLockPatchPathParams = {
+  raffleId: string;
+};
+
+export type LockRaffleTombolaRafflesRaffleIdLockPatchError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type LockRaffleTombolaRafflesRaffleIdLockPatchVariables = {
+  pathParams: LockRaffleTombolaRafflesRaffleIdLockPatchPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Lock a raffle
+ *
+ * **The user must be a member of the raffle's group to use this endpoint**
+ */
+export const fetchLockRaffleTombolaRafflesRaffleIdLockPatch = (
+  variables: LockRaffleTombolaRafflesRaffleIdLockPatchVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    LockRaffleTombolaRafflesRaffleIdLockPatchError,
+    undefined,
+    {},
+    {},
+    LockRaffleTombolaRafflesRaffleIdLockPatchPathParams
+  >({
+    url: "/tombola/raffles/{raffleId}/lock",
+    method: "patch",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Lock a raffle
+ *
+ * **The user must be a member of the raffle's group to use this endpoint**
+ */
+export const useLockRaffleTombolaRafflesRaffleIdLockPatch = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      LockRaffleTombolaRafflesRaffleIdLockPatchError,
+      LockRaffleTombolaRafflesRaffleIdLockPatchVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    LockRaffleTombolaRafflesRaffleIdLockPatchError,
+    LockRaffleTombolaRafflesRaffleIdLockPatchVariables
+  >({
+    mutationFn: (
+      variables: LockRaffleTombolaRafflesRaffleIdLockPatchVariables
+    ) =>
+      fetchLockRaffleTombolaRafflesRaffleIdLockPatch({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type GetProductsAmapProductsGetError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetProductsAmapProductsGetResponse = Schemas.ProductComplete[];
+
+export type GetProductsAmapProductsGetVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * Return all products
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const fetchGetProductsAmapProductsGet = (
+  variables: GetProductsAmapProductsGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    GetProductsAmapProductsGetResponse,
+    GetProductsAmapProductsGetError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/amap/products", method: "get", ...variables, signal });
+
+/**
+ * Return all products
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const useGetProductsAmapProductsGet = <
+  TData = GetProductsAmapProductsGetResponse
+>(
+  variables: GetProductsAmapProductsGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      GetProductsAmapProductsGetResponse,
+      GetProductsAmapProductsGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    GetProductsAmapProductsGetResponse,
+    GetProductsAmapProductsGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/amap/products",
+      operationId: "getProductsAmapProductsGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetProductsAmapProductsGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type CreateProductAmapProductsPostError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type CreateProductAmapProductsPostVariables = {
+  body: Schemas.ProductSimple;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Create a new product
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const fetchCreateProductAmapProductsPost = (
+  variables: CreateProductAmapProductsPostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.ProductComplete,
+    CreateProductAmapProductsPostError,
+    Schemas.ProductSimple,
+    {},
+    {},
+    {}
+  >({ url: "/amap/products", method: "post", ...variables, signal });
+
+/**
+ * Create a new product
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const useCreateProductAmapProductsPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.ProductComplete,
+      CreateProductAmapProductsPostError,
+      CreateProductAmapProductsPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.ProductComplete,
+    CreateProductAmapProductsPostError,
+    CreateProductAmapProductsPostVariables
+  >({
+    mutationFn: (variables: CreateProductAmapProductsPostVariables) =>
+      fetchCreateProductAmapProductsPost({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
+export type GetProductByIdAmapProductsProductIdGetPathParams = {
+  productId: string;
+};
+
+export type GetProductByIdAmapProductsProductIdGetError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type GetProductByIdAmapProductsProductIdGetVariables = {
+  pathParams: GetProductByIdAmapProductsProductIdGetPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Get a specific product
+ */
+export const fetchGetProductByIdAmapProductsProductIdGet = (
+  variables: GetProductByIdAmapProductsProductIdGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.ProductComplete,
+    GetProductByIdAmapProductsProductIdGetError,
+    undefined,
+    {},
+    {},
+    GetProductByIdAmapProductsProductIdGetPathParams
+  >({ url: "/amap/products/{productId}", method: "get", ...variables, signal });
+
+/**
+ * Get a specific product
+ */
+export const useGetProductByIdAmapProductsProductIdGet = <
+  TData = Schemas.ProductComplete
+>(
+  variables: GetProductByIdAmapProductsProductIdGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      Schemas.ProductComplete,
+      GetProductByIdAmapProductsProductIdGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    Schemas.ProductComplete,
+    GetProductByIdAmapProductsProductIdGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/amap/products/{productId}",
+      operationId: "getProductByIdAmapProductsProductIdGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetProductByIdAmapProductsProductIdGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type EditProductAmapProductsProductIdPatchPathParams = {
+  productId: string;
+};
+
+export type EditProductAmapProductsProductIdPatchError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type EditProductAmapProductsProductIdPatchVariables = {
+  body?: Schemas.ProductEdit;
+  pathParams: EditProductAmapProductsProductIdPatchPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Edit a product
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const fetchEditProductAmapProductsProductIdPatch = (
+  variables: EditProductAmapProductsProductIdPatchVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    EditProductAmapProductsProductIdPatchError,
+    Schemas.ProductEdit,
+    {},
+    {},
+    EditProductAmapProductsProductIdPatchPathParams
+  >({
+    url: "/amap/products/{productId}",
+    method: "patch",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Edit a product
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const useEditProductAmapProductsProductIdPatch = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      EditProductAmapProductsProductIdPatchError,
+      EditProductAmapProductsProductIdPatchVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    EditProductAmapProductsProductIdPatchError,
+    EditProductAmapProductsProductIdPatchVariables
+  >({
+    mutationFn: (variables: EditProductAmapProductsProductIdPatchVariables) =>
+      fetchEditProductAmapProductsProductIdPatch({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type DeleteProductAmapProductsProductIdDeletePathParams = {
+  productId: string;
+};
+
+export type DeleteProductAmapProductsProductIdDeleteError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type DeleteProductAmapProductsProductIdDeleteVariables = {
+  pathParams: DeleteProductAmapProductsProductIdDeletePathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Delete a product. A product can not be deleted if it is already used in a delivery.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const fetchDeleteProductAmapProductsProductIdDelete = (
+  variables: DeleteProductAmapProductsProductIdDeleteVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    DeleteProductAmapProductsProductIdDeleteError,
+    undefined,
+    {},
+    {},
+    DeleteProductAmapProductsProductIdDeletePathParams
+  >({
+    url: "/amap/products/{productId}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Delete a product. A product can not be deleted if it is already used in a delivery.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const useDeleteProductAmapProductsProductIdDelete = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      DeleteProductAmapProductsProductIdDeleteError,
+      DeleteProductAmapProductsProductIdDeleteVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    DeleteProductAmapProductsProductIdDeleteError,
+    DeleteProductAmapProductsProductIdDeleteVariables
+  >({
+    mutationFn: (
+      variables: DeleteProductAmapProductsProductIdDeleteVariables
+    ) =>
+      fetchDeleteProductAmapProductsProductIdDelete({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type GetDeliveriesAmapDeliveriesGetError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type GetDeliveriesAmapDeliveriesGetResponse = Schemas.DeliveryReturn[];
+
+export type GetDeliveriesAmapDeliveriesGetVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * Get all deliveries.
+ */
+export const fetchGetDeliveriesAmapDeliveriesGet = (
+  variables: GetDeliveriesAmapDeliveriesGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    GetDeliveriesAmapDeliveriesGetResponse,
+    GetDeliveriesAmapDeliveriesGetError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/amap/deliveries", method: "get", ...variables, signal });
+
+/**
+ * Get all deliveries.
+ */
+export const useGetDeliveriesAmapDeliveriesGet = <
+  TData = GetDeliveriesAmapDeliveriesGetResponse
+>(
+  variables: GetDeliveriesAmapDeliveriesGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      GetDeliveriesAmapDeliveriesGetResponse,
+      GetDeliveriesAmapDeliveriesGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    GetDeliveriesAmapDeliveriesGetResponse,
+    GetDeliveriesAmapDeliveriesGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/amap/deliveries",
+      operationId: "getDeliveriesAmapDeliveriesGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetDeliveriesAmapDeliveriesGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type CreateDeliveryAmapDeliveriesPostError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type CreateDeliveryAmapDeliveriesPostVariables = {
+  body: Schemas.DeliveryBase;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Create a new delivery.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const fetchCreateDeliveryAmapDeliveriesPost = (
+  variables: CreateDeliveryAmapDeliveriesPostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.DeliveryReturn,
+    CreateDeliveryAmapDeliveriesPostError,
+    Schemas.DeliveryBase,
+    {},
+    {},
+    {}
+  >({ url: "/amap/deliveries", method: "post", ...variables, signal });
+
+/**
+ * Create a new delivery.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const useCreateDeliveryAmapDeliveriesPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.DeliveryReturn,
+      CreateDeliveryAmapDeliveriesPostError,
+      CreateDeliveryAmapDeliveriesPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.DeliveryReturn,
+    CreateDeliveryAmapDeliveriesPostError,
+    CreateDeliveryAmapDeliveriesPostVariables
+  >({
+    mutationFn: (variables: CreateDeliveryAmapDeliveriesPostVariables) =>
+      fetchCreateDeliveryAmapDeliveriesPost({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type DeleteDeliveryAmapDeliveriesDeliveryIdDeletePathParams = {
+  deliveryId: string;
+};
+
+export type DeleteDeliveryAmapDeliveriesDeliveryIdDeleteError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type DeleteDeliveryAmapDeliveriesDeliveryIdDeleteVariables = {
+  pathParams: DeleteDeliveryAmapDeliveriesDeliveryIdDeletePathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Delete a delivery.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const fetchDeleteDeliveryAmapDeliveriesDeliveryIdDelete = (
+  variables: DeleteDeliveryAmapDeliveriesDeliveryIdDeleteVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    DeleteDeliveryAmapDeliveriesDeliveryIdDeleteError,
+    undefined,
+    {},
+    {},
+    DeleteDeliveryAmapDeliveriesDeliveryIdDeletePathParams
+  >({
+    url: "/amap/deliveries/{deliveryId}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Delete a delivery.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const useDeleteDeliveryAmapDeliveriesDeliveryIdDelete = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      DeleteDeliveryAmapDeliveriesDeliveryIdDeleteError,
+      DeleteDeliveryAmapDeliveriesDeliveryIdDeleteVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    DeleteDeliveryAmapDeliveriesDeliveryIdDeleteError,
+    DeleteDeliveryAmapDeliveriesDeliveryIdDeleteVariables
+  >({
+    mutationFn: (
+      variables: DeleteDeliveryAmapDeliveriesDeliveryIdDeleteVariables
+    ) =>
+      fetchDeleteDeliveryAmapDeliveriesDeliveryIdDelete({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type EditDeliveryAmapDeliveriesDeliveryIdPatchPathParams = {
+  deliveryId: string;
+};
+
+export type EditDeliveryAmapDeliveriesDeliveryIdPatchError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type EditDeliveryAmapDeliveriesDeliveryIdPatchVariables = {
+  body?: Schemas.DeliveryUpdate;
+  pathParams: EditDeliveryAmapDeliveriesDeliveryIdPatchPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Edit a delivery.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const fetchEditDeliveryAmapDeliveriesDeliveryIdPatch = (
+  variables: EditDeliveryAmapDeliveriesDeliveryIdPatchVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    EditDeliveryAmapDeliveriesDeliveryIdPatchError,
+    Schemas.DeliveryUpdate,
+    {},
+    {},
+    EditDeliveryAmapDeliveriesDeliveryIdPatchPathParams
+  >({
+    url: "/amap/deliveries/{deliveryId}",
+    method: "patch",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Edit a delivery.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const useEditDeliveryAmapDeliveriesDeliveryIdPatch = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      EditDeliveryAmapDeliveriesDeliveryIdPatchError,
+      EditDeliveryAmapDeliveriesDeliveryIdPatchVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    EditDeliveryAmapDeliveriesDeliveryIdPatchError,
+    EditDeliveryAmapDeliveriesDeliveryIdPatchVariables
+  >({
+    mutationFn: (
+      variables: EditDeliveryAmapDeliveriesDeliveryIdPatchVariables
+    ) =>
+      fetchEditDeliveryAmapDeliveriesDeliveryIdPatch({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type AddProductToDeliveryAmapDeliveriesDeliveryIdProductsPostPathParams =
+  {
+    deliveryId: string;
+  };
+
+export type AddProductToDeliveryAmapDeliveriesDeliveryIdProductsPostError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type AddProductToDeliveryAmapDeliveriesDeliveryIdProductsPostVariables =
+  {
+    body: Schemas.DeliveryProductsUpdate;
+    pathParams: AddProductToDeliveryAmapDeliveriesDeliveryIdProductsPostPathParams;
+  } & HyperionContext["fetcherOptions"];
+
+/**
+ * Add `product_id` product to `delivery_id` delivery. This endpoint will only add a membership between the two objects.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const fetchAddProductToDeliveryAmapDeliveriesDeliveryIdProductsPost = (
+  variables: AddProductToDeliveryAmapDeliveriesDeliveryIdProductsPostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    void,
+    AddProductToDeliveryAmapDeliveriesDeliveryIdProductsPostError,
+    Schemas.DeliveryProductsUpdate,
+    {},
+    {},
+    AddProductToDeliveryAmapDeliveriesDeliveryIdProductsPostPathParams
+  >({
+    url: "/amap/deliveries/{deliveryId}/products",
+    method: "post",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Add `product_id` product to `delivery_id` delivery. This endpoint will only add a membership between the two objects.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const useAddProductToDeliveryAmapDeliveriesDeliveryIdProductsPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      void,
+      AddProductToDeliveryAmapDeliveriesDeliveryIdProductsPostError,
+      AddProductToDeliveryAmapDeliveriesDeliveryIdProductsPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    void,
+    AddProductToDeliveryAmapDeliveriesDeliveryIdProductsPostError,
+    AddProductToDeliveryAmapDeliveriesDeliveryIdProductsPostVariables
+  >({
+    mutationFn: (
+      variables: AddProductToDeliveryAmapDeliveriesDeliveryIdProductsPostVariables
+    ) =>
+      fetchAddProductToDeliveryAmapDeliveriesDeliveryIdProductsPost({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type RemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDeletePathParams =
+  {
+    deliveryId: string;
+  };
+
+export type RemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDeleteError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type RemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDeleteVariables =
+  {
+    body: Schemas.DeliveryProductsUpdate;
+    pathParams: RemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDeletePathParams;
+  } & HyperionContext["fetcherOptions"];
+
+/**
+ * Remove a given product from a delivery. This won't delete the product nor the delivery.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const fetchRemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDelete =
+  (
+    variables: RemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDeleteVariables,
+    signal?: AbortSignal
+  ) =>
+    hyperionFetch<
+      undefined,
+      RemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDeleteError,
+      Schemas.DeliveryProductsUpdate,
+      {},
+      {},
+      RemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDeletePathParams
+    >({
+      url: "/amap/deliveries/{deliveryId}/products",
+      method: "delete",
+      ...variables,
+      signal,
+    });
+
+/**
+ * Remove a given product from a delivery. This won't delete the product nor the delivery.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const useRemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDelete =
+  (
+    options?: Omit<
+      reactQuery.UseMutationOptions<
+        undefined,
+        RemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDeleteError,
+        RemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDeleteVariables
+      >,
+      "mutationFn"
+    >
+  ) => {
+    const { fetcherOptions } = useHyperionContext();
+    return reactQuery.useMutation<
+      undefined,
+      RemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDeleteError,
+      RemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDeleteVariables
+    >({
+      mutationFn: (
+        variables: RemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDeleteVariables
+      ) =>
+        fetchRemoveProductFromDeliveryAmapDeliveriesDeliveryIdProductsDelete({
+          ...fetcherOptions,
+          ...variables,
+        }),
+      ...options,
+    });
+  };
+
+export type GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetPathParams = {
+  deliveryId: string;
+};
+
+export type GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetResponse =
+  Schemas.OrderReturn[];
+
+export type GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetVariables = {
+  pathParams: GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Get orders from a delivery.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const fetchGetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGet = (
+  variables: GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetResponse,
+    GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetError,
+    undefined,
+    {},
+    {},
+    GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetPathParams
+  >({
+    url: "/amap/deliveries/{deliveryId}/orders",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Get orders from a delivery.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const useGetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGet = <
+  TData = GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetResponse
+>(
+  variables: GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetResponse,
+      GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetResponse,
+    GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/amap/deliveries/{deliveryId}/orders",
+      operationId: "getOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type GetOrderByIdAmapOrdersOrderIdGetPathParams = {
+  orderId: string;
+};
+
+export type GetOrderByIdAmapOrdersOrderIdGetError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type GetOrderByIdAmapOrdersOrderIdGetVariables = {
+  pathParams: GetOrderByIdAmapOrdersOrderIdGetPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Get content of an order.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const fetchGetOrderByIdAmapOrdersOrderIdGet = (
+  variables: GetOrderByIdAmapOrdersOrderIdGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.OrderReturn,
+    GetOrderByIdAmapOrdersOrderIdGetError,
+    undefined,
+    {},
+    {},
+    GetOrderByIdAmapOrdersOrderIdGetPathParams
+  >({ url: "/amap/orders/{orderId}", method: "get", ...variables, signal });
+
+/**
+ * Get content of an order.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const useGetOrderByIdAmapOrdersOrderIdGet = <
+  TData = Schemas.OrderReturn
+>(
+  variables: GetOrderByIdAmapOrdersOrderIdGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      Schemas.OrderReturn,
+      GetOrderByIdAmapOrdersOrderIdGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    Schemas.OrderReturn,
+    GetOrderByIdAmapOrdersOrderIdGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/amap/orders/{orderId}",
+      operationId: "getOrderByIdAmapOrdersOrderIdGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetOrderByIdAmapOrdersOrderIdGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type EditOrderFromDeliveryAmapOrdersOrderIdPatchPathParams = {
+  orderId: string;
+};
+
+export type EditOrderFromDeliveryAmapOrdersOrderIdPatchError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type EditOrderFromDeliveryAmapOrdersOrderIdPatchVariables = {
+  body?: Schemas.OrderEdit;
+  pathParams: EditOrderFromDeliveryAmapOrdersOrderIdPatchPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Edit an order.
+ *
+ * **A member of the group AMAP can edit orders of other users**
+ */
+export const fetchEditOrderFromDeliveryAmapOrdersOrderIdPatch = (
+  variables: EditOrderFromDeliveryAmapOrdersOrderIdPatchVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    EditOrderFromDeliveryAmapOrdersOrderIdPatchError,
+    Schemas.OrderEdit,
+    {},
+    {},
+    EditOrderFromDeliveryAmapOrdersOrderIdPatchPathParams
+  >({ url: "/amap/orders/{orderId}", method: "patch", ...variables, signal });
+
+/**
+ * Edit an order.
+ *
+ * **A member of the group AMAP can edit orders of other users**
+ */
+export const useEditOrderFromDeliveryAmapOrdersOrderIdPatch = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      EditOrderFromDeliveryAmapOrdersOrderIdPatchError,
+      EditOrderFromDeliveryAmapOrdersOrderIdPatchVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    EditOrderFromDeliveryAmapOrdersOrderIdPatchError,
+    EditOrderFromDeliveryAmapOrdersOrderIdPatchVariables
+  >({
+    mutationFn: (
+      variables: EditOrderFromDeliveryAmapOrdersOrderIdPatchVariables
+    ) =>
+      fetchEditOrderFromDeliveryAmapOrdersOrderIdPatch({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type RemoveOrderAmapOrdersOrderIdDeletePathParams = {
+  orderId: string;
+};
+
+export type RemoveOrderAmapOrdersOrderIdDeleteError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type RemoveOrderAmapOrdersOrderIdDeleteVariables = {
+  pathParams: RemoveOrderAmapOrdersOrderIdDeletePathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Delete an order.
+ *
+ * **A member of the group AMAP can delete orders of other users**
+ */
+export const fetchRemoveOrderAmapOrdersOrderIdDelete = (
+  variables: RemoveOrderAmapOrdersOrderIdDeleteVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    RemoveOrderAmapOrdersOrderIdDeleteError,
+    undefined,
+    {},
+    {},
+    RemoveOrderAmapOrdersOrderIdDeletePathParams
+  >({ url: "/amap/orders/{orderId}", method: "delete", ...variables, signal });
+
+/**
+ * Delete an order.
+ *
+ * **A member of the group AMAP can delete orders of other users**
+ */
+export const useRemoveOrderAmapOrdersOrderIdDelete = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      RemoveOrderAmapOrdersOrderIdDeleteError,
+      RemoveOrderAmapOrdersOrderIdDeleteVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    RemoveOrderAmapOrdersOrderIdDeleteError,
+    RemoveOrderAmapOrdersOrderIdDeleteVariables
+  >({
+    mutationFn: (variables: RemoveOrderAmapOrdersOrderIdDeleteVariables) =>
+      fetchRemoveOrderAmapOrdersOrderIdDelete({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type AddOrderToDelieveryAmapOrdersPostError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type AddOrderToDelieveryAmapOrdersPostVariables = {
+  body: Schemas.OrderBase;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Add an order to a delivery.
+ *
+ * **A member of the group AMAP can create an order for every user**
+ */
+export const fetchAddOrderToDelieveryAmapOrdersPost = (
+  variables: AddOrderToDelieveryAmapOrdersPostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.OrderReturn,
+    AddOrderToDelieveryAmapOrdersPostError,
+    Schemas.OrderBase,
+    {},
+    {},
+    {}
+  >({ url: "/amap/orders", method: "post", ...variables, signal });
+
+/**
+ * Add an order to a delivery.
+ *
+ * **A member of the group AMAP can create an order for every user**
+ */
+export const useAddOrderToDelieveryAmapOrdersPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.OrderReturn,
+      AddOrderToDelieveryAmapOrdersPostError,
+      AddOrderToDelieveryAmapOrdersPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.OrderReturn,
+    AddOrderToDelieveryAmapOrdersPostError,
+    AddOrderToDelieveryAmapOrdersPostVariables
+  >({
+    mutationFn: (variables: AddOrderToDelieveryAmapOrdersPostVariables) =>
+      fetchAddOrderToDelieveryAmapOrdersPost({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type OpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPostPathParams =
+  {
+    deliveryId: string;
+  };
+
+export type OpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPostError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type OpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPostVariables =
+  {
+    pathParams: OpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPostPathParams;
+  } & HyperionContext["fetcherOptions"];
+
+export const fetchOpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPost =
+  (
+    variables: OpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPostVariables,
+    signal?: AbortSignal
+  ) =>
+    hyperionFetch<
+      undefined,
+      OpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPostError,
+      undefined,
+      {},
+      {},
+      OpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPostPathParams
+    >({
+      url: "/amap/deliveries/{deliveryId}/openordering",
+      method: "post",
+      ...variables,
+      signal,
+    });
+
+export const useOpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPost =
+  (
+    options?: Omit<
+      reactQuery.UseMutationOptions<
+        undefined,
+        OpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPostError,
+        OpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPostVariables
+      >,
+      "mutationFn"
+    >
+  ) => {
+    const { fetcherOptions } = useHyperionContext();
+    return reactQuery.useMutation<
+      undefined,
+      OpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPostError,
+      OpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPostVariables
+    >({
+      mutationFn: (
+        variables: OpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPostVariables
+      ) =>
+        fetchOpenOrderingOfDeliveryAmapDeliveriesDeliveryIdOpenorderingPost({
+          ...fetcherOptions,
+          ...variables,
+        }),
+      ...options,
+    });
+  };
+
+export type LockDeliveryAmapDeliveriesDeliveryIdLockPostPathParams = {
+  deliveryId: string;
+};
+
+export type LockDeliveryAmapDeliveriesDeliveryIdLockPostError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type LockDeliveryAmapDeliveriesDeliveryIdLockPostVariables = {
+  pathParams: LockDeliveryAmapDeliveriesDeliveryIdLockPostPathParams;
+} & HyperionContext["fetcherOptions"];
+
+export const fetchLockDeliveryAmapDeliveriesDeliveryIdLockPost = (
+  variables: LockDeliveryAmapDeliveriesDeliveryIdLockPostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    LockDeliveryAmapDeliveriesDeliveryIdLockPostError,
+    undefined,
+    {},
+    {},
+    LockDeliveryAmapDeliveriesDeliveryIdLockPostPathParams
+  >({
+    url: "/amap/deliveries/{deliveryId}/lock",
+    method: "post",
+    ...variables,
+    signal,
+  });
+
+export const useLockDeliveryAmapDeliveriesDeliveryIdLockPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      LockDeliveryAmapDeliveriesDeliveryIdLockPostError,
+      LockDeliveryAmapDeliveriesDeliveryIdLockPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    LockDeliveryAmapDeliveriesDeliveryIdLockPostError,
+    LockDeliveryAmapDeliveriesDeliveryIdLockPostVariables
+  >({
+    mutationFn: (
+      variables: LockDeliveryAmapDeliveriesDeliveryIdLockPostVariables
+    ) =>
+      fetchLockDeliveryAmapDeliveriesDeliveryIdLockPost({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type MarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPostPathParams =
+  {
+    deliveryId: string;
+  };
+
+export type MarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPostError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type MarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPostVariables =
+  {
+    pathParams: MarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPostPathParams;
+  } & HyperionContext["fetcherOptions"];
+
+export const fetchMarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPost =
+  (
+    variables: MarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPostVariables,
+    signal?: AbortSignal
+  ) =>
+    hyperionFetch<
+      undefined,
+      MarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPostError,
+      undefined,
+      {},
+      {},
+      MarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPostPathParams
+    >({
+      url: "/amap/deliveries/{deliveryId}/delivered",
+      method: "post",
+      ...variables,
+      signal,
+    });
+
+export const useMarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      MarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPostError,
+      MarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    MarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPostError,
+    MarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPostVariables
+  >({
+    mutationFn: (
+      variables: MarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPostVariables
+    ) =>
+      fetchMarkDeliveryAsDeliveredAmapDeliveriesDeliveryIdDeliveredPost({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type ArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePostPathParams = {
+  deliveryId: string;
+};
+
+export type ArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePostError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type ArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePostVariables = {
+  pathParams: ArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePostPathParams;
+} & HyperionContext["fetcherOptions"];
+
+export const fetchArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePost = (
+  variables: ArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    ArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePostError,
+    undefined,
+    {},
+    {},
+    ArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePostPathParams
+  >({
+    url: "/amap/deliveries/{deliveryId}/archive",
+    method: "post",
+    ...variables,
+    signal,
+  });
+
+export const useArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      ArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePostError,
+      ArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    ArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePostError,
+    ArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePostVariables
+  >({
+    mutationFn: (
+      variables: ArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePostVariables
+    ) =>
+      fetchArchiveOfDeliveryAmapDeliveriesDeliveryIdArchivePost({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type GetUsersCashAmapUsersCashGetError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetUsersCashAmapUsersCashGetResponse = Schemas.CashComplete[];
+
+export type GetUsersCashAmapUsersCashGetVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * Get cash from all users.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const fetchGetUsersCashAmapUsersCashGet = (
+  variables: GetUsersCashAmapUsersCashGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    GetUsersCashAmapUsersCashGetResponse,
+    GetUsersCashAmapUsersCashGetError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/amap/users/cash", method: "get", ...variables, signal });
+
+/**
+ * Get cash from all users.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const useGetUsersCashAmapUsersCashGet = <
+  TData = GetUsersCashAmapUsersCashGetResponse
+>(
+  variables: GetUsersCashAmapUsersCashGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      GetUsersCashAmapUsersCashGetResponse,
+      GetUsersCashAmapUsersCashGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    GetUsersCashAmapUsersCashGetResponse,
+    GetUsersCashAmapUsersCashGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/amap/users/cash",
+      operationId: "getUsersCashAmapUsersCashGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetUsersCashAmapUsersCashGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type GetCashByIdAmapUsersUserIdCashGetPathParams = {
+  userId: string;
+};
+
+export type GetCashByIdAmapUsersUserIdCashGetError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type GetCashByIdAmapUsersUserIdCashGetVariables = {
+  pathParams: GetCashByIdAmapUsersUserIdCashGetPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Get cash from a specific user.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint or can only access the endpoint for its own user_id**
+ */
+export const fetchGetCashByIdAmapUsersUserIdCashGet = (
+  variables: GetCashByIdAmapUsersUserIdCashGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.CashComplete,
+    GetCashByIdAmapUsersUserIdCashGetError,
+    undefined,
+    {},
+    {},
+    GetCashByIdAmapUsersUserIdCashGetPathParams
+  >({ url: "/amap/users/{userId}/cash", method: "get", ...variables, signal });
+
+/**
+ * Get cash from a specific user.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint or can only access the endpoint for its own user_id**
+ */
+export const useGetCashByIdAmapUsersUserIdCashGet = <
+  TData = Schemas.CashComplete
+>(
+  variables: GetCashByIdAmapUsersUserIdCashGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      Schemas.CashComplete,
+      GetCashByIdAmapUsersUserIdCashGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    Schemas.CashComplete,
+    GetCashByIdAmapUsersUserIdCashGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/amap/users/{userId}/cash",
+      operationId: "getCashByIdAmapUsersUserIdCashGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetCashByIdAmapUsersUserIdCashGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type CreateCashOfUserAmapUsersUserIdCashPostPathParams = {
+  userId: string;
+};
+
+export type CreateCashOfUserAmapUsersUserIdCashPostError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type CreateCashOfUserAmapUsersUserIdCashPostVariables = {
+  body: Schemas.CashEdit;
+  pathParams: CreateCashOfUserAmapUsersUserIdCashPostPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Create cash for an user.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const fetchCreateCashOfUserAmapUsersUserIdCashPost = (
+  variables: CreateCashOfUserAmapUsersUserIdCashPostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.CashComplete,
+    CreateCashOfUserAmapUsersUserIdCashPostError,
+    Schemas.CashEdit,
+    {},
+    {},
+    CreateCashOfUserAmapUsersUserIdCashPostPathParams
+  >({ url: "/amap/users/{userId}/cash", method: "post", ...variables, signal });
+
+/**
+ * Create cash for an user.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const useCreateCashOfUserAmapUsersUserIdCashPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.CashComplete,
+      CreateCashOfUserAmapUsersUserIdCashPostError,
+      CreateCashOfUserAmapUsersUserIdCashPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.CashComplete,
+    CreateCashOfUserAmapUsersUserIdCashPostError,
+    CreateCashOfUserAmapUsersUserIdCashPostVariables
+  >({
+    mutationFn: (variables: CreateCashOfUserAmapUsersUserIdCashPostVariables) =>
+      fetchCreateCashOfUserAmapUsersUserIdCashPost({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type EditCashByIdAmapUsersUserIdCashPatchPathParams = {
+  userId: string;
+};
+
+export type EditCashByIdAmapUsersUserIdCashPatchError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type EditCashByIdAmapUsersUserIdCashPatchVariables = {
+  body: Schemas.CashEdit;
+  pathParams: EditCashByIdAmapUsersUserIdCashPatchPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Edit cash for an user. This will add the balance to the current balance.
+ * A negative value can be provided to remove money from the user.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const fetchEditCashByIdAmapUsersUserIdCashPatch = (
+  variables: EditCashByIdAmapUsersUserIdCashPatchVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    EditCashByIdAmapUsersUserIdCashPatchError,
+    Schemas.CashEdit,
+    {},
+    {},
+    EditCashByIdAmapUsersUserIdCashPatchPathParams
+  >({
+    url: "/amap/users/{userId}/cash",
+    method: "patch",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Edit cash for an user. This will add the balance to the current balance.
+ * A negative value can be provided to remove money from the user.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const useEditCashByIdAmapUsersUserIdCashPatch = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      EditCashByIdAmapUsersUserIdCashPatchError,
+      EditCashByIdAmapUsersUserIdCashPatchVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    EditCashByIdAmapUsersUserIdCashPatchError,
+    EditCashByIdAmapUsersUserIdCashPatchVariables
+  >({
+    mutationFn: (variables: EditCashByIdAmapUsersUserIdCashPatchVariables) =>
+      fetchEditCashByIdAmapUsersUserIdCashPatch({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type GetOrdersOfUserAmapUsersUserIdOrdersGetPathParams = {
+  userId: string;
+};
+
+export type GetOrdersOfUserAmapUsersUserIdOrdersGetError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type GetOrdersOfUserAmapUsersUserIdOrdersGetResponse =
+  Schemas.OrderReturn[];
+
+export type GetOrdersOfUserAmapUsersUserIdOrdersGetVariables = {
+  pathParams: GetOrdersOfUserAmapUsersUserIdOrdersGetPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Get orders from an user.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint or can only access the endpoint for its own user_id**
+ */
+export const fetchGetOrdersOfUserAmapUsersUserIdOrdersGet = (
+  variables: GetOrdersOfUserAmapUsersUserIdOrdersGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    GetOrdersOfUserAmapUsersUserIdOrdersGetResponse,
+    GetOrdersOfUserAmapUsersUserIdOrdersGetError,
+    undefined,
+    {},
+    {},
+    GetOrdersOfUserAmapUsersUserIdOrdersGetPathParams
+  >({
+    url: "/amap/users/{userId}/orders",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Get orders from an user.
+ *
+ * **The user must be a member of the group AMAP to use this endpoint or can only access the endpoint for its own user_id**
+ */
+export const useGetOrdersOfUserAmapUsersUserIdOrdersGet = <
+  TData = GetOrdersOfUserAmapUsersUserIdOrdersGetResponse
+>(
+  variables: GetOrdersOfUserAmapUsersUserIdOrdersGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      GetOrdersOfUserAmapUsersUserIdOrdersGetResponse,
+      GetOrdersOfUserAmapUsersUserIdOrdersGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    GetOrdersOfUserAmapUsersUserIdOrdersGetResponse,
+    GetOrdersOfUserAmapUsersUserIdOrdersGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/amap/users/{userId}/orders",
+      operationId: "getOrdersOfUserAmapUsersUserIdOrdersGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetOrdersOfUserAmapUsersUserIdOrdersGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type GetInformationAmapInformationGetError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type GetInformationAmapInformationGetVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * Return all information
+ */
+export const fetchGetInformationAmapInformationGet = (
+  variables: GetInformationAmapInformationGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.Information,
+    GetInformationAmapInformationGetError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/amap/information", method: "get", ...variables, signal });
+
+/**
+ * Return all information
+ */
+export const useGetInformationAmapInformationGet = <
+  TData = Schemas.Information
+>(
+  variables: GetInformationAmapInformationGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      Schemas.Information,
+      GetInformationAmapInformationGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    Schemas.Information,
+    GetInformationAmapInformationGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/amap/information",
+      operationId: "getInformationAmapInformationGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetInformationAmapInformationGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type EditInformationAmapInformationPatchError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type EditInformationAmapInformationPatchVariables = {
+  body?: Schemas.InformationEdit;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Update information
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const fetchEditInformationAmapInformationPatch = (
+  variables: EditInformationAmapInformationPatchVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    EditInformationAmapInformationPatchError,
+    Schemas.InformationEdit,
+    {},
+    {},
+    {}
+  >({ url: "/amap/information", method: "patch", ...variables, signal });
+
+/**
+ * Update information
+ *
+ * **The user must be a member of the group AMAP to use this endpoint**
+ */
+export const useEditInformationAmapInformationPatch = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      EditInformationAmapInformationPatchError,
+      EditInformationAmapInformationPatchVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    EditInformationAmapInformationPatchError,
+    EditInformationAmapInformationPatchVariables
+  >({
+    mutationFn: (variables: EditInformationAmapInformationPatchVariables) =>
+      fetchEditInformationAmapInformationPatch({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type GetManagersBookingManagersGetError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type GetManagersBookingManagersGetResponse = Schemas.Manager[];
+
+export type GetManagersBookingManagersGetVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * Get existing managers.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const fetchGetManagersBookingManagersGet = (
+  variables: GetManagersBookingManagersGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    GetManagersBookingManagersGetResponse,
+    GetManagersBookingManagersGetError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/booking/managers", method: "get", ...variables, signal });
+
+/**
+ * Get existing managers.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const useGetManagersBookingManagersGet = <
+  TData = GetManagersBookingManagersGetResponse
+>(
+  variables: GetManagersBookingManagersGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      GetManagersBookingManagersGetResponse,
+      GetManagersBookingManagersGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    GetManagersBookingManagersGetResponse,
+    GetManagersBookingManagersGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/booking/managers",
+      operationId: "getManagersBookingManagersGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetManagersBookingManagersGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type CreateManagerBookingManagersPostError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type CreateManagerBookingManagersPostVariables = {
+  body: Schemas.ManagerBase;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Create a manager.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const fetchCreateManagerBookingManagersPost = (
+  variables: CreateManagerBookingManagersPostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.Manager,
+    CreateManagerBookingManagersPostError,
+    Schemas.ManagerBase,
+    {},
+    {},
+    {}
+  >({ url: "/booking/managers", method: "post", ...variables, signal });
+
+/**
+ * Create a manager.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const useCreateManagerBookingManagersPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.Manager,
+      CreateManagerBookingManagersPostError,
+      CreateManagerBookingManagersPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.Manager,
+    CreateManagerBookingManagersPostError,
+    CreateManagerBookingManagersPostVariables
+  >({
+    mutationFn: (variables: CreateManagerBookingManagersPostVariables) =>
+      fetchCreateManagerBookingManagersPost({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type UpdateManagerBookingManagersManagerIdPatchPathParams = {
+  managerId: string;
+};
+
+export type UpdateManagerBookingManagersManagerIdPatchError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type UpdateManagerBookingManagersManagerIdPatchVariables = {
+  body?: Schemas.ManagerUpdate;
+  pathParams: UpdateManagerBookingManagersManagerIdPatchPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Update a manager, the request should contain a JSON with the fields to change (not necessarily all fields) and their new value.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const fetchUpdateManagerBookingManagersManagerIdPatch = (
+  variables: UpdateManagerBookingManagersManagerIdPatchVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    UpdateManagerBookingManagersManagerIdPatchError,
+    Schemas.ManagerUpdate,
+    {},
+    {},
+    UpdateManagerBookingManagersManagerIdPatchPathParams
+  >({
+    url: "/booking/managers/{managerId}",
+    method: "patch",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Update a manager, the request should contain a JSON with the fields to change (not necessarily all fields) and their new value.
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const useUpdateManagerBookingManagersManagerIdPatch = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      UpdateManagerBookingManagersManagerIdPatchError,
+      UpdateManagerBookingManagersManagerIdPatchVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    UpdateManagerBookingManagersManagerIdPatchError,
+    UpdateManagerBookingManagersManagerIdPatchVariables
+  >({
+    mutationFn: (
+      variables: UpdateManagerBookingManagersManagerIdPatchVariables
+    ) =>
+      fetchUpdateManagerBookingManagersManagerIdPatch({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type DeleteManagerBookingManagersManagerIdDeletePathParams = {
+  managerId: string;
+};
+
+export type DeleteManagerBookingManagersManagerIdDeleteError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type DeleteManagerBookingManagersManagerIdDeleteVariables = {
+  pathParams: DeleteManagerBookingManagersManagerIdDeletePathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Delete a manager only if the manager is not linked to any room
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const fetchDeleteManagerBookingManagersManagerIdDelete = (
+  variables: DeleteManagerBookingManagersManagerIdDeleteVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    DeleteManagerBookingManagersManagerIdDeleteError,
+    undefined,
+    {},
+    {},
+    DeleteManagerBookingManagersManagerIdDeletePathParams
+  >({
+    url: "/booking/managers/{managerId}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Delete a manager only if the manager is not linked to any room
+ *
+ * **This endpoint is only usable by administrators**
+ */
+export const useDeleteManagerBookingManagersManagerIdDelete = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      DeleteManagerBookingManagersManagerIdDeleteError,
+      DeleteManagerBookingManagersManagerIdDeleteVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    DeleteManagerBookingManagersManagerIdDeleteError,
+    DeleteManagerBookingManagersManagerIdDeleteVariables
+  >({
+    mutationFn: (
+      variables: DeleteManagerBookingManagersManagerIdDeleteVariables
+    ) =>
+      fetchDeleteManagerBookingManagersManagerIdDelete({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type GetCurrentUserManagersBookingManagersUsersMeGetError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type GetCurrentUserManagersBookingManagersUsersMeGetResponse =
+  Schemas.Manager[];
+
+export type GetCurrentUserManagersBookingManagersUsersMeGetVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * Return all managers the current user is a member.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const fetchGetCurrentUserManagersBookingManagersUsersMeGet = (
+  variables: GetCurrentUserManagersBookingManagersUsersMeGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    GetCurrentUserManagersBookingManagersUsersMeGetResponse,
+    GetCurrentUserManagersBookingManagersUsersMeGetError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/booking/managers/users/me", method: "get", ...variables, signal });
+
+/**
+ * Return all managers the current user is a member.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const useGetCurrentUserManagersBookingManagersUsersMeGet = <
+  TData = GetCurrentUserManagersBookingManagersUsersMeGetResponse
+>(
+  variables: GetCurrentUserManagersBookingManagersUsersMeGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      GetCurrentUserManagersBookingManagersUsersMeGetResponse,
+      GetCurrentUserManagersBookingManagersUsersMeGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    GetCurrentUserManagersBookingManagersUsersMeGetResponse,
+    GetCurrentUserManagersBookingManagersUsersMeGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/booking/managers/users/me",
+      operationId: "getCurrentUserManagersBookingManagersUsersMeGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetCurrentUserManagersBookingManagersUsersMeGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type GetBookingsForManagerBookingBookingsUsersMeManageGetError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type GetBookingsForManagerBookingBookingsUsersMeManageGetResponse =
+  Schemas.BookingReturnApplicant[];
+
+export type GetBookingsForManagerBookingBookingsUsersMeManageGetVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * Return all bookings a user can manage.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const fetchGetBookingsForManagerBookingBookingsUsersMeManageGet = (
+  variables: GetBookingsForManagerBookingBookingsUsersMeManageGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    GetBookingsForManagerBookingBookingsUsersMeManageGetResponse,
+    GetBookingsForManagerBookingBookingsUsersMeManageGetError,
+    undefined,
+    {},
+    {},
+    {}
+  >({
+    url: "/booking/bookings/users/me/manage",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Return all bookings a user can manage.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const useGetBookingsForManagerBookingBookingsUsersMeManageGet = <
+  TData = GetBookingsForManagerBookingBookingsUsersMeManageGetResponse
+>(
+  variables: GetBookingsForManagerBookingBookingsUsersMeManageGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      GetBookingsForManagerBookingBookingsUsersMeManageGetResponse,
+      GetBookingsForManagerBookingBookingsUsersMeManageGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    GetBookingsForManagerBookingBookingsUsersMeManageGetResponse,
+    GetBookingsForManagerBookingBookingsUsersMeManageGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/booking/bookings/users/me/manage",
+      operationId: "getBookingsForManagerBookingBookingsUsersMeManageGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetBookingsForManagerBookingBookingsUsersMeManageGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGetError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGetResponse =
+  Schemas.BookingReturnApplicant[];
+
+export type GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGetVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * Return all confirmed bookings a user can manage.
+ * **The user must be authenticated to use this endpoint**
+ */
+export const fetchGetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGet =
+  (
+    variables: GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGetVariables,
+    signal?: AbortSignal
+  ) =>
+    hyperionFetch<
+      GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGetResponse,
+      GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGetError,
+      undefined,
+      {},
+      {},
+      {}
+    >({
+      url: "/booking/bookings/confirmed/users/me/manage",
+      method: "get",
+      ...variables,
+      signal,
+    });
+
+/**
+ * Return all confirmed bookings a user can manage.
+ * **The user must be authenticated to use this endpoint**
+ */
+export const useGetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGet =
+  <
+    TData = GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGetResponse
+  >(
+    variables: GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGetVariables,
+    options?: Omit<
+      reactQuery.UseQueryOptions<
+        GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGetResponse,
+        GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGetError,
+        TData
+      >,
+      "queryKey" | "queryFn" | "initialData"
+    >
+  ) => {
+    const { fetcherOptions, queryOptions, queryKeyFn } =
+      useHyperionContext(options);
+    return reactQuery.useQuery<
+      GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGetResponse,
+      GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGetError,
+      TData
+    >({
+      queryKey: queryKeyFn({
+        path: "/booking/bookings/confirmed/users/me/manage",
+        operationId:
+          "getConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGet",
+        variables,
+      }),
+      queryFn: ({ signal }) =>
+        fetchGetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGet(
+          { ...fetcherOptions, ...variables },
+          signal
+        ),
+      ...options,
+      ...queryOptions,
+    });
+  };
+
+export type GetConfirmedBookingsBookingBookingsConfirmedGetError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type GetConfirmedBookingsBookingBookingsConfirmedGetResponse =
+  Schemas.BookingReturnSimpleApplicant[];
+
+export type GetConfirmedBookingsBookingBookingsConfirmedGetVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * Return all confirmed bookings.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const fetchGetConfirmedBookingsBookingBookingsConfirmedGet = (
+  variables: GetConfirmedBookingsBookingBookingsConfirmedGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    GetConfirmedBookingsBookingBookingsConfirmedGetResponse,
+    GetConfirmedBookingsBookingBookingsConfirmedGetError,
+    undefined,
+    {},
+    {},
+    {}
+  >({
+    url: "/booking/bookings/confirmed",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Return all confirmed bookings.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const useGetConfirmedBookingsBookingBookingsConfirmedGet = <
+  TData = GetConfirmedBookingsBookingBookingsConfirmedGetResponse
+>(
+  variables: GetConfirmedBookingsBookingBookingsConfirmedGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      GetConfirmedBookingsBookingBookingsConfirmedGetResponse,
+      GetConfirmedBookingsBookingBookingsConfirmedGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    GetConfirmedBookingsBookingBookingsConfirmedGetResponse,
+    GetConfirmedBookingsBookingBookingsConfirmedGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/booking/bookings/confirmed",
+      operationId: "getConfirmedBookingsBookingBookingsConfirmedGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetConfirmedBookingsBookingBookingsConfirmedGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type GetApplicantBookingsBookingBookingsUsersMeGetError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type GetApplicantBookingsBookingBookingsUsersMeGetResponse =
+  Schemas.BookingReturn[];
+
+export type GetApplicantBookingsBookingBookingsUsersMeGetVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * Get the user bookings.
+ *
+ * **Only usable by the user**
+ */
+export const fetchGetApplicantBookingsBookingBookingsUsersMeGet = (
+  variables: GetApplicantBookingsBookingBookingsUsersMeGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    GetApplicantBookingsBookingBookingsUsersMeGetResponse,
+    GetApplicantBookingsBookingBookingsUsersMeGetError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/booking/bookings/users/me", method: "get", ...variables, signal });
+
+/**
+ * Get the user bookings.
+ *
+ * **Only usable by the user**
+ */
+export const useGetApplicantBookingsBookingBookingsUsersMeGet = <
+  TData = GetApplicantBookingsBookingBookingsUsersMeGetResponse
+>(
+  variables: GetApplicantBookingsBookingBookingsUsersMeGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      GetApplicantBookingsBookingBookingsUsersMeGetResponse,
+      GetApplicantBookingsBookingBookingsUsersMeGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    GetApplicantBookingsBookingBookingsUsersMeGetResponse,
+    GetApplicantBookingsBookingBookingsUsersMeGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/booking/bookings/users/me",
+      operationId: "getApplicantBookingsBookingBookingsUsersMeGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetApplicantBookingsBookingBookingsUsersMeGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type CreateBookingBookingBookingsPostError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type CreateBookingBookingBookingsPostVariables = {
+  body: Schemas.BookingBase;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Create a booking.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const fetchCreateBookingBookingBookingsPost = (
+  variables: CreateBookingBookingBookingsPostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.BookingReturn,
+    CreateBookingBookingBookingsPostError,
+    Schemas.BookingBase,
+    {},
+    {},
+    {}
+  >({ url: "/booking/bookings", method: "post", ...variables, signal });
+
+/**
+ * Create a booking.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const useCreateBookingBookingBookingsPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.BookingReturn,
+      CreateBookingBookingBookingsPostError,
+      CreateBookingBookingBookingsPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.BookingReturn,
+    CreateBookingBookingBookingsPostError,
+    CreateBookingBookingBookingsPostVariables
+  >({
+    mutationFn: (variables: CreateBookingBookingBookingsPostVariables) =>
+      fetchCreateBookingBookingBookingsPost({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type EditBookingBookingBookingsBookingIdPatchPathParams = {
+  bookingId: string;
+};
+
+export type EditBookingBookingBookingsBookingIdPatchError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type EditBookingBookingBookingsBookingIdPatchVariables = {
+  body?: Schemas.BookingEdit;
+  pathParams: EditBookingBookingBookingsBookingIdPatchPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Edit a booking.
+ *
+ * **Only usable by a user in the manager group of the booking or applicant before decision**
+ */
+export const fetchEditBookingBookingBookingsBookingIdPatch = (
+  variables: EditBookingBookingBookingsBookingIdPatchVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    EditBookingBookingBookingsBookingIdPatchError,
+    Schemas.BookingEdit,
+    {},
+    {},
+    EditBookingBookingBookingsBookingIdPatchPathParams
+  >({
+    url: "/booking/bookings/{bookingId}",
+    method: "patch",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Edit a booking.
+ *
+ * **Only usable by a user in the manager group of the booking or applicant before decision**
+ */
+export const useEditBookingBookingBookingsBookingIdPatch = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      EditBookingBookingBookingsBookingIdPatchError,
+      EditBookingBookingBookingsBookingIdPatchVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    EditBookingBookingBookingsBookingIdPatchError,
+    EditBookingBookingBookingsBookingIdPatchVariables
+  >({
+    mutationFn: (
+      variables: EditBookingBookingBookingsBookingIdPatchVariables
+    ) =>
+      fetchEditBookingBookingBookingsBookingIdPatch({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type DeleteBookingBookingBookingsBookingIdDeletePathParams = {
+  bookingId: string;
+};
+
+export type DeleteBookingBookingBookingsBookingIdDeleteError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type DeleteBookingBookingBookingsBookingIdDeleteVariables = {
+  pathParams: DeleteBookingBookingBookingsBookingIdDeletePathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Remove a booking.
+ *
+ * **Only usable by the applicant before decision**
+ */
+export const fetchDeleteBookingBookingBookingsBookingIdDelete = (
+  variables: DeleteBookingBookingBookingsBookingIdDeleteVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    DeleteBookingBookingBookingsBookingIdDeleteError,
+    undefined,
+    {},
+    {},
+    DeleteBookingBookingBookingsBookingIdDeletePathParams
+  >({
+    url: "/booking/bookings/{bookingId}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Remove a booking.
+ *
+ * **Only usable by the applicant before decision**
+ */
+export const useDeleteBookingBookingBookingsBookingIdDelete = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      DeleteBookingBookingBookingsBookingIdDeleteError,
+      DeleteBookingBookingBookingsBookingIdDeleteVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    DeleteBookingBookingBookingsBookingIdDeleteError,
+    DeleteBookingBookingBookingsBookingIdDeleteVariables
+  >({
+    mutationFn: (
+      variables: DeleteBookingBookingBookingsBookingIdDeleteVariables
+    ) =>
+      fetchDeleteBookingBookingBookingsBookingIdDelete({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type ConfirmBookingBookingBookingsBookingIdReplyDecisionPatchPathParams =
+  {
+    bookingId: string;
+    decision: Schemas.Decision;
+  };
+
+export type ConfirmBookingBookingBookingsBookingIdReplyDecisionPatchError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type ConfirmBookingBookingBookingsBookingIdReplyDecisionPatchVariables =
+  {
+    pathParams: ConfirmBookingBookingBookingsBookingIdReplyDecisionPatchPathParams;
+  } & HyperionContext["fetcherOptions"];
+
+/**
+ * Give a decision to a booking.
+ *
+ * **Only usable by a user in the manager group of the booking**
+ */
+export const fetchConfirmBookingBookingBookingsBookingIdReplyDecisionPatch = (
+  variables: ConfirmBookingBookingBookingsBookingIdReplyDecisionPatchVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    ConfirmBookingBookingBookingsBookingIdReplyDecisionPatchError,
+    undefined,
+    {},
+    {},
+    ConfirmBookingBookingBookingsBookingIdReplyDecisionPatchPathParams
+  >({
+    url: "/booking/bookings/{bookingId}/reply/{decision}",
+    method: "patch",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Give a decision to a booking.
+ *
+ * **Only usable by a user in the manager group of the booking**
+ */
+export const useConfirmBookingBookingBookingsBookingIdReplyDecisionPatch = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      ConfirmBookingBookingBookingsBookingIdReplyDecisionPatchError,
+      ConfirmBookingBookingBookingsBookingIdReplyDecisionPatchVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    ConfirmBookingBookingBookingsBookingIdReplyDecisionPatchError,
+    ConfirmBookingBookingBookingsBookingIdReplyDecisionPatchVariables
+  >({
+    mutationFn: (
+      variables: ConfirmBookingBookingBookingsBookingIdReplyDecisionPatchVariables
+    ) =>
+      fetchConfirmBookingBookingBookingsBookingIdReplyDecisionPatch({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type GetRoomsBookingRoomsGetError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetRoomsBookingRoomsGetResponse = Schemas.RoomComplete[];
+
+export type GetRoomsBookingRoomsGetVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * Get all rooms.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const fetchGetRoomsBookingRoomsGet = (
+  variables: GetRoomsBookingRoomsGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    GetRoomsBookingRoomsGetResponse,
+    GetRoomsBookingRoomsGetError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/booking/rooms", method: "get", ...variables, signal });
+
+/**
+ * Get all rooms.
+ *
+ * **The user must be authenticated to use this endpoint**
+ */
+export const useGetRoomsBookingRoomsGet = <
+  TData = GetRoomsBookingRoomsGetResponse
+>(
+  variables: GetRoomsBookingRoomsGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      GetRoomsBookingRoomsGetResponse,
+      GetRoomsBookingRoomsGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    GetRoomsBookingRoomsGetResponse,
+    GetRoomsBookingRoomsGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/booking/rooms",
+      operationId: "getRoomsBookingRoomsGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetRoomsBookingRoomsGet({ ...fetcherOptions, ...variables }, signal),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type CreateRoomBookingRoomsPostError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type CreateRoomBookingRoomsPostVariables = {
+  body: Schemas.RoomBase;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Create a new room in database.
+ *
+ * **This endpoint is only usable by admins**
+ */
+export const fetchCreateRoomBookingRoomsPost = (
+  variables: CreateRoomBookingRoomsPostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.RoomComplete,
+    CreateRoomBookingRoomsPostError,
+    Schemas.RoomBase,
+    {},
+    {},
+    {}
+  >({ url: "/booking/rooms", method: "post", ...variables, signal });
+
+/**
+ * Create a new room in database.
+ *
+ * **This endpoint is only usable by admins**
+ */
+export const useCreateRoomBookingRoomsPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.RoomComplete,
+      CreateRoomBookingRoomsPostError,
+      CreateRoomBookingRoomsPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.RoomComplete,
+    CreateRoomBookingRoomsPostError,
+    CreateRoomBookingRoomsPostVariables
+  >({
+    mutationFn: (variables: CreateRoomBookingRoomsPostVariables) =>
+      fetchCreateRoomBookingRoomsPost({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
+export type EditRoomBookingRoomsRoomIdPatchPathParams = {
+  roomId: string;
+};
+
+export type EditRoomBookingRoomsRoomIdPatchError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type EditRoomBookingRoomsRoomIdPatchVariables = {
+  body: Schemas.RoomBase;
+  pathParams: EditRoomBookingRoomsRoomIdPatchPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Edit a room.
+ *
+ * **This endpoint is only usable by admins**
+ */
+export const fetchEditRoomBookingRoomsRoomIdPatch = (
+  variables: EditRoomBookingRoomsRoomIdPatchVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    EditRoomBookingRoomsRoomIdPatchError,
+    Schemas.RoomBase,
+    {},
+    {},
+    EditRoomBookingRoomsRoomIdPatchPathParams
+  >({ url: "/booking/rooms/{roomId}", method: "patch", ...variables, signal });
+
+/**
+ * Edit a room.
+ *
+ * **This endpoint is only usable by admins**
+ */
+export const useEditRoomBookingRoomsRoomIdPatch = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      EditRoomBookingRoomsRoomIdPatchError,
+      EditRoomBookingRoomsRoomIdPatchVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    EditRoomBookingRoomsRoomIdPatchError,
+    EditRoomBookingRoomsRoomIdPatchVariables
+  >({
+    mutationFn: (variables: EditRoomBookingRoomsRoomIdPatchVariables) =>
+      fetchEditRoomBookingRoomsRoomIdPatch({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
+export type DeleteRoomBookingRoomsRoomIdDeletePathParams = {
+  roomId: string;
+};
+
+export type DeleteRoomBookingRoomsRoomIdDeleteError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type DeleteRoomBookingRoomsRoomIdDeleteVariables = {
+  pathParams: DeleteRoomBookingRoomsRoomIdDeletePathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Delete a room only if there are not future or ongoing bookings of this room
+ *
+ * **This endpoint is only usable by admins**
+ */
+export const fetchDeleteRoomBookingRoomsRoomIdDelete = (
+  variables: DeleteRoomBookingRoomsRoomIdDeleteVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    DeleteRoomBookingRoomsRoomIdDeleteError,
+    undefined,
+    {},
+    {},
+    DeleteRoomBookingRoomsRoomIdDeletePathParams
+  >({ url: "/booking/rooms/{roomId}", method: "delete", ...variables, signal });
+
+/**
+ * Delete a room only if there are not future or ongoing bookings of this room
+ *
+ * **This endpoint is only usable by admins**
+ */
+export const useDeleteRoomBookingRoomsRoomIdDelete = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      DeleteRoomBookingRoomsRoomIdDeleteError,
+      DeleteRoomBookingRoomsRoomIdDeleteVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    DeleteRoomBookingRoomsRoomIdDeleteError,
+    DeleteRoomBookingRoomsRoomIdDeleteVariables
+  >({
+    mutationFn: (variables: DeleteRoomBookingRoomsRoomIdDeleteVariables) =>
+      fetchDeleteRoomBookingRoomsRoomIdDelete({
         ...fetcherOptions,
         ...variables,
       }),
@@ -8780,7 +11171,7 @@ export type ReadLoanersLoansLoanersGetVariables =
  */
 export const fetchReadLoanersLoansLoanersGet = (
   variables: ReadLoanersLoansLoanersGetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     ReadLoanersLoansLoanersGetResponse,
@@ -8797,7 +11188,7 @@ export const fetchReadLoanersLoansLoanersGet = (
  * **This endpoint is only usable by administrators**
  */
 export const useReadLoanersLoansLoanersGet = <
-  TData = ReadLoanersLoansLoanersGetResponse,
+  TData = ReadLoanersLoansLoanersGetResponse
 >(
   variables: ReadLoanersLoansLoanersGetVariables,
   options?: Omit<
@@ -8807,7 +11198,7 @@ export const useReadLoanersLoansLoanersGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -8824,7 +11215,7 @@ export const useReadLoanersLoansLoanersGet = <
     queryFn: ({ signal }) =>
       fetchReadLoanersLoansLoanersGet(
         { ...fetcherOptions, ...variables },
-        signal,
+        signal
       ),
     ...options,
     ...queryOptions,
@@ -8849,7 +11240,7 @@ export type CreateLoanerLoansLoanersPostVariables = {
  */
 export const fetchCreateLoanerLoansLoanersPost = (
   variables: CreateLoanerLoansLoanersPostVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     Schemas.Loaner,
@@ -8875,7 +11266,7 @@ export const useCreateLoanerLoansLoanersPost = (
       CreateLoanerLoansLoanersPostVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -8909,7 +11300,7 @@ export type DeleteLoanerLoansLoanersLoanerIdDeleteVariables = {
  */
 export const fetchDeleteLoanerLoansLoanersLoanerIdDelete = (
   variables: DeleteLoanerLoansLoanersLoanerIdDeleteVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
@@ -8938,7 +11329,7 @@ export const useDeleteLoanerLoansLoanersLoanerIdDelete = (
       DeleteLoanerLoansLoanersLoanerIdDeleteVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -8976,7 +11367,7 @@ export type UpdateLoanerLoansLoanersLoanerIdPatchVariables = {
  */
 export const fetchUpdateLoanerLoansLoanersLoanerIdPatch = (
   variables: UpdateLoanerLoansLoanersLoanerIdPatchVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
@@ -9005,7 +11396,7 @@ export const useUpdateLoanerLoansLoanersLoanerIdPatch = (
       UpdateLoanerLoansLoanersLoanerIdPatchVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -9055,7 +11446,7 @@ export type GetLoansByLoanerLoansLoanersLoanerIdLoansGetVariables = {
  */
 export const fetchGetLoansByLoanerLoansLoanersLoanerIdLoansGet = (
   variables: GetLoansByLoanerLoansLoanersLoanerIdLoansGetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     GetLoansByLoanerLoansLoanersLoanerIdLoansGetResponse,
@@ -9081,7 +11472,7 @@ export const fetchGetLoansByLoanerLoansLoanersLoanerIdLoansGet = (
  * **The user must be a member of the loaner group_manager to use this endpoint**
  */
 export const useGetLoansByLoanerLoansLoanersLoanerIdLoansGet = <
-  TData = GetLoansByLoanerLoansLoanersLoanerIdLoansGetResponse,
+  TData = GetLoansByLoanerLoansLoanersLoanerIdLoansGetResponse
 >(
   variables: GetLoansByLoanerLoansLoanersLoanerIdLoansGetVariables,
   options?: Omit<
@@ -9091,7 +11482,7 @@ export const useGetLoansByLoanerLoansLoanersLoanerIdLoansGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -9108,7 +11499,7 @@ export const useGetLoansByLoanerLoansLoanersLoanerIdLoansGet = <
     queryFn: ({ signal }) =>
       fetchGetLoansByLoanerLoansLoanersLoanerIdLoansGet(
         { ...fetcherOptions, ...variables },
-        signal,
+        signal
       ),
     ...options,
     ...queryOptions,
@@ -9139,7 +11530,7 @@ export type GetItemsByLoanerLoansLoanersLoanerIdItemsGetVariables = {
  */
 export const fetchGetItemsByLoanerLoansLoanersLoanerIdItemsGet = (
   variables: GetItemsByLoanerLoansLoanersLoanerIdItemsGetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     GetItemsByLoanerLoansLoanersLoanerIdItemsGetResponse,
@@ -9161,7 +11552,7 @@ export const fetchGetItemsByLoanerLoansLoanersLoanerIdItemsGet = (
  * **The user must be a member of the loaner group_manager to use this endpoint**
  */
 export const useGetItemsByLoanerLoansLoanersLoanerIdItemsGet = <
-  TData = GetItemsByLoanerLoansLoanersLoanerIdItemsGetResponse,
+  TData = GetItemsByLoanerLoansLoanersLoanerIdItemsGetResponse
 >(
   variables: GetItemsByLoanerLoansLoanersLoanerIdItemsGetVariables,
   options?: Omit<
@@ -9171,7 +11562,7 @@ export const useGetItemsByLoanerLoansLoanersLoanerIdItemsGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -9188,7 +11579,7 @@ export const useGetItemsByLoanerLoansLoanersLoanerIdItemsGet = <
     queryFn: ({ signal }) =>
       fetchGetItemsByLoanerLoansLoanersLoanerIdItemsGet(
         { ...fetcherOptions, ...variables },
-        signal,
+        signal
       ),
     ...options,
     ...queryOptions,
@@ -9217,7 +11608,7 @@ export type CreateItemsForLoanerLoansLoanersLoanerIdItemsPostVariables = {
  */
 export const fetchCreateItemsForLoanerLoansLoanersLoanerIdItemsPost = (
   variables: CreateItemsForLoanerLoansLoanersLoanerIdItemsPostVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     Schemas.Item,
@@ -9246,7 +11637,7 @@ export const useCreateItemsForLoanerLoansLoanersLoanerIdItemsPost = (
       CreateItemsForLoanerLoansLoanersLoanerIdItemsPostVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -9255,7 +11646,7 @@ export const useCreateItemsForLoanerLoansLoanersLoanerIdItemsPost = (
     CreateItemsForLoanerLoansLoanersLoanerIdItemsPostVariables
   >({
     mutationFn: (
-      variables: CreateItemsForLoanerLoansLoanersLoanerIdItemsPostVariables,
+      variables: CreateItemsForLoanerLoansLoanersLoanerIdItemsPostVariables
     ) =>
       fetchCreateItemsForLoanerLoansLoanersLoanerIdItemsPost({
         ...fetcherOptions,
@@ -9290,7 +11681,7 @@ export type UpdateItemsForLoanerLoansLoanersLoanerIdItemsItemIdPatchVariables =
  */
 export const fetchUpdateItemsForLoanerLoansLoanersLoanerIdItemsItemIdPatch = (
   variables: UpdateItemsForLoanerLoansLoanersLoanerIdItemsItemIdPatchVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
@@ -9319,7 +11710,7 @@ export const useUpdateItemsForLoanerLoansLoanersLoanerIdItemsItemIdPatch = (
       UpdateItemsForLoanerLoansLoanersLoanerIdItemsItemIdPatchVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -9328,7 +11719,7 @@ export const useUpdateItemsForLoanerLoansLoanersLoanerIdItemsItemIdPatch = (
     UpdateItemsForLoanerLoansLoanersLoanerIdItemsItemIdPatchVariables
   >({
     mutationFn: (
-      variables: UpdateItemsForLoanerLoansLoanersLoanerIdItemsItemIdPatchVariables,
+      variables: UpdateItemsForLoanerLoansLoanersLoanerIdItemsItemIdPatchVariables
     ) =>
       fetchUpdateItemsForLoanerLoansLoanersLoanerIdItemsItemIdPatch({
         ...fetcherOptions,
@@ -9361,7 +11752,7 @@ export type DeleteLoanerItemLoansLoanersLoanerIdItemsItemIdDeleteVariables = {
  */
 export const fetchDeleteLoanerItemLoansLoanersLoanerIdItemsItemIdDelete = (
   variables: DeleteLoanerItemLoansLoanersLoanerIdItemsItemIdDeleteVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
@@ -9391,7 +11782,7 @@ export const useDeleteLoanerItemLoansLoanersLoanerIdItemsItemIdDelete = (
       DeleteLoanerItemLoansLoanersLoanerIdItemsItemIdDeleteVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -9400,7 +11791,7 @@ export const useDeleteLoanerItemLoansLoanersLoanerIdItemsItemIdDelete = (
     DeleteLoanerItemLoansLoanersLoanerIdItemsItemIdDeleteVariables
   >({
     mutationFn: (
-      variables: DeleteLoanerItemLoansLoanersLoanerIdItemsItemIdDeleteVariables,
+      variables: DeleteLoanerItemLoansLoanersLoanerIdItemsItemIdDeleteVariables
     ) =>
       fetchDeleteLoanerItemLoansLoanersLoanerIdItemsItemIdDelete({
         ...fetcherOptions,
@@ -9434,7 +11825,7 @@ export type GetCurrentUserLoansLoansUsersMeGetVariables = {
  */
 export const fetchGetCurrentUserLoansLoansUsersMeGet = (
   variables: GetCurrentUserLoansLoansUsersMeGetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     GetCurrentUserLoansLoansUsersMeGetResponse,
@@ -9453,7 +11844,7 @@ export const fetchGetCurrentUserLoansLoansUsersMeGet = (
  * **The user must be authenticated to use this endpoint**
  */
 export const useGetCurrentUserLoansLoansUsersMeGet = <
-  TData = GetCurrentUserLoansLoansUsersMeGetResponse,
+  TData = GetCurrentUserLoansLoansUsersMeGetResponse
 >(
   variables: GetCurrentUserLoansLoansUsersMeGetVariables,
   options?: Omit<
@@ -9463,7 +11854,7 @@ export const useGetCurrentUserLoansLoansUsersMeGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -9480,7 +11871,7 @@ export const useGetCurrentUserLoansLoansUsersMeGet = <
     queryFn: ({ signal }) =>
       fetchGetCurrentUserLoansLoansUsersMeGet(
         { ...fetcherOptions, ...variables },
-        signal,
+        signal
       ),
     ...options,
     ...queryOptions,
@@ -9503,7 +11894,7 @@ export type GetCurrentUserLoanersLoansUsersMeLoanersGetVariables =
  */
 export const fetchGetCurrentUserLoanersLoansUsersMeLoanersGet = (
   variables: GetCurrentUserLoanersLoansUsersMeLoanersGetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     GetCurrentUserLoanersLoansUsersMeLoanersGetResponse,
@@ -9520,7 +11911,7 @@ export const fetchGetCurrentUserLoanersLoansUsersMeLoanersGet = (
  * **The user must be authenticated to use this endpoint**
  */
 export const useGetCurrentUserLoanersLoansUsersMeLoanersGet = <
-  TData = GetCurrentUserLoanersLoansUsersMeLoanersGetResponse,
+  TData = GetCurrentUserLoanersLoansUsersMeLoanersGetResponse
 >(
   variables: GetCurrentUserLoanersLoansUsersMeLoanersGetVariables,
   options?: Omit<
@@ -9530,7 +11921,7 @@ export const useGetCurrentUserLoanersLoansUsersMeLoanersGet = <
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -9547,7 +11938,7 @@ export const useGetCurrentUserLoanersLoansUsersMeLoanersGet = <
     queryFn: ({ signal }) =>
       fetchGetCurrentUserLoanersLoansUsersMeLoanersGet(
         { ...fetcherOptions, ...variables },
-        signal,
+        signal
       ),
     ...options,
     ...queryOptions,
@@ -9570,7 +11961,7 @@ export type CreateLoanLoansPostVariables = {
  */
 export const fetchCreateLoanLoansPost = (
   variables: CreateLoanLoansPostVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     Schemas.Loan,
@@ -9594,7 +11985,7 @@ export const useCreateLoanLoansPost = (
       CreateLoanLoansPostVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -9632,7 +12023,7 @@ export type UpdateLoanLoansLoanIdPatchVariables = {
  */
 export const fetchUpdateLoanLoansLoanIdPatch = (
   variables: UpdateLoanLoansLoanIdPatchVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
@@ -9659,7 +12050,7 @@ export const useUpdateLoanLoansLoanIdPatch = (
       UpdateLoanLoansLoanIdPatchVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -9694,7 +12085,7 @@ export type DeleteLoanLoansLoanIdDeleteVariables = {
  */
 export const fetchDeleteLoanLoansLoanIdDelete = (
   variables: DeleteLoanLoansLoanIdDeleteVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
@@ -9719,7 +12110,7 @@ export const useDeleteLoanLoansLoanIdDelete = (
       DeleteLoanLoansLoanIdDeleteVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -9753,7 +12144,7 @@ export type ReturnLoanLoansLoanIdReturnPostVariables = {
  */
 export const fetchReturnLoanLoansLoanIdReturnPost = (
   variables: ReturnLoanLoansLoanIdReturnPostVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
@@ -9777,7 +12168,7 @@ export const useReturnLoanLoansLoanIdReturnPost = (
       ReturnLoanLoansLoanIdReturnPostVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -9812,7 +12203,7 @@ export type ExtendLoanLoansLoanIdExtendPostVariables = {
  */
 export const fetchExtendLoanLoansLoanIdExtendPost = (
   variables: ExtendLoanLoansLoanIdExtendPostVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
@@ -9836,7 +12227,7 @@ export const useExtendLoanLoansLoanIdExtendPost = (
       ExtendLoanLoansLoanIdExtendPostVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -9850,631 +12241,159 @@ export const useExtendLoanLoansLoanIdExtendPost = (
   });
 };
 
-export type GetDevicesNotificationDevicesGetError =
-  Fetcher.ErrorWrapper<undefined>;
+export type GetSessionsCinemaSessionsGetError = Fetcher.ErrorWrapper<undefined>;
 
-export type GetDevicesNotificationDevicesGetResponse = Schemas.FirebaseDevice[];
+export type GetSessionsCinemaSessionsGetResponse =
+  Schemas.CineSessionComplete[];
 
-export type GetDevicesNotificationDevicesGetVariables =
+export type GetSessionsCinemaSessionsGetVariables =
   HyperionContext["fetcherOptions"];
 
-/**
- * Get all devices a user have registered.
- * This endpoint is useful to get firebase tokens for debugging purposes.
- *
- * **Only admins can use this endpoint**
- */
-export const fetchGetDevicesNotificationDevicesGet = (
-  variables: GetDevicesNotificationDevicesGetVariables,
-  signal?: AbortSignal,
+export const fetchGetSessionsCinemaSessionsGet = (
+  variables: GetSessionsCinemaSessionsGetVariables,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
-    GetDevicesNotificationDevicesGetResponse,
-    GetDevicesNotificationDevicesGetError,
+    GetSessionsCinemaSessionsGetResponse,
+    GetSessionsCinemaSessionsGetError,
     undefined,
     {},
     {},
     {}
-  >({ url: "/notification/devices", method: "get", ...variables, signal });
+  >({ url: "/cinema/sessions", method: "get", ...variables, signal });
 
-/**
- * Get all devices a user have registered.
- * This endpoint is useful to get firebase tokens for debugging purposes.
- *
- * **Only admins can use this endpoint**
- */
-export const useGetDevicesNotificationDevicesGet = <
-  TData = GetDevicesNotificationDevicesGetResponse,
+export const useGetSessionsCinemaSessionsGet = <
+  TData = GetSessionsCinemaSessionsGetResponse
 >(
-  variables: GetDevicesNotificationDevicesGetVariables,
+  variables: GetSessionsCinemaSessionsGetVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
-      GetDevicesNotificationDevicesGetResponse,
-      GetDevicesNotificationDevicesGetError,
+      GetSessionsCinemaSessionsGetResponse,
+      GetSessionsCinemaSessionsGetError,
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
   return reactQuery.useQuery<
-    GetDevicesNotificationDevicesGetResponse,
-    GetDevicesNotificationDevicesGetError,
+    GetSessionsCinemaSessionsGetResponse,
+    GetSessionsCinemaSessionsGetError,
     TData
   >({
     queryKey: queryKeyFn({
-      path: "/notification/devices",
-      operationId: "getDevicesNotificationDevicesGet",
+      path: "/cinema/sessions",
+      operationId: "getSessionsCinemaSessionsGet",
       variables,
     }),
     queryFn: ({ signal }) =>
-      fetchGetDevicesNotificationDevicesGet(
+      fetchGetSessionsCinemaSessionsGet(
         { ...fetcherOptions, ...variables },
-        signal,
+        signal
       ),
     ...options,
     ...queryOptions,
   });
 };
 
-export type RegisterFirebaseDeviceNotificationDevicesPostError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type RegisterFirebaseDeviceNotificationDevicesPostVariables = {
-  body: Schemas.BodyRegisterFirebaseDeviceNotificationDevicesPost;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Register a firebase device for the user, if the device already exists, this will update the creation date.
- * This endpoint should be called once a month to ensure that the token is still valide.
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const fetchRegisterFirebaseDeviceNotificationDevicesPost = (
-  variables: RegisterFirebaseDeviceNotificationDevicesPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    RegisterFirebaseDeviceNotificationDevicesPostError,
-    Schemas.BodyRegisterFirebaseDeviceNotificationDevicesPost,
-    {},
-    {},
-    {}
-  >({ url: "/notification/devices", method: "post", ...variables, signal });
-
-/**
- * Register a firebase device for the user, if the device already exists, this will update the creation date.
- * This endpoint should be called once a month to ensure that the token is still valide.
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const useRegisterFirebaseDeviceNotificationDevicesPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      RegisterFirebaseDeviceNotificationDevicesPostError,
-      RegisterFirebaseDeviceNotificationDevicesPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    RegisterFirebaseDeviceNotificationDevicesPostError,
-    RegisterFirebaseDeviceNotificationDevicesPostVariables
-  >({
-    mutationFn: (
-      variables: RegisterFirebaseDeviceNotificationDevicesPostVariables,
-    ) =>
-      fetchRegisterFirebaseDeviceNotificationDevicesPost({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type UnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDeletePathParams =
-  {
-    firebaseToken: string;
-  };
-
-export type UnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDeleteError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type UnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDeleteVariables =
-  {
-    pathParams: UnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDeletePathParams;
-  } & HyperionContext["fetcherOptions"];
-
-/**
- * Unregister a new firebase device for the user
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const fetchUnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDelete =
-  (
-    variables: UnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDeleteVariables,
-    signal?: AbortSignal,
-  ) =>
-    hyperionFetch<
-      undefined,
-      UnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDeleteError,
-      undefined,
-      {},
-      {},
-      UnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDeletePathParams
-    >({
-      url: "/notification/devices/{firebaseToken}",
-      method: "delete",
-      ...variables,
-      signal,
-    });
-
-/**
- * Unregister a new firebase device for the user
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const useUnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDelete =
-  (
-    options?: Omit<
-      reactQuery.UseMutationOptions<
-        undefined,
-        UnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDeleteError,
-        UnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDeleteVariables
-      >,
-      "mutationFn"
-    >,
-  ) => {
-    const { fetcherOptions } = useHyperionContext();
-    return reactQuery.useMutation<
-      undefined,
-      UnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDeleteError,
-      UnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDeleteVariables
-    >({
-      mutationFn: (
-        variables: UnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDeleteVariables,
-      ) =>
-        fetchUnregisterFirebaseDeviceNotificationDevicesFirebaseTokenDelete({
-          ...fetcherOptions,
-          ...variables,
-        }),
-      ...options,
-    });
-  };
-
-export type GetMessagesNotificationMessagesFirebaseTokenGetPathParams = {
-  firebaseToken: string;
-};
-
-export type GetMessagesNotificationMessagesFirebaseTokenGetError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type GetMessagesNotificationMessagesFirebaseTokenGetResponse =
-  Schemas.Message[];
-
-export type GetMessagesNotificationMessagesFirebaseTokenGetVariables = {
-  pathParams: GetMessagesNotificationMessagesFirebaseTokenGetPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Get all messages for a specific device from the user
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const fetchGetMessagesNotificationMessagesFirebaseTokenGet = (
-  variables: GetMessagesNotificationMessagesFirebaseTokenGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetMessagesNotificationMessagesFirebaseTokenGetResponse,
-    GetMessagesNotificationMessagesFirebaseTokenGetError,
-    undefined,
-    {},
-    {},
-    GetMessagesNotificationMessagesFirebaseTokenGetPathParams
-  >({
-    url: "/notification/messages/{firebaseToken}",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-/**
- * Get all messages for a specific device from the user
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const useGetMessagesNotificationMessagesFirebaseTokenGet = <
-  TData = GetMessagesNotificationMessagesFirebaseTokenGetResponse,
->(
-  variables: GetMessagesNotificationMessagesFirebaseTokenGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetMessagesNotificationMessagesFirebaseTokenGetResponse,
-      GetMessagesNotificationMessagesFirebaseTokenGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetMessagesNotificationMessagesFirebaseTokenGetResponse,
-    GetMessagesNotificationMessagesFirebaseTokenGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/notification/messages/{firebaseToken}",
-      operationId: "getMessagesNotificationMessagesFirebaseTokenGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetMessagesNotificationMessagesFirebaseTokenGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type SubscribeToTopicNotificationTopicsTopicStrSubscribePostPathParams =
-  {
-    /**
-     * The topic to subscribe to. The Topic may be followed by an additional identifier (ex: cinema_4c029b5f-2bf7-4b70-85d4-340a4bd28653)
-     */
-    topicStr: string;
-  };
-
-export type SubscribeToTopicNotificationTopicsTopicStrSubscribePostError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type SubscribeToTopicNotificationTopicsTopicStrSubscribePostVariables = {
-  pathParams: SubscribeToTopicNotificationTopicsTopicStrSubscribePostPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Subscribe to a topic
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const fetchSubscribeToTopicNotificationTopicsTopicStrSubscribePost = (
-  variables: SubscribeToTopicNotificationTopicsTopicStrSubscribePostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    SubscribeToTopicNotificationTopicsTopicStrSubscribePostError,
-    undefined,
-    {},
-    {},
-    SubscribeToTopicNotificationTopicsTopicStrSubscribePostPathParams
-  >({
-    url: "/notification/topics/{topicStr}/subscribe",
-    method: "post",
-    ...variables,
-    signal,
-  });
-
-/**
- * Subscribe to a topic
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const useSubscribeToTopicNotificationTopicsTopicStrSubscribePost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      SubscribeToTopicNotificationTopicsTopicStrSubscribePostError,
-      SubscribeToTopicNotificationTopicsTopicStrSubscribePostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    SubscribeToTopicNotificationTopicsTopicStrSubscribePostError,
-    SubscribeToTopicNotificationTopicsTopicStrSubscribePostVariables
-  >({
-    mutationFn: (
-      variables: SubscribeToTopicNotificationTopicsTopicStrSubscribePostVariables,
-    ) =>
-      fetchSubscribeToTopicNotificationTopicsTopicStrSubscribePost({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type UnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePostPathParams =
-  {
-    topicStr: string;
-  };
-
-export type UnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePostError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type UnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePostVariables =
-  {
-    pathParams: UnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePostPathParams;
-  } & HyperionContext["fetcherOptions"];
-
-/**
- * Unsubscribe to a topic
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const fetchUnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePost =
-  (
-    variables: UnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePostVariables,
-    signal?: AbortSignal,
-  ) =>
-    hyperionFetch<
-      undefined,
-      UnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePostError,
-      undefined,
-      {},
-      {},
-      UnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePostPathParams
-    >({
-      url: "/notification/topics/{topicStr}/unsubscribe",
-      method: "post",
-      ...variables,
-      signal,
-    });
-
-/**
- * Unsubscribe to a topic
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const useUnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      UnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePostError,
-      UnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    UnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePostError,
-    UnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePostVariables
-  >({
-    mutationFn: (
-      variables: UnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePostVariables,
-    ) =>
-      fetchUnsubscribeToTopicNotificationTopicsTopicStrUnsubscribePost({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type GetTopicNotificationTopicsGetError =
-  Fetcher.ErrorWrapper<undefined>;
-
-export type GetTopicNotificationTopicsGetResponse = string[];
-
-export type GetTopicNotificationTopicsGetVariables =
-  HyperionContext["fetcherOptions"];
-
-/**
- * Get topics the user is subscribed to
- * Does not return session topics (those with a topic_identifier)
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const fetchGetTopicNotificationTopicsGet = (
-  variables: GetTopicNotificationTopicsGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetTopicNotificationTopicsGetResponse,
-    GetTopicNotificationTopicsGetError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/notification/topics", method: "get", ...variables, signal });
-
-/**
- * Get topics the user is subscribed to
- * Does not return session topics (those with a topic_identifier)
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const useGetTopicNotificationTopicsGet = <
-  TData = GetTopicNotificationTopicsGetResponse,
->(
-  variables: GetTopicNotificationTopicsGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetTopicNotificationTopicsGetResponse,
-      GetTopicNotificationTopicsGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetTopicNotificationTopicsGetResponse,
-    GetTopicNotificationTopicsGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/notification/topics",
-      operationId: "getTopicNotificationTopicsGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetTopicNotificationTopicsGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type GetTopicIdentifierNotificationTopicsTopicStrGetPathParams = {
-  topicStr: string;
-};
-
-export type GetTopicIdentifierNotificationTopicsTopicStrGetError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type GetTopicIdentifierNotificationTopicsTopicStrGetResponse = string[];
-
-export type GetTopicIdentifierNotificationTopicsTopicStrGetVariables = {
-  pathParams: GetTopicIdentifierNotificationTopicsTopicStrGetPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Get custom topic (with identifiers) the user is subscribed to
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const fetchGetTopicIdentifierNotificationTopicsTopicStrGet = (
-  variables: GetTopicIdentifierNotificationTopicsTopicStrGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetTopicIdentifierNotificationTopicsTopicStrGetResponse,
-    GetTopicIdentifierNotificationTopicsTopicStrGetError,
-    undefined,
-    {},
-    {},
-    GetTopicIdentifierNotificationTopicsTopicStrGetPathParams
-  >({
-    url: "/notification/topics/{topicStr}",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-/**
- * Get custom topic (with identifiers) the user is subscribed to
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const useGetTopicIdentifierNotificationTopicsTopicStrGet = <
-  TData = GetTopicIdentifierNotificationTopicsTopicStrGetResponse,
->(
-  variables: GetTopicIdentifierNotificationTopicsTopicStrGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetTopicIdentifierNotificationTopicsTopicStrGetResponse,
-      GetTopicIdentifierNotificationTopicsTopicStrGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetTopicIdentifierNotificationTopicsTopicStrGetResponse,
-    GetTopicIdentifierNotificationTopicsTopicStrGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/notification/topics/{topicStr}",
-      operationId: "getTopicIdentifierNotificationTopicsTopicStrGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetTopicIdentifierNotificationTopicsTopicStrGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type SendNotificationNotificationSendPostError = Fetcher.ErrorWrapper<{
+export type CreateSessionCinemaSessionsPostError = Fetcher.ErrorWrapper<{
   status: 422;
   payload: Schemas.HTTPValidationError;
 }>;
 
-export type SendNotificationNotificationSendPostVariables = {
-  body: Schemas.Message;
+export type CreateSessionCinemaSessionsPostVariables = {
+  body: Schemas.CineSessionBase;
 } & HyperionContext["fetcherOptions"];
 
-/**
- * Send ourself a test notification.
- *
- * **Only admins can use this endpoint**
- */
-export const fetchSendNotificationNotificationSendPost = (
-  variables: SendNotificationNotificationSendPostVariables,
-  signal?: AbortSignal,
+export const fetchCreateSessionCinemaSessionsPost = (
+  variables: CreateSessionCinemaSessionsPostVariables,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
-    void,
-    SendNotificationNotificationSendPostError,
-    Schemas.Message,
+    Schemas.CineSessionComplete,
+    CreateSessionCinemaSessionsPostError,
+    Schemas.CineSessionBase,
     {},
     {},
     {}
-  >({ url: "/notification/send", method: "post", ...variables, signal });
+  >({ url: "/cinema/sessions", method: "post", ...variables, signal });
 
-/**
- * Send ourself a test notification.
- *
- * **Only admins can use this endpoint**
- */
-export const useSendNotificationNotificationSendPost = (
+export const useCreateSessionCinemaSessionsPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.CineSessionComplete,
+      CreateSessionCinemaSessionsPostError,
+      CreateSessionCinemaSessionsPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.CineSessionComplete,
+    CreateSessionCinemaSessionsPostError,
+    CreateSessionCinemaSessionsPostVariables
+  >({
+    mutationFn: (variables: CreateSessionCinemaSessionsPostVariables) =>
+      fetchCreateSessionCinemaSessionsPost({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
+export type UpdateSessionCinemaSessionsSessionIdPatchPathParams = {
+  sessionId: string;
+};
+
+export type UpdateSessionCinemaSessionsSessionIdPatchError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type UpdateSessionCinemaSessionsSessionIdPatchVariables = {
+  body?: Schemas.CineSessionUpdate;
+  pathParams: UpdateSessionCinemaSessionsSessionIdPatchPathParams;
+} & HyperionContext["fetcherOptions"];
+
+export const fetchUpdateSessionCinemaSessionsSessionIdPatch = (
+  variables: UpdateSessionCinemaSessionsSessionIdPatchVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    void,
+    UpdateSessionCinemaSessionsSessionIdPatchError,
+    Schemas.CineSessionUpdate,
+    {},
+    {},
+    UpdateSessionCinemaSessionsSessionIdPatchPathParams
+  >({
+    url: "/cinema/sessions/{sessionId}",
+    method: "patch",
+    ...variables,
+    signal,
+  });
+
+export const useUpdateSessionCinemaSessionsSessionIdPatch = (
   options?: Omit<
     reactQuery.UseMutationOptions<
       void,
-      SendNotificationNotificationSendPostError,
-      SendNotificationNotificationSendPostVariables
+      UpdateSessionCinemaSessionsSessionIdPatchError,
+      UpdateSessionCinemaSessionsSessionIdPatchVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
     void,
-    SendNotificationNotificationSendPostError,
-    SendNotificationNotificationSendPostVariables
+    UpdateSessionCinemaSessionsSessionIdPatchError,
+    UpdateSessionCinemaSessionsSessionIdPatchVariables
   >({
-    mutationFn: (variables: SendNotificationNotificationSendPostVariables) =>
-      fetchSendNotificationNotificationSendPost({
+    mutationFn: (
+      variables: UpdateSessionCinemaSessionsSessionIdPatchVariables
+    ) =>
+      fetchUpdateSessionCinemaSessionsSessionIdPatch({
         ...fetcherOptions,
         ...variables,
       }),
@@ -10482,250 +12401,58 @@ export const useSendNotificationNotificationSendPost = (
   });
 };
 
-export type GetRaffleTombolaRafflesGetError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetRaffleTombolaRafflesGetResponse = Schemas.RaffleComplete[];
-
-export type GetRaffleTombolaRafflesGetVariables =
-  HyperionContext["fetcherOptions"];
-
-/**
- * Return all raffles
- */
-export const fetchGetRaffleTombolaRafflesGet = (
-  variables: GetRaffleTombolaRafflesGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetRaffleTombolaRafflesGetResponse,
-    GetRaffleTombolaRafflesGetError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/tombola/raffles", method: "get", ...variables, signal });
-
-/**
- * Return all raffles
- */
-export const useGetRaffleTombolaRafflesGet = <
-  TData = GetRaffleTombolaRafflesGetResponse,
->(
-  variables: GetRaffleTombolaRafflesGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetRaffleTombolaRafflesGetResponse,
-      GetRaffleTombolaRafflesGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetRaffleTombolaRafflesGetResponse,
-    GetRaffleTombolaRafflesGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/tombola/raffles",
-      operationId: "getRaffleTombolaRafflesGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetRaffleTombolaRafflesGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
+export type DeleteSessionCinemaSessionsSessionIdDeletePathParams = {
+  sessionId: string;
 };
 
-export type CreateRaffleTombolaRafflesPostError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type CreateRaffleTombolaRafflesPostVariables = {
-  body: Schemas.RaffleBase;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Create a new raffle
- *
- * **The user must be a member of the group admin to use this endpoint**
- */
-export const fetchCreateRaffleTombolaRafflesPost = (
-  variables: CreateRaffleTombolaRafflesPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.RaffleComplete,
-    CreateRaffleTombolaRafflesPostError,
-    Schemas.RaffleBase,
-    {},
-    {},
-    {}
-  >({ url: "/tombola/raffles", method: "post", ...variables, signal });
-
-/**
- * Create a new raffle
- *
- * **The user must be a member of the group admin to use this endpoint**
- */
-export const useCreateRaffleTombolaRafflesPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.RaffleComplete,
-      CreateRaffleTombolaRafflesPostError,
-      CreateRaffleTombolaRafflesPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.RaffleComplete,
-    CreateRaffleTombolaRafflesPostError,
-    CreateRaffleTombolaRafflesPostVariables
-  >({
-    mutationFn: (variables: CreateRaffleTombolaRafflesPostVariables) =>
-      fetchCreateRaffleTombolaRafflesPost({ ...fetcherOptions, ...variables }),
-    ...options,
-  });
-};
-
-export type EditRaffleTombolaRafflesRaffleIdPatchPathParams = {
-  raffleId: string;
-};
-
-export type EditRaffleTombolaRafflesRaffleIdPatchError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type EditRaffleTombolaRafflesRaffleIdPatchVariables = {
-  body?: Schemas.RaffleEdit;
-  pathParams: EditRaffleTombolaRafflesRaffleIdPatchPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Edit a raffle
- *
- * **The user must be a member of the raffle's group to use this endpoint**
- */
-export const fetchEditRaffleTombolaRafflesRaffleIdPatch = (
-  variables: EditRaffleTombolaRafflesRaffleIdPatchVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    EditRaffleTombolaRafflesRaffleIdPatchError,
-    Schemas.RaffleEdit,
-    {},
-    {},
-    EditRaffleTombolaRafflesRaffleIdPatchPathParams
-  >({
-    url: "/tombola/raffles/{raffleId}",
-    method: "patch",
-    ...variables,
-    signal,
-  });
-
-/**
- * Edit a raffle
- *
- * **The user must be a member of the raffle's group to use this endpoint**
- */
-export const useEditRaffleTombolaRafflesRaffleIdPatch = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      EditRaffleTombolaRafflesRaffleIdPatchError,
-      EditRaffleTombolaRafflesRaffleIdPatchVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    EditRaffleTombolaRafflesRaffleIdPatchError,
-    EditRaffleTombolaRafflesRaffleIdPatchVariables
-  >({
-    mutationFn: (variables: EditRaffleTombolaRafflesRaffleIdPatchVariables) =>
-      fetchEditRaffleTombolaRafflesRaffleIdPatch({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type DeleteRaffleTombolaRafflesRaffleIdDeletePathParams = {
-  raffleId: string;
-};
-
-export type DeleteRaffleTombolaRafflesRaffleIdDeleteError =
+export type DeleteSessionCinemaSessionsSessionIdDeleteError =
   Fetcher.ErrorWrapper<{
     status: 422;
     payload: Schemas.HTTPValidationError;
   }>;
 
-export type DeleteRaffleTombolaRafflesRaffleIdDeleteVariables = {
-  pathParams: DeleteRaffleTombolaRafflesRaffleIdDeletePathParams;
+export type DeleteSessionCinemaSessionsSessionIdDeleteVariables = {
+  pathParams: DeleteSessionCinemaSessionsSessionIdDeletePathParams;
 } & HyperionContext["fetcherOptions"];
 
-/**
- * Delete a raffle.
- *
- * **The user must be a member of the raffle's group to use this endpoint**
- */
-export const fetchDeleteRaffleTombolaRafflesRaffleIdDelete = (
-  variables: DeleteRaffleTombolaRafflesRaffleIdDeleteVariables,
-  signal?: AbortSignal,
+export const fetchDeleteSessionCinemaSessionsSessionIdDelete = (
+  variables: DeleteSessionCinemaSessionsSessionIdDeleteVariables,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
-    DeleteRaffleTombolaRafflesRaffleIdDeleteError,
+    DeleteSessionCinemaSessionsSessionIdDeleteError,
     undefined,
     {},
     {},
-    DeleteRaffleTombolaRafflesRaffleIdDeletePathParams
+    DeleteSessionCinemaSessionsSessionIdDeletePathParams
   >({
-    url: "/tombola/raffles/{raffleId}",
+    url: "/cinema/sessions/{sessionId}",
     method: "delete",
     ...variables,
     signal,
   });
 
-/**
- * Delete a raffle.
- *
- * **The user must be a member of the raffle's group to use this endpoint**
- */
-export const useDeleteRaffleTombolaRafflesRaffleIdDelete = (
+export const useDeleteSessionCinemaSessionsSessionIdDelete = (
   options?: Omit<
     reactQuery.UseMutationOptions<
       undefined,
-      DeleteRaffleTombolaRafflesRaffleIdDeleteError,
-      DeleteRaffleTombolaRafflesRaffleIdDeleteVariables
+      DeleteSessionCinemaSessionsSessionIdDeleteError,
+      DeleteSessionCinemaSessionsSessionIdDeleteVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
     undefined,
-    DeleteRaffleTombolaRafflesRaffleIdDeleteError,
-    DeleteRaffleTombolaRafflesRaffleIdDeleteVariables
+    DeleteSessionCinemaSessionsSessionIdDeleteError,
+    DeleteSessionCinemaSessionsSessionIdDeleteVariables
   >({
     mutationFn: (
-      variables: DeleteRaffleTombolaRafflesRaffleIdDeleteVariables,
+      variables: DeleteSessionCinemaSessionsSessionIdDeleteVariables
     ) =>
-      fetchDeleteRaffleTombolaRafflesRaffleIdDelete({
+      fetchDeleteSessionCinemaSessionsSessionIdDelete({
         ...fetcherOptions,
         ...variables,
       }),
@@ -10733,218 +12460,59 @@ export const useDeleteRaffleTombolaRafflesRaffleIdDelete = (
   });
 };
 
-export type GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetPathParams = {
-  groupId: string;
+export type CreateCampaignsLogoCinemaSessionsSessionIdPosterPostPathParams = {
+  sessionId: string;
 };
 
-export type GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetError =
+export type CreateCampaignsLogoCinemaSessionsSessionIdPosterPostError =
   Fetcher.ErrorWrapper<{
     status: 422;
     payload: Schemas.HTTPValidationError;
   }>;
 
-export type GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetResponse =
-  Schemas.RaffleComplete[];
-
-export type GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetVariables = {
-  pathParams: GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetPathParams;
+export type CreateCampaignsLogoCinemaSessionsSessionIdPosterPostVariables = {
+  body: Schemas.BodyCreateCampaignsLogoCinemaSessionsSessionIdPosterPost;
+  pathParams: CreateCampaignsLogoCinemaSessionsSessionIdPosterPostPathParams;
 } & HyperionContext["fetcherOptions"];
 
-/**
- * Return all raffles from a group
- */
-export const fetchGetRafflesByGroupIdTombolaGroupGroupIdRafflesGet = (
-  variables: GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetVariables,
-  signal?: AbortSignal,
+export const fetchCreateCampaignsLogoCinemaSessionsSessionIdPosterPost = (
+  variables: CreateCampaignsLogoCinemaSessionsSessionIdPosterPostVariables,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
-    GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetResponse,
-    GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetError,
-    undefined,
+    Schemas.AppCoreStandardResponsesResult,
+    CreateCampaignsLogoCinemaSessionsSessionIdPosterPostError,
+    Schemas.BodyCreateCampaignsLogoCinemaSessionsSessionIdPosterPost,
     {},
     {},
-    GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetPathParams
+    CreateCampaignsLogoCinemaSessionsSessionIdPosterPostPathParams
   >({
-    url: "/tombola/group/{groupId}/raffles",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-/**
- * Return all raffles from a group
- */
-export const useGetRafflesByGroupIdTombolaGroupGroupIdRafflesGet = <
-  TData = GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetResponse,
->(
-  variables: GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetResponse,
-      GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetResponse,
-    GetRafflesByGroupIdTombolaGroupGroupIdRafflesGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/tombola/group/{groupId}/raffles",
-      operationId: "getRafflesByGroupIdTombolaGroupGroupIdRafflesGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetRafflesByGroupIdTombolaGroupGroupIdRafflesGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type GetRaffleStatsTombolaRafflesRaffleIdStatsGetPathParams = {
-  raffleId: string;
-};
-
-export type GetRaffleStatsTombolaRafflesRaffleIdStatsGetError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type GetRaffleStatsTombolaRafflesRaffleIdStatsGetVariables = {
-  pathParams: GetRaffleStatsTombolaRafflesRaffleIdStatsGetPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Return the number of ticket sold and the total amount recollected for a raffle
- */
-export const fetchGetRaffleStatsTombolaRafflesRaffleIdStatsGet = (
-  variables: GetRaffleStatsTombolaRafflesRaffleIdStatsGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.RaffleStats,
-    GetRaffleStatsTombolaRafflesRaffleIdStatsGetError,
-    undefined,
-    {},
-    {},
-    GetRaffleStatsTombolaRafflesRaffleIdStatsGetPathParams
-  >({
-    url: "/tombola/raffles/{raffleId}/stats",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-/**
- * Return the number of ticket sold and the total amount recollected for a raffle
- */
-export const useGetRaffleStatsTombolaRafflesRaffleIdStatsGet = <
-  TData = Schemas.RaffleStats,
->(
-  variables: GetRaffleStatsTombolaRafflesRaffleIdStatsGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      Schemas.RaffleStats,
-      GetRaffleStatsTombolaRafflesRaffleIdStatsGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    Schemas.RaffleStats,
-    GetRaffleStatsTombolaRafflesRaffleIdStatsGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/tombola/raffles/{raffleId}/stats",
-      operationId: "getRaffleStatsTombolaRafflesRaffleIdStatsGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetRaffleStatsTombolaRafflesRaffleIdStatsGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type CreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPostPathParams = {
-  raffleId: string;
-};
-
-export type CreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPostError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type CreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPostVariables = {
-  body: Schemas.BodyCreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPost;
-  pathParams: CreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPostPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Upload a logo for a specific raffle.
- *
- * **The user must be a member of the raffle's group to use this endpoint**
- */
-export const fetchCreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPost = (
-  variables: CreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.AppUtilsTypesStandardResponsesResult,
-    CreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPostError,
-    Schemas.BodyCreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPost,
-    {},
-    {},
-    CreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPostPathParams
-  >({
-    url: "/tombola/raffles/{raffleId}/logo",
+    url: "/cinema/sessions/{sessionId}/poster",
     method: "post",
     ...variables,
     signal,
   });
 
-/**
- * Upload a logo for a specific raffle.
- *
- * **The user must be a member of the raffle's group to use this endpoint**
- */
-export const useCreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPost = (
+export const useCreateCampaignsLogoCinemaSessionsSessionIdPosterPost = (
   options?: Omit<
     reactQuery.UseMutationOptions<
-      Schemas.AppUtilsTypesStandardResponsesResult,
-      CreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPostError,
-      CreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPostVariables
+      Schemas.AppCoreStandardResponsesResult,
+      CreateCampaignsLogoCinemaSessionsSessionIdPosterPostError,
+      CreateCampaignsLogoCinemaSessionsSessionIdPosterPostVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
-    Schemas.AppUtilsTypesStandardResponsesResult,
-    CreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPostError,
-    CreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPostVariables
+    Schemas.AppCoreStandardResponsesResult,
+    CreateCampaignsLogoCinemaSessionsSessionIdPosterPostError,
+    CreateCampaignsLogoCinemaSessionsSessionIdPosterPostVariables
   >({
     mutationFn: (
-      variables: CreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPostVariables,
+      variables: CreateCampaignsLogoCinemaSessionsSessionIdPosterPostVariables
     ) =>
-      fetchCreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPost({
+      fetchCreateCampaignsLogoCinemaSessionsSessionIdPosterPost({
         ...fetcherOptions,
         ...variables,
       }),
@@ -10952,2958 +12520,103 @@ export const useCreateCurrentRaffleLogoTombolaRafflesRaffleIdLogoPost = (
   });
 };
 
-export type ReadRaffleLogoTombolaRafflesRaffleIdLogoGetPathParams = {
-  raffleId: string;
+export type ReadSessionPosterCinemaSessionsSessionIdPosterGetPathParams = {
+  sessionId: string;
 };
 
-export type ReadRaffleLogoTombolaRafflesRaffleIdLogoGetError =
+export type ReadSessionPosterCinemaSessionsSessionIdPosterGetError =
   Fetcher.ErrorWrapper<{
     status: 422;
     payload: Schemas.HTTPValidationError;
   }>;
 
-export type ReadRaffleLogoTombolaRafflesRaffleIdLogoGetVariables = {
-  pathParams: ReadRaffleLogoTombolaRafflesRaffleIdLogoGetPathParams;
+export type ReadSessionPosterCinemaSessionsSessionIdPosterGetVariables = {
+  pathParams: ReadSessionPosterCinemaSessionsSessionIdPosterGetPathParams;
 } & HyperionContext["fetcherOptions"];
 
-/**
- * Get the logo of a specific raffle.
- */
-export const fetchReadRaffleLogoTombolaRafflesRaffleIdLogoGet = (
-  variables: ReadRaffleLogoTombolaRafflesRaffleIdLogoGetVariables,
-  signal?: AbortSignal,
+export const fetchReadSessionPosterCinemaSessionsSessionIdPosterGet = (
+  variables: ReadSessionPosterCinemaSessionsSessionIdPosterGetVariables,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
-    ReadRaffleLogoTombolaRafflesRaffleIdLogoGetError,
+    ReadSessionPosterCinemaSessionsSessionIdPosterGetError,
     undefined,
     {},
     {},
-    ReadRaffleLogoTombolaRafflesRaffleIdLogoGetPathParams
+    ReadSessionPosterCinemaSessionsSessionIdPosterGetPathParams
   >({
-    url: "/tombola/raffles/{raffleId}/logo",
+    url: "/cinema/sessions/{sessionId}/poster",
     method: "get",
     ...variables,
     signal,
   });
 
-/**
- * Get the logo of a specific raffle.
- */
-export const useReadRaffleLogoTombolaRafflesRaffleIdLogoGet = <
-  TData = undefined,
+export const useReadSessionPosterCinemaSessionsSessionIdPosterGet = <
+  TData = undefined
 >(
-  variables: ReadRaffleLogoTombolaRafflesRaffleIdLogoGetVariables,
+  variables: ReadSessionPosterCinemaSessionsSessionIdPosterGetVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
       undefined,
-      ReadRaffleLogoTombolaRafflesRaffleIdLogoGetError,
+      ReadSessionPosterCinemaSessionsSessionIdPosterGetError,
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
   return reactQuery.useQuery<
     undefined,
-    ReadRaffleLogoTombolaRafflesRaffleIdLogoGetError,
+    ReadSessionPosterCinemaSessionsSessionIdPosterGetError,
     TData
   >({
     queryKey: queryKeyFn({
-      path: "/tombola/raffles/{raffleId}/logo",
-      operationId: "readRaffleLogoTombolaRafflesRaffleIdLogoGet",
+      path: "/cinema/sessions/{sessionId}/poster",
+      operationId: "readSessionPosterCinemaSessionsSessionIdPosterGet",
       variables,
     }),
     queryFn: ({ signal }) =>
-      fetchReadRaffleLogoTombolaRafflesRaffleIdLogoGet(
+      fetchReadSessionPosterCinemaSessionsSessionIdPosterGet(
         { ...fetcherOptions, ...variables },
-        signal,
+        signal
       ),
     ...options,
     ...queryOptions,
   });
 };
 
-export type GetPackTicketsTombolaPackTicketsGetError =
-  Fetcher.ErrorWrapper<undefined>;
-
-export type GetPackTicketsTombolaPackTicketsGetResponse =
-  Schemas.PackTicketSimple[];
-
-export type GetPackTicketsTombolaPackTicketsGetVariables =
-  HyperionContext["fetcherOptions"];
-
-/**
- * Return all tickets
- */
-export const fetchGetPackTicketsTombolaPackTicketsGet = (
-  variables: GetPackTicketsTombolaPackTicketsGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetPackTicketsTombolaPackTicketsGetResponse,
-    GetPackTicketsTombolaPackTicketsGetError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/tombola/pack_tickets", method: "get", ...variables, signal });
-
-/**
- * Return all tickets
- */
-export const useGetPackTicketsTombolaPackTicketsGet = <
-  TData = GetPackTicketsTombolaPackTicketsGetResponse,
->(
-  variables: GetPackTicketsTombolaPackTicketsGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetPackTicketsTombolaPackTicketsGetResponse,
-      GetPackTicketsTombolaPackTicketsGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetPackTicketsTombolaPackTicketsGetResponse,
-    GetPackTicketsTombolaPackTicketsGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/tombola/pack_tickets",
-      operationId: "getPackTicketsTombolaPackTicketsGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetPackTicketsTombolaPackTicketsGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type CreatePackticketTombolaPackTicketsPostError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type CreatePackticketTombolaPackTicketsPostVariables = {
-  body: Schemas.PackTicketBase;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Create a new packticket
- *
- * **The user must be a member of the raffle's group to use this endpoint**
- */
-export const fetchCreatePackticketTombolaPackTicketsPost = (
-  variables: CreatePackticketTombolaPackTicketsPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.PackTicketSimple,
-    CreatePackticketTombolaPackTicketsPostError,
-    Schemas.PackTicketBase,
-    {},
-    {},
-    {}
-  >({ url: "/tombola/pack_tickets", method: "post", ...variables, signal });
-
-/**
- * Create a new packticket
- *
- * **The user must be a member of the raffle's group to use this endpoint**
- */
-export const useCreatePackticketTombolaPackTicketsPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.PackTicketSimple,
-      CreatePackticketTombolaPackTicketsPostError,
-      CreatePackticketTombolaPackTicketsPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.PackTicketSimple,
-    CreatePackticketTombolaPackTicketsPostError,
-    CreatePackticketTombolaPackTicketsPostVariables
-  >({
-    mutationFn: (variables: CreatePackticketTombolaPackTicketsPostVariables) =>
-      fetchCreatePackticketTombolaPackTicketsPost({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type EditPackticketTombolaPackTicketsPackticketIdPatchPathParams = {
-  packticketId: string;
-};
-
-export type EditPackticketTombolaPackTicketsPackticketIdPatchError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type EditPackticketTombolaPackTicketsPackticketIdPatchVariables = {
-  body?: Schemas.PackTicketEdit;
-  pathParams: EditPackticketTombolaPackTicketsPackticketIdPatchPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Edit a packticket
- *
- * **The user must be a member of the raffle's group to use this endpoint**
- */
-export const fetchEditPackticketTombolaPackTicketsPackticketIdPatch = (
-  variables: EditPackticketTombolaPackTicketsPackticketIdPatchVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    EditPackticketTombolaPackTicketsPackticketIdPatchError,
-    Schemas.PackTicketEdit,
-    {},
-    {},
-    EditPackticketTombolaPackTicketsPackticketIdPatchPathParams
-  >({
-    url: "/tombola/pack_tickets/{packticketId}",
-    method: "patch",
-    ...variables,
-    signal,
-  });
-
-/**
- * Edit a packticket
- *
- * **The user must be a member of the raffle's group to use this endpoint**
- */
-export const useEditPackticketTombolaPackTicketsPackticketIdPatch = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      EditPackticketTombolaPackTicketsPackticketIdPatchError,
-      EditPackticketTombolaPackTicketsPackticketIdPatchVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    EditPackticketTombolaPackTicketsPackticketIdPatchError,
-    EditPackticketTombolaPackTicketsPackticketIdPatchVariables
-  >({
-    mutationFn: (
-      variables: EditPackticketTombolaPackTicketsPackticketIdPatchVariables,
-    ) =>
-      fetchEditPackticketTombolaPackTicketsPackticketIdPatch({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type DeletePackticketTombolaPackTicketsPackticketIdDeletePathParams = {
-  packticketId: string;
-};
-
-export type DeletePackticketTombolaPackTicketsPackticketIdDeleteError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type DeletePackticketTombolaPackTicketsPackticketIdDeleteVariables = {
-  pathParams: DeletePackticketTombolaPackTicketsPackticketIdDeletePathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Delete a packticket.
- *
- * **The user must be a member of the raffle's group to use this endpoint**
- */
-export const fetchDeletePackticketTombolaPackTicketsPackticketIdDelete = (
-  variables: DeletePackticketTombolaPackTicketsPackticketIdDeleteVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    DeletePackticketTombolaPackTicketsPackticketIdDeleteError,
-    undefined,
-    {},
-    {},
-    DeletePackticketTombolaPackTicketsPackticketIdDeletePathParams
-  >({
-    url: "/tombola/pack_tickets/{packticketId}",
-    method: "delete",
-    ...variables,
-    signal,
-  });
-
-/**
- * Delete a packticket.
- *
- * **The user must be a member of the raffle's group to use this endpoint**
- */
-export const useDeletePackticketTombolaPackTicketsPackticketIdDelete = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      DeletePackticketTombolaPackTicketsPackticketIdDeleteError,
-      DeletePackticketTombolaPackTicketsPackticketIdDeleteVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    DeletePackticketTombolaPackTicketsPackticketIdDeleteError,
-    DeletePackticketTombolaPackTicketsPackticketIdDeleteVariables
-  >({
-    mutationFn: (
-      variables: DeletePackticketTombolaPackTicketsPackticketIdDeleteVariables,
-    ) =>
-      fetchDeletePackticketTombolaPackTicketsPackticketIdDelete({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetPathParams =
-  {
-    raffleId: string;
-  };
-
-export type GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetResponse =
-  Schemas.PackTicketSimple[];
-
-export type GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetVariables =
-  {
-    pathParams: GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetPathParams;
-  } & HyperionContext["fetcherOptions"];
-
-/**
- * Return all pack_tickets associated to a raffle
- */
-export const fetchGetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGet =
-  (
-    variables: GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetVariables,
-    signal?: AbortSignal,
-  ) =>
-    hyperionFetch<
-      GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetResponse,
-      GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetError,
-      undefined,
-      {},
-      {},
-      GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetPathParams
-    >({
-      url: "/tombola/raffles/{raffleId}/pack_tickets",
-      method: "get",
-      ...variables,
-      signal,
-    });
-
-/**
- * Return all pack_tickets associated to a raffle
- */
-export const useGetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGet = <
-  TData = GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetResponse,
->(
-  variables: GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetResponse,
-      GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetResponse,
-    GetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/tombola/raffles/{raffleId}/pack_tickets",
-      operationId:
-        "getPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetPackTicketsByRaffleIdTombolaRafflesRaffleIdPackTicketsGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type GetTicketsTombolaTicketsGetError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetTicketsTombolaTicketsGetResponse = Schemas.TicketSimple[];
-
-export type GetTicketsTombolaTicketsGetVariables =
-  HyperionContext["fetcherOptions"];
-
-/**
- * Return all tickets
- *
- * **The user must be a member of the group admin to use this endpoint**
- */
-export const fetchGetTicketsTombolaTicketsGet = (
-  variables: GetTicketsTombolaTicketsGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetTicketsTombolaTicketsGetResponse,
-    GetTicketsTombolaTicketsGetError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/tombola/tickets", method: "get", ...variables, signal });
-
-/**
- * Return all tickets
- *
- * **The user must be a member of the group admin to use this endpoint**
- */
-export const useGetTicketsTombolaTicketsGet = <
-  TData = GetTicketsTombolaTicketsGetResponse,
->(
-  variables: GetTicketsTombolaTicketsGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetTicketsTombolaTicketsGetResponse,
-      GetTicketsTombolaTicketsGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetTicketsTombolaTicketsGetResponse,
-    GetTicketsTombolaTicketsGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/tombola/tickets",
-      operationId: "getTicketsTombolaTicketsGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetTicketsTombolaTicketsGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type BuyTicketTombolaTicketsBuyPackIdPostPathParams = {
-  packId: string;
-};
-
-export type BuyTicketTombolaTicketsBuyPackIdPostError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type BuyTicketTombolaTicketsBuyPackIdPostResponse =
-  Schemas.TicketComplete[];
-
-export type BuyTicketTombolaTicketsBuyPackIdPostVariables = {
-  pathParams: BuyTicketTombolaTicketsBuyPackIdPostPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Buy a ticket
- */
-export const fetchBuyTicketTombolaTicketsBuyPackIdPost = (
-  variables: BuyTicketTombolaTicketsBuyPackIdPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    BuyTicketTombolaTicketsBuyPackIdPostResponse,
-    BuyTicketTombolaTicketsBuyPackIdPostError,
-    undefined,
-    {},
-    {},
-    BuyTicketTombolaTicketsBuyPackIdPostPathParams
-  >({
-    url: "/tombola/tickets/buy/{packId}",
-    method: "post",
-    ...variables,
-    signal,
-  });
-
-/**
- * Buy a ticket
- */
-export const useBuyTicketTombolaTicketsBuyPackIdPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      BuyTicketTombolaTicketsBuyPackIdPostResponse,
-      BuyTicketTombolaTicketsBuyPackIdPostError,
-      BuyTicketTombolaTicketsBuyPackIdPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    BuyTicketTombolaTicketsBuyPackIdPostResponse,
-    BuyTicketTombolaTicketsBuyPackIdPostError,
-    BuyTicketTombolaTicketsBuyPackIdPostVariables
-  >({
-    mutationFn: (variables: BuyTicketTombolaTicketsBuyPackIdPostVariables) =>
-      fetchBuyTicketTombolaTicketsBuyPackIdPost({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type GetTicketsByUseridTombolaUsersUserIdTicketsGetPathParams = {
-  userId: string;
-};
-
-export type GetTicketsByUseridTombolaUsersUserIdTicketsGetError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type GetTicketsByUseridTombolaUsersUserIdTicketsGetResponse =
-  Schemas.TicketComplete[];
-
-export type GetTicketsByUseridTombolaUsersUserIdTicketsGetVariables = {
-  pathParams: GetTicketsByUseridTombolaUsersUserIdTicketsGetPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Get tickets of a specific user.
- *
- * **Only admin users can get tickets of another user**
- */
-export const fetchGetTicketsByUseridTombolaUsersUserIdTicketsGet = (
-  variables: GetTicketsByUseridTombolaUsersUserIdTicketsGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetTicketsByUseridTombolaUsersUserIdTicketsGetResponse,
-    GetTicketsByUseridTombolaUsersUserIdTicketsGetError,
-    undefined,
-    {},
-    {},
-    GetTicketsByUseridTombolaUsersUserIdTicketsGetPathParams
-  >({
-    url: "/tombola/users/{userId}/tickets",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-/**
- * Get tickets of a specific user.
- *
- * **Only admin users can get tickets of another user**
- */
-export const useGetTicketsByUseridTombolaUsersUserIdTicketsGet = <
-  TData = GetTicketsByUseridTombolaUsersUserIdTicketsGetResponse,
->(
-  variables: GetTicketsByUseridTombolaUsersUserIdTicketsGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetTicketsByUseridTombolaUsersUserIdTicketsGetResponse,
-      GetTicketsByUseridTombolaUsersUserIdTicketsGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetTicketsByUseridTombolaUsersUserIdTicketsGetResponse,
-    GetTicketsByUseridTombolaUsersUserIdTicketsGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/tombola/users/{userId}/tickets",
-      operationId: "getTicketsByUseridTombolaUsersUserIdTicketsGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetTicketsByUseridTombolaUsersUserIdTicketsGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetPathParams = {
-  raffleId: string;
-};
-
-export type GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetResponse =
-  Schemas.TicketComplete[];
-
-export type GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetVariables = {
-  pathParams: GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Get tickets from a specific raffle.
- *
- * **The user must be a member of the raffle's group to use this endpoint
- */
-export const fetchGetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGet = (
-  variables: GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetResponse,
-    GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetError,
-    undefined,
-    {},
-    {},
-    GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetPathParams
-  >({
-    url: "/tombola/raffles/{raffleId}/tickets",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-/**
- * Get tickets from a specific raffle.
- *
- * **The user must be a member of the raffle's group to use this endpoint
- */
-export const useGetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGet = <
-  TData = GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetResponse,
->(
-  variables: GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetResponse,
-      GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetResponse,
-    GetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/tombola/raffles/{raffleId}/tickets",
-      operationId: "getTicketsByRaffleidTombolaRafflesRaffleIdTicketsGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetTicketsByRaffleidTombolaRafflesRaffleIdTicketsGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type GetPrizesTombolaPrizesGetError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetPrizesTombolaPrizesGetResponse = Schemas.PrizeSimple[];
-
-export type GetPrizesTombolaPrizesGetVariables =
-  HyperionContext["fetcherOptions"];
-
-/**
- * Return all prizes
- */
-export const fetchGetPrizesTombolaPrizesGet = (
-  variables: GetPrizesTombolaPrizesGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetPrizesTombolaPrizesGetResponse,
-    GetPrizesTombolaPrizesGetError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/tombola/prizes", method: "get", ...variables, signal });
-
-/**
- * Return all prizes
- */
-export const useGetPrizesTombolaPrizesGet = <
-  TData = GetPrizesTombolaPrizesGetResponse,
->(
-  variables: GetPrizesTombolaPrizesGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetPrizesTombolaPrizesGetResponse,
-      GetPrizesTombolaPrizesGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetPrizesTombolaPrizesGetResponse,
-    GetPrizesTombolaPrizesGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/tombola/prizes",
-      operationId: "getPrizesTombolaPrizesGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetPrizesTombolaPrizesGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type CreatePrizeTombolaPrizesPostError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type CreatePrizeTombolaPrizesPostVariables = {
-  body: Schemas.PrizeBase;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Create a new prize
- *
- * **The user must be a member of the raffle's group to use this endpoint
- */
-export const fetchCreatePrizeTombolaPrizesPost = (
-  variables: CreatePrizeTombolaPrizesPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.PrizeSimple,
-    CreatePrizeTombolaPrizesPostError,
-    Schemas.PrizeBase,
-    {},
-    {},
-    {}
-  >({ url: "/tombola/prizes", method: "post", ...variables, signal });
-
-/**
- * Create a new prize
- *
- * **The user must be a member of the raffle's group to use this endpoint
- */
-export const useCreatePrizeTombolaPrizesPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.PrizeSimple,
-      CreatePrizeTombolaPrizesPostError,
-      CreatePrizeTombolaPrizesPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.PrizeSimple,
-    CreatePrizeTombolaPrizesPostError,
-    CreatePrizeTombolaPrizesPostVariables
-  >({
-    mutationFn: (variables: CreatePrizeTombolaPrizesPostVariables) =>
-      fetchCreatePrizeTombolaPrizesPost({ ...fetcherOptions, ...variables }),
-    ...options,
-  });
-};
-
-export type EditPrizeTombolaPrizesPrizeIdPatchPathParams = {
-  prizeId: string;
-};
-
-export type EditPrizeTombolaPrizesPrizeIdPatchError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type EditPrizeTombolaPrizesPrizeIdPatchVariables = {
-  body?: Schemas.PrizeEdit;
-  pathParams: EditPrizeTombolaPrizesPrizeIdPatchPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Edit a prize
- *
- * **The user must be a member of the group raffle's to use this endpoint
- */
-export const fetchEditPrizeTombolaPrizesPrizeIdPatch = (
-  variables: EditPrizeTombolaPrizesPrizeIdPatchVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    EditPrizeTombolaPrizesPrizeIdPatchError,
-    Schemas.PrizeEdit,
-    {},
-    {},
-    EditPrizeTombolaPrizesPrizeIdPatchPathParams
-  >({
-    url: "/tombola/prizes/{prizeId}",
-    method: "patch",
-    ...variables,
-    signal,
-  });
-
-/**
- * Edit a prize
- *
- * **The user must be a member of the group raffle's to use this endpoint
- */
-export const useEditPrizeTombolaPrizesPrizeIdPatch = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      EditPrizeTombolaPrizesPrizeIdPatchError,
-      EditPrizeTombolaPrizesPrizeIdPatchVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    EditPrizeTombolaPrizesPrizeIdPatchError,
-    EditPrizeTombolaPrizesPrizeIdPatchVariables
-  >({
-    mutationFn: (variables: EditPrizeTombolaPrizesPrizeIdPatchVariables) =>
-      fetchEditPrizeTombolaPrizesPrizeIdPatch({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type DeletePrizeTombolaPrizesPrizeIdDeletePathParams = {
-  prizeId: string;
-};
-
-export type DeletePrizeTombolaPrizesPrizeIdDeleteError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type DeletePrizeTombolaPrizesPrizeIdDeleteVariables = {
-  pathParams: DeletePrizeTombolaPrizesPrizeIdDeletePathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Delete a prize.
- *
- * **The user must be a member of the group raffle's to use this endpoint
- */
-export const fetchDeletePrizeTombolaPrizesPrizeIdDelete = (
-  variables: DeletePrizeTombolaPrizesPrizeIdDeleteVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    DeletePrizeTombolaPrizesPrizeIdDeleteError,
-    undefined,
-    {},
-    {},
-    DeletePrizeTombolaPrizesPrizeIdDeletePathParams
-  >({
-    url: "/tombola/prizes/{prizeId}",
-    method: "delete",
-    ...variables,
-    signal,
-  });
-
-/**
- * Delete a prize.
- *
- * **The user must be a member of the group raffle's to use this endpoint
- */
-export const useDeletePrizeTombolaPrizesPrizeIdDelete = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      DeletePrizeTombolaPrizesPrizeIdDeleteError,
-      DeletePrizeTombolaPrizesPrizeIdDeleteVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    DeletePrizeTombolaPrizesPrizeIdDeleteError,
-    DeletePrizeTombolaPrizesPrizeIdDeleteVariables
-  >({
-    mutationFn: (variables: DeletePrizeTombolaPrizesPrizeIdDeleteVariables) =>
-      fetchDeletePrizeTombolaPrizesPrizeIdDelete({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetPathParams = {
-  raffleId: string;
-};
-
-export type GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetResponse =
-  Schemas.PrizeSimple[];
-
-export type GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetVariables = {
-  pathParams: GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Get prizes from a specific raffle.
- */
-export const fetchGetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGet = (
-  variables: GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetResponse,
-    GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetError,
-    undefined,
-    {},
-    {},
-    GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetPathParams
-  >({
-    url: "/tombola/raffles/{raffleId}/prizes",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-/**
- * Get prizes from a specific raffle.
- */
-export const useGetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGet = <
-  TData = GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetResponse,
->(
-  variables: GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetResponse,
-      GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetResponse,
-    GetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/tombola/raffles/{raffleId}/prizes",
-      operationId: "getPrizesByRaffleidTombolaRafflesRaffleIdPrizesGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetPrizesByRaffleidTombolaRafflesRaffleIdPrizesGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type CreatePrizePictureTombolaPrizesPrizeIdPicturePostPathParams = {
-  prizeId: string;
-};
-
-export type CreatePrizePictureTombolaPrizesPrizeIdPicturePostError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type CreatePrizePictureTombolaPrizesPrizeIdPicturePostVariables = {
-  body: Schemas.BodyCreatePrizePictureTombolaPrizesPrizeIdPicturePost;
-  pathParams: CreatePrizePictureTombolaPrizesPrizeIdPicturePostPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Upload a logo for a specific prize.
- *
- * **The user must be a member of the raffle's group to use this endpoint**
- */
-export const fetchCreatePrizePictureTombolaPrizesPrizeIdPicturePost = (
-  variables: CreatePrizePictureTombolaPrizesPrizeIdPicturePostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.AppUtilsTypesStandardResponsesResult,
-    CreatePrizePictureTombolaPrizesPrizeIdPicturePostError,
-    Schemas.BodyCreatePrizePictureTombolaPrizesPrizeIdPicturePost,
-    {},
-    {},
-    CreatePrizePictureTombolaPrizesPrizeIdPicturePostPathParams
-  >({
-    url: "/tombola/prizes/{prizeId}/picture",
-    method: "post",
-    ...variables,
-    signal,
-  });
-
-/**
- * Upload a logo for a specific prize.
- *
- * **The user must be a member of the raffle's group to use this endpoint**
- */
-export const useCreatePrizePictureTombolaPrizesPrizeIdPicturePost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.AppUtilsTypesStandardResponsesResult,
-      CreatePrizePictureTombolaPrizesPrizeIdPicturePostError,
-      CreatePrizePictureTombolaPrizesPrizeIdPicturePostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.AppUtilsTypesStandardResponsesResult,
-    CreatePrizePictureTombolaPrizesPrizeIdPicturePostError,
-    CreatePrizePictureTombolaPrizesPrizeIdPicturePostVariables
-  >({
-    mutationFn: (
-      variables: CreatePrizePictureTombolaPrizesPrizeIdPicturePostVariables,
-    ) =>
-      fetchCreatePrizePictureTombolaPrizesPrizeIdPicturePost({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type ReadPrizeLogoTombolaPrizesPrizeIdPictureGetPathParams = {
-  prizeId: string;
-};
-
-export type ReadPrizeLogoTombolaPrizesPrizeIdPictureGetError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type ReadPrizeLogoTombolaPrizesPrizeIdPictureGetVariables = {
-  pathParams: ReadPrizeLogoTombolaPrizesPrizeIdPictureGetPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Get the logo of a specific prize.
- */
-export const fetchReadPrizeLogoTombolaPrizesPrizeIdPictureGet = (
-  variables: ReadPrizeLogoTombolaPrizesPrizeIdPictureGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    ReadPrizeLogoTombolaPrizesPrizeIdPictureGetError,
-    undefined,
-    {},
-    {},
-    ReadPrizeLogoTombolaPrizesPrizeIdPictureGetPathParams
-  >({
-    url: "/tombola/prizes/{prizeId}/picture",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-/**
- * Get the logo of a specific prize.
- */
-export const useReadPrizeLogoTombolaPrizesPrizeIdPictureGet = <
-  TData = undefined,
->(
-  variables: ReadPrizeLogoTombolaPrizesPrizeIdPictureGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      undefined,
-      ReadPrizeLogoTombolaPrizesPrizeIdPictureGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    undefined,
-    ReadPrizeLogoTombolaPrizesPrizeIdPictureGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/tombola/prizes/{prizeId}/picture",
-      operationId: "readPrizeLogoTombolaPrizesPrizeIdPictureGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchReadPrizeLogoTombolaPrizesPrizeIdPictureGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type GetUsersCashTombolaUsersCashGetError =
-  Fetcher.ErrorWrapper<undefined>;
-
-export type GetUsersCashTombolaUsersCashGetResponse = Schemas.CashComplete[];
-
-export type GetUsersCashTombolaUsersCashGetVariables =
-  HyperionContext["fetcherOptions"];
-
-/**
- * Get cash from all users.
- *
- * **The user must be a member of the group admin to use this endpoint
- */
-export const fetchGetUsersCashTombolaUsersCashGet = (
-  variables: GetUsersCashTombolaUsersCashGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetUsersCashTombolaUsersCashGetResponse,
-    GetUsersCashTombolaUsersCashGetError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/tombola/users/cash", method: "get", ...variables, signal });
-
-/**
- * Get cash from all users.
- *
- * **The user must be a member of the group admin to use this endpoint
- */
-export const useGetUsersCashTombolaUsersCashGet = <
-  TData = GetUsersCashTombolaUsersCashGetResponse,
->(
-  variables: GetUsersCashTombolaUsersCashGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetUsersCashTombolaUsersCashGetResponse,
-      GetUsersCashTombolaUsersCashGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetUsersCashTombolaUsersCashGetResponse,
-    GetUsersCashTombolaUsersCashGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/tombola/users/cash",
-      operationId: "getUsersCashTombolaUsersCashGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetUsersCashTombolaUsersCashGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type GetCashByIdTombolaUsersUserIdCashGetPathParams = {
-  userId: string;
-};
-
-export type GetCashByIdTombolaUsersUserIdCashGetError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type GetCashByIdTombolaUsersUserIdCashGetVariables = {
-  pathParams: GetCashByIdTombolaUsersUserIdCashGetPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Get cash from a specific user.
- *
- * **The user must be a member of the group admin to use this endpoint or can only access the endpoint for its own user_id**
- */
-export const fetchGetCashByIdTombolaUsersUserIdCashGet = (
-  variables: GetCashByIdTombolaUsersUserIdCashGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.CashComplete,
-    GetCashByIdTombolaUsersUserIdCashGetError,
-    undefined,
-    {},
-    {},
-    GetCashByIdTombolaUsersUserIdCashGetPathParams
-  >({
-    url: "/tombola/users/{userId}/cash",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-/**
- * Get cash from a specific user.
- *
- * **The user must be a member of the group admin to use this endpoint or can only access the endpoint for its own user_id**
- */
-export const useGetCashByIdTombolaUsersUserIdCashGet = <
-  TData = Schemas.CashComplete,
->(
-  variables: GetCashByIdTombolaUsersUserIdCashGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      Schemas.CashComplete,
-      GetCashByIdTombolaUsersUserIdCashGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    Schemas.CashComplete,
-    GetCashByIdTombolaUsersUserIdCashGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/tombola/users/{userId}/cash",
-      operationId: "getCashByIdTombolaUsersUserIdCashGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetCashByIdTombolaUsersUserIdCashGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type CreateCashOfUserTombolaUsersUserIdCashPostPathParams = {
-  userId: string;
-};
-
-export type CreateCashOfUserTombolaUsersUserIdCashPostError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type CreateCashOfUserTombolaUsersUserIdCashPostVariables = {
-  body: Schemas.CashEdit;
-  pathParams: CreateCashOfUserTombolaUsersUserIdCashPostPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Create cash for a user.
- *
- * **The user must be a member of the group admin to use this endpoint**
- */
-export const fetchCreateCashOfUserTombolaUsersUserIdCashPost = (
-  variables: CreateCashOfUserTombolaUsersUserIdCashPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.CashComplete,
-    CreateCashOfUserTombolaUsersUserIdCashPostError,
-    Schemas.CashEdit,
-    {},
-    {},
-    CreateCashOfUserTombolaUsersUserIdCashPostPathParams
-  >({
-    url: "/tombola/users/{userId}/cash",
-    method: "post",
-    ...variables,
-    signal,
-  });
-
-/**
- * Create cash for a user.
- *
- * **The user must be a member of the group admin to use this endpoint**
- */
-export const useCreateCashOfUserTombolaUsersUserIdCashPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.CashComplete,
-      CreateCashOfUserTombolaUsersUserIdCashPostError,
-      CreateCashOfUserTombolaUsersUserIdCashPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.CashComplete,
-    CreateCashOfUserTombolaUsersUserIdCashPostError,
-    CreateCashOfUserTombolaUsersUserIdCashPostVariables
-  >({
-    mutationFn: (
-      variables: CreateCashOfUserTombolaUsersUserIdCashPostVariables,
-    ) =>
-      fetchCreateCashOfUserTombolaUsersUserIdCashPost({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type EditCashByIdTombolaUsersUserIdCashPatchPathParams = {
-  userId: string;
-};
-
-export type EditCashByIdTombolaUsersUserIdCashPatchError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type EditCashByIdTombolaUsersUserIdCashPatchVariables = {
-  body: Schemas.CashEdit;
-  pathParams: EditCashByIdTombolaUsersUserIdCashPatchPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Edit cash for an user. This will add the balance to the current balance.
- * A negative value can be provided to remove money from the user.
- *
- * **The user must be a member of the group admin to use this endpoint**
- */
-export const fetchEditCashByIdTombolaUsersUserIdCashPatch = (
-  variables: EditCashByIdTombolaUsersUserIdCashPatchVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    EditCashByIdTombolaUsersUserIdCashPatchError,
-    Schemas.CashEdit,
-    {},
-    {},
-    EditCashByIdTombolaUsersUserIdCashPatchPathParams
-  >({
-    url: "/tombola/users/{userId}/cash",
-    method: "patch",
-    ...variables,
-    signal,
-  });
-
-/**
- * Edit cash for an user. This will add the balance to the current balance.
- * A negative value can be provided to remove money from the user.
- *
- * **The user must be a member of the group admin to use this endpoint**
- */
-export const useEditCashByIdTombolaUsersUserIdCashPatch = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      EditCashByIdTombolaUsersUserIdCashPatchError,
-      EditCashByIdTombolaUsersUserIdCashPatchVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    EditCashByIdTombolaUsersUserIdCashPatchError,
-    EditCashByIdTombolaUsersUserIdCashPatchVariables
-  >({
-    mutationFn: (variables: EditCashByIdTombolaUsersUserIdCashPatchVariables) =>
-      fetchEditCashByIdTombolaUsersUserIdCashPatch({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type DrawWinnerTombolaPrizesPrizeIdDrawPostPathParams = {
-  prizeId: string;
-};
-
-export type DrawWinnerTombolaPrizesPrizeIdDrawPostError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type DrawWinnerTombolaPrizesPrizeIdDrawPostResponse =
-  Schemas.TicketComplete[];
-
-export type DrawWinnerTombolaPrizesPrizeIdDrawPostVariables = {
-  pathParams: DrawWinnerTombolaPrizesPrizeIdDrawPostPathParams;
-} & HyperionContext["fetcherOptions"];
-
-export const fetchDrawWinnerTombolaPrizesPrizeIdDrawPost = (
-  variables: DrawWinnerTombolaPrizesPrizeIdDrawPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    DrawWinnerTombolaPrizesPrizeIdDrawPostResponse,
-    DrawWinnerTombolaPrizesPrizeIdDrawPostError,
-    undefined,
-    {},
-    {},
-    DrawWinnerTombolaPrizesPrizeIdDrawPostPathParams
-  >({
-    url: "/tombola/prizes/{prizeId}/draw",
-    method: "post",
-    ...variables,
-    signal,
-  });
-
-export const useDrawWinnerTombolaPrizesPrizeIdDrawPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      DrawWinnerTombolaPrizesPrizeIdDrawPostResponse,
-      DrawWinnerTombolaPrizesPrizeIdDrawPostError,
-      DrawWinnerTombolaPrizesPrizeIdDrawPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    DrawWinnerTombolaPrizesPrizeIdDrawPostResponse,
-    DrawWinnerTombolaPrizesPrizeIdDrawPostError,
-    DrawWinnerTombolaPrizesPrizeIdDrawPostVariables
-  >({
-    mutationFn: (variables: DrawWinnerTombolaPrizesPrizeIdDrawPostVariables) =>
-      fetchDrawWinnerTombolaPrizesPrizeIdDrawPost({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type OpenRaffleTombolaRafflesRaffleIdOpenPatchPathParams = {
-  raffleId: string;
-};
-
-export type OpenRaffleTombolaRafflesRaffleIdOpenPatchError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type OpenRaffleTombolaRafflesRaffleIdOpenPatchVariables = {
-  pathParams: OpenRaffleTombolaRafflesRaffleIdOpenPatchPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Open a raffle
- *
- * **The user must be a member of the raffle's group to use this endpoint**
- */
-export const fetchOpenRaffleTombolaRafflesRaffleIdOpenPatch = (
-  variables: OpenRaffleTombolaRafflesRaffleIdOpenPatchVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    OpenRaffleTombolaRafflesRaffleIdOpenPatchError,
-    undefined,
-    {},
-    {},
-    OpenRaffleTombolaRafflesRaffleIdOpenPatchPathParams
-  >({
-    url: "/tombola/raffles/{raffleId}/open",
-    method: "patch",
-    ...variables,
-    signal,
-  });
-
-/**
- * Open a raffle
- *
- * **The user must be a member of the raffle's group to use this endpoint**
- */
-export const useOpenRaffleTombolaRafflesRaffleIdOpenPatch = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      OpenRaffleTombolaRafflesRaffleIdOpenPatchError,
-      OpenRaffleTombolaRafflesRaffleIdOpenPatchVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    OpenRaffleTombolaRafflesRaffleIdOpenPatchError,
-    OpenRaffleTombolaRafflesRaffleIdOpenPatchVariables
-  >({
-    mutationFn: (
-      variables: OpenRaffleTombolaRafflesRaffleIdOpenPatchVariables,
-    ) =>
-      fetchOpenRaffleTombolaRafflesRaffleIdOpenPatch({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type LockRaffleTombolaRafflesRaffleIdLockPatchPathParams = {
-  raffleId: string;
-};
-
-export type LockRaffleTombolaRafflesRaffleIdLockPatchError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type LockRaffleTombolaRafflesRaffleIdLockPatchVariables = {
-  pathParams: LockRaffleTombolaRafflesRaffleIdLockPatchPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Lock a raffle
- *
- * **The user must be a member of the raffle's group to use this endpoint**
- */
-export const fetchLockRaffleTombolaRafflesRaffleIdLockPatch = (
-  variables: LockRaffleTombolaRafflesRaffleIdLockPatchVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    LockRaffleTombolaRafflesRaffleIdLockPatchError,
-    undefined,
-    {},
-    {},
-    LockRaffleTombolaRafflesRaffleIdLockPatchPathParams
-  >({
-    url: "/tombola/raffles/{raffleId}/lock",
-    method: "patch",
-    ...variables,
-    signal,
-  });
-
-/**
- * Lock a raffle
- *
- * **The user must be a member of the raffle's group to use this endpoint**
- */
-export const useLockRaffleTombolaRafflesRaffleIdLockPatch = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      LockRaffleTombolaRafflesRaffleIdLockPatchError,
-      LockRaffleTombolaRafflesRaffleIdLockPatchVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    LockRaffleTombolaRafflesRaffleIdLockPatchError,
-    LockRaffleTombolaRafflesRaffleIdLockPatchVariables
-  >({
-    mutationFn: (
-      variables: LockRaffleTombolaRafflesRaffleIdLockPatchVariables,
-    ) =>
-      fetchLockRaffleTombolaRafflesRaffleIdLockPatch({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type ReadUsersUsersGetError = Fetcher.ErrorWrapper<undefined>;
-
-export type ReadUsersUsersGetResponse = Schemas.CoreUserSimple[];
-
-export type ReadUsersUsersGetVariables = HyperionContext["fetcherOptions"];
-
-/**
- * Return all users from database as a list of `CoreUserSimple`
- *
- * **This endpoint is only usable by administrators**
- */
-export const fetchReadUsersUsersGet = (
-  variables: ReadUsersUsersGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    ReadUsersUsersGetResponse,
-    ReadUsersUsersGetError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/users/", method: "get", ...variables, signal });
-
-/**
- * Return all users from database as a list of `CoreUserSimple`
- *
- * **This endpoint is only usable by administrators**
- */
-export const useReadUsersUsersGet = <TData = ReadUsersUsersGetResponse>(
-  variables: ReadUsersUsersGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      ReadUsersUsersGetResponse,
-      ReadUsersUsersGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    ReadUsersUsersGetResponse,
-    ReadUsersUsersGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/users/",
-      operationId: "readUsersUsersGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchReadUsersUsersGet({ ...fetcherOptions, ...variables }, signal),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type CountUsersUsersCountGetError = Fetcher.ErrorWrapper<undefined>;
-
-export type CountUsersUsersCountGetVariables =
-  HyperionContext["fetcherOptions"];
-
-/**
- * Return all users from database as a list of `CoreUserSimple`
- *
- * **This endpoint is only usable by administrators**
- */
-export const fetchCountUsersUsersCountGet = (
-  variables: CountUsersUsersCountGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<number, CountUsersUsersCountGetError, undefined, {}, {}, {}>({
-    url: "/users/count",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-/**
- * Return all users from database as a list of `CoreUserSimple`
- *
- * **This endpoint is only usable by administrators**
- */
-export const useCountUsersUsersCountGet = <TData = number>(
-  variables: CountUsersUsersCountGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<number, CountUsersUsersCountGetError, TData>,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<number, CountUsersUsersCountGetError, TData>({
-    queryKey: queryKeyFn({
-      path: "/users/count",
-      operationId: "countUsersUsersCountGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchCountUsersUsersCountGet({ ...fetcherOptions, ...variables }, signal),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type SearchUsersUsersSearchGetQueryParams = {
-  query: string;
-  includedGroups?: string[];
-  excludedGroups?: string[];
-};
-
-export type SearchUsersUsersSearchGetError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type SearchUsersUsersSearchGetResponse = Schemas.CoreUserSimple[];
-
-export type SearchUsersUsersSearchGetVariables = {
-  queryParams: SearchUsersUsersSearchGetQueryParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Search for a user using Fuzzy String Matching
- *
- * `query` will be compared against users name, firstname and nickname
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const fetchSearchUsersUsersSearchGet = (
-  variables: SearchUsersUsersSearchGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    SearchUsersUsersSearchGetResponse,
-    SearchUsersUsersSearchGetError,
-    undefined,
-    {},
-    SearchUsersUsersSearchGetQueryParams,
-    {}
-  >({ url: "/users/search", method: "get", ...variables, signal });
-
-/**
- * Search for a user using Fuzzy String Matching
- *
- * `query` will be compared against users name, firstname and nickname
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const useSearchUsersUsersSearchGet = <
-  TData = SearchUsersUsersSearchGetResponse,
->(
-  variables: SearchUsersUsersSearchGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      SearchUsersUsersSearchGetResponse,
-      SearchUsersUsersSearchGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    SearchUsersUsersSearchGetResponse,
-    SearchUsersUsersSearchGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/users/search",
-      operationId: "searchUsersUsersSearchGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchSearchUsersUsersSearchGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type ReadCurrentUserUsersMeGetError = Fetcher.ErrorWrapper<undefined>;
-
-export type ReadCurrentUserUsersMeGetVariables =
-  HyperionContext["fetcherOptions"];
-
-/**
- * Return `CoreUser` representation of current user
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const fetchReadCurrentUserUsersMeGet = (
-  variables: ReadCurrentUserUsersMeGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.CoreUser,
-    ReadCurrentUserUsersMeGetError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/users/me", method: "get", ...variables, signal });
-
-/**
- * Return `CoreUser` representation of current user
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const useReadCurrentUserUsersMeGet = <TData = Schemas.CoreUser>(
-  variables: ReadCurrentUserUsersMeGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      Schemas.CoreUser,
-      ReadCurrentUserUsersMeGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    Schemas.CoreUser,
-    ReadCurrentUserUsersMeGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/users/me",
-      operationId: "readCurrentUserUsersMeGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchReadCurrentUserUsersMeGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type UpdateCurrentUserUsersMePatchError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type UpdateCurrentUserUsersMePatchVariables = {
-  body?: Schemas.CoreUserUpdate;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Update the current user, the request should contain a JSON with the fields to change (not necessarily all fields) and their new value
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const fetchUpdateCurrentUserUsersMePatch = (
-  variables: UpdateCurrentUserUsersMePatchVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    UpdateCurrentUserUsersMePatchError,
-    Schemas.CoreUserUpdate,
-    {},
-    {},
-    {}
-  >({ url: "/users/me", method: "patch", ...variables, signal });
-
-/**
- * Update the current user, the request should contain a JSON with the fields to change (not necessarily all fields) and their new value
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const useUpdateCurrentUserUsersMePatch = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      UpdateCurrentUserUsersMePatchError,
-      UpdateCurrentUserUsersMePatchVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    UpdateCurrentUserUsersMePatchError,
-    UpdateCurrentUserUsersMePatchVariables
-  >({
-    mutationFn: (variables: UpdateCurrentUserUsersMePatchVariables) =>
-      fetchUpdateCurrentUserUsersMePatch({ ...fetcherOptions, ...variables }),
-    ...options,
-  });
-};
-
-export type CreateUserByUserUsersCreatePostError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type CreateUserByUserUsersCreatePostVariables = {
-  body: Schemas.CoreUserCreateRequest;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Start the user account creation process. The user will be sent an email with a link to activate his account.
- * > The received token needs to be sent to the `/users/activate` endpoint to activate the account.
- *
- * If the **password** is not provided, it will be required during the activation process. Don't submit a password if you are creating an account for someone else.
- *
- * When creating **student** or **staff** account a valid ECL email is required.
- * Only admin users can create other **account types**, contact ÉCLAIR for more information.
- */
-export const fetchCreateUserByUserUsersCreatePost = (
-  variables: CreateUserByUserUsersCreatePostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.AppUtilsTypesStandardResponsesResult,
-    CreateUserByUserUsersCreatePostError,
-    Schemas.CoreUserCreateRequest,
-    {},
-    {},
-    {}
-  >({ url: "/users/create", method: "post", ...variables, signal });
-
-/**
- * Start the user account creation process. The user will be sent an email with a link to activate his account.
- * > The received token needs to be sent to the `/users/activate` endpoint to activate the account.
- *
- * If the **password** is not provided, it will be required during the activation process. Don't submit a password if you are creating an account for someone else.
- *
- * When creating **student** or **staff** account a valid ECL email is required.
- * Only admin users can create other **account types**, contact ÉCLAIR for more information.
- */
-export const useCreateUserByUserUsersCreatePost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.AppUtilsTypesStandardResponsesResult,
-      CreateUserByUserUsersCreatePostError,
-      CreateUserByUserUsersCreatePostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.AppUtilsTypesStandardResponsesResult,
-    CreateUserByUserUsersCreatePostError,
-    CreateUserByUserUsersCreatePostVariables
-  >({
-    mutationFn: (variables: CreateUserByUserUsersCreatePostVariables) =>
-      fetchCreateUserByUserUsersCreatePost({ ...fetcherOptions, ...variables }),
-    ...options,
-  });
-};
-
-export type BatchCreateUsersUsersBatchCreationPostError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type BatchCreateUsersUsersBatchCreationPostRequestBody =
-  Schemas.CoreBatchUserCreateRequest[];
-
-export type BatchCreateUsersUsersBatchCreationPostVariables = {
-  body?: BatchCreateUsersUsersBatchCreationPostRequestBody;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Batch user account creation process. All users will be sent an email with a link to activate their account.
- * > The received token needs to be send to `/users/activate` endpoint to activate the account.
- *
- * Even for creating **student** or **staff** account a valid ECL email is not required but should preferably be used.
- *
- * The endpoint return a dictionary of unsuccessful user creation: `{email: error message}`.
- *
- * **This endpoint is only usable by administrators**
- */
-export const fetchBatchCreateUsersUsersBatchCreationPost = (
-  variables: BatchCreateUsersUsersBatchCreationPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.BatchResult,
-    BatchCreateUsersUsersBatchCreationPostError,
-    BatchCreateUsersUsersBatchCreationPostRequestBody,
-    {},
-    {},
-    {}
-  >({ url: "/users/batch-creation", method: "post", ...variables, signal });
-
-/**
- * Batch user account creation process. All users will be sent an email with a link to activate their account.
- * > The received token needs to be send to `/users/activate` endpoint to activate the account.
- *
- * Even for creating **student** or **staff** account a valid ECL email is not required but should preferably be used.
- *
- * The endpoint return a dictionary of unsuccessful user creation: `{email: error message}`.
- *
- * **This endpoint is only usable by administrators**
- */
-export const useBatchCreateUsersUsersBatchCreationPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.BatchResult,
-      BatchCreateUsersUsersBatchCreationPostError,
-      BatchCreateUsersUsersBatchCreationPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.BatchResult,
-    BatchCreateUsersUsersBatchCreationPostError,
-    BatchCreateUsersUsersBatchCreationPostVariables
-  >({
-    mutationFn: (variables: BatchCreateUsersUsersBatchCreationPostVariables) =>
-      fetchBatchCreateUsersUsersBatchCreationPost({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type GetUserActivationPageUsersActivateGetQueryParams = {
-  activation_token: string;
-};
-
-export type GetUserActivationPageUsersActivateGetError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type GetUserActivationPageUsersActivateGetVariables = {
-  queryParams: GetUserActivationPageUsersActivateGetQueryParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Return a HTML page to activate an account. The activation token is passed as a query string.
- *
- * **This endpoint is an UI endpoint which send and html page response.
- */
-export const fetchGetUserActivationPageUsersActivateGet = (
-  variables: GetUserActivationPageUsersActivateGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    GetUserActivationPageUsersActivateGetError,
-    undefined,
-    {},
-    GetUserActivationPageUsersActivateGetQueryParams,
-    {}
-  >({ url: "/users/activate", method: "get", ...variables, signal });
-
-/**
- * Return a HTML page to activate an account. The activation token is passed as a query string.
- *
- * **This endpoint is an UI endpoint which send and html page response.
- */
-export const useGetUserActivationPageUsersActivateGet = <TData = undefined>(
-  variables: GetUserActivationPageUsersActivateGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      undefined,
-      GetUserActivationPageUsersActivateGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    undefined,
-    GetUserActivationPageUsersActivateGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/users/activate",
-      operationId: "getUserActivationPageUsersActivateGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetUserActivationPageUsersActivateGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type ActivateUserUsersActivatePostError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type ActivateUserUsersActivatePostVariables = {
-  body: Schemas.CoreUserActivateRequest;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Activate the previously created account.
- *
- * **token**: the activation token sent by email to the user
- *
- * **password**: user password, required if it was not provided previously
- */
-export const fetchActivateUserUsersActivatePost = (
-  variables: ActivateUserUsersActivatePostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.AppUtilsTypesStandardResponsesResult,
-    ActivateUserUsersActivatePostError,
-    Schemas.CoreUserActivateRequest,
-    {},
-    {},
-    {}
-  >({ url: "/users/activate", method: "post", ...variables, signal });
-
-/**
- * Activate the previously created account.
- *
- * **token**: the activation token sent by email to the user
- *
- * **password**: user password, required if it was not provided previously
- */
-export const useActivateUserUsersActivatePost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.AppUtilsTypesStandardResponsesResult,
-      ActivateUserUsersActivatePostError,
-      ActivateUserUsersActivatePostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.AppUtilsTypesStandardResponsesResult,
-    ActivateUserUsersActivatePostError,
-    ActivateUserUsersActivatePostVariables
-  >({
-    mutationFn: (variables: ActivateUserUsersActivatePostVariables) =>
-      fetchActivateUserUsersActivatePost({ ...fetcherOptions, ...variables }),
-    ...options,
-  });
-};
-
-export type MakeAdminUsersMakeAdminPostError = Fetcher.ErrorWrapper<undefined>;
-
-export type MakeAdminUsersMakeAdminPostVariables =
-  HyperionContext["fetcherOptions"];
-
-/**
- * This endpoint is only usable if the database contains exactly one user.
- * It will add this user to the `admin` group.
- */
-export const fetchMakeAdminUsersMakeAdminPost = (
-  variables: MakeAdminUsersMakeAdminPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.AppUtilsTypesStandardResponsesResult,
-    MakeAdminUsersMakeAdminPostError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/users/make-admin", method: "post", ...variables, signal });
-
-/**
- * This endpoint is only usable if the database contains exactly one user.
- * It will add this user to the `admin` group.
- */
-export const useMakeAdminUsersMakeAdminPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.AppUtilsTypesStandardResponsesResult,
-      MakeAdminUsersMakeAdminPostError,
-      MakeAdminUsersMakeAdminPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.AppUtilsTypesStandardResponsesResult,
-    MakeAdminUsersMakeAdminPostError,
-    MakeAdminUsersMakeAdminPostVariables
-  >({
-    mutationFn: (variables: MakeAdminUsersMakeAdminPostVariables) =>
-      fetchMakeAdminUsersMakeAdminPost({ ...fetcherOptions, ...variables }),
-    ...options,
-  });
-};
-
-export type RecoverUserUsersRecoverPostError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type RecoverUserUsersRecoverPostVariables = {
-  body: Schemas.BodyRecoverUserUsersRecoverPost;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Allow a user to start a password reset process.
- *
- * If the provided **email** corresponds to an existing account, a password reset token will be sent.
- * Using this token, the password can be changed with `/users/reset-password` endpoint
- */
-export const fetchRecoverUserUsersRecoverPost = (
-  variables: RecoverUserUsersRecoverPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.AppUtilsTypesStandardResponsesResult,
-    RecoverUserUsersRecoverPostError,
-    Schemas.BodyRecoverUserUsersRecoverPost,
-    {},
-    {},
-    {}
-  >({ url: "/users/recover", method: "post", ...variables, signal });
-
-/**
- * Allow a user to start a password reset process.
- *
- * If the provided **email** corresponds to an existing account, a password reset token will be sent.
- * Using this token, the password can be changed with `/users/reset-password` endpoint
- */
-export const useRecoverUserUsersRecoverPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.AppUtilsTypesStandardResponsesResult,
-      RecoverUserUsersRecoverPostError,
-      RecoverUserUsersRecoverPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.AppUtilsTypesStandardResponsesResult,
-    RecoverUserUsersRecoverPostError,
-    RecoverUserUsersRecoverPostVariables
-  >({
-    mutationFn: (variables: RecoverUserUsersRecoverPostVariables) =>
-      fetchRecoverUserUsersRecoverPost({ ...fetcherOptions, ...variables }),
-    ...options,
-  });
-};
-
-export type ResetPasswordUsersResetPasswordPostError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type ResetPasswordUsersResetPasswordPostVariables = {
-  body: Schemas.ResetPasswordRequest;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Reset the user password, using a **reset_token** provided by `/users/recover` endpoint.
- */
-export const fetchResetPasswordUsersResetPasswordPost = (
-  variables: ResetPasswordUsersResetPasswordPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.AppUtilsTypesStandardResponsesResult,
-    ResetPasswordUsersResetPasswordPostError,
-    Schemas.ResetPasswordRequest,
-    {},
-    {},
-    {}
-  >({ url: "/users/reset-password", method: "post", ...variables, signal });
-
-/**
- * Reset the user password, using a **reset_token** provided by `/users/recover` endpoint.
- */
-export const useResetPasswordUsersResetPasswordPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.AppUtilsTypesStandardResponsesResult,
-      ResetPasswordUsersResetPasswordPostError,
-      ResetPasswordUsersResetPasswordPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.AppUtilsTypesStandardResponsesResult,
-    ResetPasswordUsersResetPasswordPostError,
-    ResetPasswordUsersResetPasswordPostVariables
-  >({
-    mutationFn: (variables: ResetPasswordUsersResetPasswordPostVariables) =>
-      fetchResetPasswordUsersResetPasswordPost({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type MigrateMailUsersMigrateMailPostError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type MigrateMailUsersMigrateMailPostVariables = {
-  body: Schemas.MailMigrationRequest;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Due to a change in the email format, all student users need to migrate their email address.
- * This endpoint will send a confirmation code to the user's new email address. He will need to use this code to confirm the change with `/users/confirm-mail-migration` endpoint.
- */
-export const fetchMigrateMailUsersMigrateMailPost = (
-  variables: MigrateMailUsersMigrateMailPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    MigrateMailUsersMigrateMailPostError,
-    Schemas.MailMigrationRequest,
-    {},
-    {},
-    {}
-  >({ url: "/users/migrate-mail", method: "post", ...variables, signal });
-
-/**
- * Due to a change in the email format, all student users need to migrate their email address.
- * This endpoint will send a confirmation code to the user's new email address. He will need to use this code to confirm the change with `/users/confirm-mail-migration` endpoint.
- */
-export const useMigrateMailUsersMigrateMailPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      MigrateMailUsersMigrateMailPostError,
-      MigrateMailUsersMigrateMailPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    MigrateMailUsersMigrateMailPostError,
-    MigrateMailUsersMigrateMailPostVariables
-  >({
-    mutationFn: (variables: MigrateMailUsersMigrateMailPostVariables) =>
-      fetchMigrateMailUsersMigrateMailPost({ ...fetcherOptions, ...variables }),
-    ...options,
-  });
-};
-
-export type MigrateMailConfirmUsersMigrateMailConfirmGetQueryParams = {
-  token: string;
-};
-
-export type MigrateMailConfirmUsersMigrateMailConfirmGetError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type MigrateMailConfirmUsersMigrateMailConfirmGetVariables = {
-  queryParams: MigrateMailConfirmUsersMigrateMailConfirmGetQueryParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Due to a change in the email format, all student users need to migrate their email address.
- * This endpoint will updates the user new email address.
- */
-export const fetchMigrateMailConfirmUsersMigrateMailConfirmGet = (
-  variables: MigrateMailConfirmUsersMigrateMailConfirmGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    void,
-    MigrateMailConfirmUsersMigrateMailConfirmGetError,
-    undefined,
-    {},
-    MigrateMailConfirmUsersMigrateMailConfirmGetQueryParams,
-    {}
-  >({
-    url: "/users/migrate-mail-confirm",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-/**
- * Due to a change in the email format, all student users need to migrate their email address.
- * This endpoint will updates the user new email address.
- */
-export const useMigrateMailConfirmUsersMigrateMailConfirmGet = <TData = void>(
-  variables: MigrateMailConfirmUsersMigrateMailConfirmGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      void,
-      MigrateMailConfirmUsersMigrateMailConfirmGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    void,
-    MigrateMailConfirmUsersMigrateMailConfirmGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/users/migrate-mail-confirm",
-      operationId: "migrateMailConfirmUsersMigrateMailConfirmGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchMigrateMailConfirmUsersMigrateMailConfirmGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type ChangePasswordUsersChangePasswordPostError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type ChangePasswordUsersChangePasswordPostVariables = {
-  body: Schemas.ChangePasswordRequest;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Change a user password.
- *
- * This endpoint will check the **old_password**, see also the `/users/reset-password` endpoint if the user forgot their password.
- */
-export const fetchChangePasswordUsersChangePasswordPost = (
-  variables: ChangePasswordUsersChangePasswordPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.AppUtilsTypesStandardResponsesResult,
-    ChangePasswordUsersChangePasswordPostError,
-    Schemas.ChangePasswordRequest,
-    {},
-    {},
-    {}
-  >({ url: "/users/change-password", method: "post", ...variables, signal });
-
-/**
- * Change a user password.
- *
- * This endpoint will check the **old_password**, see also the `/users/reset-password` endpoint if the user forgot their password.
- */
-export const useChangePasswordUsersChangePasswordPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.AppUtilsTypesStandardResponsesResult,
-      ChangePasswordUsersChangePasswordPostError,
-      ChangePasswordUsersChangePasswordPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.AppUtilsTypesStandardResponsesResult,
-    ChangePasswordUsersChangePasswordPostError,
-    ChangePasswordUsersChangePasswordPostVariables
-  >({
-    mutationFn: (variables: ChangePasswordUsersChangePasswordPostVariables) =>
-      fetchChangePasswordUsersChangePasswordPost({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type ReadUserUsersUserIdGetPathParams = {
-  userId: string;
-};
-
-export type ReadUserUsersUserIdGetError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type ReadUserUsersUserIdGetVariables = {
-  pathParams: ReadUserUsersUserIdGetPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Return `CoreUserSimple` representation of user with id `user_id`
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const fetchReadUserUsersUserIdGet = (
-  variables: ReadUserUsersUserIdGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.CoreUser,
-    ReadUserUsersUserIdGetError,
-    undefined,
-    {},
-    {},
-    ReadUserUsersUserIdGetPathParams
-  >({ url: "/users/{userId}", method: "get", ...variables, signal });
-
-/**
- * Return `CoreUserSimple` representation of user with id `user_id`
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const useReadUserUsersUserIdGet = <TData = Schemas.CoreUser>(
-  variables: ReadUserUsersUserIdGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      Schemas.CoreUser,
-      ReadUserUsersUserIdGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    Schemas.CoreUser,
-    ReadUserUsersUserIdGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/users/{userId}",
-      operationId: "readUserUsersUserIdGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchReadUserUsersUserIdGet({ ...fetcherOptions, ...variables }, signal),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type UpdateUserUsersUserIdPatchPathParams = {
-  userId: string;
-};
-
-export type UpdateUserUsersUserIdPatchError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
-
-export type UpdateUserUsersUserIdPatchVariables = {
-  body?: Schemas.CoreUserUpdateAdmin;
-  pathParams: UpdateUserUsersUserIdPatchPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Update an user, the request should contain a JSON with the fields to change (not necessarily all fields) and their new value
- *
- * **This endpoint is only usable by administrators**
- */
-export const fetchUpdateUserUsersUserIdPatch = (
-  variables: UpdateUserUsersUserIdPatchVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    UpdateUserUsersUserIdPatchError,
-    Schemas.CoreUserUpdateAdmin,
-    {},
-    {},
-    UpdateUserUsersUserIdPatchPathParams
-  >({ url: "/users/{userId}", method: "patch", ...variables, signal });
-
-/**
- * Update an user, the request should contain a JSON with the fields to change (not necessarily all fields) and their new value
- *
- * **This endpoint is only usable by administrators**
- */
-export const useUpdateUserUsersUserIdPatch = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      UpdateUserUsersUserIdPatchError,
-      UpdateUserUsersUserIdPatchVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    UpdateUserUsersUserIdPatchError,
-    UpdateUserUsersUserIdPatchVariables
-  >({
-    mutationFn: (variables: UpdateUserUsersUserIdPatchVariables) =>
-      fetchUpdateUserUsersUserIdPatch({ ...fetcherOptions, ...variables }),
-    ...options,
-  });
-};
-
-export type DeleteUserUsersMeAskDeletionPostError =
-  Fetcher.ErrorWrapper<undefined>;
-
-export type DeleteUserUsersMeAskDeletionPostVariables =
-  HyperionContext["fetcherOptions"];
-
-/**
- * This endpoint will ask administrators to process to the user deletion.
- * This manual verification is needed to prevent data from being deleting for other users
- */
-export const fetchDeleteUserUsersMeAskDeletionPost = (
-  variables: DeleteUserUsersMeAskDeletionPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    DeleteUserUsersMeAskDeletionPostError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/users/me/ask-deletion", method: "post", ...variables, signal });
-
-/**
- * This endpoint will ask administrators to process to the user deletion.
- * This manual verification is needed to prevent data from being deleting for other users
- */
-export const useDeleteUserUsersMeAskDeletionPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      DeleteUserUsersMeAskDeletionPostError,
-      DeleteUserUsersMeAskDeletionPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    DeleteUserUsersMeAskDeletionPostError,
-    DeleteUserUsersMeAskDeletionPostVariables
-  >({
-    mutationFn: (variables: DeleteUserUsersMeAskDeletionPostVariables) =>
-      fetchDeleteUserUsersMeAskDeletionPost({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type ReadOwnProfilePictureUsersMeProfilePictureGetError =
-  Fetcher.ErrorWrapper<undefined>;
-
-export type ReadOwnProfilePictureUsersMeProfilePictureGetVariables =
-  HyperionContext["fetcherOptions"];
-
-/**
- * Get the profile picture of the authenticated user.
- */
-export const fetchReadOwnProfilePictureUsersMeProfilePictureGet = (
-  variables: ReadOwnProfilePictureUsersMeProfilePictureGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    ReadOwnProfilePictureUsersMeProfilePictureGetError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/users/me/profile-picture", method: "get", ...variables, signal });
-
-/**
- * Get the profile picture of the authenticated user.
- */
-export const useReadOwnProfilePictureUsersMeProfilePictureGet = <
-  TData = undefined,
->(
-  variables: ReadOwnProfilePictureUsersMeProfilePictureGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      undefined,
-      ReadOwnProfilePictureUsersMeProfilePictureGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    undefined,
-    ReadOwnProfilePictureUsersMeProfilePictureGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/users/me/profile-picture",
-      operationId: "readOwnProfilePictureUsersMeProfilePictureGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchReadOwnProfilePictureUsersMeProfilePictureGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type CreateCurrentUserProfilePictureUsersMeProfilePicturePostError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type CreateCurrentUserProfilePictureUsersMeProfilePicturePostVariables =
-  {
-    body: Schemas.BodyCreateCurrentUserProfilePictureUsersMeProfilePicturePost;
-  } & HyperionContext["fetcherOptions"];
-
-/**
- * Upload a profile picture for the current user.
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const fetchCreateCurrentUserProfilePictureUsersMeProfilePicturePost = (
-  variables: CreateCurrentUserProfilePictureUsersMeProfilePicturePostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    Schemas.AppUtilsTypesStandardResponsesResult,
-    CreateCurrentUserProfilePictureUsersMeProfilePicturePostError,
-    Schemas.BodyCreateCurrentUserProfilePictureUsersMeProfilePicturePost,
-    {},
-    {},
-    {}
-  >({ url: "/users/me/profile-picture", method: "post", ...variables, signal });
-
-/**
- * Upload a profile picture for the current user.
- *
- * **The user must be authenticated to use this endpoint**
- */
-export const useCreateCurrentUserProfilePictureUsersMeProfilePicturePost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      Schemas.AppUtilsTypesStandardResponsesResult,
-      CreateCurrentUserProfilePictureUsersMeProfilePicturePostError,
-      CreateCurrentUserProfilePictureUsersMeProfilePicturePostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    Schemas.AppUtilsTypesStandardResponsesResult,
-    CreateCurrentUserProfilePictureUsersMeProfilePicturePostError,
-    CreateCurrentUserProfilePictureUsersMeProfilePicturePostVariables
-  >({
-    mutationFn: (
-      variables: CreateCurrentUserProfilePictureUsersMeProfilePicturePostVariables,
-    ) =>
-      fetchCreateCurrentUserProfilePictureUsersMeProfilePicturePost({
-        ...fetcherOptions,
-        ...variables,
-      }),
-    ...options,
-  });
-};
-
-export type ReadUserProfilePictureUsersUserIdProfilePictureGetPathParams = {
-  userId: string;
-};
-
-export type ReadUserProfilePictureUsersUserIdProfilePictureGetError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type ReadUserProfilePictureUsersUserIdProfilePictureGetVariables = {
-  pathParams: ReadUserProfilePictureUsersUserIdProfilePictureGetPathParams;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Get the profile picture of an user.
- *
- * Unauthenticated users can use this endpoint (needed for some OIDC services)
- */
-export const fetchReadUserProfilePictureUsersUserIdProfilePictureGet = (
-  variables: ReadUserProfilePictureUsersUserIdProfilePictureGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    ReadUserProfilePictureUsersUserIdProfilePictureGetError,
-    undefined,
-    {},
-    {},
-    ReadUserProfilePictureUsersUserIdProfilePictureGetPathParams
-  >({
-    url: "/users/{userId}/profile-picture",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-/**
- * Get the profile picture of an user.
- *
- * Unauthenticated users can use this endpoint (needed for some OIDC services)
- */
-export const useReadUserProfilePictureUsersUserIdProfilePictureGet = <
-  TData = undefined,
->(
-  variables: ReadUserProfilePictureUsersUserIdProfilePictureGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      undefined,
-      ReadUserProfilePictureUsersUserIdProfilePictureGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    undefined,
-    ReadUserProfilePictureUsersUserIdProfilePictureGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/users/{userId}/profile-picture",
-      operationId: "readUserProfilePictureUsersUserIdProfilePictureGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchReadUserProfilePictureUsersUserIdProfilePictureGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type GetParticipantByIdRaidParticipantParticipantIdGetPathParams = {
+export type GetParticipantByIdRaidParticipantsParticipantIdGetPathParams = {
   participantId: string;
 };
 
-export type GetParticipantByIdRaidParticipantParticipantIdGetError =
+export type GetParticipantByIdRaidParticipantsParticipantIdGetError =
   Fetcher.ErrorWrapper<{
     status: 422;
     payload: Schemas.HTTPValidationError;
   }>;
 
-export type GetParticipantByIdRaidParticipantParticipantIdGetVariables = {
-  pathParams: GetParticipantByIdRaidParticipantParticipantIdGetPathParams;
+export type GetParticipantByIdRaidParticipantsParticipantIdGetVariables = {
+  pathParams: GetParticipantByIdRaidParticipantsParticipantIdGetPathParams;
 } & HyperionContext["fetcherOptions"];
 
 /**
  * Get a participant by id
  */
-export const fetchGetParticipantByIdRaidParticipantParticipantIdGet = (
-  variables: GetParticipantByIdRaidParticipantParticipantIdGetVariables,
-  signal?: AbortSignal,
+export const fetchGetParticipantByIdRaidParticipantsParticipantIdGet = (
+  variables: GetParticipantByIdRaidParticipantsParticipantIdGetVariables,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     Schemas.Participant,
-    GetParticipantByIdRaidParticipantParticipantIdGetError,
+    GetParticipantByIdRaidParticipantsParticipantIdGetError,
     undefined,
     {},
     {},
-    GetParticipantByIdRaidParticipantParticipantIdGetPathParams
+    GetParticipantByIdRaidParticipantsParticipantIdGetPathParams
   >({
-    url: "/raid/participant/{participantId}",
+    url: "/raid/participants/{participantId}",
     method: "get",
     ...variables,
     signal,
@@ -13912,72 +12625,72 @@ export const fetchGetParticipantByIdRaidParticipantParticipantIdGet = (
 /**
  * Get a participant by id
  */
-export const useGetParticipantByIdRaidParticipantParticipantIdGet = <
-  TData = Schemas.Participant,
+export const useGetParticipantByIdRaidParticipantsParticipantIdGet = <
+  TData = Schemas.Participant
 >(
-  variables: GetParticipantByIdRaidParticipantParticipantIdGetVariables,
+  variables: GetParticipantByIdRaidParticipantsParticipantIdGetVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
       Schemas.Participant,
-      GetParticipantByIdRaidParticipantParticipantIdGetError,
+      GetParticipantByIdRaidParticipantsParticipantIdGetError,
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
   return reactQuery.useQuery<
     Schemas.Participant,
-    GetParticipantByIdRaidParticipantParticipantIdGetError,
+    GetParticipantByIdRaidParticipantsParticipantIdGetError,
     TData
   >({
     queryKey: queryKeyFn({
-      path: "/raid/participant/{participantId}",
-      operationId: "getParticipantByIdRaidParticipantParticipantIdGet",
+      path: "/raid/participants/{participantId}",
+      operationId: "getParticipantByIdRaidParticipantsParticipantIdGet",
       variables,
     }),
     queryFn: ({ signal }) =>
-      fetchGetParticipantByIdRaidParticipantParticipantIdGet(
+      fetchGetParticipantByIdRaidParticipantsParticipantIdGet(
         { ...fetcherOptions, ...variables },
-        signal,
+        signal
       ),
     ...options,
     ...queryOptions,
   });
 };
 
-export type UpdateParticipantRaidParticipantParticipantIdPatchPathParams = {
+export type UpdateParticipantRaidParticipantsParticipantIdPatchPathParams = {
   participantId: string;
 };
 
-export type UpdateParticipantRaidParticipantParticipantIdPatchError =
+export type UpdateParticipantRaidParticipantsParticipantIdPatchError =
   Fetcher.ErrorWrapper<{
     status: 422;
     payload: Schemas.HTTPValidationError;
   }>;
 
-export type UpdateParticipantRaidParticipantParticipantIdPatchVariables = {
+export type UpdateParticipantRaidParticipantsParticipantIdPatchVariables = {
   body?: Schemas.ParticipantUpdate;
-  pathParams: UpdateParticipantRaidParticipantParticipantIdPatchPathParams;
+  pathParams: UpdateParticipantRaidParticipantsParticipantIdPatchPathParams;
 } & HyperionContext["fetcherOptions"];
 
 /**
  * Update a participant
  */
-export const fetchUpdateParticipantRaidParticipantParticipantIdPatch = (
-  variables: UpdateParticipantRaidParticipantParticipantIdPatchVariables,
-  signal?: AbortSignal,
+export const fetchUpdateParticipantRaidParticipantsParticipantIdPatch = (
+  variables: UpdateParticipantRaidParticipantsParticipantIdPatchVariables,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
-    UpdateParticipantRaidParticipantParticipantIdPatchError,
+    UpdateParticipantRaidParticipantsParticipantIdPatchError,
     Schemas.ParticipantUpdate,
     {},
     {},
-    UpdateParticipantRaidParticipantParticipantIdPatchPathParams
+    UpdateParticipantRaidParticipantsParticipantIdPatchPathParams
   >({
-    url: "/raid/participant/{participantId}",
+    url: "/raid/participants/{participantId}",
     method: "patch",
     ...variables,
     signal,
@@ -13986,26 +12699,26 @@ export const fetchUpdateParticipantRaidParticipantParticipantIdPatch = (
 /**
  * Update a participant
  */
-export const useUpdateParticipantRaidParticipantParticipantIdPatch = (
+export const useUpdateParticipantRaidParticipantsParticipantIdPatch = (
   options?: Omit<
     reactQuery.UseMutationOptions<
       undefined,
-      UpdateParticipantRaidParticipantParticipantIdPatchError,
-      UpdateParticipantRaidParticipantParticipantIdPatchVariables
+      UpdateParticipantRaidParticipantsParticipantIdPatchError,
+      UpdateParticipantRaidParticipantsParticipantIdPatchVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
     undefined,
-    UpdateParticipantRaidParticipantParticipantIdPatchError,
-    UpdateParticipantRaidParticipantParticipantIdPatchVariables
+    UpdateParticipantRaidParticipantsParticipantIdPatchError,
+    UpdateParticipantRaidParticipantsParticipantIdPatchVariables
   >({
     mutationFn: (
-      variables: UpdateParticipantRaidParticipantParticipantIdPatchVariables,
+      variables: UpdateParticipantRaidParticipantsParticipantIdPatchVariables
     ) =>
-      fetchUpdateParticipantRaidParticipantParticipantIdPatch({
+      fetchUpdateParticipantRaidParticipantsParticipantIdPatch({
         ...fetcherOptions,
         ...variables,
       }),
@@ -14013,52 +12726,52 @@ export const useUpdateParticipantRaidParticipantParticipantIdPatch = (
   });
 };
 
-export type CreateParticipantRaidParticipantPostError = Fetcher.ErrorWrapper<{
+export type CreateParticipantRaidParticipantsPostError = Fetcher.ErrorWrapper<{
   status: 422;
   payload: Schemas.HTTPValidationError;
 }>;
 
-export type CreateParticipantRaidParticipantPostVariables = {
+export type CreateParticipantRaidParticipantsPostVariables = {
   body: Schemas.ParticipantBase;
 } & HyperionContext["fetcherOptions"];
 
 /**
  * Create a participant
  */
-export const fetchCreateParticipantRaidParticipantPost = (
-  variables: CreateParticipantRaidParticipantPostVariables,
-  signal?: AbortSignal,
+export const fetchCreateParticipantRaidParticipantsPost = (
+  variables: CreateParticipantRaidParticipantsPostVariables,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     Schemas.Participant,
-    CreateParticipantRaidParticipantPostError,
+    CreateParticipantRaidParticipantsPostError,
     Schemas.ParticipantBase,
     {},
     {},
     {}
-  >({ url: "/raid/participant", method: "post", ...variables, signal });
+  >({ url: "/raid/participants", method: "post", ...variables, signal });
 
 /**
  * Create a participant
  */
-export const useCreateParticipantRaidParticipantPost = (
+export const useCreateParticipantRaidParticipantsPost = (
   options?: Omit<
     reactQuery.UseMutationOptions<
       Schemas.Participant,
-      CreateParticipantRaidParticipantPostError,
-      CreateParticipantRaidParticipantPostVariables
+      CreateParticipantRaidParticipantsPostError,
+      CreateParticipantRaidParticipantsPostVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
     Schemas.Participant,
-    CreateParticipantRaidParticipantPostError,
-    CreateParticipantRaidParticipantPostVariables
+    CreateParticipantRaidParticipantsPostError,
+    CreateParticipantRaidParticipantsPostVariables
   >({
-    mutationFn: (variables: CreateParticipantRaidParticipantPostVariables) =>
-      fetchCreateParticipantRaidParticipantPost({
+    mutationFn: (variables: CreateParticipantRaidParticipantsPostVariables) =>
+      fetchCreateParticipantRaidParticipantsPost({
         ...fetcherOptions,
         ...variables,
       }),
@@ -14066,88 +12779,193 @@ export const useCreateParticipantRaidParticipantPost = (
   });
 };
 
-export type CreateTeamRaidTeamPostError = Fetcher.ErrorWrapper<{
+export type GetAllTeamsRaidTeamsGetError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetAllTeamsRaidTeamsGetResponse = Schemas.TeamPreview[];
+
+export type GetAllTeamsRaidTeamsGetVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * Get all teams
+ */
+export const fetchGetAllTeamsRaidTeamsGet = (
+  variables: GetAllTeamsRaidTeamsGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    GetAllTeamsRaidTeamsGetResponse,
+    GetAllTeamsRaidTeamsGetError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/raid/teams", method: "get", ...variables, signal });
+
+/**
+ * Get all teams
+ */
+export const useGetAllTeamsRaidTeamsGet = <
+  TData = GetAllTeamsRaidTeamsGetResponse
+>(
+  variables: GetAllTeamsRaidTeamsGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      GetAllTeamsRaidTeamsGetResponse,
+      GetAllTeamsRaidTeamsGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    GetAllTeamsRaidTeamsGetResponse,
+    GetAllTeamsRaidTeamsGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/raid/teams",
+      operationId: "getAllTeamsRaidTeamsGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetAllTeamsRaidTeamsGet({ ...fetcherOptions, ...variables }, signal),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type CreateTeamRaidTeamsPostError = Fetcher.ErrorWrapper<{
   status: 422;
   payload: Schemas.HTTPValidationError;
 }>;
 
-export type CreateTeamRaidTeamPostVariables = {
+export type CreateTeamRaidTeamsPostVariables = {
   body: Schemas.TeamBase;
 } & HyperionContext["fetcherOptions"];
 
 /**
  * Create a team
  */
-export const fetchCreateTeamRaidTeamPost = (
-  variables: CreateTeamRaidTeamPostVariables,
-  signal?: AbortSignal,
+export const fetchCreateTeamRaidTeamsPost = (
+  variables: CreateTeamRaidTeamsPostVariables,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     Schemas.TeamBase,
-    CreateTeamRaidTeamPostError,
+    CreateTeamRaidTeamsPostError,
     Schemas.TeamBase,
     {},
     {},
     {}
-  >({ url: "/raid/team", method: "post", ...variables, signal });
+  >({ url: "/raid/teams", method: "post", ...variables, signal });
 
 /**
  * Create a team
  */
-export const useCreateTeamRaidTeamPost = (
+export const useCreateTeamRaidTeamsPost = (
   options?: Omit<
     reactQuery.UseMutationOptions<
       Schemas.TeamBase,
-      CreateTeamRaidTeamPostError,
-      CreateTeamRaidTeamPostVariables
+      CreateTeamRaidTeamsPostError,
+      CreateTeamRaidTeamsPostVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
     Schemas.TeamBase,
-    CreateTeamRaidTeamPostError,
-    CreateTeamRaidTeamPostVariables
+    CreateTeamRaidTeamsPostError,
+    CreateTeamRaidTeamsPostVariables
   >({
-    mutationFn: (variables: CreateTeamRaidTeamPostVariables) =>
-      fetchCreateTeamRaidTeamPost({ ...fetcherOptions, ...variables }),
+    mutationFn: (variables: CreateTeamRaidTeamsPostVariables) =>
+      fetchCreateTeamRaidTeamsPost({ ...fetcherOptions, ...variables }),
     ...options,
   });
 };
 
-export type GetTeamByParticipantIdRaidParticipantParticipantIdTeamGetPathParams =
+export type DeleteAllTeamsRaidTeamsDeleteError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteAllTeamsRaidTeamsDeleteVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * Delete all teams
+ */
+export const fetchDeleteAllTeamsRaidTeamsDelete = (
+  variables: DeleteAllTeamsRaidTeamsDeleteVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    DeleteAllTeamsRaidTeamsDeleteError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/raid/teams", method: "delete", ...variables, signal });
+
+/**
+ * Delete all teams
+ */
+export const useDeleteAllTeamsRaidTeamsDelete = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      DeleteAllTeamsRaidTeamsDeleteError,
+      DeleteAllTeamsRaidTeamsDeleteVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    DeleteAllTeamsRaidTeamsDeleteError,
+    DeleteAllTeamsRaidTeamsDeleteVariables
+  >({
+    mutationFn: (variables: DeleteAllTeamsRaidTeamsDeleteVariables) =>
+      fetchDeleteAllTeamsRaidTeamsDelete({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
+export type GetTeamByParticipantIdRaidParticipantsParticipantIdTeamGetPathParams =
   {
     participantId: string;
   };
 
-export type GetTeamByParticipantIdRaidParticipantParticipantIdTeamGetError =
+export type GetTeamByParticipantIdRaidParticipantsParticipantIdTeamGetError =
   Fetcher.ErrorWrapper<{
     status: 422;
     payload: Schemas.HTTPValidationError;
   }>;
 
-export type GetTeamByParticipantIdRaidParticipantParticipantIdTeamGetVariables =
+export type GetTeamByParticipantIdRaidParticipantsParticipantIdTeamGetVariables =
   {
-    pathParams: GetTeamByParticipantIdRaidParticipantParticipantIdTeamGetPathParams;
+    pathParams: GetTeamByParticipantIdRaidParticipantsParticipantIdTeamGetPathParams;
   } & HyperionContext["fetcherOptions"];
 
 /**
  * Get a team by participant id
  */
-export const fetchGetTeamByParticipantIdRaidParticipantParticipantIdTeamGet = (
-  variables: GetTeamByParticipantIdRaidParticipantParticipantIdTeamGetVariables,
-  signal?: AbortSignal,
+export const fetchGetTeamByParticipantIdRaidParticipantsParticipantIdTeamGet = (
+  variables: GetTeamByParticipantIdRaidParticipantsParticipantIdTeamGetVariables,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     Schemas.Team,
-    GetTeamByParticipantIdRaidParticipantParticipantIdTeamGetError,
+    GetTeamByParticipantIdRaidParticipantsParticipantIdTeamGetError,
     undefined,
     {},
     {},
-    GetTeamByParticipantIdRaidParticipantParticipantIdTeamGetPathParams
+    GetTeamByParticipantIdRaidParticipantsParticipantIdTeamGetPathParams
   >({
-    url: "/raid/participant/{participantId}/team",
+    url: "/raid/participants/{participantId}/team",
     method: "get",
     ...variables,
     signal,
@@ -14156,380 +12974,211 @@ export const fetchGetTeamByParticipantIdRaidParticipantParticipantIdTeamGet = (
 /**
  * Get a team by participant id
  */
-export const useGetTeamByParticipantIdRaidParticipantParticipantIdTeamGet = <
-  TData = Schemas.Team,
+export const useGetTeamByParticipantIdRaidParticipantsParticipantIdTeamGet = <
+  TData = Schemas.Team
 >(
-  variables: GetTeamByParticipantIdRaidParticipantParticipantIdTeamGetVariables,
+  variables: GetTeamByParticipantIdRaidParticipantsParticipantIdTeamGetVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
       Schemas.Team,
-      GetTeamByParticipantIdRaidParticipantParticipantIdTeamGetError,
+      GetTeamByParticipantIdRaidParticipantsParticipantIdTeamGetError,
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
   return reactQuery.useQuery<
     Schemas.Team,
-    GetTeamByParticipantIdRaidParticipantParticipantIdTeamGetError,
+    GetTeamByParticipantIdRaidParticipantsParticipantIdTeamGetError,
     TData
   >({
     queryKey: queryKeyFn({
-      path: "/raid/participant/{participantId}/team",
-      operationId: "getTeamByParticipantIdRaidParticipantParticipantIdTeamGet",
+      path: "/raid/participants/{participantId}/team",
+      operationId: "getTeamByParticipantIdRaidParticipantsParticipantIdTeamGet",
       variables,
     }),
     queryFn: ({ signal }) =>
-      fetchGetTeamByParticipantIdRaidParticipantParticipantIdTeamGet(
+      fetchGetTeamByParticipantIdRaidParticipantsParticipantIdTeamGet(
         { ...fetcherOptions, ...variables },
-        signal,
+        signal
       ),
     ...options,
     ...queryOptions,
   });
 };
 
-export type GetAllTeamsRaidTeamAllGetError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetAllTeamsRaidTeamAllGetResponse = Schemas.TeamPreview[];
-
-export type GetAllTeamsRaidTeamAllGetVariables =
-  HyperionContext["fetcherOptions"];
-
-/**
- * Get all teams
- */
-export const fetchGetAllTeamsRaidTeamAllGet = (
-  variables: GetAllTeamsRaidTeamAllGetVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    GetAllTeamsRaidTeamAllGetResponse,
-    GetAllTeamsRaidTeamAllGetError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/raid/team/all", method: "get", ...variables, signal });
-
-/**
- * Get all teams
- */
-export const useGetAllTeamsRaidTeamAllGet = <
-  TData = GetAllTeamsRaidTeamAllGetResponse,
->(
-  variables: GetAllTeamsRaidTeamAllGetVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<
-      GetAllTeamsRaidTeamAllGetResponse,
-      GetAllTeamsRaidTeamAllGetError,
-      TData
-    >,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<
-    GetAllTeamsRaidTeamAllGetResponse,
-    GetAllTeamsRaidTeamAllGetError,
-    TData
-  >({
-    queryKey: queryKeyFn({
-      path: "/raid/team/all",
-      operationId: "getAllTeamsRaidTeamAllGet",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetAllTeamsRaidTeamAllGet(
-        { ...fetcherOptions, ...variables },
-        signal,
-      ),
-    ...options,
-    ...queryOptions,
-  });
-};
-
-export type DeleteAllTeamsRaidTeamAllDeleteError =
-  Fetcher.ErrorWrapper<undefined>;
-
-export type DeleteAllTeamsRaidTeamAllDeleteVariables =
-  HyperionContext["fetcherOptions"];
-
-/**
- * Delete all teams
- */
-export const fetchDeleteAllTeamsRaidTeamAllDelete = (
-  variables: DeleteAllTeamsRaidTeamAllDeleteVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    DeleteAllTeamsRaidTeamAllDeleteError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/raid/team/all", method: "delete", ...variables, signal });
-
-/**
- * Delete all teams
- */
-export const useDeleteAllTeamsRaidTeamAllDelete = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      DeleteAllTeamsRaidTeamAllDeleteError,
-      DeleteAllTeamsRaidTeamAllDeleteVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    DeleteAllTeamsRaidTeamAllDeleteError,
-    DeleteAllTeamsRaidTeamAllDeleteVariables
-  >({
-    mutationFn: (variables: DeleteAllTeamsRaidTeamAllDeleteVariables) =>
-      fetchDeleteAllTeamsRaidTeamAllDelete({ ...fetcherOptions, ...variables }),
-    ...options,
-  });
-};
-
-export type GetTeamByIdRaidTeamTeamIdGetPathParams = {
+export type GetTeamByIdRaidTeamsTeamIdGetPathParams = {
   teamId: string;
 };
 
-export type GetTeamByIdRaidTeamTeamIdGetError = Fetcher.ErrorWrapper<{
+export type GetTeamByIdRaidTeamsTeamIdGetError = Fetcher.ErrorWrapper<{
   status: 422;
   payload: Schemas.HTTPValidationError;
 }>;
 
-export type GetTeamByIdRaidTeamTeamIdGetVariables = {
-  pathParams: GetTeamByIdRaidTeamTeamIdGetPathParams;
+export type GetTeamByIdRaidTeamsTeamIdGetVariables = {
+  pathParams: GetTeamByIdRaidTeamsTeamIdGetPathParams;
 } & HyperionContext["fetcherOptions"];
 
 /**
  * Get a team by id
  */
-export const fetchGetTeamByIdRaidTeamTeamIdGet = (
-  variables: GetTeamByIdRaidTeamTeamIdGetVariables,
-  signal?: AbortSignal,
+export const fetchGetTeamByIdRaidTeamsTeamIdGet = (
+  variables: GetTeamByIdRaidTeamsTeamIdGetVariables,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     Schemas.Team,
-    GetTeamByIdRaidTeamTeamIdGetError,
+    GetTeamByIdRaidTeamsTeamIdGetError,
     undefined,
     {},
     {},
-    GetTeamByIdRaidTeamTeamIdGetPathParams
-  >({ url: "/raid/team/{teamId}", method: "get", ...variables, signal });
+    GetTeamByIdRaidTeamsTeamIdGetPathParams
+  >({ url: "/raid/teams/{teamId}", method: "get", ...variables, signal });
 
 /**
  * Get a team by id
  */
-export const useGetTeamByIdRaidTeamTeamIdGet = <TData = Schemas.Team>(
-  variables: GetTeamByIdRaidTeamTeamIdGetVariables,
+export const useGetTeamByIdRaidTeamsTeamIdGet = <TData = Schemas.Team>(
+  variables: GetTeamByIdRaidTeamsTeamIdGetVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
       Schemas.Team,
-      GetTeamByIdRaidTeamTeamIdGetError,
+      GetTeamByIdRaidTeamsTeamIdGetError,
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
   return reactQuery.useQuery<
     Schemas.Team,
-    GetTeamByIdRaidTeamTeamIdGetError,
+    GetTeamByIdRaidTeamsTeamIdGetError,
     TData
   >({
     queryKey: queryKeyFn({
-      path: "/raid/team/{teamId}",
-      operationId: "getTeamByIdRaidTeamTeamIdGet",
+      path: "/raid/teams/{teamId}",
+      operationId: "getTeamByIdRaidTeamsTeamIdGet",
       variables,
     }),
     queryFn: ({ signal }) =>
-      fetchGetTeamByIdRaidTeamTeamIdGet(
+      fetchGetTeamByIdRaidTeamsTeamIdGet(
         { ...fetcherOptions, ...variables },
-        signal,
+        signal
       ),
     ...options,
     ...queryOptions,
   });
 };
 
-export type UpdateTeamRaidTeamTeamIdPatchPathParams = {
+export type UpdateTeamRaidTeamsTeamIdPatchPathParams = {
   teamId: string;
 };
 
-export type UpdateTeamRaidTeamTeamIdPatchError = Fetcher.ErrorWrapper<{
+export type UpdateTeamRaidTeamsTeamIdPatchError = Fetcher.ErrorWrapper<{
   status: 422;
   payload: Schemas.HTTPValidationError;
 }>;
 
-export type UpdateTeamRaidTeamTeamIdPatchVariables = {
+export type UpdateTeamRaidTeamsTeamIdPatchVariables = {
   body?: Schemas.TeamUpdate;
-  pathParams: UpdateTeamRaidTeamTeamIdPatchPathParams;
+  pathParams: UpdateTeamRaidTeamsTeamIdPatchPathParams;
 } & HyperionContext["fetcherOptions"];
 
 /**
  * Update a team
  */
-export const fetchUpdateTeamRaidTeamTeamIdPatch = (
-  variables: UpdateTeamRaidTeamTeamIdPatchVariables,
-  signal?: AbortSignal,
+export const fetchUpdateTeamRaidTeamsTeamIdPatch = (
+  variables: UpdateTeamRaidTeamsTeamIdPatchVariables,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
-    UpdateTeamRaidTeamTeamIdPatchError,
+    UpdateTeamRaidTeamsTeamIdPatchError,
     Schemas.TeamUpdate,
     {},
     {},
-    UpdateTeamRaidTeamTeamIdPatchPathParams
-  >({ url: "/raid/team/{teamId}", method: "patch", ...variables, signal });
+    UpdateTeamRaidTeamsTeamIdPatchPathParams
+  >({ url: "/raid/teams/{teamId}", method: "patch", ...variables, signal });
 
 /**
  * Update a team
  */
-export const useUpdateTeamRaidTeamTeamIdPatch = (
+export const useUpdateTeamRaidTeamsTeamIdPatch = (
   options?: Omit<
     reactQuery.UseMutationOptions<
       undefined,
-      UpdateTeamRaidTeamTeamIdPatchError,
-      UpdateTeamRaidTeamTeamIdPatchVariables
+      UpdateTeamRaidTeamsTeamIdPatchError,
+      UpdateTeamRaidTeamsTeamIdPatchVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
     undefined,
-    UpdateTeamRaidTeamTeamIdPatchError,
-    UpdateTeamRaidTeamTeamIdPatchVariables
+    UpdateTeamRaidTeamsTeamIdPatchError,
+    UpdateTeamRaidTeamsTeamIdPatchVariables
   >({
-    mutationFn: (variables: UpdateTeamRaidTeamTeamIdPatchVariables) =>
-      fetchUpdateTeamRaidTeamTeamIdPatch({ ...fetcherOptions, ...variables }),
+    mutationFn: (variables: UpdateTeamRaidTeamsTeamIdPatchVariables) =>
+      fetchUpdateTeamRaidTeamsTeamIdPatch({ ...fetcherOptions, ...variables }),
     ...options,
   });
 };
 
-export type DeleteTeamRaidTeamTeamIdDeletePathParams = {
+export type DeleteTeamRaidTeamsTeamIdDeletePathParams = {
   teamId: string;
 };
 
-export type DeleteTeamRaidTeamTeamIdDeleteError = Fetcher.ErrorWrapper<{
+export type DeleteTeamRaidTeamsTeamIdDeleteError = Fetcher.ErrorWrapper<{
   status: 422;
   payload: Schemas.HTTPValidationError;
 }>;
 
-export type DeleteTeamRaidTeamTeamIdDeleteVariables = {
-  pathParams: DeleteTeamRaidTeamTeamIdDeletePathParams;
+export type DeleteTeamRaidTeamsTeamIdDeleteVariables = {
+  pathParams: DeleteTeamRaidTeamsTeamIdDeletePathParams;
 } & HyperionContext["fetcherOptions"];
 
 /**
  * Delete a team
  */
-export const fetchDeleteTeamRaidTeamTeamIdDelete = (
-  variables: DeleteTeamRaidTeamTeamIdDeleteVariables,
-  signal?: AbortSignal,
+export const fetchDeleteTeamRaidTeamsTeamIdDelete = (
+  variables: DeleteTeamRaidTeamsTeamIdDeleteVariables,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
-    DeleteTeamRaidTeamTeamIdDeleteError,
+    DeleteTeamRaidTeamsTeamIdDeleteError,
     undefined,
     {},
     {},
-    DeleteTeamRaidTeamTeamIdDeletePathParams
-  >({ url: "/raid/team/{teamId}", method: "delete", ...variables, signal });
+    DeleteTeamRaidTeamsTeamIdDeletePathParams
+  >({ url: "/raid/teams/{teamId}", method: "delete", ...variables, signal });
 
 /**
  * Delete a team
  */
-export const useDeleteTeamRaidTeamTeamIdDelete = (
+export const useDeleteTeamRaidTeamsTeamIdDelete = (
   options?: Omit<
     reactQuery.UseMutationOptions<
       undefined,
-      DeleteTeamRaidTeamTeamIdDeleteError,
-      DeleteTeamRaidTeamTeamIdDeleteVariables
+      DeleteTeamRaidTeamsTeamIdDeleteError,
+      DeleteTeamRaidTeamsTeamIdDeleteVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
     undefined,
-    DeleteTeamRaidTeamTeamIdDeleteError,
-    DeleteTeamRaidTeamTeamIdDeleteVariables
+    DeleteTeamRaidTeamsTeamIdDeleteError,
+    DeleteTeamRaidTeamsTeamIdDeleteVariables
   >({
-    mutationFn: (variables: DeleteTeamRaidTeamTeamIdDeleteVariables) =>
-      fetchDeleteTeamRaidTeamTeamIdDelete({ ...fetcherOptions, ...variables }),
-    ...options,
-  });
-};
-
-export type CreateDocumentRaidParticipantParticipantIdDocumentPostError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type CreateDocumentRaidParticipantParticipantIdDocumentPostVariables = {
-  body: Schemas.Document;
-} & HyperionContext["fetcherOptions"];
-
-/**
- * Create a document
- */
-export const fetchCreateDocumentRaidParticipantParticipantIdDocumentPost = (
-  variables: CreateDocumentRaidParticipantParticipantIdDocumentPostVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<
-    undefined,
-    CreateDocumentRaidParticipantParticipantIdDocumentPostError,
-    Schemas.Document,
-    {},
-    {},
-    {}
-  >({
-    url: "/raid/participant/{participantId}/document",
-    method: "post",
-    ...variables,
-    signal,
-  });
-
-/**
- * Create a document
- */
-export const useCreateDocumentRaidParticipantParticipantIdDocumentPost = (
-  options?: Omit<
-    reactQuery.UseMutationOptions<
-      undefined,
-      CreateDocumentRaidParticipantParticipantIdDocumentPostError,
-      CreateDocumentRaidParticipantParticipantIdDocumentPostVariables
-    >,
-    "mutationFn"
-  >,
-) => {
-  const { fetcherOptions } = useHyperionContext();
-  return reactQuery.useMutation<
-    undefined,
-    CreateDocumentRaidParticipantParticipantIdDocumentPostError,
-    CreateDocumentRaidParticipantParticipantIdDocumentPostVariables
-  >({
-    mutationFn: (
-      variables: CreateDocumentRaidParticipantParticipantIdDocumentPostVariables,
-    ) =>
-      fetchCreateDocumentRaidParticipantParticipantIdDocumentPost({
-        ...fetcherOptions,
-        ...variables,
-      }),
+    mutationFn: (variables: DeleteTeamRaidTeamsTeamIdDeleteVariables) =>
+      fetchDeleteTeamRaidTeamsTeamIdDelete({ ...fetcherOptions, ...variables }),
     ...options,
   });
 };
@@ -14554,10 +13203,10 @@ export type UploadDocumentRaidDocumentDocumentIdPostVariables = {
  */
 export const fetchUploadDocumentRaidDocumentDocumentIdPost = (
   variables: UploadDocumentRaidDocumentDocumentIdPostVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
-    Schemas.AppUtilsTypesStandardResponsesResult,
+    Schemas.AppCoreStandardResponsesResult,
     UploadDocumentRaidDocumentDocumentIdPostError,
     Schemas.BodyUploadDocumentRaidDocumentDocumentIdPost,
     {},
@@ -14576,21 +13225,21 @@ export const fetchUploadDocumentRaidDocumentDocumentIdPost = (
 export const useUploadDocumentRaidDocumentDocumentIdPost = (
   options?: Omit<
     reactQuery.UseMutationOptions<
-      Schemas.AppUtilsTypesStandardResponsesResult,
+      Schemas.AppCoreStandardResponsesResult,
       UploadDocumentRaidDocumentDocumentIdPostError,
       UploadDocumentRaidDocumentDocumentIdPostVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
-    Schemas.AppUtilsTypesStandardResponsesResult,
+    Schemas.AppCoreStandardResponsesResult,
     UploadDocumentRaidDocumentDocumentIdPostError,
     UploadDocumentRaidDocumentDocumentIdPostVariables
   >({
     mutationFn: (
-      variables: UploadDocumentRaidDocumentDocumentIdPostVariables,
+      variables: UploadDocumentRaidDocumentDocumentIdPostVariables
     ) =>
       fetchUploadDocumentRaidDocumentDocumentIdPost({
         ...fetcherOptions,
@@ -14618,7 +13267,7 @@ export type ReadDocumentRaidDocumentDocumentIdGetVariables = {
  */
 export const fetchReadDocumentRaidDocumentDocumentIdGet = (
   variables: ReadDocumentRaidDocumentDocumentIdGetVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
@@ -14646,7 +13295,7 @@ export const useReadDocumentRaidDocumentDocumentIdGet = <TData = undefined>(
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
-  >,
+  >
 ) => {
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
@@ -14663,150 +13312,12 @@ export const useReadDocumentRaidDocumentDocumentIdGet = <TData = undefined>(
     queryFn: ({ signal }) =>
       fetchReadDocumentRaidDocumentDocumentIdGet(
         { ...fetcherOptions, ...variables },
-        signal,
+        signal
       ),
     ...options,
     ...queryOptions,
   });
 };
-
-export type UpdateDocumentRaidParticipantParticipantIdDocumentDocumentIdPatchPathParams =
-  {
-    documentId: string;
-  };
-
-export type UpdateDocumentRaidParticipantParticipantIdDocumentDocumentIdPatchError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type UpdateDocumentRaidParticipantParticipantIdDocumentDocumentIdPatchVariables =
-  {
-    body: Schemas.DocumentBase;
-    pathParams: UpdateDocumentRaidParticipantParticipantIdDocumentDocumentIdPatchPathParams;
-  } & HyperionContext["fetcherOptions"];
-
-/**
- * Update a document
- */
-export const fetchUpdateDocumentRaidParticipantParticipantIdDocumentDocumentIdPatch =
-  (
-    variables: UpdateDocumentRaidParticipantParticipantIdDocumentDocumentIdPatchVariables,
-    signal?: AbortSignal,
-  ) =>
-    hyperionFetch<
-      undefined,
-      UpdateDocumentRaidParticipantParticipantIdDocumentDocumentIdPatchError,
-      Schemas.DocumentBase,
-      {},
-      {},
-      UpdateDocumentRaidParticipantParticipantIdDocumentDocumentIdPatchPathParams
-    >({
-      url: "/raid/participant/{participantId}/document/{documentId}",
-      method: "patch",
-      ...variables,
-      signal,
-    });
-
-/**
- * Update a document
- */
-export const useUpdateDocumentRaidParticipantParticipantIdDocumentDocumentIdPatch =
-  (
-    options?: Omit<
-      reactQuery.UseMutationOptions<
-        undefined,
-        UpdateDocumentRaidParticipantParticipantIdDocumentDocumentIdPatchError,
-        UpdateDocumentRaidParticipantParticipantIdDocumentDocumentIdPatchVariables
-      >,
-      "mutationFn"
-    >,
-  ) => {
-    const { fetcherOptions } = useHyperionContext();
-    return reactQuery.useMutation<
-      undefined,
-      UpdateDocumentRaidParticipantParticipantIdDocumentDocumentIdPatchError,
-      UpdateDocumentRaidParticipantParticipantIdDocumentDocumentIdPatchVariables
-    >({
-      mutationFn: (
-        variables: UpdateDocumentRaidParticipantParticipantIdDocumentDocumentIdPatchVariables,
-      ) =>
-        fetchUpdateDocumentRaidParticipantParticipantIdDocumentDocumentIdPatch({
-          ...fetcherOptions,
-          ...variables,
-        }),
-      ...options,
-    });
-  };
-
-export type DeleteDocumentRaidParticipantParticipantIdDocumentDocumentIdDeletePathParams =
-  {
-    documentId: string;
-  };
-
-export type DeleteDocumentRaidParticipantParticipantIdDocumentDocumentIdDeleteError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type DeleteDocumentRaidParticipantParticipantIdDocumentDocumentIdDeleteVariables =
-  {
-    pathParams: DeleteDocumentRaidParticipantParticipantIdDocumentDocumentIdDeletePathParams;
-  } & HyperionContext["fetcherOptions"];
-
-/**
- * Delete a document
- */
-export const fetchDeleteDocumentRaidParticipantParticipantIdDocumentDocumentIdDelete =
-  (
-    variables: DeleteDocumentRaidParticipantParticipantIdDocumentDocumentIdDeleteVariables,
-    signal?: AbortSignal,
-  ) =>
-    hyperionFetch<
-      undefined,
-      DeleteDocumentRaidParticipantParticipantIdDocumentDocumentIdDeleteError,
-      undefined,
-      {},
-      {},
-      DeleteDocumentRaidParticipantParticipantIdDocumentDocumentIdDeletePathParams
-    >({
-      url: "/raid/participant/{participantId}/document/{documentId}",
-      method: "delete",
-      ...variables,
-      signal,
-    });
-
-/**
- * Delete a document
- */
-export const useDeleteDocumentRaidParticipantParticipantIdDocumentDocumentIdDelete =
-  (
-    options?: Omit<
-      reactQuery.UseMutationOptions<
-        undefined,
-        DeleteDocumentRaidParticipantParticipantIdDocumentDocumentIdDeleteError,
-        DeleteDocumentRaidParticipantParticipantIdDocumentDocumentIdDeleteVariables
-      >,
-      "mutationFn"
-    >,
-  ) => {
-    const { fetcherOptions } = useHyperionContext();
-    return reactQuery.useMutation<
-      undefined,
-      DeleteDocumentRaidParticipantParticipantIdDocumentDocumentIdDeleteError,
-      DeleteDocumentRaidParticipantParticipantIdDocumentDocumentIdDeleteVariables
-    >({
-      mutationFn: (
-        variables: DeleteDocumentRaidParticipantParticipantIdDocumentDocumentIdDeleteVariables,
-      ) =>
-        fetchDeleteDocumentRaidParticipantParticipantIdDocumentDocumentIdDelete(
-          { ...fetcherOptions, ...variables },
-        ),
-      ...options,
-    });
-  };
 
 export type ConfirmPaymentRaidParticipantParticipantIdPaymentPostPathParams = {
   participantId: string;
@@ -14827,7 +13338,7 @@ export type ConfirmPaymentRaidParticipantParticipantIdPaymentPostVariables = {
  */
 export const fetchConfirmPaymentRaidParticipantParticipantIdPaymentPost = (
   variables: ConfirmPaymentRaidParticipantParticipantIdPaymentPostVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   hyperionFetch<
     undefined,
@@ -14854,7 +13365,7 @@ export const useConfirmPaymentRaidParticipantParticipantIdPaymentPost = (
       ConfirmPaymentRaidParticipantParticipantIdPaymentPostVariables
     >,
     "mutationFn"
-  >,
+  >
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
@@ -14863,7 +13374,7 @@ export const useConfirmPaymentRaidParticipantParticipantIdPaymentPost = (
     ConfirmPaymentRaidParticipantParticipantIdPaymentPostVariables
   >({
     mutationFn: (
-      variables: ConfirmPaymentRaidParticipantParticipantIdPaymentPostVariables,
+      variables: ConfirmPaymentRaidParticipantParticipantIdPaymentPostVariables
     ) =>
       fetchConfirmPaymentRaidParticipantParticipantIdPaymentPost({
         ...fetcherOptions,
@@ -14895,7 +13406,7 @@ export type ValidateAttestationOnHonourRaidParticipantParticipantIdHonourPostVar
 export const fetchValidateAttestationOnHonourRaidParticipantParticipantIdHonourPost =
   (
     variables: ValidateAttestationOnHonourRaidParticipantParticipantIdHonourPostVariables,
-    signal?: AbortSignal,
+    signal?: AbortSignal
   ) =>
     hyperionFetch<
       undefined,
@@ -14923,7 +13434,7 @@ export const useValidateAttestationOnHonourRaidParticipantParticipantIdHonourPos
         ValidateAttestationOnHonourRaidParticipantParticipantIdHonourPostVariables
       >,
       "mutationFn"
-    >,
+    >
   ) => {
     const { fetcherOptions } = useHyperionContext();
     return reactQuery.useMutation<
@@ -14932,7 +13443,7 @@ export const useValidateAttestationOnHonourRaidParticipantParticipantIdHonourPos
       ValidateAttestationOnHonourRaidParticipantParticipantIdHonourPostVariables
     >({
       mutationFn: (
-        variables: ValidateAttestationOnHonourRaidParticipantParticipantIdHonourPostVariables,
+        variables: ValidateAttestationOnHonourRaidParticipantParticipantIdHonourPostVariables
       ) =>
         fetchValidateAttestationOnHonourRaidParticipantParticipantIdHonourPost({
           ...fetcherOptions,
@@ -14942,92 +13453,720 @@ export const useValidateAttestationOnHonourRaidParticipantParticipantIdHonourPos
     });
   };
 
+export type GetEventsCalendarEventsGetError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetEventsCalendarEventsGetResponse = Schemas.EventReturn[];
+
+export type GetEventsCalendarEventsGetVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * Get all events from the database.
+ */
+export const fetchGetEventsCalendarEventsGet = (
+  variables: GetEventsCalendarEventsGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    GetEventsCalendarEventsGetResponse,
+    GetEventsCalendarEventsGetError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/calendar/events/", method: "get", ...variables, signal });
+
+/**
+ * Get all events from the database.
+ */
+export const useGetEventsCalendarEventsGet = <
+  TData = GetEventsCalendarEventsGetResponse
+>(
+  variables: GetEventsCalendarEventsGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      GetEventsCalendarEventsGetResponse,
+      GetEventsCalendarEventsGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    GetEventsCalendarEventsGetResponse,
+    GetEventsCalendarEventsGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/calendar/events/",
+      operationId: "getEventsCalendarEventsGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetEventsCalendarEventsGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type AddEventCalendarEventsPostError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type AddEventCalendarEventsPostVariables = {
+  body: Schemas.EventBase;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Add an event to the calendar.
+ */
+export const fetchAddEventCalendarEventsPost = (
+  variables: AddEventCalendarEventsPostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.EventReturn,
+    AddEventCalendarEventsPostError,
+    Schemas.EventBase,
+    {},
+    {},
+    {}
+  >({ url: "/calendar/events/", method: "post", ...variables, signal });
+
+/**
+ * Add an event to the calendar.
+ */
+export const useAddEventCalendarEventsPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.EventReturn,
+      AddEventCalendarEventsPostError,
+      AddEventCalendarEventsPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.EventReturn,
+    AddEventCalendarEventsPostError,
+    AddEventCalendarEventsPostVariables
+  >({
+    mutationFn: (variables: AddEventCalendarEventsPostVariables) =>
+      fetchAddEventCalendarEventsPost({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
+export type GetConfirmedEventsCalendarEventsConfirmedGetError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type GetConfirmedEventsCalendarEventsConfirmedGetResponse =
+  Schemas.EventComplete[];
+
+export type GetConfirmedEventsCalendarEventsConfirmedGetVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * Get all confirmed events.
+ *
+ * **Usable by every member**
+ */
+export const fetchGetConfirmedEventsCalendarEventsConfirmedGet = (
+  variables: GetConfirmedEventsCalendarEventsConfirmedGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    GetConfirmedEventsCalendarEventsConfirmedGetResponse,
+    GetConfirmedEventsCalendarEventsConfirmedGetError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/calendar/events/confirmed", method: "get", ...variables, signal });
+
+/**
+ * Get all confirmed events.
+ *
+ * **Usable by every member**
+ */
+export const useGetConfirmedEventsCalendarEventsConfirmedGet = <
+  TData = GetConfirmedEventsCalendarEventsConfirmedGetResponse
+>(
+  variables: GetConfirmedEventsCalendarEventsConfirmedGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      GetConfirmedEventsCalendarEventsConfirmedGetResponse,
+      GetConfirmedEventsCalendarEventsConfirmedGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    GetConfirmedEventsCalendarEventsConfirmedGetResponse,
+    GetConfirmedEventsCalendarEventsConfirmedGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/calendar/events/confirmed",
+      operationId: "getConfirmedEventsCalendarEventsConfirmedGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetConfirmedEventsCalendarEventsConfirmedGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type GetApplicantBookingsCalendarEventsUserApplicantIdGetPathParams = {
+  applicantId: string;
+};
+
+export type GetApplicantBookingsCalendarEventsUserApplicantIdGetError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type GetApplicantBookingsCalendarEventsUserApplicantIdGetResponse =
+  Schemas.EventReturn[];
+
+export type GetApplicantBookingsCalendarEventsUserApplicantIdGetVariables = {
+  pathParams: GetApplicantBookingsCalendarEventsUserApplicantIdGetPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Get one user bookings.
+ *
+ * **Usable by the user or admins**
+ */
+export const fetchGetApplicantBookingsCalendarEventsUserApplicantIdGet = (
+  variables: GetApplicantBookingsCalendarEventsUserApplicantIdGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    GetApplicantBookingsCalendarEventsUserApplicantIdGetResponse,
+    GetApplicantBookingsCalendarEventsUserApplicantIdGetError,
+    undefined,
+    {},
+    {},
+    GetApplicantBookingsCalendarEventsUserApplicantIdGetPathParams
+  >({
+    url: "/calendar/events/user/{applicantId}",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Get one user bookings.
+ *
+ * **Usable by the user or admins**
+ */
+export const useGetApplicantBookingsCalendarEventsUserApplicantIdGet = <
+  TData = GetApplicantBookingsCalendarEventsUserApplicantIdGetResponse
+>(
+  variables: GetApplicantBookingsCalendarEventsUserApplicantIdGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      GetApplicantBookingsCalendarEventsUserApplicantIdGetResponse,
+      GetApplicantBookingsCalendarEventsUserApplicantIdGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    GetApplicantBookingsCalendarEventsUserApplicantIdGetResponse,
+    GetApplicantBookingsCalendarEventsUserApplicantIdGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/calendar/events/user/{applicantId}",
+      operationId: "getApplicantBookingsCalendarEventsUserApplicantIdGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetApplicantBookingsCalendarEventsUserApplicantIdGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type GetEventByIdCalendarEventsEventIdGetPathParams = {
+  eventId: string;
+};
+
+export type GetEventByIdCalendarEventsEventIdGetError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type GetEventByIdCalendarEventsEventIdGetVariables = {
+  pathParams: GetEventByIdCalendarEventsEventIdGetPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Get an event's information by its id.
+ */
+export const fetchGetEventByIdCalendarEventsEventIdGet = (
+  variables: GetEventByIdCalendarEventsEventIdGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.EventComplete,
+    GetEventByIdCalendarEventsEventIdGetError,
+    undefined,
+    {},
+    {},
+    GetEventByIdCalendarEventsEventIdGetPathParams
+  >({ url: "/calendar/events/{eventId}", method: "get", ...variables, signal });
+
+/**
+ * Get an event's information by its id.
+ */
+export const useGetEventByIdCalendarEventsEventIdGet = <
+  TData = Schemas.EventComplete
+>(
+  variables: GetEventByIdCalendarEventsEventIdGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      Schemas.EventComplete,
+      GetEventByIdCalendarEventsEventIdGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    Schemas.EventComplete,
+    GetEventByIdCalendarEventsEventIdGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/calendar/events/{eventId}",
+      operationId: "getEventByIdCalendarEventsEventIdGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetEventByIdCalendarEventsEventIdGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type EditBookingsIdCalendarEventsEventIdPatchPathParams = {
+  eventId: string;
+};
+
+export type EditBookingsIdCalendarEventsEventIdPatchError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type EditBookingsIdCalendarEventsEventIdPatchVariables = {
+  body?: Schemas.EventEdit;
+  pathParams: EditBookingsIdCalendarEventsEventIdPatchPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Edit an event.
+ *
+ * **Only usable by admins or applicant before decision**
+ */
+export const fetchEditBookingsIdCalendarEventsEventIdPatch = (
+  variables: EditBookingsIdCalendarEventsEventIdPatchVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    EditBookingsIdCalendarEventsEventIdPatchError,
+    Schemas.EventEdit,
+    {},
+    {},
+    EditBookingsIdCalendarEventsEventIdPatchPathParams
+  >({
+    url: "/calendar/events/{eventId}",
+    method: "patch",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Edit an event.
+ *
+ * **Only usable by admins or applicant before decision**
+ */
+export const useEditBookingsIdCalendarEventsEventIdPatch = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      EditBookingsIdCalendarEventsEventIdPatchError,
+      EditBookingsIdCalendarEventsEventIdPatchVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    EditBookingsIdCalendarEventsEventIdPatchError,
+    EditBookingsIdCalendarEventsEventIdPatchVariables
+  >({
+    mutationFn: (
+      variables: EditBookingsIdCalendarEventsEventIdPatchVariables
+    ) =>
+      fetchEditBookingsIdCalendarEventsEventIdPatch({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type DeleteBookingsIdCalendarEventsEventIdDeletePathParams = {
+  eventId: void;
+};
+
+export type DeleteBookingsIdCalendarEventsEventIdDeleteError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type DeleteBookingsIdCalendarEventsEventIdDeleteVariables = {
+  pathParams: DeleteBookingsIdCalendarEventsEventIdDeletePathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Remove an event.
+ *
+ * **Only usable by admins or applicant before decision**
+ */
+export const fetchDeleteBookingsIdCalendarEventsEventIdDelete = (
+  variables: DeleteBookingsIdCalendarEventsEventIdDeleteVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    DeleteBookingsIdCalendarEventsEventIdDeleteError,
+    undefined,
+    {},
+    {},
+    DeleteBookingsIdCalendarEventsEventIdDeletePathParams
+  >({
+    url: "/calendar/events/{eventId}",
+    method: "delete",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Remove an event.
+ *
+ * **Only usable by admins or applicant before decision**
+ */
+export const useDeleteBookingsIdCalendarEventsEventIdDelete = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      DeleteBookingsIdCalendarEventsEventIdDeleteError,
+      DeleteBookingsIdCalendarEventsEventIdDeleteVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    DeleteBookingsIdCalendarEventsEventIdDeleteError,
+    DeleteBookingsIdCalendarEventsEventIdDeleteVariables
+  >({
+    mutationFn: (
+      variables: DeleteBookingsIdCalendarEventsEventIdDeleteVariables
+    ) =>
+      fetchDeleteBookingsIdCalendarEventsEventIdDelete({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type GetEventApplicantcalendarEventsEventIdApplicantGetPathParams = {
+  eventId: string;
+};
+
+export type GetEventApplicantcalendarEventsEventIdApplicantGetError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type GetEventApplicantcalendarEventsEventIdApplicantGetVariables = {
+  pathParams: GetEventApplicantcalendarEventsEventIdApplicantGetPathParams;
+} & HyperionContext["fetcherOptions"];
+
+export const fetchGetEventApplicantcalendarEventsEventIdApplicantGet = (
+  variables: GetEventApplicantcalendarEventsEventIdApplicantGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.EventApplicant,
+    GetEventApplicantcalendarEventsEventIdApplicantGetError,
+    undefined,
+    {},
+    {},
+    GetEventApplicantcalendarEventsEventIdApplicantGetPathParams
+  >({
+    url: "calendar/events/{eventId}/applicant",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+export const useGetEventApplicantcalendarEventsEventIdApplicantGet = <
+  TData = Schemas.EventApplicant
+>(
+  variables: GetEventApplicantcalendarEventsEventIdApplicantGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      Schemas.EventApplicant,
+      GetEventApplicantcalendarEventsEventIdApplicantGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    Schemas.EventApplicant,
+    GetEventApplicantcalendarEventsEventIdApplicantGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "calendar/events/{eventId}/applicant",
+      operationId: "getEventApplicantcalendarEventsEventIdApplicantGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetEventApplicantcalendarEventsEventIdApplicantGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type ConfirmBookingCalendarEventsEventIdReplyDecisionPatchPathParams = {
+  eventId: string;
+  decision: Schemas.Decision;
+};
+
+export type ConfirmBookingCalendarEventsEventIdReplyDecisionPatchError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type ConfirmBookingCalendarEventsEventIdReplyDecisionPatchVariables = {
+  pathParams: ConfirmBookingCalendarEventsEventIdReplyDecisionPatchPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Give a decision to an event.
+ *
+ * **Only usable by admins**
+ */
+export const fetchConfirmBookingCalendarEventsEventIdReplyDecisionPatch = (
+  variables: ConfirmBookingCalendarEventsEventIdReplyDecisionPatchVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    ConfirmBookingCalendarEventsEventIdReplyDecisionPatchError,
+    undefined,
+    {},
+    {},
+    ConfirmBookingCalendarEventsEventIdReplyDecisionPatchPathParams
+  >({
+    url: "/calendar/events/{eventId}/reply/{decision}",
+    method: "patch",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Give a decision to an event.
+ *
+ * **Only usable by admins**
+ */
+export const useConfirmBookingCalendarEventsEventIdReplyDecisionPatch = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      ConfirmBookingCalendarEventsEventIdReplyDecisionPatchError,
+      ConfirmBookingCalendarEventsEventIdReplyDecisionPatchVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    ConfirmBookingCalendarEventsEventIdReplyDecisionPatchError,
+    ConfirmBookingCalendarEventsEventIdReplyDecisionPatchVariables
+  >({
+    mutationFn: (
+      variables: ConfirmBookingCalendarEventsEventIdReplyDecisionPatchVariables
+    ) =>
+      fetchConfirmBookingCalendarEventsEventIdReplyDecisionPatch({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type RecreateIcalFileCalendarIcalCreatePostError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type RecreateIcalFileCalendarIcalCreatePostVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * Create manually the icalendar file
+ *
+ * **Only usable by global admins**
+ */
+export const fetchRecreateIcalFileCalendarIcalCreatePost = (
+  variables: RecreateIcalFileCalendarIcalCreatePostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    RecreateIcalFileCalendarIcalCreatePostError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/calendar/ical/create", method: "post", ...variables, signal });
+
+/**
+ * Create manually the icalendar file
+ *
+ * **Only usable by global admins**
+ */
+export const useRecreateIcalFileCalendarIcalCreatePost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      RecreateIcalFileCalendarIcalCreatePostError,
+      RecreateIcalFileCalendarIcalCreatePostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    RecreateIcalFileCalendarIcalCreatePostError,
+    RecreateIcalFileCalendarIcalCreatePostVariables
+  >({
+    mutationFn: (variables: RecreateIcalFileCalendarIcalCreatePostVariables) =>
+      fetchRecreateIcalFileCalendarIcalCreatePost({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type GetIcalendarFileCalendarIcalGetError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type GetIcalendarFileCalendarIcalGetVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * Get the icalendar file corresponding to the event in the database.
+ */
+export const fetchGetIcalendarFileCalendarIcalGet = (
+  variables: GetIcalendarFileCalendarIcalGetVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    GetIcalendarFileCalendarIcalGetError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/calendar/ical", method: "get", ...variables, signal });
+
+/**
+ * Get the icalendar file corresponding to the event in the database.
+ */
+export const useGetIcalendarFileCalendarIcalGet = <TData = undefined>(
+  variables: GetIcalendarFileCalendarIcalGetVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      undefined,
+      GetIcalendarFileCalendarIcalGetError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    undefined,
+    GetIcalendarFileCalendarIcalGetError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/calendar/ical",
+      operationId: "getIcalendarFileCalendarIcalGet",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetIcalendarFileCalendarIcalGet(
+        { ...fetcherOptions, ...variables },
+        signal
+      ),
+    ...options,
+    ...queryOptions,
+  });
+};
+
 export type QueryOperation =
-  | {
-      path: "/advert/advertisers";
-      operationId: "readAdvertisersAdvertAdvertisersGet";
-      variables: ReadAdvertisersAdvertAdvertisersGetVariables;
-    }
-  | {
-      path: "/advert/me/advertisers";
-      operationId: "getCurrentUserAdvertisersAdvertMeAdvertisersGet";
-      variables: GetCurrentUserAdvertisersAdvertMeAdvertisersGetVariables;
-    }
-  | {
-      path: "/advert/adverts";
-      operationId: "readAdvertsAdvertAdvertsGet";
-      variables: ReadAdvertsAdvertAdvertsGetVariables;
-    }
-  | {
-      path: "/advert/adverts/{advertId}";
-      operationId: "readAdvertAdvertAdvertsAdvertIdGet";
-      variables: ReadAdvertAdvertAdvertsAdvertIdGetVariables;
-    }
-  | {
-      path: "/advert/adverts/{advertId}/picture";
-      operationId: "readAdvertImageAdvertAdvertsAdvertIdPictureGet";
-      variables: ReadAdvertImageAdvertAdvertsAdvertIdPictureGetVariables;
-    }
-  | {
-      path: "/amap/products";
-      operationId: "getProductsAmapProductsGet";
-      variables: GetProductsAmapProductsGetVariables;
-    }
-  | {
-      path: "/amap/products/{productId}";
-      operationId: "getProductByIdAmapProductsProductIdGet";
-      variables: GetProductByIdAmapProductsProductIdGetVariables;
-    }
-  | {
-      path: "/amap/deliveries";
-      operationId: "getDeliveriesAmapDeliveriesGet";
-      variables: GetDeliveriesAmapDeliveriesGetVariables;
-    }
-  | {
-      path: "/amap/deliveries/{deliveryId}/orders";
-      operationId: "getOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGet";
-      variables: GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetVariables;
-    }
-  | {
-      path: "/amap/orders/{orderId}";
-      operationId: "getOrderByIdAmapOrdersOrderIdGet";
-      variables: GetOrderByIdAmapOrdersOrderIdGetVariables;
-    }
-  | {
-      path: "/amap/users/cash";
-      operationId: "getUsersCashAmapUsersCashGet";
-      variables: GetUsersCashAmapUsersCashGetVariables;
-    }
-  | {
-      path: "/amap/users/{userId}/cash";
-      operationId: "getCashByIdAmapUsersUserIdCashGet";
-      variables: GetCashByIdAmapUsersUserIdCashGetVariables;
-    }
-  | {
-      path: "/amap/users/{userId}/orders";
-      operationId: "getOrdersOfUserAmapUsersUserIdOrdersGet";
-      variables: GetOrdersOfUserAmapUsersUserIdOrdersGetVariables;
-    }
-  | {
-      path: "/amap/information";
-      operationId: "getInformationAmapInformationGet";
-      variables: GetInformationAmapInformationGetVariables;
-    }
-  | {
-      path: "/associations";
-      operationId: "getAssociationsAssociationsGet";
-      variables: GetAssociationsAssociationsGetVariables;
-    }
-  | {
-      path: "/associations/{associationId}";
-      operationId: "getAssociationAssociationsAssociationIdGet";
-      variables: GetAssociationAssociationsAssociationIdGetVariables;
-    }
-  | {
-      path: "/associations/{associationId}/users";
-      operationId: "getUsersAssociationAssociationsAssociationIdUsersGet";
-      variables: GetUsersAssociationAssociationsAssociationIdUsersGetVariables;
-    }
   | {
       path: "/auth/authorize";
       operationId: "getAuthorizePageAuthAuthorizeGet";
@@ -15047,121 +14186,6 @@ export type QueryOperation =
       path: "/.well-known/openid-configuration";
       operationId: "oidcConfigurationWellKnownOpenidConfigurationGet";
       variables: OidcConfigurationWellKnownOpenidConfigurationGetVariables;
-    }
-  | {
-      path: "/booking/managers";
-      operationId: "getManagersBookingManagersGet";
-      variables: GetManagersBookingManagersGetVariables;
-    }
-  | {
-      path: "/booking/managers/users/me";
-      operationId: "getCurrentUserManagersBookingManagersUsersMeGet";
-      variables: GetCurrentUserManagersBookingManagersUsersMeGetVariables;
-    }
-  | {
-      path: "/booking/bookings/users/me/manage";
-      operationId: "getBookingsForManagerBookingBookingsUsersMeManageGet";
-      variables: GetBookingsForManagerBookingBookingsUsersMeManageGetVariables;
-    }
-  | {
-      path: "/booking/bookings/confirmed/users/me/manage";
-      operationId: "getConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGet";
-      variables: GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGetVariables;
-    }
-  | {
-      path: "/booking/bookings/confirmed";
-      operationId: "getConfirmedBookingsBookingBookingsConfirmedGet";
-      variables: GetConfirmedBookingsBookingBookingsConfirmedGetVariables;
-    }
-  | {
-      path: "/booking/bookings/users/me";
-      operationId: "getApplicantBookingsBookingBookingsUsersMeGet";
-      variables: GetApplicantBookingsBookingBookingsUsersMeGetVariables;
-    }
-  | {
-      path: "/booking/rooms";
-      operationId: "getRoomsBookingRoomsGet";
-      variables: GetRoomsBookingRoomsGetVariables;
-    }
-  | {
-      path: "/calendar/events/";
-      operationId: "getEventsCalendarEventsGet";
-      variables: GetEventsCalendarEventsGetVariables;
-    }
-  | {
-      path: "/calendar/events/confirmed";
-      operationId: "getConfirmedEventsCalendarEventsConfirmedGet";
-      variables: GetConfirmedEventsCalendarEventsConfirmedGetVariables;
-    }
-  | {
-      path: "/calendar/events/user/{applicantId}";
-      operationId: "getApplicantBookingsCalendarEventsUserApplicantIdGet";
-      variables: GetApplicantBookingsCalendarEventsUserApplicantIdGetVariables;
-    }
-  | {
-      path: "/calendar/events/{eventId}";
-      operationId: "getEventByIdCalendarEventsEventIdGet";
-      variables: GetEventByIdCalendarEventsEventIdGetVariables;
-    }
-  | {
-      path: "calendar/events/{eventId}/applicant";
-      operationId: "getEventApplicantcalendarEventsEventIdApplicantGet";
-      variables: GetEventApplicantcalendarEventsEventIdApplicantGetVariables;
-    }
-  | {
-      path: "/calendar/ical";
-      operationId: "getIcalendarFileCalendarIcalGet";
-      variables: GetIcalendarFileCalendarIcalGetVariables;
-    }
-  | {
-      path: "/campaign/sections";
-      operationId: "getSectionsCampaignSectionsGet";
-      variables: GetSectionsCampaignSectionsGetVariables;
-    }
-  | {
-      path: "/campaign/lists";
-      operationId: "getListsCampaignListsGet";
-      variables: GetListsCampaignListsGetVariables;
-    }
-  | {
-      path: "/campaign/voters";
-      operationId: "getVotersCampaignVotersGet";
-      variables: GetVotersCampaignVotersGetVariables;
-    }
-  | {
-      path: "/campaign/votes";
-      operationId: "getSectionsAlreadyVotedCampaignVotesGet";
-      variables: GetSectionsAlreadyVotedCampaignVotesGetVariables;
-    }
-  | {
-      path: "/campaign/results";
-      operationId: "getResultsCampaignResultsGet";
-      variables: GetResultsCampaignResultsGetVariables;
-    }
-  | {
-      path: "/campaign/status";
-      operationId: "getStatusVoteCampaignStatusGet";
-      variables: GetStatusVoteCampaignStatusGetVariables;
-    }
-  | {
-      path: "/campaign/stats/{sectionId}";
-      operationId: "getStatsForSectionCampaignStatsSectionIdGet";
-      variables: GetStatsForSectionCampaignStatsSectionIdGetVariables;
-    }
-  | {
-      path: "/campaign/lists/{listId}/logo";
-      operationId: "readCampaignsLogoCampaignListsListIdLogoGet";
-      variables: ReadCampaignsLogoCampaignListsListIdLogoGetVariables;
-    }
-  | {
-      path: "/cinema/sessions";
-      operationId: "getSessionsCinemaSessionsGet";
-      variables: GetSessionsCinemaSessionsGetVariables;
-    }
-  | {
-      path: "/cinema/sessions/{sessionId}/poster";
-      operationId: "readSessionPosterCinemaSessionsSessionIdPosterGet";
-      variables: ReadSessionPosterCinemaSessionsSessionIdPosterGetVariables;
     }
   | {
       path: "/information";
@@ -15229,31 +14253,6 @@ export type QueryOperation =
       variables: ReadGroupGroupsGroupIdGetVariables;
     }
   | {
-      path: "/loans/loaners/";
-      operationId: "readLoanersLoansLoanersGet";
-      variables: ReadLoanersLoansLoanersGetVariables;
-    }
-  | {
-      path: "/loans/loaners/{loanerId}/loans";
-      operationId: "getLoansByLoanerLoansLoanersLoanerIdLoansGet";
-      variables: GetLoansByLoanerLoansLoanersLoanerIdLoansGetVariables;
-    }
-  | {
-      path: "/loans/loaners/{loanerId}/items";
-      operationId: "getItemsByLoanerLoansLoanersLoanerIdItemsGet";
-      variables: GetItemsByLoanerLoansLoanersLoanerIdItemsGetVariables;
-    }
-  | {
-      path: "/loans/users/me";
-      operationId: "getCurrentUserLoansLoansUsersMeGet";
-      variables: GetCurrentUserLoansLoansUsersMeGetVariables;
-    }
-  | {
-      path: "/loans/users/me/loaners";
-      operationId: "getCurrentUserLoanersLoansUsersMeLoanersGet";
-      variables: GetCurrentUserLoanersLoansUsersMeLoanersGetVariables;
-    }
-  | {
       path: "/notification/devices";
       operationId: "getDevicesNotificationDevicesGet";
       variables: GetDevicesNotificationDevicesGetVariables;
@@ -15272,6 +14271,116 @@ export type QueryOperation =
       path: "/notification/topics/{topicStr}";
       operationId: "getTopicIdentifierNotificationTopicsTopicStrGet";
       variables: GetTopicIdentifierNotificationTopicsTopicStrGetVariables;
+    }
+  | {
+      path: "/users/";
+      operationId: "readUsersUsersGet";
+      variables: ReadUsersUsersGetVariables;
+    }
+  | {
+      path: "/users/count";
+      operationId: "countUsersUsersCountGet";
+      variables: CountUsersUsersCountGetVariables;
+    }
+  | {
+      path: "/users/search";
+      operationId: "searchUsersUsersSearchGet";
+      variables: SearchUsersUsersSearchGetVariables;
+    }
+  | {
+      path: "/users/me";
+      operationId: "readCurrentUserUsersMeGet";
+      variables: ReadCurrentUserUsersMeGetVariables;
+    }
+  | {
+      path: "/users/activate";
+      operationId: "getUserActivationPageUsersActivateGet";
+      variables: GetUserActivationPageUsersActivateGetVariables;
+    }
+  | {
+      path: "/users/migrate-mail-confirm";
+      operationId: "migrateMailConfirmUsersMigrateMailConfirmGet";
+      variables: MigrateMailConfirmUsersMigrateMailConfirmGetVariables;
+    }
+  | {
+      path: "/users/{userId}";
+      operationId: "readUserUsersUserIdGet";
+      variables: ReadUserUsersUserIdGetVariables;
+    }
+  | {
+      path: "/users/me/profile-picture";
+      operationId: "readOwnProfilePictureUsersMeProfilePictureGet";
+      variables: ReadOwnProfilePictureUsersMeProfilePictureGetVariables;
+    }
+  | {
+      path: "/users/{userId}/profile-picture";
+      operationId: "readUserProfilePictureUsersUserIdProfilePictureGet";
+      variables: ReadUserProfilePictureUsersUserIdProfilePictureGetVariables;
+    }
+  | {
+      path: "/campaign/sections";
+      operationId: "getSectionsCampaignSectionsGet";
+      variables: GetSectionsCampaignSectionsGetVariables;
+    }
+  | {
+      path: "/campaign/lists";
+      operationId: "getListsCampaignListsGet";
+      variables: GetListsCampaignListsGetVariables;
+    }
+  | {
+      path: "/campaign/voters";
+      operationId: "getVotersCampaignVotersGet";
+      variables: GetVotersCampaignVotersGetVariables;
+    }
+  | {
+      path: "/campaign/votes";
+      operationId: "getSectionsAlreadyVotedCampaignVotesGet";
+      variables: GetSectionsAlreadyVotedCampaignVotesGetVariables;
+    }
+  | {
+      path: "/campaign/results";
+      operationId: "getResultsCampaignResultsGet";
+      variables: GetResultsCampaignResultsGetVariables;
+    }
+  | {
+      path: "/campaign/status";
+      operationId: "getStatusVoteCampaignStatusGet";
+      variables: GetStatusVoteCampaignStatusGetVariables;
+    }
+  | {
+      path: "/campaign/stats/{sectionId}";
+      operationId: "getStatsForSectionCampaignStatsSectionIdGet";
+      variables: GetStatsForSectionCampaignStatsSectionIdGetVariables;
+    }
+  | {
+      path: "/campaign/lists/{listId}/logo";
+      operationId: "readCampaignsLogoCampaignListsListIdLogoGet";
+      variables: ReadCampaignsLogoCampaignListsListIdLogoGetVariables;
+    }
+  | {
+      path: "/advert/advertisers";
+      operationId: "readAdvertisersAdvertAdvertisersGet";
+      variables: ReadAdvertisersAdvertAdvertisersGetVariables;
+    }
+  | {
+      path: "/advert/me/advertisers";
+      operationId: "getCurrentUserAdvertisersAdvertMeAdvertisersGet";
+      variables: GetCurrentUserAdvertisersAdvertMeAdvertisersGetVariables;
+    }
+  | {
+      path: "/advert/adverts";
+      operationId: "readAdvertsAdvertAdvertsGet";
+      variables: ReadAdvertsAdvertAdvertsGetVariables;
+    }
+  | {
+      path: "/advert/adverts/{advertId}";
+      operationId: "readAdvertAdvertAdvertsAdvertIdGet";
+      variables: ReadAdvertAdvertAdvertsAdvertIdGetVariables;
+    }
+  | {
+      path: "/advert/adverts/{advertId}/picture";
+      operationId: "readAdvertImageAdvertAdvertsAdvertIdPictureGet";
+      variables: ReadAdvertImageAdvertAdvertsAdvertIdPictureGetVariables;
     }
   | {
       path: "/tombola/raffles";
@@ -15344,72 +14453,172 @@ export type QueryOperation =
       variables: GetCashByIdTombolaUsersUserIdCashGetVariables;
     }
   | {
-      path: "/users/";
-      operationId: "readUsersUsersGet";
-      variables: ReadUsersUsersGetVariables;
+      path: "/amap/products";
+      operationId: "getProductsAmapProductsGet";
+      variables: GetProductsAmapProductsGetVariables;
     }
   | {
-      path: "/users/count";
-      operationId: "countUsersUsersCountGet";
-      variables: CountUsersUsersCountGetVariables;
+      path: "/amap/products/{productId}";
+      operationId: "getProductByIdAmapProductsProductIdGet";
+      variables: GetProductByIdAmapProductsProductIdGetVariables;
     }
   | {
-      path: "/users/search";
-      operationId: "searchUsersUsersSearchGet";
-      variables: SearchUsersUsersSearchGetVariables;
+      path: "/amap/deliveries";
+      operationId: "getDeliveriesAmapDeliveriesGet";
+      variables: GetDeliveriesAmapDeliveriesGetVariables;
     }
   | {
-      path: "/users/me";
-      operationId: "readCurrentUserUsersMeGet";
-      variables: ReadCurrentUserUsersMeGetVariables;
+      path: "/amap/deliveries/{deliveryId}/orders";
+      operationId: "getOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGet";
+      variables: GetOrdersFromDeliveryAmapDeliveriesDeliveryIdOrdersGetVariables;
     }
   | {
-      path: "/users/activate";
-      operationId: "getUserActivationPageUsersActivateGet";
-      variables: GetUserActivationPageUsersActivateGetVariables;
+      path: "/amap/orders/{orderId}";
+      operationId: "getOrderByIdAmapOrdersOrderIdGet";
+      variables: GetOrderByIdAmapOrdersOrderIdGetVariables;
     }
   | {
-      path: "/users/migrate-mail-confirm";
-      operationId: "migrateMailConfirmUsersMigrateMailConfirmGet";
-      variables: MigrateMailConfirmUsersMigrateMailConfirmGetVariables;
+      path: "/amap/users/cash";
+      operationId: "getUsersCashAmapUsersCashGet";
+      variables: GetUsersCashAmapUsersCashGetVariables;
     }
   | {
-      path: "/users/{userId}";
-      operationId: "readUserUsersUserIdGet";
-      variables: ReadUserUsersUserIdGetVariables;
+      path: "/amap/users/{userId}/cash";
+      operationId: "getCashByIdAmapUsersUserIdCashGet";
+      variables: GetCashByIdAmapUsersUserIdCashGetVariables;
     }
   | {
-      path: "/users/me/profile-picture";
-      operationId: "readOwnProfilePictureUsersMeProfilePictureGet";
-      variables: ReadOwnProfilePictureUsersMeProfilePictureGetVariables;
+      path: "/amap/users/{userId}/orders";
+      operationId: "getOrdersOfUserAmapUsersUserIdOrdersGet";
+      variables: GetOrdersOfUserAmapUsersUserIdOrdersGetVariables;
     }
   | {
-      path: "/users/{userId}/profile-picture";
-      operationId: "readUserProfilePictureUsersUserIdProfilePictureGet";
-      variables: ReadUserProfilePictureUsersUserIdProfilePictureGetVariables;
+      path: "/amap/information";
+      operationId: "getInformationAmapInformationGet";
+      variables: GetInformationAmapInformationGetVariables;
     }
   | {
-      path: "/raid/participant/{participantId}";
-      operationId: "getParticipantByIdRaidParticipantParticipantIdGet";
-      variables: GetParticipantByIdRaidParticipantParticipantIdGetVariables;
+      path: "/booking/managers";
+      operationId: "getManagersBookingManagersGet";
+      variables: GetManagersBookingManagersGetVariables;
     }
   | {
-      path: "/raid/participant/{participantId}/team";
-      operationId: "getTeamByParticipantIdRaidParticipantParticipantIdTeamGet";
-      variables: GetTeamByParticipantIdRaidParticipantParticipantIdTeamGetVariables;
+      path: "/booking/managers/users/me";
+      operationId: "getCurrentUserManagersBookingManagersUsersMeGet";
+      variables: GetCurrentUserManagersBookingManagersUsersMeGetVariables;
     }
   | {
-      path: "/raid/team/all";
-      operationId: "getAllTeamsRaidTeamAllGet";
-      variables: GetAllTeamsRaidTeamAllGetVariables;
+      path: "/booking/bookings/users/me/manage";
+      operationId: "getBookingsForManagerBookingBookingsUsersMeManageGet";
+      variables: GetBookingsForManagerBookingBookingsUsersMeManageGetVariables;
     }
   | {
-      path: "/raid/team/{teamId}";
-      operationId: "getTeamByIdRaidTeamTeamIdGet";
-      variables: GetTeamByIdRaidTeamTeamIdGetVariables;
+      path: "/booking/bookings/confirmed/users/me/manage";
+      operationId: "getConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGet";
+      variables: GetConfirmedBookingsForManagerBookingBookingsConfirmedUsersMeManageGetVariables;
+    }
+  | {
+      path: "/booking/bookings/confirmed";
+      operationId: "getConfirmedBookingsBookingBookingsConfirmedGet";
+      variables: GetConfirmedBookingsBookingBookingsConfirmedGetVariables;
+    }
+  | {
+      path: "/booking/bookings/users/me";
+      operationId: "getApplicantBookingsBookingBookingsUsersMeGet";
+      variables: GetApplicantBookingsBookingBookingsUsersMeGetVariables;
+    }
+  | {
+      path: "/booking/rooms";
+      operationId: "getRoomsBookingRoomsGet";
+      variables: GetRoomsBookingRoomsGetVariables;
+    }
+  | {
+      path: "/loans/loaners/";
+      operationId: "readLoanersLoansLoanersGet";
+      variables: ReadLoanersLoansLoanersGetVariables;
+    }
+  | {
+      path: "/loans/loaners/{loanerId}/loans";
+      operationId: "getLoansByLoanerLoansLoanersLoanerIdLoansGet";
+      variables: GetLoansByLoanerLoansLoanersLoanerIdLoansGetVariables;
+    }
+  | {
+      path: "/loans/loaners/{loanerId}/items";
+      operationId: "getItemsByLoanerLoansLoanersLoanerIdItemsGet";
+      variables: GetItemsByLoanerLoansLoanersLoanerIdItemsGetVariables;
+    }
+  | {
+      path: "/loans/users/me";
+      operationId: "getCurrentUserLoansLoansUsersMeGet";
+      variables: GetCurrentUserLoansLoansUsersMeGetVariables;
+    }
+  | {
+      path: "/loans/users/me/loaners";
+      operationId: "getCurrentUserLoanersLoansUsersMeLoanersGet";
+      variables: GetCurrentUserLoanersLoansUsersMeLoanersGetVariables;
+    }
+  | {
+      path: "/cinema/sessions";
+      operationId: "getSessionsCinemaSessionsGet";
+      variables: GetSessionsCinemaSessionsGetVariables;
+    }
+  | {
+      path: "/cinema/sessions/{sessionId}/poster";
+      operationId: "readSessionPosterCinemaSessionsSessionIdPosterGet";
+      variables: ReadSessionPosterCinemaSessionsSessionIdPosterGetVariables;
+    }
+  | {
+      path: "/raid/participants/{participantId}";
+      operationId: "getParticipantByIdRaidParticipantsParticipantIdGet";
+      variables: GetParticipantByIdRaidParticipantsParticipantIdGetVariables;
+    }
+  | {
+      path: "/raid/teams";
+      operationId: "getAllTeamsRaidTeamsGet";
+      variables: GetAllTeamsRaidTeamsGetVariables;
+    }
+  | {
+      path: "/raid/participants/{participantId}/team";
+      operationId: "getTeamByParticipantIdRaidParticipantsParticipantIdTeamGet";
+      variables: GetTeamByParticipantIdRaidParticipantsParticipantIdTeamGetVariables;
+    }
+  | {
+      path: "/raid/teams/{teamId}";
+      operationId: "getTeamByIdRaidTeamsTeamIdGet";
+      variables: GetTeamByIdRaidTeamsTeamIdGetVariables;
     }
   | {
       path: "/raid/document/{documentId}";
       operationId: "readDocumentRaidDocumentDocumentIdGet";
       variables: ReadDocumentRaidDocumentDocumentIdGetVariables;
+    }
+  | {
+      path: "/calendar/events/";
+      operationId: "getEventsCalendarEventsGet";
+      variables: GetEventsCalendarEventsGetVariables;
+    }
+  | {
+      path: "/calendar/events/confirmed";
+      operationId: "getConfirmedEventsCalendarEventsConfirmedGet";
+      variables: GetConfirmedEventsCalendarEventsConfirmedGetVariables;
+    }
+  | {
+      path: "/calendar/events/user/{applicantId}";
+      operationId: "getApplicantBookingsCalendarEventsUserApplicantIdGet";
+      variables: GetApplicantBookingsCalendarEventsUserApplicantIdGetVariables;
+    }
+  | {
+      path: "/calendar/events/{eventId}";
+      operationId: "getEventByIdCalendarEventsEventIdGet";
+      variables: GetEventByIdCalendarEventsEventIdGetVariables;
+    }
+  | {
+      path: "calendar/events/{eventId}/applicant";
+      operationId: "getEventApplicantcalendarEventsEventIdApplicantGet";
+      variables: GetEventApplicantcalendarEventsEventIdApplicantGetVariables;
+    }
+  | {
+      path: "/calendar/ical";
+      operationId: "getIcalendarFileCalendarIcalGet";
+      variables: GetIcalendarFileCalendarIcalGetVariables;
     };

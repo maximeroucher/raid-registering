@@ -303,7 +303,7 @@ export type CalendarEventType =
   | "Asso ind\u00E9"
   | "HH"
   | "Strass"
-  | "Soir\u00E9e"
+  | "Rewass"
   | "Autre";
 
 export type CashComplete = {
@@ -549,6 +549,7 @@ export type DeliveryUpdate = {
 export type Difficulty = "discovery" | "sports" | "expert";
 
 export type Document = {
+  participant_id: string;
   name: string;
   type: DocumentType;
   id: string;
@@ -557,11 +558,6 @@ export type Document = {
    */
   uploaded_at: string;
   validated: boolean;
-};
-
-export type DocumentBase = {
-  name: string;
-  type: DocumentType;
 };
 
 export type DocumentType =
@@ -918,6 +914,8 @@ export type ManagerUpdate = {
   group_id?: string | null;
 };
 
+export type MeetingPlace = "centrale" | "bellecour" | "anyway";
+
 export type Message = {
   /**
    * A context represents a topic. There can only by one notification per context.
@@ -1011,10 +1009,9 @@ export type Participant = {
    * @format date
    */
   birthday: string;
+  address: string;
   phone: string;
   email: string;
-  id: string;
-  address: string | null;
   bike_size: Size | null;
   t_shirt_size: Size | null;
   situation: string | null;
@@ -1028,7 +1025,7 @@ export type Participant = {
   raid_rules?: Document | null;
   attestation_on_honour: boolean;
   payment: boolean;
-  validation_progress: number;
+  id: string;
 };
 
 export type ParticipantBase = {
@@ -1038,6 +1035,7 @@ export type ParticipantBase = {
    * @format date
    */
   birthday: string;
+  address: string;
   phone: string;
   email: string;
 };
@@ -1046,20 +1044,15 @@ export type ParticipantUpdate = {
   name?: string | null;
   firstname?: string | null;
   birthday?: string | null;
+  address?: string | null;
   phone?: string | null;
   email?: string | null;
-  address?: string | null;
   bike_size?: Size | null;
   t_shirt_size?: Size | null;
   situation?: string | null;
   other_school?: string | null;
   company?: string | null;
   diet?: string | null;
-  id_card?: Document | null;
-  medical_certificate?: Document | null;
-  security_file?: SecurityFile | null;
-  student_card?: Document | null;
-  raid_rules?: Document | null;
   attestation_on_honour?: boolean | null;
 };
 
@@ -1211,6 +1204,7 @@ export type Team = {
   second: Participant | null;
   difficulty: Difficulty | null;
   validation_progress: number;
+  meeting_place: MeetingPlace | null;
 };
 
 export type TeamBase = {
@@ -1224,13 +1218,13 @@ export type TeamPreview = {
   captain: ParticipantBase;
   second: ParticipantBase | null;
   difficulty: Difficulty | null;
-  validation_progress: number;
 };
 
 export type TeamUpdate = {
   name?: string | null;
   number?: number | null;
   difficulty?: Difficulty | null;
+  meeting_place?: MeetingPlace | null;
 };
 
 export type TicketComplete = {
@@ -1297,14 +1291,14 @@ export type VoterGroup = {
   group_id: string;
 };
 
-export type AppSchemasSchemasCampaignResult = {
-  list_id: string;
-  count: number;
-};
-
-export type AppUtilsTypesStandardResponsesResult = {
+export type AppCoreStandardResponsesResult = {
   /**
    * @default true
    */
   success?: boolean;
+};
+
+export type AppModulesCampaignSchemasCampaignResult = {
+  list_id: string;
+  count: number;
 };
