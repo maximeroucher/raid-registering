@@ -13,8 +13,17 @@ import {
 import { ControllerRenderProps, FieldValues } from "react-hook-form";
 import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 import { Button } from "../ui/button";
+import internal from "stream";
+import { HiArrowNarrowRight, HiArrowRight, HiArrowSmRight } from "react-icons/hi";
+import { fi } from "date-fns/locale";
 
-type ValueType = string | Size | boolean | Document | SecurityFile;
+type ValueType = string | Size | boolean | Document | SecurityFile | Situation;
+
+export type Situation =
+  | "centrale"
+  | "otherschool"
+  | "corporatepartner"
+  | "other";
 
 export enum ValueTypes {
   STRING = "string",
@@ -22,6 +31,7 @@ export enum ValueTypes {
   BOOLEAN = "boolean",
   DOCUMENT = "document",
   SECURITYFILE = "securityFile",
+  SITUATION = "situation",
 }
 
 interface EditParticipantCardItemProps<T extends ValueType> {
@@ -30,6 +40,7 @@ interface EditParticipantCardItemProps<T extends ValueType> {
   placeholder?: string;
   form: any;
   type: T;
+  layer?: number;
 }
 
 export function EditParticipantCardItem<T extends ValueType>({
@@ -38,6 +49,7 @@ export function EditParticipantCardItem<T extends ValueType>({
   placeholder,
   form,
   type,
+  layer,
 }: EditParticipantCardItemProps<T>) {
   const sizeArray: Size[] = ["XS", "S", "M", "L", "XL"];
 
@@ -82,7 +94,9 @@ export function EditParticipantCardItem<T extends ValueType>({
                   <span className="font-semibold  mr-6">
                     Choisir un fichier
                   </span>
-                  <span className="text-gray-500">{field.value ?? "Aucun fichier séléctionné"}</span>
+                  <span className="text-gray-500">
+                    {field.value ?? "Aucun fichier séléctionné"}
+                  </span>
                 </div>
               </Button>
             </DialogTrigger>
@@ -123,6 +137,24 @@ export function EditParticipantCardItem<T extends ValueType>({
             </FormControl>
           </div>
         );
+      case ValueTypes.SITUATION:
+        return (
+          <div className="col-span-4">
+            <FormMessage />
+            <FormControl>
+              <Combobox
+                values={[
+                  { value: "centrale", label: "Centrale" },
+                  { value: "otherschool", label: "Autre école" },
+                  { value: "corporatepartner", label: "Partenaire entreprise" },
+                  { value: "other", label: "Autre" },
+                ]}
+                placeholder="Situation"
+                {...field}
+              />
+            </FormControl>
+          </div>
+        );
 
       default:
         return <Skeleton className="w-24 h-6" />;
@@ -135,8 +167,10 @@ export function EditParticipantCardItem<T extends ValueType>({
       name={id}
       render={({ field }) => (
         <FormItem>
-          <div className="grid p-2 grid-cols-6">
-            <FormLabel className="font-semibold text-left my-auto text-md col-span-2">
+          <div className={`grid p-2 grid-cols-6 `}>
+            <FormLabel
+              className={`font-semibold text-left my-auto text-md col-span-2`}
+            >{layer &&  <HiArrowNarrowRight className="inline mr-4" />}
               {label}
             </FormLabel>
             {valueComponent(field)}

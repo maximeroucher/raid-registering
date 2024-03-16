@@ -16,6 +16,7 @@ import { toast } from "../ui/use-toast";
 import { useParticipant } from "@/src/hooks/useParticipant";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { HiPencil, HiCheck, HiX } from "react-icons/hi";
+import { useTeam } from "@/src/hooks/useTeam";
 
 interface ViewEditParticipantItemProps {
   me: Participant;
@@ -29,6 +30,7 @@ export const ViewEditParticipantItem = ({
   setIsEdit,
 }: ViewEditParticipantItemProps) => {
   const { updateParticipant, isUpdateLoading } = useParticipant();
+  const { refetchTeam } = useTeam();
   const formSchema = z.object({
     address: z
       .string()
@@ -54,6 +56,10 @@ export const ViewEditParticipantItem = ({
         { message: "Veuillez renseigner une taille de t-shirt valide" }
       )
       .optional(),
+    situation: z.string().optional(),
+    otherSchool: z.string().optional(),
+    company: z.string().optional(),
+    other: z.string().optional(),
     diet: z.string().optional(),
     attestationHonour: z.boolean().optional(),
   });
@@ -62,8 +68,10 @@ export const ViewEditParticipantItem = ({
     resolver: zodResolver(formSchema),
     defaultValues: {
       address: me.address ?? undefined,
-      bikeSize: me.bike_size ?? undefined,
-      tShirtSize: me.t_shirt_size ?? undefined,
+      bikeSize: me.bike_size?.toUpperCase() ?? undefined,
+      tShirtSize: me.t_shirt_size?.toUpperCase() ?? undefined,
+      situation: me.situation === "centrale" ? me.situation ?? undefined : "other",
+      other: me.situation !== "centrale" ? me.situation ?? undefined : undefined,
       diet: me.diet ?? undefined,
       attestationHonour: me.attestation_on_honour,
     },
@@ -75,17 +83,35 @@ export const ViewEditParticipantItem = ({
       return;
     }
     const updatedParticipant: ParticipantUpdate = {
-      bike_size: values.bikeSize?.toUpperCase() as Size ?? null,
-      t_shirt_size: values.tShirtSize?.toUpperCase() as Size ?? null,
-      ...values,
+      bike_size: (values.bikeSize?.toUpperCase() as Size) ?? null,
+      t_shirt_size: (values.tShirtSize?.toUpperCase() as Size) ?? null,
+      situation: switchSituation(values),
+      address: values.address ?? null,
+      diet: values.diet ?? null,
+      attestation_on_honour: values.attestationHonour,
     };
+    console.log(updatedParticipant);
     updateParticipant(updatedParticipant, () => {
       toast({
         title: "Profil mis à jour",
         description: "Vos informations ont été mises à jour avec succès",
       });
+      refetchTeam();
       setIsEdit(!isEdit);
     });
+  }
+
+  function switchSituation(values: z.infer<typeof formSchema>) {
+    switch (values.situation) {
+      case "otherschool":
+        return values.otherSchool;
+      case "corporatepartner":
+        return values.company;
+      case "other":
+        return values.other;
+      default:
+        return values.situation;
+    }
   }
 
   function getSituation() {
@@ -99,6 +125,46 @@ export const ViewEditParticipantItem = ({
       default:
         return <ParticipantCardItem label="Situation" value={me.situation} />;
     }
+  }
+
+  function getSituationEdit() {
+    return (
+      <>
+        <EditParticipantCardItem
+          label="Addresse"
+          id="situation"
+          form={form}
+          type={ValueTypes.SITUATION}
+        />
+        {form.watch("situation") === "otherschool" && (
+          <EditParticipantCardItem
+            label="Nom de l'école"
+            id="otherSchool"
+            form={form}
+            type={ValueTypes.STRING}
+            layer={1}
+          />
+        )}
+        {form.watch("situation") === "corporatepartner" && (
+          <EditParticipantCardItem
+            label="Nom de l'entreprise"
+            id="company"
+            form={form}
+            type={ValueTypes.STRING}
+            layer={1}
+          />
+        )}
+        {form.watch("situation") === "other" && (
+          <EditParticipantCardItem
+            label="Autre situation"
+            id="other"
+            form={form}
+            type={ValueTypes.STRING}
+            layer={1}
+          />
+        )}
+      </>
+    );
   }
 
   return (
@@ -128,12 +194,7 @@ export const ViewEditParticipantItem = ({
                 form={form}
                 type={ValueTypes.SIZE}
               />
-              <EditParticipantCardItem
-                label="Situation"
-                id="situation"
-                form={form}
-                type={ValueTypes.STRING}
-              />
+              {getSituationEdit()}
               <EditParticipantCardItem
                 label="Régime alimentaire"
                 id="diet"
