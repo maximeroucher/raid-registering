@@ -87,9 +87,10 @@ export const ParticipantCard = ({
           </CardFooter>
           <Progress
             value={
-              participant?.validation_progress
-                ? participant!.validation_progress * 100
-                : 0
+              // participant?.validation_progress
+              //   ? participant!.validation_progress * 100
+              //   : 0
+              0
             }
           />
         </>
