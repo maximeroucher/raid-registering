@@ -39,7 +39,8 @@ export const TeamCard = ({ team }: TeamCardProps) => {
           </div>
         </CardHeader>
         <Progress
-          value={team?.validation_progress ? team.validation_progress * 100 : 0}
+          // value={team?.validation_progress ? team.validation_progress * 100 : 0}
+          value={0}
         />
       </div>
     </Card>
