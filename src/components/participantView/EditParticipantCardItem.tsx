@@ -19,10 +19,9 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import { Button } from "../ui/button";
-import {
-  HiArrowNarrowRight,
-} from "react-icons/hi";
+import { HiArrowNarrowRight } from "react-icons/hi";
 import { DropzoneInput } from "../ui/dropzoneInput";
+import { useState } from "react";
 
 type ValueType = string | Size | boolean | Document | SecurityFile | Situation;
 
@@ -62,6 +61,8 @@ export function EditParticipantCardItem<T extends ValueType>({
 
   const valueComponent = (
     field: ControllerRenderProps<FieldValues, string>,
+    open: boolean,
+    setIsOpen: (value: boolean) => void,
   ) => {
     switch (type) {
       case ValueTypes.BOOLEAN:
@@ -94,7 +95,7 @@ export function EditParticipantCardItem<T extends ValueType>({
         );
       case ValueTypes.DOCUMENT:
         return (
-          <Dialog>
+          <Dialog open={open} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
               <Button variant="outline" className="col-span-4">
                 <div className="flex flex-row items-start w-full">
@@ -114,9 +115,10 @@ export function EditParticipantCardItem<T extends ValueType>({
                 </DialogTitle>
               </DialogHeader>
               <DropzoneInput
-                form={form}
-                onDropAccepted={(files) => {
-                  console.log(files);
+                setIsOpen={setIsOpen}
+                onDropAccepted={(files, _) => {
+                  const file = files[0];
+                  field.onChange(file.name);
                 }}
               />
             </DialogContent>
@@ -175,6 +177,8 @@ export function EditParticipantCardItem<T extends ValueType>({
     }
   };
 
+  const [open, setIsOpen] = useState(false);
+
   return (
     <FormField
       control={form.control}
@@ -188,7 +192,7 @@ export function EditParticipantCardItem<T extends ValueType>({
               {layer && <HiArrowNarrowRight className="inline mr-4" />}
               {label}
             </FormLabel>
-            {valueComponent(field)}
+            {valueComponent(field, open, setIsOpen)}
           </div>
         </FormItem>
       )}

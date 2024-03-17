@@ -1,55 +1,68 @@
 import { cn } from "@/lib/utils";
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogTitle,
-} from "@radix-ui/react-dialog";
-import { id } from "date-fns/locale";
-import { DialogHeader } from "./dialog";
-import { FormField } from "./form";
-import { Button } from "./button";
-import Dropzone from "react-dropzone";
-import { ControllerRenderProps, FieldValues } from "react-hook-form";
+import { set } from "date-fns";
+import { useState } from "react";
+import Dropzone, { DropEvent, Accept } from "react-dropzone";
 
 interface DropzoneInputProps {
-  form: any;
-  onDropAccepted: (files: any[]) => void;
+  onDropAccepted: (files: File[], event: DropEvent) => void;
+  setIsOpen: (isOpen: boolean) => void;
   multiple?: boolean;
   maxSize?: number;
+  accept?: Accept;
 }
 
 export const DropzoneInput = ({
-  form,
+  setIsOpen,
   onDropAccepted,
   multiple = false,
   maxSize = 10485760,
+  accept = {
+    "image/*": [".jpg", ".jpeg", ".png"],
+    "application/pdf": [".pdf"],
+  },
 }: DropzoneInputProps) => {
+  const [isDropRejected, setIsDropRejected] = useState(false);
+  const [rejectionMessage, setRejectionMessage] = useState("");
+  const maxSizeInMo = maxSize / 1000000;
+  const supportedTypes = Object.values(accept)
+    .map((types) => types.map((type) => type.replaceAll(".", "")).join(", "))
+    .join(", ");
+
   return (
     <Dropzone
-      accept={{
-        "image/*": [".jpg", ".jpeg", ".png"],
-        "application/pdf": [".pdf"],
+      accept={accept}
+      onDropAccepted={(files, event) => {
+        setIsDropRejected(false);
+        setIsOpen(false);
+        onDropAccepted(files, event);
       }}
-      onDropAccepted={onDropAccepted}
+      onDropRejected={(files, _) => {
+        const file = files[0];
+        if (file.file.size > maxSize) {
+          setRejectionMessage(`Fichier trop lourd (max: ${maxSizeInMo}Mo)`);
+        } else {
+          setRejectionMessage(
+            `Type de fichier non supporté (supporté: ${supportedTypes})`,
+          );
+        }
+        setIsDropRejected(true);
+      }}
       multiple={multiple}
       maxSize={maxSize}
     >
       {({ getRootProps, getInputProps }) => (
-        <div
-          {...getRootProps({
-            className: cn(
-              "container flex flex-col items-center justify-center w-full h-48 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer",
-            ),
-          })}
-        >
-          <div className="flex items-center gap-x-3 mt-2 mb-2">
-            <label
-              htmlFor="Products"
-              className={`text-sm text-[7E8DA0] cursor-pointer focus:outline-none focus:underline ${
-                form.formState.errors.products && "text-red-500"
-              }`}
-            >
+        <>
+          {isDropRejected && (
+            <span className="text-red-600 font-medium">{rejectionMessage}</span>
+          )}
+          <div
+            {...getRootProps({
+              className: cn(
+                `container flex flex-col items-center justify-center w-full h-48 border-2 ${isDropRejected ? "border-red-600" : "border-gray-300"} border-dashed rounded-lg cursor-pointer`,
+              ),
+            })}
+          >
+            <div className="flex flex-col items-center gap-x-3 mt-2 mb-2">
               <span className="flex items-center space-x-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -73,9 +86,9 @@ export const DropzoneInput = ({
                 </span>
               </span>
               <input {...getInputProps()} />
-            </label>
+            </div>
           </div>
-        </div>
+        </>
       )}
     </Dropzone>
   );

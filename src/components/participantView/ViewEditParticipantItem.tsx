@@ -44,7 +44,7 @@ export const ViewEditParticipantItem = ({
         (value) => {
           return ["XS", "S", "M", "L", "XL"].includes(value.toUpperCase());
         },
-        { message: "Veuillez renseigner une taille de vélo valide" }
+        { message: "Veuillez renseigner une taille de vélo valide" },
       )
       .optional(),
     tShirtSize: z
@@ -53,7 +53,7 @@ export const ViewEditParticipantItem = ({
         (value) => {
           return ["XS", "S", "M", "L", "XL"].includes(value.toUpperCase());
         },
-        { message: "Veuillez renseigner une taille de t-shirt valide" }
+        { message: "Veuillez renseigner une taille de t-shirt valide" },
       )
       .optional(),
     situation: z.string().optional(),
@@ -61,18 +61,51 @@ export const ViewEditParticipantItem = ({
     company: z.string().optional(),
     other: z.string().optional(),
     diet: z.string().optional(),
+    idCard: z
+      .object({
+        name: z.string(),
+      })
+      .optional(),
+    medicalCertificate: z
+      .object({
+        name: z.string(),
+      })
+      .optional(),
+    studentCard: z
+      .object({
+        name: z.string(),
+      })
+      .optional(),
     attestationHonour: z.boolean().optional(),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    mode: "onBlur",
     defaultValues: {
       address: me.address ?? undefined,
       bikeSize: me.bike_size?.toUpperCase() ?? undefined,
       tShirtSize: me.t_shirt_size?.toUpperCase() ?? undefined,
-      situation: me.situation === "centrale" ? me.situation ?? undefined : "other",
-      other: me.situation !== "centrale" ? me.situation ?? undefined : undefined,
+      situation:
+        me.situation === "centrale" ? me.situation ?? undefined : "other",
+      other:
+        me.situation !== "centrale" ? me.situation ?? undefined : undefined,
       diet: me.diet ?? undefined,
+      idCard: me.id_card
+        ? {
+            name: me.id_card.name,
+          }
+        : undefined,
+      medicalCertificate: me.medical_certificate
+        ? {
+            name: me.medical_certificate.name,
+          }
+        : undefined,
+      studentCard: me.student_card
+        ? {
+            name: me.student_card.name,
+          }
+        : undefined,
       attestationHonour: me.attestation_on_honour,
     },
   });
@@ -82,6 +115,7 @@ export const ViewEditParticipantItem = ({
       setIsEdit(!isEdit);
       return;
     }
+    console.log(values);
     const updatedParticipant: ParticipantUpdate = {
       bike_size: (values.bikeSize?.toUpperCase() as Size) ?? null,
       t_shirt_size: (values.tShirtSize?.toUpperCase() as Size) ?? null,
@@ -131,7 +165,7 @@ export const ViewEditParticipantItem = ({
     return (
       <>
         <EditParticipantCardItem
-          label="Addresse"
+          label="Situation"
           id="situation"
           form={form}
           type={ValueTypes.SITUATION}
