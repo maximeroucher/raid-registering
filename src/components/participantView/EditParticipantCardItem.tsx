@@ -11,11 +11,18 @@ import {
   FormControl,
 } from "../ui/form";
 import { ControllerRenderProps, FieldValues } from "react-hook-form";
-import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
 import { Button } from "../ui/button";
-import internal from "stream";
-import { HiArrowNarrowRight, HiArrowRight, HiArrowSmRight } from "react-icons/hi";
-import { fi } from "date-fns/locale";
+import {
+  HiArrowNarrowRight,
+} from "react-icons/hi";
+import { DropzoneInput } from "../ui/dropzoneInput";
 
 type ValueType = string | Size | boolean | Document | SecurityFile | Situation;
 
@@ -54,7 +61,7 @@ export function EditParticipantCardItem<T extends ValueType>({
   const sizeArray: Size[] = ["XS", "S", "M", "L", "XL"];
 
   const valueComponent = (
-    field: ControllerRenderProps<FieldValues, string>
+    field: ControllerRenderProps<FieldValues, string>,
   ) => {
     switch (type) {
       case ValueTypes.BOOLEAN:
@@ -100,11 +107,18 @@ export function EditParticipantCardItem<T extends ValueType>({
                 </div>
               </Button>
             </DialogTrigger>
-            <DialogContent className="w-80">
-              <FormMessage />
-              <FormControl>
-                <Input type="file" {...field} />
-              </FormControl>
+            <DialogContent className="md:max-w-2xl top-1/2">
+              <DialogHeader>
+                <DialogTitle className="text-red sm:text-lg">
+                  {label}
+                </DialogTitle>
+              </DialogHeader>
+              <DropzoneInput
+                form={form}
+                onDropAccepted={(files) => {
+                  console.log(files);
+                }}
+              />
             </DialogContent>
           </Dialog>
         );
@@ -120,7 +134,7 @@ export function EditParticipantCardItem<T extends ValueType>({
                 </div>
               </Button>
             </DialogTrigger>
-            <DialogContent className="w-80">
+            <DialogContent>
               <FormMessage />
               <FormControl>
                 <Input type="file" {...field} />
@@ -170,7 +184,8 @@ export function EditParticipantCardItem<T extends ValueType>({
           <div className={`grid p-2 grid-cols-6 `}>
             <FormLabel
               className={`font-semibold text-left my-auto text-md col-span-2`}
-            >{layer &&  <HiArrowNarrowRight className="inline mr-4" />}
+            >
+              {layer && <HiArrowNarrowRight className="inline mr-4" />}
               {label}
             </FormLabel>
             {valueComponent(field)}
