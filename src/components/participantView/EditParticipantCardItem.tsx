@@ -99,12 +99,15 @@ export function EditParticipantCardItem<T extends ValueType>({
             <DialogTrigger asChild>
               <Button variant="outline" className="col-span-4">
                 <div className="flex flex-row items-start w-full">
-                  <span className="font-semibold  mr-6">
-                    Choisir un fichier
-                  </span>
-                  <span className="text-gray-500">
-                    {field.value ?? "Aucun fichier séléctionné"}
-                  </span>
+                  {field.value ? (
+                    <span className="text-gray-500 overflow-hidden">
+                      {field.value ?? "Aucun fichier séléctionné"}
+                    </span>
+                  ) : (
+                    <span className="font-semibold  mr-6">
+                      Choisir un fichier
+                    </span>
+                  )}
                 </div>
               </Button>
             </DialogTrigger>
