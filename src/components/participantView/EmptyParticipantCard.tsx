@@ -14,7 +14,7 @@ export const EmptyParticipantCard = () => {
   return (
     <Card className="w-full" onClick={showToast}>
       <CardContent className="w-full h-full">
-        <div className="flex m-auto h-full">
+        <div className="flex m-auto h-full mt-3">
           <Button variant="outline" className="flex m-auto">
             <HiPlus className="inline mr-4" />
             <span>Inviter un participant</span>
