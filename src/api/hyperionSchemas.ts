@@ -551,7 +551,6 @@ export type Difficulty = "discovery" | "sports" | "expert";
 export type Document = {
   participant_id: string;
   name: string;
-  type: DocumentType;
   id: string;
   /**
    * @format date
@@ -560,11 +559,11 @@ export type Document = {
   validated: boolean;
 };
 
-export type DocumentType =
-  | "idCard"
-  | "medicalCertificate"
-  | "studentCard"
-  | "raidRules";
+export type DocumentCreation = {
+  participant_id: string;
+  name: string;
+  id: string;
+};
 
 export type EventApplicant = {
   name: string;
@@ -1198,7 +1197,7 @@ export type StatusType =
 export type Team = {
   name: string;
   id: string;
-  number: number;
+  number: number | null;
   captain: Participant;
   second: Participant | null;
   difficulty: Difficulty | null;
@@ -1212,7 +1211,7 @@ export type TeamBase = {
 export type TeamPreview = {
   name: string;
   id: string;
-  number: number;
+  number: number | null;
   captain: ParticipantBase;
   second: ParticipantBase | null;
   difficulty: Difficulty | null;
