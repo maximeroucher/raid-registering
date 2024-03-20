@@ -12,12 +12,14 @@ export const EmptyParticipantCard = () => {
     });
   }
   return (
-    <Card className="flex w-full m-14" onClick={showToast}>
-      <CardContent className="m-auto">
-        <Button variant="outline">
-          <HiPlus className="inline mr-4"/>
-          <span >Inviter un participant</span>
-        </Button>
+    <Card className="w-full" onClick={showToast}>
+      <CardContent className="w-full h-full">
+        <div className="flex m-auto h-full">
+          <Button variant="outline" className="flex m-auto">
+            <HiPlus className="inline mr-4" />
+            <span>Inviter un participant</span>
+          </Button>
+        </div>
       </CardContent>
     </Card>
   );
