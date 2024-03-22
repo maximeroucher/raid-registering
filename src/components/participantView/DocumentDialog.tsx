@@ -26,9 +26,10 @@ export const DocumentDialog = ({
 }: DocumentDialogProps) => {
   const { uploadDocument, getDocument } = useDocument();
   const file = getDocument(id);
+  console.log(file);
   return (
     <>
-      {file !== undefined ? (
+      {file?.name !== undefined ? (
         <div className="flex flex-col items-center gap-4">
           <span className="text-gray-500 overflow-hidden m-auto">
             <Image
@@ -58,11 +59,9 @@ export const DocumentDialog = ({
             uploadDocument(file, id, documentId, () => {
               field.onChange({
                 name: file.name,
-                validated: false,
                 participant_id: me!.id,
-                type: id,
                 id: documentId,
-                uploaded_at: toDate(file.lastModified),
+                updated: true,
               });
               setIsUploading(false);
             });

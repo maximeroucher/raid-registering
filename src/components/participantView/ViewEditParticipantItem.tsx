@@ -3,20 +3,20 @@ import {
   ParticipantUpdate,
   Size,
 } from "@/src/api/hyperionSchemas";
-import { CardContent, CardFooter } from "../ui/card";
+import { CardContent } from "../ui/card";
 import { EditParticipantCardItem, ValueTypes } from "./EditParticipantCardItem";
 import { ParticipantCardItem } from "./ParticipantCardItem";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Controller, FormProvider, useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
-import { Value } from "@radix-ui/react-select";
 import { Button } from "../ui/button";
 import { toast } from "../ui/use-toast";
 import { useParticipant } from "@/src/hooks/useParticipant";
 import { ReloadIcon } from "@radix-ui/react-icons";
-import { HiPencil, HiCheck, HiX } from "react-icons/hi";
+import { HiCheck } from "react-icons/hi";
 import { useTeam } from "@/src/hooks/useTeam";
+import { useDocument } from "@/src/hooks/useDocument";
 
 interface ViewEditParticipantItemProps {
   me: Participant;
@@ -31,6 +31,7 @@ export const ViewEditParticipantItem = ({
 }: ViewEditParticipantItemProps) => {
   const { updateParticipant, isUpdateLoading } = useParticipant();
   const { refetchTeam } = useTeam();
+  const { assignDocument } = useDocument();
   const formSchema = z.object({
     address: z
       .string()
@@ -64,18 +65,35 @@ export const ViewEditParticipantItem = ({
     idCard: z
       .object({
         name: z.string(),
+        participant_id: z.string().uuid(),
+        id: z.string().uuid(),
+        updated: z.boolean(),
       })
-      .optional(),
+      .partial(),
     medicalCertificate: z
       .object({
         name: z.string(),
+        participant_id: z.string().uuid(),
+        id: z.string().uuid(),
+        updated: z.boolean(),
       })
-      .optional(),
+      .partial(),
     studentCard: z
       .object({
         name: z.string(),
+        participant_id: z.string().uuid(),
+        id: z.string().uuid(),
+        updated: z.boolean(),
       })
-      .optional(),
+      .partial(),
+    raidRules: z
+      .object({
+        name: z.string(),
+        participant_id: z.string().uuid(),
+        id: z.string().uuid(),
+        updated: z.boolean(),
+      })
+      .partial(),
     attestationHonour: z.boolean().optional(),
   });
 
@@ -91,21 +109,26 @@ export const ViewEditParticipantItem = ({
       other:
         me.situation !== "centrale" ? me.situation ?? undefined : undefined,
       diet: me.diet ?? undefined,
-      idCard: me.id_card
-        ? {
-            name: me.id_card.name,
-          }
-        : undefined,
-      medicalCertificate: me.medical_certificate
-        ? {
-            name: me.medical_certificate.name,
-          }
-        : undefined,
-      studentCard: me.student_card
-        ? {
-            name: me.student_card.name,
-          }
-        : undefined,
+      idCard: {
+        name: me.id_card?.name ?? undefined,
+        participant_id: me.id_card?.participant_id ?? me.id,
+        id: me.id_card?.id ?? undefined,
+      },
+      medicalCertificate: {
+        name: me.medical_certificate?.name ?? undefined,
+        participant_id: me.medical_certificate?.participant_id ?? me.id,
+        id: me.medical_certificate?.id ?? undefined,
+      },
+      studentCard: {
+        name: me.student_card?.name ?? undefined,
+        participant_id: me.student_card?.participant_id ?? me.id,
+        id: me.student_card?.id ?? undefined,
+      },
+      raidRules: {
+        name: me.raid_rules?.name ?? undefined,
+        participant_id: me.raid_rules?.participant_id ?? me.id,
+        id: me.raid_rules?.id ?? undefined,
+      },
       attestationHonour: me.attestation_on_honour,
     },
   });
@@ -115,7 +138,26 @@ export const ViewEditParticipantItem = ({
       setIsEdit(!isEdit);
       return;
     }
-    console.log(values);
+    const documentToUpdate = [
+      values.idCard,
+      values.medicalCertificate,
+      values.studentCard,
+      values.raidRules,
+    ].filter((doc) => doc.updated);
+    for (const doc of documentToUpdate) {
+      if (doc) {
+        assignDocument(
+          {
+            id: doc.id!,
+            name: doc.name!,
+            participant_id: doc.participant_id!,
+          },
+          () => {
+            console.log("Document updated: ", doc.name);
+          },
+        );
+      }
+    }
     const updatedParticipant: ParticipantUpdate = {
       bike_size: (values.bikeSize?.toUpperCase() as Size) ?? null,
       t_shirt_size: (values.tShirtSize?.toUpperCase() as Size) ?? null,
@@ -240,12 +282,14 @@ export const ViewEditParticipantItem = ({
                 id="idCard"
                 form={form}
                 type={ValueTypes.DOCUMENT}
+                me={me}
               />
               <EditParticipantCardItem
                 label="Certificat médical"
                 id="medicalCertificate"
                 form={form}
                 type={ValueTypes.DOCUMENT}
+                me={me}
               />
               <EditParticipantCardItem
                 label="Fiche de sécurité"
@@ -258,6 +302,14 @@ export const ViewEditParticipantItem = ({
                 id="studentCard"
                 form={form}
                 type={ValueTypes.DOCUMENT}
+                me={me}
+              />
+              <EditParticipantCardItem
+                label="Règlement du raid"
+                id="raidRules"
+                form={form}
+                type={ValueTypes.DOCUMENT}
+                me={me}
               />
               <EditParticipantCardItem
                 label="Attestation sur l'honneur"
