@@ -1,7 +1,6 @@
 import { Participant } from "@/src/api/hyperionSchemas";
 import {
   Card,
-  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
@@ -11,10 +10,8 @@ import { ParticipantCardItem } from "./ParticipantCardItem";
 import { Progress } from "../ui/progress";
 import { Button } from "../ui/button";
 import { HiPencil, HiX } from "react-icons/hi";
-import { toast } from "../ui/use-toast";
 import { Skeleton } from "../ui/skeleton";
 import { useState } from "react";
-import { EditParticipantCardItem } from "./EditParticipantCardItem";
 import { ViewEditParticipantItem } from "./ViewEditParticipantItem";
 
 interface ParticipantCardProps {

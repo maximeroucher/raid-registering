@@ -1,4 +1,9 @@
-import { SecurityFile, Size, Document } from "@/src/api/hyperionSchemas";
+import {
+  SecurityFile,
+  Size,
+  Document,
+  Participant,
+} from "@/src/api/hyperionSchemas";
 import { Checkbox } from "../ui/checkbox";
 import { Skeleton } from "../ui/skeleton";
 import { Input } from "../ui/input";
@@ -22,6 +27,11 @@ import { Button } from "../ui/button";
 import { HiArrowNarrowRight } from "react-icons/hi";
 import { DropzoneInput } from "../ui/dropzoneInput";
 import { useState } from "react";
+import { set, toDate } from "date-fns";
+import { useDocument } from "@/src/hooks/useDocument";
+import Image from "next/image";
+import { ReloadIcon } from "@radix-ui/react-icons";
+import { DocumentDialog } from "./documentDialog";
 
 type ValueType = string | Size | boolean | Document | SecurityFile | Situation;
 
@@ -47,6 +57,7 @@ interface EditParticipantCardItemProps<T extends ValueType> {
   form: any;
   type: T;
   layer?: number;
+  me?: Participant;
 }
 
 export function EditParticipantCardItem<T extends ValueType>({
@@ -56,7 +67,10 @@ export function EditParticipantCardItem<T extends ValueType>({
   form,
   type,
   layer,
+  me,
 }: EditParticipantCardItemProps<T>) {
+  const [isUploading, setIsUploading] = useState(false);
+
   const sizeArray: Size[] = ["XS", "S", "M", "L", "XL"];
 
   const valueComponent = (
@@ -96,17 +110,28 @@ export function EditParticipantCardItem<T extends ValueType>({
       case ValueTypes.DOCUMENT:
         return (
           <Dialog open={open} onOpenChange={setIsOpen}>
+            <FormMessage />
             <DialogTrigger asChild>
-              <Button variant="outline" className="col-span-4">
+              <Button
+                variant="outline"
+                className="col-span-4"
+                disabled={isUploading}
+              >
                 <div className="flex flex-row items-start w-full">
-                  {field.value ? (
-                    <span className="text-gray-500 overflow-hidden">
-                      {field.value ?? "Aucun fichier séléctionné"}
-                    </span>
+                  {isUploading ? (
+                    <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
                   ) : (
-                    <span className="font-semibold  mr-6">
-                      Choisir un fichier
-                    </span>
+                    <>
+                      {field.value?.name ? (
+                        <span className="text-gray-500 overflow-hidden">
+                          {field.value.name ?? "Aucun fichier séléctionné"}
+                        </span>
+                      ) : (
+                        <span className="font-semibold  mr-6">
+                          Choisir un fichier
+                        </span>
+                      )}
+                    </>
                   )}
                 </div>
               </Button>
@@ -117,12 +142,12 @@ export function EditParticipantCardItem<T extends ValueType>({
                   {label}
                 </DialogTitle>
               </DialogHeader>
-              <DropzoneInput
+              <DocumentDialog
                 setIsOpen={setIsOpen}
-                onDropAccepted={(files, _) => {
-                  const file = files[0];
-                  field.onChange(file.name);
-                }}
+                setIsUploading={setIsUploading}
+                field={field}
+                me={me}
+                id={id}
               />
             </DialogContent>
           </Dialog>
