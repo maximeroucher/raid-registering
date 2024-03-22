@@ -31,7 +31,7 @@ import { set, toDate } from "date-fns";
 import { useDocument } from "@/src/hooks/useDocument";
 import Image from "next/image";
 import { ReloadIcon } from "@radix-ui/react-icons";
-import { DocumentDialog } from "./documentDialog";
+import { DocumentDialog } from "./DocumentDialog";
 
 type ValueType = string | Size | boolean | Document | SecurityFile | Situation;
 
