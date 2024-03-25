@@ -166,7 +166,6 @@ export const ViewEditParticipantItem = ({
       diet: values.diet ?? null,
       attestation_on_honour: values.attestationHonour,
     };
-    console.log(updatedParticipant);
     updateParticipant(updatedParticipant, () => {
       toast({
         title: "Profil mis à jour",
@@ -174,6 +173,7 @@ export const ViewEditParticipantItem = ({
       });
       refetchTeam();
       setIsEdit(!isEdit);
+      form.reset();
     });
   }
 
