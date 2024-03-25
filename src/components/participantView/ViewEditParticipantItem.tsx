@@ -65,33 +65,33 @@ export const ViewEditParticipantItem = ({
     idCard: z
       .object({
         name: z.string(),
-        participant_id: z.string().uuid(),
         id: z.string().uuid(),
         updated: z.boolean(),
+        type: z.literal("idCard"),
       })
       .partial(),
     medicalCertificate: z
       .object({
         name: z.string(),
-        participant_id: z.string().uuid(),
         id: z.string().uuid(),
         updated: z.boolean(),
+        type: z.literal("medicalCertificate"),
       })
       .partial(),
     studentCard: z
       .object({
         name: z.string(),
-        participant_id: z.string().uuid(),
         id: z.string().uuid(),
         updated: z.boolean(),
+        type: z.literal("studentCard"),
       })
       .partial(),
     raidRules: z
       .object({
         name: z.string(),
-        participant_id: z.string().uuid(),
         id: z.string().uuid(),
         updated: z.boolean(),
+        type: z.literal("raidRules"),
       })
       .partial(),
     attestationHonour: z.boolean().optional(),
@@ -111,23 +111,23 @@ export const ViewEditParticipantItem = ({
       diet: me.diet ?? undefined,
       idCard: {
         name: me.id_card?.name ?? undefined,
-        participant_id: me.id_card?.participant_id ?? me.id,
         id: me.id_card?.id ?? undefined,
+        type: "idCard",
       },
       medicalCertificate: {
         name: me.medical_certificate?.name ?? undefined,
-        participant_id: me.medical_certificate?.participant_id ?? me.id,
         id: me.medical_certificate?.id ?? undefined,
+        type: "medicalCertificate",
       },
       studentCard: {
         name: me.student_card?.name ?? undefined,
-        participant_id: me.student_card?.participant_id ?? me.id,
         id: me.student_card?.id ?? undefined,
+        type: "studentCard",
       },
       raidRules: {
         name: me.raid_rules?.name ?? undefined,
-        participant_id: me.raid_rules?.participant_id ?? me.id,
         id: me.raid_rules?.id ?? undefined,
+        type: "raidRules",
       },
       attestationHonour: me.attestation_on_honour,
     },
@@ -150,7 +150,7 @@ export const ViewEditParticipantItem = ({
           {
             id: doc.id!,
             name: doc.name!,
-            participant_id: doc.participant_id!,
+            type: doc.type!,
           },
           () => {
             console.log("Document updated: ", doc.name);
@@ -242,13 +242,14 @@ export const ViewEditParticipantItem = ({
       </>
     );
   }
+  console.log(me);
 
   return (
     <CardContent>
       <FormProvider {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col justify-between h-full"
+          className={`flex flex-col justify-between h-full ${isEdit ? '' : 'space-y-4'}`}
         >
           {isEdit ? (
             <>

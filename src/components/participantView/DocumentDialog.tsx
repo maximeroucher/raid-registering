@@ -59,8 +59,8 @@ export const DocumentDialog = ({
             uploadDocument(file, id, documentId, () => {
               field.onChange({
                 name: file.name,
-                participant_id: me!.id,
                 id: documentId,
+                type: id,
                 updated: true,
               });
               setIsUploading(false);

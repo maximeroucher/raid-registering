@@ -549,7 +549,7 @@ export type DeliveryUpdate = {
 export type Difficulty = "discovery" | "sports" | "expert";
 
 export type Document = {
-  participant_id: string;
+  type: DocumentType;
   name: string;
   id: string;
   /**
@@ -560,10 +560,16 @@ export type Document = {
 };
 
 export type DocumentCreation = {
-  participant_id: string;
+  type: DocumentType;
   name: string;
   id: string;
 };
+
+export type DocumentType =
+  | "idCard"
+  | "medicalCertificate"
+  | "studentCard"
+  | "raidRules";
 
 export type EventApplicant = {
   name: string;
