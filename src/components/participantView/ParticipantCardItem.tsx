@@ -67,7 +67,7 @@ export const ParticipantCardItem = ({
             <div className="bg-zinc-200 px-2 rounded-md">
               <span>{(value as Document).name}</span>
             </div>
-            <Checkbox checked={(value as Document).validated} />
+            <Checkbox checked={(value as Document).validated} className="ml-4"/>
           </>
         );
       case isSecurityFile(value):
@@ -81,7 +81,6 @@ export const ParticipantCardItem = ({
         );
       case isString(value):
         return <span>{value}</span>;
-
       case isNull(value):
         return <span className="text-zinc-400">Non renseigné</span>;
       default:
@@ -91,7 +90,7 @@ export const ParticipantCardItem = ({
 
   return (
     <div className="flex flex-row w-full justify-between p-2">
-      <span className="font-semibold">{label}</span>
+      <span className="font-semibold w-1/3">{label}</span>
       {valueComponent(value)}
     </div>
   );
