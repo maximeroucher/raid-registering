@@ -30,7 +30,7 @@ export const DocumentView = ({ documentKey, id, file }: DocumentViewProps) => {
 
   return (
     <>
-      {file && (
+      {file?.size && (
         <Image
           src={URL.createObjectURL(file)}
           alt={documentKey}

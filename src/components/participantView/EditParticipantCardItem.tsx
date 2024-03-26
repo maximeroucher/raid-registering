@@ -147,7 +147,6 @@ export function EditParticipantCardItem<T extends ValueType>({
                 setIsUploading={setIsUploading}
                 field={field}
                 id={id}
-                key={id}
               />
             </DialogContent>
           </Dialog>
