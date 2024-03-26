@@ -1,20 +1,16 @@
-import { Participant } from "@/src/api/hyperionSchemas";
-
 import { ControllerRenderProps, FieldValues } from "react-hook-form";
 
 import { Button } from "../ui/button";
 import { DropzoneInput } from "../ui/dropzoneInput";
-import { useState } from "react";
-import { toDate } from "date-fns";
 import { useDocument } from "@/src/hooks/useDocument";
-import Image from "next/image";
+import { DocumentView } from "./DocumentView";
 
 interface DocumentDialogProps {
   setIsOpen: (value: boolean) => void;
   setIsUploading: (value: boolean) => void;
   field: ControllerRenderProps<FieldValues, string>;
   id: string;
-  me?: Participant;
+  key: string;
 }
 
 export const DocumentDialog = ({
@@ -22,23 +18,16 @@ export const DocumentDialog = ({
   setIsOpen,
   field,
   id,
-  me,
+  key,
 }: DocumentDialogProps) => {
   const { uploadDocument, getDocument } = useDocument();
-  const file = getDocument(id);
-  console.log(file);
+  const file = getDocument(key);
   return (
     <>
       {file?.name !== undefined ? (
         <div className="flex flex-col items-center gap-4">
           <span className="text-gray-500 overflow-hidden m-auto">
-            <Image
-              src={URL.createObjectURL(file)}
-              alt={file.name}
-              width={300}
-              height={200}
-              className="rounded-lg w-auto max-h-[400px]"
-            />
+            <DocumentView id={id} documentKey={key} file={file}/>
           </span>
           <Button
             className="w-full"

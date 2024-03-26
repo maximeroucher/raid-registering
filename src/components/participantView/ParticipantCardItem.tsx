@@ -1,6 +1,16 @@
 import { SecurityFile, Size, Document } from "@/src/api/hyperionSchemas";
 import { Checkbox } from "../ui/checkbox";
 import { Skeleton } from "../ui/skeleton";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
+import { Button } from "../ui/button";
+import { DocumentView } from "./DocumentView";
+import { useDocument } from "@/src/hooks/useDocument";
 
 type ValueType =
   | string
@@ -21,6 +31,7 @@ export const ParticipantCardItem = ({
   label,
   value,
 }: ParticipantCardItemProps) => {
+  const { getDocument } = useDocument();
   const isSize = (value: ValueType): value is Size => {
     return (
       value === "XS" ||
@@ -62,12 +73,34 @@ export const ParticipantCardItem = ({
           </div>
         );
       case isDocument(value):
+        const key = value.type as string;
+        const file = getDocument(key);
         return (
           <>
-            <div className="bg-zinc-200 px-2 rounded-md">
-              <span>{(value as Document).name}</span>
-            </div>
-            <Checkbox checked={(value as Document).validated} className="ml-4"/>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant={null} className="col-span-4 px-4 bg-zinc-200 ">
+                  <div className="flex flex-row items-start w-full">
+                    <span className="text-gray-500 overflow-hidden">
+                      {value.name ?? "Aucun fichier séléctionné"}
+                    </span>
+                  </div>
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="md:max-w-2xl top-1/2">
+                <DialogHeader>
+                  <DialogTitle className="text-red sm:text-lg">
+                    {label}
+                  </DialogTitle>
+                </DialogHeader>
+                <div className="flex flex-col items-center gap-4">
+                  <span className="text-gray-500 overflow-hidden m-auto">
+                    <DocumentView documentKey={key} id={value.id} file={file} />
+                  </span>
+                </div>
+              </DialogContent>
+            </Dialog>
+            <Checkbox checked={value.validated} className="ml-4" />
           </>
         );
       case isSecurityFile(value):
@@ -89,7 +122,7 @@ export const ParticipantCardItem = ({
   };
 
   return (
-    <div className="flex flex-row w-full justify-between p-2">
+    <div className="flex flex-row w-full justify-between p-2 items-center">
       <span className="font-semibold w-1/3">{label}</span>
       {valueComponent(value)}
     </div>

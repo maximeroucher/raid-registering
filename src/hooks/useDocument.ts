@@ -7,6 +7,7 @@ import { useTokenStore } from "../stores/token";
 import { DocumentCreation } from "../api/hyperionSchemas";
 import axios from "axios";
 import { useDocumentsStore } from "../stores/documents";
+import { useState } from "react";
 
 export const useDocument = () => {
   const backUrl: string =
@@ -14,6 +15,7 @@ export const useDocument = () => {
   const queryClient = useQueryClient();
   const { token, userId } = useTokenStore();
   const { documents, setDocument, setId } = useDocumentsStore();
+  const [documentId, setDocumentId] = useState<string>("");
 
   const { mutate: mutateAssignDocument } =
     useCreateDocumentRaidParticipantParticipantIdDocumentPost();
@@ -66,23 +68,20 @@ export const useDocument = () => {
       });
   };
 
-  // const useGetDocument = (key: string, documentId: string) => {
-  //   const {data} = useReadDocumentRaidDocumentDocumentIdGet(
-  //     {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //       pathParams: {
-  //         documentId: documentId!,
-  //       },
-  //     },
-  //     {
-  //       enabled: documents[key]?.file !== undefined,
-  //       queryHash: "getDocument",
-  //     },
-  //   );
-  // };
 
+  const { data, refetch, isPending } = useReadDocumentRaidDocumentDocumentIdGet<File>(
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      pathParams: {
+        documentId: documentId!,
+      },
+    },
+    {
+      enabled: documentId !== "",
+    },
+  );
 
   const getDocument = (key: string) => {
     return documents[key]?.file;
@@ -92,5 +91,10 @@ export const useDocument = () => {
     assignDocument,
     uploadDocument,
     getDocument,
+    data,
+    refetch,
+    isLoading: isPending,
+    setDocumentId,
+    isIdSet: documentId !== "",
   };
 };

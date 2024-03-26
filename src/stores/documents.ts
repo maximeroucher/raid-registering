@@ -36,8 +36,8 @@ export const useDocumentsStore = create<DocumentsStore>()(
             documents: {
               ...state.documents,
               [key]: {
-                id,
-                file,
+                id: id,
+                file: file,
               },
             },
           }));
@@ -48,7 +48,7 @@ export const useDocumentsStore = create<DocumentsStore>()(
               ...state.documents,
               [key]: {
                 ...state.documents[key],
-                id,
+                id: id,
               },
             },
           }));

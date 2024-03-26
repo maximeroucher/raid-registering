@@ -146,8 +146,8 @@ export function EditParticipantCardItem<T extends ValueType>({
                 setIsOpen={setIsOpen}
                 setIsUploading={setIsUploading}
                 field={field}
-                me={me}
                 id={id}
+                key={id}
               />
             </DialogContent>
           </Dialog>
@@ -213,7 +213,7 @@ export function EditParticipantCardItem<T extends ValueType>({
       name={id}
       render={({ field }) => (
         <FormItem>
-          <div className={`grid p-2 grid-cols-6 `}>
+          <div className={`grid p-2 grid-cols-6`}>
             <FormLabel
               className={`font-semibold text-left my-auto text-md col-span-2`}
             >

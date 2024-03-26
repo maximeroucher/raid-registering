@@ -242,7 +242,6 @@ export const ViewEditParticipantItem = ({
       </>
     );
   }
-  console.log(me);
 
   return (
     <CardContent>
