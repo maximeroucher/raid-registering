@@ -14098,6 +14098,141 @@ export const useReadDocumentRaidDocumentDocumentIdGet = <TData = undefined>(
   });
 };
 
+export type ConfirmSecurityFileRaidSecurityFilePostQueryParams = {
+  participant_id: string;
+  group_id: Schemas.GroupType;
+};
+
+export type ConfirmSecurityFileRaidSecurityFilePostError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type ConfirmSecurityFileRaidSecurityFilePostVariables = {
+  body: Schemas.SecurityFile;
+  queryParams: ConfirmSecurityFileRaidSecurityFilePostQueryParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Confirm security file
+ */
+export const fetchConfirmSecurityFileRaidSecurityFilePost = (
+  variables: ConfirmSecurityFileRaidSecurityFilePostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.SecurityFile,
+    ConfirmSecurityFileRaidSecurityFilePostError,
+    Schemas.SecurityFile,
+    {},
+    ConfirmSecurityFileRaidSecurityFilePostQueryParams,
+    {}
+  >({ url: "/raid/security_file", method: "post", ...variables, signal });
+
+/**
+ * Confirm security file
+ */
+export const useConfirmSecurityFileRaidSecurityFilePost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.SecurityFile,
+      ConfirmSecurityFileRaidSecurityFilePostError,
+      ConfirmSecurityFileRaidSecurityFilePostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.SecurityFile,
+    ConfirmSecurityFileRaidSecurityFilePostError,
+    ConfirmSecurityFileRaidSecurityFilePostVariables
+  >({
+    mutationFn: (variables: ConfirmSecurityFileRaidSecurityFilePostVariables) =>
+      fetchConfirmSecurityFileRaidSecurityFilePost({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type AssignSecurityFileRaidParticipantParticipantIdSecurityFilePostPathParams =
+  {
+    participantId: string;
+  };
+
+export type AssignSecurityFileRaidParticipantParticipantIdSecurityFilePostQueryParams =
+  {
+    security_file_id: string;
+  };
+
+export type AssignSecurityFileRaidParticipantParticipantIdSecurityFilePostError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type AssignSecurityFileRaidParticipantParticipantIdSecurityFilePostVariables =
+  {
+    pathParams: AssignSecurityFileRaidParticipantParticipantIdSecurityFilePostPathParams;
+    queryParams: AssignSecurityFileRaidParticipantParticipantIdSecurityFilePostQueryParams;
+  } & HyperionContext["fetcherOptions"];
+
+/**
+ * Assign security file
+ */
+export const fetchAssignSecurityFileRaidParticipantParticipantIdSecurityFilePost =
+  (
+    variables: AssignSecurityFileRaidParticipantParticipantIdSecurityFilePostVariables,
+    signal?: AbortSignal
+  ) =>
+    hyperionFetch<
+      undefined,
+      AssignSecurityFileRaidParticipantParticipantIdSecurityFilePostError,
+      undefined,
+      {},
+      AssignSecurityFileRaidParticipantParticipantIdSecurityFilePostQueryParams,
+      AssignSecurityFileRaidParticipantParticipantIdSecurityFilePostPathParams
+    >({
+      url: "/raid/participant/{participantId}/security_file",
+      method: "post",
+      ...variables,
+      signal,
+    });
+
+/**
+ * Assign security file
+ */
+export const useAssignSecurityFileRaidParticipantParticipantIdSecurityFilePost =
+  (
+    options?: Omit<
+      reactQuery.UseMutationOptions<
+        undefined,
+        AssignSecurityFileRaidParticipantParticipantIdSecurityFilePostError,
+        AssignSecurityFileRaidParticipantParticipantIdSecurityFilePostVariables
+      >,
+      "mutationFn"
+    >
+  ) => {
+    const { fetcherOptions } = useHyperionContext();
+    return reactQuery.useMutation<
+      undefined,
+      AssignSecurityFileRaidParticipantParticipantIdSecurityFilePostError,
+      AssignSecurityFileRaidParticipantParticipantIdSecurityFilePostVariables
+    >({
+      mutationFn: (
+        variables: AssignSecurityFileRaidParticipantParticipantIdSecurityFilePostVariables
+      ) =>
+        fetchAssignSecurityFileRaidParticipantParticipantIdSecurityFilePost({
+          ...fetcherOptions,
+          ...variables,
+        }),
+      ...options,
+    });
+  };
+
 export type ConfirmPaymentRaidParticipantParticipantIdPaymentPostPathParams = {
   participantId: string;
 };
