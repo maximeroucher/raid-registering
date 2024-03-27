@@ -106,6 +106,7 @@ export const ViewEditParticipantItem = ({
         trauma: z.string().optional(),
         family: z.string().optional(),
         id: z.string().uuid(),
+        updated: z.boolean(),
       }).partial(),
     attestationHonour: z.boolean().optional(),
   });
@@ -143,7 +144,7 @@ export const ViewEditParticipantItem = ({
         type: "raidRules",
       },
       securityFile: {
-        allergy: "test" /* me?.security_file?.allergy ?? "test" */,
+        allergy: me?.security_file?.allergy ?? undefined,
         asthma: me?.security_file?.asthma ?? false,
         intensive_care_unit: me?.security_file?.intensive_care_unit ?? false,
         intensive_care_unit_when:
@@ -171,6 +172,20 @@ export const ViewEditParticipantItem = ({
       values.studentCard,
       values.raidRules,
     ].filter((doc) => doc.updated);
+
+    if (values.securityFile.updated) {
+      assignDocument(
+        {
+          id: values.securityFile.id!,
+          name: "Fiche de sécurité",
+          type: "securityFile",
+        },
+        () => {
+          console.log("Security file updated");
+        },
+      );
+    }
+
     for (const doc of documentToUpdate) {
       if (doc) {
         assignDocument(
