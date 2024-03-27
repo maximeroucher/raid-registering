@@ -25,13 +25,10 @@ import {
 } from "../ui/dialog";
 import { Button } from "../ui/button";
 import { HiArrowNarrowRight } from "react-icons/hi";
-import { DropzoneInput } from "../ui/dropzoneInput";
 import { useState } from "react";
-import { set, toDate } from "date-fns";
-import { useDocument } from "@/src/hooks/useDocument";
-import Image from "next/image";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { DocumentDialog } from "./DocumentDialog";
+import { SecurityFileDialog } from "./SecurityFileDialog";
 
 type ValueType = string | Size | boolean | Document | SecurityFile | Situation;
 
@@ -57,7 +54,6 @@ interface EditParticipantCardItemProps<T extends ValueType> {
   form: any;
   type: T;
   layer?: number;
-  me?: Participant;
 }
 
 export function EditParticipantCardItem<T extends ValueType>({
@@ -65,9 +61,8 @@ export function EditParticipantCardItem<T extends ValueType>({
   id,
   placeholder,
   form,
-  type,
   layer,
-  me,
+  type,
 }: EditParticipantCardItemProps<T>) {
   const [isUploading, setIsUploading] = useState(false);
 
@@ -84,7 +79,10 @@ export function EditParticipantCardItem<T extends ValueType>({
           <div className="col-span-4 text-right">
             <FormMessage />
             <FormControl>
-              <Checkbox {...field} />
+              <Checkbox
+                checked={field.value}
+                onCheckedChange={field.onChange}
+              />
             </FormControl>
           </div>
         );
@@ -153,7 +151,7 @@ export function EditParticipantCardItem<T extends ValueType>({
         );
       case ValueTypes.SECURITYFILE:
         return (
-          <Dialog>
+          <Dialog open={open} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
               <Button variant="outline" className="col-span-4">
                 <div className="flex flex-row items-start w-full">
@@ -163,11 +161,13 @@ export function EditParticipantCardItem<T extends ValueType>({
                 </div>
               </Button>
             </DialogTrigger>
-            <DialogContent>
-              <FormMessage />
-              <FormControl>
-                <Input type="file" {...field} />
-              </FormControl>
+            <DialogContent className="md:max-w-3xl top-1/2">
+              <DialogHeader>
+                <DialogTitle className="text-red sm:text-lg">
+                  {label}
+                </DialogTitle>
+              </DialogHeader>
+              <SecurityFileDialog setIsOpen={setIsOpen} form={form} />
             </DialogContent>
           </Dialog>
         );

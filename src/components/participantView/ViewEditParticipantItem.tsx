@@ -4,7 +4,6 @@ import {
   Size,
 } from "@/src/api/hyperionSchemas";
 import { CardContent } from "../ui/card";
-import { EditParticipantCardItem, ValueTypes } from "./EditParticipantCardItem";
 import { ParticipantCardItem } from "./ParticipantCardItem";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,6 +16,7 @@ import { ReloadIcon } from "@radix-ui/react-icons";
 import { HiCheck } from "react-icons/hi";
 import { useTeam } from "@/src/hooks/useTeam";
 import { useDocument } from "@/src/hooks/useDocument";
+import { EditParticipantCardItem, ValueTypes } from "./EditParticipantCardItem";
 
 interface ViewEditParticipantItemProps {
   me: Participant;
@@ -94,6 +94,19 @@ export const ViewEditParticipantItem = ({
         type: z.literal("raidRules"),
       })
       .partial(),
+      securityFile: z.object({
+        allergy: z.string().optional(),
+        asthma: z.boolean(),
+        intensive_care_unit: z.boolean().optional(),
+        intensive_care_unit_when: z.string().optional(),
+        ongoing_treatment: z.string().optional(),
+        sicknesses: z.string().optional(),
+        hospitalization: z.string().optional(),
+        surgical_operation: z.string().optional(),
+        trauma: z.string().optional(),
+        family: z.string().optional(),
+        id: z.string().uuid(),
+      }).partial(),
     attestationHonour: z.boolean().optional(),
   });
 
@@ -128,6 +141,20 @@ export const ViewEditParticipantItem = ({
         name: me.raid_rules?.name ?? undefined,
         id: me.raid_rules?.id ?? undefined,
         type: "raidRules",
+      },
+      securityFile: {
+        allergy: "test" /* me?.security_file?.allergy ?? "test" */,
+        asthma: me?.security_file?.asthma ?? false,
+        intensive_care_unit: me?.security_file?.intensive_care_unit ?? false,
+        intensive_care_unit_when:
+          me?.security_file?.intensive_care_unit_when ?? undefined,
+        ongoing_treatment: me?.security_file?.ongoing_treatment ?? undefined,
+        sicknesses: me?.security_file?.sicknesses ?? undefined,
+        hospitalization: me?.security_file?.hospitalization ?? undefined,
+        surgical_operation: me?.security_file?.surgical_operation ?? undefined,
+        trauma: me?.security_file?.trauma ?? undefined,
+        family: me?.security_file?.family ?? undefined,
+        id: me?.security_file?.id ?? undefined,
       },
       attestationHonour: me.attestation_on_honour,
     },
@@ -245,7 +272,7 @@ export const ViewEditParticipantItem = ({
 
   return (
     <CardContent>
-      <FormProvider {...form}>
+      <FormProvider {...form} key={"Participant"}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className={`flex flex-col justify-between h-full ${isEdit ? '' : 'space-y-4'}`}
@@ -282,14 +309,12 @@ export const ViewEditParticipantItem = ({
                 id="idCard"
                 form={form}
                 type={ValueTypes.DOCUMENT}
-                me={me}
               />
               <EditParticipantCardItem
                 label="Certificat médical"
                 id="medicalCertificate"
                 form={form}
                 type={ValueTypes.DOCUMENT}
-                me={me}
               />
               <EditParticipantCardItem
                 label="Fiche de sécurité"
@@ -302,14 +327,12 @@ export const ViewEditParticipantItem = ({
                 id="studentCard"
                 form={form}
                 type={ValueTypes.DOCUMENT}
-                me={me}
               />
               <EditParticipantCardItem
                 label="Règlement du raid"
                 id="raidRules"
                 form={form}
                 type={ValueTypes.DOCUMENT}
-                me={me}
               />
               <EditParticipantCardItem
                 label="Attestation sur l'honneur"
