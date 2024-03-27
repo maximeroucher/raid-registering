@@ -10,6 +10,12 @@ export const SecurityFileDialog = ({
   setIsOpen,
   form,
 }: SecurityFileDialogProps) => {
+
+  function onValidate(_: any) {
+    form.setValue("securityFile.validated", true);
+    setIsOpen(false);
+  }
+
   function getAsthma() {
     return (
       <>
@@ -88,7 +94,7 @@ export const SecurityFileDialog = ({
         form={form}
         type={ValueTypes.STRING}
       />
-      <Button className="mt-6" type="button" onClick={(e) => setIsOpen(false)}>
+      <Button className="mt-6" type="button" onClick={onValidate}>
         Valider
       </Button>
     </div>
