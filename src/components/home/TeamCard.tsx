@@ -97,37 +97,40 @@ export const TeamCard = ({ team }: TeamCardProps) => {
               </Button>
             )}
           </div>
-          {/* <CardContent>
-            {team?.meeting_place !== undefined ? (
-              <div>{`Lieu de rendez-vous: ${team?.meeting_place}`}</div>
-            ) : (
-              <Skeleton className="w-24 h-6" />
-            )}
-            <div className="h-3"></div>
-            {team?.difficulty !== undefined ? (
-              <div>Parcours: {team?.difficulty ?? "Non renseigné"}</div>
-            ) : (
-              <Skeleton className="w-24 h-6" />
-            )}
-          </CardContent> */}
           <div className="h-4"></div>
-          <div className="flex flex-wrap gap-4">
-            {information.map((info) => (
-              <Card key={info.title} className="w-[220px]">
-                <CardContent className="mt-4">
-                  <CardDescription>
-                    <div className="flex flex-row justify-between">
-                      <div className="text-l font-bold">{info.title}</div>
-                      {info.unit}
-                    </div>
-                  </CardDescription>
-                  <div className="h-3"></div>
-                  <CardTitle>{info.value}</CardTitle>
-                  <CardDescription>{info.description}</CardDescription>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          {isEdit ? (
+            <CardContent>
+              {team?.meeting_place !== undefined ? (
+                <div>{`Lieu de rendez-vous: ${team?.meeting_place}`}</div>
+              ) : (
+                <Skeleton className="w-24 h-6" />
+              )}
+              <div className="h-3"></div>
+              {team?.difficulty !== undefined ? (
+                <div>Parcours: {team?.difficulty ?? "Non renseigné"}</div>
+              ) : (
+                <Skeleton className="w-24 h-6" />
+              )}
+            </CardContent>
+          ) : (
+            <div className="flex flex-wrap gap-4">
+              {information.map((info) => (
+                <Card key={info.title} className="w-[220px]">
+                  <CardContent className="mt-4">
+                    <CardDescription>
+                      <div className="flex flex-row justify-between">
+                        <div className="text-l font-bold">{info.title}</div>
+                        {info.unit}
+                      </div>
+                    </CardDescription>
+                    <div className="h-3"></div>
+                    <CardTitle>{info.value}</CardTitle>
+                    <CardDescription>{info.description}</CardDescription>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          )}
         </CardHeader>
       </div>
     </Card>
