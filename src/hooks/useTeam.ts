@@ -2,9 +2,11 @@ import {
   useGetTeamByParticipantIdRaidParticipantsParticipantIdTeamGet,
   useCreateTeamRaidTeamsPost,
   CreateTeamRaidTeamsPostVariables,
+  useUpdateTeamRaidTeamsTeamIdPatch,
+  UpdateTeamRaidTeamsTeamIdPatchVariables,
 } from "@/src/api/hyperionComponents";
 import { useTokenStore } from "@/src/stores/token";
-import { TeamBase } from "../api/hyperionSchemas";
+import { TeamBase, TeamUpdate } from "../api/hyperionSchemas";
 import { useQueryClient } from "@tanstack/react-query";
 
 export const useTeam = () => {
@@ -28,7 +30,7 @@ export const useTeam = () => {
       enabled: userId !== null,
       retry: 0,
       queryHash: "getTeamByParticipantId",
-    }
+    },
   );
 
   const {
@@ -56,6 +58,37 @@ export const useTeam = () => {
     });
   };
 
+  const {
+    mutate: mutateUpdateTeam,
+    isSuccess: isUpdateSuccess,
+    isPending: isUpdateLoading,
+  } = useUpdateTeamRaidTeamsTeamIdPatch({});
+
+  const updateTeam = (
+    teamId: string,
+    callback: () => void,
+    team?: TeamUpdate,
+  ) => {
+    const body: UpdateTeamRaidTeamsTeamIdPatchVariables = {
+      body: team,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      pathParams: {
+        teamId,
+      },
+    };
+    mutateUpdateTeam(body, {
+      // Not using onSucess because of : https://github.com/TanStack/query/discussions/2878
+      onSettled: () => {
+        // Assuming success in all cases
+        // For unknown reasons, the invalidation of the query does not work
+        refetchTeam();
+        callback();
+      },
+    });
+  };
+
   return {
     team,
     isLoading,
@@ -63,5 +96,8 @@ export const useTeam = () => {
     isCreationLoading,
     isCreationSuccess,
     refetchTeam,
+    updateTeam,
+    isUpdateLoading,
+    isUpdateSuccess,
   };
 };
