@@ -11,6 +11,7 @@ import {
 import { Button } from "../ui/button";
 import { DocumentView } from "./DocumentView";
 import { useDocument } from "@/src/hooks/useDocument";
+import { SecurityFileDialog } from "./SecurityFileDialog";
 
 type ValueType =
   | string
@@ -76,7 +77,7 @@ export const ParticipantCardItem = ({
         const key = value.type as string;
         const file = getDocument(key);
         return (
-          <>
+          <div className="flex flex-row w-full justify-end items-center">
             <Dialog>
               <DialogTrigger asChild>
                 <Button variant={null} className="col-span-4 px-4 bg-zinc-200 ">
@@ -101,16 +102,36 @@ export const ParticipantCardItem = ({
               </DialogContent>
             </Dialog>
             <Checkbox checked={value.validated} className="ml-4" />
-          </>
+          </div>
         );
       case isSecurityFile(value):
         return (
-          <>
-            <div className="bg-zinc-200 px-2 rounded-md">
-              <span>Fiche de sécurité</span>
-            </div>
-            <Checkbox checked={true} />
-          </>
+          <div className="flex flex-row w-full justify-end items-center">
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant={null} className="col-span-4 px-4 bg-zinc-200 ">
+                  <div className="flex flex-row items-start w-full">
+                    <span className="text-gray-500 overflow-hidden">
+                      {"Fiche sécurité" ?? "Aucun fichier séléctionné"}
+                    </span>
+                  </div>
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="md:max-w-2xl top-1/2">
+                <DialogHeader>
+                  <DialogTitle className="text-red sm:text-lg">
+                    {label}
+                  </DialogTitle>
+                </DialogHeader>
+                <div className="flex flex-col items-center gap-4">
+                  <span className="text-gray-500 overflow-hidden m-auto">
+                    {/* <SecurityFileDialog setIsOpen={setIsOpen} form={form} /> */}
+                  </span>
+                </div>
+              </DialogContent>
+            </Dialog>
+            <Checkbox checked={true} className="ml-4" />
+          </div>
         );
       case isString(value):
         return <span>{value}</span>;
