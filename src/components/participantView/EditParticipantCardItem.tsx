@@ -2,7 +2,8 @@ import {
   SecurityFile,
   Size,
   Document,
-  Participant,
+  Difficulty,
+  MeetingPlace,
 } from "@/src/api/hyperionSchemas";
 import { Checkbox } from "../ui/checkbox";
 import { Skeleton } from "../ui/skeleton";
@@ -30,7 +31,15 @@ import { ReloadIcon } from "@radix-ui/react-icons";
 import { DocumentDialog } from "./DocumentDialog";
 import { SecurityFileDialog } from "./SecurityFileDialog";
 
-type ValueType = string | Size | boolean | Document | SecurityFile | Situation;
+type ValueType =
+  | string
+  | Size
+  | boolean
+  | Document
+  | SecurityFile
+  | Situation
+  | Difficulty
+  | MeetingPlace;
 
 export type Situation =
   | "centrale"
@@ -45,6 +54,8 @@ export enum ValueTypes {
   DOCUMENT = "document",
   SECURITYFILE = "securityFile",
   SITUATION = "situation",
+  DIFFICULTY = "difficulty",
+  MEETINGPLACE = "meetingPlace",
 }
 
 interface EditParticipantCardItemProps<T extends ValueType> {
@@ -98,7 +109,7 @@ export function EditParticipantCardItem<T extends ValueType>({
                     value: size,
                     label: size,
                   }))}
-                  placeholder="Taille"
+                  placeholder={placeholder}
                   {...field}
                 />
               </FormControl>
@@ -192,7 +203,42 @@ export function EditParticipantCardItem<T extends ValueType>({
                   { value: "corporatepartner", label: "Partenaire entreprise" },
                   { value: "other", label: "Autre" },
                 ]}
-                placeholder="Situation"
+                placeholder={placeholder}
+                {...field}
+              />
+            </FormControl>
+          </div>
+        );
+
+      case ValueTypes.DIFFICULTY:
+        return (
+          <div className="col-span-4">
+            <FormMessage />
+            <FormControl>
+              <Combobox
+                values={[
+                  { value: "discovery", label: "Découverte" },
+                  { value: "sports", label: "Sportif" },
+                  { value: "expert", label: "Expert" },
+                ]}
+                placeholder={placeholder}
+                {...field}
+              />
+            </FormControl>
+          </div>
+        );
+      case ValueTypes.MEETINGPLACE:
+        return (
+          <div className="col-span-4">
+            <FormMessage />
+            <FormControl>
+              <Combobox
+                values={[
+                  { value: "centrale", label: "Centrale" },
+                  { value: "bellecour", label: "Bellecour" },
+                  { value: "anyway", label: "Peu importe" },
+                ]}
+                placeholder={placeholder}
                 {...field}
               />
             </FormControl>

@@ -300,6 +300,7 @@ export const ViewEditParticipantItem = ({
               />
               <EditParticipantCardItem
                 label="Taille de vélo"
+                placeholder="Taille"
                 id="bikeSize"
                 form={form}
                 type={ValueTypes.SIZE}
@@ -307,6 +308,7 @@ export const ViewEditParticipantItem = ({
               <EditParticipantCardItem
                 label="Taille de t-shirt"
                 id="tShirtSize"
+                placeholder="Taille"
                 form={form}
                 type={ValueTypes.SIZE}
               />

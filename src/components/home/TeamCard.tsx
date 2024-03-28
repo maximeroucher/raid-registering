@@ -1,6 +1,6 @@
 "use client";
 
-import { Team } from "@/src/api/hyperionSchemas";
+import { Team, Difficulty } from "@/src/api/hyperionSchemas";
 import {
   Card,
   CardHeader,
@@ -10,8 +10,16 @@ import {
 } from "../ui/card";
 import { Skeleton } from "../ui/skeleton";
 import { Button } from "../ui/button";
-import { HiPencil, HiX, HiCalendar, HiMap } from "react-icons/hi";
+import { HiPencil, HiX, HiCalendar, HiMap, HiCheck } from "react-icons/hi";
+import { ReloadIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
+import {
+  EditParticipantCardItem,
+  ValueTypes,
+} from "../participantView/EditParticipantCardItem";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FormProvider, useForm } from "react-hook-form";
+import { z } from "zod";
 
 interface TeamCardProps {
   team?: Team;
@@ -19,6 +27,7 @@ interface TeamCardProps {
 
 export const TeamCard = ({ team }: TeamCardProps) => {
   const [isEdit, setIsEdit] = useState(false);
+  const [isUpdateLoading, setIsUpdateLoading] = useState(false);
 
   function toggleEdit() {
     setIsEdit(!isEdit);
@@ -33,13 +42,13 @@ export const TeamCard = ({ team }: TeamCardProps) => {
     },
     {
       title: "Lieu de rendez-vous",
-      value: "Centrale",
+      value: team?.meeting_place ?? "Non renseigné",
       description: "lieu de départ et d'arrivée",
       unit: <HiMap className="h-4 w-4" />,
     },
     {
       title: "Parcours",
-      value: "Expert",
+      value: team?.difficulty ?? "Non renseigné",
       description: "parcours exigeant",
       unit: <></>,
     },
@@ -63,20 +72,47 @@ export const TeamCard = ({ team }: TeamCardProps) => {
     },
   ];
 
+  const formSchema = z.object({
+    name: z.string().optional(),
+    difficulty: z.enum(["discovery", "sports", "expert"]).optional(),
+    meeting_place: z.enum(["centrale", "bellecour", "anyway"]).optional(),
+  });
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    mode: "onBlur",
+    defaultValues: {
+      name: team?.name ?? undefined,
+      difficulty: team?.difficulty ?? undefined,
+      meeting_place: team?.meeting_place ?? undefined,
+    },
+  });
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    if (!form.formState.isDirty) {
+      setIsEdit(!isEdit);
+      return;
+    }
+  }
+
   return (
     <Card className="w-full mt-5">
       <div className="flex flex-col">
         <CardHeader>
           <div className="flex flex-row justify-between">
-            <div>
-              <CardTitle>
-                {team?.name ? (
-                  <div>{team?.name}</div>
-                ) : (
-                  <Skeleton className="w-24 h-8" />
-                )}
-              </CardTitle>
-            </div>
+            <CardTitle>
+              {isEdit ? (
+                <div>{"Éditer l'équipe"}</div>
+              ) : (
+                <>
+                  {team?.name ? (
+                    <div>{team?.name}</div>
+                  ) : (
+                    <Skeleton className="w-24 h-8" />
+                  )}
+                </>
+              )}
+            </CardTitle>
             {isEdit ? (
               <Button
                 variant="destructive"
@@ -99,19 +135,50 @@ export const TeamCard = ({ team }: TeamCardProps) => {
           </div>
           <div className="h-4"></div>
           {isEdit ? (
-            <CardContent>
-              {team?.meeting_place !== undefined ? (
-                <div>{`Lieu de rendez-vous: ${team?.meeting_place}`}</div>
-              ) : (
-                <Skeleton className="w-24 h-6" />
-              )}
-              <div className="h-3"></div>
-              {team?.difficulty !== undefined ? (
-                <div>Parcours: {team?.difficulty ?? "Non renseigné"}</div>
-              ) : (
-                <Skeleton className="w-24 h-6" />
-              )}
-            </CardContent>
+            <FormProvider {...form} key={"Participant"}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className={`flex flex-col justify-between h-full ${isEdit ? "" : "space-y-4"}`}
+              >
+                <CardContent>
+                  <EditParticipantCardItem
+                    label="Nom d'équipe"
+                    id="name"
+                    form={form}
+                    type={ValueTypes.STRING}
+                  />
+                  <EditParticipantCardItem
+                    label="Lieu de rendez-vous"
+                    id="meeting_place"
+                    placeholder="Selectionner un lieu de rendez-vous"
+                    form={form}
+                    type={ValueTypes.MEETINGPLACE}
+                  />
+
+                  <EditParticipantCardItem
+                    label="Parcours"
+                    id="difficulty"
+                    placeholder="Selectionner un parcours"
+                    form={form}
+                    type={ValueTypes.DIFFICULTY}
+                  />
+                  {isUpdateLoading ? (
+                    <Button variant="default" disabled className="w-full mt-6">
+                      <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                    </Button>
+                  ) : (
+                    <Button
+                      className="w-full mt-6"
+                      type="submit"
+                      disabled={!form.formState.isDirty}
+                    >
+                      <HiCheck className="mr-2 h-4 w-4" />
+                      Enregistrer
+                    </Button>
+                  )}
+                </CardContent>
+              </form>
+            </FormProvider>
           ) : (
             <div className="flex flex-wrap gap-4">
               {information.map((info) => (
