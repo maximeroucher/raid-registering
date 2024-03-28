@@ -40,7 +40,7 @@ const Home = () => {
       )}
       <TopBar />
       <main className="flex flex-col items-center">
-        <div className="w-full px-24">
+        <div className="w-full px-16">
           <TeamCard team={team} />
         </div>
         <div className="grid md:grid-cols-2 gap-16 w-full p-16 grid-cols-1">
