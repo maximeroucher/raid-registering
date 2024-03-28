@@ -77,8 +77,6 @@ export function EditParticipantCardItem<T extends ValueType>({
 }: EditParticipantCardItemProps<T>) {
   const [isUploading, setIsUploading] = useState(false);
 
-  const sizeArray: Size[] = ["XS", "S", "M", "L", "XL"];
-
   const valueComponent = (
     field: ControllerRenderProps<FieldValues, string>,
     open: boolean,
@@ -105,10 +103,13 @@ export function EditParticipantCardItem<T extends ValueType>({
               <FormMessage />
               <FormControl>
                 <Combobox
-                  values={sizeArray.map((size) => ({
-                    value: size,
-                    label: size,
-                  }))}
+                  values={[
+                    { value: "xs", label: "XS" },
+                    { value: "s", label: "S" },
+                    { value: "m", label: "M" },
+                    { value: "l", label: "L" },
+                    { value: "xl", label: "XL" },
+                  ]}
                   placeholder={placeholder}
                   {...field}
                 />
