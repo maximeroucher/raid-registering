@@ -1,5 +1,7 @@
+import { useSecurityFile } from "@/src/hooks/useSecurityFile";
 import { Button } from "../ui/button";
 import { EditParticipantCardItem, ValueTypes } from "./EditParticipantCardItem";
+import { SecurityFile } from "@/src/api/hyperionSchemas";
 
 interface SecurityFileDialogProps {
   setIsOpen: (value: boolean) => void;
@@ -11,8 +13,19 @@ export const SecurityFileDialog = ({
   form,
 }: SecurityFileDialogProps) => {
 
+  const { setSecurityFile } = useSecurityFile();
+
   function onValidate(_: any) {
-    form.setValue("securityFile.validated", true);
+    form.setValue("securityFile.updated", true);
+    if (form.getValues("securityFile.id") === undefined) {
+      form.setValue("securityFile.id", crypto.randomUUID());
+    }
+    const securityFile: SecurityFile = {
+      ...form.getValues("securityFile"),
+    }
+    console.log(securityFile);
+    setSecurityFile(securityFile, () => {
+    });
     setIsOpen(false);
   }
 

@@ -17,6 +17,7 @@ import { HiCheck } from "react-icons/hi";
 import { useTeam } from "@/src/hooks/useTeam";
 import { useDocument } from "@/src/hooks/useDocument";
 import { EditParticipantCardItem, ValueTypes } from "./EditParticipantCardItem";
+import { useSecurityFile } from "@/src/hooks/useSecurityFile";
 
 interface ViewEditParticipantItemProps {
   me: Participant;
@@ -32,6 +33,7 @@ export const ViewEditParticipantItem = ({
   const { updateParticipant, isUpdateLoading } = useParticipant();
   const { refetchTeam } = useTeam();
   const { assignDocument } = useDocument();
+  const { assignSecurityFile } = useSecurityFile();
   const formSchema = z.object({
     address: z
       .string()
@@ -94,7 +96,8 @@ export const ViewEditParticipantItem = ({
         type: z.literal("raidRules"),
       })
       .partial(),
-      securityFile: z.object({
+    securityFile: z
+      .object({
         allergy: z.string().optional(),
         asthma: z.boolean(),
         intensive_care_unit: z.boolean().optional(),
@@ -107,7 +110,8 @@ export const ViewEditParticipantItem = ({
         family: z.string().optional(),
         id: z.string().uuid(),
         updated: z.boolean(),
-      }).partial(),
+      })
+      .partial(),
     attestationHonour: z.boolean().optional(),
   });
 
@@ -173,17 +177,11 @@ export const ViewEditParticipantItem = ({
       values.raidRules,
     ].filter((doc) => doc.updated);
 
+    console.log(values)
     if (values.securityFile.updated) {
-      assignDocument(
-        {
-          id: values.securityFile.id!,
-          name: "Fiche de sécurité",
-          type: "securityFile",
-        },
-        () => {
-          console.log("Security file updated");
-        },
-      );
+      assignSecurityFile(me.id!, values.securityFile.id!, () => {
+        console.log("Security file updated");
+      });
     }
 
     for (const doc of documentToUpdate) {
@@ -290,7 +288,7 @@ export const ViewEditParticipantItem = ({
       <FormProvider {...form} key={"Participant"}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className={`flex flex-col justify-between h-full ${isEdit ? '' : 'space-y-4'}`}
+          className={`flex flex-col justify-between h-full ${isEdit ? "" : "space-y-4"}`}
         >
           {isEdit ? (
             <>

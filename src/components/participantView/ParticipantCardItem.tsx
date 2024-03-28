@@ -55,7 +55,7 @@ export const ParticipantCardItem = ({
   };
 
   const isSecurityFile = (value: ValueType): value is SecurityFile => {
-    return typeof (value as SecurityFile)?.name === "string";
+    return typeof (value as SecurityFile)?.asthma === "boolean";
   };
 
   const isString = (value: ValueType): value is string => {
