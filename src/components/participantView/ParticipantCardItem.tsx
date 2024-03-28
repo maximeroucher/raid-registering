@@ -11,7 +11,7 @@ import {
 import { Button } from "../ui/button";
 import { DocumentView } from "./DocumentView";
 import { useDocument } from "@/src/hooks/useDocument";
-import { SecurityFileDialog } from "./SecurityFileDialog";
+import { SecurityFileDialogView } from "./SecurityFileDialogView";
 
 type ValueType =
   | string
@@ -123,10 +123,8 @@ export const ParticipantCardItem = ({
                     {label}
                   </DialogTitle>
                 </DialogHeader>
-                <div className="flex flex-col items-center gap-4">
-                  <span className="text-gray-500 overflow-hidden m-auto">
-                    {/* <SecurityFileDialog setIsOpen={setIsOpen} form={form} /> */}
-                  </span>
+                <div className="flex flex-col items-center">
+                    <SecurityFileDialogView file={value} />
                 </div>
               </DialogContent>
             </Dialog>
