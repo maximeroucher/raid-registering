@@ -167,9 +167,15 @@ export function EditParticipantCardItem<T extends ValueType>({
             <DialogTrigger asChild>
               <Button variant="outline" className="col-span-4">
                 <div className="flex flex-row items-start w-full">
-                  <span className="font-semibold  mr-6">
-                    {field.value ? "Modifier" : "Remplir"} la fiche de sécurité
-                  </span>
+                  {field.value?.id ? (
+                    <span className="text-gray-500 overflow-hidden">
+                      {"Fiche de sécurité"}
+                    </span>
+                  ) : (
+                    <span className="font-semibold  mr-6">
+                      {"Remplir la fiche de sécurité"}
+                    </span>
+                  )}
                 </div>
               </Button>
             </DialogTrigger>
