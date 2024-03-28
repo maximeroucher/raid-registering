@@ -14098,47 +14098,40 @@ export const useReadDocumentRaidDocumentDocumentIdGet = <TData = undefined>(
   });
 };
 
-export type ConfirmSecurityFileRaidSecurityFilePostQueryParams = {
-  participant_id: string;
-  group_id: Schemas.GroupType;
-};
+export type SetSecurityFileRaidSecurityFilePostError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
 
-export type ConfirmSecurityFileRaidSecurityFilePostError =
-  Fetcher.ErrorWrapper<{
-    status: 422;
-    payload: Schemas.HTTPValidationError;
-  }>;
-
-export type ConfirmSecurityFileRaidSecurityFilePostVariables = {
+export type SetSecurityFileRaidSecurityFilePostVariables = {
   body: Schemas.SecurityFile;
-  queryParams: ConfirmSecurityFileRaidSecurityFilePostQueryParams;
 } & HyperionContext["fetcherOptions"];
 
 /**
  * Confirm security file
  */
-export const fetchConfirmSecurityFileRaidSecurityFilePost = (
-  variables: ConfirmSecurityFileRaidSecurityFilePostVariables,
+export const fetchSetSecurityFileRaidSecurityFilePost = (
+  variables: SetSecurityFileRaidSecurityFilePostVariables,
   signal?: AbortSignal
 ) =>
   hyperionFetch<
     Schemas.SecurityFile,
-    ConfirmSecurityFileRaidSecurityFilePostError,
+    SetSecurityFileRaidSecurityFilePostError,
     Schemas.SecurityFile,
     {},
-    ConfirmSecurityFileRaidSecurityFilePostQueryParams,
+    {},
     {}
-  >({ url: "/raid/security_file", method: "post", ...variables, signal });
+  >({ url: "/raid/security_file/", method: "post", ...variables, signal });
 
 /**
  * Confirm security file
  */
-export const useConfirmSecurityFileRaidSecurityFilePost = (
+export const useSetSecurityFileRaidSecurityFilePost = (
   options?: Omit<
     reactQuery.UseMutationOptions<
       Schemas.SecurityFile,
-      ConfirmSecurityFileRaidSecurityFilePostError,
-      ConfirmSecurityFileRaidSecurityFilePostVariables
+      SetSecurityFileRaidSecurityFilePostError,
+      SetSecurityFileRaidSecurityFilePostVariables
     >,
     "mutationFn"
   >
@@ -14146,11 +14139,11 @@ export const useConfirmSecurityFileRaidSecurityFilePost = (
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
     Schemas.SecurityFile,
-    ConfirmSecurityFileRaidSecurityFilePostError,
-    ConfirmSecurityFileRaidSecurityFilePostVariables
+    SetSecurityFileRaidSecurityFilePostError,
+    SetSecurityFileRaidSecurityFilePostVariables
   >({
-    mutationFn: (variables: ConfirmSecurityFileRaidSecurityFilePostVariables) =>
-      fetchConfirmSecurityFileRaidSecurityFilePost({
+    mutationFn: (variables: SetSecurityFileRaidSecurityFilePostVariables) =>
+      fetchSetSecurityFileRaidSecurityFilePost({
         ...fetcherOptions,
         ...variables,
       }),

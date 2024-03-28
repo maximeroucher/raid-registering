@@ -691,27 +691,6 @@ export type FloorsType =
   | "X5"
   | "X6";
 
-/**
- * In Hyperion, each user may have multiple groups. Belonging to a group gives access to a set of specific endpoints.
- * Usually, one or a few groups are associated to some rights over their corresponding module. For example a member of amap group is allowed to administrate the amap module
- *
- * A group may also allow using Hyperion OAuth/Openid connect capabilities to sign in to a specific external platform.
- *
- * Being member of admin only gives rights over admin specific endpoints. For example, an admin won't be able to administrate amap module
- */
-export type GroupType =
-  | "39691052-2ae5-4e12-99d0-7a9f5f2b0136"
-  | "ab4c7503-41b3-11ee-8177-089798f1a4a5"
-  | "703056c4-be9d-475c-aa51-b7fc62a96aaa"
-  | "29751438-103c-42f2-b09b-33fbb20758a7"
-  | "0a25cb76-4b63-4fd3-b939-da6d9feabf28"
-  | "70db65ee-d533-4f6b-9ffa-a4d70a17b7ef"
-  | "53a669d6-84b1-4352-8d7c-421c1fbd9c6a"
-  | "45649735-866a-49df-b04b-a13c74fd5886"
-  | "6c6d7e88-fdb8-4e42-b2b5-3d3cfd12e7d6"
-  | "ce5f36e6-5377-489f-9696-de70e2477300"
-  | "b378b102-4979-4186-8630-d28fe460ee08";
-
 export type HTTPValidationError = {
   detail?: ValidationError[];
 };
