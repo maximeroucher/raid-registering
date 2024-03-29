@@ -100,7 +100,7 @@ export const useParticipant = () => {
     });
   };
 
-  if (me !== undefined && participant !== me) {
+  if (me !== undefined && participant !== me && token !== null) {
     setParticipant(me);
   }
 

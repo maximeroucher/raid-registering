@@ -5,6 +5,7 @@ import { Participant } from "../api/hyperionSchemas";
 interface ParticipantStore {
   participant?: Participant;
   setParticipant: (participant?: Participant) => void;
+  resetParticipant: () => void;
 }
 
 export const useParticipantStore = create<ParticipantStore>()(
@@ -14,6 +15,9 @@ export const useParticipantStore = create<ParticipantStore>()(
         participant: undefined,
         setParticipant: (participant?: Participant) => {
           set({ participant: participant });
+        },
+        resetParticipant: () => {
+          set({ participant: undefined });
         },
       }),
       {
