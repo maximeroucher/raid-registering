@@ -41,7 +41,7 @@ export const CreateParticipant = ({
   setIsOpened,
 }: CreateParticipantProps) => {
   const { createParticipant } = useParticipant();
-  const { createTeam } = useTeam();
+  const { createTeam, refetchTeam } = useTeam();
   const [isLoading, setIsLoading] = useState(false);
 
   const formSchema = z.object({
@@ -106,6 +106,7 @@ export const CreateParticipant = ({
             name: `Équipe de ${values.firstname} ${values.name}`,
           },
           () => {
+            refetchTeam();
             setIsOpened(false);
             setIsLoading(false);
             toast({
