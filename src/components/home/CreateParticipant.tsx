@@ -111,9 +111,9 @@ export const CreateParticipant = ({
             toast({
               title: "Votre profil a été créé avec succès",
             });
-          }
+          },
         );
-      }
+      },
     );
   }
 

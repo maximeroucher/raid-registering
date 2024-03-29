@@ -42,6 +42,9 @@ export function DatePicker({ date, setDate, defaultDate }: DatePickerProps) {
           selected={date}
           onSelect={setDate}
           locale={fr}
+          captionLayout="dropdown-buttons"
+          fromYear={1900}
+          toDate={new Date()}
           defaultMonth={defaultDate}
           initialFocus
         />
