@@ -145,7 +145,7 @@ export const useAuth = () => {
 
     window.addEventListener("message", (event) => {
       const data = event.data;
-      if (data !== null && data !== undefined && data.includes("code=")) {
+      if (data !== null && data !== undefined && new URL(data).searchParams.get("code") !== null) {
         login(data);
       }
     });
