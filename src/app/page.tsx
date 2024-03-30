@@ -5,12 +5,13 @@ import { ParticipantCard } from "../components/participantView/ParicipantCard";
 import { TeamCard } from "../components/home/TeamCard";
 import { TopBar } from "../components/home/TopBar";
 import { useAuth } from "../hooks/useAuth";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useTeam } from "../hooks/useTeam";
 import { CreateParticipant } from "../components/home/CreateParticipant";
 import { useUser } from "../hooks/useUser";
 import { useParticipant } from "../hooks/useParticipant";
 import { useState } from "react";
+import { useInviteTokenStore } from "../stores/inviteTokenStore";
 
 const Home = () => {
   const { isTokenQueried, token } = useAuth();
@@ -18,8 +19,15 @@ const Home = () => {
   const { me: user } = useUser();
   const { team } = useTeam();
   const [isOpened, setIsOpened] = useState(false);
-
+  const searchParams = useSearchParams();
+  const newInviteToken = searchParams.get("invite");
+  const { inviteToken, setInviteToken } = useInviteTokenStore();
   const router = useRouter();
+
+  if (newInviteToken !== null && inviteToken !== newInviteToken) {
+    setInviteToken(newInviteToken);
+    router.replace("/");
+  }
 
   if (isTokenQueried && token === null) {
     router.replace("/login");

@@ -12,6 +12,7 @@ import { useTokenStore } from "@/src/stores/token";
 import { useRouter } from "next/navigation";
 import { useUserStore } from "../stores/user";
 import { useParticipantStore } from "../stores/particpant";
+import { useInviteTokenStore } from "../stores/inviteTokenStore";
 
 const clientId: string = "Titan";
 const redirectUrlHost: string =
@@ -25,6 +26,7 @@ export const useAuth = () => {
   const { token, setToken, refreshToken, setRefreshToken } = useTokenStore();
   const { resetUser } = useUserStore();
   const { resetParticipant } = useParticipantStore();
+  const { resetInviteToken } = useInviteTokenStore();
   const [isTokenQueried, setIsTokenQueried] = useState(false);
   const router = useRouter();
 
@@ -166,6 +168,7 @@ export const useAuth = () => {
     router.replace("/login");
     resetUser();
     resetParticipant();
+    resetInviteToken();
   }
 
   async function getTokenFromStorage(): Promise<string | null> {

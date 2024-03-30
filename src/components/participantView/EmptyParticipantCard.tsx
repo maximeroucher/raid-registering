@@ -19,7 +19,7 @@ export const EmptyParticipantCard = ({ team }: EmptyParticipantCardProps) => {
     }
     createInviteToken(team.id, (token) => {
       const frontendUrl = process.env.NEXT_PUBLIC_FRONTEND_URL;
-      const inviteLink = `${frontendUrl}/invite/${token.token}`;
+      const inviteLink = `${frontendUrl}?invite=${token.token}`;
       navigator.clipboard.writeText(inviteLink).then(() => {
         toast({
           title: "Invitation envoyée",
