@@ -707,6 +707,11 @@ export type InformationEdit = {
   description?: string | null;
 };
 
+export type InviteToken = {
+  token: string;
+  team: TeamPreview;
+};
+
 export type Item = {
   name: string;
   suggested_caution: number;

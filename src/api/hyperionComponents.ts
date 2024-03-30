@@ -14360,6 +14360,71 @@ export const useValidateAttestationOnHonourRaidParticipantParticipantIdHonourPos
     });
   };
 
+export type CreateInviteTokenRaidTeamsTeamIdInvitePostPathParams = {
+  teamId: string;
+};
+
+export type CreateInviteTokenRaidTeamsTeamIdInvitePostError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type CreateInviteTokenRaidTeamsTeamIdInvitePostVariables = {
+  pathParams: CreateInviteTokenRaidTeamsTeamIdInvitePostPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Create an invite token
+ */
+export const fetchCreateInviteTokenRaidTeamsTeamIdInvitePost = (
+  variables: CreateInviteTokenRaidTeamsTeamIdInvitePostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    Schemas.InviteToken,
+    CreateInviteTokenRaidTeamsTeamIdInvitePostError,
+    undefined,
+    {},
+    {},
+    CreateInviteTokenRaidTeamsTeamIdInvitePostPathParams
+  >({
+    url: "/raid/teams/{teamId}/invite",
+    method: "post",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Create an invite token
+ */
+export const useCreateInviteTokenRaidTeamsTeamIdInvitePost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.InviteToken,
+      CreateInviteTokenRaidTeamsTeamIdInvitePostError,
+      CreateInviteTokenRaidTeamsTeamIdInvitePostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.InviteToken,
+    CreateInviteTokenRaidTeamsTeamIdInvitePostError,
+    CreateInviteTokenRaidTeamsTeamIdInvitePostVariables
+  >({
+    mutationFn: (
+      variables: CreateInviteTokenRaidTeamsTeamIdInvitePostVariables
+    ) =>
+      fetchCreateInviteTokenRaidTeamsTeamIdInvitePost({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
 export type QueryOperation =
   | {
       path: "/auth/authorize";
