@@ -121,8 +121,8 @@ export const ViewEditParticipantItem = ({
     mode: "onBlur",
     defaultValues: {
       address: me.address ?? undefined,
-      bikeSize: me.bike_size?.toUpperCase() ?? undefined,
-      tShirtSize: me.t_shirt_size?.toUpperCase() ?? undefined,
+      bikeSize: me.bike_size?.toLowerCase() ?? undefined,
+      tShirtSize: me.t_shirt_size?.toLowerCase() ?? undefined,
       situation:
         me.situation === "centrale" ? me.situation ?? undefined : "other",
       other:
