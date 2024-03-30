@@ -46,7 +46,7 @@ export const ViewEditParticipantItem = ({
       .string()
       .refine(
         (value) => {
-          return ["XS", "S", "M", "L", "XL"].includes(value.toUpperCase());
+          return ["xs", "s", "m", "l", "xl"].includes(value);
         },
         { message: "Veuillez renseigner une taille de vélo valide" },
       )
@@ -55,7 +55,7 @@ export const ViewEditParticipantItem = ({
       .string()
       .refine(
         (value) => {
-          return ["XS", "S", "M", "L", "XL"].includes(value.toUpperCase());
+          return ["xs", "s", "m", "l", "xl"].includes(value);
         },
         { message: "Veuillez renseigner une taille de t-shirt valide" },
       )
