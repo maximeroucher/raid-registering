@@ -28,6 +28,7 @@ import { ReloadIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import { useTeam } from "@/src/hooks/useTeam";
+import { useInviteTokenStore } from "@/src/stores/inviteTokenStore";
 
 interface CreateParticipantProps {
   user: CoreUser;
@@ -42,6 +43,7 @@ export const CreateParticipant = ({
 }: CreateParticipantProps) => {
   const { createParticipant } = useParticipant();
   const { createTeam, refetchTeam } = useTeam();
+  const { inviteToken } = useInviteTokenStore();
   const [isLoading, setIsLoading] = useState(false);
 
   const formSchema = z.object({
@@ -101,6 +103,7 @@ export const CreateParticipant = ({
         birthday: dateString,
       },
       () => {
+        if (inviteToken === undefined) {
         createTeam(
           {
             name: `Équipe de ${values.firstname} ${values.name}`,
@@ -114,6 +117,9 @@ export const CreateParticipant = ({
             });
           },
         );
+        } else {
+          console.log("join Team");
+        }
       },
     );
   }

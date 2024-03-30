@@ -708,8 +708,8 @@ export type InformationEdit = {
 };
 
 export type InviteToken = {
+  team_id: string;
   token: string;
-  team: TeamPreview;
 };
 
 export type Item = {

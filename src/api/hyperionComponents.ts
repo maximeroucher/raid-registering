@@ -14425,6 +14425,60 @@ export const useCreateInviteTokenRaidTeamsTeamIdInvitePost = (
   });
 };
 
+export type JoinTeamRaidTeamsJoinTokenPostPathParams = {
+  token: string;
+};
+
+export type JoinTeamRaidTeamsJoinTokenPostError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type JoinTeamRaidTeamsJoinTokenPostVariables = {
+  pathParams: JoinTeamRaidTeamsJoinTokenPostPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Join a team
+ */
+export const fetchJoinTeamRaidTeamsJoinTokenPost = (
+  variables: JoinTeamRaidTeamsJoinTokenPostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    JoinTeamRaidTeamsJoinTokenPostError,
+    undefined,
+    {},
+    {},
+    JoinTeamRaidTeamsJoinTokenPostPathParams
+  >({ url: "/raid/teams/join/{token}", method: "post", ...variables, signal });
+
+/**
+ * Join a team
+ */
+export const useJoinTeamRaidTeamsJoinTokenPost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      JoinTeamRaidTeamsJoinTokenPostError,
+      JoinTeamRaidTeamsJoinTokenPostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    JoinTeamRaidTeamsJoinTokenPostError,
+    JoinTeamRaidTeamsJoinTokenPostVariables
+  >({
+    mutationFn: (variables: JoinTeamRaidTeamsJoinTokenPostVariables) =>
+      fetchJoinTeamRaidTeamsJoinTokenPost({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
 export type QueryOperation =
   | {
       path: "/auth/authorize";

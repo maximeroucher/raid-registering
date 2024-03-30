@@ -12,6 +12,7 @@ import { useUser } from "../hooks/useUser";
 import { useParticipant } from "../hooks/useParticipant";
 import { useState } from "react";
 import { useInviteTokenStore } from "../stores/inviteTokenStore";
+import { JoinTeamDialog } from "../components/home/JoinTeamDialog";
 
 const Home = () => {
   const { isTokenQueried, token } = useAuth();
@@ -41,8 +42,8 @@ const Home = () => {
     setIsOpened(true);
   }
 
-  if (inviteToken !== null) {
-    console.log("inviteToken", inviteToken);
+  if (inviteToken !== undefined && !isOpened) {
+    setIsOpened(true);
   }
 
   return (
@@ -53,6 +54,9 @@ const Home = () => {
           setIsOpened={setIsOpened}
           user={user}
         />
+      )}
+      {inviteToken !== undefined && (
+        <JoinTeamDialog isOpened={isOpened} setIsOpened={setIsOpened} />
       )}
       <TopBar />
       <main className="flex flex-col items-center">
