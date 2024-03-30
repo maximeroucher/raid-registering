@@ -24,7 +24,11 @@ const Home = () => {
   const { inviteToken, setInviteToken } = useInviteTokenStore();
   const router = useRouter();
 
-  if (newInviteToken !== null && inviteToken !== newInviteToken) {
+  if (
+    newInviteToken !== null &&
+    inviteToken !== newInviteToken &&
+    typeof window !== "undefined"
+  ) {
     setInviteToken(newInviteToken);
     router.replace("/");
   }
@@ -35,6 +39,10 @@ const Home = () => {
 
   if (isFetched && me === undefined && !isOpened) {
     setIsOpened(true);
+  }
+
+  if (inviteToken !== null) {
+    console.log("inviteToken", inviteToken);
   }
 
   return (
