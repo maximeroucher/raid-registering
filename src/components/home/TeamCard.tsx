@@ -13,6 +13,7 @@ import { Button } from "../ui/button";
 import { HiPencil, HiX, HiCalendar, HiMap } from "react-icons/hi";
 import { useState } from "react";
 import { TeamEdit } from "./TeamEdit";
+import { difficulties, getLabelFromValue, meetingPlaces } from "@/src/infra/comboboxValues";
 
 interface TeamCardProps {
   team?: Team;
@@ -34,13 +35,13 @@ export const TeamCard = ({ team }: TeamCardProps) => {
     },
     {
       title: "Lieu de rendez-vous",
-      value: team?.meeting_place ?? "Non renseigné",
+      value: getLabelFromValue(meetingPlaces, team?.meeting_place ?? undefined),
       description: "lieu de départ et d'arrivée",
       unit: <HiMap className="h-4 w-4" />,
     },
     {
       title: "Parcours",
-      value: team?.difficulty ?? "Non renseigné",
+      value: getLabelFromValue(difficulties, team?.difficulty ?? undefined),
       description: "parcours exigeant",
       unit: <></>,
     },

@@ -18,6 +18,7 @@ import { useTeam } from "@/src/hooks/useTeam";
 import { useDocument } from "@/src/hooks/useDocument";
 import { EditParticipantCardItem, ValueTypes } from "./EditParticipantCardItem";
 import { useSecurityFile } from "@/src/hooks/useSecurityFile";
+import { getLabelFromValue, situations } from "@/src/infra/comboboxValues";
 
 interface ViewEditParticipantItemProps {
   me: Participant;
@@ -177,7 +178,7 @@ export const ViewEditParticipantItem = ({
       values.raidRules,
     ].filter((doc) => doc.updated);
 
-    console.log(values)
+    console.log(values);
     if (values.securityFile.updated) {
       assignSecurityFile(me.id!, values.securityFile.id!, () => {
         console.log("Security file updated");
@@ -238,8 +239,15 @@ export const ViewEditParticipantItem = ({
         );
       case "corporatePartner":
         return <ParticipantCardItem label="Situation" value={me.company} />;
-      default:
+      case "other":
         return <ParticipantCardItem label="Situation" value={me.situation} />;
+      default:
+        return (
+          <ParticipantCardItem
+            label="Situation"
+            value={getLabelFromValue(situations, me.situation ?? undefined)}
+          />
+        );
     }
   }
 

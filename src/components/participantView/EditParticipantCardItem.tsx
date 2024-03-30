@@ -30,6 +30,7 @@ import { useState } from "react";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { DocumentDialog } from "./DocumentDialog";
 import { SecurityFileDialog } from "./SecurityFileDialog";
+import { difficulties, meetingPlaces, situations, sizes } from "@/src/infra/comboboxValues";
 
 type ValueType =
   | string
@@ -103,13 +104,7 @@ export function EditParticipantCardItem<T extends ValueType>({
               <FormMessage />
               <FormControl>
                 <Combobox
-                  values={[
-                    { value: "xs", label: "XS" },
-                    { value: "s", label: "S" },
-                    { value: "m", label: "M" },
-                    { value: "l", label: "L" },
-                    { value: "xl", label: "XL" },
-                  ]}
+                  values={sizes}
                   placeholder={placeholder}
                   {...field}
                 />
@@ -204,12 +199,7 @@ export function EditParticipantCardItem<T extends ValueType>({
             <FormMessage />
             <FormControl>
               <Combobox
-                values={[
-                  { value: "centrale", label: "Centrale" },
-                  { value: "otherschool", label: "Autre école" },
-                  { value: "corporatepartner", label: "Partenaire entreprise" },
-                  { value: "other", label: "Autre" },
-                ]}
+                values={situations}
                 placeholder={placeholder}
                 {...field}
               />
@@ -223,11 +213,7 @@ export function EditParticipantCardItem<T extends ValueType>({
             <FormMessage />
             <FormControl>
               <Combobox
-                values={[
-                  { value: "discovery", label: "Découverte" },
-                  { value: "sports", label: "Sportif" },
-                  { value: "expert", label: "Expert" },
-                ]}
+                values={difficulties}
                 placeholder={placeholder}
                 {...field}
               />
@@ -240,11 +226,7 @@ export function EditParticipantCardItem<T extends ValueType>({
             <FormMessage />
             <FormControl>
               <Combobox
-                values={[
-                  { value: "centrale", label: "Centrale" },
-                  { value: "bellecour", label: "Bellecour" },
-                  { value: "anyway", label: "Peu importe" },
-                ]}
+                values={meetingPlaces}
                 placeholder={placeholder}
                 {...field}
               />
