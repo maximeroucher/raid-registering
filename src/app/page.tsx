@@ -49,7 +49,7 @@ const Home = () => {
             {team?.second && team?.second !== null ? (
               <ParticipantCard participant={team?.second} isCaptain={false} />
             ) : (
-              <EmptyParticipantCard />
+              <EmptyParticipantCard team={team} />
             )}
           </>
         </div>

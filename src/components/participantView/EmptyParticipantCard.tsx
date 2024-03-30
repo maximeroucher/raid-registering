@@ -3,12 +3,24 @@ import { Card, CardContent } from "../ui/card";
 import { HiPlus } from "react-icons/hi";
 import { toast } from "../ui/use-toast";
 import { Button } from "../ui/button";
+import { useInviteToken } from "@/src/hooks/useInviteToken";
+import { Team } from "@/src/api/hyperionSchemas";
 
-export const EmptyParticipantCard = () => {
+interface EmptyParticipantCardProps {
+  team?: Team;
+}
+
+export const EmptyParticipantCard = ({ team }: EmptyParticipantCardProps) => {
+  const { createInviteToken } = useInviteToken();
   function showToast() {
-    toast({
-      title: "Profil mis à jour",
-      description: "Vos informations ont été mises à jour avec succès",
+    if (team === undefined) {
+      return;
+    }
+    createInviteToken(team.id, (token) => {
+      toast({
+        title: "Invitation envoyée",
+        description: `Le lien d'invitation est ${token.token}`,
+      });
     });
   }
   return (
