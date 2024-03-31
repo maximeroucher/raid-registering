@@ -9,20 +9,21 @@ import {
 } from "@tanstack/react-query";
 import { Toaster } from "../components/ui/toaster";
 import { toast } from "../components/ui/use-toast";
+import { Suspense } from "react";
 
 const inter = Outfit({ subsets: ["latin-ext"] });
 
 const queryClient = new QueryClient({
-  queryCache: new QueryCache({
-    onError: (error) => {
-      console.error(error);
-      toast({
-        title: "Erreur",
-        description: "Une erreur est survenue, veuillez réessayer plus tard",
-        variant: "destructive",
-      });
-    },
-  }),
+  // queryCache: new QueryCache({
+  //   onError: (error) => {
+  //     console.error(error);
+  //     toast({
+  //       title: "Erreur",
+  //       description: "Une erreur est survenue, veuillez réessayer plus tard",
+  //       variant: "destructive",
+  //     });
+  //   },
+  // }),
 });
 
 export default function RootLayout({
@@ -33,10 +34,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <QueryClientProvider client={queryClient}>
-          {children}
-          <Toaster />
-        </QueryClientProvider>
+        <Suspense fallback={<div>Loading...</div>}>
+          <QueryClientProvider client={queryClient}>
+            {children}
+            <Toaster />
+          </QueryClientProvider>
+        </Suspense>
       </body>
     </html>
   );

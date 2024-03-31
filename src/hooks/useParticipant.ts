@@ -1,26 +1,28 @@
 import {
-  useGetParticipantByIdRaidParticipantParticipantIdGet,
-  useCreateParticipantRaidParticipantPost,
-  CreateParticipantRaidParticipantPostVariables,
-  useUpdateParticipantRaidParticipantParticipantIdPatch,
-  UpdateParticipantRaidParticipantParticipantIdPatchVariables,
+  useGetParticipantByIdRaidParticipantsParticipantIdGet,
+  useCreateParticipantRaidParticipantsPost,
+  CreateParticipantRaidParticipantsPostVariables,
+  useUpdateParticipantRaidParticipantsParticipantIdPatch,
+  UpdateParticipantRaidParticipantsParticipantIdPatchVariables,
 } from "@/src/api/hyperionComponents";
 import { useTokenStore } from "@/src/stores/token";
 import { useQueryClient } from "@tanstack/react-query";
 import { ParticipantBase, ParticipantUpdate } from "../api/hyperionSchemas";
 import { useParticipantStore } from "../stores/particpant";
+import { useTeam } from "./useTeam";
 
 export const useParticipant = () => {
   const { token, userId } = useTokenStore();
   const queryClient = useQueryClient();
   const { participant, setParticipant } = useParticipantStore();
+  const { refetchTeam } = useTeam();
 
   const {
     data: me,
     isLoading,
     isFetched,
     refetch,
-  } = useGetParticipantByIdRaidParticipantParticipantIdGet(
+  } = useGetParticipantByIdRaidParticipantsParticipantIdGet(
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -33,20 +35,20 @@ export const useParticipant = () => {
       enabled: userId !== null && participant === undefined,
       retry: 0,
       queryHash: "getParticipantById",
-    },
+    }
   );
 
   const {
     mutate: mutateCreateParticipant,
     isSuccess: isCreationSuccess,
     isPending: isCreationLoading,
-  } = useCreateParticipantRaidParticipantPost({});
+  } = useCreateParticipantRaidParticipantsPost({});
 
   const createParticipant = (
     participant: ParticipantBase,
-    callback: () => void,
+    callback: () => void
   ) => {
-    const body: CreateParticipantRaidParticipantPostVariables = {
+    const body: CreateParticipantRaidParticipantsPostVariables = {
       body: participant,
       headers: {
         Authorization: `Bearer ${token}`,
@@ -56,7 +58,10 @@ export const useParticipant = () => {
       onSuccess: () => {
         queryClient.invalidateQueries({
           predicate: (query) => {
-            return query.queryHash === "getParticipantById";
+            return (
+              query.queryHash === "getParticipantById" ||
+              query.queryHash === "getTeamByParticipantId"
+            );
           },
         });
         callback();
@@ -68,13 +73,13 @@ export const useParticipant = () => {
     mutate: mutateUpdateParticipant,
     isSuccess: isUpdateSuccess,
     isPending: isUpdateLoading,
-  } = useUpdateParticipantRaidParticipantParticipantIdPatch({});
+  } = useUpdateParticipantRaidParticipantsParticipantIdPatch({});
 
   const updateParticipant = (
     participant: ParticipantUpdate,
-    callback: () => void,
+    callback: () => void
   ) => {
-    const body: UpdateParticipantRaidParticipantParticipantIdPatchVariables = {
+    const body: UpdateParticipantRaidParticipantsParticipantIdPatchVariables = {
       body: participant,
       headers: {
         Authorization: `Bearer ${token}`,
@@ -89,14 +94,13 @@ export const useParticipant = () => {
         // Assuming success in all cases
         // For unknown reasons, the invalidation of the query does not work
         refetch();
+        refetchTeam();
         callback();
       },
     });
   };
 
-  if (me !== undefined && participant !== me) {
-    console.log("setParticipant");
-    console.log(me);
+  if (me !== undefined && participant !== me && token !== null) {
     setParticipant(me);
   }
 

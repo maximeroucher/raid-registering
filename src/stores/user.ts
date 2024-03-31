@@ -5,6 +5,7 @@ import { CoreUser } from "../api/hyperionSchemas";
 interface UserStore {
   user?: CoreUser;
   setUser: (user?: CoreUser) => void;
+  resetUser: () => void;
 }
 
 export const useUserStore = create<UserStore>()(
@@ -14,6 +15,9 @@ export const useUserStore = create<UserStore>()(
         user: undefined,
         setUser: (user?: CoreUser) => {
           set({ user: user });
+        },
+        resetUser: () => {
+          set({ user: undefined });
         },
       }),
       {

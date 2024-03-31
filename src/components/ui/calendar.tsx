@@ -2,11 +2,13 @@
 
 import * as React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { DayPicker } from "react-day-picker";
+import { DayPicker, useDayPicker, useNavigation } from "react-day-picker";
 import { fr } from "date-fns/locale";
 
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/src/components/ui/button";
+import { Select, SelectItem, SelectContent, SelectTrigger } from "./select";
+import { format } from "date-fns";
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 
@@ -25,7 +27,7 @@ function Calendar({
         months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
         month: "space-y-4",
         caption: "flex justify-center pt-1 relative items-center",
-        caption_label: "text-sm font-medium",
+        caption_label: "text-sm font-medium hidden",
         nav: "space-x-1 flex items-center",
         nav_button: cn(
           buttonVariants({ variant: "outline" }),
@@ -53,11 +55,87 @@ function Calendar({
         day_range_middle:
           "aria-selected:bg-accent aria-selected:text-accent-foreground",
         day_hidden: "invisible",
+        caption_dropdowns: "flex gap-1 items-center",
         ...classNames,
       }}
       components={{
         IconLeft: ({ ...props }) => <ChevronLeft className="h-4 w-4" />,
         IconRight: ({ ...props }) => <ChevronRight className="h-4 w-4" />,
+        Dropdown: (props) => {
+          const { fromDate, fromMonth, fromYear, toDate, toMonth, toYear } =
+            useDayPicker();
+
+          const { goToMonth, currentMonth } = useNavigation();
+          if (props.name === "months") {
+            const selectItems = Array.from({ length: 12 }, (_, i) => {
+              const date = new Date(0, i);
+              return {
+                value: i.toString(),
+                label: date.toLocaleString("default", { month: "long" }),
+              };
+            });
+            return (
+              <Select
+                value={props.value?.toString()}
+                onValueChange={(newValue) => {
+                  const newDate = new Date(currentMonth);
+                  newDate.setMonth(parseInt(newValue));
+                  goToMonth(newDate);
+                }}
+              >
+                <SelectTrigger>
+                  {format(currentMonth, "MMM", { locale: fr })}
+                </SelectTrigger>
+                <SelectContent>
+                  {selectItems.map((item) => (
+                    <SelectItem key={item.value} value={item.value}>
+                      {item.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            );
+          } else {
+            const earliestYear =
+              fromYear || fromMonth?.getFullYear() || fromDate?.getFullYear();
+            const latestYear =
+              toYear || toMonth?.getFullYear() || toDate?.getFullYear();
+
+            if (earliestYear && latestYear) {
+              const selectItems = Array.from(
+                { length: latestYear - earliestYear + 1 },
+                (_, i) => {
+                  const year = earliestYear + i;
+                  return {
+                    value: year.toString(),
+                    label: year.toString(),
+                  };
+                },
+              );
+              return (
+                <Select
+                  value={props.value?.toString()}
+                  onValueChange={(newValue) => {
+                    const newDate = new Date(currentMonth);
+                    newDate.setFullYear(parseInt(newValue));
+                    goToMonth(newDate);
+                  }}
+                >
+                  <SelectTrigger>{currentMonth.getFullYear()}</SelectTrigger>
+                  <SelectContent>
+                    {selectItems.map((item) => (
+                      <SelectItem key={item.value} value={item.value}>
+                        {item.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              );
+            } else {
+              return <></>;
+            }
+          }
+        },
       }}
       {...props}
     />

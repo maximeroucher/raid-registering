@@ -1,41 +1,46 @@
 import {
-  useGetTeamByParticipantIdRaidParticipantParticipantIdTeamGet,
-  useCreateTeamRaidTeamPost,
-  CreateTeamRaidTeamPostVariables,
+  useGetTeamByParticipantIdRaidParticipantsParticipantIdTeamGet,
+  useCreateTeamRaidTeamsPost,
+  CreateTeamRaidTeamsPostVariables,
+  useUpdateTeamRaidTeamsTeamIdPatch,
+  UpdateTeamRaidTeamsTeamIdPatchVariables,
 } from "@/src/api/hyperionComponents";
 import { useTokenStore } from "@/src/stores/token";
-import { TeamBase } from "../api/hyperionSchemas";
+import { TeamBase, TeamUpdate } from "../api/hyperionSchemas";
 import { useQueryClient } from "@tanstack/react-query";
 
 export const useTeam = () => {
   const { token, userId } = useTokenStore();
   const queryClient = useQueryClient();
 
-  const { data: team, isLoading } =
-    useGetTeamByParticipantIdRaidParticipantParticipantIdTeamGet(
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        pathParams: {
-          participantId: userId!,
-        },
+  const {
+    data: team,
+    isLoading,
+    refetch: refetchTeam,
+  } = useGetTeamByParticipantIdRaidParticipantsParticipantIdTeamGet(
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
       },
-      {
-        enabled: userId !== null,
-        retry: 0,
-        queryHash: "getTeamByParticipantId",
+      pathParams: {
+        participantId: userId!,
       },
-    );
+    },
+    {
+      enabled: userId !== null,
+      retry: 0,
+      queryHash: "getTeamByParticipantId",
+    },
+  );
 
   const {
     mutate: mutateCreateTeam,
     isSuccess: isCreationSuccess,
     isPending: isCreationLoading,
-  } = useCreateTeamRaidTeamPost({});
+  } = useCreateTeamRaidTeamsPost({});
 
-  const createTeam = (team: TeamBase) => {
-    const body: CreateTeamRaidTeamPostVariables = {
+  const createTeam = (team: TeamBase, callback: () => void) => {
+    const body: CreateTeamRaidTeamsPostVariables = {
       body: team,
       headers: {
         Authorization: `Bearer ${token}`,
@@ -48,9 +53,51 @@ export const useTeam = () => {
             return query.queryHash === "getTeamByParticipantId";
           },
         });
+        callback();
       },
     });
   };
 
-  return { team, isLoading, createTeam, isCreationLoading, isCreationSuccess };
+  const {
+    mutate: mutateUpdateTeam,
+    isSuccess: isUpdateSuccess,
+    isPending: isUpdateLoading,
+  } = useUpdateTeamRaidTeamsTeamIdPatch({});
+
+  const updateTeam = (
+    teamId: string,
+    callback: () => void,
+    team?: TeamUpdate,
+  ) => {
+    const body: UpdateTeamRaidTeamsTeamIdPatchVariables = {
+      body: team,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      pathParams: {
+        teamId,
+      },
+    };
+    mutateUpdateTeam(body, {
+      // Not using onSucess because of : https://github.com/TanStack/query/discussions/2878
+      onSettled: () => {
+        // Assuming success in all cases
+        // For unknown reasons, the invalidation of the query does not work
+        refetchTeam();
+        callback();
+      },
+    });
+  };
+
+  return {
+    team,
+    isLoading,
+    createTeam,
+    isCreationLoading,
+    isCreationSuccess,
+    refetchTeam,
+    updateTeam,
+    isUpdateLoading,
+    isUpdateSuccess,
+  };
 };

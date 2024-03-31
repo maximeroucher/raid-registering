@@ -10,6 +10,9 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { useTokenStore } from "@/src/stores/token";
 import { useRouter } from "next/navigation";
+import { useUserStore } from "../stores/user";
+import { useParticipantStore } from "../stores/particpant";
+import { useInviteTokenStore } from "../stores/inviteTokenStore";
 
 const clientId: string = "Titan";
 const redirectUrlHost: string =
@@ -21,6 +24,9 @@ const scopes: string[] = ["API"];
 export const useAuth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { token, setToken, refreshToken, setRefreshToken } = useTokenStore();
+  const { resetUser } = useUserStore();
+  const { resetParticipant } = useParticipantStore();
+  const { resetInviteToken } = useInviteTokenStore();
   const [isTokenQueried, setIsTokenQueried] = useState(false);
   const router = useRouter();
 
@@ -145,7 +151,11 @@ export const useAuth = () => {
 
     window.addEventListener("message", (event) => {
       const data = event.data;
-      if (data !== null && data !== undefined && data.includes("code=")) {
+      if (
+        data !== null &&
+        data !== undefined &&
+        new URL(data).searchParams.get("code") !== null
+      ) {
         login(data);
       }
     });
@@ -156,6 +166,9 @@ export const useAuth = () => {
     setRefreshToken(null);
     setIsTokenQueried(true);
     router.replace("/login");
+    resetUser();
+    resetParticipant();
+    resetInviteToken();
   }
 
   async function getTokenFromStorage(): Promise<string | null> {

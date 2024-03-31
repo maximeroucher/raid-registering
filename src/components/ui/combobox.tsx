@@ -45,7 +45,7 @@ export function Combobox({
         >
           <span>
             {value
-              ? values.find((v) => v.value.toLowerCase() === value)?.label
+              ? values.find((v) => v.value === value)?.label
               : placeholder}
           </span>
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />

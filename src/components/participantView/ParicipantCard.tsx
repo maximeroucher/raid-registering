@@ -1,7 +1,6 @@
 import { Participant } from "@/src/api/hyperionSchemas";
 import {
   Card,
-  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
@@ -11,11 +10,10 @@ import { ParticipantCardItem } from "./ParticipantCardItem";
 import { Progress } from "../ui/progress";
 import { Button } from "../ui/button";
 import { HiPencil, HiX } from "react-icons/hi";
-import { toast } from "../ui/use-toast";
 import { Skeleton } from "../ui/skeleton";
 import { useState } from "react";
-import { EditParticipantCardItem } from "./EditParticipantCardItem";
 import { ViewEditParticipantItem } from "./ViewEditParticipantItem";
+import { calculateParticipantProgress } from "@/src/infra/teamUtils";
 
 interface ParticipantCardProps {
   participant?: Participant;
@@ -33,7 +31,7 @@ export const ParticipantCard = ({
   }
 
   return (
-    <Card className="w-full m-14">
+    <Card className="w-full flex flex-col justify-between">
       <CardHeader>
         <div className="flex flex-row justify-between">
           <div>
@@ -85,13 +83,7 @@ export const ParticipantCard = ({
               value={participant?.payment}
             />
           </CardFooter>
-          <Progress
-            value={
-              participant?.validation_progress
-                ? participant!.validation_progress * 100
-                : 0
-            }
-          />
+          <Progress value={calculateParticipantProgress(participant)} />
         </>
       )}
     </Card>

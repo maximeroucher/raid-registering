@@ -18,7 +18,7 @@ export const useUser = () => {
     },
   );
 
-  if (me !== undefined && user === undefined) {
+  if (me !== undefined && user === undefined && token !== null) {
     setUser(me);
   }
 
