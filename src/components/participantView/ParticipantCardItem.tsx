@@ -77,7 +77,7 @@ export const ParticipantCardItem = ({
         const key = value.type as string;
         const file = getDocument(key);
         return (
-          <div className="flex flex-row w-full justify-end items-center">
+          <div className="flex flex-row w-full justify-end items-center h-6">
             <Dialog>
               <DialogTrigger asChild>
                 <Button variant={null} className="col-span-4 px-4 bg-zinc-200 ">
@@ -101,12 +101,12 @@ export const ParticipantCardItem = ({
                 </div>
               </DialogContent>
             </Dialog>
-            <Checkbox checked={value.validated} className="ml-4" />
+            <Checkbox checked={value.validated} className="ml-8" />
           </div>
         );
       case isSecurityFile(value):
         return (
-          <div className="flex flex-row w-full justify-end items-center">
+          <div className="flex flex-row w-full justify-end items-center h-6">
             <Dialog>
               <DialogTrigger asChild>
                 <Button variant={null} className="col-span-4 px-4 bg-zinc-200 ">
@@ -128,7 +128,7 @@ export const ParticipantCardItem = ({
                 </div>
               </DialogContent>
             </Dialog>
-            <Checkbox checked={true} className="ml-4" />
+            <Checkbox checked={true} className="ml-8" />
           </div>
         );
       case isString(value):
