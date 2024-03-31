@@ -35,7 +35,7 @@ export const useParticipant = () => {
       enabled: userId !== null && participant === undefined,
       retry: 0,
       queryHash: "getParticipantById",
-    }
+    },
   );
 
   const {
@@ -46,7 +46,7 @@ export const useParticipant = () => {
 
   const createParticipant = (
     participant: ParticipantBase,
-    callback: () => void
+    callback: () => void,
   ) => {
     const body: CreateParticipantRaidParticipantsPostVariables = {
       body: participant,
@@ -77,7 +77,7 @@ export const useParticipant = () => {
 
   const updateParticipant = (
     participant: ParticipantUpdate,
-    callback: () => void
+    callback: () => void,
   ) => {
     const body: UpdateParticipantRaidParticipantsParticipantIdPatchVariables = {
       body: participant,

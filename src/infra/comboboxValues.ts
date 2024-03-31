@@ -18,7 +18,7 @@ export const meetingPlaces = [
 ];
 
 export const sizes = [
-  { value: "xs", label: "XS"},
+  { value: "xs", label: "XS" },
   { value: "s", label: "S" },
   { value: "m", label: "M" },
   { value: "l", label: "L" },

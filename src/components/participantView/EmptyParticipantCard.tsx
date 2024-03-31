@@ -32,7 +32,11 @@ export const EmptyParticipantCard = ({ team }: EmptyParticipantCardProps) => {
     <Card className="w-full" onClick={showToast}>
       <CardContent className="w-full h-full">
         <div className="flex m-auto h-full mt-3">
-          <Button variant="outline" className="flex m-auto w-[200px]" disabled={isCreationLoading}>
+          <Button
+            variant="outline"
+            className="flex m-auto w-[200px]"
+            disabled={isCreationLoading}
+          >
             {isCreationLoading ? (
               <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
             ) : (

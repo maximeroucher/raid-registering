@@ -104,19 +104,19 @@ export const CreateParticipant = ({
       },
       () => {
         if (inviteToken === undefined) {
-        createTeam(
-          {
-            name: `Équipe de ${values.firstname} ${values.name}`,
-          },
-          () => {
-            refetchTeam();
-            setIsOpened(false);
-            setIsLoading(false);
-            toast({
-              title: "Votre profil a été créé avec succès",
-            });
-          },
-        );
+          createTeam(
+            {
+              name: `Équipe de ${values.firstname} ${values.name}`,
+            },
+            () => {
+              refetchTeam();
+              setIsOpened(false);
+              setIsLoading(false);
+              toast({
+                title: "Votre profil a été créé avec succès",
+              });
+            },
+          );
         } else {
           console.log("join Team");
         }

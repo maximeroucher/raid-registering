@@ -48,7 +48,11 @@ export const JoinTeamDialog = ({
             Annuler
           </Button>
 
-          <Button onClick={onJoinTeam} disabled={isJoinLoading} className="w-[140px]">
+          <Button
+            onClick={onJoinTeam}
+            disabled={isJoinLoading}
+            className="w-[140px]"
+          >
             {isJoinLoading ? (
               <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
             ) : (

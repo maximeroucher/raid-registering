@@ -12,7 +12,6 @@ export const SecurityFileDialog = ({
   setIsOpen,
   form,
 }: SecurityFileDialogProps) => {
-
   const { setSecurityFile } = useSecurityFile();
 
   function onValidate(_: any) {
@@ -22,10 +21,9 @@ export const SecurityFileDialog = ({
     }
     const securityFile: SecurityFile = {
       ...form.getValues("securityFile"),
-    }
+    };
     console.log(securityFile);
-    setSecurityFile(securityFile, () => {
-    });
+    setSecurityFile(securityFile, () => {});
     setIsOpen(false);
   }
 
