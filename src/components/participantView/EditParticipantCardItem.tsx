@@ -5,7 +5,6 @@ import {
   Difficulty,
   MeetingPlace,
 } from "@/src/api/hyperionSchemas";
-import { Checkbox } from "../ui/checkbox";
 import { Skeleton } from "../ui/skeleton";
 import { Input } from "../ui/input";
 import { Combobox } from "../ui/combobox";
@@ -36,6 +35,7 @@ import {
   situations,
   sizes,
 } from "@/src/infra/comboboxValues";
+import { ConfirmationCheckbox } from "./ConfirmationCheckbox";
 
 type ValueType =
   | string
@@ -71,6 +71,7 @@ interface EditParticipantCardItemProps<T extends ValueType> {
   form: any;
   type: T;
   layer?: number;
+  needDialog?: boolean;
 }
 
 export function EditParticipantCardItem<T extends ValueType>({
@@ -80,6 +81,7 @@ export function EditParticipantCardItem<T extends ValueType>({
   form,
   layer,
   type,
+  needDialog,
 }: EditParticipantCardItemProps<T>) {
   const [isUploading, setIsUploading] = useState(false);
 
@@ -91,15 +93,11 @@ export function EditParticipantCardItem<T extends ValueType>({
     switch (type) {
       case ValueTypes.BOOLEAN:
         return (
-          <div className="col-span-4 text-right">
-            <FormMessage />
-            <FormControl>
-              <Checkbox
-                checked={field.value}
-                onCheckedChange={field.onChange}
-              />
-            </FormControl>
-          </div>
+          <ConfirmationCheckbox
+            label={label}
+            field={field}
+            needDialog={needDialog ?? false}
+          />
         );
       case ValueTypes.SIZE:
         return (

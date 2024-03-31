@@ -188,7 +188,6 @@ export const ViewEditParticipantItem = ({
       values.raidRules,
     ].filter((doc) => doc.updated);
 
-    console.log(values);
     if (values.securityFile.updated) {
       assignSecurityFile(me.id!, values.securityFile.id!, () => {
         console.log("Security file updated");
@@ -379,6 +378,7 @@ export const ViewEditParticipantItem = ({
                 id="attestationHonour"
                 form={form}
                 type={ValueTypes.BOOLEAN}
+                needDialog
               />
             </>
           ) : (
