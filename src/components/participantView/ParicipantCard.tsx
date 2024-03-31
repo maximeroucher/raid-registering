@@ -30,7 +30,7 @@ export const ParticipantCard = ({
   }
 
   return (
-    <Card className="w-full">
+    <Card className="w-full flex flex-col justify-between">
       <CardHeader>
         <div className="flex flex-row justify-between">
           <div>

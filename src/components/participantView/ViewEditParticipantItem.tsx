@@ -340,13 +340,24 @@ export const ViewEditParticipantItem = ({
                 form={form}
                 type={ValueTypes.SIZE}
               />
-              {getSituationEdit()}
               <EditParticipantCardItem
                 label="Régime alimentaire"
                 id="diet"
                 form={form}
                 type={ValueTypes.STRING}
               />
+              {getSituationEdit()}
+              {["centrale", "otherschool"].includes(
+                form.watch("situation") ?? "",
+              ) && (
+                <EditParticipantCardItem
+                  label="Carte étudiante"
+                  id="studentCard"
+                  form={form}
+                  type={ValueTypes.DOCUMENT}
+                  layer={1}
+                />
+              )}
               <EditParticipantCardItem
                 label="Carte d'identité"
                 id="idCard"
@@ -364,12 +375,6 @@ export const ViewEditParticipantItem = ({
                 id="securityFile"
                 form={form}
                 type={ValueTypes.SECURITYFILE}
-              />
-              <EditParticipantCardItem
-                label="Carte étudiante"
-                id="studentCard"
-                form={form}
-                type={ValueTypes.DOCUMENT}
               />
               <EditParticipantCardItem
                 label="Règlement du raid"
@@ -395,8 +400,16 @@ export const ViewEditParticipantItem = ({
                 label="Taille de t-shirt"
                 value={me.t_shirt_size}
               />
-              {getSituation()}
               <ParticipantCardItem label="Régime alimentaire" value={me.diet} />
+              {getSituation()}
+              {["centrale", "otherschool"].includes(
+                getSituationLabel(me.situation ?? undefined) ?? "",
+              ) && (
+                <ParticipantCardItem
+                  label="Carte étudiante"
+                  value={me.student_card}
+                />
+              )}
               <ParticipantCardItem
                 label="Carte d'identité"
                 value={me.id_card}
@@ -408,10 +421,6 @@ export const ViewEditParticipantItem = ({
               <ParticipantCardItem
                 label="Fiche de sécurité"
                 value={me.security_file}
-              />
-              <ParticipantCardItem
-                label="Carte étudiante"
-                value={me.student_card}
               />
               <ParticipantCardItem
                 label="Règlement du raid"
