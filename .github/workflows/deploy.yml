@@ -23,8 +23,10 @@ jobs:
       - name: Configure Dotenv
         run: |
           echo NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL} >> .env
+          echo NEXT_PUBLIC_FRONTEND_URL=${NEXT_PUBLIC_FRONTEND_URL} >> .env
         env:
           NEXT_PUBLIC_BACKEND_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_URL }}
+          NEXT_PUBLIC_FRONTEND_URL: ${{ secrets.NEXT_PUBLIC_FRONTEND_URL }}
 
       - name: Build
         run: CI=false yarn build # Using CI=false remove Treat warning as error that make the compilation fail
