@@ -30,7 +30,12 @@ import { useState } from "react";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { DocumentDialog } from "./DocumentDialog";
 import { SecurityFileDialog } from "./SecurityFileDialog";
-import { difficulties, meetingPlaces, situations, sizes } from "@/src/infra/comboboxValues";
+import {
+  difficulties,
+  meetingPlaces,
+  situations,
+  sizes,
+} from "@/src/infra/comboboxValues";
 
 type ValueType =
   | string
@@ -103,11 +108,7 @@ export function EditParticipantCardItem<T extends ValueType>({
             <div className="col-span-1">
               <FormMessage />
               <FormControl>
-                <Combobox
-                  values={sizes}
-                  placeholder={placeholder}
-                  {...field}
-                />
+                <Combobox values={sizes} placeholder={placeholder} {...field} />
               </FormControl>
             </div>
           </>

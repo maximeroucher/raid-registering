@@ -124,7 +124,7 @@ export const ParticipantCardItem = ({
                   </DialogTitle>
                 </DialogHeader>
                 <div className="flex flex-col items-center">
-                    <SecurityFileDialogView file={value} />
+                  <SecurityFileDialogView file={value} />
                 </div>
               </DialogContent>
             </Dialog>

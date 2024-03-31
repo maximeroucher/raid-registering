@@ -16,7 +16,10 @@ export const useInviteToken = () => {
     isSuccess: isCreationSuccess,
   } = useCreateInviteTokenRaidTeamsTeamIdInvitePost({});
 
-  const createInviteToken = (teamId: string, callback: (token: InviteToken) => void) => {
+  const createInviteToken = (
+    teamId: string,
+    callback: (token: InviteToken) => void,
+  ) => {
     const body: CreateInviteTokenRaidTeamsTeamIdInvitePostVariables = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -54,7 +57,7 @@ export const useInviteToken = () => {
         // Assuming success in all cases
         // For unknown reasons, the invalidation of the query does not work
         callback();
-      }
+      },
     });
   };
 

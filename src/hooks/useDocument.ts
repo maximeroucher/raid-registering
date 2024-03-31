@@ -68,20 +68,20 @@ export const useDocument = () => {
       });
   };
 
-
-  const { data, refetch, isPending } = useReadDocumentRaidDocumentDocumentIdGet<File>(
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
+  const { data, refetch, isPending } =
+    useReadDocumentRaidDocumentDocumentIdGet<File>(
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        pathParams: {
+          documentId: documentId!,
+        },
       },
-      pathParams: {
-        documentId: documentId!,
+      {
+        enabled: documentId !== "",
       },
-    },
-    {
-      enabled: documentId !== "",
-    },
-  );
+    );
 
   const getDocument = (key: string) => {
     return documents[key]?.file;

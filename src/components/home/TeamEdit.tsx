@@ -1,10 +1,7 @@
-import { Team,  } from "@/src/api/hyperionSchemas";
-import {
-
-  CardContent,
-} from "../ui/card";
+import { Team } from "@/src/api/hyperionSchemas";
+import { CardContent } from "../ui/card";
 import { Button } from "../ui/button";
-import {  HiCheck } from "react-icons/hi";
+import { HiCheck } from "react-icons/hi";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import {
   EditParticipantCardItem,
