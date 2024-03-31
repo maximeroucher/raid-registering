@@ -123,10 +123,19 @@ export const ViewEditParticipantItem = ({
       address: me.address ?? undefined,
       bikeSize: me.bike_size?.toLowerCase() ?? undefined,
       tShirtSize: me.t_shirt_size?.toLowerCase() ?? undefined,
-      situation:
-        me.situation === "centrale" ? me.situation ?? undefined : "other",
+      situation: getSituationLabel(me.situation ?? undefined),
       other:
-        me.situation !== "centrale" ? me.situation ?? undefined : undefined,
+        getSituationLabel(me.situation ?? undefined) === "other"
+          ? getSituationTitle(me.situation ?? undefined)
+          : undefined,
+      otherSchool:
+        getSituationLabel(me.situation ?? undefined) === "otherschool"
+          ? getSituationTitle(me.situation ?? undefined)
+          : undefined,
+      company:
+        getSituationLabel(me.situation ?? undefined) === "corporatepartner"
+          ? getSituationTitle(me.situation ?? undefined)
+          : undefined,
       diet: me.diet ?? undefined,
       idCard: {
         name: me.id_card?.name ?? undefined,
@@ -214,41 +223,52 @@ export const ViewEditParticipantItem = ({
       });
       refetchTeam();
       setIsEdit(!isEdit);
-      form.reset();
+      // form.reset();
     });
   }
 
   function switchSituation(values: z.infer<typeof formSchema>) {
     switch (values.situation) {
       case "otherschool":
-        return values.otherSchool;
+        return `otherschool : ${values.otherSchool}`;
       case "corporatepartner":
-        return values.company;
+        return `corporatepartner : ${values.company}`;
       case "other":
-        return values.other;
+        return `other : ${values.other}`;
       default:
-        return values.situation;
+        return `centrale`;
     }
   }
 
+  function getSituationLabel(situation?: string) {
+    return situation?.split(" : ")[0];
+  }
+
+  function getSituationTitle(situation?: string) {
+    const parts = situation?.split(" : ");
+    return parts?.length === 2 ? parts[1] : "Centrale";
+  }
+
   function getSituation() {
-    switch (me.situation) {
-      case "otherSchool":
-        return (
-          <ParticipantCardItem label="Situation" value={me.other_school} />
-        );
-      case "corporatePartner":
-        return <ParticipantCardItem label="Situation" value={me.company} />;
-      case "other":
-        return <ParticipantCardItem label="Situation" value={me.situation} />;
-      default:
-        return (
-          <ParticipantCardItem
-            label="Situation"
-            value={getLabelFromValue(situations, me.situation ?? undefined)}
-          />
-        );
-    }
+    const situation = me.situation?.split(" : ")[0];
+    const title = me.situation?.split(" : ")[1];
+    return (
+      <>
+        <ParticipantCardItem
+          label="Situation"
+          value={getLabelFromValue(situations, situation)}
+        />
+        {situation === "otherschool" && (
+          <ParticipantCardItem label="Nom de l'école" value={title} />
+        )}
+        {situation === "corporatepartner" && (
+          <ParticipantCardItem label="Nom de l'entreprise" value={title} />
+        )}
+        {situation === "other" && (
+          <ParticipantCardItem label="Autre situation" value={title} />
+        )}
+      </>
+    );
   }
 
   function getSituationEdit() {
