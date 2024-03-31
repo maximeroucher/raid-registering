@@ -66,22 +66,24 @@ export const ParticipantCardItem = ({
   const valueComponent = (value: ValueType) => {
     switch (true) {
       case isBoolean(value):
-        return <Checkbox checked={value} />;
+        return <Checkbox checked={value} className="col-span-4 ml-auto" />;
       case isSize(value):
         return (
-          <div className="bg-zinc-200 px-2 rounded-md">
-            <span>{value}</span>
+          <div className=" col-start-6 col-span-1">
+            <div className="bg-zinc-200 px-2 rounded-md w-8 flex justify-center ml-auto">
+              <span>{value}</span>
+            </div>
           </div>
         );
       case isDocument(value):
         const key = value.type as string;
         const file = getDocument(key);
         return (
-          <div className="flex flex-row w-full justify-end items-center h-6">
+          <div className="flex flex-row w-full justify-end items-center h-6 col-span-4">
             <Dialog>
               <DialogTrigger asChild>
-                <Button variant={null} className="col-span-4 px-4 bg-zinc-200 ">
-                  <div className="flex flex-row items-start w-full">
+                <Button variant={null} className="pl-auto max-w-full bg-zinc-200">
+                  <div className="flex flex-row items-start max-w-full">
                     <span className="text-gray-500 overflow-hidden">
                       {value.name ?? "Aucun fichier séléctionné"}
                     </span>
@@ -106,7 +108,7 @@ export const ParticipantCardItem = ({
         );
       case isSecurityFile(value):
         return (
-          <div className="flex flex-row w-full justify-end items-center h-6">
+          <div className="flex flex-row w-full justify-end items-center h-6 col-span-4">
             <Dialog>
               <DialogTrigger asChild>
                 <Button variant={null} className="col-span-4 px-4 bg-zinc-200 ">
@@ -132,17 +134,23 @@ export const ParticipantCardItem = ({
           </div>
         );
       case isString(value):
-        return <span>{value}</span>;
+        return <span className="col-span-4 text-right">{value}</span>;
       case isNull(value):
-        return <span className="text-zinc-400">Non renseigné</span>;
+        return (
+          <span className="text-zinc-400 col-span-4 text-right">
+            Non renseigné
+          </span>
+        );
       default:
-        return <Skeleton className="w-24 h-6" />;
+        return <Skeleton className="w-24 h-6 col-span-4 text-right" />;
     }
   };
 
   return (
-    <div className="flex flex-row w-full justify-between p-2 items-center">
-      <span className="font-semibold w-1/3">{label}</span>
+    <div className="grid p-2 grid-cols-6 items-center w-full">
+      <span className="font-semibold text-left my-auto col-span-2">
+        {label}
+      </span>
       {valueComponent(value)}
     </div>
   );

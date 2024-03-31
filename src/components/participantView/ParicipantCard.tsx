@@ -77,7 +77,7 @@ export const ParticipantCard = ({
       )}
       {!isEdit && (
         <>
-          <CardFooter className="flex flex-col">
+          <CardFooter className="w-full">
             <ParticipantCardItem
               label="Paiement"
               value={participant?.payment}
