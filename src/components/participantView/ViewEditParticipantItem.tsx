@@ -19,6 +19,7 @@ import { useDocument } from "@/src/hooks/useDocument";
 import { EditParticipantCardItem, ValueTypes } from "./EditParticipantCardItem";
 import { useSecurityFile } from "@/src/hooks/useSecurityFile";
 import { getLabelFromValue, situations } from "@/src/infra/comboboxValues";
+import { getSituationLabel, getSituationTitle } from "@/src/infra/teamUtils";
 
 interface ViewEditParticipantItemProps {
   me: Participant;
@@ -238,15 +239,6 @@ export const ViewEditParticipantItem = ({
       default:
         return `centrale`;
     }
-  }
-
-  function getSituationLabel(situation?: string) {
-    return situation?.split(" : ")[0];
-  }
-
-  function getSituationTitle(situation?: string) {
-    const parts = situation?.split(" : ");
-    return parts?.length === 2 ? parts[1] : "Centrale";
   }
 
   function getSituation() {

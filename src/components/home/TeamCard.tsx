@@ -13,7 +13,12 @@ import { Button } from "../ui/button";
 import { HiPencil, HiX, HiCalendar, HiMap } from "react-icons/hi";
 import { useState } from "react";
 import { TeamEdit } from "./TeamEdit";
-import { difficulties, getLabelFromValue, meetingPlaces } from "@/src/infra/comboboxValues";
+import {
+  difficulties,
+  getLabelFromValue,
+  meetingPlaces,
+} from "@/src/infra/comboboxValues";
+import { calculateTeamProgress } from "@/src/infra/teamUtils";
 
 interface TeamCardProps {
   team?: Team;
@@ -59,7 +64,7 @@ export const TeamCard = ({ team }: TeamCardProps) => {
     },
     {
       title: "Inscription",
-      value: "75%",
+      value: `${calculateTeamProgress(team).toFixed(0)}%`,
       description: "10 jours restants",
       unit: <div>%</div>,
     },

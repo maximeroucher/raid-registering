@@ -13,6 +13,7 @@ import { HiPencil, HiX } from "react-icons/hi";
 import { Skeleton } from "../ui/skeleton";
 import { useState } from "react";
 import { ViewEditParticipantItem } from "./ViewEditParticipantItem";
+import { calculateParticipantProgress } from "@/src/infra/teamUtils";
 
 interface ParticipantCardProps {
   participant?: Participant;
@@ -82,14 +83,7 @@ export const ParticipantCard = ({
               value={participant?.payment}
             />
           </CardFooter>
-          <Progress
-            value={
-              // participant?.validation_progress
-              //   ? participant!.validation_progress * 100
-              //   : 0
-              0
-            }
-          />
+          <Progress value={calculateParticipantProgress(participant)} />
         </>
       )}
     </Card>
