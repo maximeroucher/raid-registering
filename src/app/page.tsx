@@ -64,14 +64,12 @@ const Home = () => {
           <TeamCard team={team} />
         </div>
         <div className="grid xl:grid-cols-2 gap-16 w-full p-16 grid-cols-1">
-          <>
-            <ParticipantCard participant={team?.captain} isCaptain />
-            {team?.second && team?.second !== null ? (
-              <ParticipantCard participant={team?.second} isCaptain={false} />
-            ) : (
-              <EmptyParticipantCard team={team} />
-            )}
-          </>
+          <ParticipantCard participant={team?.captain} isCaptain />
+          {team?.second !== null ? (
+            <ParticipantCard participant={team?.second} isCaptain={false} />
+          ) : (
+            <EmptyParticipantCard team={team} />
+          )}
         </div>
       </main>
     </>
