@@ -63,7 +63,7 @@ const Home = () => {
         <div className="w-full px-16">
           <TeamCard team={team} />
         </div>
-        <div className="grid md:grid-cols-2 gap-16 w-full p-16 grid-cols-1">
+        <div className="grid xl:grid-cols-2 gap-16 w-full p-16 grid-cols-1">
           <>
             <ParticipantCard participant={team?.captain} isCaptain />
             {team?.second && team?.second !== null ? (
