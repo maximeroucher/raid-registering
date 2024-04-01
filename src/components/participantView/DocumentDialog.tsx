@@ -6,12 +6,14 @@ import { useDocument } from "@/src/hooks/useDocument";
 import Image from "next/image";
 import { useDocumentsStore } from "@/src/stores/documents";
 import { useState } from "react";
+import { Skeleton } from "../ui/skeleton";
 
 interface DocumentDialogProps {
   setIsOpen: (value: boolean) => void;
   setIsUploading: (value: boolean) => void;
   field: ControllerRenderProps<FieldValues, string>;
   id: string;
+  documentId?: string;
 }
 
 export const DocumentDialog = ({
@@ -19,6 +21,7 @@ export const DocumentDialog = ({
   setIsOpen,
   field,
   id,
+  documentId,
 }: DocumentDialogProps) => {
   const { uploadDocument, getDocument, data, setDocumentId, isIdSet } =
     useDocument();
@@ -64,23 +67,29 @@ export const DocumentDialog = ({
           </Button>
         </div>
       ) : (
-        <DropzoneInput
-          setIsOpen={setIsOpen}
-          onDropAccepted={(files, _) => {
-            const file = files[0];
-            const documentId = crypto.randomUUID();
-            setIsUploading(true);
-            uploadDocument(file, id, documentId, () => {
-              field.onChange({
-                name: file.name,
-                id: documentId,
-                type: id,
-                updated: true,
-              });
-              setIsUploading(false);
-            });
-          }}
-        />
+        <>
+          {documentId ? (
+            <Skeleton className="w-full h-80" />
+          ) : (
+            <DropzoneInput
+              setIsOpen={setIsOpen}
+              onDropAccepted={(files, _) => {
+                const file = files[0];
+                const documentId = crypto.randomUUID();
+                setIsUploading(true);
+                uploadDocument(file, id, documentId, () => {
+                  field.onChange({
+                    name: file.name,
+                    id: documentId,
+                    type: id,
+                    updated: true,
+                  });
+                  setIsUploading(false);
+                });
+              }}
+            />
+          )}
+        </>
       )}
     </>
   );
