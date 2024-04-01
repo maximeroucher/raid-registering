@@ -2,7 +2,7 @@
 
 import { EmptyParticipantCard } from "../components/participantView/EmptyParticipantCard";
 import { ParticipantCard } from "../components/participantView/ParicipantCard";
-import { TeamCard } from "../components/home/TeamCard";
+import { TeamCard } from "../components/teamCard/TeamCard";
 import { TopBar } from "../components/home/TopBar";
 import { useAuth } from "../hooks/useAuth";
 import { useRouter, useSearchParams } from "next/navigation";

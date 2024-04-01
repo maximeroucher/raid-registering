@@ -24,6 +24,7 @@ import {
   meetingPlaces,
 } from "@/src/infra/comboboxValues";
 import { calculateTeamProgress } from "@/src/infra/teamUtils";
+import { TeamInfoCard } from "./TeamInfoCard";
 
 interface TeamCardProps {
   team?: Team;
@@ -53,25 +54,25 @@ export const TeamCard = ({ team }: TeamCardProps) => {
       title: "Parcours",
       value: getLabelFromValue(difficulties, team?.difficulty ?? undefined),
       description: "parcours exigeant",
-      unit: <></>,
+      unit: undefined,
     },
     {
       title: "Distance",
       value: "150 km",
       description: "répartis sur les deux jours",
-      unit: <div>km</div>,
+      unit: <span>km</span>,
     },
     {
       title: "Dénivelé",
       value: "2500 m",
       description: "répartis sur les deux jours",
-      unit: <div>m</div>,
+      unit: <span>m</span>,
     },
     {
       title: "Inscription",
       value: `${calculateTeamProgress(team).toFixed(0)}%`,
       description: "10 jours restants",
-      unit: <div>%</div>,
+      unit: <span>%</span>,
     },
   ];
 
@@ -119,19 +120,11 @@ export const TeamCard = ({ team }: TeamCardProps) => {
           ) : (
             <div className="flex flex-wrap gap-4">
               {information.map((info) => (
-                <Card key={info.title} className="w-[220px]">
-                  <CardContent className="mt-4">
-                    <CardDescription>
-                      <div className="flex flex-row justify-between">
-                        <div className="text-l font-bold">{info.title}</div>
-                        {info.unit}
-                      </div>
-                    </CardDescription>
-                    <div className="h-3"></div>
-                    <CardTitle>{info.value}</CardTitle>
-                    <CardDescription>{info.description}</CardDescription>
-                  </CardContent>
-                </Card>
+                <TeamInfoCard
+                  info={info}
+                  key={info.title}
+                  isLoaded={team !== undefined}
+                />
               ))}
             </div>
           )}
