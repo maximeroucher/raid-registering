@@ -208,6 +208,7 @@ export const ViewEditUserInfo = ({
                   value={me?.phone}
                   country={"fr"}
                   specialLabel=""
+                  inputClass="bg-transparent"
                   disabled
                 />
               </div>
