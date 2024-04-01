@@ -19,7 +19,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "../ui/avatar";
 
 export const UserButton = () => {
   const { me } = useParticipant();
-  const { profilePicture } = useProfilePicture();
+  // const { profilePicture } = useProfilePicture();
   const [isOpened, setIsOpened] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
 
