@@ -36,13 +36,13 @@ export const UserButton = () => {
         <Button variant="ghost">
           {me?.firstname === undefined || me?.name === undefined ? (
             <>
-              <Skeleton className="w-10 h-10 rounded-full" />
-              <div className="mr-2" />
+              {/* <Skeleton className="w-10 h-10 rounded-full" />
+              <div className="mr-2" /> */}
               <Skeleton className="w-24 h-6" />
             </>
           ) : (
             <>
-              <Avatar className="mr-2 mb-1">
+              {/* <Avatar className="mr-2 mb-1">
                 {profilePicture && (
                   <AvatarImage
                     src={URL.createObjectURL(profilePicture)}
@@ -52,7 +52,7 @@ export const UserButton = () => {
                 <AvatarFallback>
                   {me.firstname.charAt(0) + me.name.charAt(0)}
                 </AvatarFallback>
-              </Avatar>
+              </Avatar> */}
               {me.firstname + " " + me.name}
             </>
           )}
