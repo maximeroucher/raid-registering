@@ -29,6 +29,7 @@ import { useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import { useTeam } from "@/src/hooks/useTeam";
 import { useInviteTokenStore } from "@/src/stores/inviteTokenStore";
+import { useInviteToken } from "@/src/hooks/useInviteToken";
 
 interface CreateParticipantProps {
   user: CoreUser;
@@ -44,6 +45,7 @@ export const CreateParticipant = ({
   const { createParticipant } = useParticipant();
   const { createTeam, refetchTeam } = useTeam();
   const { inviteToken } = useInviteTokenStore();
+  const { joinTeam, isJoinLoading } = useInviteToken();
   const [isLoading, setIsLoading] = useState(false);
 
   const formSchema = z.object({
@@ -118,7 +120,17 @@ export const CreateParticipant = ({
             },
           );
         } else {
-          console.log("join Team");
+          joinTeam(
+            inviteToken,
+            () => {
+              refetchTeam();
+              setIsOpened(false);
+              setIsLoading(false);
+              toast({
+                title: "Vous avez rejoint l'équipe avec succès",
+              });
+            },
+          );
         }
       },
     );
