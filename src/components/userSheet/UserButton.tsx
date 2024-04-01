@@ -14,9 +14,12 @@ import { useParticipant } from "@/src/hooks/useParticipant";
 import { Skeleton } from "../ui/skeleton";
 import { ViewEditUserInfo } from "./ViewEditUserInfo";
 import { LogoutButton } from "./logoutButton";
+import { useProfilePicture } from "@/src/hooks/useProfilePicture";
+import { Avatar, AvatarImage, AvatarFallback } from "../ui/avatar";
 
 export const UserButton = () => {
   const { me } = useParticipant();
+  const { profilePicture } = useProfilePicture();
   const [isOpened, setIsOpened] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
 
@@ -32,9 +35,26 @@ export const UserButton = () => {
       <SheetTrigger asChild>
         <Button variant="ghost">
           {me?.firstname === undefined || me?.name === undefined ? (
-            <Skeleton className="w-24 h-6" />
+            <>
+              <Skeleton className="w-10 h-10 rounded-full" />
+              <div className="mr-2" />
+              <Skeleton className="w-24 h-6" />
+            </>
           ) : (
-            <>{me.firstname + " " + me.name}</>
+            <>
+              <Avatar className="mr-2 mb-1">
+                {profilePicture && (
+                  <AvatarImage
+                    src={URL.createObjectURL(profilePicture)}
+                    alt={me.firstname + " " + me.name}
+                  />
+                )}
+                <AvatarFallback>
+                  {me.firstname.charAt(0) + me.name.charAt(0)}
+                </AvatarFallback>
+              </Avatar>
+              {me.firstname + " " + me.name}
+            </>
           )}
         </Button>
       </SheetTrigger>
