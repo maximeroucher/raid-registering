@@ -84,6 +84,7 @@ export const useDocument = () => {
     );
 
   const getDocument = (key: string) => {
+    if (key === "" || key === undefined) return undefined;
     return documents[key]?.file;
   };
 

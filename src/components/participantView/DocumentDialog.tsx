@@ -27,7 +27,7 @@ export const DocumentDialog = ({
     useDocument();
   const { setDocument } = useDocumentsStore();
   const [isLoading, setIsLoading] = useState(false);
-  const file = getDocument(field.value.id);
+  const file = getDocument(field.value?.id);
   const [image, setImage] = useState<File | undefined>(file);
   if (
     file?.size === undefined &&
@@ -44,6 +44,7 @@ export const DocumentDialog = ({
     setImage(data);
     setDocumentId("");
   }
+
   return (
     <>
       {image?.size !== undefined ? (
@@ -61,6 +62,7 @@ export const DocumentDialog = ({
             className="w-full"
             onClick={() => {
               field.onChange(null);
+              setImage(undefined);
             }}
           >
             Modifier

@@ -2,6 +2,7 @@ import { useDocument } from "@/src/hooks/useDocument";
 import { useDocumentsStore } from "@/src/stores/documents";
 import Image from "next/image";
 import { useState } from "react";
+import { Skeleton } from "../ui/skeleton";
 
 interface DocumentViewProps {
   documentKey: string;
@@ -30,7 +31,7 @@ export const DocumentView = ({ documentKey, id, file }: DocumentViewProps) => {
 
   return (
     <>
-      {file?.size && (
+      {file?.size ? (
         <Image
           src={URL.createObjectURL(file)}
           alt={documentKey}
@@ -38,6 +39,8 @@ export const DocumentView = ({ documentKey, id, file }: DocumentViewProps) => {
           height={200}
           className="rounded-lg w-auto max-h-[400px]"
         />
+      ) : (
+        <Skeleton className="w-full h-80" />
       )}
     </>
   );
