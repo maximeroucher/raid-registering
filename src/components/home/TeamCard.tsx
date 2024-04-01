@@ -10,7 +10,12 @@ import {
 } from "../ui/card";
 import { Skeleton } from "../ui/skeleton";
 import { Button } from "../ui/button";
-import { HiPencil, HiX, HiCalendar, HiMap } from "react-icons/hi";
+import {
+  HiPencil,
+  HiX,
+  HiOutlineCalendar,
+  HiOutlineLocationMarker,
+} from "react-icons/hi";
 import { useState } from "react";
 import { TeamEdit } from "./TeamEdit";
 import {
@@ -36,13 +41,13 @@ export const TeamCard = ({ team }: TeamCardProps) => {
       title: "Date",
       value: "06-07 octobre",
       description: "week-end complet",
-      unit: <HiCalendar className="h-4 w-4" />,
+      unit: <HiOutlineCalendar className="h-4 w-4" />,
     },
     {
       title: "Lieu de rendez-vous",
       value: getLabelFromValue(meetingPlaces, team?.meeting_place ?? undefined),
       description: "lieu de départ et d'arrivée",
-      unit: <HiMap className="h-4 w-4" />,
+      unit: <HiOutlineLocationMarker className="h-4 w-4" />,
     },
     {
       title: "Parcours",
