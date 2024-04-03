@@ -120,17 +120,14 @@ export const CreateParticipant = ({
             },
           );
         } else {
-          joinTeam(
-            inviteToken,
-            () => {
-              refetchTeam();
-              setIsOpened(false);
-              setIsLoading(false);
-              toast({
-                title: "Vous avez rejoint l'équipe avec succès",
-              });
-            },
-          );
+          joinTeam(inviteToken, () => {
+            refetchTeam();
+            setIsOpened(false);
+            setIsLoading(false);
+            toast({
+              title: "Vous avez rejoint l'équipe avec succès",
+            });
+          });
         }
       },
     );

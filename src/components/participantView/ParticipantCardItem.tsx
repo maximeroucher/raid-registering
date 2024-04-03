@@ -82,7 +82,10 @@ export const ParticipantCardItem = ({
           <div className="flex flex-row w-full justify-end items-center h-6 col-span-4">
             <Dialog>
               <DialogTrigger asChild>
-                <Button variant={null} className="pl-auto max-w-full bg-zinc-200">
+                <Button
+                  variant={null}
+                  className="pl-auto max-w-full bg-zinc-200"
+                >
                   <div className="flex flex-row items-start max-w-full">
                     <span className="text-gray-500 overflow-hidden">
                       {value.name ?? "Aucun fichier séléctionné"}
