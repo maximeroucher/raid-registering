@@ -70,7 +70,7 @@ export const ParticipantCardItem = ({
       case isSize(value):
         return (
           <div className=" col-start-6 col-span-1">
-            <div className="bg-zinc-200 px-2 rounded-md w-8 flex justify-center ml-auto">
+            <div className="bg-zinc-200 px-2 rounded-md w-8 flex justify-center ml-auto dark:bg-zinc-700">
               <span>{value}</span>
             </div>
           </div>

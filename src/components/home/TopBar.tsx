@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Button } from "../ui/button";
 import { UserButton } from "../userSheet/UserButton";
+import { ThemeButton } from "../ui/themeButton";
 export const TopBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -28,13 +28,14 @@ export const TopBar = () => {
             <rect x="14" y="1" width="7" height="6" />
             <rect x="14" y="11" width="7" height="12" />
           </svg>
-          <span className="ml-2 text-xl font-bold tracking-wide text-zinc-700 uppercase">
+          <span className="ml-2 text-xl font-bold tracking-wide uppercase">
             Inscription Raid 2024
           </span>
         </a>
         <div className="items-center hidden space-x-8 lg:flex">
           {/* <Button>Admin</Button> */}
           <UserButton />
+          <ThemeButton />
         </div>
         <div className="lg:hidden">
           <button

@@ -48,7 +48,7 @@ export const ConfirmationCheckbox = ({
       <DialogTrigger asChild>
         <Button
           variant="ghost"
-          className="col-span-4 hover:bg-white"
+          className="col-span-4 hover:bg-transparent"
           onClick={(e) => handleCheckboxChange()}
         >
           <div className="w-full text-right">
