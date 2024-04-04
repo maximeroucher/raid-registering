@@ -39,16 +39,22 @@ export const TeamCard = ({ team }: TeamCardProps) => {
 
   const information = [
     {
+      title: "Lieu de rendez-vous",
+      value: getLabelFromValue(meetingPlaces, team?.meeting_place ?? undefined),
+      description: "lieu de départ et d'arrivée",
+      unit: <HiOutlineLocationMarker className="h-4 w-4" />,
+    },
+    {
       title: "Date",
       value: "06-07 octobre",
       description: "week-end complet",
       unit: <HiOutlineCalendar className="h-4 w-4" />,
     },
     {
-      title: "Lieu de rendez-vous",
-      value: getLabelFromValue(meetingPlaces, team?.meeting_place ?? undefined),
-      description: "lieu de départ et d'arrivée",
-      unit: <HiOutlineLocationMarker className="h-4 w-4" />,
+      title: "Inscription",
+      value: `${calculateTeamProgress(team).toFixed(0)}%`,
+      description: "10 jours restants",
+      unit: <span>%</span>,
     },
     {
       title: "Parcours",
@@ -67,12 +73,6 @@ export const TeamCard = ({ team }: TeamCardProps) => {
       value: "2500 m",
       description: "répartis sur les deux jours",
       unit: <span>m</span>,
-    },
-    {
-      title: "Inscription",
-      value: `${calculateTeamProgress(team).toFixed(0)}%`,
-      description: "10 jours restants",
-      unit: <span>%</span>,
     },
   ];
 
@@ -118,7 +118,7 @@ export const TeamCard = ({ team }: TeamCardProps) => {
           {isEdit && team ? (
             <TeamEdit team={team!} setIsEdit={setIsEdit} />
           ) : (
-            <div className="flex flex-wrap gap-4">
+            <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
               {information.map((info) => (
                 <TeamInfoCard
                   info={info}

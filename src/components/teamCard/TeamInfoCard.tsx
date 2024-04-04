@@ -1,4 +1,10 @@
-import { Card, CardContent, CardDescription, CardTitle } from "../ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
 import { Skeleton } from "../ui/skeleton";
 
 interface TeamInfo {
@@ -15,28 +21,34 @@ interface TeamInfoCardProps {
 
 export const TeamInfoCard = ({ info, isLoaded }: TeamInfoCardProps) => {
   return (
-    <Card key={info.title} className="w-[220px]">
-      <CardContent className="mt-4">
-        <CardDescription className="flex flex-row justify-between">
+    <Card
+      key={info.title}
+    >
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <CardTitle className="text-sm font-medium">
           {isLoaded ? (
-            <span className="text-l font-bold">{info.title}</span>
+            <span>{info.title}</span>
           ) : (
             <Skeleton className="w-24 h-5" />
           )}
-          {info.unit &&
-            (isLoaded ? info.unit : <Skeleton className="w-4 h-4" />)}
-        </CardDescription>
-        <div className="h-3"></div>
-        <CardTitle>
-          {isLoaded ? info.value : <Skeleton className="w-[150px] h-6" />}
         </CardTitle>
-        <CardDescription>
-          {isLoaded ? (
-            info.description
+        {info.unit &&
+          (isLoaded ? (
+            info.unit
           ) : (
-            <Skeleton className="w-[120px] h-4 mt-1" />
-          )}
-        </CardDescription>
+            <Skeleton className="w-4 h-4 text-muted-foreground" />
+          ))}
+      </CardHeader>
+      <CardContent>
+        <div className="text-2xl font-bold">
+          {isLoaded ? info.value : <Skeleton className="w-[150px] h-6" />}
+        </div>
+
+        {isLoaded ? (
+          <p className="text-xs text-muted-foreground">{info.description}</p>
+        ) : (
+          <Skeleton className="w-[120px] h-4 mt-1" />
+        )}
       </CardContent>
     </Card>
   );
