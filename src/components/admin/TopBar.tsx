@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 
 import {
@@ -22,11 +24,18 @@ import {
 } from "@/src/components/ui/dropdown-menu";
 import { Input } from "@/src/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/src/components/ui/sheet";
+import { UserButton } from "../userSheet/UserButton";
+import { ThemeButton } from "../ui/themeButton";
+import { Skeleton } from "../ui/skeleton";
+import { useUser } from "@/src/hooks/useUser";
+import { LogoutButton } from "../userSheet/logoutButton";
 
 export const TopBar = () => {
-  return (
-    <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
-      <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
+  const { me } = useUser();
+
+  function getNavigation() {
+    return (
+      <>
         <Link
           href="#"
           className="flex items-center gap-2 text-lg font-semibold md:text-base"
@@ -38,32 +47,22 @@ export const TopBar = () => {
           href="#"
           className="text-foreground transition-colors hover:text-foreground"
         >
-          Dashboard
+          Tableau de bord
         </Link>
         <Link
-          href="#"
+          href="/admin/teams"
           className="text-muted-foreground transition-colors hover:text-foreground"
         >
-          Orders
+          Equipes
         </Link>
-        <Link
-          href="#"
-          className="text-muted-foreground transition-colors hover:text-foreground"
-        >
-          Products
-        </Link>
-        <Link
-          href="#"
-          className="text-muted-foreground transition-colors hover:text-foreground"
-        >
-          Customers
-        </Link>
-        <Link
-          href="#"
-          className="text-muted-foreground transition-colors hover:text-foreground"
-        >
-          Analytics
-        </Link>
+      </>
+    );
+  }
+
+  return (
+    <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+      <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6 mx-10 max-md:mx-0 w-full">
+        {getNavigation()}
       </nav>
       <Sheet>
         <SheetTrigger asChild>
@@ -74,70 +73,48 @@ export const TopBar = () => {
         </SheetTrigger>
         <SheetContent side="left">
           <nav className="grid gap-6 text-lg font-medium">
-            <Link
-              href="#"
-              className="flex items-center gap-2 text-lg font-semibold"
-            >
-              <Package2 className="h-6 w-6" />
-              <span className="sr-only">Acme Inc</span>
-            </Link>
-            <Link href="#" className="hover:text-foreground">
-              Dashboard
-            </Link>
-            <Link
-              href="#"
-              className="text-muted-foreground hover:text-foreground"
-            >
-              Orders
-            </Link>
-            <Link
-              href="#"
-              className="text-muted-foreground hover:text-foreground"
-            >
-              Products
-            </Link>
-            <Link
-              href="#"
-              className="text-muted-foreground hover:text-foreground"
-            >
-              Customers
-            </Link>
-            <Link
-              href="#"
-              className="text-muted-foreground hover:text-foreground"
-            >
-              Analytics
-            </Link>
+            {getNavigation()}
           </nav>
         </SheetContent>
       </Sheet>
-      <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
-        <form className="ml-auto flex-1 sm:flex-initial">
-          <div className="relative">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input
-              type="search"
-              placeholder="Search products..."
-              className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
-            />
-          </div>
-        </form>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="secondary" size="icon" className="rounded-full">
-              <CircleUser className="h-5 w-5" />
-              <span className="sr-only">Toggle user menu</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Settings</DropdownMenuItem>
-            <DropdownMenuItem>Support</DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Logout</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+      <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4  mx-10 max-md:mx-0">
+        <div className="flex flex-row ml-auto">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost">
+                {me?.firstname === undefined || me?.name === undefined ? (
+                  <>
+                    {/* <Skeleton className="w-10 h-10 rounded-full" />
+              <div className="mr-2" /> */}
+                    <Skeleton className="w-24 h-6" />
+                  </>
+                ) : (
+                  <>
+                    {/* <Avatar className="mr-2 mb-1">
+                {profilePicture && (
+                  <AvatarImage
+                    src={URL.createObjectURL(profilePicture)}
+                    alt={me.firstname + " " + me.name}
+                  />
+                )}
+                <AvatarFallback>
+                  {me.firstname.charAt(0) + me.name.charAt(0)}
+                </AvatarFallback>
+              </Avatar> */}
+                    {me.firstname + " " + me.name}
+                  </>
+                )}
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem>
+                <LogoutButton />
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <div className="w-4"></div>
+          <ThemeButton />
+        </div>
       </div>
     </header>
   );
