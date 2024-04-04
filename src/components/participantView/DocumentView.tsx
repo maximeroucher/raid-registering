@@ -1,8 +1,11 @@
+"use client";
+
 import { useDocument } from "@/src/hooks/useDocument";
 import { useDocumentsStore } from "@/src/stores/documents";
 import Image from "next/image";
 import { useState } from "react";
 import { Skeleton } from "../ui/skeleton";
+import { PdfViewer } from "./PdfViewer";
 
 interface DocumentViewProps {
   documentKey: string;
@@ -28,17 +31,24 @@ export const DocumentView = ({ documentKey, id, file }: DocumentViewProps) => {
     setDocument(documentKey, id, data);
     setDocumentId("");
   }
+  console.log(file?.type);
 
   return (
     <>
       {file?.size ? (
-        <Image
-          src={URL.createObjectURL(file)}
-          alt={documentKey}
-          width={300}
-          height={200}
-          className="rounded-lg w-auto max-h-[400px]"
-        />
+        file?.type === "application/pdf" ? (
+          <div className="h-[600px]">
+            <PdfViewer file={file} />
+          </div>
+        ) : (
+          <Image
+            src={URL.createObjectURL(file)}
+            alt={documentKey}
+            width={300}
+            height={200}
+            className="rounded-lg w-auto max-h-[400px]"
+          />
+        )
       ) : (
         <Skeleton className="w-full h-80" />
       )}
