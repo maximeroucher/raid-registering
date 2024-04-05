@@ -16,13 +16,13 @@ const Dashboard = () => {
   const information = [
     {
       title: "Participants inscrits",
-      value: teams?.length.toString() || "0",
+      value: teams?.length?.toString() || "0",
       description: "personnes ayant commencé leur inscription",
       unit: undefined,
     },
     {
       title: "Binômes enregistrés",
-      value: teams?.filter((team) => team.second).length.toString() || "0",
+      value: teams?.filter((team) => team.second).length?.toString() || "0",
       description: "dossier en cours de validation",
       unit: undefined,
     },

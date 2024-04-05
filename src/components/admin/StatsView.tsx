@@ -1,16 +1,17 @@
 "use client";
 
-import { Label } from "@radix-ui/react-label";
 import {
   Card,
   CardHeader,
   CardTitle,
   CardContent,
   CardDescription,
-  CardFooter,
 } from "../ui/card";
 import { ChartView } from "./ChartView";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
+import { Label } from "../ui/label";
+import { Switch } from "../ui/switch";
+import { useState } from "react";
 
 const data = [
   {
@@ -28,14 +29,24 @@ const data = [
 ];
 
 export const StatsView = () => {
+  const [seeAll, setSeeAll] = useState(false);
   return (
     <Card>
-      <CardHeader className="flex flex-row items-center">
+      <CardHeader className="flex flex-row items-center justify-between">
         <div className="grid gap-2">
           <CardTitle>Statistiques</CardTitle>
-        <CardDescription>
-            Ne porte que sur les équipes validées
-        </CardDescription>
+          <CardDescription>
+            {seeAll
+              ? "Porte sur toutes les équipes"
+              : "Ne porte que sur les équipes validées"}
+          </CardDescription>
+        </div>
+        <div className="items-center space-x-2 grid gap-2">
+          <Switch
+            id="airplane-mode"
+            checked={seeAll}
+            onCheckedChange={setSeeAll}
+          />
         </div>
       </CardHeader>
       <CardContent>
