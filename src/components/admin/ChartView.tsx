@@ -32,11 +32,10 @@ export const ChartView = ({ data }: CardViewProps) => {
             dataKey="value"
             radius={[10, 10, 0, 0]}
             style={{
-              fill: "var(--theme-primary)",
-              opacity: 1,
-              "--theme-primary": `hsl(${
+              fill: `hsl(${
                 theme?.cssVars[mode === "dark" ? "dark" : "light"].primary
               })`,
+              opacity: 1,
             }}
           >
             {data.map((entry, index) => (
