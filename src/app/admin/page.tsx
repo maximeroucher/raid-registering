@@ -40,7 +40,7 @@ const Dashboard = () => {
     },
   ];
 
-  if (!isAdmin(user)) {
+  if (!isAdmin(user) && typeof window !== "undefined") {
     router.replace("/");
   }
 
@@ -55,7 +55,7 @@ const Dashboard = () => {
         </div>
         <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
           <TeamsPreview teams={teams} isLoading={isLoading} />
-          <StatsView />
+          <StatsView teams={teams} isLoading={isLoading} />
         </div>
       </main>
     </div>

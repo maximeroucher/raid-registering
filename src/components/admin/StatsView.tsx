@@ -9,27 +9,20 @@ import {
 } from "../ui/card";
 import { ChartView } from "./ChartView";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
-import { Label } from "../ui/label";
 import { Switch } from "../ui/switch";
 import { useState } from "react";
+import { TeamPreview } from "@/src/api/hyperionSchemas";
+import { getStats } from "@/src/infra/statsUtils";
 
-const data = [
-  {
-    label: "Expert",
-    value: 240,
-  },
-  {
-    label: "Sportif",
-    value: 300,
-  },
-  {
-    label: "Découverte",
-    value: 200,
-  },
-];
+interface StatsViewProps {
+  teams?: TeamPreview[];
+  isLoading: boolean;
+}
 
-export const StatsView = () => {
+export const StatsView = ({ teams, isLoading }: StatsViewProps) => {
   const [seeAll, setSeeAll] = useState(false);
+  const { difficultyData, meetingPlaceData, bikeSizeData, tShirtSizeData } =
+    getStats(seeAll, teams);
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
@@ -58,16 +51,16 @@ export const StatsView = () => {
             <TabsTrigger value="tShirtSize">T-Shirt</TabsTrigger>
           </TabsList>
           <TabsContent value="difficulty">
-            <ChartView data={data} />
+            <ChartView data={difficultyData} />
           </TabsContent>
           <TabsContent value="meetingPlace">
-            <ChartView data={data} />
+            <ChartView data={meetingPlaceData} />
           </TabsContent>
           <TabsContent value="bikeSize">
-            <ChartView data={data} />
+            <ChartView data={bikeSizeData} />
           </TabsContent>
           <TabsContent value="tShirtSize">
-            <ChartView data={data} />
+            <ChartView data={tShirtSizeData} />
           </TabsContent>
         </Tabs>
       </CardContent>
