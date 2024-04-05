@@ -38,6 +38,14 @@ const Home = () => {
     router.replace("/login");
   }
 
+  if (
+    user?.groups
+      ?.map((group) => group.id === "b378b102-4979-4186-8630-d28fe460ee08")
+      .includes(true)
+  ) {
+    router.replace("/admin");
+  }
+
   if (isFetched && me === undefined && !isOpened) {
     setIsOpened(true);
   }

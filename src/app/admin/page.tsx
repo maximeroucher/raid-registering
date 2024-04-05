@@ -1,9 +1,15 @@
+"use client";
+
 import { TeamInfoCard } from "@/src/components/teamCard/TeamInfoCard";
 import { TopBar } from "@/src/components/admin/TopBar";
 import { TeamsPreview } from "@/src/components/admin/TeamsPreview";
 import { StatsView } from "@/src/components/admin/StatsView";
+import { useUser } from "@/src/hooks/useUser";
+import { useRouter } from "next/navigation";
 
 const Dashboard = () => {
+  const { me: user } = useUser();
+  const router = useRouter();
   const information = [
     {
       title: "Participants enregistrés",
@@ -30,6 +36,14 @@ const Dashboard = () => {
       unit: undefined,
     },
   ];
+
+  if (
+    !user?.groups
+      ?.map((group) => group.id === "b378b102-4979-4186-8630-d28fe460ee08")
+      .includes(true)
+  ) {
+    router.replace("/");
+  }
 
   return (
     <div className="flex min-h-screen w-full flex-col">
