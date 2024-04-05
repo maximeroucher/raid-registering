@@ -18,11 +18,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/src/components/ui/table";
-import { useTeams } from "@/src/hooks/useTeams";
 import { Skeleton } from "../ui/skeleton";
+import { TeamPreview } from "@/src/api/hyperionSchemas";
 
-export const TeamsPreview = () => {
-  const { teams, isLoading } = useTeams();
+interface TeamsPreviewProps {
+  teams?: TeamPreview[];
+  isLoading: boolean;
+}
+
+export const TeamsPreview = (
+  { teams, isLoading }: TeamsPreviewProps
+) => {
   return (
     <Card className="xl:col-span-2">
       <CardHeader className="flex flex-row items-center">
