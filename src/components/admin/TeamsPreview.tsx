@@ -1,11 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/src/components/ui/avatar";
 import { Badge } from "@/src/components/ui/badge";
 import { Button } from "@/src/components/ui/button";
 import {
@@ -23,8 +18,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/src/components/ui/table";
+import { useTeams } from "@/src/hooks/useTeams";
+import { Skeleton } from "../ui/skeleton";
 
 export const TeamsPreview = () => {
+  const { teams, isLoading } = useTeams();
   return (
     <Card className="xl:col-span-2">
       <CardHeader className="flex flex-row items-center">
@@ -53,49 +51,66 @@ export const TeamsPreview = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
-              <TableCell>
-                Team n°1
-              </TableCell>
-              <TableCell className="max-md:hidden">
-                <div className="font-medium">Liam Johnson</div>
-                <div className="text-sm text-muted-foreground max-md:hidden">
-                  liam@example.com
-                </div>
-              </TableCell>
-              <TableCell className="max-md:hidden">
-                <div className="font-medium">Liam Johnson</div>
-                <div className="text-sm text-muted-foreground max-md:hidden">
-                  liam@example.com
-                </div>
-              </TableCell>
-              <TableCell className="max-md:hidden">
-                <Badge className="text-xs" variant="outline">
-                  Expert
-                </Badge>
-              </TableCell>
-              <TableCell className="text-right">10%</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                Team test
-              </TableCell>
-              <TableCell className="max-md:hidden">
-                <div className="font-medium">Liam Johnson</div>
-                <div className="text-sm text-muted-foreground max-md:hidden">
-                  liam@example.com
-                </div>
-              </TableCell>
-              <TableCell className="max-md:hidden">
-                <div className="font-medium">Non renseigné</div>
-              </TableCell>
-              <TableCell className="max-md:hidden">
-                <Badge className="text-xs" variant="outline">
-                  Sportif
-                </Badge>
-              </TableCell>
-              <TableCell className="text-right">20%</TableCell>
-            </TableRow>
+            {isLoading && (
+              <>
+                {[...Array(10)].map((_, index) => (
+                  <TableRow key={index}>
+                    <TableCell>
+                      <Skeleton className="h-4 w-20" />
+                    </TableCell>
+                    <TableCell className="max-md:hidden">
+                      <Skeleton className="h-4 w-20" />
+                    </TableCell>
+                    <TableCell className="max-md:hidden">
+                      <Skeleton className="h-4 w-20" />
+                    </TableCell>
+                    <TableCell className="max-md:hidden">
+                      <Skeleton className="h-4 w-20" />
+                    </TableCell>
+                    <TableCell className=" ml-auto text-right">
+                      <Skeleton className="h-4 w-20" />
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </>
+            )}
+            {teams && (
+              <>
+                {teams.slice(0, 10).map((team) => (
+                  <TableRow key={team.id}>
+                    <TableCell>{team.name}</TableCell>
+                    <TableCell className="max-md:hidden">
+                      <div className="font-medium">
+                        {team.captain?.firstname} {team.captain?.name}
+                      </div>
+                      <div className="text-sm text-muted-foreground max-md:hidden">
+                        {team.captain?.email}
+                      </div>
+                    </TableCell>
+                    <TableCell className="max-md:hidden">
+                      {team.second ? (
+                        <>
+                          <div className="font-medium">
+                            {team.second.firstname} {team.second.name}
+                          </div>
+                          <div className="text-sm text-muted-foreground max-md:hidden">
+                            {team.second.email}
+                          </div>
+                        </>
+                      ) : (
+                        <div className="font-medium">Non renseigné</div>
+                      )}
+                    </TableCell>
+                    <TableCell className="max-md:hidden">
+                      <Badge className="text-xs" variant="outline">
+                        {team.difficulty}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-right">?</TableCell>
+                  </TableRow>
+                ))}
+              </>
+            )}
           </TableBody>
         </Table>
       </CardContent>
