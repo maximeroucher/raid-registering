@@ -25,7 +25,7 @@ export const ChartView = ({ data }: CardViewProps) => {
   const { theme: mode } = useTheme();
 
   return (
-    <div>
+    <div className="h-[40vh] mb-10">
       <ResponsiveContainer>
         <BarChart data={data}>
           <Bar
