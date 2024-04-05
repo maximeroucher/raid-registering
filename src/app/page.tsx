@@ -13,6 +13,7 @@ import { useParticipant } from "../hooks/useParticipant";
 import { useState } from "react";
 import { useInviteTokenStore } from "../stores/inviteTokenStore";
 import { JoinTeamDialog } from "../components/home/JoinTeamDialog";
+import { isAdmin } from "../infra/adminUtils";
 
 const Home = () => {
   const { isTokenQueried, token } = useAuth();
@@ -38,11 +39,7 @@ const Home = () => {
     router.replace("/login");
   }
 
-  if (
-    user?.groups
-      ?.map((group) => group.id === "b378b102-4979-4186-8630-d28fe460ee08")
-      .includes(true)
-  ) {
+  if (isAdmin(user)) {
     router.replace("/admin");
   }
 

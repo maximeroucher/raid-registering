@@ -7,6 +7,7 @@ import { StatsView } from "@/src/components/admin/StatsView";
 import { useUser } from "@/src/hooks/useUser";
 import { useRouter } from "next/navigation";
 import { useTeams } from "@/src/hooks/useTeams";
+import { isAdmin } from "@/src/infra/adminUtils";
 
 const Dashboard = () => {
   const { me: user } = useUser();
@@ -39,11 +40,7 @@ const Dashboard = () => {
     },
   ];
 
-  if (
-    !user?.groups
-      ?.map((group) => group.id === "b378b102-4979-4186-8630-d28fe460ee08")
-      .includes(true)
-  ) {
+  if (!isAdmin(user)) {
     router.replace("/");
   }
 
