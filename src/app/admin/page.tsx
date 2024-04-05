@@ -26,6 +26,7 @@ import {
 import { TeamInfoCard } from "@/src/components/teamCard/TeamInfoCard";
 import { TopBar } from "@/src/components/admin/TopBar";
 import { TeamsPreview } from "@/src/components/admin/TeamsPreview";
+import { StatsView } from "@/src/components/admin/StatsView";
 
 const Dashboard = () => {
   const information = [
@@ -60,7 +61,8 @@ const Dashboard = () => {
         </div>
         <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
           <TeamsPreview />
-          <Card>
+          <StatsView />
+          {/* <Card>
             <CardHeader>
               <CardTitle>Recent Sales</CardTitle>
             </CardHeader>
@@ -141,7 +143,7 @@ const Dashboard = () => {
                 <div className="ml-auto font-medium">+$39.00</div>
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
         </div>
       </main>
     </div>
