@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useDocumentsStore } from "@/src/stores/documents";
 import { useState } from "react";
 import { Skeleton } from "../ui/skeleton";
+import { PdfViewer } from "./PdfViewer";
 
 interface DocumentDialogProps {
   setIsOpen: (value: boolean) => void;
@@ -50,13 +51,19 @@ export const DocumentDialog = ({
       {image?.size !== undefined ? (
         <div className="flex flex-col items-center gap-4">
           <span className="text-gray-500 overflow-hidden m-auto">
-            <Image
-              src={URL.createObjectURL(image)}
-              alt={field.name}
-              width={300}
-              height={200}
-              className="rounded-lg w-auto max-h-[400px]"
-            />
+            {image?.type === "application/pdf" ? (
+              <div className="h-[600px]">
+                <PdfViewer file={image} />
+              </div>
+            ) : (
+              <Image
+                src={URL.createObjectURL(image)}
+                alt={field.name}
+                width={300}
+                height={200}
+                className="rounded-lg w-auto max-h-[400px]"
+              />
+            )}
           </span>
           <Button
             className="w-full"
