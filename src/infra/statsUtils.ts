@@ -70,14 +70,21 @@ function getMeetingPlaceData(
     return response;
   }
   teams.forEach((team) => {
-    if (team.meeting_place === "centrale") {
-      response[0].value++;
-    } else if (team.meeting_place === "bellecour") {
-      response[1].value++;
-    } else if (team.meeting_place === "anyway") {
-      response[2].value++;
-    } else if (seeAll) {
-      response[3].value++;
+    switch (team.meeting_place) {
+      case "centrale":
+        response[0].value++;
+        break;
+      case "bellecour":
+        response[1].value++;
+        break;
+      case "anyway":
+        response[2].value++;
+        break;
+      default:
+        if (seeAll) {
+          response[3].value++;
+        }
+        break;
     }
   });
   return response;
@@ -105,18 +112,27 @@ function getBikeSizeData(
     .flat(1)
     .forEach((participant) => {
       if (participant) {
-        if (participant.bike_size === "XS") {
-          response[0].value++;
-        } else if (participant.bike_size === "S") {
-          response[1].value++;
-        } else if (participant.bike_size === "M") {
-          response[2].value++;
-        } else if (participant.bike_size === "L") {
-          response[3].value++;
-        } else if (participant.bike_size === "XL") {
-          response[4].value++;
-        } else if (seeAll) {
-          response[5].value++;
+        switch (participant.bike_size) {
+          case "XS":
+            response[0].value++;
+            break;
+          case "S":
+            response[1].value++;
+            break;
+          case "M":
+            response[2].value++;
+            break;
+          case "L":
+            response[3].value++;
+            break;
+          case "XL":
+            response[4].value++;
+            break;
+          default:
+            if (seeAll) {
+              response[5].value++;
+            }
+            break;
         }
       }
     });
@@ -145,18 +161,27 @@ function getTShirtSizeData(
     .flat(1)
     .forEach((participant) => {
       if (participant) {
-        if (participant.t_shirt_size === "XS") {
-          response[0].value++;
-        } else if (participant.t_shirt_size === "S") {
-          response[1].value++;
-        } else if (participant.t_shirt_size === "M") {
-          response[2].value++;
-        } else if (participant.t_shirt_size === "L") {
-          response[3].value++;
-        } else if (participant.t_shirt_size === "XL") {
-          response[4].value++;
-        } else if (seeAll) {
-          response[5].value++;
+        switch (participant.t_shirt_size) {
+          case "XS":
+            response[0].value++;
+            break;
+          case "S":
+            response[1].value++;
+            break;
+          case "M":
+            response[2].value++;
+            break;
+          case "L":
+            response[3].value++;
+            break;
+          case "XL":
+            response[4].value++;
+            break;
+          default:
+            if (seeAll) {
+              response[5].value++;
+            }
+            break;
         }
       }
     });
