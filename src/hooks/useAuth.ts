@@ -31,7 +31,7 @@ export const useAuth = () => {
   const router = useRouter();
 
   let tokenRefreshIntervalHandler: any;
-  let tokenRefreshInterval = 30 * 60 * 1000;
+  let tokenRefreshInterval = 60 * 1000;
 
   function generateRandomString(length: number): string {
     var result = "";

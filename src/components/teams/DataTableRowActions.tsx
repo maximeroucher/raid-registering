@@ -18,8 +18,8 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 
-import { labels } from "@/src/infra/data";
-import { taskSchema } from "@/src/infra/schema";
+import { TeamPreview } from "@/src/api/hyperionSchemas";
+import { difficulties } from "@/src/infra/comboboxValues";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -28,7 +28,7 @@ interface DataTableRowActionsProps<TData> {
 export function DataTableRowActions<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
-  const task = taskSchema.parse(row.original);
+  const task = row.original as TeamPreview;
 
   return (
     <DropdownMenu>
@@ -47,10 +47,10 @@ export function DataTableRowActions<TData>({
         <DropdownMenuItem>Favorite</DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuSub>
-          <DropdownMenuSubTrigger>Labels</DropdownMenuSubTrigger>
+          <DropdownMenuSubTrigger>Parcours</DropdownMenuSubTrigger>
           <DropdownMenuSubContent>
-            <DropdownMenuRadioGroup value={task.label}>
-              {labels.map((label) => (
+            <DropdownMenuRadioGroup value={task.name}>
+              {difficulties.map((label) => (
                 <DropdownMenuRadioItem key={label.value} value={label.value}>
                   {label.label}
                 </DropdownMenuRadioItem>
