@@ -21,7 +21,7 @@ interface StatsViewProps {
 
 export const StatsView = ({ teams, isLoading }: StatsViewProps) => {
   const [seeAll, setSeeAll] = useState(false);
-  const { difficultyData, meetingPlaceData, bikeSizeData, tShirtSizeData } =
+  const { difficultyData, meetingPlaceData, bikeSizeData, tShirtSizeData, situationData } =
     getStats(seeAll, teams);
   return (
     <Card>
@@ -44,11 +44,12 @@ export const StatsView = ({ teams, isLoading }: StatsViewProps) => {
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="difficulty">
-          <TabsList className="grid w-full grid-cols-4 mb-6">
+          <TabsList className="grid w-full grid-cols-5 mb-6">
             <TabsTrigger value="difficulty">Parcours</TabsTrigger>
             <TabsTrigger value="meetingPlace">Départ</TabsTrigger>
             <TabsTrigger value="bikeSize">VTT</TabsTrigger>
             <TabsTrigger value="tShirtSize">T-Shirt</TabsTrigger>
+            <TabsTrigger value="situation">Situation</TabsTrigger>
           </TabsList>
           <TabsContent value="difficulty">
             <ChartView data={difficultyData} />
@@ -61,6 +62,9 @@ export const StatsView = ({ teams, isLoading }: StatsViewProps) => {
           </TabsContent>
           <TabsContent value="tShirtSize">
             <ChartView data={tShirtSizeData} />
+          </TabsContent>
+          <TabsContent value="situation">
+            <ChartView data={situationData} />
           </TabsContent>
         </Tabs>
       </CardContent>

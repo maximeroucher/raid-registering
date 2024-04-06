@@ -1107,8 +1107,8 @@ export type Participant = {
   email: string;
   bike_size: Size | null;
   t_shirt_size: Size | null;
-  address: string | null;
   situation: string | null;
+  address: string | null;
   other_school?: string | null;
   company?: string | null;
   diet?: string | null;
@@ -1133,6 +1133,7 @@ export type ParticipantBase = {
   email: string;
   bike_size: Size | null;
   t_shirt_size: Size | null;
+  situation: string | null;
 };
 
 export type ParticipantUpdate = {

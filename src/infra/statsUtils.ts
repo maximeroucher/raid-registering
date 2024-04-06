@@ -5,6 +5,7 @@ export interface Stats {
   meetingPlaceData: { value: number; label: string }[];
   bikeSizeData: { value: number; label: string }[];
   tShirtSizeData: { value: number; label: string }[];
+  situationData: { value: number; label: string }[];
 }
 
 export function getStats(seeAll: boolean, teams?: TeamPreview[]): Stats {
@@ -13,11 +14,13 @@ export function getStats(seeAll: boolean, teams?: TeamPreview[]): Stats {
   const meetingPlaceData = getMeetingPlaceData(seeAll, filteredTeams);
   const bikeSizeData = getBikeSizeData(seeAll, filteredTeams);
   const tShirtSizeData = getTShirtSizeData(seeAll, filteredTeams);
+  const situationData = getSituationData(seeAll, filteredTeams);
   return {
     difficultyData,
     meetingPlaceData,
     bikeSizeData,
     tShirtSizeData,
+    situationData,
   };
 }
 
@@ -154,6 +157,52 @@ function getTShirtSizeData(
           response[4].value++;
         } else if (seeAll) {
           response[5].value++;
+        }
+      }
+    });
+  return response;
+}
+
+function getSituationData(
+  seeAll: boolean,
+  teams?: TeamPreview[],
+): { value: number; label: string }[] {
+  var response = [
+    { value: 0, label: "Centrale" },
+    { value: 0, label: "Autre école" },
+    { value: 0, label: "Partenaire" },
+    { value: 0, label: "Autre" },
+  ];
+  if (seeAll) {
+    response.push({ value: 0, label: "N/A" });
+  }
+  if (!teams) {
+    return response;
+  }
+  teams
+    .map((team) => [team.captain, team.second])
+    .flat(1)
+    .forEach((participant) => {
+      if (participant) {
+        const situation = participant.situation?.split(" : ")[0];
+        switch (situation) {
+          case "centrale":
+            response[0].value++;
+            break;
+          case "otherschool":
+            response[1].value++;
+            break;
+          case "corporatepartner":
+            response[2].value++;
+            break;
+          case "other":
+            response[3].value++;
+            break;
+          default:
+            if (seeAll) {
+              response[4].value++;
+            }
+            break;
         }
       }
     });
