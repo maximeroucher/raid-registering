@@ -23,7 +23,7 @@ export const useUser = () => {
     setUser(me);
   }
   
-  const isAdmin = () => user?.groups?.some((group) => group.id === RAID_ADMIN_GROUP_ID);
+  const isAdmin = () => user?.groups?.some((group) => group.id === RAID_ADMIN_GROUP_ID) ?? false;
 
   return { me: user, isLoading, isAdmin };
 };

@@ -3,10 +3,11 @@ import { useTokenStore } from "@/src/stores/token";
 import { useUser } from "./useUser";
 
 export const useTeams = () => {
-  const { token, userId } = useTokenStore();
-
+  const { token } = useTokenStore();
   const { isAdmin } = useUser();
-  console.log(isAdmin())
+
+  console.log("token", token);
+  console.log(isAdmin() && token !== null)
 
   const {
     data: teams,
@@ -19,7 +20,7 @@ export const useTeams = () => {
       },
     },
     {
-      enabled: isAdmin(),
+      enabled: isAdmin() && token !== null,
       retry: 0,
       queryHash: "getTeams",
     },

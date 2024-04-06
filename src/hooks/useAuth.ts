@@ -30,6 +30,9 @@ export const useAuth = () => {
   const [isTokenQueried, setIsTokenQueried] = useState(false);
   const router = useRouter();
 
+  let tokenRefreshIntervalHandler: any;
+  let tokenRefreshInterval = 30 * 60 * 1000;
+
   function generateRandomString(length: number): string {
     var result = "";
     var characters =
@@ -76,6 +79,7 @@ export const useAuth = () => {
   }
 
   async function refreshTokens(): Promise<string | null> {
+    setIsLoading(true);
     console.log("refreshing tokens");
     if (refreshToken) {
       const params: BodyTokenAuthTokenPost = {
@@ -162,6 +166,7 @@ export const useAuth = () => {
   }
 
   function logout() {
+    stopBackgroundRefreshing();
     setToken(null);
     setRefreshToken(null);
     setIsTokenQueried(true);
@@ -172,7 +177,9 @@ export const useAuth = () => {
   }
 
   async function getTokenFromStorage(): Promise<string | null> {
+    console.log("getting token from storage");
     setIsLoading(true);
+    startBackgroundRefreshing();
     if (typeof window === "undefined") return null;
     if (token !== null) {
       if (isTokenExpired()) {
@@ -189,19 +196,23 @@ export const useAuth = () => {
     return token;
   }
 
+  const startBackgroundRefreshing = () => {
+    clearInterval(tokenRefreshIntervalHandler);
 
-  useQuery({
-    queryKey: ["getTokenFromStorage"],
-    queryFn: getTokenFromStorage,
-    retry: 0,
-  });
+    tokenRefreshIntervalHandler = setInterval(() => {
+      if (isTokenExpired()) {
+        refreshTokens();
+      }
+    }, tokenRefreshInterval);
+  };
 
-  useQuery({
-    queryKey: ["refreshToken"],
-    queryFn: refreshTokens,
-    retry: 0,
-    enabled: isTokenExpired(),
-  });
+  const stopBackgroundRefreshing = () => {
+    clearInterval(tokenRefreshIntervalHandler);
+  };
+
+  if (!isTokenQueried) {
+    getTokenFromStorage();
+  }
 
   return { getTokenFromRequest, isLoading, token, isTokenQueried, logout };
 };
