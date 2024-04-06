@@ -40,7 +40,7 @@ const Dashboard = () => {
   ];
 
   if (!isAdmin() && typeof window !== "undefined") {
-    router.replace("/");
+    router.replace("/?redirect=/admin");
   }
 
   return (

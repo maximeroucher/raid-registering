@@ -39,7 +39,12 @@ const Home = () => {
   }
 
   if (isAdmin() && typeof window !== "undefined") {
-    router.replace("/admin");
+    const redirection = searchParams.get("redirect");
+    if (redirection !== null) {
+      router.replace(redirection);
+    } else {
+      router.replace("/admin");
+    }
   }
 
   if (isFetched && me === undefined && !isOpened) {
