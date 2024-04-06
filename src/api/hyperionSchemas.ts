@@ -75,6 +75,28 @@ export type Applicant = {
   phone?: string | null;
 };
 
+export type AssociationBase = {
+  name: string;
+  kind: Kinds;
+  mandate_year: number;
+  description?: string | null;
+};
+
+export type AssociationComplete = {
+  name: string;
+  kind: Kinds;
+  mandate_year: number;
+  description?: string | null;
+  id: string;
+};
+
+export type AssociationEdit = {
+  name?: string | null;
+  kind?: Kinds | null;
+  description?: string | null;
+  mandate_year?: number | null;
+};
+
 /**
  * Return a dictionary of {key: error message} indicating which element of failed.
  */
@@ -104,6 +126,14 @@ export type BodyCreateAdvertImageAdvertAdvertsAdvertIdPicturePost = {
    */
   image: Blob;
 };
+
+export type BodyCreateAssociationLogoPhonebookAssociationsAssociationIdPicturePost =
+  {
+    /**
+     * @format binary
+     */
+    image: Blob;
+  };
 
 export type BodyCreateCampaignsLogoCampaignListsListIdLogoPost = {
   /**
@@ -139,6 +169,14 @@ export type BodyCreatePrizePictureTombolaPrizesPrizeIdPicturePost = {
    */
   image: Blob;
 };
+
+export type BodyCreateRecommendationImageRecommendationRecommendationsRecommendationIdPicturePost =
+  {
+    /**
+     * @format binary
+     */
+    image: Blob;
+  };
 
 export type BodyLoginForAccessTokenAuthSimpleTokenPost = {
   grant_type?: string | null;
@@ -770,6 +808,18 @@ export type ItemUpdate = {
   suggested_lending_duration?: number | null;
 };
 
+export type Kinds =
+  | "Comit\u00E9"
+  | "Section AE"
+  | "Club AE"
+  | "Section USE"
+  | "Club USE"
+  | "Asso ind\u00E9";
+
+export type KindsReturn = {
+  kinds: Kinds[];
+};
+
 /**
  * Base schema for a list.
  */
@@ -834,6 +884,7 @@ export type Loan = {
   caution?: string | null;
   id: string;
   returned: boolean;
+  returned_date: string | null;
   items_qty: ItemQuantity[];
   borrower: CoreUserSimple;
   loaner: Loaner;
@@ -926,6 +977,39 @@ export type ManagerUpdate = {
 
 export type MeetingPlace = "centrale" | "bellecour" | "anyway";
 
+export type MemberComplete = {
+  name: string;
+  firstname: string;
+  nickname?: string | null;
+  id: string;
+  email: string;
+  phone?: string | null;
+  promo?: number | null;
+  memberships: MembershipComplete[];
+};
+
+export type MembershipBase = {
+  user_id: string;
+  association_id: string;
+  mandate_year: number;
+  role_name: string;
+  role_tags?: string | null;
+};
+
+export type MembershipComplete = {
+  user_id: string;
+  association_id: string;
+  mandate_year: number;
+  role_name: string;
+  role_tags?: string | null;
+  id: string;
+};
+
+export type MembershipEdit = {
+  role_name?: string | null;
+  role_tags?: string | null;
+};
+
 export type Message = {
   /**
    * A context represents a topic. There can only by one notification per context.
@@ -947,7 +1031,7 @@ export type Message = {
    */
   delivery_datetime?: string | null;
   /**
-   * @format date
+   * @format date-time
    */
   expire_on: string;
 };
@@ -1021,9 +1105,9 @@ export type Participant = {
   birthday: string;
   phone: string;
   email: string;
-  address: string | null;
   bike_size: Size | null;
   t_shirt_size: Size | null;
+  address: string | null;
   situation: string | null;
   other_school?: string | null;
   company?: string | null;
@@ -1047,6 +1131,8 @@ export type ParticipantBase = {
   birthday: string;
   phone: string;
   email: string;
+  bike_size: Size | null;
+  t_shirt_size: Size | null;
 };
 
 export type ParticipantUpdate = {
@@ -1141,9 +1227,39 @@ export type RaffleStats = {
 
 export type RaffleStatusType = "creation" | "open" | "lock";
 
+export type Recommendation = {
+  title: string;
+  code?: string | null;
+  summary: string;
+  description: string;
+  id: string;
+  /**
+   * @format date-time
+   */
+  creation: string;
+};
+
+export type RecommendationBase = {
+  title: string;
+  code?: string | null;
+  summary: string;
+  description: string;
+};
+
+export type RecommendationEdit = {
+  title?: string | null;
+  code?: string | null;
+  summary?: string | null;
+  description?: string | null;
+};
+
 export type ResetPasswordRequest = {
   reset_token: string;
   new_password: string;
+};
+
+export type RoleTagsReturn = {
+  tags: string[];
 };
 
 export type RoomBase = {
@@ -1218,6 +1334,7 @@ export type TeamPreview = {
   captain: ParticipantBase;
   second: ParticipantBase | null;
   difficulty: Difficulty | null;
+  meeting_place: MeetingPlace | null;
 };
 
 export type TeamUpdate = {

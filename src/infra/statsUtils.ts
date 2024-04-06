@@ -66,17 +66,17 @@ function getMeetingPlaceData(
   if (!teams) {
     return response;
   }
-  // teams.forEach((team) => {
-  //     if (team.meeting_place === "central") {
-  //         response[0].value++;
-  //     } else if (team.meeting_place === "bellecour") {
-  //         response[1].value++;
-  //     } else if (team.meeting_place === "any") {
-  //         response[2].value++;
-  //     } else if (seeAll) {
-  //         response[3].value++;
-  //     }
-  // });
+  teams.forEach((team) => {
+    if (team.meeting_place === "centrale") {
+      response[0].value++;
+    } else if (team.meeting_place === "bellecour") {
+      response[1].value++;
+    } else if (team.meeting_place === "anyway") {
+      response[2].value++;
+    } else if (seeAll) {
+      response[3].value++;
+    }
+  });
   return response;
 }
 
@@ -97,26 +97,26 @@ function getBikeSizeData(
   if (!teams) {
     return response;
   }
-  //   teams
-  //     .map((team) => [team.captain, team.second])
-  //     .flat(1)
-  //     .forEach((participant) => {
-  //       if (participant) {
-  //         if (participant.bike_size === "XS") {
-  //           response[0].value++;
-  //         } else if (participant.bike_size === "S") {
-  //           response[1].value++;
-  //         } else if (participant.bike_size === "M") {
-  //           response[2].value++;
-  //         } else if (participant.bike_size === "L") {
-  //           response[3].value++;
-  //         } else if (participant.bike_size === "XL") {
-  //           response[4].value++;
-  //         } else if (seeAll) {
-  //           response[5].value++;
-  //         }
-  //       }
-  //     });
+  teams
+    .map((team) => [team.captain, team.second])
+    .flat(1)
+    .forEach((participant) => {
+      if (participant) {
+        if (participant.bike_size === "XS") {
+          response[0].value++;
+        } else if (participant.bike_size === "S") {
+          response[1].value++;
+        } else if (participant.bike_size === "M") {
+          response[2].value++;
+        } else if (participant.bike_size === "L") {
+          response[3].value++;
+        } else if (participant.bike_size === "XL") {
+          response[4].value++;
+        } else if (seeAll) {
+          response[5].value++;
+        }
+      }
+    });
   return response;
 }
 
@@ -137,25 +137,25 @@ function getTShirtSizeData(
   if (!teams) {
     return response;
   }
-  // teams
-  //     .map((team) => [team.captain, team.second])
-  //     .flat(1)
-  //     .forEach((participant) => {
-  //         if (participant) {
-  //             if (participant.t_shirt_size === "XS") {
-  //                 response[0].value++;
-  //             } else if (participant.t_shirt_size === "S") {
-  //                 response[1].value++;
-  //             } else if (participant.t_shirt_size === "M") {
-  //                 response[2].value++;
-  //             } else if (participant.t_shirt_size === "L") {
-  //                 response[3].value++;
-  //             } else if (participant.t_shirt_size === "XL") {
-  //                 response[4].value++;
-  //             } else if (seeAll) {
-  //                 response[5].value++;
-  //             }
-  //         }
-  //     });
+  teams
+    .map((team) => [team.captain, team.second])
+    .flat(1)
+    .forEach((participant) => {
+      if (participant) {
+        if (participant.t_shirt_size === "XS") {
+          response[0].value++;
+        } else if (participant.t_shirt_size === "S") {
+          response[1].value++;
+        } else if (participant.t_shirt_size === "M") {
+          response[2].value++;
+        } else if (participant.t_shirt_size === "L") {
+          response[3].value++;
+        } else if (participant.t_shirt_size === "XL") {
+          response[4].value++;
+        } else if (seeAll) {
+          response[5].value++;
+        }
+      }
+    });
   return response;
 }
