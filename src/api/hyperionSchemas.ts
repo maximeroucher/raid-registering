@@ -1109,6 +1109,7 @@ export type Participant = {
   t_shirt_size: Size | null;
   situation: string | null;
   validation_progress: number;
+  id: string;
   address: string | null;
   other_school?: string | null;
   company?: string | null;
@@ -1120,10 +1121,20 @@ export type Participant = {
   raid_rules?: Document | null;
   attestation_on_honour: boolean;
   payment: boolean;
-  id: string;
 };
 
 export type ParticipantBase = {
+  name: string;
+  firstname: string;
+  /**
+   * @format date
+   */
+  birthday: string;
+  phone: string;
+  email: string;
+};
+
+export type ParticipantPreview = {
   name: string;
   firstname: string;
   /**
@@ -1335,8 +1346,8 @@ export type TeamPreview = {
   name: string;
   id: string;
   number: number | null;
-  captain: ParticipantBase;
-  second: ParticipantBase | null;
+  captain: ParticipantPreview;
+  second: ParticipantPreview | null;
   difficulty: Difficulty | null;
   meeting_place: MeetingPlace | null;
   validation_progress: number;

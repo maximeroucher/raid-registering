@@ -6,7 +6,7 @@ import { Checkbox } from "../ui/checkbox";
 import { Badge } from "../ui/badge";
 import { DataTableColumnHeader } from "./DataTableColumnHeader";
 import { DataTableRowActions } from "./DataTableRowActions";
-import { ParticipantBase, TeamPreview } from "@/src/api/hyperionSchemas";
+import { ParticipantPreview, TeamPreview } from "@/src/api/hyperionSchemas";
 import { difficulties, getLabelFromValue } from "@/src/infra/comboboxValues";
 
 export const columns: ColumnDef<TeamPreview>[] = [
@@ -49,7 +49,7 @@ export const columns: ColumnDef<TeamPreview>[] = [
       <DataTableColumnHeader column={column} title="Capitaine" />
     ),
     cell: ({ row }) => {
-      const captain = row.getValue("captain") as ParticipantBase;
+      const captain = row.getValue("captain") as ParticipantPreview;
       return (
         <div className="flex space-x-2">
           {captain.firstname} {captain.name}
@@ -64,7 +64,7 @@ export const columns: ColumnDef<TeamPreview>[] = [
       <DataTableColumnHeader column={column} title="Coéquiper" />
     ),
     cell: ({ row }) => {
-      const second = row.getValue("second") as ParticipantBase | undefined;
+      const second = row.getValue("second") as ParticipantPreview | undefined;
       return (
         <div className="flex space-x-2">
           {second ? `${second.firstname} ${second.name}` : "Aucun"}
