@@ -241,8 +241,8 @@ export const ViewEditParticipantItem = ({
   }
 
   function getSituation() {
-    const situation = me.situation?.split(" : ")[0];
-    const title = me.situation?.split(" : ")[1];
+    const situation = getSituationLabel(me.situation ?? undefined)
+    const title = getSituationTitle(me.situation ?? undefined)
     return (
       <>
         <ParticipantCardItem

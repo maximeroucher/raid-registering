@@ -1,4 +1,5 @@
 import { TeamPreview } from "../api/hyperionSchemas";
+import { getSituationLabel } from "./teamUtils";
 
 export interface Stats {
   difficultyData: { value: number; label: string }[];
@@ -209,8 +210,7 @@ function getSituationData(
     .flat(1)
     .forEach((participant) => {
       if (participant) {
-        const situation = participant.situation?.split(" : ")[0];
-        switch (situation) {
+        switch (getSituationLabel(participant.situation ?? undefined)) {
           case "centrale":
             response[0].value++;
             break;
