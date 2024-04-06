@@ -8,9 +8,11 @@ import {
 import { useTokenStore } from "@/src/stores/token";
 import { TeamBase, TeamUpdate } from "../api/hyperionSchemas";
 import { useQueryClient } from "@tanstack/react-query";
+import { useUser } from "./useUser";
 
 export const useTeam = () => {
   const { token, userId } = useTokenStore();
+  const { isAdmin } = useUser();
   const queryClient = useQueryClient();
 
   const {
@@ -27,7 +29,7 @@ export const useTeam = () => {
       },
     },
     {
-      enabled: userId !== null,
+      enabled: userId !== null && !isAdmin,
       retry: 0,
       queryHash: "getTeamByParticipantId",
     },

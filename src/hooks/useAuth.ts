@@ -189,6 +189,7 @@ export const useAuth = () => {
     return token;
   }
 
+
   useQuery({
     queryKey: ["getTokenFromStorage"],
     queryFn: getTokenFromStorage,

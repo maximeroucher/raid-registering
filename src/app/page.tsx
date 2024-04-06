@@ -13,12 +13,11 @@ import { useParticipant } from "../hooks/useParticipant";
 import { useState } from "react";
 import { useInviteTokenStore } from "../stores/inviteTokenStore";
 import { JoinTeamDialog } from "../components/home/JoinTeamDialog";
-import { isAdmin } from "../infra/adminUtils";
 
 const Home = () => {
   const { isTokenQueried, token } = useAuth();
   const { me, isFetched } = useParticipant();
-  const { me: user } = useUser();
+  const { me: user, isAdmin } = useUser();
   const { team } = useTeam();
   const [isOpened, setIsOpened] = useState(false);
   const searchParams = useSearchParams();
@@ -39,7 +38,7 @@ const Home = () => {
     router.replace("/login");
   }
 
-  if (isAdmin(user)) {
+  if (isAdmin && typeof window !== "undefined") {
     router.replace("/admin");
   }
 

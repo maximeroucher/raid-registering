@@ -7,10 +7,9 @@ import { StatsView } from "@/src/components/admin/StatsView";
 import { useUser } from "@/src/hooks/useUser";
 import { useRouter } from "next/navigation";
 import { useTeams } from "@/src/hooks/useTeams";
-import { isAdmin } from "@/src/infra/adminUtils";
 
 const Dashboard = () => {
-  const { me: user } = useUser();
+  const { me: user, isAdmin } = useUser();
   const { teams, isLoading } = useTeams();
   const router = useRouter();
   const information = [
@@ -40,7 +39,7 @@ const Dashboard = () => {
     },
   ];
 
-  if (!isAdmin(user) && typeof window !== "undefined") {
+  if (!isAdmin && typeof window !== "undefined") {
     router.replace("/");
   }
 

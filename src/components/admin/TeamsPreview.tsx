@@ -20,6 +20,7 @@ import {
 } from "@/src/components/ui/table";
 import { Skeleton } from "../ui/skeleton";
 import { TeamPreview } from "@/src/api/hyperionSchemas";
+import { difficulties, getLabelFromValue } from "@/src/infra/comboboxValues";
 
 interface TeamsPreviewProps {
   teams?: TeamPreview[];
@@ -109,7 +110,7 @@ export const TeamsPreview = (
                     </TableCell>
                     <TableCell className="max-md:hidden">
                       <Badge className="text-xs" variant="outline">
-                        {team.difficulty}
+                        {getLabelFromValue(difficulties, team.difficulty ?? undefined)}
                       </Badge>
                     </TableCell>
                     <TableCell className="text-right">?</TableCell>

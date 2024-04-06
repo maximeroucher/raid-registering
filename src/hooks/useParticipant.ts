@@ -10,9 +10,11 @@ import { useQueryClient } from "@tanstack/react-query";
 import { ParticipantBase, ParticipantUpdate } from "../api/hyperionSchemas";
 import { useParticipantStore } from "../stores/particpant";
 import { useTeam } from "./useTeam";
+import { useUser } from "./useUser";
 
 export const useParticipant = () => {
   const { token, userId } = useTokenStore();
+  const { isAdmin } = useUser();
   const queryClient = useQueryClient();
   const { participant, setParticipant } = useParticipantStore();
   const { refetchTeam } = useTeam();
@@ -32,7 +34,7 @@ export const useParticipant = () => {
       },
     },
     {
-      enabled: userId !== null && participant === undefined,
+      enabled: userId !== null && participant === undefined && !isAdmin,
       retry: 0,
       queryHash: "getParticipantById",
     },
