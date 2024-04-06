@@ -1108,6 +1108,7 @@ export type Participant = {
   bike_size: Size | null;
   t_shirt_size: Size | null;
   situation: string | null;
+  validation_progress: number;
   address: string | null;
   other_school?: string | null;
   company?: string | null;
@@ -1134,6 +1135,7 @@ export type ParticipantBase = {
   bike_size: Size | null;
   t_shirt_size: Size | null;
   situation: string | null;
+  validation_progress: number;
 };
 
 export type ParticipantUpdate = {
@@ -1322,6 +1324,7 @@ export type Team = {
   second: Participant | null;
   difficulty: Difficulty | null;
   meeting_place: MeetingPlace | null;
+  validation_progress: number;
 };
 
 export type TeamBase = {
@@ -1336,6 +1339,7 @@ export type TeamPreview = {
   second: ParticipantBase | null;
   difficulty: Difficulty | null;
   meeting_place: MeetingPlace | null;
+  validation_progress: number;
 };
 
 export type TeamUpdate = {

@@ -23,7 +23,6 @@ import {
   getLabelFromValue,
   meetingPlaces,
 } from "@/src/infra/comboboxValues";
-import { calculateTeamProgress } from "@/src/infra/teamUtils";
 import { TeamInfoCard } from "./TeamInfoCard";
 
 interface TeamCardProps {
@@ -52,7 +51,7 @@ export const TeamCard = ({ team }: TeamCardProps) => {
     },
     {
       title: "Inscription",
-      value: `${calculateTeamProgress(team).toFixed(0)}%`,
+      value: `${team?.validation_progress.toFixed(0)}%`,
       description: "10 jours restants",
       unit: <span>%</span>,
     },

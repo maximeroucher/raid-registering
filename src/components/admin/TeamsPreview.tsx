@@ -27,9 +27,7 @@ interface TeamsPreviewProps {
   isLoading: boolean;
 }
 
-export const TeamsPreview = (
-  { teams, isLoading }: TeamsPreviewProps
-) => {
+export const TeamsPreview = ({ teams, isLoading }: TeamsPreviewProps) => {
   return (
     <Card className="xl:col-span-2">
       <CardHeader className="flex flex-row items-center">
@@ -110,10 +108,15 @@ export const TeamsPreview = (
                     </TableCell>
                     <TableCell className="max-md:hidden">
                       <Badge className="text-xs" variant="outline">
-                        {getLabelFromValue(difficulties, team.difficulty ?? undefined)}
+                        {getLabelFromValue(
+                          difficulties,
+                          team.difficulty ?? undefined,
+                        )}
                       </Badge>
                     </TableCell>
-                    <TableCell className="text-right">?</TableCell>
+                    <TableCell className="text-right">
+                      {team?.validation_progress}%
+                    </TableCell>
                   </TableRow>
                 ))}
               </>
