@@ -34,7 +34,7 @@ export const useParticipant = () => {
       },
     },
     {
-      enabled: userId !== null && participant === undefined && !isAdmin,
+      enabled: userId !== null && participant === undefined && !isAdmin(),
       retry: 0,
       queryHash: "getParticipantById",
     },

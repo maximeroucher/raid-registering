@@ -4,7 +4,9 @@ import { useUser } from "./useUser";
 
 export const useTeams = () => {
   const { token, userId } = useTokenStore();
+
   const { isAdmin } = useUser();
+  console.log(isAdmin())
 
   const {
     data: teams,
@@ -17,9 +19,9 @@ export const useTeams = () => {
       },
     },
     {
-      enabled: isAdmin,
+      enabled: isAdmin(),
       retry: 0,
-      queryHash: "getTeamByParticipantId",
+      queryHash: "getTeams",
     },
   );
 

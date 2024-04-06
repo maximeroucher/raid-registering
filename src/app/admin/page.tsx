@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { useTeams } from "@/src/hooks/useTeams";
 
 const Dashboard = () => {
-  const { me: user, isAdmin } = useUser();
+  const { isAdmin } = useUser();
   const { teams, isLoading } = useTeams();
   const router = useRouter();
   const information = [
@@ -39,7 +39,7 @@ const Dashboard = () => {
     },
   ];
 
-  if (!isAdmin && typeof window !== "undefined") {
+  if (!isAdmin() && typeof window !== "undefined") {
     router.replace("/");
   }
 

@@ -29,7 +29,7 @@ export const useTeam = () => {
       },
     },
     {
-      enabled: userId !== null && !isAdmin,
+      enabled: userId !== null && !isAdmin(),
       retry: 0,
       queryHash: "getTeamByParticipantId",
     },

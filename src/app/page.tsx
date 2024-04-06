@@ -38,7 +38,7 @@ const Home = () => {
     router.replace("/login");
   }
 
-  if (isAdmin && typeof window !== "undefined") {
+  if (isAdmin() && typeof window !== "undefined") {
     router.replace("/admin");
   }
 
