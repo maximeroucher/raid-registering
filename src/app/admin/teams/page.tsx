@@ -12,16 +12,44 @@ import { columns } from "@/src/components/teams/Columns";
 import { TopBar } from "@/src/components/admin/TopBar";
 import { useTeams } from "@/src/hooks/useTeams";
 import { useUser } from "@/src/hooks/useUser";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+} from "@/src/components/ui/sheet";
 
 const Dashboard = () => {
   const { isAdmin } = useUser();
-  const { teams, isLoading } = useTeams();
+  const { teams } = useTeams();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const [isOpened, setIsOpened] = useState(false);
+  const [teamId, setTeamId] = useState<string | null>(null);
 
   if (!isAdmin() && typeof window !== "undefined") {
-    router.replace("/?redirect=/admin/teams");
+    const redirectUrl = new URL(window.location.href);
+    const path = redirectUrl.pathname + redirectUrl.search;
+    router.replace(`/?redirect=${path}`);
   }
+
+  const selectedTeamId = searchParams.get("teamId");
+  if (selectedTeamId !== teamId) {
+    setTeamId(selectedTeamId);
+    setIsOpened(!!selectedTeamId);
+  }
+
+  function handleModalClose() {
+    setIsOpened(false);
+    router.replace("/admin/teams");
+    setTeamId(null);
+  }
+
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <TopBar />
@@ -36,6 +64,22 @@ const Dashboard = () => {
           </CardContent>
         </Card>
       </main>
+      {teamId && (
+        <Sheet open={isOpened} onOpenChange={handleModalClose}>
+          <SheetContent side="team">
+            <SheetHeader>
+              <SheetTitle>Edit profile</SheetTitle>
+              <SheetDescription>
+                Make changes to your profile here.
+              </SheetDescription>
+            </SheetHeader>
+            <div className="p-4 space-y-4"></div>
+            <SheetFooter>
+              <SheetClose asChild></SheetClose>
+            </SheetFooter>
+          </SheetContent>
+        </Sheet>
+      )}
     </div>
   );
 };

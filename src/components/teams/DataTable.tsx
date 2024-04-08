@@ -26,6 +26,8 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
+import { useRouter } from "next/navigation";
+import { TeamPreview } from "@/src/api/hyperionSchemas";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -43,6 +45,11 @@ export function DataTable<TData, TValue>({
     [],
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
+  const router = useRouter();
+
+  function onTeamSelect(id: string) {
+    router.replace(`/admin/teams?teamId=${id}`);
+  }
 
   const table = useReactTable({
     data,
@@ -95,6 +102,7 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  onClick={() => onTeamSelect((row.original as TeamPreview).id)}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
@@ -112,7 +120,7 @@ export function DataTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  Pas de résultat
                 </TableCell>
               </TableRow>
             )}
