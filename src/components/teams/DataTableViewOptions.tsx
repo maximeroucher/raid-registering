@@ -20,6 +20,24 @@ interface DataTableViewOptionsProps<TData> {
 export function DataTableViewOptions<TData>({
   table,
 }: DataTableViewOptionsProps<TData>) {
+
+  function getColumnName(key: string) {
+    switch (key) {
+      case "second":
+        return "Coéquipier";
+      case "captain":
+        return "Capitaine";
+      case "difficulty":
+        return "Parcours";
+      case "meeting_place":
+        return "Lieu de rendez-vous";
+      case "validation_progress":
+        return "Inscription";
+      default:
+        return key;
+    }
+  }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -29,11 +47,11 @@ export function DataTableViewOptions<TData>({
           className="ml-auto hidden h-8 lg:flex"
         >
           <MixerHorizontalIcon className="mr-2 h-4 w-4" />
-          View
+          Colonnes
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[150px]">
-        <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
+      <DropdownMenuContent align="end" className="w-[180px]">
+        <DropdownMenuLabel>Activer les colonnes</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {table
           .getAllColumns()
@@ -45,11 +63,10 @@ export function DataTableViewOptions<TData>({
             return (
               <DropdownMenuCheckboxItem
                 key={column.id}
-                className="capitalize"
                 checked={column.getIsVisible()}
                 onCheckedChange={(value) => column.toggleVisibility(!!value)}
               >
-                {column.id}
+                {getColumnName(column.id)}
               </DropdownMenuCheckboxItem>
             );
           })}
