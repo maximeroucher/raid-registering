@@ -31,7 +31,7 @@ export const useAuth = () => {
   const router = useRouter();
 
   let tokenRefreshIntervalHandler: any;
-  let tokenRefreshInterval = 60 * 1000;
+  let tokenRefreshInterval = 2 * 60 * 1000;
 
   function generateRandomString(length: number): string {
     var result = "";
@@ -65,17 +65,23 @@ export const useAuth = () => {
       "Content-Type": "application/x-www-form-urlencoded",
       Accept: "application/json",
     };
-    const result = await axios.post(`${backUrl}/auth/token`, body, {
-      headers: headers,
-    });
-    if (result.status != 200) {
+    try {
+      const result = await axios.post(`${backUrl}/auth/token`, body, {
+        headers: headers,
+      });
+      if (result.status != 200) {
+        setIsLoading(false);
+        return;
+      }
+      const tokenResponse: TokenResponse = result.data;
       setIsLoading(false);
-      return;
+      setToken(tokenResponse.access_token);
+      setRefreshToken(tokenResponse.refresh_token);
+    } catch (error) {
+      console.error(error);
+      setIsLoading(false);
+      logout();
     }
-    const tokenResponse: TokenResponse = result.data;
-    setIsLoading(false);
-    setToken(tokenResponse.access_token);
-    setRefreshToken(tokenResponse.refresh_token);
   }
 
   async function refreshTokens(): Promise<string | null> {
@@ -178,8 +184,8 @@ export const useAuth = () => {
 
   async function getTokenFromStorage(): Promise<string | null> {
     console.log("getting token from storage");
+    if (isLoading) return null;
     setIsLoading(true);
-    startBackgroundRefreshing();
     if (typeof window === "undefined") return null;
     if (token !== null) {
       if (isTokenExpired()) {
@@ -188,6 +194,7 @@ export const useAuth = () => {
         setToken(token);
         setIsLoading(false);
       }
+      startBackgroundRefreshing();
     } else {
       setIsLoading(false);
       router.replace("/login");
@@ -197,10 +204,13 @@ export const useAuth = () => {
   }
 
   const startBackgroundRefreshing = () => {
+    console.log("starting background refreshing");
+    console.log("tokenRefreshInterval", tokenRefreshInterval);
     clearInterval(tokenRefreshIntervalHandler);
 
     tokenRefreshIntervalHandler = setInterval(() => {
-      if (isTokenExpired()) {
+      console.log("checking token");
+      if (isTokenExpired() && !isLoading) {
         refreshTokens();
       }
     }, tokenRefreshInterval);
@@ -210,7 +220,7 @@ export const useAuth = () => {
     clearInterval(tokenRefreshIntervalHandler);
   };
 
-  if (!isTokenQueried) {
+  if (!isTokenQueried && !isLoading) {
     getTokenFromStorage();
   }
 
