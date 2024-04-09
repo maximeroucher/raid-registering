@@ -41,10 +41,9 @@ export const TopBar = () => {
           className="flex items-center gap-2 text-lg font-semibold md:text-base"
         >
           <Package2 className="h-6 w-6" />
-          <span className="sr-only">Acme Inc</span>
         </Link>
         <Link
-          href="#"
+          href="/admin"
           className="text-foreground transition-colors hover:text-foreground"
         >
           Tableau de bord
