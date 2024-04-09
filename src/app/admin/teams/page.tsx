@@ -14,15 +14,7 @@ import { useTeams } from "@/src/hooks/useTeams";
 import { useUser } from "@/src/hooks/useUser";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-} from "@/src/components/ui/sheet";
+import { TeamSheet } from "@/src/components/teamSheet/TeamSheet";
 
 const Dashboard = () => {
   const { isAdmin } = useUser();
@@ -65,20 +57,11 @@ const Dashboard = () => {
         </Card>
       </main>
       {teamId && (
-        <Sheet open={isOpened} onOpenChange={handleModalClose}>
-          <SheetContent side="team">
-            <SheetHeader>
-              <SheetTitle>Edit profile</SheetTitle>
-              <SheetDescription>
-                Make changes to your profile here.
-              </SheetDescription>
-            </SheetHeader>
-            <div className="p-4 space-y-4"></div>
-            <SheetFooter>
-              <SheetClose asChild></SheetClose>
-            </SheetFooter>
-          </SheetContent>
-        </Sheet>
+        <TeamSheet
+          isOpened={isOpened}
+          onClose={handleModalClose}
+          teamId={teamId}
+        />
       )}
     </div>
   );
