@@ -6,12 +6,12 @@ import { getSituationLabel } from "@/src/infra/teamUtils";
 
 interface ParticipantDocumentCardProps {
   participant: Participant;
-setDocument: (document: Document) => void;
+  setDocument: (document: Document) => void;
 }
 
 export const ParticipantDocumentCard = ({
   participant,
-  setDocument
+  setDocument,
 }: ParticipantDocumentCardProps) => {
   return (
     <>

@@ -15,8 +15,7 @@ export const DocumentTab = ({ team }: InformationTabProps) => {
   const [selectedDocument, setSelectedDocument] = useState<Document | null>(
     null,
   );
-  const key = selectedDocument?.type;
-  console.log(selectedDocument);
+  const key = selectedDocument?.type
   return (
     <div className="grid xl:grid-cols-2 gap-4 w-full py-6 grid-cols-1 max-md:p-8 max-md:gap-4">
       <Card>

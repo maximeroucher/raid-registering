@@ -14,7 +14,7 @@ interface DocumentViewProps {
 }
 
 export const DocumentView = ({ documentKey, id, file }: DocumentViewProps) => {
-  const { data, setDocumentId, isIdSet } = useDocument();
+  const { data, setDocumentId, isIdSet, refetch } = useDocument();
   const { setDocument } = useDocumentsStore();
   const [isLoading, setIsLoading] = useState(false);
   if (
@@ -25,13 +25,14 @@ export const DocumentView = ({ documentKey, id, file }: DocumentViewProps) => {
   ) {
     setIsLoading(true);
     setDocumentId(id);
+    refetch();
   }
 
   if (data?.size !== undefined && isLoading) {
     setDocument(documentKey, id, data);
     setDocumentId("");
   }
-  console.log(file?.type);
+  console.log(documentKey, id, file, data, isLoading, isIdSet);
 
   return (
     <>
