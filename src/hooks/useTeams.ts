@@ -1,9 +1,9 @@
 import { useGetAllTeamsRaidTeamsGet } from "@/src/api/hyperionComponents";
-import { useTokenStore } from "@/src/stores/token";
 import { useUser } from "./useUser";
+import { useAuth } from "./useAuth";
 
 export const useTeams = () => {
-  const { token } = useTokenStore();
+  const { token } = useAuth();
   const { isAdmin } = useUser();
 
   const {

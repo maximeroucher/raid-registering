@@ -7,7 +7,6 @@ import {
   BodyTokenAuthTokenPost,
   TokenResponse,
 } from "@/src/api/hyperionSchemas";
-import { useQuery } from "@tanstack/react-query";
 import { useTokenStore } from "@/src/stores/token";
 import { useRouter } from "next/navigation";
 import { useUserStore } from "../stores/user";
@@ -23,7 +22,7 @@ const scopes: string[] = ["API"];
 
 export const useAuth = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { token, setToken, refreshToken, setRefreshToken } = useTokenStore();
+  const { token, setToken, refreshToken, setRefreshToken, userId } = useTokenStore();
   const { resetUser } = useUserStore();
   const { resetParticipant } = useParticipantStore();
   const { resetInviteToken } = useInviteTokenStore();
@@ -220,9 +219,11 @@ export const useAuth = () => {
     clearInterval(tokenRefreshIntervalHandler);
   };
 
+  console.log("isTokenQueried", isTokenQueried);
+
   if (!isTokenQueried && !isLoading) {
     getTokenFromStorage();
   }
 
-  return { getTokenFromRequest, isLoading, token, isTokenQueried, logout };
+  return { getTokenFromRequest, isLoading, token, isTokenQueried, logout, userId };
 };

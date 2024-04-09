@@ -4,11 +4,11 @@ import {
   useJoinTeamRaidTeamsJoinTokenPost,
   JoinTeamRaidTeamsJoinTokenPostVariables,
 } from "@/src/api/hyperionComponents";
-import { useTokenStore } from "@/src/stores/token";
 import { InviteToken } from "../api/hyperionSchemas";
+import { useAuth } from "./useAuth";
 
 export const useInviteToken = () => {
-  const { token } = useTokenStore();
+  const { token } = useAuth();
 
   const {
     mutate: mutateCreateInviteToken,

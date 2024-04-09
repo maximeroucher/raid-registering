@@ -1,8 +1,8 @@
 import { useReadOwnProfilePictureUsersMeProfilePictureGet } from "@/src/api/hyperionComponents";
-import { useTokenStore } from "@/src/stores/token";
+import { useAuth } from "./useAuth";
 
 export const useProfilePicture = () => {
-  const { token } = useTokenStore();
+  const { token } = useAuth();
 
   const { data, isLoading } =
     useReadOwnProfilePictureUsersMeProfilePictureGet<File>(

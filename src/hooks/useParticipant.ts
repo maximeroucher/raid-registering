@@ -5,15 +5,15 @@ import {
   useUpdateParticipantRaidParticipantsParticipantIdPatch,
   UpdateParticipantRaidParticipantsParticipantIdPatchVariables,
 } from "@/src/api/hyperionComponents";
-import { useTokenStore } from "@/src/stores/token";
 import { useQueryClient } from "@tanstack/react-query";
 import { ParticipantBase, ParticipantUpdate } from "../api/hyperionSchemas";
 import { useParticipantStore } from "../stores/particpant";
 import { useTeam } from "./useTeam";
 import { useUser } from "./useUser";
+import { useAuth } from "./useAuth";
 
 export const useParticipant = () => {
-  const { token, userId } = useTokenStore();
+  const { token, userId } = useAuth();
   const { isAdmin } = useUser();
   const queryClient = useQueryClient();
   const { participant, setParticipant } = useParticipantStore();

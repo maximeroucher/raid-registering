@@ -5,13 +5,13 @@ import {
   useUpdateTeamRaidTeamsTeamIdPatch,
   UpdateTeamRaidTeamsTeamIdPatchVariables,
 } from "@/src/api/hyperionComponents";
-import { useTokenStore } from "@/src/stores/token";
 import { TeamBase, TeamUpdate } from "../api/hyperionSchemas";
 import { useQueryClient } from "@tanstack/react-query";
 import { useUser } from "./useUser";
+import { useAuth } from "./useAuth";
 
 export const useTeam = () => {
-  const { token, userId } = useTokenStore();
+  const { token, userId } = useAuth();
   const { isAdmin } = useUser();
   const queryClient = useQueryClient();
 

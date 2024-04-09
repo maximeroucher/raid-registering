@@ -4,12 +4,12 @@ import {
   useAssignSecurityFileRaidParticipantParticipantIdSecurityFilePost,
   AssignSecurityFileRaidParticipantParticipantIdSecurityFilePostVariables,
 } from "@/src/api/hyperionComponents";
-import { useTokenStore } from "@/src/stores/token";
-import { SecurityFile, TeamBase } from "../api/hyperionSchemas";
+import { SecurityFile } from "../api/hyperionSchemas";
 import { useQueryClient } from "@tanstack/react-query";
+import { useAuth } from "./useAuth";
 
 export const useSecurityFile = () => {
-  const { token, userId } = useTokenStore();
+  const { token } = useAuth();
   const queryClient = useQueryClient();
 
   const {

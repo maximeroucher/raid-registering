@@ -3,17 +3,17 @@ import {
   useCreateDocumentRaidParticipantParticipantIdDocumentPost,
   useReadDocumentRaidDocumentDocumentIdGet,
 } from "../api/hyperionComponents";
-import { useTokenStore } from "../stores/token";
 import { DocumentCreation } from "../api/hyperionSchemas";
 import axios from "axios";
 import { useDocumentsStore } from "../stores/documents";
 import { useState } from "react";
+import { useAuth } from "./useAuth";
 
 export const useDocument = () => {
   const backUrl: string =
     process.env.NEXT_PUBLIC_BACKEND_URL || "https://hyperion.myecl.fr";
   const queryClient = useQueryClient();
-  const { token, userId } = useTokenStore();
+  const { token, userId } = useAuth();
   const { documents, setDocument, setId } = useDocumentsStore();
   const [documentId, setDocumentId] = useState<string>("");
 
