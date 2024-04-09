@@ -115,7 +115,7 @@ export const TeamsPreview = ({ teams, isLoading }: TeamsPreviewProps) => {
                       </Badge>
                     </TableCell>
                     <TableCell className="text-right">
-                      {team?.validation_progress}%
+                      {team?.validation_progress.toFixed(0)}%
                     </TableCell>
                   </TableRow>
                 ))}

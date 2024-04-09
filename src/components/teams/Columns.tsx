@@ -115,7 +115,9 @@ export const columns: ColumnDef<TeamPreview>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex w-[100px] items-center">
-          <span>{row.getValue("validation_progress")}%</span>
+          <span>
+            {(row.getValue("validation_progress") as number).toFixed(0)}%
+          </span>
         </div>
       );
     },
