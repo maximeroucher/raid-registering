@@ -9,6 +9,7 @@ import { useAdminTeam } from "@/src/hooks/useAdminTeam";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { InformationTab } from "./InformationTab";
 import { Skeleton } from "../ui/skeleton";
+import { DocumentTab } from "./DocumentTab";
 
 interface TeamSheetProps {
   isOpened: boolean;
@@ -52,7 +53,9 @@ export const TeamSheet = ({ isOpened, onClose, teamId }: TeamSheetProps) => {
               <TabsContent value="information">
                 {team && <InformationTab team={team} />}
               </TabsContent>
-              <TabsContent value="document"></TabsContent>
+              <TabsContent value="document">
+                {team && <DocumentTab team={team} />}
+              </TabsContent>
               <TabsContent value="payment"></TabsContent>
             </>
           )}
