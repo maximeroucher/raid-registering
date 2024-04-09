@@ -13,12 +13,28 @@ interface DocumentItemProps {
   value: string;
   document: Document | null;
   index: number;
+  setDocument: (document: Document) => void;
 }
 
-export const DocumentItem = ({ value, document, index }: DocumentItemProps) => {
+export const DocumentItem = ({
+  value,
+  document,
+  index,
+  setDocument,
+}: DocumentItemProps) => {
   const isValidated = (document && document.validated) || false;
   return (
-    <AccordionItem value={`item-${index}`}>
+    <AccordionItem
+      value={`item-${index}`}
+      onClick={() => {
+        console.log("click");
+        console.log(document);
+        if (document) {
+          console.log("setDocument");
+          setDocument(document);
+        }
+      }}
+    >
       <AccordionTrigger disabled={isValidated}>
         <div className="flex flex-row mr-auto items-center">
           {isValidated && <HiCheck className="mr-4" />}
@@ -27,9 +43,13 @@ export const DocumentItem = ({ value, document, index }: DocumentItemProps) => {
       </AccordionTrigger>
       <AccordionContent>
         {!isValidated && (
-          <Button className="w-full">
-            Valider le document
-          </Button>
+          <>
+            {document ? (
+              <Button className="w-full">Valider le document</Button>
+            ) : (
+              <span className="text-muted-foreground">Aucun document</span>
+            )}
+          </>
         )}
       </AccordionContent>
     </AccordionItem>
