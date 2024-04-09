@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { useUserStore } from "../stores/user";
 import { useParticipantStore } from "../stores/particpant";
 import { useInviteTokenStore } from "../stores/inviteTokenStore";
+import { useQuery } from "@tanstack/react-query";
 
 const clientId: string = "Titan";
 const redirectUrlHost: string =
@@ -28,9 +29,6 @@ export const useAuth = () => {
   const { resetInviteToken } = useInviteTokenStore();
   const [isTokenQueried, setIsTokenQueried] = useState(false);
   const router = useRouter();
-
-  let tokenRefreshIntervalHandler: any;
-  let tokenRefreshInterval = 2 * 60 * 1000;
 
   function generateRandomString(length: number): string {
     var result = "";
@@ -104,7 +102,7 @@ export const useAuth = () => {
       ? JSON.parse(atob(token.split(".")[1])).exp
       : 0;
     const now = Math.floor(Date.now() / 1000);
-    return access_token_expires < now;
+    return access_token_expires < now - 60;
   }
 
   async function getTokenFromRequest(popupWindow: Window | null) {
@@ -171,7 +169,6 @@ export const useAuth = () => {
   }
 
   function logout() {
-    stopBackgroundRefreshing();
     setToken(null);
     setRefreshToken(null);
     setIsTokenQueried(true);
@@ -193,7 +190,6 @@ export const useAuth = () => {
         setToken(token);
         setIsLoading(false);
       }
-      startBackgroundRefreshing();
     } else {
       setIsLoading(false);
       router.replace("/login");
@@ -202,28 +198,19 @@ export const useAuth = () => {
     return token;
   }
 
-  const startBackgroundRefreshing = () => {
-    console.log("starting background refreshing");
-    console.log("tokenRefreshInterval", tokenRefreshInterval);
-    clearInterval(tokenRefreshIntervalHandler);
+  useQuery({
+    queryKey: ["getTokenFromStorage"],
+    queryFn: () => getTokenFromStorage(),
+    retry: 0,
+    enabled: !isTokenQueried,
+  });
 
-    tokenRefreshIntervalHandler = setInterval(() => {
-      console.log("checking token");
-      if (isTokenExpired() && !isLoading) {
-        refreshTokens();
-      }
-    }, tokenRefreshInterval);
-  };
-
-  const stopBackgroundRefreshing = () => {
-    clearInterval(tokenRefreshIntervalHandler);
-  };
-
-  console.log("isTokenQueried", isTokenQueried);
-
-  if (!isTokenQueried && !isLoading) {
-    getTokenFromStorage();
-  }
+  useQuery({
+    queryKey: ["refreshTokens"],
+    queryFn: () => refreshTokens(),
+    retry: 0,
+    enabled: isTokenQueried && isTokenExpired(),
+  });
 
   return { getTokenFromRequest, isLoading, token, isTokenQueried, logout, userId };
 };
