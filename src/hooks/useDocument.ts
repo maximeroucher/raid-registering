@@ -14,7 +14,7 @@ export const useDocument = () => {
     process.env.NEXT_PUBLIC_BACKEND_URL || "https://hyperion.myecl.fr";
   const queryClient = useQueryClient();
   const { token, userId } = useAuth();
-  const { documents, setDocument, setId } = useDocumentsStore();
+  const { documents, setDocument } = useDocumentsStore();
   const [documentId, setDocumentId] = useState<string>("");
 
   const { mutate: mutateAssignDocument } =
@@ -46,6 +46,7 @@ export const useDocument = () => {
     file: File,
     key: string,
     documentId: string,
+    participantId: string,
     callback: () => void,
   ) => {
     const formData = new FormData();
@@ -63,7 +64,7 @@ export const useDocument = () => {
             return query.queryHash === "getDocument";
           },
         });
-        setDocument(key, documentId!, file);
+        setDocument(participantId, key, documentId!, file);
         callback();
       });
   };
@@ -83,9 +84,10 @@ export const useDocument = () => {
       },
     );
 
-  const getDocument = (key: string) => {
+  const getDocument = (userId: string, key: string) => {
     if (key === "" || key === undefined) return undefined;
-    return documents[key]?.file;
+    if (documents[userId!] === undefined) return undefined;
+    return documents[userId!][key]?.file;
   };
 
   return {

@@ -26,11 +26,13 @@ type ValueType =
 interface ParticipantCardItemProps {
   label: string;
   value: ValueType;
+  participantId?: string;
 }
 
 export const ParticipantCardItem = ({
   label,
   value,
+  participantId,
 }: ParticipantCardItemProps) => {
   const { getDocument } = useDocument();
   const isSize = (value: ValueType): value is Size => {
@@ -77,7 +79,7 @@ export const ParticipantCardItem = ({
         );
       case isDocument(value):
         const key = value.type as string;
-        const file = getDocument(key);
+        const file = getDocument(participantId!, key);
         return (
           <div className="flex flex-row w-full justify-end items-center h-6 col-span-4">
             <Dialog>
@@ -101,7 +103,7 @@ export const ParticipantCardItem = ({
                 </DialogHeader>
                 <div className="flex flex-col items-center gap-4">
                   <span className="text-gray-500 overflow-hidden m-auto">
-                    <DocumentView documentKey={key} id={value.id} file={file} />
+                    <DocumentView userId={participantId!} documentKey={key} id={value.id} file={file} />
                   </span>
                 </div>
               </DialogContent>

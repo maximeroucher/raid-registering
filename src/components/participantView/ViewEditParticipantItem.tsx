@@ -241,8 +241,8 @@ export const ViewEditParticipantItem = ({
   }
 
   function getSituation() {
-    const situation = getSituationLabel(me.situation ?? undefined)
-    const title = getSituationTitle(me.situation ?? undefined)
+    const situation = getSituationLabel(me.situation ?? undefined);
+    const title = getSituationTitle(me.situation ?? undefined);
     return (
       <>
         <ParticipantCardItem
@@ -347,6 +347,7 @@ export const ViewEditParticipantItem = ({
                   form={form}
                   type={ValueTypes.DOCUMENT}
                   layer={1}
+                  participantId={me.id!}
                 />
               )}
               <EditParticipantCardItem
@@ -354,12 +355,14 @@ export const ViewEditParticipantItem = ({
                 id="idCard"
                 form={form}
                 type={ValueTypes.DOCUMENT}
+                participantId={me.id!}
               />
               <EditParticipantCardItem
                 label="Certificat médical"
                 id="medicalCertificate"
                 form={form}
                 type={ValueTypes.DOCUMENT}
+                participantId={me.id!}
               />
               <EditParticipantCardItem
                 label="Fiche de sécurité"
@@ -372,6 +375,7 @@ export const ViewEditParticipantItem = ({
                 id="raidRules"
                 form={form}
                 type={ValueTypes.DOCUMENT}
+                participantId={me.id!}
               />
               <EditParticipantCardItem
                 label="Attestation sur l'honneur"
@@ -400,15 +404,18 @@ export const ViewEditParticipantItem = ({
                 <ParticipantCardItem
                   label="Carte étudiante"
                   value={me.student_card}
+                  participantId={me.id!}
                 />
               )}
               <ParticipantCardItem
                 label="Carte d'identité"
                 value={me.id_card}
+                participantId={me.id!}
               />
               <ParticipantCardItem
                 label="Certificat médical"
                 value={me.medical_certificate}
+                participantId={me.id!}
               />
               <ParticipantCardItem
                 label="Fiche de sécurité"
@@ -417,6 +424,7 @@ export const ViewEditParticipantItem = ({
               <ParticipantCardItem
                 label="Règlement du raid"
                 value={me.raid_rules}
+                participantId={me.id!}
               />
               <ParticipantCardItem
                 label="Attestation sur l'honneur"

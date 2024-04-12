@@ -6,13 +6,19 @@ import { getSituationLabel } from "@/src/infra/teamUtils";
 
 interface ParticipantDocumentCardProps {
   participant: Participant;
-  setDocument: (document: Document) => void;
+  setDocument: (document: Document, userId: string) => void;
 }
 
 export const ParticipantDocumentCard = ({
   participant,
   setDocument,
 }: ParticipantDocumentCardProps) => {
+  const setOnlyDocument = () => {
+    return (document: Document) => {
+      setDocument(document, participant.id);
+    };
+  }
+
   return (
     <>
       <CardHeader>
@@ -26,19 +32,19 @@ export const ParticipantDocumentCard = ({
             value="Carte d'identité"
             document={participant.id_card}
             index={0}
-            setDocument={setDocument}
+            setDocument={setOnlyDocument()}
           />
           <DocumentItem
             value="Certificat médical"
             document={participant.medical_certificate}
             index={1}
-            setDocument={setDocument}
+            setDocument={setOnlyDocument()}
           />
           <DocumentItem
             value="Réglement"
             document={participant.raid_rules ?? null}
             index={2}
-            setDocument={setDocument}
+            setDocument={setOnlyDocument()}
           />
           {["centrale", "otherschool"].includes(
             getSituationLabel(participant.situation ?? undefined) ?? "",
@@ -47,7 +53,7 @@ export const ParticipantDocumentCard = ({
               value="Carte étudiant"
               document={participant.student_card ?? null}
               index={3}
-              setDocument={setDocument}
+              setDocument={setOnlyDocument()}
             />
           )}
         </Accordion>

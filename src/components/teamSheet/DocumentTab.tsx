@@ -15,18 +15,36 @@ export const DocumentTab = ({ team }: InformationTabProps) => {
   const [selectedDocument, setSelectedDocument] = useState<Document | null>(
     null,
   );
-  const key = selectedDocument?.type
+  const [selectedDocumentUser, setSelectedDocumentUser] = useState<string | null>(
+    null,
+  );
+
+  function setDocument(document: Document, userId: string) {
+    console.log("setDocument", document)
+    setSelectedDocument(document);
+    setSelectedDocumentUser(userId);
+  }
+  const key = selectedDocument?.type;
   return (
     <div className="grid xl:grid-cols-2 gap-4 w-full py-6 grid-cols-1 max-md:p-8 max-md:gap-4">
       <Card>
-        <ParticipantDocumentCard participant={team.captain} setDocument={setSelectedDocument}/>
-        {team.second && <ParticipantDocumentCard participant={team.second} setDocument={setSelectedDocument}/>}
+        <ParticipantDocumentCard
+          participant={team.captain}
+          setDocument={setDocument}
+        />
+        {team.second && (
+          <ParticipantDocumentCard
+            participant={team.second}
+            setDocument={setDocument}
+          />
+        )}
       </Card>
-      {selectedDocument && key && (
+      {selectedDocument && key && selectedDocumentUser && (
         <DocumentView
+          userId={selectedDocumentUser}
           documentKey={key}
           id={selectedDocument.id}
-          file={getDocument(key)}
+          file={getDocument(selectedDocumentUser, key)}
         />
       )}
     </div>

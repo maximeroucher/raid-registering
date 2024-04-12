@@ -72,6 +72,7 @@ interface EditParticipantCardItemProps<T extends ValueType> {
   type: T;
   layer?: number;
   needDialog?: boolean;
+  participantId?: string;
 }
 
 export function EditParticipantCardItem<T extends ValueType>({
@@ -82,6 +83,7 @@ export function EditParticipantCardItem<T extends ValueType>({
   layer,
   type,
   needDialog,
+  participantId
 }: EditParticipantCardItemProps<T>) {
   const [isUploading, setIsUploading] = useState(false);
 
@@ -152,6 +154,7 @@ export function EditParticipantCardItem<T extends ValueType>({
                 field={field}
                 id={id}
                 documentId={field.value?.id}
+                participantId={participantId!}
               />
             </DialogContent>
           </Dialog>

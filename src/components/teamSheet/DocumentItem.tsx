@@ -27,10 +27,7 @@ export const DocumentItem = ({
     <AccordionItem
       value={`item-${index}`}
       onClick={() => {
-        console.log("click");
-        console.log(document);
         if (document) {
-          console.log("setDocument");
           setDocument(document);
         }
       }}

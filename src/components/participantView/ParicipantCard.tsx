@@ -89,7 +89,7 @@ export const ParticipantCard = ({
             {participant ? (
               <ParticipantCardItem
                 label="Paiement"
-                value={participant?.payment}
+                value={participant.payment}
               />
             ) : (
               <div className="grid p-2 grid-cols-6 items-center w-full h-[65px]">

@@ -3,36 +3,39 @@
 import { useDocument } from "@/src/hooks/useDocument";
 import { useDocumentsStore } from "@/src/stores/documents";
 import Image from "next/image";
-import { useState } from "react";
 import { Skeleton } from "../ui/skeleton";
 import { PdfViewer } from "./PdfViewer";
 
 interface DocumentViewProps {
+  userId: string;
   documentKey: string;
   id: string;
   file?: File;
 }
 
-export const DocumentView = ({ documentKey, id, file }: DocumentViewProps) => {
-  const { data, setDocumentId, isIdSet, refetch } = useDocument();
+export const DocumentView = ({
+  userId,
+  documentKey,
+  id,
+  file,
+}: DocumentViewProps) => {
+  const { data, setDocumentId, isIdSet } = useDocument();
   const { setDocument } = useDocumentsStore();
-  const [isLoading, setIsLoading] = useState(false);
+  console.log("DocumentView", data);
+  console.log("file", file);
+  console.log("isIdSet", isIdSet);
   if (
     file?.size === undefined &&
     !isIdSet &&
-    !isLoading &&
     data?.size === undefined
   ) {
-    setIsLoading(true);
     setDocumentId(id);
-    refetch();
   }
 
-  if (data?.size !== undefined && isLoading) {
-    setDocument(documentKey, id, data);
+  if (data?.size !== undefined && isIdSet) {
+    setDocument(userId, documentKey, id, data);
     setDocumentId("");
   }
-  console.log(documentKey, id, file, data, isLoading, isIdSet);
 
   return (
     <>
@@ -47,7 +50,7 @@ export const DocumentView = ({ documentKey, id, file }: DocumentViewProps) => {
             alt={documentKey}
             width={300}
             height={200}
-            className="rounded-lg w-auto max-h-[400px]"
+            className="rounded-lg w-auto max-h-[400px] m-auto"
           />
         )
       ) : (
