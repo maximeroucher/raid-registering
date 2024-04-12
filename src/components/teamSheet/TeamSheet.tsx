@@ -10,6 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { InformationTab } from "./InformationTab";
 import { Skeleton } from "../ui/skeleton";
 import { DocumentTab } from "./DocumentTab";
+import { PaymentTab } from "./PaymentTab";
 
 interface TeamSheetProps {
   isOpened: boolean;
@@ -56,7 +57,9 @@ export const TeamSheet = ({ isOpened, onClose, teamId }: TeamSheetProps) => {
               <TabsContent value="document">
                 {team && <DocumentTab team={team} />}
               </TabsContent>
-              <TabsContent value="payment"></TabsContent>
+              <TabsContent value="payment">
+                {team && <PaymentTab team={team} />}
+              </TabsContent>
             </>
           )}
         </Tabs>

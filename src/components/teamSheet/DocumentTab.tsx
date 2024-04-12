@@ -8,11 +8,11 @@ import { Document } from "@/src/api/hyperionSchemas";
 import { useAdminTeam } from "@/src/hooks/useAdminTeam";
 import { toast } from "../ui/use-toast";
 
-interface InformationTabProps {
+interface DocumentTabProps {
   team: Team;
 }
 
-export const DocumentTab = ({ team }: InformationTabProps) => {
+export const DocumentTab = ({ team }: DocumentTabProps) => {
   const { getDocument, validateDocument, isValidationLoading } = useDocument();
   const { refetchTeam } = useAdminTeam(team.id);
   const [selectedDocument, setSelectedDocument] = useState<Document | null>(
