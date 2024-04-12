@@ -14,6 +14,7 @@ interface DocumentItemProps {
   document: Document | null;
   index: number;
   setDocument: (document: Document) => void;
+  downloadDocument: (document: Document) => void;
 }
 
 export const DocumentItem = ({
@@ -21,6 +22,7 @@ export const DocumentItem = ({
   document,
   index,
   setDocument,
+  downloadDocument,
 }: DocumentItemProps) => {
   const isValidated = (document && document.validated) || false;
   return (
@@ -42,7 +44,10 @@ export const DocumentItem = ({
         {!isValidated && (
           <>
             {document ? (
+              <div className="flex grid-cols-2 gap-6">
+              <Button variant="outline" className="w-full" onClick={(_) => downloadDocument(document)}>Télécharger le document</Button>
               <Button className="w-full">Valider le document</Button>
+              </div>
             ) : (
               <span className="text-muted-foreground">Aucun document</span>
             )}

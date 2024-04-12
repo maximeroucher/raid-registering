@@ -1,4 +1,4 @@
-import { Team } from "@/src/api/hyperionSchemas";
+import { Participant, Team } from "@/src/api/hyperionSchemas";
 import { Card } from "../ui/card";
 import { ParticipantDocumentCard } from "./ParticipantDocumentCard";
 import { DocumentView } from "../participantView/DocumentView";
@@ -15,27 +15,45 @@ export const DocumentTab = ({ team }: InformationTabProps) => {
   const [selectedDocument, setSelectedDocument] = useState<Document | null>(
     null,
   );
-  const [selectedDocumentUser, setSelectedDocumentUser] = useState<string | null>(
-    null,
-  );
+  const [selectedDocumentUser, setSelectedDocumentUser] = useState<
+    string | null
+  >(null);
 
   function setDocument(document: Document, userId: string) {
-    console.log("setDocument", document)
+    console.log("setDocument", document);
     setSelectedDocument(document);
     setSelectedDocumentUser(userId);
   }
+
+  function downloadDocument(doc: Document, participant: Participant) {
+    const key = doc.type;
+    const file = getDocument(participant.id, key);
+    if (file !== undefined) {
+      const extension = file.type.split("/")[1];
+      const name = `${participant.firstname}_${participant.name}_${key}.${extension}`;
+      const url = window.URL.createObjectURL(new Blob([file]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", name);
+      document.body.appendChild(link);
+      link.click();
+    }
+  }
+
   const key = selectedDocument?.type;
   return (
     <div className="grid xl:grid-cols-2 gap-4 w-full py-6 grid-cols-1 max-md:p-8 max-md:gap-4">
       <Card>
         <ParticipantDocumentCard
           participant={team.captain}
-          setDocument={setDocument}
+          setDocument={(doc) => setDocument(doc, team.captain.id)}
+          downloadDocument={(doc) => downloadDocument(doc, team.captain)}
         />
         {team.second && (
           <ParticipantDocumentCard
             participant={team.second}
-            setDocument={setDocument}
+            setDocument={(doc) => setDocument(doc, team.second!.id)}
+            downloadDocument={(doc) => downloadDocument(doc, team.second!)}
           />
         )}
       </Card>
