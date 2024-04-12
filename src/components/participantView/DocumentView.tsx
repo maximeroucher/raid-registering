@@ -5,6 +5,7 @@ import { useDocumentsStore } from "@/src/stores/documents";
 import Image from "next/image";
 import { Skeleton } from "../ui/skeleton";
 import { PdfViewer } from "./PdfViewer";
+import { useState } from "react";
 
 interface DocumentViewProps {
   userId: string;
@@ -19,19 +20,22 @@ export const DocumentView = ({
   id,
   file,
 }: DocumentViewProps) => {
-  const { data, setDocumentId, isIdSet } = useDocument();
+  const { data, setDocumentId, documentId } = useDocument();
   const { setDocument } = useDocumentsStore();
+  const [isLoading, setIsLoading] = useState(data?.size === undefined);
+
   if (
     file?.size === undefined &&
-    !isIdSet &&
+    documentId !== id &&
     data?.size === undefined
   ) {
     setDocumentId(id);
+    setIsLoading(true);
   }
 
-  if (data?.size !== undefined && isIdSet) {
+  if (data?.size !== undefined && isLoading) {
     setDocument(userId, documentKey, id, data);
-    setDocumentId("");
+    setIsLoading(false);
   }
 
   return (

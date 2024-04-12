@@ -118,7 +118,7 @@ export const useDocument = () => {
     refetch,
     isLoading: isPending,
     setDocumentId,
-    isIdSet: documentId !== "",
+    documentId,
     validateDocument,
     isValidationLoading,
   };

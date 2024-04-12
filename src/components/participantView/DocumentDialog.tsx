@@ -26,19 +26,30 @@ export const DocumentDialog = ({
   documentId,
   participantId,
 }: DocumentDialogProps) => {
-  const { uploadDocument, getDocument, data, setDocumentId, isIdSet } =
-    useDocument();
+  const {
+    uploadDocument,
+    getDocument,
+    data,
+    setDocumentId,
+    documentId: docId,
+  } = useDocument();
   const { setDocument } = useDocumentsStore();
   const file = getDocument(participantId, field.value?.id);
   const [image, setImage] = useState<File | undefined>(file);
-  if (file?.size === undefined && !isIdSet && data?.size === undefined) {
+  const [isLoading, setIsLoading] = useState(data?.size === undefined);
+  if (
+    file?.size === undefined &&
+    docId !== documentId &&
+    data?.size === undefined
+  ) {
     setDocumentId(field.value.id);
+    setIsLoading(true);
   }
 
-  if (data?.size !== undefined && isIdSet) {
+  if (data?.size !== undefined && isLoading) {
     setDocument(participantId, id, field.value.id, data);
     setImage(data);
-    setDocumentId("");
+    setIsLoading(false);
   }
 
   return (
