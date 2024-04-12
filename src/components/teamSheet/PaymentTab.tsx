@@ -4,6 +4,7 @@ import { Card, CardContent } from "../ui/card";
 import { toast } from "../ui/use-toast";
 import { usePayment } from "@/src/hooks/usePayment";
 import { useAdminTeam } from "@/src/hooks/useAdminTeam";
+import { useTeams } from "@/src/hooks/useTeams";
 
 interface PaymentTabProps {
   team: Team;
@@ -12,10 +13,12 @@ interface PaymentTabProps {
 export const PaymentTab = ({ team }: PaymentTabProps) => {
   const { validatePayment, isLoading } = usePayment();
   const { refetchTeam } = useAdminTeam(team.id);
+  const { refetchTeams } = useTeams();
 
   function validateCallback(participantId: string) {
     validatePayment(participantId, () => {
       refetchTeam();
+      refetchTeams();
       toast({
         title: "Paiement validé avec succès",
       });

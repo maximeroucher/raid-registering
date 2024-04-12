@@ -7,6 +7,7 @@ import { useDocument } from "@/src/hooks/useDocument";
 import { Document } from "@/src/api/hyperionSchemas";
 import { useAdminTeam } from "@/src/hooks/useAdminTeam";
 import { toast } from "../ui/use-toast";
+import { useTeams } from "@/src/hooks/useTeams";
 
 interface DocumentTabProps {
   team: Team;
@@ -15,6 +16,7 @@ interface DocumentTabProps {
 export const DocumentTab = ({ team }: DocumentTabProps) => {
   const { getDocument, validateDocument, isValidationLoading } = useDocument();
   const { refetchTeam } = useAdminTeam(team.id);
+  const { refetchTeams } = useTeams();
   const [selectedDocument, setSelectedDocument] = useState<Document | null>(
     null,
   );
@@ -45,6 +47,7 @@ export const DocumentTab = ({ team }: DocumentTabProps) => {
   function validateCallback(documentId: string) {
     validateDocument(documentId, () => {
       refetchTeam();
+      refetchTeams();
       toast({
         title: "Document validé avec succès",
       });
