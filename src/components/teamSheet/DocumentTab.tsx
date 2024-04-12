@@ -5,13 +5,15 @@ import { DocumentView } from "../participantView/DocumentView";
 import { useState } from "react";
 import { useDocument } from "@/src/hooks/useDocument";
 import { Document } from "@/src/api/hyperionSchemas";
+import { useAdminTeam } from "@/src/hooks/useAdminTeam";
 
 interface InformationTabProps {
   team: Team;
 }
 
 export const DocumentTab = ({ team }: InformationTabProps) => {
-  const { getDocument } = useDocument();
+  const { getDocument, validateDocument, isValidationLoading } = useDocument();
+  const { refetchTeam } = useAdminTeam(team.id);
   const [selectedDocument, setSelectedDocument] = useState<Document | null>(
     null,
   );
@@ -20,7 +22,6 @@ export const DocumentTab = ({ team }: InformationTabProps) => {
   >(null);
 
   function setDocument(document: Document, userId: string) {
-    console.log("setDocument", document);
     setSelectedDocument(document);
     setSelectedDocumentUser(userId);
   }
@@ -40,6 +41,12 @@ export const DocumentTab = ({ team }: InformationTabProps) => {
     }
   }
 
+  function validateCallback(documentId: string) {
+    validateDocument(documentId, () => {
+      refetchTeam();
+    });
+  }
+
   const key = selectedDocument?.type;
   return (
     <div className="grid xl:grid-cols-2 gap-4 w-full py-6 grid-cols-1 max-md:p-8 max-md:gap-4">
@@ -48,12 +55,16 @@ export const DocumentTab = ({ team }: InformationTabProps) => {
           participant={team.captain}
           setDocument={(doc) => setDocument(doc, team.captain.id)}
           downloadDocument={(doc) => downloadDocument(doc, team.captain)}
+          validateDocument={validateCallback}
+          isValidationLoading={isValidationLoading}
         />
         {team.second && (
           <ParticipantDocumentCard
             participant={team.second}
             setDocument={(doc) => setDocument(doc, team.second!.id)}
             downloadDocument={(doc) => downloadDocument(doc, team.second!)}
+            validateDocument={validateCallback}
+            isValidationLoading={isValidationLoading}
           />
         )}
       </Card>

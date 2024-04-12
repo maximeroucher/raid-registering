@@ -6,7 +6,7 @@ export const useAdminTeam = (teamId: string) => {
   const { token, userId } = useAuth();
   const { isAdmin } = useUser();
 
-  const { data: team } = useGetTeamByIdRaidTeamsTeamIdGet(
+  const { data: team, refetch: refetchTeam } = useGetTeamByIdRaidTeamsTeamIdGet(
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -22,5 +22,5 @@ export const useAdminTeam = (teamId: string) => {
     },
   );
 
-  return { team };
+  return { team, refetchTeam };
 };

@@ -8,12 +8,16 @@ interface ParticipantDocumentCardProps {
   participant: Participant;
   setDocument: (document: Document) => void;
   downloadDocument: (document: Document) => void;
+  validateDocument: (documentId: string) => void;
+  isValidationLoading: boolean;
 }
 
 export const ParticipantDocumentCard = ({
   participant,
   setDocument,
   downloadDocument,
+  validateDocument,
+  isValidationLoading,
 }: ParticipantDocumentCardProps) => {
 
   return (
@@ -31,6 +35,8 @@ export const ParticipantDocumentCard = ({
             index={0}
             setDocument={setDocument}
             downloadDocument={downloadDocument}
+            validateDocument={validateDocument}
+            isValidationLoading={isValidationLoading}
           />
           <DocumentItem
             value="Certificat médical"
@@ -38,6 +44,8 @@ export const ParticipantDocumentCard = ({
             index={1}
             setDocument={setDocument}
             downloadDocument={downloadDocument}
+            validateDocument={validateDocument}
+            isValidationLoading={isValidationLoading}
           />
           <DocumentItem
             value="Réglement"
@@ -45,6 +53,8 @@ export const ParticipantDocumentCard = ({
             index={2}
             setDocument={setDocument}
             downloadDocument={downloadDocument}
+            validateDocument={validateDocument}
+            isValidationLoading={isValidationLoading}
           />
           {["centrale", "otherschool"].includes(
             getSituationLabel(participant.situation ?? undefined) ?? "",
@@ -55,6 +65,8 @@ export const ParticipantDocumentCard = ({
               index={3}
               setDocument={setDocument}
               downloadDocument={downloadDocument}
+              validateDocument={validateDocument}
+              isValidationLoading={isValidationLoading}
             />
           )}
         </Accordion>

@@ -2,6 +2,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import {
   useCreateDocumentRaidParticipantParticipantIdDocumentPost,
   useReadDocumentRaidDocumentDocumentIdGet,
+  useValidateDocumentRaidDocumentDocumentIdValidatePost,
 } from "../api/hyperionComponents";
 import { DocumentCreation } from "../api/hyperionSchemas";
 import axios from "axios";
@@ -84,6 +85,25 @@ export const useDocument = () => {
       },
     );
 
+  const { mutate: mutateValidateDocument, isPending: isValidationLoading } =
+    useValidateDocumentRaidDocumentDocumentIdValidatePost();
+
+  const validateDocument = (documentId: string, callback: () => void) => {
+    const body = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      pathParams: {
+        documentId: documentId,
+      },
+    };
+    mutateValidateDocument(body, {
+      onSettled: () => {
+        callback();
+      },
+    });
+  };
+
   const getDocument = (userId: string, key: string) => {
     if (key === "" || key === undefined) return undefined;
     if (documents[userId!] === undefined) return undefined;
@@ -99,5 +119,7 @@ export const useDocument = () => {
     isLoading: isPending,
     setDocumentId,
     isIdSet: documentId !== "",
+    validateDocument,
+    isValidationLoading,
   };
 };

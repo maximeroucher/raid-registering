@@ -15084,6 +15084,71 @@ export const useReadDocumentRaidDocumentDocumentIdGet = <TData = undefined>(
   });
 };
 
+export type ValidateDocumentRaidDocumentDocumentIdValidatePostPathParams = {
+  documentId: string;
+};
+
+export type ValidateDocumentRaidDocumentDocumentIdValidatePostError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type ValidateDocumentRaidDocumentDocumentIdValidatePostVariables = {
+  pathParams: ValidateDocumentRaidDocumentDocumentIdValidatePostPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Validate a document
+ */
+export const fetchValidateDocumentRaidDocumentDocumentIdValidatePost = (
+  variables: ValidateDocumentRaidDocumentDocumentIdValidatePostVariables,
+  signal?: AbortSignal
+) =>
+  hyperionFetch<
+    undefined,
+    ValidateDocumentRaidDocumentDocumentIdValidatePostError,
+    undefined,
+    {},
+    {},
+    ValidateDocumentRaidDocumentDocumentIdValidatePostPathParams
+  >({
+    url: "/raid/document/{documentId}/validate",
+    method: "post",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Validate a document
+ */
+export const useValidateDocumentRaidDocumentDocumentIdValidatePost = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      ValidateDocumentRaidDocumentDocumentIdValidatePostError,
+      ValidateDocumentRaidDocumentDocumentIdValidatePostVariables
+    >,
+    "mutationFn"
+  >
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    ValidateDocumentRaidDocumentDocumentIdValidatePostError,
+    ValidateDocumentRaidDocumentDocumentIdValidatePostVariables
+  >({
+    mutationFn: (
+      variables: ValidateDocumentRaidDocumentDocumentIdValidatePostVariables
+    ) =>
+      fetchValidateDocumentRaidDocumentDocumentIdValidatePost({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
 export type SetSecurityFileRaidSecurityFilePostError = Fetcher.ErrorWrapper<{
   status: 422;
   payload: Schemas.HTTPValidationError;

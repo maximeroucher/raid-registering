@@ -21,9 +21,6 @@ export const DocumentView = ({
 }: DocumentViewProps) => {
   const { data, setDocumentId, isIdSet } = useDocument();
   const { setDocument } = useDocumentsStore();
-  console.log("DocumentView", data);
-  console.log("file", file);
-  console.log("isIdSet", isIdSet);
   if (
     file?.size === undefined &&
     !isIdSet &&
