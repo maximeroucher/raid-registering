@@ -2,29 +2,15 @@
 
 import Link from "next/link";
 
-import {
-  Activity,
-  ArrowUpRight,
-  CircleUser,
-  CreditCard,
-  DollarSign,
-  Menu,
-  Package2,
-  Search,
-  Users,
-} from "lucide-react";
+import { Menu } from "lucide-react";
 import { Button } from "@/src/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/src/components/ui/dropdown-menu";
-import { Input } from "@/src/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/src/components/ui/sheet";
-import { UserButton } from "../userSheet/UserButton";
 import { ThemeButton } from "../ui/themeButton";
 import { Skeleton } from "../ui/skeleton";
 import { useUser } from "@/src/hooks/useUser";
@@ -32,28 +18,26 @@ import { LogoutButton } from "../userSheet/logoutButton";
 
 export const TopBar = () => {
   const { me } = useUser();
+  const currentPath = window.location.pathname;
+
+  function buildNavigation(path: string, label: string) {
+    const isPathSelected = currentPath === path;
+    return (
+      <Link
+        href={path}
+        className={`${isPathSelected ? "text-foreground" : "text-muted-foreground"} transition-colors hover:text-foreground`}
+      >
+        {label}
+      </Link>
+    );
+  }
 
   function getNavigation() {
     return (
       <>
-        <Link
-          href="#"
-          className="flex items-center gap-2 text-lg font-semibold md:text-base"
-        >
-          <Package2 className="h-6 w-6" />
-        </Link>
-        <Link
-          href="/admin"
-          className="text-foreground transition-colors hover:text-foreground"
-        >
-          Tableau de bord
-        </Link>
-        <Link
-          href="/admin/teams"
-          className="text-muted-foreground transition-colors hover:text-foreground"
-        >
-          Equipes
-        </Link>
+        {buildNavigation("/admin", "Tableau de bord")}
+        {buildNavigation("/admin/teams", "Equipes")}
+        {buildNavigation("/admin/information", "Informations")}
       </>
     );
   }
