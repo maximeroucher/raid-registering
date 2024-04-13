@@ -60,19 +60,7 @@ export const TeamCard = ({ team }: TeamCardProps) => {
       value: getLabelFromValue(difficulties, team?.difficulty ?? undefined),
       description: "parcours exigeant",
       unit: undefined,
-    },
-    {
-      title: "Distance",
-      value: "150 km",
-      description: "répartis sur les deux jours",
-      unit: <span>km</span>,
-    },
-    {
-      title: "Dénivelé",
-      value: "2500 m",
-      description: "répartis sur les deux jours",
-      unit: <span>m</span>,
-    },
+    }
   ];
 
   return (
@@ -117,7 +105,7 @@ export const TeamCard = ({ team }: TeamCardProps) => {
           {isEdit && team ? (
             <TeamEdit team={team!} setIsEdit={setIsEdit} />
           ) : (
-            <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-6">
+            <div className="grid gap-4 md:grid-cols-2 md:gap-8 xl:grid-cols-4">
               {information.map((info) => (
                 <TeamInfoCard
                   info={info}
