@@ -3,7 +3,7 @@ import { useGetTeamByIdRaidTeamsTeamIdGet } from "../api/hyperionComponents";
 import { useAuth } from "./useAuth";
 
 export const useAdminTeam = (teamId: string) => {
-  const { token, userId } = useAuth();
+  const { token, userId, isTokenExpired } = useAuth();
   const { isAdmin } = useUser();
 
   const { data: team, refetch: refetchTeam } = useGetTeamByIdRaidTeamsTeamIdGet(
@@ -16,7 +16,7 @@ export const useAdminTeam = (teamId: string) => {
       },
     },
     {
-      enabled: userId !== null && isAdmin(),
+      enabled: userId !== null && isAdmin() && !isTokenExpired(),
       retry: 0,
       queryHash: "getTeamById",
     },

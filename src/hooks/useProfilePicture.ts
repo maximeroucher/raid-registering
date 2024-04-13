@@ -2,7 +2,7 @@ import { useReadOwnProfilePictureUsersMeProfilePictureGet } from "@/src/api/hype
 import { useAuth } from "./useAuth";
 
 export const useProfilePicture = () => {
-  const { token } = useAuth();
+  const { token, isTokenExpired } = useAuth();
 
   const { data, isLoading } =
     useReadOwnProfilePictureUsersMeProfilePictureGet<File>(
@@ -12,7 +12,7 @@ export const useProfilePicture = () => {
         },
       },
       {
-        enabled: token !== null,
+        enabled: token !== null && !isTokenExpired(),
         retry: 0,
       },
     );

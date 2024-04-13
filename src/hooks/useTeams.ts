@@ -3,7 +3,7 @@ import { useUser } from "./useUser";
 import { useAuth } from "./useAuth";
 
 export const useTeams = () => {
-  const { token } = useAuth();
+  const { token, isTokenExpired } = useAuth();
   const { isAdmin } = useUser();
 
   const {
@@ -17,7 +17,7 @@ export const useTeams = () => {
       },
     },
     {
-      enabled: isAdmin() && token !== null,
+      enabled: isAdmin() && !isTokenExpired(),
       retry: 0,
       queryHash: "getTeams",
     },

@@ -5,7 +5,7 @@ import { useAuth } from "./useAuth";
 const RAID_ADMIN_GROUP_ID = "b378b102-4979-4186-8630-d28fe460ee08";
 
 export const useUser = () => {
-  const { token } = useAuth();
+  const { token, isTokenExpired } = useAuth();
   const { user, setUser } = useUserStore();
   const { data: me, isLoading } = useReadCurrentUserUsersMeGet(
     {
@@ -14,7 +14,7 @@ export const useUser = () => {
       },
     },
     {
-      enabled: token !== null && user === undefined,
+      enabled: user === undefined && !isTokenExpired(),
       retry: 0,
     },
   );
@@ -22,8 +22,9 @@ export const useUser = () => {
   if (me !== undefined && user === undefined && token !== null) {
     setUser(me);
   }
-  
-  const isAdmin = () => user?.groups?.some((group) => group.id === RAID_ADMIN_GROUP_ID) ?? false;
+
+  const isAdmin = () =>
+    user?.groups?.some((group) => group.id === RAID_ADMIN_GROUP_ID) ?? false;
 
   return { me: user, isLoading, isAdmin };
 };

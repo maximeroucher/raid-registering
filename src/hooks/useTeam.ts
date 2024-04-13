@@ -11,7 +11,7 @@ import { useUser } from "./useUser";
 import { useAuth } from "./useAuth";
 
 export const useTeam = () => {
-  const { token, userId } = useAuth();
+  const { token, userId, isTokenExpired } = useAuth();
   const { isAdmin } = useUser();
   const queryClient = useQueryClient();
 
@@ -29,7 +29,7 @@ export const useTeam = () => {
       },
     },
     {
-      enabled: userId !== null && !isAdmin(),
+      enabled: userId !== null && !isAdmin() && !isTokenExpired(),
       retry: 0,
       queryHash: "getTeamByParticipantId",
     },

@@ -13,7 +13,7 @@ import { useUser } from "./useUser";
 import { useAuth } from "./useAuth";
 
 export const useParticipant = () => {
-  const { token, userId } = useAuth();
+  const { token, userId, isTokenExpired } = useAuth();
   const { isAdmin } = useUser();
   const queryClient = useQueryClient();
   const { participant, setParticipant } = useParticipantStore();
@@ -34,7 +34,7 @@ export const useParticipant = () => {
       },
     },
     {
-      enabled: userId !== null && participant === undefined && !isAdmin(),
+      enabled: userId !== null && participant === undefined && !isAdmin() && !isTokenExpired(),
       retry: 0,
       queryHash: "getParticipantById",
     },

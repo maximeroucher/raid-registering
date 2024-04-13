@@ -212,5 +212,5 @@ export const useAuth = () => {
     enabled: isTokenQueried && isTokenExpired(),
   });
 
-  return { getTokenFromRequest, isLoading, token, isTokenQueried, logout, userId };
+  return { getTokenFromRequest, isLoading, token, isTokenQueried, logout, userId, isTokenExpired };
 };
