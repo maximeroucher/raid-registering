@@ -18,7 +18,7 @@ import { LogoutButton } from "../userSheet/logoutButton";
 
 export const TopBar = () => {
   const { me } = useUser();
-  const currentPath = window.location.pathname;
+  const currentPath = typeof window !== "undefined" ? window.location.pathname : "";
 
   function buildNavigation(path: string, label: string) {
     const isPathSelected = currentPath === path;

@@ -9,22 +9,19 @@ import { cn } from "@/lib/utils";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 import { Button } from "./button";
 import { Calendar } from "./calendar";
+import { DateRange } from "react-day-picker";
 
-interface DatePickerProps {
-  date?: Date;
+interface RangeDatePickerProps {
+  dateRange?: DateRange;
   defaultDate?: Date;
-  fromDate?: Date;
-  toDate?: Date;
-  setDate: (date?: Date) => void;
+  setDateRange: (dateRange?: DateRange) => void;
 }
 
-export function DatePicker({
-  date,
-  setDate,
+export function RangeDatePicker({
+  dateRange,
+  setDateRange,
   defaultDate,
-  fromDate,
-  toDate,
-}: DatePickerProps) {
+}: RangeDatePickerProps) {
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -32,27 +29,29 @@ export function DatePicker({
           variant={"outline"}
           className={cn(
             "w-full justify-start text-left font-normal",
-            !date && "text-muted-foreground",
+            !dateRange && "text-muted-foreground",
           )}
           type="button"
         >
           <CalendarIcon className="mr-2 h-4 w-4" />
-          {date ? (
-            format(date, "PPP", { locale: fr })
+          {dateRange && dateRange.from && dateRange.to ? (
+            format(dateRange.from, "PPP", { locale: fr }) +
+            " - " +
+            format(dateRange.to, "PPP", { locale: fr })
           ) : (
-            <span>Sélectionner une date</span>
+            <span>Sélectionner une période</span>
           )}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
         <Calendar
-          mode="single"
-          selected={date}
-          onSelect={setDate}
+          mode="range"
+          selected={dateRange}
+          onSelect={setDateRange}
           locale={fr}
           captionLayout="dropdown-buttons"
-          fromDate={fromDate ?? new Date(1900)}
-          toDate={toDate ?? new Date()}
+          fromYear={new Date().getFullYear() - 1}
+          toYear={new Date().getFullYear() + 1}
           defaultMonth={defaultDate}
           initialFocus
         />
