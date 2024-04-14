@@ -15,16 +15,16 @@ import { ThemeProvider } from "../components/ui/theme";
 const inter = Outfit({ subsets: ["latin-ext"] });
 
 const queryClient = new QueryClient({
-  // queryCache: new QueryCache({
-  //   onError: (error) => {
-  //     console.error(error);
-  //     toast({
-  //       title: "Erreur",
-  //       description: "Une erreur est survenue, veuillez réessayer plus tard",
-  //       variant: "destructive",
-  //     });
-  //   },
-  // }),
+  queryCache: new QueryCache({
+    onError: (error) => {
+      console.error(error);
+      toast({
+        title: "Erreur",
+        description: "Une erreur est survenue, veuillez réessayer plus tard",
+        variant: "destructive",
+      });
+    },
+  }),
 });
 
 export default function RootLayout({
