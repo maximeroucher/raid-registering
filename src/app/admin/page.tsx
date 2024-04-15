@@ -7,28 +7,48 @@ import { StatsView } from "@/src/components/admin/StatsView";
 import { useUser } from "@/src/hooks/useUser";
 import { useRouter } from "next/navigation";
 import { useTeams } from "@/src/hooks/useTeams";
+import { Participant } from "@/src/api/hyperionSchemas";
 
 const Dashboard = () => {
   const { isAdmin } = useUser();
   const { teams, isLoading } = useTeams();
   const router = useRouter();
+
+  const allParticipants =
+    (teams
+      ?.map((team) => [team.captain, team.second])
+      .flat(1)
+      .filter((participant) => participant !== null) as Participant[]) ?? [];
+
+  const allPayments = allParticipants
+    ?.map((participant) => {
+      if (participant.payment) {
+        return 1;
+      }
+      return 0;
+    })
+    .reduce<number>((a, b) => a + b, 0);
+
   const information = [
     {
       title: "Participants inscrits",
-      value: teams?.length?.toString() || "0",
+      value: allParticipants?.length.toString() || "0",
       description: "personnes ayant commencé leur inscription",
       unit: undefined,
     },
     {
-      title: "Binômes enregistrés",
-      value: teams?.filter((team) => team.second).length?.toString() || "0",
-      description: "dossier en cours de validation",
+      title: "Paiements efectués",
+      value: allPayments?.toString() || "0",
+      description: `${allParticipants?.length - allPayments} paiements manquants`,
       unit: undefined,
     },
     {
       title: "Equipes validées",
-      value: "0",
-      description: "dossier validé et payé",
+      value:
+        teams
+          ?.filter((team) => team.validation_progress === 100)
+          .length.toString() || "0",
+      description: "dossier complet validé et payé",
       unit: undefined,
     },
     {

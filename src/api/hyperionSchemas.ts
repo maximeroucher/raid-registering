@@ -1109,6 +1109,7 @@ export type Participant = {
   t_shirt_size: Size | null;
   situation: string | null;
   validation_progress: number;
+  payment: boolean;
   id: string;
   address: string | null;
   other_school?: string | null;
@@ -1120,7 +1121,6 @@ export type Participant = {
   student_card?: Document | null;
   raid_rules?: Document | null;
   attestation_on_honour: boolean;
-  payment: boolean;
 };
 
 export type ParticipantBase = {
@@ -1147,6 +1147,7 @@ export type ParticipantPreview = {
   t_shirt_size: Size | null;
   situation: string | null;
   validation_progress: number;
+  payment: boolean;
 };
 
 export type ParticipantUpdate = {
