@@ -21,12 +21,7 @@ const Dashboard = () => {
       .filter((participant) => participant !== null) as Participant[]) ?? [];
 
   const allPayments = allParticipants
-    ?.map((participant) => {
-      if (participant.payment) {
-        return 1;
-      }
-      return 0;
-    })
+    ?.map((participant) => (participant.payment ? 1 : 0))
     .reduce<number>((a, b) => a + b, 0);
 
   const information = [
