@@ -3,21 +3,37 @@
 import { Button } from "@/src/components/ui/button";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useAuth } from "../../hooks/useAuth";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useCodeVerifierStore } from "@/src/stores/codeVerifier";
 
 const Login = () => {
-  const { getTokenFromRequest, token, isTokenQueried, isLoading } = useAuth();
-
+  const { token, isTokenExpired, login, isLoading, getTokenFromRequest } =
+    useAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const code = searchParams.get("code");
+  const { codeVerifier, isLoading: isLoggingLoading } = useCodeVerifierStore();
+  if (
+    code &&
+    typeof window !== "undefined" &&
+    !isLoading &&
+    codeVerifier !== undefined
+  ) {
+    login(code, () => {
+      router.replace("/");
+    });
+  }
+
+  if (token !== null && !isTokenExpired()) {
+    router.replace("/");
+  }
 
   function connectMyECL(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
-    getTokenFromRequest(window);
+    getTokenFromRequest();
   }
 
-  if (isTokenQueried && token !== null) {
-    router.replace("/");
-  }
+  console.log("isLoggingLoading", isLoggingLoading)
 
   return (
     <Button variant="outline" onClick={connectMyECL} disabled={isLoading}>

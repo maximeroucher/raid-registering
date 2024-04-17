@@ -13,8 +13,9 @@ import { useUserStore } from "../stores/user";
 import { useParticipantStore } from "../stores/particpant";
 import { useInviteTokenStore } from "../stores/inviteTokenStore";
 import { useQuery } from "@tanstack/react-query";
+import { useCodeVerifierStore } from "../stores/codeVerifier";
 
-const clientId: string = "Titan";
+const clientId: string = "RaidRegistering";
 const redirectUrlHost: string =
   process.env.NEXT_PUBLIC_REDIRECT_URL || "https://myecl.fr/static.html";
 const backUrl: string =
@@ -23,12 +24,15 @@ const scopes: string[] = ["API"];
 
 export const useAuth = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { token, setToken, refreshToken, setRefreshToken, userId } = useTokenStore();
+  const { token, setToken, refreshToken, setRefreshToken, userId } =
+    useTokenStore();
   const { resetUser } = useUserStore();
   const { resetParticipant } = useParticipantStore();
   const { resetInviteToken } = useInviteTokenStore();
   const [isTokenQueried, setIsTokenQueried] = useState(false);
   const router = useRouter();
+  const { codeVerifier, setCodeVerifier, resetCodeVerifier } =
+    useCodeVerifierStore();
 
   function generateRandomString(length: number): string {
     var result = "";
@@ -57,6 +61,7 @@ export const useAuth = () => {
   }
 
   async function getToken(params: BodyTokenAuthTokenPost) {
+    setIsLoading(true);
     const body = stringify(params);
     const headers = {
       "Content-Type": "application/x-www-form-urlencoded",
@@ -105,73 +110,42 @@ export const useAuth = () => {
     return access_token_expires < now - 60;
   }
 
-  async function getTokenFromRequest(popupWindow: Window | null) {
-    const codeVerifier = generateRandomString(128);
+  async function login(code: string, callback?: () => void) {
+    console.log("logging in", isLoading);
+    if (!codeVerifier) {
+      console.error("Code verifier not set");
+      return;
+    }
+    const params: BodyTokenAuthTokenPost = {
+      grant_type: "authorization_code",
+      client_id: clientId,
+      code: code,
+      redirect_uri: redirectUrlHost,
+      code_verifier: codeVerifier,
+    };
+    await getToken(params);
+    setIsTokenQueried(true);
+    if (callback) callback();
+    resetCodeVerifier();
+  }
 
+  async function getTokenFromRequest() {
+    setIsLoading(true);
+    const code = generateRandomString(128);
+    setCodeVerifier(code);
     const authUrl = `${backUrl}/auth/authorize?client_id=${clientId}&response_type=code&scope=${scopes.join(
       " ",
     )}&redirect_uri=${redirectUrlHost}&code_challenge=${await hash(
-      codeVerifier,
+      code,
     )}&code_challenge_method=S256`;
 
-    setIsLoading(true);
-    const POPUP_HEIGHT = 900;
-    const POPUP_WIDTH = 800;
-    // To fix issues with window.screen in multi-monitor setups, the easier option is to
-    // center the pop-up over the parent window.
-    const top = window.outerHeight / 2 + window.screenY - POPUP_HEIGHT / 2;
-    const left = window.outerWidth / 2 + window.screenX - POPUP_WIDTH / 2;
-    popupWindow = window.open(
-      authUrl,
-      "Hyperion",
-      `height=${POPUP_HEIGHT},width=${POPUP_WIDTH},top=${top},left=${left},scrollbars=yes`,
-    );
-
-    const interval = setInterval(() => {
-      try {
-        if (popupWindow && popupWindow.closed) {
-          clearInterval(interval);
-          setIsLoading(false);
-        }
-      } catch (e) {
-        console.error(e);
-      }
-    }, 1000);
-
-    function login(data: string) {
-      const receivedUri = new URL(data);
-      const code = receivedUri.searchParams.get("code");
-      if (popupWindow) {
-        popupWindow.close();
-        popupWindow = null;
-      }
-
-      const params: BodyTokenAuthTokenPost = {
-        grant_type: "authorization_code",
-        client_id: clientId,
-        code: code,
-        redirect_uri: redirectUrlHost,
-        code_verifier: codeVerifier,
-      };
-      getToken(params);
-    }
-
-    window.addEventListener("message", (event) => {
-      const data = event.data;
-      if (
-        data !== null &&
-        data !== undefined &&
-        new URL(data).searchParams.get("code") !== null
-      ) {
-        login(data);
-      }
-    });
+    window.location.href = authUrl;
   }
 
   function logout() {
     setToken(null);
     setRefreshToken(null);
-    setIsTokenQueried(true);
+    setIsTokenQueried(false);
     router.replace("/login");
     resetUser();
     resetParticipant();
@@ -189,12 +163,13 @@ export const useAuth = () => {
       } else {
         setToken(token);
         setIsLoading(false);
+        setIsTokenQueried(true);
+        console.log("is token queried", isTokenQueried);
       }
     } else {
       setIsLoading(false);
       router.replace("/login");
     }
-    setIsTokenQueried(true);
     return token;
   }
 
@@ -212,5 +187,14 @@ export const useAuth = () => {
     enabled: isTokenQueried && isTokenExpired(),
   });
 
-  return { getTokenFromRequest, isLoading, token, isTokenQueried, logout, userId, isTokenExpired };
+  return {
+    getTokenFromRequest,
+    isLoading,
+    token,
+    isTokenQueried,
+    logout,
+    userId,
+    isTokenExpired,
+    login,
+  };
 };
