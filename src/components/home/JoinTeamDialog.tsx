@@ -44,7 +44,7 @@ export const JoinTeamDialog = ({
           équipe.
         </DialogDescription>
         <div className="flex justify-end mt-2 space-x-4">
-          <Button variant="outline" onClick={closeDialog}>
+          <Button variant="outline" onClick={closeDialog} disabled={isJoinLoading}>
             Annuler
           </Button>
 
