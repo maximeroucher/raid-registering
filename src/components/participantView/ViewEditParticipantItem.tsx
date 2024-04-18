@@ -22,13 +22,13 @@ import { getLabelFromValue, situations } from "@/src/infra/comboboxValues";
 import { getSituationLabel, getSituationTitle } from "@/src/infra/teamUtils";
 
 interface ViewEditParticipantItemProps {
-  me: Participant;
+  participant: Participant;
   isEdit: boolean;
   setIsEdit: (value: boolean) => void;
 }
 
 export const ViewEditParticipantItem = ({
-  me,
+  participant,
   isEdit,
   setIsEdit,
 }: ViewEditParticipantItemProps) => {
@@ -121,58 +121,58 @@ export const ViewEditParticipantItem = ({
     resolver: zodResolver(formSchema),
     mode: "onBlur",
     defaultValues: {
-      address: me.address ?? undefined,
-      bikeSize: me.bike_size?.toLowerCase() ?? undefined,
-      tShirtSize: me.t_shirt_size?.toLowerCase() ?? undefined,
-      situation: getSituationLabel(me.situation ?? undefined),
+      address: participant.address ?? undefined,
+      bikeSize: participant.bike_size?.toLowerCase() ?? undefined,
+      tShirtSize: participant.t_shirt_size?.toLowerCase() ?? undefined,
+      situation: getSituationLabel(participant.situation ?? undefined),
       other:
-        getSituationLabel(me.situation ?? undefined) === "other"
-          ? getSituationTitle(me.situation ?? undefined)
+        getSituationLabel(participant.situation ?? undefined) === "other"
+          ? getSituationTitle(participant.situation ?? undefined)
           : undefined,
       otherSchool:
-        getSituationLabel(me.situation ?? undefined) === "otherschool"
-          ? getSituationTitle(me.situation ?? undefined)
+        getSituationLabel(participant.situation ?? undefined) === "otherschool"
+          ? getSituationTitle(participant.situation ?? undefined)
           : undefined,
       company:
-        getSituationLabel(me.situation ?? undefined) === "corporatepartner"
-          ? getSituationTitle(me.situation ?? undefined)
+        getSituationLabel(participant.situation ?? undefined) === "corporatepartner"
+          ? getSituationTitle(participant.situation ?? undefined)
           : undefined,
-      diet: me.diet ?? undefined,
+      diet: participant.diet ?? undefined,
       idCard: {
-        name: me.id_card?.name ?? undefined,
-        id: me.id_card?.id ?? undefined,
+        name: participant.id_card?.name ?? undefined,
+        id: participant.id_card?.id ?? undefined,
         type: "idCard",
       },
       medicalCertificate: {
-        name: me.medical_certificate?.name ?? undefined,
-        id: me.medical_certificate?.id ?? undefined,
+        name: participant.medical_certificate?.name ?? undefined,
+        id: participant.medical_certificate?.id ?? undefined,
         type: "medicalCertificate",
       },
       studentCard: {
-        name: me.student_card?.name ?? undefined,
-        id: me.student_card?.id ?? undefined,
+        name: participant.student_card?.name ?? undefined,
+        id: participant.student_card?.id ?? undefined,
         type: "studentCard",
       },
       raidRules: {
-        name: me.raid_rules?.name ?? undefined,
-        id: me.raid_rules?.id ?? undefined,
+        name: participant.raid_rules?.name ?? undefined,
+        id: participant.raid_rules?.id ?? undefined,
         type: "raidRules",
       },
       securityFile: {
-        allergy: me?.security_file?.allergy ?? undefined,
-        asthma: me?.security_file?.asthma ?? false,
-        intensive_care_unit: me?.security_file?.intensive_care_unit ?? false,
+        allergy: participant?.security_file?.allergy ?? undefined,
+        asthma: participant?.security_file?.asthma ?? false,
+        intensive_care_unit: participant?.security_file?.intensive_care_unit ?? false,
         intensive_care_unit_when:
-          me?.security_file?.intensive_care_unit_when ?? undefined,
-        ongoing_treatment: me?.security_file?.ongoing_treatment ?? undefined,
-        sicknesses: me?.security_file?.sicknesses ?? undefined,
-        hospitalization: me?.security_file?.hospitalization ?? undefined,
-        surgical_operation: me?.security_file?.surgical_operation ?? undefined,
-        trauma: me?.security_file?.trauma ?? undefined,
-        family: me?.security_file?.family ?? undefined,
-        id: me?.security_file?.id ?? undefined,
+          participant?.security_file?.intensive_care_unit_when ?? undefined,
+        ongoing_treatment: participant?.security_file?.ongoing_treatment ?? undefined,
+        sicknesses: participant?.security_file?.sicknesses ?? undefined,
+        hospitalization: participant?.security_file?.hospitalization ?? undefined,
+        surgical_operation: participant?.security_file?.surgical_operation ?? undefined,
+        trauma: participant?.security_file?.trauma ?? undefined,
+        family: participant?.security_file?.family ?? undefined,
+        id: participant?.security_file?.id ?? undefined,
       },
-      attestationHonour: me.attestation_on_honour,
+      attestationHonour: participant.attestation_on_honour,
     },
   });
 
@@ -189,7 +189,7 @@ export const ViewEditParticipantItem = ({
     ].filter((doc) => doc.updated);
 
     if (values.securityFile.updated) {
-      assignSecurityFile(me.id!, values.securityFile.id!, () => {
+      assignSecurityFile(participant.id!, values.securityFile.id!, () => {
         console.log("Security file updated");
       });
     }
@@ -216,14 +216,14 @@ export const ViewEditParticipantItem = ({
       diet: values.diet ?? null,
       attestation_on_honour: values.attestationHonour,
     };
-    updateParticipant(updatedParticipant, () => {
+    updateParticipant(updatedParticipant, participant.id, () => {
       toast({
         title: "Profil mis à jour",
         description: "Vos informations ont été mises à jour avec succès",
       });
       refetchTeam();
       setIsEdit(!isEdit);
-      // form.reset();
+      form.reset();
     });
   }
 
@@ -241,8 +241,8 @@ export const ViewEditParticipantItem = ({
   }
 
   function getSituation() {
-    const situation = getSituationLabel(me.situation ?? undefined);
-    const title = getSituationTitle(me.situation ?? undefined);
+    const situation = getSituationLabel(participant.situation ?? undefined);
+    const title = getSituationTitle(participant.situation ?? undefined);
     return (
       <>
         <ParticipantCardItem
@@ -347,7 +347,7 @@ export const ViewEditParticipantItem = ({
                   form={form}
                   type={ValueTypes.DOCUMENT}
                   layer={1}
-                  participantId={me.id!}
+                  participantId={participant.id!}
                 />
               )}
               <EditParticipantCardItem
@@ -355,14 +355,14 @@ export const ViewEditParticipantItem = ({
                 id="idCard"
                 form={form}
                 type={ValueTypes.DOCUMENT}
-                participantId={me.id!}
+                participantId={participant.id!}
               />
               <EditParticipantCardItem
                 label="Certificat médical"
                 id="medicalCertificate"
                 form={form}
                 type={ValueTypes.DOCUMENT}
-                participantId={me.id!}
+                participantId={participant.id!}
               />
               <EditParticipantCardItem
                 label="Fiche de sécurité"
@@ -375,7 +375,7 @@ export const ViewEditParticipantItem = ({
                 id="raidRules"
                 form={form}
                 type={ValueTypes.DOCUMENT}
-                participantId={me.id!}
+                participantId={participant.id!}
               />
               <EditParticipantCardItem
                 label="Attestation sur l'honneur"
@@ -387,48 +387,48 @@ export const ViewEditParticipantItem = ({
             </>
           ) : (
             <>
-              <ParticipantCardItem label="Addresse" value={me.address} />
+              <ParticipantCardItem label="Addresse" value={participant.address} />
               <ParticipantCardItem
                 label="Taille de vélo"
-                value={me.bike_size}
+                value={participant.bike_size}
               />
               <ParticipantCardItem
                 label="Taille de t-shirt"
-                value={me.t_shirt_size}
+                value={participant.t_shirt_size}
               />
-              <ParticipantCardItem label="Régime alimentaire" value={me.diet} />
+              <ParticipantCardItem label="Régime alimentaire" value={participant.diet} />
               {getSituation()}
               {["centrale", "otherschool"].includes(
-                getSituationLabel(me.situation ?? undefined) ?? "",
+                getSituationLabel(participant.situation ?? undefined) ?? "",
               ) && (
                 <ParticipantCardItem
                   label="Carte étudiante"
-                  value={me.student_card}
-                  participantId={me.id!}
+                  value={participant.student_card}
+                  participantId={participant.id!}
                 />
               )}
               <ParticipantCardItem
                 label="Carte d'identité"
-                value={me.id_card}
-                participantId={me.id!}
+                value={participant.id_card}
+                participantId={participant.id!}
               />
               <ParticipantCardItem
                 label="Certificat médical"
-                value={me.medical_certificate}
-                participantId={me.id!}
+                value={participant.medical_certificate}
+                participantId={participant.id!}
               />
               <ParticipantCardItem
                 label="Fiche de sécurité"
-                value={me.security_file}
+                value={participant.security_file}
               />
               <ParticipantCardItem
                 label="Règlement du raid"
-                value={me.raid_rules}
-                participantId={me.id!}
+                value={participant.raid_rules}
+                participantId={participant.id!}
               />
               <ParticipantCardItem
                 label="Attestation sur l'honneur"
-                value={me.attestation_on_honour}
+                value={participant.attestation_on_honour}
               />
             </>
           )}

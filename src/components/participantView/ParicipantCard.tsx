@@ -76,7 +76,7 @@ export const ParticipantCard = ({
       </CardHeader>
       {participant ? (
         <ViewEditParticipantItem
-          me={participant}
+          participant={participant}
           isEdit={isEdit}
           setIsEdit={setIsEdit}
         />

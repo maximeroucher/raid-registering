@@ -79,6 +79,7 @@ export const useParticipant = () => {
 
   const updateParticipant = (
     participant: ParticipantUpdate,
+    participantId: string,
     callback: () => void,
   ) => {
     const body: UpdateParticipantRaidParticipantsParticipantIdPatchVariables = {
@@ -87,7 +88,7 @@ export const useParticipant = () => {
         Authorization: `Bearer ${token}`,
       },
       pathParams: {
-        participantId: userId!,
+        participantId: participantId,
       },
     };
     mutateUpdateParticipant(body, {

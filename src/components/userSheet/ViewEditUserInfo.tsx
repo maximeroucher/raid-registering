@@ -91,7 +91,7 @@ export const ViewEditUserInfo = ({
       ...values,
       birthday: dateString,
     };
-    updateParticipant(updatedParticipant, () => {
+    updateParticipant(updatedParticipant, me.id, () => {
       toast({
         title: "Profil mis à jour",
         description: "Vos informations ont été mises à jour avec succès",
