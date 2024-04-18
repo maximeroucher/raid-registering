@@ -17,15 +17,21 @@ export const EmptyParticipantCard = ({ team }: EmptyParticipantCardProps) => {
     if (team === undefined) {
       return;
     }
-    createInviteToken(team.id, (token) => {
+    createInviteToken(team.id, async (token) => {
       const frontendUrl = process.env.NEXT_PUBLIC_FRONTEND_URL;
       const inviteLink = `${frontendUrl}?invite=${token.token}`;
-      navigator.clipboard.writeText(inviteLink).then(() => {
+      try {
+        await navigator.clipboard.writeText(inviteLink);
         toast({
-          title: "Invitation envoyée",
+          title: "Invitation créée",
           description: `Le lien d'invitation a été copié dans le presse-papier.`,
         });
-      });
+      } catch (e) {
+        toast({
+          title: "Invitation créée",
+          description: `Le lien d'invitation est : ${inviteLink}`,
+        });
+      }
     });
   }
   return (
