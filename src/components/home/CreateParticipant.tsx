@@ -223,7 +223,7 @@ export const CreateParticipant = ({
               />
             </div>
             <DialogFooter>
-              <Button type="submit" className="w-full mt-4">
+              <Button type="submit" className="w-full mt-4" disabled={isLoading}>
                 {isLoading ? (
                   <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
                 ) : (
