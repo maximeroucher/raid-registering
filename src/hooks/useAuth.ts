@@ -112,7 +112,7 @@ export const useAuth = () => {
 
   async function login(code: string, callback?: () => void) {
     console.log("logging in", isLoading);
-    if (!codeVerifier) {
+    if (!codeVerifier || isLoading) {
       console.error("Code verifier not set");
       return;
     }
