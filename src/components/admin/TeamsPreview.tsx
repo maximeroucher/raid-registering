@@ -110,7 +110,7 @@ export const TeamsPreview = ({ teams, isLoading }: TeamsPreviewProps) => {
                             </div>
                           </>
                         ) : (
-                          <div className="font-medium">Non renseigné</div>
+                          <div className="font-medium text-muted-foreground">Non renseigné</div>
                         )}
                       </TableCell>
                       <TableCell className="max-md:hidden">

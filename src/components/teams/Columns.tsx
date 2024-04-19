@@ -71,8 +71,10 @@ export const columns: ColumnDef<TeamPreview>[] = [
     cell: ({ row }) => {
       const second = row.getValue("second") as ParticipantPreview | undefined;
       return (
-        <div className="flex space-x-2">
-          {second ? `${second.firstname} ${second.name}` : "Aucun"}
+        <div
+          className={`flex space-x-2 ${second ?? "text-muted-foreground"}`}
+        >
+          {second ? `${second.firstname} ${second.name}` : "Non renseigné"}
         </div>
       );
     },
