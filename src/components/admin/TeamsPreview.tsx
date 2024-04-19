@@ -21,6 +21,7 @@ import {
 import { Skeleton } from "../ui/skeleton";
 import { TeamPreview } from "@/src/api/hyperionSchemas";
 import { difficulties, getLabelFromValue } from "@/src/infra/comboboxValues";
+import { CircularProgressBar } from "@tomickigrzegorz/react-circular-progress-bar";
 
 interface TeamsPreviewProps {
   teams?: TeamPreview[];
@@ -51,7 +52,7 @@ export const TeamsPreview = ({ teams, isLoading }: TeamsPreviewProps) => {
               <TableHead>Nom</TableHead>
               <TableHead className="max-md:hidden">Capitaine</TableHead>
               <TableHead className="max-md:hidden">Coéquipier</TableHead>
-              <TableHead className="max-md:hidden">Parcours</TableHead>
+              <TableHead className="max-md:hidden">Documents</TableHead>
               <TableHead className="text-right">Inscription</TableHead>
             </TableRow>
           </TableHeader>
@@ -63,15 +64,11 @@ export const TeamsPreview = ({ teams, isLoading }: TeamsPreviewProps) => {
                     <TableCell>
                       <Skeleton className="h-4 w-20" />
                     </TableCell>
-                    <TableCell className="max-md:hidden">
-                      <Skeleton className="h-4 w-20" />
-                    </TableCell>
-                    <TableCell className="max-md:hidden">
-                      <Skeleton className="h-4 w-20" />
-                    </TableCell>
-                    <TableCell className="max-md:hidden">
-                      <Skeleton className="h-4 w-20" />
-                    </TableCell>
+                    {[...Array(3)].map((_, index) => (
+                      <TableCell key={index} className="max-md:hidden">
+                        <Skeleton className="h-4 w-20" />
+                      </TableCell>
+                    ))}
                     <TableCell className=" ml-auto text-right">
                       <Skeleton className="h-4 w-20" />
                     </TableCell>
@@ -88,44 +85,69 @@ export const TeamsPreview = ({ teams, isLoading }: TeamsPreviewProps) => {
                       (a.validation_progress % 100),
                   )
                   .slice(0, 5)
-                  .map((team) => (
-                    <TableRow key={team.id}>
-                      <TableCell>{team.name}</TableCell>
-                      <TableCell className="max-md:hidden">
-                        <div className="font-medium">
-                          {team.captain?.firstname} {team.captain?.name}
-                        </div>
-                        <div className="text-sm text-muted-foreground max-md:hidden">
-                          {team.captain?.email}
-                        </div>
-                      </TableCell>
-                      <TableCell className="max-md:hidden">
-                        {team.second ? (
-                          <>
-                            <div className="font-medium">
-                              {team.second.firstname} {team.second.name}
+                  .map((team) => {
+                    const number_of_validated_document =
+                      team.captain.number_of_validated_document +
+                      (team.second?.number_of_validated_document ?? 0);
+                    const number_of_document =
+                      team.captain.number_of_document +
+                      (team.second?.number_of_document ?? 0);
+                    return (
+                      <TableRow key={team.id}>
+                        <TableCell>{team.name}</TableCell>
+                        <TableCell className="max-md:hidden">
+                          <div className="font-medium">
+                            {team.captain?.firstname} {team.captain?.name}
+                          </div>
+                          <div className="text-sm text-muted-foreground max-md:hidden">
+                            {team.captain?.email}
+                          </div>
+                        </TableCell>
+                        <TableCell className="max-md:hidden">
+                          {team.second ? (
+                            <>
+                              <div className="font-medium">
+                                {team.second.firstname} {team.second.name}
+                              </div>
+                              <div className="text-sm text-muted-foreground max-md:hidden">
+                                {team.second.email}
+                              </div>
+                            </>
+                          ) : (
+                            <div className="font-medium text-muted-foreground">
+                              Non renseigné
                             </div>
-                            <div className="text-sm text-muted-foreground max-md:hidden">
-                              {team.second.email}
-                            </div>
-                          </>
-                        ) : (
-                          <div className="font-medium text-muted-foreground">Non renseigné</div>
-                        )}
-                      </TableCell>
-                      <TableCell className="max-md:hidden">
-                        <Badge className="text-xs" variant="outline">
-                          {getLabelFromValue(
-                            difficulties,
-                            team.difficulty ?? undefined,
                           )}
-                        </Badge>
-                      </TableCell>
-                      <TableCell className="text-right">
-                        {team?.validation_progress.toFixed(0)}%
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                        </TableCell>
+                        <TableCell className="max-md:hidden">
+                          <div className="flex w-[150px] items-center">
+                            <Badge variant="outline">
+                              <CircularProgressBar
+                                percent={
+                                  (number_of_validated_document /
+                                    number_of_document) *
+                                  100
+                                }
+                                animationOff={true}
+                                round={true}
+                                size={12}
+                                stroke={20}
+                                number={false}
+                                colorSlice="black"
+                              />
+                              <span className="ml-2">
+                                {number_of_validated_document} /{" "}
+                                {number_of_document} {"validés"}
+                              </span>
+                            </Badge>
+                          </div>
+                        </TableCell>
+                        <TableCell className="text-right">
+                          {team?.validation_progress.toFixed(0)}%
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
               </>
             )}
           </TableBody>
