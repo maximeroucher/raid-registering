@@ -1110,6 +1110,8 @@ export type Participant = {
   situation: string | null;
   validation_progress: number;
   payment: boolean;
+  number_of_document: number;
+  number_of_validated_document: number;
   id: string;
   address: string | null;
   other_school?: string | null;
@@ -1148,6 +1150,8 @@ export type ParticipantPreview = {
   situation: string | null;
   validation_progress: number;
   payment: boolean;
+  number_of_document: number;
+  number_of_validated_document: number;
 };
 
 export type ParticipantUpdate = {
