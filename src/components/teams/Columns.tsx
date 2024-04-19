@@ -7,7 +7,12 @@ import { Badge } from "../ui/badge";
 import { DataTableColumnHeader } from "./DataTableColumnHeader";
 import { DataTableRowActions } from "./DataTableRowActions";
 import { ParticipantPreview, TeamPreview } from "@/src/api/hyperionSchemas";
-import { difficulties, getLabelFromValue, meetingPlaces } from "@/src/infra/comboboxValues";
+import {
+  difficulties,
+  getLabelFromValue,
+  meetingPlaces,
+} from "@/src/infra/comboboxValues";
+import { CircularProgressBar } from "@tomickigrzegorz/react-circular-progress-bar";
 
 export const columns: ColumnDef<TeamPreview>[] = [
   {
@@ -124,6 +129,44 @@ export const columns: ColumnDef<TeamPreview>[] = [
     sortingFn: (rowA, rowB, id) => {
       return (rowA.getValue(id) as number) - (rowB.getValue(id) as number);
     },
+  },
+  {
+    accessorKey: "document_progress",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Documents" />
+    ),
+    cell: ({ row }) => {
+      const number_of_validated_document =
+        (row.getValue("captain") as ParticipantPreview)
+          .number_of_validated_document +
+        ((row.getValue("second") as ParticipantPreview | null)
+          ?.number_of_validated_document ?? 0);
+      const number_of_document =
+        (row.getValue("captain") as ParticipantPreview).number_of_document +
+        ((row.getValue("second") as ParticipantPreview | null)
+          ?.number_of_document ?? 0);
+      return (
+        <div className="flex w-[150px] items-center">
+          <Badge variant="outline">
+            <CircularProgressBar
+              percent={
+                (number_of_validated_document / number_of_document) * 100
+              }
+              animationOff={true}
+              round={true}
+              size={12}
+              stroke={20}
+              number={false}
+              colorSlice="black"
+            />
+            <span className="ml-2">
+              {number_of_validated_document} / {number_of_document} {"validés"}
+            </span>
+          </Badge>
+        </div>
+      );
+    },
+    enableSorting: false,
   },
   {
     id: "actions",

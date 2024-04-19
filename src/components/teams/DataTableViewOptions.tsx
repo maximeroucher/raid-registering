@@ -33,6 +33,8 @@ export function DataTableViewOptions<TData>({
         return "Lieu de rendez-vous";
       case "validation_progress":
         return "Inscription";
+      case "document_progress":
+          return "Documents";
       default:
         return key;
     }
