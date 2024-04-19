@@ -1078,19 +1078,6 @@
   resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.15.3.tgz#1a11cef82a458e90694bedfb40dcff610e69460e"
   integrity sha512-wOgV0HfEvuMOv8RlqdR9MdNNqq0uyvQtP39QOvGlggHvIObOE4exS+D5LGO8LZ3LUXxId2IlUKcHDHaGujWhUg==
 
-"@tomickigrzegorz/react-circular-progress-bar@^1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@tomickigrzegorz/react-circular-progress-bar/-/react-circular-progress-bar-1.1.2.tgz#88897759ac2b1a2be7ec9cb0e22e5075c497f5f5"
-  integrity sha512-GECg3VjJ/YZZd2XJXzDNxpHSa7nZ41hb1iX9AUUtgSbRgAAMk+eA805JD1UEyziHJ6f7kCwgGpaqTWDl32VtoQ==
-  dependencies:
-    prop-types "^15.7.2"
-
-"@types/@tomickigrzegorz/react-circular-progress-bar":
-  version "1.1.2"
-  resolved "https://codeload.github.com/tomickigrzegorz/react-circular-progress-bar/tar.gz/d7c49b7f7b93d357c17e88e2914e8e12da660733"
-  dependencies:
-    prop-types "^15.7.2"
-
 "@types/base-64@^1.0.2":
   version "1.0.2"
   resolved "https://registry.npmjs.org/@types/base-64/-/base-64-1.0.2.tgz"
@@ -4089,6 +4076,11 @@ quick-lru@^5.1.1:
   version "5.1.1"
   resolved "https://registry.npmjs.org/quick-lru/-/quick-lru-5.1.1.tgz"
   integrity sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==
+
+react-circular-progressbar@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-circular-progressbar/-/react-circular-progressbar-2.1.0.tgz#99e5ae499c21de82223b498289e96f66adb8fa3a"
+  integrity sha512-xp4THTrod4aLpGy68FX/k1Q3nzrfHUjUe5v6FsdwXBl3YVMwgeXYQKDrku7n/D6qsJA9CuunarAboC2xCiKs1g==
 
 react-day-picker@^8.10.0:
   version "8.10.0"

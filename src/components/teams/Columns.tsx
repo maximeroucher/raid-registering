@@ -12,7 +12,7 @@ import {
   getLabelFromValue,
   meetingPlaces,
 } from "@/src/infra/comboboxValues";
-import { CircularProgressBar } from "@tomickigrzegorz/react-circular-progress-bar";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 
 export const columns: ColumnDef<TeamPreview>[] = [
   {
@@ -71,9 +71,7 @@ export const columns: ColumnDef<TeamPreview>[] = [
     cell: ({ row }) => {
       const second = row.getValue("second") as ParticipantPreview | undefined;
       return (
-        <div
-          className={`flex space-x-2 ${second ?? "text-muted-foreground"}`}
-        >
+        <div className={`flex space-x-2 ${second ?? "text-muted-foreground"}`}>
           {second ? `${second.firstname} ${second.name}` : "Non renseigné"}
         </div>
       );
@@ -150,17 +148,18 @@ export const columns: ColumnDef<TeamPreview>[] = [
       return (
         <div className="flex w-[150px] items-center">
           <Badge variant="outline">
-            <CircularProgressBar
-              percent={
-                (number_of_validated_document / number_of_document) * 100
-              }
-              animationOff={true}
-              round={true}
-              size={12}
-              stroke={20}
-              number={false}
-              colorSlice="black"
-            />
+            <div className="h-3 w-3">
+              <CircularProgressbar
+                value={
+                  (number_of_validated_document / number_of_document) * 100
+                }
+                strokeWidth={15}
+                styles={buildStyles({
+                  pathColor: "black",
+                  strokeLinecap: "round",
+                })}
+              />
+            </div>
             <span className="ml-2">
               {number_of_validated_document} / {number_of_document} {"validés"}
             </span>
