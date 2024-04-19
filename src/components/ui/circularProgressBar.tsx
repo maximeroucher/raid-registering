@@ -11,10 +11,16 @@ export const CircularProgressBar = ({ value }: CircularProgressBarProps) => {
       <CircularProgressbar
         value={value}
         strokeWidth={15}
-        styles={buildStyles({
-          pathColor: "black",
-          strokeLinecap: "round",
-        })}
+        styles={{
+          root: {},
+          path: {
+            stroke: `black`,
+            strokeLinecap: "round",
+          },
+          trail: {},
+          text: {},
+          background: {},
+        }}
       />
     </div>
   );
