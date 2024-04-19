@@ -24,11 +24,7 @@ export const DocumentView = ({
   const { setDocument } = useDocumentsStore();
   const [isLoading, setIsLoading] = useState(data?.size === undefined);
 
-  if (
-    file?.size === undefined &&
-    documentId !== id &&
-    data?.size === undefined
-  ) {
+  if (file?.size === undefined && documentId !== id) {
     setDocumentId(id);
     setIsLoading(true);
   }
