@@ -1085,6 +1085,12 @@
   dependencies:
     prop-types "^15.7.2"
 
+"@types/@tomickigrzegorz/react-circular-progress-bar":
+  version "1.1.2"
+  resolved "https://codeload.github.com/tomickigrzegorz/react-circular-progress-bar/tar.gz/d7c49b7f7b93d357c17e88e2914e8e12da660733"
+  dependencies:
+    prop-types "^15.7.2"
+
 "@types/base-64@^1.0.2":
   version "1.0.2"
   resolved "https://registry.npmjs.org/@types/base-64/-/base-64-1.0.2.tgz"

@@ -34,6 +34,7 @@
     "@tanstack/react-query": "^5.24.1",
     "@tanstack/react-table": "^8.15.3",
     "@tomickigrzegorz/react-circular-progress-bar": "^1.1.2",
+    "@types/": "tomickigrzegorz/react-circular-progress-bar",
     "axios": "^1.6.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
