@@ -7,7 +7,7 @@ import { Badge } from "../ui/badge";
 import { DataTableColumnHeader } from "./DataTableColumnHeader";
 import { DataTableRowActions } from "./DataTableRowActions";
 import { ParticipantPreview, TeamPreview } from "@/src/api/hyperionSchemas";
-import { difficulties, getLabelFromValue } from "@/src/infra/comboboxValues";
+import { difficulties, getLabelFromValue, meetingPlaces } from "@/src/infra/comboboxValues";
 
 export const columns: ColumnDef<TeamPreview>[] = [
   {
@@ -92,13 +92,13 @@ export const columns: ColumnDef<TeamPreview>[] = [
   {
     accessorKey: "meeting_place",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Lie de rendezvous" />
+      <DataTableColumnHeader column={column} title="Lieu de rendez-vous" />
     ),
     cell: ({ row }) => {
       return (
         <div className="flex space-x-2">
           <Badge variant="outline">
-            {getLabelFromValue(difficulties, row.getValue("meeting_place"))}
+            {getLabelFromValue(meetingPlaces, row.getValue("meeting_place"))}
           </Badge>
         </div>
       );
