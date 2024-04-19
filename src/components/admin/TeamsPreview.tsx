@@ -20,7 +20,7 @@ import {
 } from "@/src/components/ui/table";
 import { Skeleton } from "../ui/skeleton";
 import { TeamPreview } from "@/src/api/hyperionSchemas";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import { CircularProgressBar } from "../ui/circularProgressBar";
 
 interface TeamsPreviewProps {
   teams?: TeamPreview[];
@@ -121,20 +121,13 @@ export const TeamsPreview = ({ teams, isLoading }: TeamsPreviewProps) => {
                         <TableCell className="max-md:hidden">
                           <div className="flex w-[150px] items-center">
                             <Badge variant="outline">
-                              <div className="h-3 w-3">
-                                <CircularProgressbar
+                                <CircularProgressBar
                                   value={
                                     (number_of_validated_document /
                                       number_of_document) *
                                     100
                                   }
-                                  strokeWidth={15}
-                                  styles={buildStyles({
-                                    pathColor: "text-primary-background",
-                                    strokeLinecap: "round",
-                                  })}
                                 />
-                              </div>
                               <span className="ml-2">
                                 {number_of_validated_document} /{" "}
                                 {number_of_document} {"validés"}

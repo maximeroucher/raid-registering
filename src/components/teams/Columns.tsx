@@ -12,7 +12,7 @@ import {
   getLabelFromValue,
   meetingPlaces,
 } from "@/src/infra/comboboxValues";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import { CircularProgressBar } from "../ui/circularProgressBar";
 
 export const columns: ColumnDef<TeamPreview>[] = [
   {
@@ -148,18 +148,9 @@ export const columns: ColumnDef<TeamPreview>[] = [
       return (
         <div className="flex w-[150px] items-center">
           <Badge variant="outline">
-            <div className="h-3 w-3">
-              <CircularProgressbar
-                value={
-                  (number_of_validated_document / number_of_document) * 100
-                }
-                strokeWidth={15}
-                styles={buildStyles({
-                  pathColor: "text-primary-background",
-                  strokeLinecap: "round",
-                })}
-              />
-            </div>
+            <CircularProgressBar
+              value={(number_of_validated_document / number_of_document) * 100}
+            />
             <span className="ml-2">
               {number_of_validated_document} / {number_of_document} {"validés"}
             </span>
