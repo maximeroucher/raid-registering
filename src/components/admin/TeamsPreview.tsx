@@ -20,7 +20,6 @@ import {
 } from "@/src/components/ui/table";
 import { Skeleton } from "../ui/skeleton";
 import { TeamPreview } from "@/src/api/hyperionSchemas";
-import { difficulties, getLabelFromValue } from "@/src/infra/comboboxValues";
 import { CircularProgressBar } from "@tomickigrzegorz/react-circular-progress-bar";
 
 interface TeamsPreviewProps {
