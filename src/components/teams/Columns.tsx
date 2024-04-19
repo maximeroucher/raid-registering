@@ -155,7 +155,7 @@ export const columns: ColumnDef<TeamPreview>[] = [
                 }
                 strokeWidth={15}
                 styles={buildStyles({
-                  pathColor: "black",
+                  pathColor: "text-primary-background",
                   strokeLinecap: "round",
                 })}
               />

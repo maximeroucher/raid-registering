@@ -130,7 +130,7 @@ export const TeamsPreview = ({ teams, isLoading }: TeamsPreviewProps) => {
                                   }
                                   strokeWidth={15}
                                   styles={buildStyles({
-                                    pathColor: "black",
+                                    pathColor: "text-primary-background",
                                     strokeLinecap: "round",
                                   })}
                                 />
