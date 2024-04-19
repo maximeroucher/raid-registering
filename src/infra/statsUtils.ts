@@ -60,7 +60,7 @@ function getMeetingPlaceData(
   teams?: TeamPreview[],
 ): { value: number; label: string }[] {
   var response = [
-    { value: 0, label: "Centrale" },
+    { value: 0, label: "Centrale Lyon" },
     { value: 0, label: "Bellecour" },
     { value: 0, label: "Peu importe" },
   ];
@@ -194,7 +194,7 @@ function getSituationData(
   teams?: TeamPreview[],
 ): { value: number; label: string }[] {
   var response = [
-    { value: 0, label: "Centrale" },
+    { value: 0, label: "Centrale Lyon" },
     { value: 0, label: "Autre école" },
     { value: 0, label: "Partenaire" },
     { value: 0, label: "Autre" },

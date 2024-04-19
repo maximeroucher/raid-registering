@@ -1,5 +1,5 @@
 export const situations = [
-  { value: "centrale", label: "Centrale" },
+  { value: "centrale", label: "Centrale Lyon" },
   { value: "otherschool", label: "Autre école" },
   { value: "corporatepartner", label: "Partenaire entreprise" },
   { value: "other", label: "Autre" },
@@ -12,7 +12,7 @@ export const difficulties = [
 ];
 
 export const meetingPlaces = [
-  { value: "centrale", label: "Centrale" },
+  { value: "centrale", label: "Centrale Lyon" },
   { value: "bellecour", label: "Bellecour" },
   { value: "anyway", label: "Peu importe" },
 ];
