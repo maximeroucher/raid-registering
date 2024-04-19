@@ -58,7 +58,7 @@ export const TeamsPreview = ({ teams, isLoading }: TeamsPreviewProps) => {
           <TableBody>
             {isLoading && (
               <>
-                {[...Array(10)].map((_, index) => (
+                {[...Array(5)].map((_, index) => (
                   <TableRow key={index}>
                     <TableCell>
                       <Skeleton className="h-4 w-20" />
@@ -81,44 +81,51 @@ export const TeamsPreview = ({ teams, isLoading }: TeamsPreviewProps) => {
             )}
             {teams && (
               <>
-                {teams.slice(0, 10).map((team) => (
-                  <TableRow key={team.id}>
-                    <TableCell>{team.name}</TableCell>
-                    <TableCell className="max-md:hidden">
-                      <div className="font-medium">
-                        {team.captain?.firstname} {team.captain?.name}
-                      </div>
-                      <div className="text-sm text-muted-foreground max-md:hidden">
-                        {team.captain?.email}
-                      </div>
-                    </TableCell>
-                    <TableCell className="max-md:hidden">
-                      {team.second ? (
-                        <>
-                          <div className="font-medium">
-                            {team.second.firstname} {team.second.name}
-                          </div>
-                          <div className="text-sm text-muted-foreground max-md:hidden">
-                            {team.second.email}
-                          </div>
-                        </>
-                      ) : (
-                        <div className="font-medium">Non renseigné</div>
-                      )}
-                    </TableCell>
-                    <TableCell className="max-md:hidden">
-                      <Badge className="text-xs" variant="outline">
-                        {getLabelFromValue(
-                          difficulties,
-                          team.difficulty ?? undefined,
+                {teams
+                  .toSorted(
+                    (a, b) =>
+                      (b.validation_progress % 100) -
+                      (a.validation_progress % 100),
+                  )
+                  .slice(0, 5)
+                  .map((team) => (
+                    <TableRow key={team.id}>
+                      <TableCell>{team.name}</TableCell>
+                      <TableCell className="max-md:hidden">
+                        <div className="font-medium">
+                          {team.captain?.firstname} {team.captain?.name}
+                        </div>
+                        <div className="text-sm text-muted-foreground max-md:hidden">
+                          {team.captain?.email}
+                        </div>
+                      </TableCell>
+                      <TableCell className="max-md:hidden">
+                        {team.second ? (
+                          <>
+                            <div className="font-medium">
+                              {team.second.firstname} {team.second.name}
+                            </div>
+                            <div className="text-sm text-muted-foreground max-md:hidden">
+                              {team.second.email}
+                            </div>
+                          </>
+                        ) : (
+                          <div className="font-medium">Non renseigné</div>
                         )}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="text-right">
-                      {team?.validation_progress.toFixed(0)}%
-                    </TableCell>
-                  </TableRow>
-                ))}
+                      </TableCell>
+                      <TableCell className="max-md:hidden">
+                        <Badge className="text-xs" variant="outline">
+                          {getLabelFromValue(
+                            difficulties,
+                            team.difficulty ?? undefined,
+                          )}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-right">
+                        {team?.validation_progress.toFixed(0)}%
+                      </TableCell>
+                    </TableRow>
+                  ))}
               </>
             )}
           </TableBody>
