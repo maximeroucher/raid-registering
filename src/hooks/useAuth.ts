@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { stringify } from "qs";
 import {
@@ -33,6 +33,8 @@ export const useAuth = () => {
   const router = useRouter();
   const { codeVerifier, setCodeVerifier, resetCodeVerifier } =
     useCodeVerifierStore();
+  const timer = useRef<NodeJS.Timeout | null>(null);
+  const REFRESH_TOKEN_BUFFER = 60;
 
   function generateRandomString(length: number): string {
     var result = "";
@@ -170,7 +172,28 @@ export const useAuth = () => {
       setIsLoading(false);
       router.replace("/login");
     }
+    lookToRefreshToken();
     return token;
+  }
+
+  function lookToRefreshToken() {
+    if (timer.current) {
+      clearTimeout(timer.current);
+    }
+    const timeToRefreshToken =
+      (token ? JSON.parse(atob(token.split(".")[1])).exp : 0) -
+      Date.now() / 1000 -
+      REFRESH_TOKEN_BUFFER;
+
+    if (timeToRefreshToken <= 0) {
+      // server call to update app state with new token and new expirationDate
+      refreshTokens();
+    } else {
+      timer.current = setTimeout(() => {
+        refreshTokens();
+        timer.current = null;
+      }, timeToRefreshToken);
+    }
   }
 
   useQuery({
