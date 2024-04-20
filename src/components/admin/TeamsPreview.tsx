@@ -34,7 +34,8 @@ export const TeamsPreview = ({ teams, isLoading }: TeamsPreviewProps) => {
         <div className="grid gap-2">
           <CardTitle>Equipes</CardTitle>
           <CardDescription>
-            Aperçu des dernières équipes inscrites
+            Aperçu des {teams?.slice(0, 5).length ?? 0} équipes les plus proches
+            de la validation de leur dossier
           </CardDescription>
         </div>
         <Button asChild size="sm" className="ml-auto gap-1">
@@ -121,13 +122,13 @@ export const TeamsPreview = ({ teams, isLoading }: TeamsPreviewProps) => {
                         <TableCell className="max-md:hidden">
                           <div className="flex w-[150px] items-center">
                             <Badge variant="outline">
-                                <CircularProgressBar
-                                  value={
-                                    (number_of_validated_document /
-                                      number_of_document) *
-                                    100
-                                  }
-                                />
+                              <CircularProgressBar
+                                value={
+                                  (number_of_validated_document /
+                                    number_of_document) *
+                                  100
+                                }
+                              />
                               <span className="ml-2">
                                 {number_of_validated_document} /{" "}
                                 {number_of_document} {"validés"}
