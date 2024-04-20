@@ -30,7 +30,6 @@ export const TopBar = () => {
         >
           <span className=" text-2xl">Inscription Raid 2024</span>
         </Link>
-
         <div className="flex flex-row ml-auto">
           <UserButton />
           <div className="w-4"></div>

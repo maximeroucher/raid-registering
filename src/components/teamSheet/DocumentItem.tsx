@@ -8,7 +8,7 @@ import {
 
 import { HiCheck } from "react-icons/hi";
 import { Button } from "../ui/button";
-import { ReloadIcon } from "@radix-ui/react-icons";
+import { LoadingButton } from "../ui/loadingButton";
 
 interface DocumentItemProps {
   value: string;
@@ -57,18 +57,14 @@ export const DocumentItem = ({
               Télécharger le document
             </Button>
             {!isValidated && (
-              <Button
+              <LoadingButton
+                isLoading={isValidationLoading}
+                label="Valider le document"
                 className="w-full"
-                onClick={(_) =>{
-                  validateDocument(document.id)}}
-                disabled={isValidationLoading}
-              >
-                {isValidationLoading ? (
-                  <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-                ) : (
-                  "Valider le document"
-                )}
-              </Button>
+                onClick={(_) => {
+                  validateDocument(document.id);
+                }}
+              />
             )}
           </div>
         ) : (

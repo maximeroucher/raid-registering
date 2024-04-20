@@ -1,11 +1,10 @@
 "use client";
 
-import { Button } from "@/src/components/ui/button";
-import { ReloadIcon } from "@radix-ui/react-icons";
 import { useAuth } from "../../hooks/useAuth";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCodeVerifierStore } from "@/src/stores/codeVerifier";
 import { useEffect } from "react";
+import { LoadingButton } from "../ui/loadingButton";
 
 const Login = () => {
   const { token, isTokenExpired, login, isLoading, getTokenFromRequest } =
@@ -38,13 +37,12 @@ const Login = () => {
   }
 
   return (
-    <Button variant="outline" onClick={connectMyECL} disabled={isLoading}>
-      {isLoading ? (
-        <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-      ) : (
-        "MyECL"
-      )}
-    </Button>
+    <LoadingButton
+      isLoading={isLoading}
+      onClick={connectMyECL}
+      label="Se connecter"
+      variant="outline"
+    />
   );
 };
 

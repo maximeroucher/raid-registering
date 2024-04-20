@@ -1,4 +1,3 @@
-import { Button } from "../ui/button";
 import {
   DialogHeader,
   DialogFooter,
@@ -9,14 +8,7 @@ import {
 } from "../ui/dialog";
 import { CreateParticipantField } from "./CreateParticipantField";
 import { DatePicker } from "../ui/datePicker";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "../ui/form";
+import { Form, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -24,12 +16,12 @@ import { CoreUser } from "@/src/api/hyperionSchemas";
 import { addYears, toDate } from "date-fns";
 import { toast } from "../ui/use-toast";
 import { useParticipant } from "@/src/hooks/useParticipant";
-import { ReloadIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import { useTeam } from "@/src/hooks/useTeam";
 import { useInviteTokenStore } from "@/src/stores/inviteTokenStore";
 import { useInviteToken } from "@/src/hooks/useInviteToken";
+import { LoadingButton } from "../ui/loadingButton";
 
 interface CreateParticipantProps {
   user: CoreUser;
@@ -223,13 +215,12 @@ export const CreateParticipant = ({
               />
             </div>
             <DialogFooter>
-              <Button type="submit" className="w-full mt-4" disabled={isLoading}>
-                {isLoading ? (
-                  <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-                ) : (
-                  "Valider"
-                )}
-              </Button>
+              <LoadingButton
+                isLoading={isLoading}
+                label="Valider"
+                type="submit"
+                className="w-full mt-4"
+              />
             </DialogFooter>
           </form>
         </Form>

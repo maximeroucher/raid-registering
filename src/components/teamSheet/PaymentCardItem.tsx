@@ -1,7 +1,6 @@
 import { Participant } from "@/src/api/hyperionSchemas";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { Button } from "../ui/button";
-import { ReloadIcon } from "@radix-ui/react-icons";
+import { LoadingButton } from "../ui/loadingButton";
 
 interface PaymentCardItemProps {
   participant: Participant;
@@ -25,17 +24,12 @@ export const PaymentCardItem = ({
         {participant.payment ? (
           <p>{"L'inscription à été payée"}</p>
         ) : (
-          <Button
+          <LoadingButton
             onClick={(_) => validateCallback(participant.id)}
-            disabled={isLoading}
+            isLoading={isLoading}
+            label={"Valider le paiement de l'inscription"}
             className="w-full"
-          >
-            {isLoading ? (
-              <ReloadIcon className="h-4 w-4 animate-spin" />
-            ) : (
-              "Valider le paiement de l'inscription"
-            )}
-          </Button>
+          />
         )}
       </CardContent>
     </Card>

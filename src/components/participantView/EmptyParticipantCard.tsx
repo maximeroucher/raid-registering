@@ -2,11 +2,10 @@ import { Card, CardContent } from "../ui/card";
 
 import { HiPlus } from "react-icons/hi";
 import { toast } from "../ui/use-toast";
-import { Button } from "../ui/button";
 import { useInviteToken } from "@/src/hooks/useInviteToken";
 import { Team } from "@/src/api/hyperionSchemas";
-import { ReloadIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
+import { LoadingButton } from "../ui/loadingButton";
 
 interface EmptyParticipantCardProps {
   team?: Team;
@@ -43,29 +42,24 @@ export const EmptyParticipantCard = ({ team }: EmptyParticipantCardProps) => {
       <CardContent className="w-full h-full">
         <div className="flex m-auto h-full mt-3 flex-col">
           <div className="flex m-auto flex-col items-center">
-          
-            
-            <Button
-              variant="outline"
-              className="w-[200px]"
-              disabled={isCreationLoading}
+            <LoadingButton
+              isLoading={isCreationLoading}
               onClick={createInviteLink}
-            >
-              {isCreationLoading ? (
-                <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-              ) : (
+              label={
                 <>
                   <HiPlus className="inline mr-4" />
                   <span>Inviter un participant</span>
                 </>
-              )}
-            </Button>
+              }
+              className="w-[200px]"
+              variant="outline"
+            />
             {invitationLink && (
               <span className="text-sm text-muted-foreground mt-4">
                 {invitationLink}
               </span>
             )}
-            </div>
+          </div>
         </div>
       </CardContent>
     </Card>
