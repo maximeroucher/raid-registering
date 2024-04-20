@@ -160,30 +160,30 @@ export const useAuth = () => {
     setIsLoading(true);
     if (typeof window === "undefined") return null;
     if (token !== null) {
-      if (isTokenExpired()) {
-        refreshTokens();
-      } else {
-        setToken(token);
+      if (!isTokenExpired()) {
         setIsLoading(false);
         setIsTokenQueried(true);
         console.log("is token queried", isTokenQueried);
       }
+      lookToRefreshToken(token);
     } else {
       setIsLoading(false);
       router.replace("/login");
     }
-    lookToRefreshToken();
     return token;
   }
 
-  function lookToRefreshToken() {
+  function lookToRefreshToken(token: string | null) {
+    console.log("looking to refresh token");
     if (timer.current) {
       clearTimeout(timer.current);
     }
+    console.log("token", token ? JSON.parse(atob(token.split(".")[1])).exp : 0);
     const timeToRefreshToken =
       (token ? JSON.parse(atob(token.split(".")[1])).exp : 0) -
       Date.now() / 1000 -
       REFRESH_TOKEN_BUFFER;
+    console.log("time to refresh token", timeToRefreshToken);
 
     if (timeToRefreshToken <= 0) {
       // server call to update app state with new token and new expirationDate

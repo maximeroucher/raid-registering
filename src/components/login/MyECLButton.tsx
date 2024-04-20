@@ -37,8 +37,6 @@ const Login = () => {
     getTokenFromRequest();
   }
 
-  console.log("isLoggingLoading", isLoggingLoading);
-
   return (
     <Button variant="outline" onClick={connectMyECL} disabled={isLoading}>
       {isLoading ? (
