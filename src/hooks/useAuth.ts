@@ -160,12 +160,13 @@ export const useAuth = () => {
     setIsLoading(true);
     if (typeof window === "undefined") return null;
     if (token !== null) {
-      if (!isTokenExpired()) {
+      if (isTokenExpired()) {
+        refreshTokens();
+      } else {
         setIsLoading(false);
         setIsTokenQueried(true);
         console.log("is token queried", isTokenQueried);
       }
-      lookToRefreshToken(token);
     } else {
       setIsLoading(false);
       router.replace("/login");
@@ -173,16 +174,16 @@ export const useAuth = () => {
     return token;
   }
 
-  function lookToRefreshToken(token: string | null) {
+  function lookToRefreshToken() {
     console.log("looking to refresh token");
     if (timer.current) {
       clearTimeout(timer.current);
     }
     console.log("token", token ? JSON.parse(atob(token.split(".")[1])).exp : 0);
     const timeToRefreshToken =
-      (token ? JSON.parse(atob(token.split(".")[1])).exp : 0) -
-      Date.now() / 1000 -
-      REFRESH_TOKEN_BUFFER;
+      (token ? JSON.parse(atob(token.split(".")[1])).exp : 0) * 1000 -
+      Date.now() -
+      REFRESH_TOKEN_BUFFER * 1000;
     console.log("time to refresh token", timeToRefreshToken);
 
     if (timeToRefreshToken <= 0) {
@@ -194,20 +195,21 @@ export const useAuth = () => {
         timer.current = null;
       }, timeToRefreshToken);
     }
+    return token;
   }
+
+  useQuery({
+    queryKey: ["lookToRefreshToken"],
+    queryFn: () => lookToRefreshToken(),
+    retry: 0,
+    enabled: isTokenQueried,
+  });
 
   useQuery({
     queryKey: ["getTokenFromStorage"],
     queryFn: () => getTokenFromStorage(),
     retry: 0,
     enabled: !isTokenQueried,
-  });
-
-  useQuery({
-    queryKey: ["refreshTokens"],
-    queryFn: () => refreshTokens(),
-    retry: 0,
-    enabled: isTokenQueried && isTokenExpired(),
   });
 
   return {
