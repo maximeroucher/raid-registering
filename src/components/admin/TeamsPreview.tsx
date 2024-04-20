@@ -61,16 +61,16 @@ export const TeamsPreview = ({ teams, isLoading }: TeamsPreviewProps) => {
               <>
                 {[...Array(5)].map((_, index) => (
                   <TableRow key={index}>
-                    <TableCell>
-                      <Skeleton className="h-4 w-20" />
+                    <TableCell className="h-20">
+                      <Skeleton className="h-6 w-24" />
                     </TableCell>
                     {[...Array(3)].map((_, index) => (
                       <TableCell key={index} className="max-md:hidden">
-                        <Skeleton className="h-4 w-20" />
+                        <Skeleton className="h-6 w-24" />
                       </TableCell>
                     ))}
-                    <TableCell className=" ml-auto text-right">
-                      <Skeleton className="h-4 w-20" />
+                    <TableCell>
+                      <Skeleton className="h-6 w-8  ml-auto" />
                     </TableCell>
                   </TableRow>
                 ))}
