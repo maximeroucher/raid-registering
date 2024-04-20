@@ -11,6 +11,7 @@ import { InformationTab } from "./InformationTab";
 import { Skeleton } from "../ui/skeleton";
 import { DocumentTab } from "./DocumentTab";
 import { PaymentTab } from "./PaymentTab";
+import { ScrollArea } from "../ui/scroll-area";
 
 interface TeamSheetProps {
   isOpened: boolean;
@@ -50,17 +51,17 @@ export const TeamSheet = ({ isOpened, onClose, teamId }: TeamSheetProps) => {
           {isLoading ? (
             <Skeleton className="h-96 w-192 mt-6" />
           ) : (
-            <>
-              <TabsContent value="information">
+            <ScrollArea className="h-[calc(100vh-180px)] w-full mt-4">
+              <TabsContent value="information" className="mt-0">
                 {team && <InformationTab team={team} />}
               </TabsContent>
-              <TabsContent value="document">
+              <TabsContent value="document" className="mt-0">
                 {team && <DocumentTab team={team} />}
               </TabsContent>
-              <TabsContent value="payment">
+              <TabsContent value="payment" className="mt-0">
                 {team && <PaymentTab team={team} />}
               </TabsContent>
-            </>
+            </ScrollArea>
           )}
         </Tabs>
       </SheetContent>
