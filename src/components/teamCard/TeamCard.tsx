@@ -59,9 +59,12 @@ export const TeamCard = ({ team }: TeamCardProps) => {
     {
       title: "Parcours",
       value: getLabelFromValue(difficulties, team?.difficulty ?? undefined),
-      description: getLabelFromValue(difficultyDescriptions, team?.difficulty ?? undefined),
+      description: getLabelFromValue(
+        difficultyDescriptions,
+        team?.difficulty ?? undefined,
+      ),
       unit: undefined,
-    }
+    },
   ];
 
   return (
