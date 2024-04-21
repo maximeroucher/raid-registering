@@ -11,19 +11,12 @@ import {
   CardTitle,
 } from "@/src/components/ui/card";
 import { Input } from "@/src/components/ui/input";
-import { Label } from "@/src/components/ui/label";
 import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/src/components/ui/form";
+import { Form } from "@/src/components/ui/form";
+import { CreateAccountFormField } from "./CreateAccountFormField";
 
 interface RegisterProps {
   onCodeReceived: () => void;
@@ -58,21 +51,12 @@ export const Register = ({ onCodeReceived }: RegisterProps) => {
               </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-4">
-              <FormField
-                control={form.control}
+              <CreateAccountFormField
+                form={form}
                 name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <div className="grid gap-2">
-                      <FormLabel className="text-left">Email</FormLabel>
-                      <div>
-                        <FormControl>
-                          <Input placeholder="inscription@raid.fr" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </div>
-                    </div>
-                  </FormItem>
+                label="Email"
+                render={(field) => (
+                  <Input placeholder="inscription@raid.fr" {...field} />
                 )}
               />
               <Button className="w-full mt-2">
@@ -82,9 +66,7 @@ export const Register = ({ onCodeReceived }: RegisterProps) => {
                 <div className="w-full text-center text-sm">
                   Vous avez déjà un compte ?{" "}
                   <Button variant="link" className="pl-1" type="button">
-                    <Link href="/login">
-                      Connectez-vous
-                    </Link>
+                    <Link href="/login">Connectez-vous</Link>
                   </Button>
                 </div>
                 <div className="w-full text-center text-sm">

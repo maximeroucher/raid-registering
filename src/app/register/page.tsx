@@ -9,7 +9,9 @@ const RegisterPage = () => {
   return showRegister ? (
     <Register onCodeReceived={() => setShowRegister(false)} />
   ) : (
-    <ActivateAccount />
+    <ActivateAccount onCodeNotReceived={
+      () => setShowRegister(true)
+    }/>
   );
 };
 
