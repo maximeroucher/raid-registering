@@ -16,6 +16,7 @@ import { Label } from "@/src/components/ui/label";
 import { PasswordInput } from "@/src/components/ui/passwordInput";
 import { TextSeparator } from "@/src/components/ui/textSeparator";
 import MyECLButton from "../../components/login/MyECLButton";
+import Link from "next/link";
 
 const Login = () => {
   function connectOther(e: React.MouseEvent<HTMLButtonElement>) {
@@ -52,7 +53,9 @@ const Login = () => {
           </form>
         </CardContent>
         <CardFooter className="flex flex-row justify-between">
-          <Button variant="link">Créer un compte</Button>
+          <Button variant="link">
+            <Link href="/register">Créer un compte</Link>
+          </Button>
           <Button variant="link">Mot de passe oublié ?</Button>
         </CardFooter>
       </Card>
