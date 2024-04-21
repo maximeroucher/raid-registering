@@ -20,6 +20,7 @@ import { useState } from "react";
 import { TeamEdit } from "./TeamEdit";
 import {
   difficulties,
+  difficultyDescriptions,
   getLabelFromValue,
   meetingPlaces,
 } from "@/src/infra/comboboxValues";
@@ -58,7 +59,7 @@ export const TeamCard = ({ team }: TeamCardProps) => {
     {
       title: "Parcours",
       value: getLabelFromValue(difficulties, team?.difficulty ?? undefined),
-      description: "parcours exigeant",
+      description: getLabelFromValue(difficultyDescriptions, team?.difficulty ?? undefined),
       unit: undefined,
     }
   ];

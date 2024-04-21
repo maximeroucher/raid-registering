@@ -25,8 +25,15 @@ export const sizes = [
   { value: "xl", label: "XL" },
 ];
 
+export const difficultyDescriptions = [
+  { value: "discovery", label: "Accessible à tous" },
+  { value: "sports", label: "Demandant de la préparation" },
+  { value: "expert", label: "Le plus exigeant" },
+  { value: undefined, label: "Sélectionner un parcours" },
+];
+
 export function getLabelFromValue(
-  values: { value: string; label: string }[],
+  values: { value?: string; label: string }[],
   value?: string,
 ) {
   const item = values.find((item) => item.value === value);
