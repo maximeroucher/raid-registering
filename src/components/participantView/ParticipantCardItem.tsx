@@ -68,7 +68,13 @@ export const ParticipantCardItem = ({
   const valueComponent = (value: ValueType) => {
     switch (true) {
       case isBoolean(value):
-        return <Checkbox checked={value} className="col-span-4 ml-auto disabled:opacity-100" disabled />;
+        return (
+          <Checkbox
+            checked={value}
+            className="col-span-4 ml-auto disabled:opacity-100"
+            disabled
+          />
+        );
       case isSize(value):
         return (
           <div className=" col-start-6 col-span-1">
@@ -103,7 +109,12 @@ export const ParticipantCardItem = ({
                 </DialogHeader>
                 <div className="flex flex-col items-center gap-4">
                   <span className="text-gray-500 overflow-hidden m-auto">
-                    <DocumentView userId={participantId!} documentKey={key} id={value.id} file={file} />
+                    <DocumentView
+                      userId={participantId!}
+                      documentKey={key}
+                      id={value.id}
+                      file={file}
+                    />
                   </span>
                 </div>
               </DialogContent>
