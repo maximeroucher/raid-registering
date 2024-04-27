@@ -36,6 +36,7 @@ import {
   sizes,
 } from "@/src/infra/comboboxValues";
 import { ConfirmationCheckbox } from "./ConfirmationCheckbox";
+import PhoneInput from "react-phone-input-2";
 
 type ValueType =
   | string
@@ -55,6 +56,7 @@ export type Situation =
 
 export enum ValueTypes {
   STRING = "string",
+  PHONE = "phone",
   SIZE = "size",
   BOOLEAN = "boolean",
   DOCUMENT = "document",
@@ -83,7 +85,7 @@ export function EditParticipantCardItem<T extends ValueType>({
   layer,
   type,
   needDialog,
-  participantId
+  participantId,
 }: EditParticipantCardItemProps<T>) {
   const [isUploading, setIsUploading] = useState(false);
 
@@ -163,16 +165,26 @@ export function EditParticipantCardItem<T extends ValueType>({
         return (
           <Dialog open={open} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-              <Button variant="outline" className="col-span-4">
+              <Button
+                variant="outline"
+                className="col-span-4"
+                disabled={isUploading}
+              >
                 <div className="flex flex-row items-start w-full">
-                  {field.value?.id ? (
-                    <span className="text-gray-500 overflow-hidden">
-                      {"Fiche de sécurité"}
-                    </span>
+                  {isUploading ? (
+                    <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
                   ) : (
-                    <span className="font-semibold mr-6">
-                      {"Remplir la fiche de sécurité"}
-                    </span>
+                    <>
+                      {field.value?.id ? (
+                        <span className="text-gray-500 overflow-hidden">
+                          {"Fiche de sécurité"}
+                        </span>
+                      ) : (
+                        <span className="font-semibold mr-6">
+                          {"Remplir la fiche de sécurité"}
+                        </span>
+                      )}
+                    </>
                   )}
                 </div>
               </Button>
@@ -183,7 +195,11 @@ export function EditParticipantCardItem<T extends ValueType>({
                   {label}
                 </DialogTitle>
               </DialogHeader>
-              <SecurityFileDialog setIsOpen={setIsOpen} form={form} />
+              <SecurityFileDialog
+                setIsOpen={setIsOpen}
+                form={form}
+                setIsUploading={setIsUploading}
+              />
             </DialogContent>
           </Dialog>
         );
@@ -231,6 +247,22 @@ export function EditParticipantCardItem<T extends ValueType>({
               <Combobox
                 values={meetingPlaces}
                 placeholder={placeholder}
+                {...field}
+              />
+            </FormControl>
+          </div>
+        );
+      case ValueTypes.PHONE:
+        return (
+          <div className="col-span-4">
+            <FormMessage />
+            <FormControl>
+              <PhoneInput
+                country={"fr"}
+                specialLabel=""
+                placeholder="+33 6 06 06 06 06"
+                inputClass="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                dropdownClass="z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2"
                 {...field}
               />
             </FormControl>

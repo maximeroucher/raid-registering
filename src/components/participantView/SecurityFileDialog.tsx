@@ -2,19 +2,23 @@ import { useSecurityFile } from "@/src/hooks/useSecurityFile";
 import { Button } from "../ui/button";
 import { EditParticipantCardItem, ValueTypes } from "./EditParticipantCardItem";
 import { SecurityFile } from "@/src/api/hyperionSchemas";
+import { TextSeparator } from "../ui/textSeparator";
 
 interface SecurityFileDialogProps {
   setIsOpen: (value: boolean) => void;
   form: any;
+  setIsUploading: (value: boolean) => void;
 }
 
 export const SecurityFileDialog = ({
   setIsOpen,
   form,
+  setIsUploading,
 }: SecurityFileDialogProps) => {
   const { setSecurityFile } = useSecurityFile();
 
   function onValidate(_: any) {
+    setIsUploading(true);
     form.setValue("securityFile.updated", true);
     if (form.getValues("securityFile.id") === undefined) {
       form.setValue("securityFile.id", crypto.randomUUID());
@@ -22,8 +26,9 @@ export const SecurityFileDialog = ({
     const securityFile: SecurityFile = {
       ...form.getValues("securityFile"),
     };
-    console.log(securityFile);
-    setSecurityFile(securityFile, () => {});
+    setSecurityFile(securityFile, () => {
+      setIsUploading(false);
+    });
     setIsOpen(false);
   }
 
@@ -104,6 +109,27 @@ export const SecurityFileDialog = ({
         id="securityFile.family"
         form={form}
         type={ValueTypes.STRING}
+      />
+      <div className="my-4 items-center">
+        <TextSeparator text="Personne à contacter en cas d'urgence" />
+      </div>
+      <EditParticipantCardItem
+        label="Prénom"
+        id="securityFile.emergency_person.firstname"
+        form={form}
+        type={ValueTypes.STRING}
+      />
+      <EditParticipantCardItem
+        label="Nom"
+        id="securityFile.emergency_person.name"
+        form={form}
+        type={ValueTypes.STRING}
+      />
+      <EditParticipantCardItem
+        label="Téléphone"
+        id="securityFile.emergency_person.phone"
+        form={form}
+        type={ValueTypes.PHONE}
       />
       <Button className="mt-6" type="button" onClick={onValidate}>
         Valider

@@ -112,6 +112,29 @@ export const ViewEditParticipantItem = ({
         family: z.string().optional(),
         id: z.string().uuid(),
         updated: z.boolean(),
+        emergency_person: z
+          .object({
+            name: z.string().min(1, {
+              message: "Veuillez renseigner le nom de la personne à contacter",
+            }),
+            firstname: z.string().min(1, {
+              message:
+                "Veuillez renseigner le prénom de la personne à contacter",
+            }),
+            phone: z
+              .string({
+                required_error: "Veuillez renseigner un numéro de téléphone",
+                invalid_type_error:
+                  "Veuillez renseigner un numéro de téléphone",
+              })
+              .min(11, {
+                message: "Veuillez renseigner un numéro de téléphone valide",
+              })
+              .max(14, {
+                message: "Veuillez renseigner un numéro de téléphone valide",
+              }),
+          })
+          .partial(),
       })
       .partial(),
     attestationHonour: z.boolean().optional(),
@@ -134,7 +157,8 @@ export const ViewEditParticipantItem = ({
           ? getSituationTitle(participant.situation ?? undefined)
           : undefined,
       company:
-        getSituationLabel(participant.situation ?? undefined) === "corporatepartner"
+        getSituationLabel(participant.situation ?? undefined) ===
+        "corporatepartner"
           ? getSituationTitle(participant.situation ?? undefined)
           : undefined,
       diet: participant.diet ?? undefined,
@@ -161,16 +185,26 @@ export const ViewEditParticipantItem = ({
       securityFile: {
         allergy: participant?.security_file?.allergy ?? undefined,
         asthma: participant?.security_file?.asthma ?? false,
-        intensive_care_unit: participant?.security_file?.intensive_care_unit ?? false,
+        intensive_care_unit:
+          participant?.security_file?.intensive_care_unit ?? false,
         intensive_care_unit_when:
           participant?.security_file?.intensive_care_unit_when ?? undefined,
-        ongoing_treatment: participant?.security_file?.ongoing_treatment ?? undefined,
+        ongoing_treatment:
+          participant?.security_file?.ongoing_treatment ?? undefined,
         sicknesses: participant?.security_file?.sicknesses ?? undefined,
-        hospitalization: participant?.security_file?.hospitalization ?? undefined,
-        surgical_operation: participant?.security_file?.surgical_operation ?? undefined,
+        hospitalization:
+          participant?.security_file?.hospitalization ?? undefined,
+        surgical_operation:
+          participant?.security_file?.surgical_operation ?? undefined,
         trauma: participant?.security_file?.trauma ?? undefined,
         family: participant?.security_file?.family ?? undefined,
         id: participant?.security_file?.id ?? undefined,
+        emergency_person: {
+          name: participant?.security_file?.emergency_person?.name ?? undefined,
+          firstname:
+            participant?.security_file?.emergency_person?.firstname ?? undefined,
+          phone: participant?.security_file?.emergency_person?.phone ?? undefined,
+        },
       },
       attestationHonour: participant.attestation_on_honour,
     },
@@ -387,7 +421,10 @@ export const ViewEditParticipantItem = ({
             </>
           ) : (
             <>
-              <ParticipantCardItem label="Addresse" value={participant.address} />
+              <ParticipantCardItem
+                label="Addresse"
+                value={participant.address}
+              />
               <ParticipantCardItem
                 label="Taille de vélo"
                 value={participant.bike_size}
@@ -396,7 +433,10 @@ export const ViewEditParticipantItem = ({
                 label="Taille de t-shirt"
                 value={participant.t_shirt_size}
               />
-              <ParticipantCardItem label="Régime alimentaire" value={participant.diet} />
+              <ParticipantCardItem
+                label="Régime alimentaire"
+                value={participant.diet}
+              />
               {getSituation()}
               {["centrale", "otherschool"].includes(
                 getSituationLabel(participant.situation ?? undefined) ?? "",
