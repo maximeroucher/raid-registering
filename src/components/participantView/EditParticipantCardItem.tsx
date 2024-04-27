@@ -168,12 +168,12 @@ export function EditParticipantCardItem<T extends ValueType>({
               <Button
                 variant="outline"
                 className="col-span-4"
-                // disabled={isUploading}
+                disabled={isUploading}
               >
                 <div className="flex flex-row items-start w-full">
-                  {/* {isUploading ? (
+                  {isUploading ? (
                     <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-                  ) : ( */}
+                  ) : (
                     <>
                       {field.value?.id ? (
                         <span className="text-gray-500 overflow-hidden">
@@ -185,7 +185,7 @@ export function EditParticipantCardItem<T extends ValueType>({
                         </span>
                       )}
                     </>
-                  {/* )} */}
+                  )}
                 </div>
               </Button>
             </DialogTrigger>
