@@ -56,7 +56,9 @@ const Login = () => {
           <Button variant="link">
             <Link href="/register">Créer un compte</Link>
           </Button>
-          <Button variant="link">Mot de passe oublié ?</Button>
+          <Button variant="link">
+            <Link href="/recover">Mot de passe oublié ?</Link>
+          </Button>
         </CardFooter>
       </Card>
     </div>
