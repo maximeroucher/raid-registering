@@ -64,6 +64,7 @@ export const SecurityFileDialogView = ({
       <ParticipantCardItem
         label="Téléphone"
         value={file.emergency_person_phone}
+        isPhone
       />
     </div>
   );

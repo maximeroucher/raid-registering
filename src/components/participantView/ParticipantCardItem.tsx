@@ -12,6 +12,7 @@ import { Button } from "../ui/button";
 import { DocumentView } from "./DocumentView";
 import { useDocument } from "@/src/hooks/useDocument";
 import { SecurityFileDialogView } from "./SecurityFileDialogView";
+import PhoneInput from "react-phone-input-2";
 
 type ValueType =
   | string
@@ -27,12 +28,14 @@ interface ParticipantCardItemProps {
   label: string;
   value: ValueType;
   participantId?: string;
+  isPhone?: boolean;
 }
 
 export const ParticipantCardItem = ({
   label,
   value,
   participantId,
+  isPhone = false,
 }: ParticipantCardItemProps) => {
   const { getDocument } = useDocument();
   const isSize = (value: ValueType): value is Size => {
@@ -67,6 +70,18 @@ export const ParticipantCardItem = ({
 
   const valueComponent = (value: ValueType) => {
     switch (true) {
+      case isPhone && isString(value):
+        return (
+          <div className="col-span-4">
+            <PhoneInput
+              value={value}
+              country={"fr"}
+              specialLabel=""
+              inputClass="bg-transparent text-right w-full"
+              disabled
+            />
+          </div>
+        );
       case isBoolean(value):
         return (
           <Checkbox
