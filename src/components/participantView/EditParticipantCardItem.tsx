@@ -126,21 +126,17 @@ export function EditParticipantCardItem<T extends ValueType>({
                 disabled={isUploading}
               >
                 <div className="flex flex-row items-start w-full">
-                  {isUploading ? (
-                    <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-                  ) : (
-                    <>
-                      {field.value?.name ? (
-                        <span className="text-gray-500 overflow-hidden">
-                          {field.value.name ?? "Aucun fichier séléctionné"}
-                        </span>
-                      ) : (
-                        <span className="font-semibold  mr-6">
-                          Choisir un fichier
-                        </span>
-                      )}
-                    </>
-                  )}
+                  <>
+                    {field.value?.name ? (
+                      <span className="text-gray-500 overflow-hidden">
+                        {field.value.name ?? "Aucun fichier séléctionné"}
+                      </span>
+                    ) : (
+                      <span className="font-semibold  mr-6">
+                        Choisir un fichier
+                      </span>
+                    )}
+                  </>
                 </div>
               </Button>
             </DialogTrigger>

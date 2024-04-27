@@ -18,7 +18,6 @@ export const SecurityFileDialog = ({
   const { setSecurityFile } = useSecurityFile();
 
   function onValidate(_: any) {
-    setIsUploading(true);
     form.setValue("securityFile.updated", true);
     if (form.getValues("securityFile.id") === undefined) {
       form.setValue("securityFile.id", crypto.randomUUID());
@@ -26,9 +25,7 @@ export const SecurityFileDialog = ({
     const securityFile: SecurityFile = {
       ...form.getValues("securityFile"),
     };
-    setSecurityFile(securityFile, () => {
-      setIsUploading(false);
-    });
+    setSecurityFile(securityFile, () => {});
     setIsOpen(false);
   }
 
