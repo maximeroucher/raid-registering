@@ -609,6 +609,12 @@ export type DocumentType =
   | "studentCard"
   | "raidRules";
 
+export type EmergencyPerson = {
+  firstname?: string | null;
+  name?: string | null;
+  phone?: string | null;
+};
+
 export type EventApplicant = {
   name: string;
   firstname: string;
@@ -1320,6 +1326,7 @@ export type SecurityFile = {
   surgical_operation?: string | null;
   trauma?: string | null;
   family?: string | null;
+  emergency_person: EmergencyPerson | null;
   id: string;
 };
 
