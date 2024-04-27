@@ -58,12 +58,12 @@ export const SecurityFileDialogView = ({
       </div>
       <ParticipantCardItem
         label="Prénom"
-        value={file.emergency_person?.firstname}
+        value={file.emergency_person_firstname}
       />
-      <ParticipantCardItem label="Nom" value={file.emergency_person?.name} />
+      <ParticipantCardItem label="Nom" value={file.emergency_person_name} />
       <ParticipantCardItem
         label="Téléphone"
-        value={file.emergency_person?.phone}
+        value={file.emergency_person_phone}
       />
     </div>
   );

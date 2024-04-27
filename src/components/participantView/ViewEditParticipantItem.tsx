@@ -112,29 +112,23 @@ export const ViewEditParticipantItem = ({
         family: z.string().optional(),
         id: z.string().uuid(),
         updated: z.boolean(),
-        emergency_person: z
-          .object({
-            name: z.string().min(1, {
-              message: "Veuillez renseigner le nom de la personne à contacter",
-            }),
-            firstname: z.string().min(1, {
-              message:
-                "Veuillez renseigner le prénom de la personne à contacter",
-            }),
-            phone: z
-              .string({
-                required_error: "Veuillez renseigner un numéro de téléphone",
-                invalid_type_error:
-                  "Veuillez renseigner un numéro de téléphone",
-              })
-              .min(11, {
-                message: "Veuillez renseigner un numéro de téléphone valide",
-              })
-              .max(14, {
-                message: "Veuillez renseigner un numéro de téléphone valide",
-              }),
+        emergency_person_name: z.string().min(1, {
+          message: "Veuillez renseigner le nom de la personne à contacter",
+        }),
+        emergency_person_firstname: z.string().min(1, {
+          message: "Veuillez renseigner le prénom de la personne à contacter",
+        }),
+        emergency_person_phone: z
+          .string({
+            required_error: "Veuillez renseigner un numéro de téléphone",
+            invalid_type_error: "Veuillez renseigner un numéro de téléphone",
           })
-          .partial(),
+          .min(11, {
+            message: "Veuillez renseigner un numéro de téléphone valide",
+          })
+          .max(14, {
+            message: "Veuillez renseigner un numéro de téléphone valide",
+          }),
       })
       .partial(),
     attestationHonour: z.boolean().optional(),
@@ -199,12 +193,12 @@ export const ViewEditParticipantItem = ({
         trauma: participant?.security_file?.trauma ?? undefined,
         family: participant?.security_file?.family ?? undefined,
         id: participant?.security_file?.id ?? undefined,
-        emergency_person: {
-          name: participant?.security_file?.emergency_person?.name ?? undefined,
-          firstname:
-            participant?.security_file?.emergency_person?.firstname ?? undefined,
-          phone: participant?.security_file?.emergency_person?.phone ?? undefined,
-        },
+        emergency_person_name:
+          participant?.security_file?.emergency_person_name ?? undefined,
+        emergency_person_firstname:
+          participant?.security_file?.emergency_person_firstname ?? undefined,
+        emergency_person_phone:
+          participant?.security_file?.emergency_person_phone ?? undefined,
       },
       attestationHonour: participant.attestation_on_honour,
     },

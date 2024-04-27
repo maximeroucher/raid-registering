@@ -115,19 +115,19 @@ export const SecurityFileDialog = ({
       </div>
       <EditParticipantCardItem
         label="Prénom"
-        id="securityFile.emergency_person.firstname"
+        id="securityFile.emergency_person_firstname"
         form={form}
         type={ValueTypes.STRING}
       />
       <EditParticipantCardItem
         label="Nom"
-        id="securityFile.emergency_person.name"
+        id="securityFile.emergency_person_name"
         form={form}
         type={ValueTypes.STRING}
       />
       <EditParticipantCardItem
         label="Téléphone"
-        id="securityFile.emergency_person.phone"
+        id="securityFile.emergency_person_phone"
         form={form}
         type={ValueTypes.PHONE}
       />
