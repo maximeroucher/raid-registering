@@ -15669,6 +15669,9 @@ export const useCreateRecommendationRecommendationRecommendationsPost = (
 
 export type EditRecommendationRecommendationRecommendationsRecommendationIdPatchPathParams =
   {
+    /**
+     * @format uuid
+     */
     recommendationId: string;
   };
 
@@ -15742,6 +15745,9 @@ export const useEditRecommendationRecommendationRecommendationsRecommendationIdP
 
 export type DeleteRecommendationRecommendationRecommendationsRecommendationIdDeletePathParams =
   {
+    /**
+     * @format uuid
+     */
     recommendationId: string;
   };
 
@@ -15814,6 +15820,9 @@ export const useDeleteRecommendationRecommendationRecommendationsRecommendationI
 
 export type ReadRecommendationImageRecommendationRecommendationsRecommendationIdPictureGetPathParams =
   {
+    /**
+     * @format uuid
+     */
     recommendationId: string;
   };
 
@@ -15894,6 +15903,9 @@ export const useReadRecommendationImageRecommendationRecommendationsRecommendati
 
 export type CreateRecommendationImageRecommendationRecommendationsRecommendationIdPicturePostPathParams =
   {
+    /**
+     * @format uuid
+     */
     recommendationId: string;
   };
 

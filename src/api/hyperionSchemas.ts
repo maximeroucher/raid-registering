@@ -1251,6 +1251,9 @@ export type Recommendation = {
   code?: string | null;
   summary: string;
   description: string;
+  /**
+   * @format uuid
+   */
   id: string;
   /**
    * @format date-time
@@ -1341,6 +1344,7 @@ export type Team = {
   difficulty: Difficulty | null;
   meeting_place: MeetingPlace | null;
   validation_progress: number;
+  file_id: string | null;
 };
 
 export type TeamBase = {
