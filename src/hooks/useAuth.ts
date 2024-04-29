@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { stringify } from "qs";
 import {
@@ -8,7 +8,7 @@ import {
   TokenResponse,
 } from "@/src/api/hyperionSchemas";
 import { useTokenStore } from "@/src/stores/token";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useUserStore } from "../stores/user";
 import { useParticipantStore } from "../stores/particpant";
 import { useInviteTokenStore } from "../stores/inviteTokenStore";
@@ -23,6 +23,7 @@ const backUrl: string =
 const scopes: string[] = ["API"];
 
 export const useAuth = () => {
+  const pathname = usePathname();
   const [isLoading, setIsLoading] = useState(false);
   const { token, setToken, refreshToken, setRefreshToken, userId } =
     useTokenStore();
@@ -169,7 +170,11 @@ export const useAuth = () => {
       }
     } else {
       setIsLoading(false);
-      router.replace("/login");
+      if (
+        !["/login", "/recover", "register"].includes(pathname ?? "")
+      ) {
+        router.replace("/login");
+      }
     }
     return token;
   }
