@@ -17,6 +17,11 @@ import { TextSeparator } from "../ui/textSeparator";
 import { Form } from "../ui/form";
 import { PasswordInput } from "../ui/passwordInput";
 import { CreateAccountFormField } from "../createAccount/CreateAccountFormField";
+import { useRecoverPassword } from "@/src/hooks/useRecoverPassword";
+import { useRouter } from "next/navigation";
+import { LoadingButton } from "../ui/loadingButton";
+import { toast } from "../ui/use-toast";
+import { Input } from "../ui/input";
 
 interface RecoverPasswordProps {
   onCodeNotReceived: () => void;
@@ -25,6 +30,8 @@ interface RecoverPasswordProps {
 export const RecoverPassword = ({
   onCodeNotReceived,
 }: RecoverPasswordProps) => {
+  const { resetPassword, isResetLoading } = useRecoverPassword();
+  const router = useRouter();
   const formSchema = z
     .object({
       activation_code: z
@@ -58,7 +65,15 @@ export const RecoverPassword = ({
     resolver: zodResolver(formSchema),
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {}
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    resetPassword(values.password, values.activation_code, () => {
+      toast({
+        title: "Mot de passe réinitialisé",
+        description: "Votre mot de passe a été réinitialisé avec succès",
+      });
+      router.replace("/login");
+    });
+  }
 
   return (
     <Form {...form}>
@@ -80,23 +95,7 @@ export const RecoverPassword = ({
                     form={form}
                     name="activation_code"
                     label="Code d'activation"
-                    render={(field) => (
-                      <InputOTP
-                        maxLength={8}
-                        pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
-                        {...field}
-                      >
-                        <InputOTPGroup className="w-full">
-                          {[...Array(8)].map((_, index) => (
-                            <InputOTPSlot
-                              index={index}
-                              key={index}
-                              className="w-full"
-                            />
-                          ))}
-                        </InputOTPGroup>
-                      </InputOTP>
-                    )}
+                    render={(field) => <Input {...field} />}
                   />
                 </div>
                 <TextSeparator text="Nouveau mot de passe" />
@@ -112,9 +111,12 @@ export const RecoverPassword = ({
                   label="Confirmer le mot de passe"
                   render={(field) => <PasswordInput {...field} />}
                 />
-                <Button type="submit" className="w-full mt-2">
-                  Réinitialiser le mot de passe
-                </Button>
+                <LoadingButton
+                  type="submit"
+                  className="w-full mt-2"
+                  label="Réinitialiser le mot de passe"
+                  isLoading={isResetLoading}
+                />
                 <div className="flex flex-row">
                   <div className="w-full text-center text-sm">
                     Vous avez déjà un compte ?{" "}

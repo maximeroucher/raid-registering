@@ -17,12 +17,16 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Form } from "@/src/components/ui/form";
 import { CreateAccountFormField } from "../createAccount/CreateAccountFormField";
+import { LoadingButton } from "../ui/loadingButton";
+import { useRecoverPassword } from "@/src/hooks/useRecoverPassword";
+import { toast } from "../ui/use-toast";
 
 interface AskMailProps {
   onCodeReceived: () => void;
 }
 
 export const AskMail = ({ onCodeReceived }: AskMailProps) => {
+  const { recoverPassword, isRecoverLoading } = useRecoverPassword();
   const formSchema = z.object({
     email: z
       .string({
@@ -37,7 +41,16 @@ export const AskMail = ({ onCodeReceived }: AskMailProps) => {
     resolver: zodResolver(formSchema),
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {}
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    recoverPassword(values.email, () => {
+      toast({
+        title: "Email envoyé",
+        description:
+          "Un email vous a été envoyé pour réinitialiser votre mot de passe",
+      });
+      onCodeReceived();
+    });
+  }
 
   return (
     <Form {...form}>
@@ -45,7 +58,9 @@ export const AskMail = ({ onCodeReceived }: AskMailProps) => {
         <div className="flex [&>div]:w-full h-screen">
           <Card className="rounded-xl border bg-card text-card-foreground shadow max-w-[700px] m-auto text-zinc-700">
             <CardHeader>
-              <CardTitle className="text-2xl">{"Réinitialiser le mot de passe"}</CardTitle>
+              <CardTitle className="text-2xl">
+                {"Réinitialiser le mot de passe"}
+              </CardTitle>
               <CardDescription>
                 {"Entrez votre email pour commencer"}
               </CardDescription>
@@ -59,9 +74,13 @@ export const AskMail = ({ onCodeReceived }: AskMailProps) => {
                   <Input placeholder="inscription@raid.fr" {...field} />
                 )}
               />
-              <Button className="w-full mt-2">
-                {"Recevoir le code de réinitialisation"}
-              </Button>
+              <LoadingButton
+                type="submit"
+                className="w-full mt-2"
+                label={"Recevoir le code de réinitialisation"}
+                isLoading={isRecoverLoading}
+              />
+
               <div className="flex flex-row">
                 <div className="w-full text-center text-sm">
                   Vous avez déjà un compte ?{" "}
