@@ -63,17 +63,6 @@ export const ActivateAccount = ({
         .min(6, {
           message: "Le mot de passe doit contenir au moins 6 caractères",
         }),
-      confirmPassword: z
-        .string({
-          required_error: "Veuillez confirmer le mot de passe",
-        })
-        .min(6, {
-          message: "Le mot de passe doit contenir au moins 6 caractères",
-        }),
-    })
-    .refine((data) => data.password === data.confirmPassword, {
-      message: "Les mots de passe ne correspondent pas",
-      path: ["confirmPassword"],
     });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -140,12 +129,6 @@ export const ActivateAccount = ({
                   label="Mot de passe"
                   render={(field) => <PasswordInput {...field} />}
                 />
-                <CreateAccountFormField
-                    form={form}
-                    name="confirmPassword"
-                    label="Confirmer le mot de passe"
-                    render={(field) => <PasswordInput {...field} />}
-                    />
                 <Button type="submit" className="w-full mt-2">
                   Créer le compte
                 </Button>
