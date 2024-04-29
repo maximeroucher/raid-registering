@@ -14,6 +14,8 @@ import { useParticipantStore } from "../stores/particpant";
 import { useInviteTokenStore } from "../stores/inviteTokenStore";
 import { useQuery } from "@tanstack/react-query";
 import { useCodeVerifierStore } from "../stores/codeVerifier";
+import { set } from "date-fns";
+import { useTokenAuthTokenPost } from "../api/hyperionComponents";
 
 const clientId: string = "RaidRegistering";
 const redirectUrlHost: string =
@@ -161,18 +163,14 @@ export const useAuth = () => {
     setIsLoading(true);
     if (typeof window === "undefined") return null;
     if (token !== null) {
-      if (isTokenExpired()) {
-        refreshTokens();
-      } else {
+      if (!isTokenExpired()) {
         setIsLoading(false);
-        setIsTokenQueried(true);
         console.log("is token queried", isTokenQueried);
       }
+      setIsTokenQueried(true);
     } else {
       setIsLoading(false);
-      if (
-        !["/login", "/recover", "/register"].includes(pathname ?? "")
-      ) {
+      if (!["/login", "/recover", "/register"].includes(pathname ?? "")) {
         router.replace("/login");
       }
     }
@@ -183,6 +181,9 @@ export const useAuth = () => {
     console.log("looking to refresh token");
     if (timer.current) {
       clearTimeout(timer.current);
+    }
+    if (token === null) {
+      return null;
     }
     console.log("token", token ? JSON.parse(atob(token.split(".")[1])).exp : 0);
     const timeToRefreshToken =
