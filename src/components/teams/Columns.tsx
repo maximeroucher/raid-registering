@@ -77,6 +77,9 @@ export const columns: ColumnDef<TeamPreview>[] = [
       );
     },
     enableSorting: false,
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id));
+    },
   },
   {
     accessorKey: "difficulty",

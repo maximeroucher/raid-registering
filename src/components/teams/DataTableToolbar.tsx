@@ -1,23 +1,24 @@
-"use client"
+"use client";
 
-import { Cross2Icon } from "@radix-ui/react-icons"
-import { Table } from "@tanstack/react-table"
+import { Cross2Icon } from "@radix-ui/react-icons";
+import { Table } from "@tanstack/react-table";
 
-import { Button } from "../ui/button"
-import { Input } from "../ui/input"
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 
-import { DataTableFacetedFilter } from "./DataTableFacetedFilter"
-import { DataTableViewOptions } from "./DataTableViewOptions"
-import { difficulties, meetingPlaces } from "@/src/infra/comboboxValues"
+import { DataTableFacetedFilter } from "./DataTableFacetedFilter";
+import { DataTableViewOptions } from "./DataTableViewOptions";
+import { difficulties, meetingPlaces } from "@/src/infra/comboboxValues";
+import { DataTableFilterCheckBox } from "./DataTableFilterCheckBox";
 
 interface DataTableToolbarProps<TData> {
-  table: Table<TData>
+  table: Table<TData>;
 }
 
 export function DataTableToolbar<TData>({
   table,
 }: DataTableToolbarProps<TData>) {
-  const isFiltered = table.getState().columnFilters.length > 0
+  const isFiltered = table.getState().columnFilters.length > 0;
 
   return (
     <div className="flex items-center justify-between">
@@ -44,6 +45,12 @@ export function DataTableToolbar<TData>({
             options={meetingPlaces}
           />
         )}
+        {table.getColumn("second") && (
+          <DataTableFilterCheckBox
+            column={table.getColumn("second")}
+            title="Equipe sans coéquipier"
+          />
+        )}
         {isFiltered && (
           <Button
             variant="ghost"
@@ -57,5 +64,5 @@ export function DataTableToolbar<TData>({
       </div>
       <DataTableViewOptions table={table} />
     </div>
-  )
+  );
 }
