@@ -1367,8 +1367,6 @@ export type ReadGroupsGroupsGetVariables = HyperionContext["fetcherOptions"];
 
 /**
  * Return all groups from database as a list of dictionaries
- *
- * **This endpoint is only usable by administrators**
  */
 export const fetchReadGroupsGroupsGet = (
   variables: ReadGroupsGroupsGetVariables,
@@ -1385,8 +1383,6 @@ export const fetchReadGroupsGroupsGet = (
 
 /**
  * Return all groups from database as a list of dictionaries
- *
- * **This endpoint is only usable by administrators**
  */
 export const useReadGroupsGroupsGet = <TData = ReadGroupsGroupsGetResponse>(
   variables: ReadGroupsGroupsGetVariables,
@@ -8230,7 +8226,7 @@ export type GetSectionsCampaignSectionsGetVariables =
 /**
  * Return sections in the database as a list of `schemas_campaign.SectionBase`
  *
- * **The user must be a member of a group authorised to vote (voters) or a member of the group CAA to use this endpoint**
+ * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
  */
 export const fetchGetSectionsCampaignSectionsGet = (
   variables: GetSectionsCampaignSectionsGetVariables,
@@ -8248,7 +8244,7 @@ export const fetchGetSectionsCampaignSectionsGet = (
 /**
  * Return sections in the database as a list of `schemas_campaign.SectionBase`
  *
- * **The user must be a member of a group authorised to vote (voters) or a member of the group CAA to use this endpoint**
+ * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
  */
 export const useGetSectionsCampaignSectionsGet = <
   TData = GetSectionsCampaignSectionsGetResponse
@@ -8426,7 +8422,7 @@ export type GetListsCampaignListsGetVariables =
 /**
  * Return campaign lists registered for the vote.
  *
- * **The user must be a member of a group authorised to vote (voters) or a member of the group CAA to use this endpoint**
+ * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
  */
 export const fetchGetListsCampaignListsGet = (
   variables: GetListsCampaignListsGetVariables,
@@ -8444,7 +8440,7 @@ export const fetchGetListsCampaignListsGet = (
 /**
  * Return campaign lists registered for the vote.
  *
- * **The user must be a member of a group authorised to vote (voters) or a member of the group CAA to use this endpoint**
+ * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
  */
 export const useGetListsCampaignListsGet = <
   TData = GetListsCampaignListsGetResponse
@@ -8748,7 +8744,7 @@ export type GetVotersCampaignVotersGetVariables =
   HyperionContext["fetcherOptions"];
 
 /**
- * Return the voters (groups allowed to vorte) for the current campaign.
+ * Return the voters (groups allowed to vote) for the current campaign.
  */
 export const fetchGetVotersCampaignVotersGet = (
   variables: GetVotersCampaignVotersGetVariables,
@@ -8764,7 +8760,7 @@ export const fetchGetVotersCampaignVotersGet = (
   >({ url: "/campaign/voters", method: "get", ...variables, signal });
 
 /**
- * Return the voters (groups allowed to vorte) for the current campaign.
+ * Return the voters (groups allowed to vote) for the current campaign.
  */
 export const useGetVotersCampaignVotersGet = <
   TData = GetVotersCampaignVotersGetResponse
@@ -9289,7 +9285,7 @@ export type GetSectionsAlreadyVotedCampaignVotesGetVariables =
 /**
  * Return the list of id of sections an user has already voted for.
  *
- * **The user must be a member of a group authorised to vote (voters) to use this endpoint**
+ * **The user must be a member of a group authorized to vote (voters) to use this endpoint**
  */
 export const fetchGetSectionsAlreadyVotedCampaignVotesGet = (
   variables: GetSectionsAlreadyVotedCampaignVotesGetVariables,
@@ -9307,7 +9303,7 @@ export const fetchGetSectionsAlreadyVotedCampaignVotesGet = (
 /**
  * Return the list of id of sections an user has already voted for.
  *
- * **The user must be a member of a group authorised to vote (voters) to use this endpoint**
+ * **The user must be a member of a group authorized to vote (voters) to use this endpoint**
  */
 export const useGetSectionsAlreadyVotedCampaignVotesGet = <
   TData = GetSectionsAlreadyVotedCampaignVotesGetResponse
@@ -9358,7 +9354,7 @@ export type VoteCampaignVotesPostVariables = {
  *
  * An user can only vote for one list per section.
  *
- * **The user must be a member of a group authorised to vote (voters) to use this endpoint**
+ * **The user must be a member of a group authorized to vote (voters) to use this endpoint**
  */
 export const fetchVoteCampaignVotesPost = (
   variables: VoteCampaignVotesPostVariables,
@@ -9378,7 +9374,7 @@ export const fetchVoteCampaignVotesPost = (
  *
  * An user can only vote for one list per section.
  *
- * **The user must be a member of a group authorised to vote (voters) to use this endpoint**
+ * **The user must be a member of a group authorized to vote (voters) to use this endpoint**
  */
 export const useVoteCampaignVotesPost = (
   options?: Omit<
@@ -9413,7 +9409,7 @@ export type GetResultsCampaignResultsGetVariables =
 /**
  * Return the results of the vote.
  *
- * **The user must be a member of a group authorised to vote (voters) or a member of the group CAA to use this endpoint**
+ * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
  */
 export const fetchGetResultsCampaignResultsGet = (
   variables: GetResultsCampaignResultsGetVariables,
@@ -9431,7 +9427,7 @@ export const fetchGetResultsCampaignResultsGet = (
 /**
  * Return the results of the vote.
  *
- * **The user must be a member of a group authorised to vote (voters) or a member of the group CAA to use this endpoint**
+ * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
  */
 export const useGetResultsCampaignResultsGet = <
   TData = GetResultsCampaignResultsGetResponse
@@ -9477,7 +9473,7 @@ export type GetStatusVoteCampaignStatusGetVariables =
 /**
  * Get the current status of the vote.
  *
- * **The user must be a member of a group authorised to vote (voters) or a member of the group CAA to use this endpoint**
+ * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
  */
 export const fetchGetStatusVoteCampaignStatusGet = (
   variables: GetStatusVoteCampaignStatusGetVariables,
@@ -9495,7 +9491,7 @@ export const fetchGetStatusVoteCampaignStatusGet = (
 /**
  * Get the current status of the vote.
  *
- * **The user must be a member of a group authorised to vote (voters) or a member of the group CAA to use this endpoint**
+ * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
  */
 export const useGetStatusVoteCampaignStatusGet = <TData = Schemas.VoteStatus>(
   variables: GetStatusVoteCampaignStatusGetVariables,
@@ -9693,7 +9689,7 @@ export type ReadCampaignsLogoCampaignListsListIdLogoGetVariables = {
 
 /**
  * Get the logo of a campaign list.
- * **The user must be a member of a group authorised to vote (voters) or a member of the group CAA to use this endpoint**
+ * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
  */
 export const fetchReadCampaignsLogoCampaignListsListIdLogoGet = (
   variables: ReadCampaignsLogoCampaignListsListIdLogoGetVariables,
@@ -9715,7 +9711,7 @@ export const fetchReadCampaignsLogoCampaignListsListIdLogoGet = (
 
 /**
  * Get the logo of a campaign list.
- * **The user must be a member of a group authorised to vote (voters) or a member of the group CAA to use this endpoint**
+ * **The user must be a member of a group authorized to vote (voters) or a member of the group CAA to use this endpoint**
  */
 export const useReadCampaignsLogoCampaignListsListIdLogoGet = <
   TData = undefined

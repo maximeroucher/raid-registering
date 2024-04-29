@@ -16,7 +16,9 @@ export type AccountType =
   | "39691052-2ae5-4e12-99d0-7a9f5f2b0136"
   | "ab4c7503-41b3-11ee-8177-089798f1a4a5"
   | "703056c4-be9d-475c-aa51-b7fc62a96aaa"
-  | "29751438-103c-42f2-b09b-33fbb20758a7";
+  | "29751438-103c-42f2-b09b-33fbb20758a7"
+  | "b1cd979e-ecc1-4bd0-bc2b-4dad2ba8cded"
+  | "ae4d1866-e7d9-4d7f-bee7-e0dda24d8dd8";
 
 export type AdvertBase = {
   title: string;
@@ -416,6 +418,10 @@ export type CoreBatchMembership = {
 export type CoreBatchUserCreateRequest = {
   email: string;
   account_type: AccountType;
+  /**
+   * @default false
+   */
+  external?: boolean;
 };
 
 /**
@@ -514,6 +520,12 @@ export type CoreUserActivateRequest = {
  */
 export type CoreUserCreateRequest = {
   email: string;
+  /**
+   * Allow Hyperion to create an external user. Without this, Hyperion will only allow non external students to be created. The email address will be used to determine if the user should be external or not. An external user may not have an ECL email address, he won't be able to access most features.
+   *
+   * @default false
+   */
+  accept_external?: boolean;
 };
 
 /**
@@ -544,6 +556,7 @@ export type CoreUserUpdateAdmin = {
   birthday?: string | null;
   phone?: string | null;
   floor?: FloorsType | null;
+  external?: boolean | null;
 };
 
 export type Decision = "approved" | "declined" | "pending";
