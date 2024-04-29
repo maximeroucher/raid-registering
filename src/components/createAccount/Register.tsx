@@ -17,12 +17,16 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Form } from "@/src/components/ui/form";
 import { CreateAccountFormField } from "./CreateAccountFormField";
+import { LoadingButton } from "../ui/loadingButton";
+import { useAccountCreation } from "@/src/hooks/useCreateAccount";
+import { toast } from "../ui/use-toast";
 
 interface RegisterProps {
   onCodeReceived: () => void;
 }
 
 export const Register = ({ onCodeReceived }: RegisterProps) => {
+  const { registerAccount, isRegisteringLoading } = useAccountCreation();
   const formSchema = z.object({
     email: z
       .string({
@@ -37,7 +41,15 @@ export const Register = ({ onCodeReceived }: RegisterProps) => {
     resolver: zodResolver(formSchema),
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {}
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    registerAccount(values.email, () => {
+      toast({
+        title: "Email envoyé",
+        description: "Un email vous a été envoyé pour activer votre compte",
+      });
+      onCodeReceived();
+    });
+  }
 
   return (
     <Form {...form}>
@@ -59,9 +71,12 @@ export const Register = ({ onCodeReceived }: RegisterProps) => {
                   <Input placeholder="inscription@raid.fr" {...field} />
                 )}
               />
-              <Button className="w-full mt-2">
-                {"Commencer à créer le compte"}
-              </Button>
+              <LoadingButton
+                className="w-full mt-2"
+                isLoading={isRegisteringLoading}
+                type="submit"
+                label="Commencer à créer le compte"
+              />
               <div className="flex flex-row">
                 <div className="w-full text-center text-sm">
                   Vous avez déjà un compte ?{" "}

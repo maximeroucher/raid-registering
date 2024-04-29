@@ -25,6 +25,11 @@ import {
 } from "../ui/form";
 import { PasswordInput } from "../ui/passwordInput";
 import { CreateAccountFormField } from "./CreateAccountFormField";
+import { LoadingButton } from "../ui/loadingButton";
+import { useAccountCreation } from "@/src/hooks/useCreateAccount";
+import { toast } from "../ui/use-toast";
+import { CoreUserActivateRequest } from "@/src/api/hyperionSchemas";
+import { useRouter } from "next/navigation";
 
 interface ActivateAccountProps {
   onCodeNotReceived: () => void;
@@ -33,43 +38,59 @@ interface ActivateAccountProps {
 export const ActivateAccount = ({
   onCodeNotReceived,
 }: ActivateAccountProps) => {
-  const formSchema = z
-    .object({
-      activation_code: z
-        .string({
-          required_error: "Veuillez renseigner le code d'activation",
-        })
-        .min(8, {
-          message: "Le code d'activation doit contenir 8 caractères",
-        }),
-      firstname: z
-        .string({
-          required_error: "Veuillez renseigner votre prénom",
-        })
-        .min(1, {
-          message: "Veuillez renseigner votre prénom",
-        }),
-      name: z
-        .string({
-          required_error: "Veuillez renseigner votre nom",
-        })
-        .min(1, {
-          message: "Veuillez renseigner votre nom",
-        }),
-      password: z
-        .string({
-          required_error: "Veuillez renseigner un mot de passe",
-        })
-        .min(6, {
-          message: "Le mot de passe doit contenir au moins 6 caractères",
-        }),
-    });
+  const { activateAccount, isActivationLoading } = useAccountCreation();
+  const router = useRouter();
+  const formSchema = z.object({
+    activation_code: z
+      .string({
+        required_error: "Veuillez renseigner le code d'activation",
+      })
+      .min(8, {
+        message: "Le code d'activation doit contenir 8 caractères",
+      }),
+    firstname: z
+      .string({
+        required_error: "Veuillez renseigner votre prénom",
+      })
+      .min(1, {
+        message: "Veuillez renseigner votre prénom",
+      }),
+    name: z
+      .string({
+        required_error: "Veuillez renseigner votre nom",
+      })
+      .min(1, {
+        message: "Veuillez renseigner votre nom",
+      }),
+    password: z
+      .string({
+        required_error: "Veuillez renseigner un mot de passe",
+      })
+      .min(6, {
+        message: "Le mot de passe doit contenir au moins 6 caractères",
+      }),
+  });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {}
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    const body: CoreUserActivateRequest = {
+      activation_token: values.activation_code,
+      firstname: values.firstname,
+      name: values.name,
+      password: values.password,
+      floor: "Exte",
+    };
+    activateAccount(body, () => {
+      toast({
+        title: "Compte créé",
+        description: "Votre compte a été créé avec succès",
+      });
+      router.replace("/login");
+    });
+  }
 
   return (
     <Form {...form}>
@@ -89,23 +110,7 @@ export const ActivateAccount = ({
                     form={form}
                     name="activation_code"
                     label="Code d'activation"
-                    render={(field) => (
-                      <InputOTP
-                        maxLength={8}
-                        pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
-                        {...field}
-                      >
-                        <InputOTPGroup className="w-full">
-                          {[...Array(8)].map((_, index) => (
-                            <InputOTPSlot
-                              index={index}
-                              key={index}
-                              className="w-full"
-                            />
-                          ))}
-                        </InputOTPGroup>
-                      </InputOTP>
-                    )}
+                    render={(field) => <Input {...field} />}
                   />
                 </div>
                 <TextSeparator text="Informations du compte" />
@@ -129,9 +134,12 @@ export const ActivateAccount = ({
                   label="Mot de passe"
                   render={(field) => <PasswordInput {...field} />}
                 />
-                <Button type="submit" className="w-full mt-2">
-                  Créer le compte
-                </Button>
+                <LoadingButton
+                  type="submit"
+                  className="w-full mt-2"
+                  label={"Créer le compte"}
+                  isLoading={isActivationLoading}
+                />
                 <div className="flex flex-row">
                   <div className="w-full text-center text-sm">
                     Vous avez déjà un compte ?{" "}

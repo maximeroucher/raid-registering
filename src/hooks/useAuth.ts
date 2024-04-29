@@ -171,7 +171,7 @@ export const useAuth = () => {
     } else {
       setIsLoading(false);
       if (
-        !["/login", "/recover", "register"].includes(pathname ?? "")
+        !["/login", "/recover", "/register"].includes(pathname ?? "")
       ) {
         router.replace("/login");
       }
