@@ -9,20 +9,11 @@ import {
   CardTitle,
 } from "@/src/components/ui/card";
 import { Input } from "@/src/components/ui/input";
-import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp";
-import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { TextSeparator } from "../ui/textSeparator";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "../ui/form";
+import { Form } from "../ui/form";
 import { PasswordInput } from "../ui/passwordInput";
 import { CreateAccountFormField } from "./CreateAccountFormField";
 import { LoadingButton } from "../ui/loadingButton";
