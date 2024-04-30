@@ -98,6 +98,13 @@ export const ViewEditUserInfo = ({
       });
       setIsEdit(!isEdit);
       setIsOpen(false);
+      form.reset({
+        firstname: values?.firstname,
+        name: values?.name,
+        email: values?.email,
+        phone: getPhone(values?.phone ?? ""),
+        birthday: values?.birthday ? toDate(values?.birthday) : undefined,
+      })
     });
   }
 
