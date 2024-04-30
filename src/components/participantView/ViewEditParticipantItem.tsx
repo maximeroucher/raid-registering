@@ -333,7 +333,10 @@ export const ViewEditParticipantItem = ({
 
   function getSituation() {
     const situation = getSituationLabel(participant.situation ?? undefined);
-    const title = getSituationTitle(participant.situation ?? undefined);
+    let title: string | null = getSituationTitle(participant.situation ?? undefined);
+    if (title === "undefined") {
+      title = null;
+    }
     return (
       <>
         <ParticipantCardItem
