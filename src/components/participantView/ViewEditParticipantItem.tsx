@@ -251,7 +251,70 @@ export const ViewEditParticipantItem = ({
       });
       refetchTeam();
       setIsEdit(!isEdit);
-      form.reset();
+      form.reset({
+        address: values.address ?? undefined,
+        bikeSize: values.bikeSize?.toLowerCase() ?? undefined,
+        tShirtSize: values.tShirtSize?.toLowerCase() ?? undefined,
+        situation: getSituationLabel(values.situation ?? undefined),
+        other:
+          getSituationLabel(values.situation ?? undefined) === "other"
+            ? getSituationTitle(values.situation ?? undefined)
+            : undefined,
+        otherSchool:
+          getSituationLabel(values.situation ?? undefined) === "otherschool"
+            ? getSituationTitle(values.situation ?? undefined)
+            : undefined,
+        company:
+          getSituationLabel(values.situation ?? undefined) ===
+          "corporatepartner"
+            ? getSituationTitle(values.situation ?? undefined)
+            : undefined,
+        diet: values.diet ?? undefined,
+        idCard: {
+          name: values.idCard?.name ?? undefined,
+          id: values.idCard?.id ?? undefined,
+          type: "idCard",
+        },
+        medicalCertificate: {
+          name: values.medicalCertificate?.name ?? undefined,
+          id: values.medicalCertificate?.id ?? undefined,
+          type: "medicalCertificate",
+        },
+        studentCard: {
+          name: values.studentCard?.name ?? undefined,
+          id: values.studentCard?.id ?? undefined,
+          type: "studentCard",
+        },
+        raidRules: {
+          name: values.raidRules?.name ?? undefined,
+          id: values.raidRules?.id ?? undefined,
+          type: "raidRules",
+        },
+        securityFile: {
+          allergy: values?.securityFile?.allergy ?? undefined,
+          asthma: values?.securityFile?.asthma ?? false,
+          intensive_care_unit:
+            values?.securityFile?.intensive_care_unit ?? false,
+          intensive_care_unit_when:
+            values?.securityFile?.intensive_care_unit_when ?? undefined,
+          ongoing_treatment:
+            values?.securityFile?.ongoing_treatment ?? undefined,
+          sicknesses: values?.securityFile?.sicknesses ?? undefined,
+          hospitalization: values?.securityFile?.hospitalization ?? undefined,
+          surgical_operation:
+            values?.securityFile?.surgical_operation ?? undefined,
+          trauma: values?.securityFile?.trauma ?? undefined,
+          family: values?.securityFile?.family ?? undefined,
+          id: values?.securityFile?.id ?? undefined,
+          emergency_person_name:
+            values?.securityFile?.emergency_person_name ?? undefined,
+          emergency_person_firstname:
+            values?.securityFile?.emergency_person_firstname ?? undefined,
+          emergency_person_phone:
+            values?.securityFile?.emergency_person_phone ?? undefined,
+        },
+        attestationHonour: values.attestationHonour,
+      });
     });
   }
 
