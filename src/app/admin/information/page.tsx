@@ -1,6 +1,7 @@
 "use client";
 
 import { TopBar } from "@/src/components/admin/TopBar";
+import { CardLayout } from "@/src/components/information/CardLayout";
 import { InscriptionEnd } from "@/src/components/information/InscriptionEnd";
 import { PaymentLink } from "@/src/components/information/PaymentLink";
 import { RaidDate } from "@/src/components/information/RaidDate";
@@ -37,6 +38,15 @@ const InformationPage = () => {
               <InscriptionEnd />
               <RaidDate />
               <PaymentLink />
+              <CardLayout label="Lien des dossiers d'inscription">
+                <></>
+              </CardLayout>
+              <CardLayout label="Lien des fiches sécu">
+                <></>
+              </CardLayout>
+              <CardLayout label="Capacité maximale">
+                <></>
+              </CardLayout>
             </div>
           </CardContent>
         </Card>
