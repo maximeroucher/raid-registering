@@ -21,6 +21,7 @@ import {
 import { Skeleton } from "../ui/skeleton";
 import { TeamPreview } from "@/src/api/hyperionSchemas";
 import { CircularProgressBar } from "../ui/circularProgressBar";
+import { useRouter } from "next/navigation";
 
 interface TeamsPreviewProps {
   teams?: TeamPreview[];
@@ -28,6 +29,12 @@ interface TeamsPreviewProps {
 }
 
 export const TeamsPreview = ({ teams, isLoading }: TeamsPreviewProps) => {
+  const router = useRouter();
+
+  function onTeamClick(teamId: string) {
+    router.push("/admin/teams?teamId=" + teamId);
+  }
+
   return (
     <Card className="xl:col-span-2">
       <CardHeader className="flex flex-row items-center">
@@ -61,7 +68,7 @@ export const TeamsPreview = ({ teams, isLoading }: TeamsPreviewProps) => {
               <>
                 {[...Array(5)].map((_, index) => (
                   <TableRow key={index}>
-                    <TableCell className="h-20">
+                    <TableCell className="h-[78px]">
                       <Skeleton className="h-6 w-24" />
                     </TableCell>
                     {[...Array(3)].map((_, index) => (
@@ -70,7 +77,7 @@ export const TeamsPreview = ({ teams, isLoading }: TeamsPreviewProps) => {
                       </TableCell>
                     ))}
                     <TableCell>
-                      <Skeleton className="h-6 w-8  ml-auto" />
+                      <Skeleton className="h-6 w-8 ml-auto" />
                     </TableCell>
                   </TableRow>
                 ))}
@@ -93,14 +100,14 @@ export const TeamsPreview = ({ teams, isLoading }: TeamsPreviewProps) => {
                       team.captain.number_of_document +
                       (team.second?.number_of_document ?? 0);
                     return (
-                      <TableRow key={team.id}>
-                        <TableCell>{team.name}</TableCell>
+                      <TableRow
+                        key={team.id}
+                        onClick={() => onTeamClick(team.id)}
+                      >
+                        <TableCell className="h-[78px]">{team.name}</TableCell>
                         <TableCell className="max-md:hidden">
                           <div className="font-medium">
                             {team.captain?.firstname} {team.captain?.name}
-                          </div>
-                          <div className="text-sm text-muted-foreground max-md:hidden">
-                            {team.captain?.email}
                           </div>
                         </TableCell>
                         <TableCell className="max-md:hidden">
@@ -108,9 +115,6 @@ export const TeamsPreview = ({ teams, isLoading }: TeamsPreviewProps) => {
                             <>
                               <div className="font-medium">
                                 {team.second.firstname} {team.second.name}
-                              </div>
-                              <div className="text-sm text-muted-foreground max-md:hidden">
-                                {team.second.email}
                               </div>
                             </>
                           ) : (
@@ -120,7 +124,7 @@ export const TeamsPreview = ({ teams, isLoading }: TeamsPreviewProps) => {
                           )}
                         </TableCell>
                         <TableCell className="max-md:hidden">
-                          <div className="flex w-[150px] items-center">
+                          <div className="flex items-center w-[110px]">
                             <Badge variant="outline">
                               <CircularProgressBar
                                 value={

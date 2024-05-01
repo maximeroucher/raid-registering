@@ -28,7 +28,7 @@ const Dashboard = () => {
     {
       title: "Participants inscrits",
       value: allParticipants?.length.toString() || "0",
-      description: "personnes ayant commencé leur inscription",
+      description: "inscription débutée",
       unit: undefined,
     },
     {
@@ -67,7 +67,7 @@ const Dashboard = () => {
             <TeamInfoCard info={info} key={info.title} isLoaded={!isLoading} />
           ))}
         </div>
-        <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-4 md:gap-8 xl:grid-cols-3">
           <TeamsPreview teams={teams} isLoading={isLoading} />
           <StatsView teams={teams} isLoading={isLoading} />
         </div>
