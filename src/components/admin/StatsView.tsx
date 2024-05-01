@@ -21,25 +21,27 @@ interface StatsViewProps {
 
 export const StatsView = ({ teams, isLoading }: StatsViewProps) => {
   const [seeAll, setSeeAll] = useState(false);
-  const { difficultyData, meetingPlaceData, bikeSizeData, tShirtSizeData, situationData } =
-    getStats(seeAll, teams);
+  const {
+    difficultyData,
+    meetingPlaceData,
+    bikeSizeData,
+    tShirtSizeData,
+    situationData,
+  } = getStats(seeAll, teams);
   return (
     <Card>
-      <CardHeader className="flex flex-row items-center justify-between">
-        <div className="grid gap-2">
+      <CardHeader className="flex flex-col items-center justify-between">
+        <div className="flex flex-row justify-between w-full">
           <CardTitle>Statistiques</CardTitle>
-          <CardDescription>
-            {seeAll
-              ? "Porte sur toutes les équipes"
-              : "Ne porte que sur les équipes validées"}
-          </CardDescription>
-        </div>
-        <div className="items-center space-x-2 grid gap-2">
           <Switch
-            id="airplane-mode"
             checked={seeAll}
             onCheckedChange={setSeeAll}
           />
+        </div>
+        <div className="ml-auto">
+          <CardDescription>
+            {seeAll ? "Toutes les équipes" : "Equipes validées"}
+          </CardDescription>
         </div>
       </CardHeader>
       <CardContent>
