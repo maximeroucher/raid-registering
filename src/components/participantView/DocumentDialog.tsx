@@ -13,7 +13,7 @@ interface DocumentDialogProps {
   setIsOpen: (value: boolean) => void;
   setIsUploading: (value: boolean) => void;
   field: ControllerRenderProps<FieldValues, string>;
-  id: string;
+  key: string;
   documentId?: string;
   participantId: string;
 }
@@ -22,7 +22,7 @@ export const DocumentDialog = ({
   setIsUploading,
   setIsOpen,
   field,
-  id,
+  key,
   documentId,
   participantId,
 }: DocumentDialogProps) => {
@@ -34,7 +34,7 @@ export const DocumentDialog = ({
     documentId: docId,
   } = useDocument();
   const { setDocument } = useDocumentsStore();
-  const file = getDocument(participantId, id);
+  const file = getDocument(participantId, key);
   const [image, setImage] = useState<File | undefined>(file);
   const [isLoading, setIsLoading] = useState(data?.size === undefined);
   if (
@@ -47,7 +47,7 @@ export const DocumentDialog = ({
   }
 
   if (data?.size !== undefined && isLoading) {
-    setDocument(participantId, id, field.value.id, data);
+    setDocument(participantId, key, field.value.id, data);
     setImage(data);
     setIsLoading(false);
   }
@@ -92,15 +92,14 @@ export const DocumentDialog = ({
                 const file = files[0];
                 const documentId = crypto.randomUUID();
                 setIsUploading(true);
-                uploadDocument(file, id, documentId, participantId, () => {
+                uploadDocument(file, key, documentId, participantId, () => {
                   field.onChange({
                     name: file.name,
                     id: documentId,
-                    type: id,
+                    type: key,
                     updated: true,
                   });
-                  console.log("setDocument", participantId, id, documentId);
-                  setDocument(participantId, id, documentId, file);
+                  setDocument(participantId, key, documentId, file);
                   setDocumentId(documentId);
                   setIsUploading(false);
                 });
