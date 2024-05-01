@@ -48,6 +48,7 @@ export const ParticipantInfoTab = ({
         </CardDescription>
       </CardHeader>
       <CardContent>
+        <ParticipantCardItem label="Email" value={participant.email} />
         <ParticipantCardItem label="Addresse" value={participant.address} />
         <ParticipantCardItem
           label="Taille de vélo"
