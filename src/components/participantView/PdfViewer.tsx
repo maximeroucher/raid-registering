@@ -32,7 +32,7 @@ export const PdfViewer = ({ file }: PdfViewerProps) => {
       onLoadSuccess={onDocumentLoadSuccess}
       options={options}
       loading={<Skeleton className="w-full h-80" />}
-      className="h-full w-full overflow-y-scroll"
+      className="w-full aspect-auto overflow-y-scroll"
     >
       {Array.from(new Array(numPages), (el, index) => (
         <Page
