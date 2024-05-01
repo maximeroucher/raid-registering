@@ -34,7 +34,7 @@ export const DocumentDialog = ({
     documentId: docId,
   } = useDocument();
   const { setDocument } = useDocumentsStore();
-  const file = getDocument(participantId, field.value?.id);
+  const file = getDocument(participantId, id);
   const [image, setImage] = useState<File | undefined>(file);
   const [isLoading, setIsLoading] = useState(data?.size === undefined);
   if (
@@ -99,6 +99,9 @@ export const DocumentDialog = ({
                     type: id,
                     updated: true,
                   });
+                  console.log("setDocument", participantId, id, documentId);
+                  setDocument(participantId, id, documentId, file);
+                  setDocumentId(documentId);
                   setIsUploading(false);
                 });
               }}
