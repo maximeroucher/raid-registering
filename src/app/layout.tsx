@@ -11,6 +11,7 @@ import { Toaster } from "../components/ui/toaster";
 import { toast } from "../components/ui/use-toast";
 import { Suspense } from "react";
 import { ThemeProvider } from "../components/ui/theme";
+import PlausibleProvider from 'next-plausible';
 
 const inter = Outfit({ subsets: ["latin-ext"] });
 
@@ -34,6 +35,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <PlausibleProvider domain="raid-registering.myecl.fr" />
+      </head>
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"

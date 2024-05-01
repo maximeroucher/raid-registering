@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
+
+const { withPlausibleProxy } = require("next-plausible");
+
 const nextConfig = {
   output: "export",
   webpack: (config, { isServer }) => {
@@ -7,4 +10,6 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withPlausibleProxy({
+  customDomain: "https://plausible.eclair.ec-lyon.fr",
+})(nextConfig);
