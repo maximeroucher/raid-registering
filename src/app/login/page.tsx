@@ -15,11 +15,6 @@ import MyECLButton from "../../components/login/MyECLButton";
 import Link from "next/link";
 
 const Login = () => {
-  function connectOther(e: React.MouseEvent<HTMLButtonElement>) {
-    e.preventDefault();
-    console.log("The link was clicked.");
-  }
-
   return (
     <div className="flex [&>div]:w-full h-screen">
       <Card className="rounded-xl border bg-card text-card-foreground shadow max-w-[700px] m-auto text-zinc-700">
