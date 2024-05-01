@@ -1,5 +1,6 @@
 import { SecurityFile } from "@/src/api/hyperionSchemas";
 import { ParticipantCardItem } from "./ParticipantCardItem";
+import { TextSeparator } from "../ui/textSeparator";
 
 interface SecurityFileDialogViewProps {
   file: SecurityFile;
@@ -51,6 +52,20 @@ export const SecurityFileDialogView = ({
       />
       <ParticipantCardItem label="Traumatisme" value={file.trauma} />
       <ParticipantCardItem label="Antécédents familiaux" value={file.family} />
+
+      <div className="my-4 items-center">
+        <TextSeparator text="Personne à contacter en cas d'urgence" />
+      </div>
+      <ParticipantCardItem
+        label="Prénom"
+        value={file.emergency_person_firstname}
+      />
+      <ParticipantCardItem label="Nom" value={file.emergency_person_name} />
+      <ParticipantCardItem
+        label="Téléphone"
+        value={file.emergency_person_phone}
+        isPhone
+      />
     </div>
   );
 };

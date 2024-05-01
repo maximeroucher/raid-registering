@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
 import { useInviteTokenStore } from "@/src/stores/inviteTokenStore";
 import { useInviteToken } from "@/src/hooks/useInviteToken";
 import { useTeam } from "@/src/hooks/useTeam";
-import { ReloadIcon } from "@radix-ui/react-icons";
+import { LoadingButton } from "../ui/loadingButton";
 
 interface JoinTeamDialogProps {
   isOpened: boolean;
@@ -44,21 +44,15 @@ export const JoinTeamDialog = ({
           équipe.
         </DialogDescription>
         <div className="flex justify-end mt-2 space-x-4">
-          <Button variant="outline" onClick={closeDialog}>
+          <Button variant="outline" onClick={closeDialog} disabled={isJoinLoading}>
             Annuler
           </Button>
-
-          <Button
+          <LoadingButton
+            isLoading={isJoinLoading}
             onClick={onJoinTeam}
-            disabled={isJoinLoading}
+            label="Rejoindre l'équipe"
             className="w-[140px]"
-          >
-            {isJoinLoading ? (
-              <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-            ) : (
-              "Rejoindre l'équipe"
-            )}
-          </Button>
+          />
         </div>
       </DialogContent>
     </Dialog>

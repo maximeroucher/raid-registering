@@ -2,19 +2,20 @@ import { useQueryClient } from "@tanstack/react-query";
 import {
   useCreateDocumentRaidParticipantParticipantIdDocumentPost,
   useReadDocumentRaidDocumentDocumentIdGet,
+  useValidateDocumentRaidDocumentDocumentIdValidatePost,
 } from "../api/hyperionComponents";
-import { useTokenStore } from "../stores/token";
 import { DocumentCreation } from "../api/hyperionSchemas";
 import axios from "axios";
 import { useDocumentsStore } from "../stores/documents";
 import { useState } from "react";
+import { useAuth } from "./useAuth";
 
 export const useDocument = () => {
   const backUrl: string =
     process.env.NEXT_PUBLIC_BACKEND_URL || "https://hyperion.myecl.fr";
   const queryClient = useQueryClient();
-  const { token, userId } = useTokenStore();
-  const { documents, setDocument, setId } = useDocumentsStore();
+  const { token, userId } = useAuth();
+  const { documents, setDocument } = useDocumentsStore();
   const [documentId, setDocumentId] = useState<string>("");
 
   const { mutate: mutateAssignDocument } =
@@ -46,6 +47,7 @@ export const useDocument = () => {
     file: File,
     key: string,
     documentId: string,
+    participantId: string,
     callback: () => void,
   ) => {
     const formData = new FormData();
@@ -63,7 +65,7 @@ export const useDocument = () => {
             return query.queryHash === "getDocument";
           },
         });
-        setDocument(key, documentId!, file);
+        setDocument(participantId, key, documentId!, file);
         callback();
       });
   };
@@ -83,8 +85,29 @@ export const useDocument = () => {
       },
     );
 
-  const getDocument = (key: string) => {
-    return documents[key]?.file;
+  const { mutate: mutateValidateDocument, isPending: isValidationLoading } =
+    useValidateDocumentRaidDocumentDocumentIdValidatePost();
+
+  const validateDocument = (documentId: string, callback: () => void) => {
+    const body = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      pathParams: {
+        documentId: documentId,
+      },
+    };
+    mutateValidateDocument(body, {
+      onSettled: () => {
+        callback();
+      },
+    });
+  };
+
+  const getDocument = (userId: string, key: string) => {
+    if (key === "" || key === undefined) return undefined;
+    if (documents[userId!] === undefined) return undefined;
+    return documents[userId!][key]?.file;
   };
 
   return {
@@ -95,6 +118,8 @@ export const useDocument = () => {
     refetch,
     isLoading: isPending,
     setDocumentId,
-    isIdSet: documentId !== "",
+    documentId,
+    validateDocument,
+    isValidationLoading,
   };
 };

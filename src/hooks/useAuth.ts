@@ -1,20 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { stringify } from "qs";
 import {
   BodyTokenAuthTokenPost,
   TokenResponse,
 } from "@/src/api/hyperionSchemas";
-import { useQuery } from "@tanstack/react-query";
 import { useTokenStore } from "@/src/stores/token";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useUserStore } from "../stores/user";
 import { useParticipantStore } from "../stores/particpant";
 import { useInviteTokenStore } from "../stores/inviteTokenStore";
+import { useQuery } from "@tanstack/react-query";
+import { useCodeVerifierStore } from "../stores/codeVerifier";
+import { set } from "date-fns";
+import { useTokenAuthTokenPost } from "../api/hyperionComponents";
 
-const clientId: string = "Titan";
+const clientId: string = "RaidRegistering";
 const redirectUrlHost: string =
   process.env.NEXT_PUBLIC_REDIRECT_URL || "https://myecl.fr/static.html";
 const backUrl: string =
@@ -22,13 +25,19 @@ const backUrl: string =
 const scopes: string[] = ["API"];
 
 export const useAuth = () => {
+  const pathname = usePathname();
   const [isLoading, setIsLoading] = useState(false);
-  const { token, setToken, refreshToken, setRefreshToken } = useTokenStore();
+  const { token, setToken, refreshToken, setRefreshToken, userId } =
+    useTokenStore();
   const { resetUser } = useUserStore();
   const { resetParticipant } = useParticipantStore();
   const { resetInviteToken } = useInviteTokenStore();
   const [isTokenQueried, setIsTokenQueried] = useState(false);
   const router = useRouter();
+  const { codeVerifier, setCodeVerifier, resetCodeVerifier } =
+    useCodeVerifierStore();
+  const timer = useRef<NodeJS.Timeout | null>(null);
+  const REFRESH_TOKEN_BUFFER = 60;
 
   function generateRandomString(length: number): string {
     var result = "";
@@ -57,25 +66,34 @@ export const useAuth = () => {
   }
 
   async function getToken(params: BodyTokenAuthTokenPost) {
+    setIsLoading(true);
     const body = stringify(params);
     const headers = {
       "Content-Type": "application/x-www-form-urlencoded",
       Accept: "application/json",
     };
-    const result = await axios.post(`${backUrl}/auth/token`, body, {
-      headers: headers,
-    });
-    if (result.status != 200) {
+    try {
+      const result = await axios.post(`${backUrl}/auth/token`, body, {
+        headers: headers,
+      });
+      if (result.status != 200) {
+        setIsLoading(false);
+        return;
+      }
+      const tokenResponse: TokenResponse = result.data;
       setIsLoading(false);
-      return;
+      setToken(tokenResponse.access_token);
+      setRefreshToken(tokenResponse.refresh_token);
+    } catch (error) {
+      console.error(error);
+      setIsLoading(false);
+      logout();
     }
-    const tokenResponse: TokenResponse = result.data;
-    setIsLoading(false);
-    setToken(tokenResponse.access_token);
-    setRefreshToken(tokenResponse.refresh_token);
   }
 
   async function refreshTokens(): Promise<string | null> {
+    if (isLoading) return null;
+    setIsLoading(true);
     console.log("refreshing tokens");
     if (refreshToken) {
       const params: BodyTokenAuthTokenPost = {
@@ -95,76 +113,45 @@ export const useAuth = () => {
       ? JSON.parse(atob(token.split(".")[1])).exp
       : 0;
     const now = Math.floor(Date.now() / 1000);
-    return access_token_expires < now;
+    return access_token_expires < now - 60;
   }
 
-  async function getTokenFromRequest(popupWindow: Window | null) {
-    const codeVerifier = generateRandomString(128);
+  async function login(code: string, callback?: () => void) {
+    console.log("logging in", isLoading);
+    if (!codeVerifier || isLoading) {
+      console.error("Code verifier not set");
+      return;
+    }
+    const params: BodyTokenAuthTokenPost = {
+      grant_type: "authorization_code",
+      client_id: clientId,
+      code: code,
+      redirect_uri: redirectUrlHost,
+      code_verifier: codeVerifier,
+    };
+    await getToken(params);
+    setIsTokenQueried(true);
+    if (callback) callback();
+    resetCodeVerifier();
+  }
 
+  async function getTokenFromRequest() {
+    setIsLoading(true);
+    const code = generateRandomString(128);
+    setCodeVerifier(code);
     const authUrl = `${backUrl}/auth/authorize?client_id=${clientId}&response_type=code&scope=${scopes.join(
       " ",
     )}&redirect_uri=${redirectUrlHost}&code_challenge=${await hash(
-      codeVerifier,
+      code,
     )}&code_challenge_method=S256`;
 
-    setIsLoading(true);
-    const POPUP_HEIGHT = 900;
-    const POPUP_WIDTH = 800;
-    // To fix issues with window.screen in multi-monitor setups, the easier option is to
-    // center the pop-up over the parent window.
-    const top = window.outerHeight / 2 + window.screenY - POPUP_HEIGHT / 2;
-    const left = window.outerWidth / 2 + window.screenX - POPUP_WIDTH / 2;
-    popupWindow = window.open(
-      authUrl,
-      "Hyperion",
-      `height=${POPUP_HEIGHT},width=${POPUP_WIDTH},top=${top},left=${left},scrollbars=yes`,
-    );
-
-    const interval = setInterval(() => {
-      try {
-        if (popupWindow && popupWindow.closed) {
-          clearInterval(interval);
-          setIsLoading(false);
-        }
-      } catch (e) {
-        console.error(e);
-      }
-    }, 1000);
-
-    function login(data: string) {
-      const receivedUri = new URL(data);
-      const code = receivedUri.searchParams.get("code");
-      if (popupWindow) {
-        popupWindow.close();
-        popupWindow = null;
-      }
-
-      const params: BodyTokenAuthTokenPost = {
-        grant_type: "authorization_code",
-        client_id: clientId,
-        code: code,
-        redirect_uri: redirectUrlHost,
-        code_verifier: codeVerifier,
-      };
-      getToken(params);
-    }
-
-    window.addEventListener("message", (event) => {
-      const data = event.data;
-      if (
-        data !== null &&
-        data !== undefined &&
-        new URL(data).searchParams.get("code") !== null
-      ) {
-        login(data);
-      }
-    });
+    window.location.href = authUrl;
   }
 
   function logout() {
     setToken(null);
     setRefreshToken(null);
-    setIsTokenQueried(true);
+    setIsTokenQueried(false);
     router.replace("/login");
     resetUser();
     resetParticipant();
@@ -172,35 +159,74 @@ export const useAuth = () => {
   }
 
   async function getTokenFromStorage(): Promise<string | null> {
+    console.log("getting token from storage");
+    if (isLoading) return null;
     setIsLoading(true);
     if (typeof window === "undefined") return null;
     if (token !== null) {
-      if (isTokenExpired()) {
-        refreshTokens();
-      } else {
-        setToken(token);
+      if (!isTokenExpired()) {
         setIsLoading(false);
+        console.log("is token queried", isTokenQueried);
       }
+      setIsTokenQueried(true);
     } else {
       setIsLoading(false);
-      router.replace("/login");
+      if (!["/login", "/recover", "/register"].includes(pathname ?? "")) {
+        router.replace("/login");
+      }
     }
-    setIsTokenQueried(true);
+    return token;
+  }
+
+  function lookToRefreshToken() {
+    console.log("looking to refresh token");
+    if (timer.current) {
+      clearTimeout(timer.current);
+    }
+    if (token === null) {
+      return null;
+    }
+    console.log("token", token ? JSON.parse(atob(token.split(".")[1])).exp : 0);
+    const timeToRefreshToken =
+      (token ? JSON.parse(atob(token.split(".")[1])).exp : 0) * 1000 -
+      Date.now() -
+      REFRESH_TOKEN_BUFFER * 1000;
+    console.log("time to refresh token", timeToRefreshToken);
+
+    if (timeToRefreshToken <= 0) {
+      // server call to update app state with new token and new expirationDate
+      refreshTokens();
+    } else {
+      timer.current = setTimeout(() => {
+        refreshTokens();
+        timer.current = null;
+      }, timeToRefreshToken);
+    }
     return token;
   }
 
   useQuery({
-    queryKey: ["getTokenFromStorage"],
-    queryFn: getTokenFromStorage,
+    queryKey: ["lookToRefreshToken"],
+    queryFn: () => lookToRefreshToken(),
     retry: 0,
+    enabled: isTokenQueried,
   });
 
   useQuery({
-    queryKey: ["refreshToken"],
-    queryFn: refreshTokens,
+    queryKey: ["getTokenFromStorage"],
+    queryFn: () => getTokenFromStorage(),
     retry: 0,
-    enabled: isTokenExpired(),
+    enabled: !isTokenQueried,
   });
 
-  return { getTokenFromRequest, isLoading, token, isTokenQueried, logout };
+  return {
+    getTokenFromRequest,
+    isLoading,
+    token,
+    isTokenQueried,
+    logout,
+    userId,
+    isTokenExpired,
+    login,
+  };
 };

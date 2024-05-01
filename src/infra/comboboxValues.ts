@@ -1,5 +1,5 @@
 export const situations = [
-  { value: "centrale", label: "Centrale" },
+  { value: "centrale", label: "Centrale Lyon" },
   { value: "otherschool", label: "Autre école" },
   { value: "corporatepartner", label: "Partenaire entreprise" },
   { value: "other", label: "Autre" },
@@ -12,7 +12,7 @@ export const difficulties = [
 ];
 
 export const meetingPlaces = [
-  { value: "centrale", label: "Centrale" },
+  { value: "centrale", label: "Centrale Lyon" },
   { value: "bellecour", label: "Bellecour" },
   { value: "anyway", label: "Peu importe" },
 ];
@@ -25,8 +25,15 @@ export const sizes = [
   { value: "xl", label: "XL" },
 ];
 
+export const difficultyDescriptions = [
+  { value: "discovery", label: "Accessible à tous" },
+  { value: "sports", label: "Demandant de la préparation" },
+  { value: "expert", label: "Le plus exigeant" },
+  { value: undefined, label: "Sélectionner un parcours" },
+];
+
 export function getLabelFromValue(
-  values: { value: string; label: string }[],
+  values: { value?: string; label: string }[],
   value?: string,
 ) {
   const item = values.find((item) => item.value === value);

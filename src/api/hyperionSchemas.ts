@@ -16,7 +16,9 @@ export type AccountType =
   | "39691052-2ae5-4e12-99d0-7a9f5f2b0136"
   | "ab4c7503-41b3-11ee-8177-089798f1a4a5"
   | "703056c4-be9d-475c-aa51-b7fc62a96aaa"
-  | "29751438-103c-42f2-b09b-33fbb20758a7";
+  | "29751438-103c-42f2-b09b-33fbb20758a7"
+  | "b1cd979e-ecc1-4bd0-bc2b-4dad2ba8cded"
+  | "ae4d1866-e7d9-4d7f-bee7-e0dda24d8dd8";
 
 export type AdvertBase = {
   title: string;
@@ -75,6 +77,28 @@ export type Applicant = {
   phone?: string | null;
 };
 
+export type AssociationBase = {
+  name: string;
+  kind: Kinds;
+  mandate_year: number;
+  description?: string | null;
+};
+
+export type AssociationComplete = {
+  name: string;
+  kind: Kinds;
+  mandate_year: number;
+  description?: string | null;
+  id: string;
+};
+
+export type AssociationEdit = {
+  name?: string | null;
+  kind?: Kinds | null;
+  description?: string | null;
+  mandate_year?: number | null;
+};
+
 /**
  * Return a dictionary of {key: error message} indicating which element of failed.
  */
@@ -104,6 +128,14 @@ export type BodyCreateAdvertImageAdvertAdvertsAdvertIdPicturePost = {
    */
   image: Blob;
 };
+
+export type BodyCreateAssociationLogoPhonebookAssociationsAssociationIdPicturePost =
+  {
+    /**
+     * @format binary
+     */
+    image: Blob;
+  };
 
 export type BodyCreateCampaignsLogoCampaignListsListIdLogoPost = {
   /**
@@ -139,6 +171,14 @@ export type BodyCreatePrizePictureTombolaPrizesPrizeIdPicturePost = {
    */
   image: Blob;
 };
+
+export type BodyCreateRecommendationImageRecommendationRecommendationsRecommendationIdPicturePost =
+  {
+    /**
+     * @format binary
+     */
+    image: Blob;
+  };
 
 export type BodyLoginForAccessTokenAuthSimpleTokenPost = {
   grant_type?: string | null;
@@ -378,6 +418,10 @@ export type CoreBatchMembership = {
 export type CoreBatchUserCreateRequest = {
   email: string;
   account_type: AccountType;
+  /**
+   * @default false
+   */
+  external?: boolean;
 };
 
 /**
@@ -476,6 +520,12 @@ export type CoreUserActivateRequest = {
  */
 export type CoreUserCreateRequest = {
   email: string;
+  /**
+   * Allow Hyperion to create an external user. Without this, Hyperion will only allow non external students to be created. The email address will be used to determine if the user should be external or not. An external user may not have an ECL email address, he won't be able to access most features.
+   *
+   * @default false
+   */
+  accept_external?: boolean;
 };
 
 /**
@@ -506,6 +556,7 @@ export type CoreUserUpdateAdmin = {
   birthday?: string | null;
   phone?: string | null;
   floor?: FloorsType | null;
+  external?: boolean | null;
 };
 
 export type Decision = "approved" | "declined" | "pending";
@@ -770,6 +821,18 @@ export type ItemUpdate = {
   suggested_lending_duration?: number | null;
 };
 
+export type Kinds =
+  | "Comit\u00E9"
+  | "Section AE"
+  | "Club AE"
+  | "Section USE"
+  | "Club USE"
+  | "Asso ind\u00E9";
+
+export type KindsReturn = {
+  kinds: Kinds[];
+};
+
 /**
  * Base schema for a list.
  */
@@ -834,6 +897,7 @@ export type Loan = {
   caution?: string | null;
   id: string;
   returned: boolean;
+  returned_date: string | null;
   items_qty: ItemQuantity[];
   borrower: CoreUserSimple;
   loaner: Loaner;
@@ -926,6 +990,39 @@ export type ManagerUpdate = {
 
 export type MeetingPlace = "centrale" | "bellecour" | "anyway";
 
+export type MemberComplete = {
+  name: string;
+  firstname: string;
+  nickname?: string | null;
+  id: string;
+  email: string;
+  phone?: string | null;
+  promo?: number | null;
+  memberships: MembershipComplete[];
+};
+
+export type MembershipBase = {
+  user_id: string;
+  association_id: string;
+  mandate_year: number;
+  role_name: string;
+  role_tags?: string | null;
+};
+
+export type MembershipComplete = {
+  user_id: string;
+  association_id: string;
+  mandate_year: number;
+  role_name: string;
+  role_tags?: string | null;
+  id: string;
+};
+
+export type MembershipEdit = {
+  role_name?: string | null;
+  role_tags?: string | null;
+};
+
 export type Message = {
   /**
    * A context represents a topic. There can only by one notification per context.
@@ -947,7 +1044,7 @@ export type Message = {
    */
   delivery_datetime?: string | null;
   /**
-   * @format date
+   * @format date-time
    */
   expire_on: string;
 };
@@ -1021,10 +1118,15 @@ export type Participant = {
   birthday: string;
   phone: string;
   email: string;
-  address: string | null;
   bike_size: Size | null;
   t_shirt_size: Size | null;
   situation: string | null;
+  validation_progress: number;
+  payment: boolean;
+  number_of_document: number;
+  number_of_validated_document: number;
+  id: string;
+  address: string | null;
   other_school?: string | null;
   company?: string | null;
   diet?: string | null;
@@ -1034,8 +1136,6 @@ export type Participant = {
   student_card?: Document | null;
   raid_rules?: Document | null;
   attestation_on_honour: boolean;
-  payment: boolean;
-  id: string;
 };
 
 export type ParticipantBase = {
@@ -1047,6 +1147,24 @@ export type ParticipantBase = {
   birthday: string;
   phone: string;
   email: string;
+};
+
+export type ParticipantPreview = {
+  name: string;
+  firstname: string;
+  /**
+   * @format date
+   */
+  birthday: string;
+  phone: string;
+  email: string;
+  bike_size: Size | null;
+  t_shirt_size: Size | null;
+  situation: string | null;
+  validation_progress: number;
+  payment: boolean;
+  number_of_document: number;
+  number_of_validated_document: number;
 };
 
 export type ParticipantUpdate = {
@@ -1141,9 +1259,42 @@ export type RaffleStats = {
 
 export type RaffleStatusType = "creation" | "open" | "lock";
 
+export type Recommendation = {
+  title: string;
+  code?: string | null;
+  summary: string;
+  description: string;
+  /**
+   * @format uuid
+   */
+  id: string;
+  /**
+   * @format date-time
+   */
+  creation: string;
+};
+
+export type RecommendationBase = {
+  title: string;
+  code?: string | null;
+  summary: string;
+  description: string;
+};
+
+export type RecommendationEdit = {
+  title?: string | null;
+  code?: string | null;
+  summary?: string | null;
+  description?: string | null;
+};
+
 export type ResetPasswordRequest = {
   reset_token: string;
   new_password: string;
+};
+
+export type RoleTagsReturn = {
+  tags: string[];
 };
 
 export type RoomBase = {
@@ -1182,6 +1333,9 @@ export type SecurityFile = {
   surgical_operation?: string | null;
   trauma?: string | null;
   family?: string | null;
+  emergency_person_firstname?: string | null;
+  emergency_person_name?: string | null;
+  emergency_person_phone?: string | null;
   id: string;
 };
 
@@ -1205,6 +1359,8 @@ export type Team = {
   second: Participant | null;
   difficulty: Difficulty | null;
   meeting_place: MeetingPlace | null;
+  validation_progress: number;
+  file_id: string | null;
 };
 
 export type TeamBase = {
@@ -1215,9 +1371,11 @@ export type TeamPreview = {
   name: string;
   id: string;
   number: number | null;
-  captain: ParticipantBase;
-  second: ParticipantBase | null;
+  captain: ParticipantPreview;
+  second: ParticipantPreview | null;
   difficulty: Difficulty | null;
+  meeting_place: MeetingPlace | null;
+  validation_progress: number;
 };
 
 export type TeamUpdate = {

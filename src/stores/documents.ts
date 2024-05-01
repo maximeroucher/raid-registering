@@ -7,48 +7,25 @@ interface DocumentInfo {
 }
 
 interface DocumentsStore {
-  documents: Record<string, DocumentInfo>;
-  setDocument: (key: string, id: string, file: File) => void;
-  setId: (key: string, id: string) => void;
+  documents: Record<string, Record<string, DocumentInfo>>;
+  setDocument: (userId: string, key: string, id: string, file: File) => void;
 }
 
 export const useDocumentsStore = create<DocumentsStore>()(
   devtools(
     persist(
       (set) => ({
-        documents: [
-          "idCard",
-          "medicalCertificate",
-          "raidRules",
-          "studentCard",
-        ].reduce(
-          (acc, key) => {
-            acc[key] = {
-              id: undefined,
-              file: undefined,
-            };
-            return acc;
-          },
-          {} as Record<string, DocumentInfo>,
-        ),
-        setDocument: (key: string, id: string, file: File) => {
+        documents: {},
+        setDocument: (userId: string, key: string, id: string, file: File) => {
           set((state) => ({
             documents: {
               ...state.documents,
-              [key]: {
-                id: id,
-                file: file,
-              },
-            },
-          }));
-        },
-        setId: (key: string, id: string) => {
-          set((state) => ({
-            documents: {
-              ...state.documents,
-              [key]: {
-                ...state.documents[key],
-                id: id,
+              [userId]: {
+                ...state.documents[userId],
+                [key]: {
+                  id: id,
+                  file: file,
+                },
               },
             },
           }));

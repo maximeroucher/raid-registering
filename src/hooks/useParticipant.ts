@@ -5,14 +5,16 @@ import {
   useUpdateParticipantRaidParticipantsParticipantIdPatch,
   UpdateParticipantRaidParticipantsParticipantIdPatchVariables,
 } from "@/src/api/hyperionComponents";
-import { useTokenStore } from "@/src/stores/token";
 import { useQueryClient } from "@tanstack/react-query";
 import { ParticipantBase, ParticipantUpdate } from "../api/hyperionSchemas";
 import { useParticipantStore } from "../stores/particpant";
 import { useTeam } from "./useTeam";
+import { useUser } from "./useUser";
+import { useAuth } from "./useAuth";
 
 export const useParticipant = () => {
-  const { token, userId } = useTokenStore();
+  const { token, userId, isTokenExpired } = useAuth();
+  const { isAdmin } = useUser();
   const queryClient = useQueryClient();
   const { participant, setParticipant } = useParticipantStore();
   const { refetchTeam } = useTeam();
@@ -32,7 +34,7 @@ export const useParticipant = () => {
       },
     },
     {
-      enabled: userId !== null && participant === undefined,
+      enabled: userId !== null && participant === undefined && !isAdmin() && !isTokenExpired(),
       retry: 0,
       queryHash: "getParticipantById",
     },
@@ -77,6 +79,7 @@ export const useParticipant = () => {
 
   const updateParticipant = (
     participant: ParticipantUpdate,
+    participantId: string,
     callback: () => void,
   ) => {
     const body: UpdateParticipantRaidParticipantsParticipantIdPatchVariables = {
@@ -85,7 +88,7 @@ export const useParticipant = () => {
         Authorization: `Bearer ${token}`,
       },
       pathParams: {
-        participantId: userId!,
+        participantId: participantId,
       },
     };
     mutateUpdateParticipant(body, {

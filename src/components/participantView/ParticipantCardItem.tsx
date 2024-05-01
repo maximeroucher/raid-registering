@@ -12,6 +12,7 @@ import { Button } from "../ui/button";
 import { DocumentView } from "./DocumentView";
 import { useDocument } from "@/src/hooks/useDocument";
 import { SecurityFileDialogView } from "./SecurityFileDialogView";
+import PhoneInput from "react-phone-input-2";
 
 type ValueType =
   | string
@@ -26,11 +27,15 @@ type ValueType =
 interface ParticipantCardItemProps {
   label: string;
   value: ValueType;
+  participantId?: string;
+  isPhone?: boolean;
 }
 
 export const ParticipantCardItem = ({
   label,
   value,
+  participantId,
+  isPhone = false,
 }: ParticipantCardItemProps) => {
   const { getDocument } = useDocument();
   const isSize = (value: ValueType): value is Size => {
@@ -65,26 +70,44 @@ export const ParticipantCardItem = ({
 
   const valueComponent = (value: ValueType) => {
     switch (true) {
+      case isPhone && isString(value):
+        return (
+          <div className="col-span-4">
+            <PhoneInput
+              value={value}
+              country={"fr"}
+              specialLabel=""
+              inputClass="bg-transparent text-right w-full"
+              disabled
+            />
+          </div>
+        );
       case isBoolean(value):
-        return <Checkbox checked={value} className="col-span-4 ml-auto" />;
+        return (
+          <Checkbox
+            checked={value}
+            className="col-span-4 ml-auto disabled:opacity-100"
+            disabled
+          />
+        );
       case isSize(value):
         return (
           <div className=" col-start-6 col-span-1">
-            <div className="bg-zinc-200 px-2 rounded-md w-8 flex justify-center ml-auto">
+            <div className="bg-zinc-200 px-2 rounded-md w-8 flex justify-center ml-auto dark:bg-zinc-700">
               <span>{value}</span>
             </div>
           </div>
         );
       case isDocument(value):
         const key = value.type as string;
-        const file = getDocument(key);
+        const file = getDocument(participantId!, key);
         return (
-          <div className="flex flex-row w-full justify-end items-center h-6 col-span-4">
+          <div className="flex flex-row justify-end items-center h-6 col-span-4 w-4/5 ml-auto">
             <Dialog>
               <DialogTrigger asChild>
                 <Button
                   variant={null}
-                  className="pl-auto max-w-full bg-zinc-200"
+                  className="ml-auto max-w-full bg-zinc-200"
                 >
                   <div className="flex flex-row items-start max-w-full">
                     <span className="text-gray-500 overflow-hidden">
@@ -101,12 +124,17 @@ export const ParticipantCardItem = ({
                 </DialogHeader>
                 <div className="flex flex-col items-center gap-4">
                   <span className="text-gray-500 overflow-hidden m-auto">
-                    <DocumentView documentKey={key} id={value.id} file={file} />
+                    <DocumentView
+                      userId={participantId!}
+                      documentKey={key}
+                      id={value.id}
+                      file={file}
+                    />
                   </span>
                 </div>
               </DialogContent>
             </Dialog>
-            <Checkbox checked={value.validated} className="ml-8" />
+            <Checkbox checked={value.validated} className="ml-4" />
           </div>
         );
       case isSecurityFile(value):
@@ -133,7 +161,7 @@ export const ParticipantCardItem = ({
                 </div>
               </DialogContent>
             </Dialog>
-            <Checkbox checked={true} className="ml-8" />
+            <Checkbox checked={true} className="ml-4" />
           </div>
         );
       case isString(value):

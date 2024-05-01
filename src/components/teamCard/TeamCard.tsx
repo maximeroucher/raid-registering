@@ -10,15 +10,21 @@ import {
 } from "../ui/card";
 import { Skeleton } from "../ui/skeleton";
 import { Button } from "../ui/button";
-import { HiPencil, HiX, HiCalendar, HiMap } from "react-icons/hi";
+import {
+  HiPencil,
+  HiX,
+  HiOutlineCalendar,
+  HiOutlineLocationMarker,
+} from "react-icons/hi";
 import { useState } from "react";
 import { TeamEdit } from "./TeamEdit";
 import {
   difficulties,
+  difficultyDescriptions,
   getLabelFromValue,
   meetingPlaces,
 } from "@/src/infra/comboboxValues";
-import { calculateTeamProgress } from "@/src/infra/teamUtils";
+import { TeamInfoCard } from "./TeamInfoCard";
 
 interface TeamCardProps {
   team?: Team;
@@ -33,40 +39,31 @@ export const TeamCard = ({ team }: TeamCardProps) => {
 
   const information = [
     {
-      title: "Date",
-      value: "06-07 octobre",
-      description: "week-end complet",
-      unit: <HiCalendar className="h-4 w-4" />,
-    },
-    {
       title: "Lieu de rendez-vous",
       value: getLabelFromValue(meetingPlaces, team?.meeting_place ?? undefined),
       description: "lieu de départ et d'arrivée",
-      unit: <HiMap className="h-4 w-4" />,
+      unit: <HiOutlineLocationMarker className="h-4 w-4" />,
+    },
+    {
+      title: "Date",
+      value: "06-07 octobre",
+      description: "week-end complet",
+      unit: <HiOutlineCalendar className="h-4 w-4" />,
+    },
+    {
+      title: "Inscription",
+      value: `${team?.validation_progress.toFixed(0)}%`,
+      description: "10 jours restants",
+      unit: <span>%</span>,
     },
     {
       title: "Parcours",
       value: getLabelFromValue(difficulties, team?.difficulty ?? undefined),
-      description: "parcours exigeant",
-      unit: <></>,
-    },
-    {
-      title: "Distance",
-      value: "150 km",
-      description: "répartis sur les deux jours",
-      unit: <div>km</div>,
-    },
-    {
-      title: "Dénivelé",
-      value: "2500 m",
-      description: "répartis sur les deux jours",
-      unit: <div>m</div>,
-    },
-    {
-      title: "Inscription",
-      value: `${calculateTeamProgress(team).toFixed(0)}%`,
-      description: "10 jours restants",
-      unit: <div>%</div>,
+      description: getLabelFromValue(
+        difficultyDescriptions,
+        team?.difficulty ?? undefined,
+      ),
+      unit: undefined,
     },
   ];
 
@@ -112,21 +109,13 @@ export const TeamCard = ({ team }: TeamCardProps) => {
           {isEdit && team ? (
             <TeamEdit team={team!} setIsEdit={setIsEdit} />
           ) : (
-            <div className="flex flex-wrap gap-4">
+            <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
               {information.map((info) => (
-                <Card key={info.title} className="w-[220px]">
-                  <CardContent className="mt-4">
-                    <CardDescription>
-                      <div className="flex flex-row justify-between">
-                        <div className="text-l font-bold">{info.title}</div>
-                        {info.unit}
-                      </div>
-                    </CardDescription>
-                    <div className="h-3"></div>
-                    <CardTitle>{info.value}</CardTitle>
-                    <CardDescription>{info.description}</CardDescription>
-                  </CardContent>
-                </Card>
+                <TeamInfoCard
+                  info={info}
+                  key={info.title}
+                  isLoaded={team !== undefined}
+                />
               ))}
             </div>
           )}

@@ -29,7 +29,6 @@ export const ConfirmationCheckbox = ({
     if (needDialog) {
       setIsOpen(!open && !field.value);
     } else {
-      console.log("oh");
       field.onChange(!field.value);
     }
   }
@@ -39,31 +38,22 @@ export const ConfirmationCheckbox = ({
   ) {
     event.preventDefault();
     field.onChange(!field.value);
+    setIsOpen(false);
   }
-
-  console.log("open", open);
 
   return (
     <Dialog open={open} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        <Button
-          variant="ghost"
-          className="col-span-4 hover:bg-white"
-          onClick={(e) => handleCheckboxChange()}
-        >
-          <div className="w-full text-right">
-            <FormMessage />
-            <FormControl>
-              <Checkbox
-                checked={field.value}
-                onCheckedChange={(value) => {
-                  handleCheckboxChange();
-                }}
-              />
-            </FormControl>
-          </div>
-        </Button>
-      </DialogTrigger>
+      <div className="w-full col-span-4 text-right">
+        <FormMessage />
+        <FormControl>
+          <Checkbox
+            checked={field.value}
+            onCheckedChange={(value) => {
+              handleCheckboxChange();
+            }}
+          />
+        </FormControl>
+      </div>
       <DialogContent className="md:max-w-3xl top-1/2">
         <DialogHeader>
           <DialogTitle>{label}</DialogTitle>
