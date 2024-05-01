@@ -406,7 +406,7 @@ export const ViewEditParticipantItem = ({
           {isEdit ? (
             <>
               <EditParticipantCardItem
-                label="Addresse"
+                label="Adresse"
                 id="address"
                 form={form}
                 type={ValueTypes.STRING}
@@ -482,7 +482,7 @@ export const ViewEditParticipantItem = ({
           ) : (
             <>
               <ParticipantCardItem
-                label="Addresse"
+                label="Adresse"
                 value={participant.address}
               />
               <ParticipantCardItem

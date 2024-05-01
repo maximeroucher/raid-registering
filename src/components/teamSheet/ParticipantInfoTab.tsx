@@ -49,7 +49,7 @@ export const ParticipantInfoTab = ({
       </CardHeader>
       <CardContent>
         <ParticipantCardItem label="Email" value={participant.email} />
-        <ParticipantCardItem label="Addresse" value={participant.address} />
+        <ParticipantCardItem label="Adresse" value={participant.address} />
         <ParticipantCardItem
           label="Taille de vélo"
           value={participant.bike_size}
