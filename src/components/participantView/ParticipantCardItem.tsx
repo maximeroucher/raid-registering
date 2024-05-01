@@ -29,12 +29,14 @@ interface ParticipantCardItemProps {
   value: ValueType;
   participantId?: string;
   isPhone?: boolean;
+  placeholder?: string;
 }
 
 export const ParticipantCardItem = ({
   label,
   value,
   participantId,
+  placeholder,
   isPhone = false,
 }: ParticipantCardItemProps) => {
   const { getDocument } = useDocument();
@@ -168,8 +170,8 @@ export const ParticipantCardItem = ({
         return <span className="col-span-4 text-right">{value}</span>;
       case isNull(value):
         return (
-          <span className="text-zinc-400 col-span-4 text-right">
-            Non renseigné
+          <span className={`${placeholder ?? "text-zinc-400"} col-span-4 text-right`}>
+            {placeholder ?? "Non renseigné"}
           </span>
         );
       default:

@@ -17,12 +17,21 @@ export const meetingPlaces = [
   { value: "anyway", label: "Peu importe" },
 ];
 
-export const sizes = [
+export const tShirtSizes = [
   { value: "xs", label: "XS" },
   { value: "s", label: "S" },
   { value: "m", label: "M" },
   { value: "l", label: "L" },
   { value: "xl", label: "XL" },
+  { value: "no", label: "Pas de Tshirt" },
+];
+
+export const bikeSizes = [
+  { value: "xs", label: "XS (< 1m55)" },
+  { value: "s", label: "S (1m55 - 1m165)" },
+  { value: "m", label: "M (1m65 - 1m80)" },
+  { value: "l", label: "L (1m80 - 1m90)" },
+  { value: "xl", label: "XL (> 1m90)" },
 ];
 
 export const difficultyDescriptions = [

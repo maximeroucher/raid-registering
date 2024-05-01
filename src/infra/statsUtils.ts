@@ -150,10 +150,8 @@ function getTShirtSizeData(
     { value: 0, label: "M" },
     { value: 0, label: "L" },
     { value: 0, label: "XL" },
+    { value: 0, label: "Non" },
   ];
-  if (seeAll) {
-    response.push({ value: 0, label: "N/A" });
-  }
   if (!teams) {
     return response;
   }
@@ -179,9 +177,7 @@ function getTShirtSizeData(
             response[4].value++;
             break;
           default:
-            if (seeAll) {
-              response[5].value++;
-            }
+            response[5].value++;
             break;
         }
       }

@@ -33,7 +33,8 @@ import {
   difficulties,
   meetingPlaces,
   situations,
-  sizes,
+  tShirtSizes,
+  bikeSizes,
 } from "@/src/infra/comboboxValues";
 import { ConfirmationCheckbox } from "./ConfirmationCheckbox";
 import PhoneInput from "react-phone-input-2";
@@ -57,7 +58,8 @@ export type Situation =
 export enum ValueTypes {
   STRING = "string",
   PHONE = "phone",
-  SIZE = "size",
+  TSHIRTSIZE = "tShirtSize",
+  BIKESIZE = "bikeSize",
   BOOLEAN = "boolean",
   DOCUMENT = "document",
   SECURITYFILE = "securityFile",
@@ -103,14 +105,27 @@ export function EditParticipantCardItem<T extends ValueType>({
             needDialog={needDialog ?? false}
           />
         );
-      case ValueTypes.SIZE:
+      case ValueTypes.TSHIRTSIZE:
         return (
           <>
-            <div className="col-span-3"></div>
-            <div className="col-span-1">
+            <div className="col-span-2"></div>
+            <div className="col-span-2">
               <FormMessage />
               <FormControl>
-                <Combobox values={sizes} placeholder={placeholder} {...field} />
+                <Combobox values={tShirtSizes} placeholder={placeholder} {...field} />
+              </FormControl>
+            </div>
+          </>
+        );
+        
+      case ValueTypes.BIKESIZE:
+        return (
+          <>
+            <div className="col-span-2"></div>
+            <div className="col-span-2">
+              <FormMessage />
+              <FormControl>
+                <Combobox values={bikeSizes} placeholder={placeholder} {...field} />
               </FormControl>
             </div>
           </>

@@ -56,7 +56,7 @@ export const ViewEditParticipantItem = ({
       .string()
       .refine(
         (value) => {
-          return ["xs", "s", "m", "l", "xl"].includes(value);
+          return ["xs", "s", "m", "l", "xl", "no"].includes(value);
         },
         { message: "Veuillez renseigner une taille de t-shirt valide" },
       )
@@ -236,9 +236,17 @@ export const ViewEditParticipantItem = ({
         );
       }
     }
+    console.log(
+      (values.tShirtSize === "no"
+        ? null
+        : (values.tShirtSize?.toUpperCase() as Size)) ?? null,
+    );
     const updatedParticipant: ParticipantUpdate = {
       bike_size: (values.bikeSize?.toUpperCase() as Size) ?? null,
-      t_shirt_size: (values.tShirtSize?.toUpperCase() as Size) ?? null,
+      t_shirt_size:
+        (values.tShirtSize === "no"
+          ? null
+          : (values.tShirtSize?.toUpperCase() as Size)) ?? null,
       situation: switchSituation(values),
       address: values.address ?? null,
       diet: values.diet ?? null,
@@ -333,7 +341,9 @@ export const ViewEditParticipantItem = ({
 
   function getSituation() {
     const situation = getSituationLabel(participant.situation ?? undefined);
-    let title: string | null = getSituationTitle(participant.situation ?? undefined);
+    let title: string | null = getSituationTitle(
+      participant.situation ?? undefined,
+    );
     if (title === "undefined") {
       title = null;
     }
@@ -416,14 +426,14 @@ export const ViewEditParticipantItem = ({
                 placeholder="Taille"
                 id="bikeSize"
                 form={form}
-                type={ValueTypes.SIZE}
+                type={ValueTypes.BIKESIZE}
               />
               <EditParticipantCardItem
                 label="Taille de t-shirt"
                 id="tShirtSize"
                 placeholder="Taille"
                 form={form}
-                type={ValueTypes.SIZE}
+                type={ValueTypes.TSHIRTSIZE}
               />
               <EditParticipantCardItem
                 label="Régime alimentaire"
@@ -492,6 +502,7 @@ export const ViewEditParticipantItem = ({
               <ParticipantCardItem
                 label="Taille de t-shirt"
                 value={participant.t_shirt_size}
+                placeholder="Pas de Tshirt"
               />
               <ParticipantCardItem
                 label="Régime alimentaire"
