@@ -16,30 +16,6 @@ import { CircularProgressBar } from "../ui/circularProgressBar";
 
 export const columns: ColumnDef<TeamPreview>[] = [
   {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-        className="translate-y-[2px]"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-        className="translate-y-[2px]"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
-  {
     accessorKey: "name",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Equipe" />
@@ -84,10 +60,14 @@ export const columns: ColumnDef<TeamPreview>[] = [
   {
     accessorKey: "difficulty",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Parcours" />
+      <DataTableColumnHeader
+        column={column}
+        title="Parcours"
+        className="max-lg:hidden"
+      />
     ),
     cell: ({ row }) => (
-      <div className="flex space-x-2">
+      <div className="flex space-x-2 max-lg:hidden">
         <Badge variant="outline">
           {getLabelFromValue(difficulties, row.getValue("difficulty"))}
         </Badge>
@@ -100,11 +80,15 @@ export const columns: ColumnDef<TeamPreview>[] = [
   {
     accessorKey: "meeting_place",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Lieu de rendez-vous" />
+      <DataTableColumnHeader
+        column={column}
+        title="Lieu de rendez-vous"
+        className="max-lg:hidden"
+      />
     ),
     cell: ({ row }) => {
       return (
-        <div className="flex space-x-2">
+        <div className="flex space-x-2 max-lg:hidden">
           <Badge variant="outline">
             {getLabelFromValue(meetingPlaces, row.getValue("meeting_place"))}
           </Badge>
@@ -118,11 +102,15 @@ export const columns: ColumnDef<TeamPreview>[] = [
   {
     accessorKey: "validation_progress",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Inscription" />
+      <DataTableColumnHeader
+        column={column}
+        title="Inscription"
+        className=""
+      />
     ),
     cell: ({ row }) => {
       return (
-        <div className="flex w-[100px] items-center">
+        <div className="flex space-x-2 items-center">
           <span>
             {(row.getValue("validation_progress") as number).toFixed(0)}%
           </span>
@@ -149,7 +137,7 @@ export const columns: ColumnDef<TeamPreview>[] = [
         ((row.getValue("second") as ParticipantPreview | null)
           ?.number_of_document ?? 0);
       return (
-        <div className="flex w-[150px] items-center">
+        <div className="flex w-[110px] items-center">
           <Badge variant="outline">
             <CircularProgressBar
               value={(number_of_validated_document / number_of_document) * 100}
