@@ -92,6 +92,7 @@ export const useAuth = () => {
   }
 
   async function refreshTokens(): Promise<string | null> {
+    if (isLoading) return null;
     setIsLoading(true);
     console.log("refreshing tokens");
     if (refreshToken) {
