@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
-    "@openapi-codegen/cli": "^2.0.0",
+    "@openapi-codegen/cli": "^2.0.2",
     "@openapi-codegen/typescript": "^8.0.0",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-avatar": "^1.0.4",
