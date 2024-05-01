@@ -11,8 +11,7 @@ import { FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { UserInfoView } from "./UserInfoView";
 import { Participant, ParticipantUpdate } from "@/src/api/hyperionSchemas";
 import { Button } from "../ui/button";
-import { SheetClose, SheetFooter } from "../ui/sheet";
-import { LogoutButton } from "./logoutButton";
+import { SheetFooter } from "../ui/sheet";
 import { HiPencil, HiCheck, HiX } from "react-icons/hi";
 import { useParticipant } from "@/src/hooks/useParticipant";
 import { toast } from "../ui/use-toast";
@@ -104,7 +103,7 @@ export const ViewEditUserInfo = ({
         email: values?.email,
         phone: getPhone(values?.phone ?? ""),
         birthday: values?.birthday ? toDate(values?.birthday) : undefined,
-      })
+      });
     });
   }
 
@@ -264,7 +263,7 @@ export const ViewEditUserInfo = ({
                   )}
                 </>
               )}
-              {isEdit ? (
+              {isEdit && (
                 <Button
                   variant="destructive"
                   onClick={() => form.reset()}
@@ -273,10 +272,6 @@ export const ViewEditUserInfo = ({
                   <HiX className="mr-2 h-4 w-4" />
                   Annuler
                 </Button>
-              ) : (
-                <SheetClose asChild>
-                  <LogoutButton />
-                </SheetClose>
               )}
             </div>
           </SheetFooter>

@@ -16,9 +16,13 @@ export const LogoutButton = () => {
   }
 
   return (
-    <Button variant="destructive" onClick={handleLogout} className="w-full">
-      <HiLogout className="mr-2 h-4 w-4" />
+    <Button
+      variant="ghost"
+      onClick={handleLogout}
+      className="px-2 py-1.5 text-sm font-medium w-full justify-start hover:bg-background text-destructive"
+    >
       Se déconnecter
+      <HiLogout className="h-4 w-4 ml-auto" />
     </Button>
   );
 };
