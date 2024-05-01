@@ -102,12 +102,12 @@ export const ParticipantCardItem = ({
         const key = value.type as string;
         const file = getDocument(participantId!, key);
         return (
-          <div className="flex flex-row w-full justify-end items-center h-6 col-span-4">
+          <div className="flex flex-row justify-end items-center h-6 col-span-4 w-4/5 ml-auto">
             <Dialog>
               <DialogTrigger asChild>
                 <Button
                   variant={null}
-                  className="pl-auto max-w-full bg-zinc-200"
+                  className="ml-auto max-w-full bg-zinc-200"
                 >
                   <div className="flex flex-row items-start max-w-full">
                     <span className="text-gray-500 overflow-hidden">
@@ -134,7 +134,7 @@ export const ParticipantCardItem = ({
                 </div>
               </DialogContent>
             </Dialog>
-            <Checkbox checked={value.validated} className="ml-8" />
+            <Checkbox checked={value.validated} className="ml-4" />
           </div>
         );
       case isSecurityFile(value):
@@ -161,7 +161,7 @@ export const ParticipantCardItem = ({
                 </div>
               </DialogContent>
             </Dialog>
-            <Checkbox checked={true} className="ml-8" />
+            <Checkbox checked={true} className="ml-4" />
           </div>
         );
       case isString(value):

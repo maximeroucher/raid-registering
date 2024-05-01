@@ -109,7 +109,7 @@ export const TeamCard = ({ team }: TeamCardProps) => {
           {isEdit && team ? (
             <TeamEdit team={team!} setIsEdit={setIsEdit} />
           ) : (
-            <div className="grid gap-4 md:grid-cols-2 md:gap-8 xl:grid-cols-4">
+            <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
               {information.map((info) => (
                 <TeamInfoCard
                   info={info}
