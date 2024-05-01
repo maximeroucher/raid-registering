@@ -46,7 +46,6 @@ const Login = () => {
       isLoading={isLoading}
       onClick={connectMyECL}
       label="Se connecter"
-      variant="outline"
     />
   );
 };

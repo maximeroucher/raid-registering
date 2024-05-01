@@ -11,10 +11,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/src/components/ui/card";
-import { Input } from "@/src/components/ui/input";
-import { Label } from "@/src/components/ui/label";
-import { PasswordInput } from "@/src/components/ui/passwordInput";
-import { TextSeparator } from "@/src/components/ui/textSeparator";
 import MyECLButton from "../../components/login/MyECLButton";
 import Link from "next/link";
 
@@ -30,25 +26,13 @@ const Login = () => {
         <CardHeader>
           <CardTitle>Se connecter</CardTitle>
           <CardDescription>
-            Connectez-vous avec MyECL ou par mail
+            Si vous possédez déjà un compte MyECL, vous pouvez vous connecter avec.
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form>
             <div className="grid w-full items-center gap-4">
               <MyECLButton />
-              <TextSeparator text="Ou continuez par email" />
-              <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
-                <Input placeholder="raid@exemple.com" id="email"></Input>
-                <div className="h-2"></div>
-                <Label htmlFor="password">Mot de passe</Label>
-                <PasswordInput type="password" hidden></PasswordInput>
-              </div>
-              <div />
-              <Button className="w-full" onClick={connectOther}>
-                Se connecter
-              </Button>
             </div>
           </form>
         </CardContent>
