@@ -13,7 +13,7 @@ interface DocumentDialogProps {
   setIsOpen: (value: boolean) => void;
   setIsUploading: (value: boolean) => void;
   field: ControllerRenderProps<FieldValues, string>;
-  key: string;
+  fileType: string;
   documentId?: string;
   participantId: string;
 }
@@ -22,7 +22,7 @@ export const DocumentDialog = ({
   setIsUploading,
   setIsOpen,
   field,
-  key,
+  fileType,
   documentId,
   participantId,
 }: DocumentDialogProps) => {
@@ -34,7 +34,7 @@ export const DocumentDialog = ({
     documentId: docId,
   } = useDocument();
   const { setDocument } = useDocumentsStore();
-  const file = getDocument(participantId, key);
+  const file = getDocument(participantId, fileType);
   const [image, setImage] = useState<File | undefined>(file);
   const [isLoading, setIsLoading] = useState(data?.size === undefined);
   if (
@@ -47,7 +47,7 @@ export const DocumentDialog = ({
   }
 
   if (data?.size !== undefined && isLoading) {
-    setDocument(participantId, key, field.value.id, data);
+    setDocument(participantId, fileType, field.value.id, data);
     setImage(data);
     setIsLoading(false);
   }
@@ -92,17 +92,23 @@ export const DocumentDialog = ({
                 const file = files[0];
                 const documentId = crypto.randomUUID();
                 setIsUploading(true);
-                uploadDocument(file, key, documentId, participantId, () => {
-                  field.onChange({
-                    name: file.name,
-                    id: documentId,
-                    type: key,
-                    updated: true,
-                  });
-                  setDocument(participantId, key, documentId, file);
-                  setDocumentId(documentId);
-                  setIsUploading(false);
-                });
+                uploadDocument(
+                  file,
+                  fileType,
+                  documentId,
+                  participantId,
+                  () => {
+                    field.onChange({
+                      name: file.name,
+                      id: documentId,
+                      type: fileType,
+                      updated: true,
+                    });
+                    setDocument(participantId, fileType, documentId, file);
+                    setDocumentId(documentId);
+                    setIsUploading(false);
+                  },
+                );
               }}
             />
           )}

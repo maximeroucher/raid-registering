@@ -165,7 +165,7 @@ export function EditParticipantCardItem<T extends ValueType>({
                 setIsOpen={setIsOpen}
                 setIsUploading={setIsUploading}
                 field={field}
-                key={id}
+                fileType={id}
                 documentId={field.value?.id}
                 participantId={participantId!}
               />
