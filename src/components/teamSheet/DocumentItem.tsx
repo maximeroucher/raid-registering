@@ -29,7 +29,7 @@ export const DocumentItem = ({
   validateDocument,
   isValidationLoading,
 }: DocumentItemProps) => {
-  const isValidated = (document && document.validated) || false;
+  const isValidated = (document && document.validation === "accepted") || false;
 
   return (
     <AccordionItem

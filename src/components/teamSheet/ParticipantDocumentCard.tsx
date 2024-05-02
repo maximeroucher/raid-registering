@@ -19,7 +19,6 @@ export const ParticipantDocumentCard = ({
   validateDocument,
   isValidationLoading,
 }: ParticipantDocumentCardProps) => {
-
   return (
     <>
       <CardHeader>
@@ -69,6 +68,15 @@ export const ParticipantDocumentCard = ({
               isValidationLoading={isValidationLoading}
             />
           )}
+          <DocumentItem
+            value="Autorisation parentale"
+            document={participant.parent_authorization ?? null}
+            index={4}
+            setDocument={setDocument}
+            downloadDocument={downloadDocument}
+            validateDocument={validateDocument}
+            isValidationLoading={isValidationLoading}
+          />
         </Accordion>
       </CardContent>
     </>

@@ -98,6 +98,14 @@ export const ViewEditParticipantItem = ({
         type: z.literal("raidRules"),
       })
       .partial(),
+    parentAuthorization: z
+      .object({
+        name: z.string(),
+        id: z.string().uuid(),
+        updated: z.boolean(),
+        type: z.literal("parentAuthorization"),
+      })
+      .partial(),
     securityFile: z
       .object({
         allergy: z.string().optional(),
@@ -176,6 +184,11 @@ export const ViewEditParticipantItem = ({
         id: participant.raid_rules?.id ?? undefined,
         type: "raidRules",
       },
+      parentAuthorization: {
+        name: participant.parent_authorization?.name ?? undefined,
+        id: participant.parent_authorization?.id ?? undefined,
+        type: "parentAuthorization",
+      },
       securityFile: {
         allergy: participant?.security_file?.allergy ?? undefined,
         asthma: participant?.security_file?.asthma ?? false,
@@ -214,6 +227,7 @@ export const ViewEditParticipantItem = ({
       values.medicalCertificate,
       values.studentCard,
       values.raidRules,
+      values.parentAuthorization,
     ].filter((doc) => doc.updated);
 
     if (values.securityFile.updated) {
@@ -297,6 +311,11 @@ export const ViewEditParticipantItem = ({
           name: values.raidRules?.name ?? undefined,
           id: values.raidRules?.id ?? undefined,
           type: "raidRules",
+        },
+        parentAuthorization: {
+          name: values.parentAuthorization?.name ?? undefined,
+          id: values.parentAuthorization?.id ?? undefined,
+          type: "parentAuthorization",
         },
         securityFile: {
           allergy: values?.securityFile?.allergy ?? undefined,
@@ -482,6 +501,13 @@ export const ViewEditParticipantItem = ({
                 participantId={participant.id!}
               />
               <EditParticipantCardItem
+                label="Autorisation parentale"
+                id="parentAuthorization"
+                form={form}
+                type={ValueTypes.DOCUMENT}
+                participantId={participant.id!}
+              />
+              <EditParticipantCardItem
                 label="Attestation sur l'honneur"
                 id="attestationHonour"
                 form={form}
@@ -535,6 +561,11 @@ export const ViewEditParticipantItem = ({
               <ParticipantCardItem
                 label="Règlement du raid"
                 value={participant.raid_rules}
+                participantId={participant.id!}
+              />
+              <ParticipantCardItem
+                label="Autorisation parentale"
+                value={participant.parent_authorization}
                 participantId={participant.id!}
               />
               <ParticipantCardItem
