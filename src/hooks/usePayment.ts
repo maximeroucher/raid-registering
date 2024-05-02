@@ -1,16 +1,13 @@
-import { useConfirmPaymentRaidParticipantParticipantIdPaymentPost } from "../api/hyperionComponents";
+import { usePostRaidParticipantParticipantIdPayment } from "../api/hyperionComponents";
 import { useAuth } from "./useAuth";
 
 export const usePayment = () => {
   const { token } = useAuth();
 
   const { mutate: mutateValidatePayment, isPending: isLoading } =
-    useConfirmPaymentRaidParticipantParticipantIdPaymentPost();
+    usePostRaidParticipantParticipantIdPayment();
 
-  const validatePayment = (participantId: string, 
-    callback: () => void,
-
-  ) => {
+  const validatePayment = (participantId: string, callback: () => void) => {
     mutateValidatePayment(
       {
         headers: {

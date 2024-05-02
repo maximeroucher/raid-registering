@@ -1,4 +1,4 @@
-import { useGetAllTeamsRaidTeamsGet } from "@/src/api/hyperionComponents";
+import { useGetRaidTeams } from "@/src/api/hyperionComponents";
 import { useUser } from "./useUser";
 import { useAuth } from "./useAuth";
 
@@ -10,7 +10,7 @@ export const useTeams = () => {
     data: teams,
     isLoading,
     refetch: refetchTeams,
-  } = useGetAllTeamsRaidTeamsGet(
+  } = useGetRaidTeams(
     {
       headers: {
         Authorization: `Bearer ${token}`,

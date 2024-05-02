@@ -1,12 +1,12 @@
 import { useUser } from "./useUser";
-import { useGetTeamByIdRaidTeamsTeamIdGet } from "../api/hyperionComponents";
+import { useGetRaidTeamsTeamId } from "../api/hyperionComponents";
 import { useAuth } from "./useAuth";
 
 export const useAdminTeam = (teamId: string) => {
   const { token, userId, isTokenExpired } = useAuth();
   const { isAdmin } = useUser();
 
-  const { data: team, refetch: refetchTeam } = useGetTeamByIdRaidTeamsTeamIdGet(
+  const { data: team, refetch: refetchTeam } = useGetRaidTeamsTeamId(
     {
       headers: {
         Authorization: `Bearer ${token}`,

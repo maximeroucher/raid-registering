@@ -14,8 +14,6 @@ import { useParticipantStore } from "../stores/particpant";
 import { useInviteTokenStore } from "../stores/inviteTokenStore";
 import { useQuery } from "@tanstack/react-query";
 import { useCodeVerifierStore } from "../stores/codeVerifier";
-import { set } from "date-fns";
-import { useTokenAuthTokenPost } from "../api/hyperionComponents";
 
 const clientId: string = "RaidRegistering";
 const redirectUrlHost: string =

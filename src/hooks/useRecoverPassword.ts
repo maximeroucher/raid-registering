@@ -1,6 +1,6 @@
 import {
-  useRecoverUserUsersRecoverPost,
-  useResetPasswordUsersResetPasswordPost,
+  usePostUsersRecover,
+  usePostUsersResetPassword,
 } from "../api/hyperionComponents";
 import {
   BodyRecoverUserUsersRecoverPost,
@@ -12,7 +12,7 @@ export const useRecoverPassword = () => {
   const { token } = useAuth();
 
   const { mutate: mutateRecoverPassword, isPending: isRecoverLoading } =
-    useRecoverUserUsersRecoverPost();
+    usePostUsersRecover();
 
   const recoverPassword = (email: string, callback: () => void) => {
     const body: BodyRecoverUserUsersRecoverPost = {
@@ -34,7 +34,7 @@ export const useRecoverPassword = () => {
   };
 
   const { mutate: mutateResetPassword, isPending: isResetLoading } =
-    useResetPasswordUsersResetPasswordPost();
+    usePostUsersResetPassword();
 
   const resetPassword = (
     password: string,

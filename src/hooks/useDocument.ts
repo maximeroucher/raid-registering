@@ -1,8 +1,8 @@
 import { useQueryClient } from "@tanstack/react-query";
 import {
-  useCreateDocumentRaidParticipantParticipantIdDocumentPost,
-  useReadDocumentRaidDocumentDocumentIdGet,
-  useValidateDocumentRaidDocumentDocumentIdValidatePost,
+  usePostRaidParticipantParticipantIdDocument,
+  useGetRaidDocumentDocumentId,
+  usePostRaidDocumentDocumentIdValidate,
 } from "../api/hyperionComponents";
 import { DocumentCreation } from "../api/hyperionSchemas";
 import axios from "axios";
@@ -19,28 +19,30 @@ export const useDocument = () => {
   const [documentId, setDocumentId] = useState<string>("");
 
   const { mutate: mutateAssignDocument } =
-    useCreateDocumentRaidParticipantParticipantIdDocumentPost();
+    usePostRaidParticipantParticipantIdDocument();
 
   const assignDocument = (file: DocumentCreation, callback: () => void) => {
-    const body = {
-      headers: {
-        Authorization: `Bearer ${token}`,
+    mutateAssignDocument(
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        pathParams: {
+          participantId: userId!,
+        },
+        body: file,
       },
-      pathParams: {
-        participantId: userId!,
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            predicate: (query) => {
+              return query.queryHash === "getTeamByParticipantId";
+            },
+          });
+          callback();
+        },
       },
-      body: file,
-    };
-    mutateAssignDocument(body, {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          predicate: (query) => {
-            return query.queryHash === "getTeamByParticipantId";
-          },
-        });
-        callback();
-      },
-    });
+    );
   };
 
   const uploadDocument = (
@@ -70,38 +72,39 @@ export const useDocument = () => {
       });
   };
 
-  const { data, refetch, isPending } =
-    useReadDocumentRaidDocumentDocumentIdGet<File>(
+  const { data, refetch, isPending } = useGetRaidDocumentDocumentId<File>(
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      pathParams: {
+        documentId: documentId!,
+      },
+    },
+    {
+      enabled: documentId !== "",
+    },
+  );
+
+  const { mutate: mutateValidateDocument, isPending: isValidationLoading } =
+    usePostRaidDocumentDocumentIdValidate();
+
+  const validateDocument = (documentId: string, callback: () => void) => {
+    mutateValidateDocument(
       {
         headers: {
           Authorization: `Bearer ${token}`,
         },
         pathParams: {
-          documentId: documentId!,
+          documentId: documentId,
         },
       },
       {
-        enabled: documentId !== "",
+        onSettled: () => {
+          callback();
+        },
       },
     );
-
-  const { mutate: mutateValidateDocument, isPending: isValidationLoading } =
-    useValidateDocumentRaidDocumentDocumentIdValidatePost();
-
-  const validateDocument = (documentId: string, callback: () => void) => {
-    const body = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      pathParams: {
-        documentId: documentId,
-      },
-    };
-    mutateValidateDocument(body, {
-      onSettled: () => {
-        callback();
-      },
-    });
   };
 
   const getDocument = (userId: string, key: string) => {

@@ -1,6 +1,6 @@
 import {
-  useCreateUserByUserUsersCreatePost,
-  useActivateUserUsersActivatePost,
+  usePostUsersCreate,
+  usePostUsersActivate,
 } from "../api/hyperionComponents";
 import {
   CoreUserCreateRequest,
@@ -12,7 +12,7 @@ export const useAccountCreation = () => {
   const { token } = useAuth();
 
   const { mutate: mutateRegister, isPending: isRegisteringLoading } =
-    useCreateUserByUserUsersCreatePost();
+    usePostUsersCreate();
 
   const registerAccount = (email: string, callback: () => void) => {
     const body: CoreUserCreateRequest = {
@@ -35,7 +35,7 @@ export const useAccountCreation = () => {
   };
 
   const { mutate: mutateActivateAccount, isPending: isActivationLoading } =
-    useActivateUserUsersActivatePost();
+    usePostUsersActivate();
 
   const activateAccount = (
     body: CoreUserActivateRequest,

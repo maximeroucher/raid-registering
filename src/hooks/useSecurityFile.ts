@@ -1,8 +1,6 @@
 import {
-  useSetSecurityFileRaidSecurityFilePost,
-  SetSecurityFileRaidSecurityFilePostVariables,
-  useAssignSecurityFileRaidParticipantParticipantIdSecurityFilePost,
-  AssignSecurityFileRaidParticipantParticipantIdSecurityFilePostVariables,
+  usePostRaidSecurityFile,
+  usePostRaidParticipantParticipantIdSecurityFile,
 } from "@/src/api/hyperionComponents";
 import { SecurityFile } from "../api/hyperionSchemas";
 import { useQueryClient } from "@tanstack/react-query";
@@ -16,35 +14,37 @@ export const useSecurityFile = () => {
     mutate: mutateAssignSecurityFile,
     isPending: isCreationLoading,
     isSuccess: isCreationSuccess,
-  } = useSetSecurityFileRaidSecurityFilePost({});
+  } = usePostRaidSecurityFile({});
 
   const setSecurityFile = (
     securityFile: SecurityFile,
     callback: () => void,
   ) => {
-    const body: SetSecurityFileRaidSecurityFilePostVariables = {
-      body: securityFile,
-      headers: {
-        Authorization: `Bearer ${token}`,
+    mutateAssignSecurityFile(
+      {
+        body: securityFile,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       },
-    };
-    mutateAssignSecurityFile(body, {
-      // FIXME: Not trigger, to investigate
-      onSuccess(data, variables, context) {
-        callback();
+      {
+        // FIXME: Not trigger, to investigate
+        onSuccess(data, variables, context) {
+          callback();
+        },
       },
-    });
+    );
   };
 
   const { mutate: mutateAssignSecurityFileRaidParticipant } =
-    useAssignSecurityFileRaidParticipantParticipantIdSecurityFilePost({});
+    usePostRaidParticipantParticipantIdSecurityFile({});
 
   const assignSecurityFile = (
     participantId: string,
     securityFile_id: string,
     callback: () => void,
   ) => {
-    const body: AssignSecurityFileRaidParticipantParticipantIdSecurityFilePostVariables =
+    mutateAssignSecurityFileRaidParticipant(
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -55,17 +55,18 @@ export const useSecurityFile = () => {
         queryParams: {
           security_file_id: securityFile_id,
         },
-      };
-    mutateAssignSecurityFileRaidParticipant(body, {
-      onSuccess(data, variables, context) {
-        queryClient.invalidateQueries({
-          predicate: (query) => {
-            return query.queryHash === "getTeamByParticipantId";
-          },
-        });
-        callback();
       },
-    });
+      {
+        onSuccess(data, variables, context) {
+          queryClient.invalidateQueries({
+            predicate: (query) => {
+              return query.queryHash === "getTeamByParticipantId";
+            },
+          });
+          callback();
+        },
+      },
+    );
   };
 
   return {

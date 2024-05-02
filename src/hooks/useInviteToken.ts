@@ -1,8 +1,6 @@
 import {
-  useCreateInviteTokenRaidTeamsTeamIdInvitePost,
-  CreateInviteTokenRaidTeamsTeamIdInvitePostVariables,
-  useJoinTeamRaidTeamsJoinTokenPost,
-  JoinTeamRaidTeamsJoinTokenPostVariables,
+  usePostRaidTeamsTeamIdInvite,
+  usePostRaidTeamsJoinToken,
 } from "@/src/api/hyperionComponents";
 import { InviteToken } from "../api/hyperionSchemas";
 import { useAuth } from "./useAuth";
@@ -14,51 +12,55 @@ export const useInviteToken = () => {
     mutate: mutateCreateInviteToken,
     isPending: isCreationLoading,
     isSuccess: isCreationSuccess,
-  } = useCreateInviteTokenRaidTeamsTeamIdInvitePost({});
+  } = usePostRaidTeamsTeamIdInvite({});
 
   const createInviteToken = (
     teamId: string,
     callback: (token: InviteToken) => void,
   ) => {
-    const body: CreateInviteTokenRaidTeamsTeamIdInvitePostVariables = {
-      headers: {
-        Authorization: `Bearer ${token}`,
+    mutateCreateInviteToken(
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        pathParams: {
+          teamId: teamId,
+        },
       },
-      pathParams: {
-        teamId: teamId,
+      {
+        onSuccess(data, variables, context) {
+          callback(data);
+        },
       },
-    };
-    mutateCreateInviteToken(body, {
-      onSuccess(data, variables, context) {
-        callback(data);
-      },
-    });
+    );
   };
 
   const {
     mutate: mutateJoinTeam,
     isPending: isJoinLoading,
     isSuccess: isJoinSuccess,
-  } = useJoinTeamRaidTeamsJoinTokenPost({});
+  } = usePostRaidTeamsJoinToken({});
 
   const joinTeam = (joinToken: string, callback: () => void) => {
-    const body: JoinTeamRaidTeamsJoinTokenPostVariables = {
-      headers: {
-        Authorization: `Bearer ${token}`,
+    mutateJoinTeam(
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        pathParams: {
+          token: joinToken,
+        },
       },
-      pathParams: {
-        token: joinToken,
+      {
+        // Not using onSucess because of : https://github.com/TanStack/query/discussions/2878
+        onSettled: (data, error) => {
+          console.log(data, error);
+          // Assuming success in all cases
+          // For unknown reasons, the invalidation of the query does not work
+          callback();
+        },
       },
-    };
-    mutateJoinTeam(body, {
-      // Not using onSucess because of : https://github.com/TanStack/query/discussions/2878
-      onSettled: (data, error) => {
-        console.log(data, error);
-        // Assuming success in all cases
-        // For unknown reasons, the invalidation of the query does not work
-        callback();
-      },
-    });
+    );
   };
 
   return {

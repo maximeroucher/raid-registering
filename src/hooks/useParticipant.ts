@@ -1,9 +1,7 @@
 import {
-  useGetParticipantByIdRaidParticipantsParticipantIdGet,
-  useCreateParticipantRaidParticipantsPost,
-  CreateParticipantRaidParticipantsPostVariables,
-  useUpdateParticipantRaidParticipantsParticipantIdPatch,
-  UpdateParticipantRaidParticipantsParticipantIdPatchVariables,
+  useGetRaidParticipantsParticipantId,
+  usePostRaidParticipants,
+  usePatchRaidParticipantsParticipantId,
 } from "@/src/api/hyperionComponents";
 import { useQueryClient } from "@tanstack/react-query";
 import { ParticipantBase, ParticipantUpdate } from "../api/hyperionSchemas";
@@ -24,7 +22,7 @@ export const useParticipant = () => {
     isLoading,
     isFetched,
     refetch,
-  } = useGetParticipantByIdRaidParticipantsParticipantIdGet(
+  } = useGetRaidParticipantsParticipantId(
     {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -34,7 +32,11 @@ export const useParticipant = () => {
       },
     },
     {
-      enabled: userId !== null && participant === undefined && !isAdmin() && !isTokenExpired(),
+      enabled:
+        userId !== null &&
+        participant === undefined &&
+        !isAdmin() &&
+        !isTokenExpired(),
       retry: 0,
       queryHash: "getParticipantById",
     },
@@ -44,63 +46,67 @@ export const useParticipant = () => {
     mutate: mutateCreateParticipant,
     isSuccess: isCreationSuccess,
     isPending: isCreationLoading,
-  } = useCreateParticipantRaidParticipantsPost({});
+  } = usePostRaidParticipants({});
 
   const createParticipant = (
     participant: ParticipantBase,
     callback: () => void,
   ) => {
-    const body: CreateParticipantRaidParticipantsPostVariables = {
-      body: participant,
-      headers: {
-        Authorization: `Bearer ${token}`,
+    mutateCreateParticipant(
+      {
+        body: participant,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       },
-    };
-    mutateCreateParticipant(body, {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          predicate: (query) => {
-            return (
-              query.queryHash === "getParticipantById" ||
-              query.queryHash === "getTeamByParticipantId"
-            );
-          },
-        });
-        callback();
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            predicate: (query) => {
+              return (
+                query.queryHash === "getParticipantById" ||
+                query.queryHash === "getTeamByParticipantId"
+              );
+            },
+          });
+          callback();
+        },
       },
-    });
+    );
   };
 
   const {
     mutate: mutateUpdateParticipant,
     isSuccess: isUpdateSuccess,
     isPending: isUpdateLoading,
-  } = useUpdateParticipantRaidParticipantsParticipantIdPatch({});
+  } = usePatchRaidParticipantsParticipantId({});
 
   const updateParticipant = (
     participant: ParticipantUpdate,
     participantId: string,
     callback: () => void,
   ) => {
-    const body: UpdateParticipantRaidParticipantsParticipantIdPatchVariables = {
-      body: participant,
-      headers: {
-        Authorization: `Bearer ${token}`,
+    mutateUpdateParticipant(
+      {
+        body: participant,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        pathParams: {
+          participantId: participantId,
+        },
       },
-      pathParams: {
-        participantId: participantId,
+      {
+        // Not using onSucess because of : https://github.com/TanStack/query/discussions/2878
+        onSettled: () => {
+          // Assuming success in all cases
+          // For unknown reasons, the invalidation of the query does not work
+          refetch();
+          refetchTeam();
+          callback();
+        },
       },
-    };
-    mutateUpdateParticipant(body, {
-      // Not using onSucess because of : https://github.com/TanStack/query/discussions/2878
-      onSettled: () => {
-        // Assuming success in all cases
-        // For unknown reasons, the invalidation of the query does not work
-        refetch();
-        refetchTeam();
-        callback();
-      },
-    });
+    );
   };
 
   if (me !== undefined && participant !== me && token !== null) {
