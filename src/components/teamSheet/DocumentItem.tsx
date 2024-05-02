@@ -6,7 +6,7 @@ import {
   AccordionTrigger,
 } from "../ui/accordion";
 
-import { HiArrowDown, HiCheck, HiClock, HiDownload, HiX } from "react-icons/hi";
+import { HiCheck, HiDownload, HiX } from "react-icons/hi";
 import { Button } from "../ui/button";
 import { LoadingButton } from "../ui/loadingButton";
 import { BadgeAlertIcon, ClockIcon } from "lucide-react";
