@@ -1,4 +1,4 @@
-import { Participant, Document } from "@/src/api/hyperionSchemas";
+import { Participant, Document, DocumentValidation } from "@/src/api/hyperionSchemas";
 import { Accordion } from "../ui/accordion";
 import { CardHeader, CardTitle, CardContent } from "../ui/card";
 import { DocumentItem } from "./DocumentItem";
@@ -8,7 +8,7 @@ interface ParticipantDocumentCardProps {
   participant: Participant;
   setDocument: (document: Document) => void;
   downloadDocument: (document: Document) => void;
-  validateDocument: (documentId: string) => void;
+  validateDocument: (documentId: string, validation: DocumentValidation) => void;
   isValidationLoading: boolean;
 }
 
@@ -59,7 +59,7 @@ export const ParticipantDocumentCard = ({
             getSituationLabel(participant.situation ?? undefined) ?? "",
           ) && (
             <DocumentItem
-              value="Carte étudiant"
+              value="Carte étudiante"
               document={participant.student_card ?? null}
               index={3}
               setDocument={setDocument}

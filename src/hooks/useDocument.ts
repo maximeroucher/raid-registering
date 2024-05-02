@@ -4,7 +4,7 @@ import {
   useGetRaidDocumentDocumentId,
   usePostRaidDocumentDocumentIdValidate,
 } from "../api/hyperionComponents";
-import { DocumentCreation } from "../api/hyperionSchemas";
+import { DocumentCreation, DocumentValidation } from "../api/hyperionSchemas";
 import axios from "axios";
 import { useDocumentsStore } from "../stores/documents";
 import { useState } from "react";
@@ -89,7 +89,11 @@ export const useDocument = () => {
   const { mutate: mutateValidateDocument, isPending: isValidationLoading } =
     usePostRaidDocumentDocumentIdValidate();
 
-  const validateDocument = (documentId: string, callback: () => void) => {
+  const setDocumentValidation = (
+    documentId: string,
+    validation: DocumentValidation,
+    callback: () => void,
+  ) => {
     mutateValidateDocument(
       {
         headers: {
@@ -97,6 +101,9 @@ export const useDocument = () => {
         },
         pathParams: {
           documentId: documentId,
+        },
+        queryParams: {
+          validation: validation,
         },
       },
       {
@@ -122,7 +129,7 @@ export const useDocument = () => {
     isLoading: isPending,
     setDocumentId,
     documentId,
-    validateDocument,
+    setDocumentValidation,
     isValidationLoading,
   };
 };

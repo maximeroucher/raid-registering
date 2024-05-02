@@ -1,4 +1,4 @@
-import { Participant, Team } from "@/src/api/hyperionSchemas";
+import { DocumentValidation, Participant, Team } from "@/src/api/hyperionSchemas";
 import { Card } from "../ui/card";
 import { ParticipantDocumentCard } from "./ParticipantDocumentCard";
 import { DocumentView } from "../participantView/DocumentView";
@@ -14,7 +14,7 @@ interface DocumentTabProps {
 }
 
 export const DocumentTab = ({ team }: DocumentTabProps) => {
-  const { getDocument, validateDocument, isValidationLoading } = useDocument();
+  const { getDocument, setDocumentValidation, isValidationLoading } = useDocument();
   const { refetchTeam } = useAdminTeam(team.id);
   const { refetchTeams } = useTeams();
   const [selectedDocument, setSelectedDocument] = useState<Document | null>(
@@ -44,8 +44,8 @@ export const DocumentTab = ({ team }: DocumentTabProps) => {
     }
   }
 
-  function validateCallback(documentId: string) {
-    validateDocument(documentId, () => {
+  function validateCallback(documentId: string, validation: DocumentValidation) {
+    setDocumentValidation(documentId, validation, () => {
       refetchTeam();
       refetchTeams();
       toast({

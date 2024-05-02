@@ -14108,6 +14108,10 @@ export type PostRaidDocumentDocumentIdValidatePathParams = {
   documentId: string;
 };
 
+export type PostRaidDocumentDocumentIdValidateQueryParams = {
+  validation: Schemas.DocumentValidation;
+};
+
 export type PostRaidDocumentDocumentIdValidateError = Fetcher.ErrorWrapper<{
   status: 422;
   payload: Schemas.HTTPValidationError;
@@ -14115,6 +14119,7 @@ export type PostRaidDocumentDocumentIdValidateError = Fetcher.ErrorWrapper<{
 
 export type PostRaidDocumentDocumentIdValidateVariables = {
   pathParams: PostRaidDocumentDocumentIdValidatePathParams;
+  queryParams: PostRaidDocumentDocumentIdValidateQueryParams;
 } & HyperionContext["fetcherOptions"];
 
 /**
@@ -14129,7 +14134,7 @@ export const fetchPostRaidDocumentDocumentIdValidate = (
     PostRaidDocumentDocumentIdValidateError,
     undefined,
     {},
-    {},
+    PostRaidDocumentDocumentIdValidateQueryParams,
     PostRaidDocumentDocumentIdValidatePathParams
   >({
     url: "/raid/document/{documentId}/validate",
