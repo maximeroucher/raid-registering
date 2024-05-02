@@ -250,11 +250,6 @@ export const ViewEditParticipantItem = ({
         );
       }
     }
-    console.log(
-      (values.tShirtSize === "no"
-        ? null
-        : (values.tShirtSize?.toUpperCase() as Size)) ?? null,
-    );
     const updatedParticipant: ParticipantUpdate = {
       bike_size: (values.bikeSize?.toUpperCase() as Size) ?? null,
       t_shirt_size:

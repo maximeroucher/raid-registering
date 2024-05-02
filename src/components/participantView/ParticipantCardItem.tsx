@@ -1,4 +1,9 @@
-import { SecurityFile, Size, Document } from "@/src/api/hyperionSchemas";
+import {
+  SecurityFile,
+  Size,
+  Document,
+  DocumentValidation,
+} from "@/src/api/hyperionSchemas";
 import { Checkbox } from "../ui/checkbox";
 import { Skeleton } from "../ui/skeleton";
 import {
@@ -13,6 +18,13 @@ import { DocumentView } from "./DocumentView";
 import { useDocument } from "@/src/hooks/useDocument";
 import { SecurityFileDialogView } from "./SecurityFileDialogView";
 import PhoneInput from "react-phone-input-2";
+import { BadgeAlertIcon, CheckIcon, ClockIcon, XIcon } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../ui/tooltip";
 
 type ValueType =
   | string
@@ -70,6 +82,32 @@ export const ParticipantCardItem = ({
     return typeof value === "string";
   };
 
+  const validationIcon = (validation: DocumentValidation) => {
+    switch (validation) {
+      case "accepted":
+        return <CheckIcon />;
+      case "refused":
+        return <XIcon />;
+      case "pending":
+        return <ClockIcon />;
+      case "temporary":
+        return <BadgeAlertIcon />;
+    }
+  };
+
+  const validationLabel = (validation: DocumentValidation) => {
+    switch (validation) {
+      case "accepted":
+        return "Le document a été accepté";
+      case "refused":
+        return "Le document a été refusé, veuillez le modifier et le renvoyer";
+      case "pending":
+        return "En attente de validation de la part de l'organisateur";
+      case "temporary":
+        return "Vous vous engagez à fournir le document dans les plus brefs délais";
+    }
+  };
+
   const valueComponent = (value: ValueType) => {
     switch (true) {
       case isPhone && isString(value):
@@ -104,7 +142,7 @@ export const ParticipantCardItem = ({
         const key = value.type as string;
         const file = getDocument(participantId!, key);
         return (
-          <div className="flex flex-row justify-end items-center h-6 col-span-4 w-4/5 ml-auto">
+          <div className="flex flex-row justify-end items-center h-6 col-span-4 w-5/6 ml-auto">
             <Dialog>
               <DialogTrigger asChild>
                 <Button
@@ -136,7 +174,18 @@ export const ParticipantCardItem = ({
                 </div>
               </DialogContent>
             </Dialog>
-            <Checkbox checked={value.validated} className="ml-4" />
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild className="ml-4 h-4 w-4 shrink-0">
+                  {validationIcon(value.validation)}
+                </TooltipTrigger>
+                <TooltipContent>
+                  <div className="flex flex-row text-gray-500 items-center justify-center gap-2 w-[180px]">
+                    {validationLabel(value.validation)}
+                  </div>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
         );
       case isSecurityFile(value):
@@ -170,7 +219,9 @@ export const ParticipantCardItem = ({
         return <span className="col-span-4 text-right">{value}</span>;
       case isNull(value):
         return (
-          <span className={`${placeholder ?? "text-zinc-400"} col-span-4 text-right`}>
+          <span
+            className={`${placeholder ?? "text-zinc-400"} col-span-4 text-right`}
+          >
             {placeholder ?? "Non renseigné"}
           </span>
         );
