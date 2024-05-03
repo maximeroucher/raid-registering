@@ -77,6 +77,7 @@ interface EditParticipantCardItemProps<T extends ValueType> {
   layer?: number;
   needDialog?: boolean;
   participantId?: string;
+  className?: string;
 }
 
 export function EditParticipantCardItem<T extends ValueType>({
@@ -88,6 +89,7 @@ export function EditParticipantCardItem<T extends ValueType>({
   type,
   needDialog,
   participantId,
+  className,
 }: EditParticipantCardItemProps<T>) {
   const [isUploading, setIsUploading] = useState(false);
 
@@ -292,7 +294,7 @@ export function EditParticipantCardItem<T extends ValueType>({
       name={id}
       render={({ field }) => (
         <FormItem>
-          <div className={`grid p-2 grid-cols-6`}>
+          <div className={`grid p-2 grid-cols-6 ${className}`}>
             <FormLabel
               className={`font-semibold text-left my-auto text-md col-span-2`}
             >

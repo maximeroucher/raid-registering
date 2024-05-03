@@ -2,6 +2,7 @@ import {
   Participant,
   ParticipantUpdate,
   Size,
+  DocumentValidation,
 } from "@/src/api/hyperionSchemas";
 import { CardContent } from "../ui/card";
 import { ParticipantCardItem } from "./ParticipantCardItem";
@@ -36,111 +37,113 @@ export const ViewEditParticipantItem = ({
   const { refetchTeam } = useTeam();
   const { assignDocument } = useDocument();
   const { assignSecurityFile } = useSecurityFile();
-  const formSchema = z.object({
-    address: z
-      .string()
-      .min(1, {
-        message: "Veuillez renseigner votre adresse",
-      })
-      .optional(),
-    bikeSize: z
-      .string()
-      .refine(
-        (value) => {
-          return ["xs", "s", "m", "l", "xl"].includes(value);
-        },
-        { message: "Veuillez renseigner une taille de vélo valide" },
-      )
-      .optional(),
-    tShirtSize: z
-      .string()
-      .refine(
-        (value) => {
-          return ["xs", "s", "m", "l", "xl", "no"].includes(value);
-        },
-        { message: "Veuillez renseigner une taille de t-shirt valide" },
-      )
-      .optional(),
-    situation: z.string().optional(),
-    otherSchool: z.string().optional(),
-    company: z.string().optional(),
-    other: z.string().optional(),
-    diet: z.string().optional(),
-    idCard: z
-      .object({
-        name: z.string(),
-        id: z.string().uuid(),
-        updated: z.boolean(),
-        type: z.literal("idCard"),
-      })
-      .partial(),
-    medicalCertificate: z
-      .object({
-        name: z.string(),
-        id: z.string().uuid(),
-        updated: z.boolean(),
-        type: z.literal("medicalCertificate"),
-      })
-      .partial(),
-    studentCard: z
-      .object({
-        name: z.string(),
-        id: z.string().uuid(),
-        updated: z.boolean(),
-        type: z.literal("studentCard"),
-      })
-      .partial(),
-    raidRules: z
-      .object({
-        name: z.string(),
-        id: z.string().uuid(),
-        updated: z.boolean(),
-        type: z.literal("raidRules"),
-      })
-      .partial(),
-    parentAuthorization: z
-      .object({
-        name: z.string(),
-        id: z.string().uuid(),
-        updated: z.boolean(),
-        type: z.literal("parentAuthorization"),
-      })
-      .partial(),
-    securityFile: z
-      .object({
-        allergy: z.string().optional(),
-        asthma: z.boolean(),
-        intensive_care_unit: z.boolean().optional(),
-        intensive_care_unit_when: z.string().optional(),
-        ongoing_treatment: z.string().optional(),
-        sicknesses: z.string().optional(),
-        hospitalization: z.string().optional(),
-        surgical_operation: z.string().optional(),
-        trauma: z.string().optional(),
-        family: z.string().optional(),
-        id: z.string().uuid(),
-        updated: z.boolean(),
-        emergency_person_name: z.string().min(1, {
-          message: "Veuillez renseigner le nom de la personne à contacter",
-        }),
-        emergency_person_firstname: z.string().min(1, {
-          message: "Veuillez renseigner le prénom de la personne à contacter",
-        }),
-        emergency_person_phone: z
-          .string({
-            required_error: "Veuillez renseigner un numéro de téléphone",
-            invalid_type_error: "Veuillez renseigner un numéro de téléphone",
-          })
-          .min(11, {
-            message: "Veuillez renseigner un numéro de téléphone valide",
-          })
-          .max(14, {
-            message: "Veuillez renseigner un numéro de téléphone valide",
+  const formSchema = z
+    .object({
+      address: z
+        .string()
+        .min(1, {
+          message: "Veuillez renseigner votre adresse",
+        })
+        .optional(),
+      bikeSize: z
+        .string()
+        .refine(
+          (value) => {
+            return ["xs", "s", "m", "l", "xl"].includes(value);
+          },
+          { message: "Veuillez renseigner une taille de vélo valide" },
+        )
+        .optional(),
+      tShirtSize: z
+        .string()
+        .refine(
+          (value) => {
+            return ["xs", "s", "m", "l", "xl", "no"].includes(value);
+          },
+          { message: "Veuillez renseigner une taille de t-shirt valide" },
+        )
+        .optional(),
+      situation: z.string().optional(),
+      otherSchool: z.string().optional(),
+      company: z.string().optional(),
+      other: z.string().optional(),
+      diet: z.string().optional(),
+      idCard: z
+        .object({
+          name: z.string(),
+          id: z.string().uuid(),
+          updated: z.boolean(),
+          type: z.literal("idCard"),
+        })
+        .partial(),
+      medicalCertificate: z
+        .object({
+          name: z.string(),
+          id: z.string().uuid(),
+          updated: z.boolean(),
+          type: z.literal("medicalCertificate"),
+        })
+        .partial(),
+      studentCard: z
+        .object({
+          name: z.string(),
+          id: z.string().uuid(),
+          updated: z.boolean(),
+          type: z.literal("studentCard"),
+        })
+        .partial(),
+      raidRules: z
+        .object({
+          name: z.string(),
+          id: z.string().uuid(),
+          updated: z.boolean(),
+          type: z.literal("raidRules"),
+        })
+        .partial(),
+      parentAuthorization: z
+        .object({
+          name: z.string(),
+          id: z.string().uuid(),
+          updated: z.boolean(),
+          type: z.literal("parentAuthorization"),
+        })
+        .partial(),
+      securityFile: z
+        .object({
+          allergy: z.string().optional(),
+          asthma: z.boolean(),
+          intensive_care_unit: z.boolean().optional(),
+          intensive_care_unit_when: z.string().optional(),
+          ongoing_treatment: z.string().optional(),
+          sicknesses: z.string().optional(),
+          hospitalization: z.string().optional(),
+          surgical_operation: z.string().optional(),
+          trauma: z.string().optional(),
+          family: z.string().optional(),
+          id: z.string().uuid(),
+          updated: z.boolean(),
+          emergency_person_name: z.string().min(1, {
+            message: "Veuillez renseigner le nom de la personne à contacter",
           }),
-      })
-      .partial(),
-    attestationHonour: z.boolean().optional(),
-  });
+          emergency_person_firstname: z.string().min(1, {
+            message: "Veuillez renseigner le prénom de la personne à contacter",
+          }),
+          emergency_person_phone: z
+            .string({
+              required_error: "Veuillez renseigner un numéro de téléphone",
+              invalid_type_error: "Veuillez renseigner un numéro de téléphone",
+            })
+            .min(11, {
+              message: "Veuillez renseigner un numéro de téléphone valide",
+            })
+            .max(14, {
+              message: "Veuillez renseigner un numéro de téléphone valide",
+            }),
+          validation: z.enum(["pending", "accepted", "refused", "temporary"]),
+        })
+        .partial(),
+      attestationHonour: z.boolean().optional(),
+    });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -212,6 +215,7 @@ export const ViewEditParticipantItem = ({
           participant?.security_file?.emergency_person_firstname ?? undefined,
         emergency_person_phone:
           participant?.security_file?.emergency_person_phone ?? undefined,
+        validation: participant?.security_file?.validation ?? undefined,
       },
       attestationHonour: participant.attestation_on_honour,
     },
@@ -334,6 +338,7 @@ export const ViewEditParticipantItem = ({
             values?.securityFile?.emergency_person_firstname ?? undefined,
           emergency_person_phone:
             values?.securityFile?.emergency_person_phone ?? undefined,
+          validation: values?.securityFile?.validation ?? undefined,
         },
         attestationHonour: values.attestationHonour,
       });
