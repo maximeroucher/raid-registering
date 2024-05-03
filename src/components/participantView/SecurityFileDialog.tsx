@@ -7,13 +7,11 @@ import { TextSeparator } from "../ui/textSeparator";
 interface SecurityFileDialogProps {
   setIsOpen: (value: boolean) => void;
   form: any;
-  setIsUploading: (value: boolean) => void;
 }
 
 export const SecurityFileDialog = ({
   setIsOpen,
   form,
-  setIsUploading,
 }: SecurityFileDialogProps) => {
   const { setSecurityFile } = useSecurityFile();
 

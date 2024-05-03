@@ -2,7 +2,7 @@ import {
   usePostRaidSecurityFile,
   usePostRaidParticipantParticipantIdSecurityFile,
 } from "@/src/api/hyperionComponents";
-import { SecurityFile } from "../api/hyperionSchemas";
+import { SecurityFileBase } from "../api/hyperionSchemas";
 import { useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "./useAuth";
 
@@ -17,7 +17,7 @@ export const useSecurityFile = () => {
   } = usePostRaidSecurityFile({});
 
   const setSecurityFile = (
-    securityFile: SecurityFile,
+    securityFile: SecurityFileBase,
     callback: () => void,
   ) => {
     mutateAssignSecurityFile(

@@ -14177,7 +14177,7 @@ export type PostRaidSecurityFileError = Fetcher.ErrorWrapper<{
 }>;
 
 export type PostRaidSecurityFileVariables = {
-  body: Schemas.SecurityFile;
+  body: Schemas.SecurityFileBase;
 } & HyperionContext["fetcherOptions"];
 
 /**
@@ -14190,7 +14190,7 @@ export const fetchPostRaidSecurityFile = (
   hyperionFetch<
     Schemas.SecurityFile,
     PostRaidSecurityFileError,
-    Schemas.SecurityFile,
+    Schemas.SecurityFileBase,
     {},
     {},
     {}

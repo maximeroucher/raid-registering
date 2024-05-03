@@ -1345,7 +1345,24 @@ export type SecurityFile = {
   emergency_person_firstname?: string | null;
   emergency_person_name?: string | null;
   emergency_person_phone?: string | null;
+  id: string;
   validation: DocumentValidation;
+};
+
+export type SecurityFileBase = {
+  allergy?: string | null;
+  asthma: boolean;
+  intensive_care_unit?: boolean | null;
+  intensive_care_unit_when?: string | null;
+  ongoing_treatment?: string | null;
+  sicknesses?: string | null;
+  hospitalization?: string | null;
+  surgical_operation?: string | null;
+  trauma?: string | null;
+  family?: string | null;
+  emergency_person_firstname?: string | null;
+  emergency_person_name?: string | null;
+  emergency_person_phone?: string | null;
   id: string;
 };
 

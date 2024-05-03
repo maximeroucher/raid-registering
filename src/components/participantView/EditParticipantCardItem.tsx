@@ -209,7 +209,6 @@ export function EditParticipantCardItem<T extends ValueType>({
               <SecurityFileDialog
                 setIsOpen={setIsOpen}
                 form={form}
-                setIsUploading={setIsUploading}
               />
             </DialogContent>
           </Dialog>

@@ -108,6 +108,19 @@ export const ParticipantCardItem = ({
     }
   };
 
+  const securityValidationLabel = (validation: DocumentValidation) => {
+    switch (validation) {
+      case "accepted":
+        return "Vous avez renseigné la personne à contacter en cas d'urgence";
+      case "refused":
+        return "Veuillez renseigner la personne à contact en cas d'urgence";
+      case "pending":
+        return "En attente de validation de la part de l'organisateur";
+      case "temporary":
+        return "Veuillez compléter la personne à contacter en cas d'urgence"
+    }
+  }
+
   const valueComponent = (value: ValueType) => {
     switch (true) {
       case isPhone && isString(value):
@@ -212,7 +225,18 @@ export const ParticipantCardItem = ({
                 </div>
               </DialogContent>
             </Dialog>
-            <Checkbox checked={true} className="ml-4" />
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild className="ml-4 h-4 w-4 shrink-0">
+                  {validationIcon(value.validation)}
+                </TooltipTrigger>
+                <TooltipContent>
+                  <div className="flex flex-row text-gray-500 items-center justify-center gap-2 w-[180px]">
+                    {securityValidationLabel(value.validation)}
+                  </div>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
         );
       case isString(value):
