@@ -1345,6 +1345,7 @@ export type SecurityFile = {
   emergency_person_firstname?: string | null;
   emergency_person_name?: string | null;
   emergency_person_phone?: string | null;
+  validation: DocumentValidation;
   id: string;
 };
 
