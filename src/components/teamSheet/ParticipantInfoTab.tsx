@@ -9,6 +9,8 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
+import { format } from "date-fns";
+import { fr } from "date-fns/locale";
 
 interface ParticipantInfoTabProps {
   participant: Participant;
@@ -48,6 +50,10 @@ export const ParticipantInfoTab = ({
         </CardDescription>
       </CardHeader>
       <CardContent>
+        <ParticipantCardItem
+          label="Date de naissance"
+          value={format(participant.birthday, "PPP", { locale: fr })}
+        />
         <ParticipantCardItem label="Email" value={participant.email} />
         <ParticipantCardItem label="Adresse" value={participant.address} />
         <ParticipantCardItem
