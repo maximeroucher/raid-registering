@@ -2,7 +2,6 @@ import { useSecurityFile } from "@/src/hooks/useSecurityFile";
 import { Button } from "../ui/button";
 import { EditParticipantCardItem, ValueTypes } from "./EditParticipantCardItem";
 import { SecurityFile } from "@/src/api/hyperionSchemas";
-import { TextSeparator } from "../ui/textSeparator";
 import {
   Accordion,
   AccordionContent,
