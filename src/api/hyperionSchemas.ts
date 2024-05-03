@@ -1144,6 +1144,7 @@ export type Participant = {
   raid_rules?: Document | null;
   parent_authorization?: Document | null;
   attestation_on_honour: boolean;
+  is_minor: boolean;
 };
 
 export type ParticipantBase = {
