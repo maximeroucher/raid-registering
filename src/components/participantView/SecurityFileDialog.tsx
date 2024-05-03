@@ -29,6 +29,8 @@ export const SecurityFileDialog = ({
   const isTemporary = validation === "temporary";
   const isPending = !isValidated && !isRefused && !isTemporary;
 
+  const isFieldMissing = form.formState.errors["securityFile"] !== undefined;
+
   function onValidate(_: any) {
     form.setValue("securityFile.updated", true);
     if (form.getValues("securityFile.id") === undefined) {
@@ -140,7 +142,9 @@ export const SecurityFileDialog = ({
         </AccordionItem>
         <AccordionItem value="emergencyPerson">
           <AccordionTrigger>
-            <div className="flex flex-row mr-auto items-center">
+            <div
+              className={`flex flex-row mr-auto items-center ${isFieldMissing && "text-destructive"}`}
+            >
               {isValidated && <HiCheck className="mr-4" />}
               {isRefused && <HiX className="mr-4" />}
               {isTemporary && <BadgeAlertIcon className="mr-4 h-4 w-4" />}
