@@ -13,6 +13,7 @@ import {
   meetingPlaces,
 } from "@/src/infra/comboboxValues";
 import { CircularProgressBar } from "../ui/circularProgressBar";
+import { ProgressBadge } from "../ui/progressBadge";
 
 export const columns: ColumnDef<TeamPreview>[] = [
   {
@@ -102,11 +103,7 @@ export const columns: ColumnDef<TeamPreview>[] = [
   {
     accessorKey: "validation_progress",
     header: ({ column }) => (
-      <DataTableColumnHeader
-        column={column}
-        title="Inscription"
-        className=""
-      />
+      <DataTableColumnHeader column={column} title="Inscription" className="" />
     ),
     cell: ({ row }) => {
       return (
@@ -137,16 +134,10 @@ export const columns: ColumnDef<TeamPreview>[] = [
         ((row.getValue("second") as ParticipantPreview | null)
           ?.number_of_document ?? 0);
       return (
-        <div className="flex w-[110px] items-center">
-          <Badge variant="outline">
-            <CircularProgressBar
-              value={(number_of_validated_document / number_of_document) * 100}
-            />
-            <span className="ml-2">
-              {number_of_validated_document} / {number_of_document} {"validés"}
-            </span>
-          </Badge>
-        </div>
+        <ProgressBadge
+          progress={number_of_validated_document}
+          total={number_of_document}
+        />
       );
     },
     enableSorting: false,

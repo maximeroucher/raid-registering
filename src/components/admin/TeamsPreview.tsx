@@ -22,6 +22,7 @@ import { Skeleton } from "../ui/skeleton";
 import { TeamPreview } from "@/src/api/hyperionSchemas";
 import { CircularProgressBar } from "../ui/circularProgressBar";
 import { useRouter } from "next/navigation";
+import { ProgressBadge } from "../ui/progressBadge";
 
 interface TeamsPreviewProps {
   teams?: TeamPreview[];
@@ -124,21 +125,10 @@ export const TeamsPreview = ({ teams, isLoading }: TeamsPreviewProps) => {
                           )}
                         </TableCell>
                         <TableCell className="max-md:hidden">
-                          <div className="flex items-center w-[110px]">
-                            <Badge variant="outline">
-                              <CircularProgressBar
-                                value={
-                                  (number_of_validated_document /
-                                    number_of_document) *
-                                  100
-                                }
-                              />
-                              <span className="ml-2">
-                                {number_of_validated_document} /{" "}
-                                {number_of_document} {"validés"}
-                              </span>
-                            </Badge>
-                          </div>
+                          <ProgressBadge
+                            progress={number_of_validated_document}
+                            total={number_of_document}
+                          />
                         </TableCell>
                         <TableCell className="text-right">
                           {team?.validation_progress.toFixed(0)}%
