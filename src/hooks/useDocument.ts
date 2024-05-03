@@ -82,7 +82,7 @@ export const useDocument = () => {
       },
     },
     {
-      enabled: documentId !== "",
+      enabled: documentId !== "" && documentId !== undefined,
     },
   );
 
