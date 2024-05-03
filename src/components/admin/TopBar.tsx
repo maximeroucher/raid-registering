@@ -5,20 +5,23 @@ import Link from "next/link";
 import { Menu } from "lucide-react";
 import { Button } from "@/src/components/ui/button";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/src/components/ui/dropdown-menu";
+  Menubar,
+  MenubarContent,
+  MenubarMenu,
+  MenubarSeparator,
+  MenubarTrigger,
+} from "../ui/menubar";
 import { Sheet, SheetContent, SheetTrigger } from "@/src/components/ui/sheet";
 import { ThemeButton } from "../ui/themeButton";
 import { Skeleton } from "../ui/skeleton";
 import { useUser } from "@/src/hooks/useUser";
 import { LogoutButton } from "../userSheet/logoutButton";
+import { useTheme } from "next-themes";
 
 export const TopBar = () => {
   const { me } = useUser();
-  const currentPath = typeof window !== "undefined" ? window.location.pathname : "";
+  const currentPath =
+    typeof window !== "undefined" ? window.location.pathname : "";
 
   function buildNavigation(path: string, label: string) {
     const isPathSelected = currentPath === path;
@@ -62,18 +65,19 @@ export const TopBar = () => {
       </Sheet>
       <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4  mx-10 max-md:mx-0">
         <div className="flex flex-row ml-auto">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost">
-                {me?.firstname === undefined || me?.name === undefined ? (
-                  <>
-                    {/* <Skeleton className="w-10 h-10 rounded-full" />
+          <Menubar>
+            <MenubarMenu>
+              <MenubarTrigger asChild>
+                <Button variant="ghost">
+                  {me?.firstname === undefined || me?.name === undefined ? (
+                    <>
+                      {/* <Skeleton className="w-10 h-10 rounded-full" />
               <div className="mr-2" /> */}
-                    <Skeleton className="w-24 h-6" />
-                  </>
-                ) : (
-                  <>
-                    {/* <Avatar className="mr-2 mb-1">
+                      <Skeleton className="w-24 h-6" />
+                    </>
+                  ) : (
+                    <>
+                      {/* <Avatar className="mr-2 mb-1">
                 {profilePicture && (
                   <AvatarImage
                     src={URL.createObjectURL(profilePicture)}
@@ -84,19 +88,18 @@ export const TopBar = () => {
                   {me.firstname.charAt(0) + me.name.charAt(0)}
                 </AvatarFallback>
               </Avatar> */}
-                    {me.firstname + " " + me.name}
-                  </>
-                )}
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem>
+                      {me.firstname + " " + me.name}
+                    </>
+                  )}
+                </Button>
+              </MenubarTrigger>
+              <MenubarContent align="end">
+                <ThemeButton />
+                <MenubarSeparator />
                 <LogoutButton />
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-          <div className="w-4"></div>
-          <ThemeButton />
+              </MenubarContent>
+            </MenubarMenu>
+          </Menubar>
         </div>
       </div>
     </header>

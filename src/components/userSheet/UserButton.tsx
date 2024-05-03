@@ -12,27 +12,22 @@ import { useParticipant } from "@/src/hooks/useParticipant";
 import { Skeleton } from "../ui/skeleton";
 import { ViewEditUserInfo } from "./ViewEditUserInfo";
 import { LogoutButton } from "./logoutButton";
-import { Moon, Sun, SunMoon } from "lucide-react";
 import {
   Menubar,
   MenubarContent,
   MenubarItem,
   MenubarMenu,
   MenubarSeparator,
-  MenubarShortcut,
-  MenubarSub,
-  MenubarSubContent,
-  MenubarSubTrigger,
   MenubarTrigger,
 } from "../ui/menubar";
 import { useTheme } from "next-themes";
+import { ThemeButton } from "../ui/themeButton";
 
 export const UserButton = () => {
   const { me } = useParticipant();
   // const { profilePicture } = useProfilePicture();
   const [isOpened, setIsOpened] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
-  const { setTheme } = useTheme();
 
   function onOpenChange() {
     if (isOpened) {
@@ -73,29 +68,7 @@ export const UserButton = () => {
           )}
         </MenubarTrigger>
         <MenubarContent>
-          <MenubarSub>
-            <MenubarSubTrigger>Thème</MenubarSubTrigger>
-            <MenubarSubContent>
-              <MenubarItem onClick={() => setTheme("light")}>
-                Clair
-                <MenubarShortcut>
-                  <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                </MenubarShortcut>
-              </MenubarItem>
-              <MenubarItem onClick={() => setTheme("dark")}>
-                Sombre
-                <MenubarShortcut>
-                  <Moon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                </MenubarShortcut>
-              </MenubarItem>
-              <MenubarItem onClick={() => setTheme("system")}>
-                Système
-                <MenubarShortcut>
-                  <SunMoon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                </MenubarShortcut>
-              </MenubarItem>
-            </MenubarSubContent>
-          </MenubarSub>
+          <ThemeButton />
           <MenubarSeparator />
           <Sheet open={isOpened} onOpenChange={onOpenChange}>
             <SheetTrigger asChild>
@@ -123,7 +96,6 @@ export const UserButton = () => {
           </Sheet>
           <MenubarSeparator />
           <MenubarItem onClick={contactUs}>Nous contacter</MenubarItem>
-
           <MenubarSeparator />
           <LogoutButton />
         </MenubarContent>
