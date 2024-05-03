@@ -72,14 +72,16 @@ export const ParticipantDocumentCard = ({
               validateDocument={validateDocument}
             />
           )}
-          <DocumentItem
-            value="Autorisation parentale"
-            document={participant.parent_authorization ?? null}
-            index={4}
-            setDocument={setDocument}
-            downloadDocument={downloadDocument}
-            validateDocument={validateDocument}
-          />
+          {participant.is_minor && (
+            <DocumentItem
+              value="Autorisation parentale"
+              document={participant.parent_authorization ?? null}
+              index={4}
+              setDocument={setDocument}
+              downloadDocument={downloadDocument}
+              validateDocument={validateDocument}
+            />
+          )}
         </Accordion>
       </CardContent>
     </>

@@ -488,16 +488,18 @@ export const ViewEditParticipantItem = ({
                 form={form}
                 type={ValueTypes.SECURITYFILE}
               />
+              {participant.is_minor && (
+                <EditParticipantCardItem
+                  label="Autorisation parentale"
+                  id="parentAuthorization"
+                  form={form}
+                  type={ValueTypes.DOCUMENT}
+                  participantId={participant.id!}
+                />
+              )}
               <EditParticipantCardItem
                 label="Règlement du raid"
                 id="raidRules"
-                form={form}
-                type={ValueTypes.DOCUMENT}
-                participantId={participant.id!}
-              />
-              <EditParticipantCardItem
-                label="Autorisation parentale"
-                id="parentAuthorization"
                 form={form}
                 type={ValueTypes.DOCUMENT}
                 participantId={participant.id!}
@@ -553,14 +555,16 @@ export const ViewEditParticipantItem = ({
                 label="Fiche de sécurité"
                 value={participant.security_file}
               />
+              {participant.is_minor && (
+                <ParticipantCardItem
+                  label="Autorisation parentale"
+                  value={participant.parent_authorization}
+                  participantId={participant.id!}
+                />
+              )}
               <ParticipantCardItem
                 label="Règlement du raid"
                 value={participant.raid_rules}
-                participantId={participant.id!}
-              />
-              <ParticipantCardItem
-                label="Autorisation parentale"
-                value={participant.parent_authorization}
                 participantId={participant.id!}
               />
               <ParticipantCardItem
