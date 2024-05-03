@@ -1,4 +1,8 @@
-import { Participant, Document, DocumentValidation } from "@/src/api/hyperionSchemas";
+import {
+  Participant,
+  Document,
+  DocumentValidation,
+} from "@/src/api/hyperionSchemas";
 import { Accordion } from "../ui/accordion";
 import { CardHeader, CardTitle, CardContent } from "../ui/card";
 import { DocumentItem } from "./DocumentItem";
@@ -8,7 +12,11 @@ interface ParticipantDocumentCardProps {
   participant: Participant;
   setDocument: (document: Document) => void;
   downloadDocument: (document: Document) => void;
-  validateDocument: (documentId: string, validation: DocumentValidation) => void;
+  validateDocument: (
+    documentId: string,
+    validation: DocumentValidation,
+    callback: () => void,
+  ) => void;
   isValidationLoading: boolean;
 }
 

@@ -8,8 +8,8 @@ import {
 
 import { HiCheck, HiDownload, HiX } from "react-icons/hi";
 import { Button } from "../ui/button";
-import { LoadingButton } from "../ui/loadingButton";
 import { BadgeAlertIcon, ClockIcon } from "lucide-react";
+import { DocumentValidationButton } from "./DocumentValidationButton";
 
 interface DocumentItemProps {
   value: string;
@@ -20,6 +20,7 @@ interface DocumentItemProps {
   validateDocument: (
     documentId: string,
     validation: DocumentValidation,
+    callback: () => void,
   ) => void;
   isValidationLoading: boolean;
 }
@@ -62,32 +63,27 @@ export const DocumentItem = ({
           <div className="flex flex-col gap-4">
             <div className="flex grid-cols-2 gap-4">
               {!isValidated && (
-                <LoadingButton
-                  isLoading={isValidationLoading}
+                <DocumentValidationButton
                   label="Valider"
-                  className="w-full"
-                  onClick={(_) => {
-                    validateDocument(document.id, "accepted");
+                  validateDocument={(callback) => {
+                    validateDocument(document.id, "accepted", callback);
                   }}
                 />
               )}
-              {(!isValidated || !isTemporary) && (
-                <LoadingButton
-                  isLoading={isValidationLoading}
-                  label="Valider temporairement"
-                  className="w-full"
-                  onClick={(_) => {
-                    validateDocument(document.id, "temporary");
-                  }}
-                />
-              )}
+              {(!isValidated && !isTemporary) &&
+                document.type === "medicalCertificate" && (
+                  <DocumentValidationButton
+                    label="Valider temporairement"
+                    validateDocument={(callback) => {
+                      validateDocument(document.id, "temporary", callback);
+                    }}
+                  />
+                )}
               {!isRefused && (
-                <LoadingButton
-                  isLoading={isValidationLoading}
+                <DocumentValidationButton
                   label="Refuser"
-                  className="w-full"
-                  onClick={(_) => {
-                    validateDocument(document.id, "refused");
+                  validateDocument={(callback) => {
+                    validateDocument(document.id, "refused", callback);
                   }}
                 />
               )}

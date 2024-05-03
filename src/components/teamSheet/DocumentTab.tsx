@@ -44,10 +44,11 @@ export const DocumentTab = ({ team }: DocumentTabProps) => {
     }
   }
 
-  function validateCallback(documentId: string, validation: DocumentValidation) {
+  function validateCallback(documentId: string, validation: DocumentValidation, callback: () => void)  {
     setDocumentValidation(documentId, validation, () => {
       refetchTeam();
       refetchTeams();
+      callback();
       toast({
         title: "Document validé avec succès",
       });
