@@ -43,7 +43,6 @@ export const ParticipantDocumentCard = ({
             setDocument={setDocument}
             downloadDocument={downloadDocument}
             validateDocument={validateDocument}
-            isValidationLoading={isValidationLoading}
           />
           <DocumentItem
             value="Certificat médical"
@@ -52,7 +51,6 @@ export const ParticipantDocumentCard = ({
             setDocument={setDocument}
             downloadDocument={downloadDocument}
             validateDocument={validateDocument}
-            isValidationLoading={isValidationLoading}
           />
           <DocumentItem
             value="Réglement"
@@ -61,7 +59,6 @@ export const ParticipantDocumentCard = ({
             setDocument={setDocument}
             downloadDocument={downloadDocument}
             validateDocument={validateDocument}
-            isValidationLoading={isValidationLoading}
           />
           {["centrale", "otherschool"].includes(
             getSituationLabel(participant.situation ?? undefined) ?? "",
@@ -73,7 +70,6 @@ export const ParticipantDocumentCard = ({
               setDocument={setDocument}
               downloadDocument={downloadDocument}
               validateDocument={validateDocument}
-              isValidationLoading={isValidationLoading}
             />
           )}
           <DocumentItem
@@ -83,7 +79,6 @@ export const ParticipantDocumentCard = ({
             setDocument={setDocument}
             downloadDocument={downloadDocument}
             validateDocument={validateDocument}
-            isValidationLoading={isValidationLoading}
           />
         </Accordion>
       </CardContent>

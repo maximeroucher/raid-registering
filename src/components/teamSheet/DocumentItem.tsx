@@ -22,7 +22,6 @@ interface DocumentItemProps {
     validation: DocumentValidation,
     callback: () => void,
   ) => void;
-  isValidationLoading: boolean;
 }
 
 export const DocumentItem = ({
@@ -32,7 +31,6 @@ export const DocumentItem = ({
   setDocument,
   downloadDocument,
   validateDocument,
-  isValidationLoading,
 }: DocumentItemProps) => {
   const isValidated = (document && document.validation === "accepted") || false;
   const isRefused = (document && document.validation === "refused") || false;
