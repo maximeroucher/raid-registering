@@ -1,11 +1,7 @@
 "use client";
 
 import { Team } from "@/src/api/hyperionSchemas";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
+import { Card, CardHeader, CardTitle } from "../ui/card";
 import { Skeleton } from "../ui/skeleton";
 import { Button } from "../ui/button";
 import {
@@ -24,8 +20,6 @@ import {
 } from "@/src/infra/comboboxValues";
 import { TeamInfoCard } from "./TeamInfoCard";
 import { useInformation } from "@/src/hooks/useInformation";
-import { format } from "date-fns";
-import { fr } from "date-fns/locale";
 import { formatDateRange, getDaysLeft } from "@/src/utils/dateFormat";
 
 interface TeamCardProps {
@@ -35,6 +29,10 @@ interface TeamCardProps {
 export const TeamCard = ({ team }: TeamCardProps) => {
   const [isEdit, setIsEdit] = useState(false);
   const { information } = useInformation();
+
+  const isRegisteringOpen = information?.raid_registering_end_date
+    ? getDaysLeft(information?.raid_registering_end_date) >= 0
+    : false;
 
   function toggleEdit() {
     setIsEdit(!isEdit);
@@ -51,7 +49,10 @@ export const TeamCard = ({ team }: TeamCardProps) => {
       title: "Dates",
       value:
         information?.raid_start_date && information?.raid_end_date
-          ? formatDateRange(information.raid_start_date, information.raid_end_date)
+          ? formatDateRange(
+              information.raid_start_date,
+              information.raid_end_date,
+            )
           : "Dates non renseignées",
       description: "week-end complet",
       unit: <HiOutlineCalendar className="h-4 w-4" />,
@@ -60,9 +61,11 @@ export const TeamCard = ({ team }: TeamCardProps) => {
       title: "Inscription",
       value: `${team?.validation_progress.toFixed(0)}%`,
       description: information?.raid_registering_end_date
-        ? `${getDaysLeft(
-            information?.raid_registering_end_date,
-          )} jours restants`
+        ? isRegisteringOpen
+          ? `${getDaysLeft(
+              information?.raid_registering_end_date,
+            )} jours restants`
+          : "Inscriptions fermées"
         : "Date de fin non renseignée",
       unit: <span>%</span>,
     },
@@ -95,24 +98,28 @@ export const TeamCard = ({ team }: TeamCardProps) => {
                 </>
               )}
             </CardTitle>
-            {isEdit && team ? (
-              <Button
-                variant="destructive"
-                onClick={toggleEdit}
-                className="w-[110px]"
-              >
-                <HiX className="mr-2 h-4 w-4" />
-                Annuler
-              </Button>
-            ) : (
-              <Button
-                variant="outline"
-                onClick={toggleEdit}
-                className="w-[110px]"
-              >
-                <HiPencil className="mr-2 h-4 w-4" />
-                Éditer
-              </Button>
+            {isRegisteringOpen && (
+              <>
+                {isEdit && team ? (
+                  <Button
+                    variant="destructive"
+                    onClick={toggleEdit}
+                    className="w-[110px]"
+                  >
+                    <HiX className="mr-2 h-4 w-4" />
+                    Annuler
+                  </Button>
+                ) : (
+                  <Button
+                    variant="outline"
+                    onClick={toggleEdit}
+                    className="w-[110px]"
+                  >
+                    <HiPencil className="mr-2 h-4 w-4" />
+                    Éditer
+                  </Button>
+                )}
+              </>
             )}
           </div>
           <div className="h-4"></div>
