@@ -1,6 +1,6 @@
 import { Button } from "@/src/components/ui/button";
 import { useState } from "react";
-import { addYears, format, toDate } from "date-fns";
+import { addYears, toDate } from "date-fns";
 import { DatePicker } from "../ui/datePicker";
 import { CardLayout } from "./CardLayout";
 import { useInformation } from "@/src/hooks/useInformation";
