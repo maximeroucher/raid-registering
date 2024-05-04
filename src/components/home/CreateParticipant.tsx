@@ -95,7 +95,7 @@ export const CreateParticipant = ({
     createParticipant(
       {
         ...values,
-        birthday: dateString,
+        birthday: dateString!,
       },
       () => {
         if (inviteToken === undefined) {
