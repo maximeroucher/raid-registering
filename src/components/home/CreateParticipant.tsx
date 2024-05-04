@@ -37,7 +37,7 @@ export const CreateParticipant = ({
   const { createParticipant } = useParticipant();
   const { createTeam, refetchTeam } = useTeam();
   const { inviteToken } = useInviteTokenStore();
-  const { joinTeam, isJoinLoading } = useInviteToken();
+  const { joinTeam } = useInviteToken();
   const [isLoading, setIsLoading] = useState(false);
 
   const formSchema = z.object({

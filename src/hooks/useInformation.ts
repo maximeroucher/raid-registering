@@ -29,8 +29,8 @@ export const useInformation = () => {
     usePatchRaidInformation({});
 
   const updateInformation = (
+    information: RaidInformation,
     callback: () => void,
-    information?: RaidInformation,
   ) => {
     mutateUpdateInformation(
       {
