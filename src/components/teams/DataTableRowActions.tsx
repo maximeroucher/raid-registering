@@ -20,6 +20,8 @@ import {
 
 import { TeamPreview } from "@/src/api/hyperionSchemas";
 import { difficulties } from "@/src/infra/comboboxValues";
+import { HiTrash, HiX } from "react-icons/hi";
+import { MergeIcon, UserRoundMinusIcon } from "lucide-react";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -28,40 +30,39 @@ interface DataTableRowActionsProps<TData> {
 export function DataTableRowActions<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
-  const task = row.original as TeamPreview;
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className="flex h-8 w-4 p-0 data-[state=open]:bg-muted"
+          className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
         >
           <DotsHorizontalIcon className="h-4 w-4" />
           <span className="sr-only">Open menu</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[160px]">
-        <DropdownMenuItem>Edit</DropdownMenuItem>
-        <DropdownMenuItem>Make a copy</DropdownMenuItem>
-        <DropdownMenuItem>Favorite</DropdownMenuItem>
+      <DropdownMenuContent align="end" className="w-[180px]">
+        {row.getValue("second") === null ? (
+          <DropdownMenuItem>
+            Fusionner avec une autre équipe
+            <DropdownMenuShortcut>
+              <MergeIcon className="h-4 w-4" />
+            </DropdownMenuShortcut>
+          </DropdownMenuItem>
+        ) : (
+          <DropdownMenuItem>
+            Retirer un member
+            <DropdownMenuShortcut>
+              <UserRoundMinusIcon className="h-4 w-4" />
+            </DropdownMenuShortcut>
+          </DropdownMenuItem>
+        )}
         <DropdownMenuSeparator />
-        <DropdownMenuSub>
-          <DropdownMenuSubTrigger>Parcours</DropdownMenuSubTrigger>
-          <DropdownMenuSubContent>
-            <DropdownMenuRadioGroup value={task.name}>
-              {difficulties.map((label) => (
-                <DropdownMenuRadioItem key={label.value} value={label.value}>
-                  {label.label}
-                </DropdownMenuRadioItem>
-              ))}
-            </DropdownMenuRadioGroup>
-          </DropdownMenuSubContent>
-        </DropdownMenuSub>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          Delete
-          <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+        <DropdownMenuItem className="text-destructive">
+          {"Supprimer l'équipe"}
+          <DropdownMenuShortcut>
+            <HiTrash className="h-4 w-4" />
+          </DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
