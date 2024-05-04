@@ -2,7 +2,7 @@ import { Button } from "@/src/components/ui/button";
 import { useState } from "react";
 import { RangeDatePicker } from "../ui/RangeDatePicker";
 import { DateRange } from "react-day-picker";
-import { formatDateRange } from "@/src/utils/dateFormat";
+import { apiFormatDate, formatDateRange } from "@/src/utils/dateFormat";
 import { CardLayout } from "./CardLayout";
 import { useInformation } from "@/src/hooks/useInformation";
 import { LoadingButton } from "../ui/loadingButton";
@@ -26,8 +26,8 @@ export const RaidDate = () => {
       updateInformation(
         {
           ...information,
-          raid_start_date: dateRange?.from?.toISOString().split("T")[0],
-          raid_end_date: dateRange?.to?.toISOString().split("T")[0],
+          raid_start_date: apiFormatDate(dateRange?.from),
+          raid_end_date: apiFormatDate(dateRange?.to),
         },
         () => {
           setIsLoading(false);

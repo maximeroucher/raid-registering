@@ -16,7 +16,7 @@ import { HiPencil, HiCheck, HiX } from "react-icons/hi";
 import { useParticipant } from "@/src/hooks/useParticipant";
 import { toast } from "../ui/use-toast";
 import { ReloadIcon } from "@radix-ui/react-icons";
-import { formatDate } from "@/src/utils/dateFormat";
+import { apiFormatDate, formatDate } from "@/src/utils/dateFormat";
 
 interface UserButtonProps {
   me: Participant;
@@ -86,7 +86,7 @@ export const ViewEditUserInfo = ({
       setIsEdit(!isEdit);
       return;
     }
-    const dateString = values.birthday.toISOString().split("T")[0];
+    const dateString = apiFormatDate(values.birthday);
     const updatedParticipant: ParticipantUpdate = {
       ...values,
       birthday: dateString,
@@ -222,9 +222,7 @@ export const ViewEditUserInfo = ({
               <UserInfoView
                 label="Date de naissance"
                 value={
-                  me?.birthday
-                    ? formatDate(me!.birthday)
-                    : "Non renseigné"
+                  me?.birthday ? formatDate(me!.birthday) : "Non renseigné"
                 }
               />
             </div>

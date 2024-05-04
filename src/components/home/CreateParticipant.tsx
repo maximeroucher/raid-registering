@@ -22,6 +22,7 @@ import { useTeam } from "@/src/hooks/useTeam";
 import { useInviteTokenStore } from "@/src/stores/inviteTokenStore";
 import { useInviteToken } from "@/src/hooks/useInviteToken";
 import { LoadingButton } from "../ui/loadingButton";
+import { apiFormatDate } from "@/src/utils/dateFormat";
 
 interface CreateParticipantProps {
   user: CoreUser;
@@ -89,7 +90,7 @@ export const CreateParticipant = ({
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    const dateString = values.birthday.toISOString().split("T")[0];
+    const dateString = apiFormatDate(values.birthday);
     setIsLoading(true);
     createParticipant(
       {
