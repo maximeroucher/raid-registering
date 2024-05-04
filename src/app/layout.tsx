@@ -38,6 +38,7 @@ export default function RootLayout({
       <head>
         <meta charSet="utf-8" />
         <title>Inscription Raid</title>
+        <link rel="shortcut icon" href="/favicon.ico" />
         <PlausibleProvider domain="raid-registering.myecl.fr" />
       </head>
       <body className={inter.className}>
