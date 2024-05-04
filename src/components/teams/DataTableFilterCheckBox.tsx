@@ -2,6 +2,7 @@ import * as React from "react";
 import { Column } from "@tanstack/react-table";
 
 import { Checkbox } from "../ui/checkbox";
+import { Button } from "../ui/button";
 
 interface DataTableFilterCheckBoxProps<TData, TValue> {
   column?: Column<TData, TValue>;
@@ -17,25 +18,29 @@ export function DataTableFilterCheckBox<TData, TValue>({
   const filterValues = Array.from(selectedValues);
   const isSelected = filterValues.length > 0;
 
+  const toggleValue = () => {
+    if (isSelected) {
+      selectedValues.delete(null);
+    } else {
+      selectedValues.add(null);
+    }
+    const filterValues = Array.from(selectedValues);
+    console.log(filterValues);
+    column?.setFilterValue(filterValues.length ? filterValues : undefined);
+  };
+
   return (
-    <div className="h-8 border-dashed border rounded-md items-center flex px-3 justify-center whitespace-nowrap text-sm font-medium ">
+    <Button
+      variant="ghost"
+      className="h-8 border-dashed border"
+      onClick={toggleValue}
+    >
       <Checkbox
         checked={isSelected}
         className="mr-2"
-        onCheckedChange={(_) => {
-          if (isSelected) {
-            selectedValues.delete(null);
-          } else {
-            selectedValues.add(null);
-          }
-          const filterValues = Array.from(selectedValues);
-          console.log(filterValues);
-          column?.setFilterValue(
-            filterValues.length ? filterValues : undefined,
-          );
-        }}
+        onCheckedChange={toggleValue}
       />
       {title}
-    </div>
+    </Button>
   );
 }
