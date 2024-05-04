@@ -36,6 +36,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta charSet="utf-8" />
+        <title>Inscription Raid</title>
         <PlausibleProvider domain="raid-registering.myecl.fr" />
       </head>
       <body className={inter.className}>
