@@ -56,7 +56,7 @@ export function DataTableFacetedFilter<TData, TValue>({
                     variant="secondary"
                     className="rounded-sm px-1 font-normal"
                   >
-                    {selectedValues.size} selected
+                    {selectedValues.size} sélectionnés
                   </Badge>
                 ) : (
                   options
@@ -80,7 +80,9 @@ export function DataTableFacetedFilter<TData, TValue>({
         <Command>
           <CommandInput placeholder={title} />
           <CommandList>
-            <CommandEmpty>No results found.</CommandEmpty>
+            <CommandEmpty>
+              Aucun résultat
+            </CommandEmpty>
             <CommandGroup>
               {options.map((option) => {
                 const isSelected = selectedValues.has(option.value);
