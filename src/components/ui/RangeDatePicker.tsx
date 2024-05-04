@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { fr } from "date-fns/locale";
 
@@ -10,6 +9,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 import { Button } from "./button";
 import { Calendar } from "./calendar";
 import { DateRange } from "react-day-picker";
+import { formatDateRange } from "@/src/utils/dateFormat";
 
 interface RangeDatePickerProps {
   dateRange?: DateRange;
@@ -35,9 +35,7 @@ export function RangeDatePicker({
         >
           <CalendarIcon className="mr-2 h-4 w-4" />
           {dateRange && dateRange.from && dateRange.to ? (
-            format(dateRange.from, "PPP", { locale: fr }) +
-            " - " +
-            format(dateRange.to, "PPP", { locale: fr })
+            formatDateRange(dateRange.from.toString(), dateRange.to.toString())
           ) : (
             <span>Sélectionner une période</span>
           )}

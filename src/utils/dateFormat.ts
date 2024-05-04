@@ -18,11 +18,11 @@ export function formatDateRange(start: string, end: string) {
   const endDateMonth = format(new Date(end), "MMMM", { locale: fr });
   const startDateYear = format(new Date(start), "yyyy", { locale: fr });
   const endDateYear = format(new Date(end), "yyyy", { locale: fr });
-  if (startDateYear === endDateYear) {
+  if (startDateYear !== endDateYear) {
     return `${startDateDay} ${startDateMonth} ${startDateYear} - ${endDateDay} ${endDateMonth} ${endDateYear}`;
   }
   if (startDateMonth !== endDateMonth) {
-    return `${startDateDay} - ${endDateDay} ${startDateMonth} ${startDateYear}`;
+    return `${startDateDay} ${startDateMonth} - ${endDateDay} ${endDateMonth} ${startDateYear}`;
   }
-  return `${startDateDay} ${startDateMonth} - ${endDateDay} ${endDateMonth} ${startDateYear}`;
+  return `${startDateDay} - ${endDateDay} ${startDateMonth} ${startDateYear}`;
 }
