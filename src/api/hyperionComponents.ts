@@ -14529,6 +14529,109 @@ export const usePostRaidTeamsJoinToken = (
   });
 };
 
+export type GetRaidInformationError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetRaidInformationVariables = HyperionContext["fetcherOptions"];
+
+/**
+ * Get raid information
+ */
+export const fetchGetRaidInformation = (
+  variables: GetRaidInformationVariables,
+  signal?: AbortSignal,
+) =>
+  hyperionFetch<
+    Schemas.RaidInformation,
+    GetRaidInformationError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/raid/information", method: "get", ...variables, signal });
+
+/**
+ * Get raid information
+ */
+export const useGetRaidInformation = <TData = Schemas.RaidInformation,>(
+  variables: GetRaidInformationVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      Schemas.RaidInformation,
+      GetRaidInformationError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >,
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    Schemas.RaidInformation,
+    GetRaidInformationError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/raid/information",
+      operationId: "getRaidInformation",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetRaidInformation({ ...fetcherOptions, ...variables }, signal),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type PatchRaidInformationError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type PatchRaidInformationVariables = {
+  body?: Schemas.RaidInformation;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Update raid information
+ */
+export const fetchPatchRaidInformation = (
+  variables: PatchRaidInformationVariables,
+  signal?: AbortSignal,
+) =>
+  hyperionFetch<
+    undefined,
+    PatchRaidInformationError,
+    Schemas.RaidInformation,
+    {},
+    {},
+    {}
+  >({ url: "/raid/information", method: "patch", ...variables, signal });
+
+/**
+ * Update raid information
+ */
+export const usePatchRaidInformation = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      PatchRaidInformationError,
+      PatchRaidInformationVariables
+    >,
+    "mutationFn"
+  >,
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    PatchRaidInformationError,
+    PatchRaidInformationVariables
+  >({
+    mutationFn: (variables: PatchRaidInformationVariables) =>
+      fetchPatchRaidInformation({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
 export type GetRecommendationRecommendationsError =
   Fetcher.ErrorWrapper<undefined>;
 
@@ -15453,6 +15556,11 @@ export type QueryOperation =
       path: "/raid/document/{documentId}";
       operationId: "getRaidDocumentDocumentId";
       variables: GetRaidDocumentDocumentIdVariables;
+    }
+  | {
+      path: "/raid/information";
+      operationId: "getRaidInformation";
+      variables: GetRaidInformationVariables;
     }
   | {
       path: "/recommendation/recommendations";

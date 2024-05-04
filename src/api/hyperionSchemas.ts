@@ -1268,6 +1268,13 @@ export type RaffleStats = {
 
 export type RaffleStatusType = "creation" | "open" | "lock";
 
+export type RaidInformation = {
+  raid_start_date?: string | null;
+  raid_end_date?: string | null;
+  raid_registering_end_date?: string | null;
+  payment_link?: string | null;
+};
+
 export type Recommendation = {
   title: string;
   code?: string | null;
