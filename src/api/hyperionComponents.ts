@@ -14529,6 +14529,124 @@ export const usePostRaidTeamsJoinToken = (
   });
 };
 
+export type PostRaidTeamsTeamIdKickParticipantIdPathParams = {
+  teamId: string;
+  participantId: string;
+};
+
+export type PostRaidTeamsTeamIdKickParticipantIdError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type PostRaidTeamsTeamIdKickParticipantIdVariables = {
+  pathParams: PostRaidTeamsTeamIdKickParticipantIdPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Leave a team
+ */
+export const fetchPostRaidTeamsTeamIdKickParticipantId = (
+  variables: PostRaidTeamsTeamIdKickParticipantIdVariables,
+  signal?: AbortSignal,
+) =>
+  hyperionFetch<
+    Schemas.Team,
+    PostRaidTeamsTeamIdKickParticipantIdError,
+    undefined,
+    {},
+    {},
+    PostRaidTeamsTeamIdKickParticipantIdPathParams
+  >({
+    url: "/raid/teams/{teamId}/kick/{participantId}",
+    method: "post",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Leave a team
+ */
+export const usePostRaidTeamsTeamIdKickParticipantId = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.Team,
+      PostRaidTeamsTeamIdKickParticipantIdError,
+      PostRaidTeamsTeamIdKickParticipantIdVariables
+    >,
+    "mutationFn"
+  >,
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.Team,
+    PostRaidTeamsTeamIdKickParticipantIdError,
+    PostRaidTeamsTeamIdKickParticipantIdVariables
+  >({
+    mutationFn: (variables: PostRaidTeamsTeamIdKickParticipantIdVariables) =>
+      fetchPostRaidTeamsTeamIdKickParticipantId({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
+export type PostRaidTeamsMergeQueryParams = {
+  team1_id: string;
+  team2_id: string;
+};
+
+export type PostRaidTeamsMergeError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type PostRaidTeamsMergeVariables = {
+  queryParams: PostRaidTeamsMergeQueryParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Merge two teams
+ */
+export const fetchPostRaidTeamsMerge = (
+  variables: PostRaidTeamsMergeVariables,
+  signal?: AbortSignal,
+) =>
+  hyperionFetch<
+    Schemas.Team,
+    PostRaidTeamsMergeError,
+    undefined,
+    {},
+    PostRaidTeamsMergeQueryParams,
+    {}
+  >({ url: "/raid/teams/merge", method: "post", ...variables, signal });
+
+/**
+ * Merge two teams
+ */
+export const usePostRaidTeamsMerge = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.Team,
+      PostRaidTeamsMergeError,
+      PostRaidTeamsMergeVariables
+    >,
+    "mutationFn"
+  >,
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.Team,
+    PostRaidTeamsMergeError,
+    PostRaidTeamsMergeVariables
+  >({
+    mutationFn: (variables: PostRaidTeamsMergeVariables) =>
+      fetchPostRaidTeamsMerge({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
 export type GetRaidInformationError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetRaidInformationVariables = HyperionContext["fetcherOptions"];
