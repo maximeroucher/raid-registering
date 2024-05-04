@@ -1,7 +1,6 @@
 import { Button } from "@/src/components/ui/button";
 import { useState } from "react";
 import { addYears, format, toDate } from "date-fns";
-import { fr } from "date-fns/locale";
 import { DatePicker } from "../ui/datePicker";
 import { CardLayout } from "./CardLayout";
 import { useInformation } from "@/src/hooks/useInformation";
@@ -10,6 +9,7 @@ import { Form, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
+import { formatDate } from "@/src/utils/dateFormat";
 
 export const InscriptionEnd = () => {
   const { information, updateInformation } = useInformation();
@@ -93,9 +93,7 @@ export const InscriptionEnd = () => {
         <>
           <div className="text-2xl font-bold">
             {information?.raid_registering_end_date ? (
-              format(information.raid_registering_end_date, "PPP", {
-                locale: fr,
-              })
+              formatDate(information.raid_registering_end_date)
             ) : (
               <span>Date non définie</span>
             )}

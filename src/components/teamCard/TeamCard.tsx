@@ -26,6 +26,7 @@ import { TeamInfoCard } from "./TeamInfoCard";
 import { useInformation } from "@/src/hooks/useInformation";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
+import { formatDateRange, getDaysLeft } from "@/src/utils/dateFormat";
 
 interface TeamCardProps {
   team?: Team;
@@ -37,29 +38,6 @@ export const TeamCard = ({ team }: TeamCardProps) => {
 
   function toggleEdit() {
     setIsEdit(!isEdit);
-  }
-
-  function getDaysLeft(dateString: string) {
-    const date = new Date(dateString);
-    const now = new Date();
-    return Math.floor((date.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
-  }
-
-  function formatDateRange(start: string, end: string) {
-    const startDateDay = format(new Date(start), "dd", { locale: fr });
-    const startDateMonth = format(new Date(start), "MMMM", { locale: fr });
-    const endDateDay = format(new Date(end), "dd", { locale: fr });
-    const endDateMonth = format(new Date(end), "MMMM", { locale: fr });
-    const startDateYear = format(new Date(start), "yyyy", { locale: fr });
-    const endDateYear = format(new Date(end), "yyyy", { locale: fr });
-    if (startDateYear === endDateYear) {
-      if (startDateMonth === endDateMonth) {
-        return `${startDateDay} - ${endDateDay} ${startDateMonth} ${startDateYear}`;
-      } else {
-        return `${startDateDay} ${startDateMonth} - ${endDateDay} ${endDateMonth} ${startDateYear}`;
-      }
-    }
-    return `${startDateDay} ${startDateMonth} ${startDateYear} - ${endDateDay} ${endDateMonth} ${endDateYear}`;
   }
 
   const informationCard = [

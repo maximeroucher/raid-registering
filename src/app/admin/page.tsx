@@ -8,10 +8,13 @@ import { useUser } from "@/src/hooks/useUser";
 import { useRouter } from "next/navigation";
 import { useTeams } from "@/src/hooks/useTeams";
 import { Participant } from "@/src/api/hyperionSchemas";
+import { formatDate, getDaysLeft } from "@/src/utils/dateFormat";
+import { useInformation } from "@/src/hooks/useInformation";
 
 const Dashboard = () => {
   const { isAdmin } = useUser();
   const { teams, isLoading } = useTeams();
+  const { information } = useInformation();
   const router = useRouter();
 
   const allParticipants =
@@ -24,7 +27,7 @@ const Dashboard = () => {
     ?.map((participant) => (participant.payment ? 1 : 0))
     .reduce<number>((a, b) => a + b, 0);
 
-  const information = [
+  const informationCard = [
     {
       title: "Participants inscrits",
       value: allParticipants?.length.toString() || "0",
@@ -48,8 +51,14 @@ const Dashboard = () => {
     },
     {
       title: "Cloture des inscriptions",
-      value: "01/09/2024",
-      description: "x jours restants",
+      value: information?.raid_registering_end_date
+        ? formatDate(information?.raid_registering_end_date)
+        : "Date non renseignée",
+      description: information?.raid_registering_end_date
+        ? `${getDaysLeft(
+            information?.raid_registering_end_date,
+          )} jours restants`
+        : "Date de fin non renseignée",
       unit: undefined,
     },
   ];
@@ -63,7 +72,7 @@ const Dashboard = () => {
       <TopBar />
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
         <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
-          {information.map((info) => (
+          {informationCard.map((info) => (
             <TeamInfoCard info={info} key={info.title} isLoaded={!isLoading} />
           ))}
         </div>

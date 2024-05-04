@@ -2,8 +2,7 @@ import { Button } from "@/src/components/ui/button";
 import { useState } from "react";
 import { RangeDatePicker } from "../ui/RangeDatePicker";
 import { DateRange } from "react-day-picker";
-import { format } from "date-fns";
-import { fr } from "date-fns/locale";
+import { formatDate } from "@/src/utils/dateFormat";
 import { CardLayout } from "./CardLayout";
 
 export const RaidDate = () => {
@@ -28,9 +27,9 @@ export const RaidDate = () => {
         <>
           <div className="text-2xl font-bold">
             {dateRange && dateRange.from && dateRange.to ? (
-              format(dateRange.from, "PPP", { locale: fr }) +
+              formatDate(dateRange.from.toString()) +
               " - " +
-              format(dateRange.to, "PPP", { locale: fr })
+              formatDate(dateRange.to.toString())
             ) : (
               <span>Période non définie</span>
             )}

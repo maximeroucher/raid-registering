@@ -1,5 +1,5 @@
 import { EditUserInfoField } from "./EditUserInfoField";
-import { addYears, formatDate, toDate } from "date-fns";
+import { addYears, toDate } from "date-fns";
 import { fr } from "date-fns/locale";
 import PhoneInput from "react-phone-input-2";
 import { Label } from "../ui/label";
@@ -16,6 +16,7 @@ import { HiPencil, HiCheck, HiX } from "react-icons/hi";
 import { useParticipant } from "@/src/hooks/useParticipant";
 import { toast } from "../ui/use-toast";
 import { ReloadIcon } from "@radix-ui/react-icons";
+import { formatDate } from "@/src/utils/dateFormat";
 
 interface UserButtonProps {
   me: Participant;
@@ -222,9 +223,7 @@ export const ViewEditUserInfo = ({
                 label="Date de naissance"
                 value={
                   me?.birthday
-                    ? formatDate(toDate(me!.birthday), "PPP", {
-                        locale: fr,
-                      })
+                    ? formatDate(me!.birthday)
                     : "Non renseigné"
                 }
               />
