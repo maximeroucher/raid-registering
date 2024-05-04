@@ -59,6 +59,7 @@ export const TeamCard = ({ team }: TeamCardProps) => {
         return `${startDateDay} ${startDateMonth} - ${endDateDay} ${endDateMonth} ${startDateYear}`;
       }
     }
+    return `${startDateDay} ${startDateMonth} ${startDateYear} - ${endDateDay} ${endDateMonth} ${endDateYear}`;
   }
 
   const informationCard = [
