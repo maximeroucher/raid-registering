@@ -27,6 +27,10 @@ const Dashboard = () => {
     ?.map((participant) => (participant.payment ? 1 : 0))
     .reduce<number>((a, b) => a + b, 0);
 
+  const isRegisteringOpen = information?.raid_registering_end_date
+    ? getDaysLeft(information?.raid_registering_end_date) >= 0
+    : false;
+
   const informationCard = [
     {
       title: "Participants inscrits",
@@ -55,9 +59,11 @@ const Dashboard = () => {
         ? formatDate(information?.raid_registering_end_date)
         : "Date non renseignée",
       description: information?.raid_registering_end_date
-        ? `${getDaysLeft(
-            information?.raid_registering_end_date,
-          )} jours restants`
+        ? isRegisteringOpen
+          ? `${getDaysLeft(
+              information?.raid_registering_end_date,
+            )} jours restants`
+          : "Inscriptions fermées"
         : "Date de fin non renseignée",
       unit: undefined,
     },
