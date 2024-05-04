@@ -1,5 +1,6 @@
 import { useUser } from "./useUser";
 import {
+  useDeleteRaidTeamsTeamId,
   useGetRaidTeamsTeamId,
   usePostRaidTeamsMerge,
   usePostRaidTeamsTeamIdKickParticipantId,
@@ -33,7 +34,6 @@ export const useAdminTeam = (teamId: string) => {
 
   const kickMember = (
     participantId: string,
-    teamId: string,
     callback: () => void,
   ) => {
     mutateKickMember(
@@ -63,7 +63,6 @@ export const useAdminTeam = (teamId: string) => {
     usePostRaidTeamsMerge({});
 
   const mergeTeams = (
-    team1Id: string,
     team2Id: string,
     callback: () => void,
   ) => {
@@ -73,8 +72,34 @@ export const useAdminTeam = (teamId: string) => {
           Authorization: `Bearer ${token}`,
         },
         queryParams: {
-          team1_id: team1Id,
+          team1_id: teamId,
           team2_id: team2Id,
+        },
+      },
+      {
+        onSuccess(data, variables, context) {
+          queryClient.invalidateQueries({
+            predicate: (query) => {
+              return query.queryHash === "getTeamById";
+            },
+          });
+          callback();
+        },
+      },
+    );
+  };
+
+  const { mutate: mutateDeleteTeam, isPending: isDeleteLoading } =
+    useDeleteRaidTeamsTeamId({});
+
+  const deleteTeam = (callback: () => void) => {
+    mutateDeleteTeam(
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        pathParams: {
+          teamId,
         },
       },
       {
@@ -97,5 +122,7 @@ export const useAdminTeam = (teamId: string) => {
     mergeTeams,
     isKickLoading,
     isMergeLoading,
+    isDeleteLoading,
+    deleteTeam,
   };
 };
