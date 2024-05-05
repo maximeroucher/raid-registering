@@ -13,6 +13,9 @@ import { useParticipant } from "../hooks/useParticipant";
 import { useState } from "react";
 import { useInviteTokenStore } from "../stores/inviteTokenStore";
 import { JoinTeamDialog } from "../components/home/JoinTeamDialog";
+import { useInformation } from "../hooks/useInformation";
+import { getDaysLeft } from "../utils/dateFormat";
+import { WarningDialog } from "../components/teams/WarningDialog";
 
 const Home = () => {
   const { isTokenQueried, token } = useAuth();
@@ -20,10 +23,12 @@ const Home = () => {
   const { me: user, isAdmin } = useUser();
   const { team } = useTeam();
   const [isOpened, setIsOpened] = useState(false);
+  const [isEndDialogOpened, setIsEndDialogOpened] = useState(true);
   const searchParams = useSearchParams();
   const newInviteToken = searchParams.get("invite");
   const { inviteToken, setInviteToken } = useInviteTokenStore();
   const router = useRouter();
+  const { information } = useInformation();
 
   if (
     newInviteToken !== null &&
@@ -58,11 +63,28 @@ const Home = () => {
   return (
     <>
       {isFetched && me === undefined && isOpened && user && (
-        <CreateParticipant
-          isOpened={isOpened}
-          setIsOpened={setIsOpened}
-          user={user}
-        />
+        <>
+          <CreateParticipant
+            isOpened={isOpened}
+            setIsOpened={setIsOpened}
+            user={user}
+          />
+          <>
+            {(information?.raid_registering_end_date
+              ? getDaysLeft(information?.raid_registering_end_date) < 0
+              : false) && (
+              <WarningDialog
+                isOpened={isEndDialogOpened}
+                setIsOpened={setIsEndDialogOpened}
+                isLoading={false}
+                title="Inscriptions terminées"
+                description="Les inscriptions sont terminées. Si vous ne l'avez pas encore fait, nous vous invitons à prendre contact avec l'organisation pour connaître les étapes à suivre."
+                validateLabel="Continuer"
+                callback={() => setIsEndDialogOpened(false)}
+              />
+            )}
+          </>
+        </>
       )}
       {inviteToken !== undefined && (
         <JoinTeamDialog isOpened={isOpened} setIsOpened={setIsOpened} />
