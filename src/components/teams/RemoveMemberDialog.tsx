@@ -2,9 +2,8 @@ import { DialogDescription } from "@radix-ui/react-dialog";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { Button } from "../ui/button";
 import { LoadingButton } from "../ui/loadingButton";
-import { TeamPreview } from "@/src/api/hyperionSchemas";
-import { Card, CardContent, CardHeader } from "../ui/card";
-import Image from "next/image";
+import { ParticipantPreview, TeamPreview } from "@/src/api/hyperionSchemas";
+import { Card, CardContent } from "../ui/card";
 import { useState } from "react";
 
 interface RemoveMemberDialogProps {
@@ -17,6 +16,29 @@ interface RemoveMemberDialogProps {
   callback: (participantId: string) => void;
 }
 
+const ParticipantCard = (
+  participant: ParticipantPreview,
+  selectedMember: ParticipantPreview | null,
+  setSelectedMember: (value: ParticipantPreview | null) => void,
+) => {
+  return (
+    <Card
+      className={
+        selectedMember === participant ? "border-2 border-primary " : "my-[1px]"
+      }
+      onClick={() => setSelectedMember(participant)}
+    >
+      <CardContent className="flex flex-col justify-between items-center">
+        <div className="h-5"></div>
+        <p className="text-lg font-semibold">
+          {participant.firstname} {participant.name}
+        </p>
+        <p className="text-sm text-foreground-muted">{participant.email}</p>
+      </CardContent>
+    </Card>
+  );
+};
+
 export const RemoveMemberDialog = ({
   isOpened,
   setIsOpened,
@@ -26,9 +48,8 @@ export const RemoveMemberDialog = ({
   validateLabel,
   callback,
 }: RemoveMemberDialogProps) => {
-  const [selectedMember, setSelectedMember] = useState<
-    TeamPreview["second"] | null
-  >(null);
+  const [selectedMember, setSelectedMember] =
+    useState<ParticipantPreview | null>(null);
 
   function closeDialog(event: React.MouseEvent<HTMLButtonElement>) {
     event.stopPropagation();
@@ -52,42 +73,10 @@ export const RemoveMemberDialog = ({
         </DialogHeader>
         <DialogDescription>
           <div className="grid gap-4 grid-cols-2 mt-2">
-            <Card
-              className={
-                selectedMember === team.captain
-                  ? "border-2 border-primary "
-                  : "my-[1px]"
-              }
-              onClick={() => setSelectedMember(team.captain)}
-            >
-              <CardContent className="flex flex-col justify-between items-center">
-                <div className="h-5"></div>
-                <p className="text-lg font-semibold">
-                  {team.captain.firstname} {team.captain.name}
-                </p>
-                <p className="text-sm text-foreground-muted">
-                  {team.captain.email}
-                </p>
-              </CardContent>
-            </Card>
-            <Card
-              className={
-                selectedMember === team.second
-                  ? "border-2 border-primary "
-                  : "my-[1px]"
-              }
-              onClick={() => setSelectedMember(team.second)}
-            >
-              <CardContent className="flex flex-col justify-between items-center">
-                <div className="h-5"></div>
-                <p className="text-lg font-semibold">
-                  {team.second?.firstname} {team.second?.name}
-                </p>
-                <p className="text-sm text-foreground-muted">
-                  {team.second?.email}
-                </p>
-              </CardContent>
-            </Card>
+            {team.captain &&
+              ParticipantCard(team.captain, selectedMember, setSelectedMember)}
+            {team.second &&
+              ParticipantCard(team.second, selectedMember, setSelectedMember)}
           </div>
         </DialogDescription>
         <div className="flex justify-end mt-2 space-x-4">
