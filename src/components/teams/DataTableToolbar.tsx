@@ -14,6 +14,7 @@ import { useMergeTeams } from "@/src/hooks/useMergeTeams";
 import { TeamPreview } from "@/src/api/hyperionSchemas";
 import { LoadingButton } from "../ui/loadingButton";
 import { MergeIcon } from "lucide-react";
+import { useTeams } from "@/src/hooks/useTeams";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
@@ -22,6 +23,7 @@ interface DataTableToolbarProps<TData> {
 export function DataTableToolbar<TData>({
   table,
 }: DataTableToolbarProps<TData>) {
+  const { refetchTeams } = useTeams();
   const { mergeTeams, isMergeLoading } = useMergeTeams();
   const isFiltered = table.getState().columnFilters.length > 0;
 
@@ -75,6 +77,7 @@ export function DataTableToolbar<TData>({
                 ).map((key) => table.getRow(key).original as TeamPreview);
                 const teamIds = selectedTeams.map((team) => team.id);
                 mergeTeams(teamIds[0], teamIds[1], () => {
+                  refetchTeams();
                   table.resetRowSelection();
                 });
               }}
