@@ -20,6 +20,7 @@ import { useState } from "react";
 import { useAdminTeam } from "@/src/hooks/useAdminTeam";
 import { TeamPreview } from "@/src/api/hyperionSchemas";
 import { RemoveMemberDialog } from "./RemoveMemberDialog";
+import { useTeams } from "@/src/hooks/useTeams";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -28,9 +29,10 @@ interface DataTableRowActionsProps<TData> {
 export function DataTableRowActions<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
-  const { deleteTeam, isDeleteLoading, kickMember, isKickLoading } = useAdminTeam(
+  const { deleteTeam, isDeleteLoading, kickMember, isKickLoading, refetchTeam } = useAdminTeam(
     (row.original as TeamPreview).id,
   );
+  const { refetchTeams } = useTeams();
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [isRemoveMemberDialogOpen, setIsRemoveMemberDialogOpen] =
     useState(false);
@@ -46,6 +48,8 @@ export function DataTableRowActions<TData>({
           validateLabel="Supprimer"
           callback={() => {
             deleteTeam(() => {
+              refetchTeam();
+              refetchTeams();
               setIsDeleteDialogOpen(false);
             });
           }}
@@ -61,6 +65,8 @@ export function DataTableRowActions<TData>({
           validateLabel="Retirer"
           callback={(participantId) => {
             kickMember(participantId, () => {
+              refetchTeam();
+              refetchTeams();
               setIsRemoveMemberDialogOpen(false);
             });
           }}
