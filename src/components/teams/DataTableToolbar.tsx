@@ -69,7 +69,7 @@ export function DataTableToolbar<TData>({
           </Button>
         )}
         {(table.getIsSomeRowsSelected() || table.getIsAllRowsSelected()) && (
-          <>
+          <div className="">
             <LoadingButton
               onClick={() => {
                 const selectedTeams = Object.keys(
@@ -81,13 +81,13 @@ export function DataTableToolbar<TData>({
                   table.resetRowSelection();
                 });
               }}
-              className="h-8 px-2 lg:px-3"
+              className="h-8 px-2 lg:px-3 lg:w-[105px] w-[40px]"
               disabled={Object.keys(table.getState().rowSelection).length !== 2}
               isLoading={isMergeLoading}
               label={
                 <>
-                  Fusionner
-                  <MergeIcon className="ml-2 h-4 w-4" />
+                  <span className="max-lg:hidden">Fusionner</span>
+                  <MergeIcon className="lg:ml-2 h-4 w-4" />
                 </>
               }
             />
@@ -96,12 +96,12 @@ export function DataTableToolbar<TData>({
               onClick={() => {
                 table.resetRowSelection();
               }}
-              className="h-8 px-2 lg:px-3"
+              className="ml-2 h-8 px-2 lg:px-3 lg:w-[105px] w-[40px]"
             >
-              Annuler
-              <Cross2Icon className="ml-2 h-4 w-4" />
+              <span className="max-lg:hidden">Annuler</span>
+              <Cross2Icon className="lg:ml-2 h-4 w-4" />
             </Button>
-          </>
+          </div>
         )}
       </div>
       <DataTableViewOptions table={table} />
