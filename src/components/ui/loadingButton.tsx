@@ -16,6 +16,7 @@ interface LoadingButtonProps {
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   label: React.ReactNode;
   className?: string;
+  disabled?: boolean;
 }
 
 export const LoadingButton = ({
@@ -24,6 +25,7 @@ export const LoadingButton = ({
   onClick,
   label,
   className,
+  disabled,
   variant = "default",
 }: LoadingButtonProps) => {
   return (
@@ -32,7 +34,7 @@ export const LoadingButton = ({
       type={type}
       onClick={onClick}
       className={className}
-      disabled={isLoading}
+      disabled={isLoading || disabled}
     >
       {isLoading ? <ReloadIcon className="mr-2 h-4 w-4 animate-spin" /> : label}
     </Button>

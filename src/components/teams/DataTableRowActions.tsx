@@ -19,6 +19,7 @@ import { WarningDialog } from "./WarningDialog";
 import { useState } from "react";
 import { useAdminTeam } from "@/src/hooks/useAdminTeam";
 import { TeamPreview } from "@/src/api/hyperionSchemas";
+import { RemoveMemberDialog } from "./RemoveMemberDialog";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -27,10 +28,12 @@ interface DataTableRowActionsProps<TData> {
 export function DataTableRowActions<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
-  const { deleteTeam, isDeleteLoading } = useAdminTeam(
+  const { deleteTeam, isDeleteLoading, kickMember, isKickLoading } = useAdminTeam(
     (row.original as TeamPreview).id,
   );
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [isRemoveMemberDialogOpen, setIsRemoveMemberDialogOpen] =
+    useState(false);
   return (
     <>
       {isDeleteDialogOpen && (
@@ -44,6 +47,21 @@ export function DataTableRowActions<TData>({
           callback={() => {
             deleteTeam(() => {
               setIsDeleteDialogOpen(false);
+            });
+          }}
+        />
+      )}
+      {isRemoveMemberDialogOpen && (
+        <RemoveMemberDialog
+          isOpened={isRemoveMemberDialogOpen}
+          setIsOpened={setIsRemoveMemberDialogOpen}
+          isLoading={isKickLoading}
+          title={`Retirer un membre de l'équipe ${(row.original as TeamPreview).name}`}
+          team={row.original as TeamPreview}
+          validateLabel="Retirer"
+          callback={(participantId) => {
+            kickMember(participantId, () => {
+              setIsRemoveMemberDialogOpen(false);
             });
           }}
         />
@@ -67,7 +85,12 @@ export function DataTableRowActions<TData>({
               </DropdownMenuShortcut>
             </DropdownMenuItem>
           ) : (
-            <DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsRemoveMemberDialogOpen(true);
+              }}
+            >
               Retirer un member
               <DropdownMenuShortcut>
                 <UserRoundMinusIcon className="h-4 w-4" />

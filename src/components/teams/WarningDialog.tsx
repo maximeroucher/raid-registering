@@ -34,20 +34,24 @@ export const WarningDialog = ({
 
   return (
     <Dialog open={isOpened} onOpenChange={setIsOpened}>
-      <DialogContent className="sm:max-w-[600px]">
+      <DialogContent
+        className="sm:max-w-[600px]"
+        onClick={(e) => e.stopPropagation()}
+      >
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
         </DialogHeader>
         <DialogDescription>{description}</DialogDescription>
         <div className="flex justify-end mt-2 space-x-4">
-          <Button variant="outline" onClick={closeDialog} disabled={isLoading}>
+          <Button variant="outline" onClick={closeDialog} disabled={isLoading} className="w-[100px]">
             Annuler
           </Button>
           <LoadingButton
             isLoading={isLoading}
             onClick={onValidate}
             label={validateLabel}
-            className="w-[140px]"
+            className="w-[100px]"
+            variant="destructive"
           />
         </div>
       </DialogContent>

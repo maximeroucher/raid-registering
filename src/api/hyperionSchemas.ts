@@ -1159,6 +1159,7 @@ export type ParticipantBase = {
 };
 
 export type ParticipantPreview = {
+  id: any;
   name: string;
   firstname: string;
   /**
