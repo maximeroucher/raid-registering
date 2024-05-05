@@ -29,9 +29,13 @@ interface DataTableRowActionsProps<TData> {
 export function DataTableRowActions<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
-  const { deleteTeam, isDeleteLoading, kickMember, isKickLoading, refetchTeam } = useAdminTeam(
-    (row.original as TeamPreview).id,
-  );
+  const {
+    deleteTeam,
+    isDeleteLoading,
+    kickMember,
+    isKickLoading,
+    refetchTeam,
+  } = useAdminTeam((row.original as TeamPreview).id);
   const { refetchTeams } = useTeams();
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [isRemoveMemberDialogOpen, setIsRemoveMemberDialogOpen] =
@@ -84,8 +88,15 @@ export function DataTableRowActions<TData>({
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[180px]">
           {row.getValue("second") === null ? (
-            <DropdownMenuItem>
-              Fusionner avec une autre équipe
+            <DropdownMenuItem
+              onClick={(e) => {
+                e.stopPropagation();
+                row.toggleSelected(!row.getIsSelected());
+              }}
+            >
+              {row.getIsSelected()
+                ? "Annuler la fusion"
+                : "Fusionner avec une autre équipe"}
               <DropdownMenuShortcut>
                 <MergeIcon className="h-4 w-4" />
               </DropdownMenuShortcut>

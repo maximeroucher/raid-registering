@@ -10,6 +10,10 @@ import { DataTableFacetedFilter } from "./DataTableFacetedFilter";
 import { DataTableViewOptions } from "./DataTableViewOptions";
 import { difficulties, meetingPlaces } from "@/src/infra/comboboxValues";
 import { DataTableFilterCheckBox } from "./DataTableFilterCheckBox";
+import { useMergeTeams } from "@/src/hooks/useMergeTeams";
+import { TeamPreview } from "@/src/api/hyperionSchemas";
+import { LoadingButton } from "../ui/loadingButton";
+import { MergeIcon } from "lucide-react";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
@@ -18,6 +22,7 @@ interface DataTableToolbarProps<TData> {
 export function DataTableToolbar<TData>({
   table,
 }: DataTableToolbarProps<TData>) {
+  const { mergeTeams, isMergeLoading } = useMergeTeams();
   const isFiltered = table.getState().columnFilters.length > 0;
 
   return (
@@ -60,6 +65,40 @@ export function DataTableToolbar<TData>({
             Supprimer
             <Cross2Icon className="ml-2 h-4 w-4" />
           </Button>
+        )}
+        {(table.getIsSomeRowsSelected() || table.getIsAllRowsSelected()) && (
+          <>
+            <LoadingButton
+              onClick={() => {
+                const selectedTeams = Object.keys(
+                  table.getState().rowSelection,
+                ).map((key) => table.getRow(key).original as TeamPreview);
+                const teamIds = selectedTeams.map((team) => team.id);
+                mergeTeams(teamIds[0], teamIds[1], () => {
+                  table.resetRowSelection();
+                });
+              }}
+              className="h-8 px-2 lg:px-3"
+              disabled={Object.keys(table.getState().rowSelection).length !== 2}
+              isLoading={isMergeLoading}
+              label={
+                <>
+                  Fusionner
+                  <MergeIcon className="ml-2 h-4 w-4" />
+                </>
+              }
+            />
+            <Button
+              variant="ghost"
+              onClick={() => {
+                table.resetRowSelection();
+              }}
+              className="h-8 px-2 lg:px-3"
+            >
+              Annuler
+              <Cross2Icon className="ml-2 h-4 w-4" />
+            </Button>
+          </>
         )}
       </div>
       <DataTableViewOptions table={table} />

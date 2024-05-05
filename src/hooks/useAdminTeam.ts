@@ -59,36 +59,6 @@ export const useAdminTeam = (teamId: string) => {
     );
   };
 
-  const { mutate: mutateMergeTeams, isPending: isMergeLoading } =
-    usePostRaidTeamsMerge({});
-
-  const mergeTeams = (
-    team2Id: string,
-    callback: () => void,
-  ) => {
-    mutateMergeTeams(
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        queryParams: {
-          team1_id: teamId,
-          team2_id: team2Id,
-        },
-      },
-      {
-        onSuccess(data, variables, context) {
-          queryClient.invalidateQueries({
-            predicate: (query) => {
-              return query.queryHash === "getTeamById";
-            },
-          });
-          callback();
-        },
-      },
-    );
-  };
-
   const { mutate: mutateDeleteTeam, isPending: isDeleteLoading } =
     useDeleteRaidTeamsTeamId({});
 
@@ -119,9 +89,7 @@ export const useAdminTeam = (teamId: string) => {
     team,
     refetchTeam,
     kickMember,
-    mergeTeams,
     isKickLoading,
-    isMergeLoading,
     isDeleteLoading,
     deleteTeam,
   };

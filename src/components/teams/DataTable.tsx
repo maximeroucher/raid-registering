@@ -4,6 +4,7 @@ import * as React from "react";
 import {
   ColumnDef,
   ColumnFiltersState,
+  Row,
   SortingState,
   VisibilityState,
   flexRender,
@@ -28,6 +29,7 @@ import {
 } from "../ui/table";
 import { useRouter } from "next/navigation";
 import { TeamPreview } from "@/src/api/hyperionSchemas";
+import { toast } from "../ui/use-toast";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -46,10 +48,6 @@ export function DataTable<TData, TValue>({
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const router = useRouter();
-
-  function onTeamSelect(id: string) {
-    router.replace(`/admin/teams?teamId=${id}`);
-  }
 
   const table = useReactTable({
     data,
@@ -72,6 +70,22 @@ export function DataTable<TData, TValue>({
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
+
+  function onTeamSelect(row: Row<TData>) {
+    if (table.getIsSomeRowsSelected() || table.getIsAllRowsSelected()) {
+      if ((row.original as TeamPreview).second) {
+        toast({
+          title: "Sélection impossible",
+          description: "Impossible de fusionner une équipe complète",
+        });
+        return;
+      }
+      row.toggleSelected(!row.getIsSelected());
+      return;
+    }
+    const id = (row.original as TeamPreview).id;
+    router.replace(`/admin/teams?teamId=${id}`);
+  }
 
   return (
     <div className="space-y-4">
@@ -102,7 +116,7 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  onClick={() => onTeamSelect((row.original as TeamPreview).id)}
+                  onClick={() => onTeamSelect(row)}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
