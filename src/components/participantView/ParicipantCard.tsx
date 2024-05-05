@@ -26,12 +26,7 @@ export const ParticipantCard = ({
   participant,
   isCaptain,
 }: ParticipantCardProps) => {
-  const { information } = useInformation();
   const [isEdit, setIsEdit] = useState(false);
-
-  const isRegisteringOpen = information?.raid_registering_end_date
-    ? getDaysLeft(information?.raid_registering_end_date) >= 0
-    : false;
 
   function toggleEdit() {
     setIsEdit(!isEdit);
@@ -60,28 +55,24 @@ export const ParticipantCard = ({
               )}
             </CardDescription>
           </div>
-          {isRegisteringOpen && (
-            <>
-              {isEdit && participant ? (
-                <Button
-                  variant="destructive"
-                  onClick={toggleEdit}
-                  className="w-[110px]"
-                >
-                  <HiX className="mr-2 h-4 w-4" />
-                  Annuler
-                </Button>
-              ) : (
-                <Button
-                  variant="outline"
-                  onClick={toggleEdit}
-                  className="w-[110px]"
-                >
-                  <HiPencil className="mr-2 h-4 w-4" />
-                  Éditer
-                </Button>
-              )}
-            </>
+          {isEdit && participant ? (
+            <Button
+              variant="destructive"
+              onClick={toggleEdit}
+              className="w-[110px]"
+            >
+              <HiX className="mr-2 h-4 w-4" />
+              Annuler
+            </Button>
+          ) : (
+            <Button
+              variant="outline"
+              onClick={toggleEdit}
+              className="w-[110px]"
+            >
+              <HiPencil className="mr-2 h-4 w-4" />
+              Éditer
+            </Button>
           )}
         </div>
       </CardHeader>

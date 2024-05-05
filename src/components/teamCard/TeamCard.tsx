@@ -98,28 +98,24 @@ export const TeamCard = ({ team }: TeamCardProps) => {
                 </>
               )}
             </CardTitle>
-            {isRegisteringOpen && (
-              <>
-                {isEdit && team ? (
-                  <Button
-                    variant="destructive"
-                    onClick={toggleEdit}
-                    className="w-[110px]"
-                  >
-                    <HiX className="mr-2 h-4 w-4" />
-                    Annuler
-                  </Button>
-                ) : (
-                  <Button
-                    variant="outline"
-                    onClick={toggleEdit}
-                    className="w-[110px]"
-                  >
-                    <HiPencil className="mr-2 h-4 w-4" />
-                    Éditer
-                  </Button>
-                )}
-              </>
+            {isEdit && team ? (
+              <Button
+                variant="destructive"
+                onClick={toggleEdit}
+                className="w-[110px]"
+              >
+                <HiX className="mr-2 h-4 w-4" />
+                Annuler
+              </Button>
+            ) : (
+              <Button
+                variant="outline"
+                onClick={toggleEdit}
+                className="w-[110px]"
+              >
+                <HiPencil className="mr-2 h-4 w-4" />
+                Éditer
+              </Button>
             )}
           </div>
           <div className="h-4"></div>
