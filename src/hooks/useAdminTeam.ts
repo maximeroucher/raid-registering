@@ -73,7 +73,7 @@ export const useAdminTeam = (teamId: string) => {
         },
       },
       {
-        onSuccess(data, variables, context) {
+        onSettled(data, error, variables, context) {
           queryClient.invalidateQueries({
             predicate: (query) => {
               return query.queryHash === "getTeamById";
