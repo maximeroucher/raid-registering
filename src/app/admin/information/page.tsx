@@ -2,6 +2,7 @@
 
 import { TopBar } from "@/src/components/admin/TopBar";
 import { CardLayout } from "@/src/components/information/CardLayout";
+import { ContactMail } from "@/src/components/information/ContactMail";
 import { InscriptionEnd } from "@/src/components/information/InscriptionEnd";
 import { PaymentLink } from "@/src/components/information/PaymentLink";
 import { RaidDate } from "@/src/components/information/RaidDate";
@@ -37,6 +38,7 @@ const InformationPage = () => {
             <div className="grid xl:grid-cols-3 gap-4 w-full grid-cols-1 max-md:p-8 max-md:gap-4">
               <InscriptionEnd />
               <RaidDate />
+              <ContactMail />
               <PaymentLink />
               <CardLayout label="Lien des dossiers d'inscription">
                 <></>
