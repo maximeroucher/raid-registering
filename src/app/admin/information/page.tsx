@@ -43,7 +43,7 @@ const InformationPage = () => {
               <PaymentLink />
               <DriveFolder />
               <CardLayout label="Capacité maximale">
-                <></>
+                <>En développement</>
               </CardLayout>
             </div>
           </CardContent>
