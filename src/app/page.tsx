@@ -16,12 +16,13 @@ import { JoinTeamDialog } from "../components/home/JoinTeamDialog";
 import { useInformation } from "../hooks/useInformation";
 import { getDaysLeft } from "../utils/dateFormat";
 import { WarningDialog } from "../components/teams/WarningDialog";
+import { toast } from "../components/ui/use-toast";
 
 const Home = () => {
   const { isTokenQueried, token } = useAuth();
   const { me, isFetched } = useParticipant();
   const { me: user, isAdmin } = useUser();
-  const { team } = useTeam();
+  const { team, createTeam, refetchTeam } = useTeam();
   const [isOpened, setIsOpened] = useState(false);
   const [isEndDialogOpened, setIsEndDialogOpened] = useState(true);
   const searchParams = useSearchParams();
@@ -29,6 +30,7 @@ const Home = () => {
   const { inviteToken, setInviteToken } = useInviteTokenStore();
   const router = useRouter();
   const { information } = useInformation();
+  const [isLoading, setIsLoading] = useState(false);
 
   if (
     newInviteToken !== null &&
@@ -60,6 +62,12 @@ const Home = () => {
     setIsOpened(true);
   }
 
+  console.log("team", team);
+  console.log("isFetched", isFetched);
+  if (me !== undefined && team === undefined && !isOpened) {
+    setIsOpened(true);
+  }
+
   return (
     <>
       {isFetched && me === undefined && isOpened && user && (
@@ -85,6 +93,33 @@ const Home = () => {
             )}
           </>
         </>
+      )}
+      {me && team === undefined && (
+        <WarningDialog
+          isOpened={isEndDialogOpened}
+          setIsOpened={setIsEndDialogOpened}
+          isLoading={isLoading}
+          title="Aucune équipe trouvée"
+          description="Vous n'êtes pas encore inscrit dans une équipe. Vous pouvez en créer une. Si vous avez reçu un lien d'invitation, vous pouvez l'utiliser pour rejoindre une équipe."
+          validateLabel="Créer une équipe"
+          width="w-[140px]"
+          callback={() => {
+            setIsLoading(true);
+            createTeam(
+              {
+                name: `Équipe de ${me.firstname} ${me.name}`,
+              },
+              () => {
+                refetchTeam();
+                setIsEndDialogOpened(false);
+                setIsLoading(false);
+                toast({
+                  title: "Votre équipe a été créée avec succès",
+                });
+              },
+            );
+          }}
+        />
       )}
       {inviteToken !== undefined && (
         <JoinTeamDialog isOpened={isOpened} setIsOpened={setIsOpened} />

@@ -11,6 +11,7 @@ interface WarningDialogProps {
   description: string;
   validateLabel: string;
   callback: () => void;
+  width?: string;
 }
 
 export const WarningDialog = ({
@@ -21,6 +22,7 @@ export const WarningDialog = ({
   description,
   validateLabel,
   callback,
+  width = "w-[100px]",
 }: WarningDialogProps) => {
   function closeDialog(event: React.MouseEvent<HTMLButtonElement>) {
     event.stopPropagation();
@@ -43,15 +45,14 @@ export const WarningDialog = ({
         </DialogHeader>
         <DialogDescription>{description}</DialogDescription>
         <div className="flex justify-end mt-2 space-x-4">
-          <Button variant="outline" onClick={closeDialog} disabled={isLoading} className="w-[100px]">
+          <Button variant="outline" onClick={closeDialog} disabled={isLoading} className={width}>
             Annuler
           </Button>
           <LoadingButton
             isLoading={isLoading}
             onClick={onValidate}
             label={validateLabel}
-            className="w-[100px]"
-            variant="destructive"
+            className={width}
           />
         </div>
       </DialogContent>
