@@ -18,7 +18,7 @@ import { LoadingButton } from "../ui/loadingButton";
 export const ContactMail = () => {
   const { information, updateInformation } = useInformation();
   const [isEdit, setIsEdit] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const formSchema = z.object({
     email: z.string().email({
@@ -71,16 +71,28 @@ export const ContactMail = () => {
                   </FormItem>
                 )}
               />
-              <LoadingButton className="mt-2 w-[120px]" type="submit" label="Valider" isLoading={isLoading}/>
+              <div className="flex flex-row">
+                <Button
+                  variant="outline"
+                  className="mt-2 mr-2 w-[120px]"
+                  onClick={() => {
+                    setIsEdit(false);
+                  }}
+                >
+                  Annuler
+                </Button>
+                <LoadingButton
+                  className="mt-2 w-[120px]"
+                  type="submit"
+                  label="Valider"
+                  isLoading={isLoading}
+                />
+              </div>
             </>
           ) : (
             <>
               <div className="text-2xl font-bold">
-                {information?.contact ?? (
-                  <span>
-                    {"Aucun contact"}
-                  </span>
-                )}
+                {information?.contact ?? <span>{"Aucun contact"}</span>}
               </div>
               <Button
                 variant="outline"

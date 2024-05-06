@@ -46,12 +46,23 @@ export const InscriptionEnd = () => {
             fromDate={addYears(new Date(), -1)}
             toDate={addYears(new Date(), 1)}
           />
-          <LoadingButton
-            className="mt-2 w-[120px]"
-            isLoading={isLoading}
-            onClick={toggleEdit}
-            label="Valider"
-          />
+          <div className="flex flex-row">
+            <Button
+              variant="outline"
+              className="mt-2 mr-2 w-[120px]"
+              onClick={() => {
+                setIsEdit(false);
+              }}
+            >
+              Annuler
+            </Button>
+            <LoadingButton
+              className="mt-2 w-[120px]"
+              isLoading={isLoading}
+              onClick={toggleEdit}
+              label="Valider"
+            />
+          </div>
         </>
       ) : (
         <>

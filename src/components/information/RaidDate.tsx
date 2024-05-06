@@ -44,12 +44,24 @@ export const RaidDate = () => {
       {isEdit ? (
         <>
           <RangeDatePicker dateRange={dateRange} setDateRange={setDateRange} />
-          <LoadingButton
-            className="mt-2 w-[120px]"
-            onClick={toggleEdit}
-            isLoading={isLoading}
-            label="Valider"
-          />
+
+          <div className="flex flex-row">
+            <Button
+              variant="outline"
+              className="mt-2 mr-2 w-[120px]"
+              onClick={() => {
+                setIsEdit(false);
+              }}
+            >
+              Annuler
+            </Button>
+            <LoadingButton
+              className="mt-2 w-[120px]"
+              onClick={toggleEdit}
+              isLoading={isLoading}
+              label="Valider"
+            />
+          </div>
         </>
       ) : (
         <>

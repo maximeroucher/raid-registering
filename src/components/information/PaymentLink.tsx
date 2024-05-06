@@ -17,9 +17,21 @@ export const PaymentLink = () => {
       {isEdit ? (
         <>
           <Input value={link} onChange={(e) => setLink(e.target.value)} />
-          <Button className="mt-2 w-[120px]" onClick={toggleEdit}>
-            Valider
-          </Button>
+
+          <div className="flex flex-row">
+            <Button
+              variant="outline"
+              className="mt-2 mr-2 w-[120px]"
+              onClick={() => {
+                setIsEdit(false);
+              }}
+            >
+              Annuler
+            </Button>
+            <Button className="mt-2 w-[120px]" onClick={toggleEdit}>
+              Valider
+            </Button>
+          </div>
         </>
       ) : (
         <>
