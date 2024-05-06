@@ -1125,6 +1125,7 @@ export type Participant = {
   birthday: string;
   phone: string;
   email: string;
+  id: string;
   bike_size: Size | null;
   t_shirt_size: Size | null;
   situation: string | null;
@@ -1132,7 +1133,6 @@ export type Participant = {
   payment: boolean;
   number_of_document: number;
   number_of_validated_document: number;
-  id: string;
   address: string | null;
   other_school?: string | null;
   company?: string | null;
@@ -1159,7 +1159,6 @@ export type ParticipantBase = {
 };
 
 export type ParticipantPreview = {
-  id: any;
   name: string;
   firstname: string;
   /**
@@ -1168,6 +1167,7 @@ export type ParticipantPreview = {
   birthday: string;
   phone: string;
   email: string;
+  id: string;
   bike_size: Size | null;
   t_shirt_size: Size | null;
   situation: string | null;
@@ -1274,6 +1274,7 @@ export type RaidInformation = {
   raid_end_date?: string | null;
   raid_registering_end_date?: string | null;
   payment_link?: string | null;
+  contact?: string | null;
 };
 
 export type Recommendation = {
