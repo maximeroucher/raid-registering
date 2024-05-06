@@ -20,11 +20,12 @@ import {
   MenubarSeparator,
   MenubarTrigger,
 } from "../ui/menubar";
-import { useTheme } from "next-themes";
 import { ThemeButton } from "../ui/themeButton";
+import { useInformation } from "@/src/hooks/useInformation";
 
 export const UserButton = () => {
   const { me } = useParticipant();
+  const { information } = useInformation();
   // const { profilePicture } = useProfilePicture();
   const [isOpened, setIsOpened] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -37,7 +38,7 @@ export const UserButton = () => {
   }
 
   function contactUs() {
-    window.open("mailto:"); //TODO: retrieve email
+    window.open(`mailto:${information?.contact}`);
   }
 
   return (
