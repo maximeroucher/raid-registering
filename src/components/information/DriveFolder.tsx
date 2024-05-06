@@ -81,20 +81,42 @@ export const DriveFolder = () => {
                   </FormItem>
                 )}
               />
-              <LoadingButton
-                className="mt-2 w-[120px]"
-                type="submit"
-                label="Valider"
-                isLoading={isLoading}
-              />
+              <div className="flex flex-row">
+                <Button
+                  variant="outline"
+                  className="mt-2 mr-2 w-[120px]"
+                  onClick={() => {
+                    setIsEdit(false);
+                  }}
+                >
+                  Annuler
+                </Button>
+                <LoadingButton
+                  className="mt-2 w-[120px]"
+                  type="submit"
+                  label="Valider"
+                  isLoading={isLoading}
+                />
+              </div>
             </>
           ) : (
             <>
               <div
-                className={`${driveFolder?.parent_folder_id ? "text-[0.7rem]" : "text-2xl"} font-bold h-8`}
+                className={`${driveFolder?.parent_folder_id && "text-green-700 hover:text-green-800 underline"} text-2xl font-bold h-8`}
               >
-                {"https://drive.google.com/drive/u/0/folders/" +
-                  driveFolder?.parent_folder_id ?? <span>{"Aucun lien"}</span>}
+                {driveFolder?.parent_folder_id ? (
+                  <a
+                    target="_blank"
+                    href={
+                      "https://drive.google.com/drive/u/0/folders/" +
+                      driveFolder?.parent_folder_id
+                    }
+                  >
+                    {"Lien du dossier Drive"}
+                  </a>
+                ) : (
+                  <span>{"Aucun lien"}</span>
+                )}
               </div>
               <Button
                 variant="outline"
