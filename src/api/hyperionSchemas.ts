@@ -1269,6 +1269,10 @@ export type RaffleStats = {
 
 export type RaffleStatusType = "creation" | "open" | "lock";
 
+export type RaidDriveFoldersCreation = {
+  parent_folder_id: string;
+};
+
 export type RaidInformation = {
   raid_start_date?: string | null;
   raid_end_date?: string | null;

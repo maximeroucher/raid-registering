@@ -14750,6 +14750,109 @@ export const usePatchRaidInformation = (
   });
 };
 
+export type GetRaidDriveError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetRaidDriveVariables = HyperionContext["fetcherOptions"];
+
+/**
+ * Get drive folders
+ */
+export const fetchGetRaidDrive = (
+  variables: GetRaidDriveVariables,
+  signal?: AbortSignal,
+) =>
+  hyperionFetch<
+    Schemas.RaidDriveFoldersCreation,
+    GetRaidDriveError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/raid/drive", method: "get", ...variables, signal });
+
+/**
+ * Get drive folders
+ */
+export const useGetRaidDrive = <TData = Schemas.RaidDriveFoldersCreation,>(
+  variables: GetRaidDriveVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      Schemas.RaidDriveFoldersCreation,
+      GetRaidDriveError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >,
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    Schemas.RaidDriveFoldersCreation,
+    GetRaidDriveError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/raid/drive",
+      operationId: "getRaidDrive",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetRaidDrive({ ...fetcherOptions, ...variables }, signal),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type PatchRaidDriveError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type PatchRaidDriveVariables = {
+  body: Schemas.RaidDriveFoldersCreation;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Update drive folders
+ */
+export const fetchPatchRaidDrive = (
+  variables: PatchRaidDriveVariables,
+  signal?: AbortSignal,
+) =>
+  hyperionFetch<
+    undefined,
+    PatchRaidDriveError,
+    Schemas.RaidDriveFoldersCreation,
+    {},
+    {},
+    {}
+  >({ url: "/raid/drive", method: "patch", ...variables, signal });
+
+/**
+ * Update drive folders
+ */
+export const usePatchRaidDrive = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      PatchRaidDriveError,
+      PatchRaidDriveVariables
+    >,
+    "mutationFn"
+  >,
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    PatchRaidDriveError,
+    PatchRaidDriveVariables
+  >({
+    mutationFn: (variables: PatchRaidDriveVariables) =>
+      fetchPatchRaidDrive({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
 export type GetRecommendationRecommendationsError =
   Fetcher.ErrorWrapper<undefined>;
 
@@ -15679,6 +15782,11 @@ export type QueryOperation =
       path: "/raid/information";
       operationId: "getRaidInformation";
       variables: GetRaidInformationVariables;
+    }
+  | {
+      path: "/raid/drive";
+      operationId: "getRaidDrive";
+      variables: GetRaidDriveVariables;
     }
   | {
       path: "/recommendation/recommendations";
