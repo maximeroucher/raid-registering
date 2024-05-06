@@ -62,8 +62,6 @@ const Home = () => {
     setIsOpened(true);
   }
 
-  console.log("team", team);
-  console.log("isFetched", isFetched);
   if (me !== undefined && team === undefined && !isOpened) {
     setIsOpened(true);
   }

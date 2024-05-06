@@ -1,18 +1,18 @@
 import { Participant } from "@/src/api/hyperionSchemas";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { LoadingButton } from "../ui/loadingButton";
+import { useState } from "react";
 
 interface PaymentCardItemProps {
   participant: Participant;
-  validateCallback: (participantId: string) => void;
-  isLoading: boolean;
+  validateCallback: (participantId: string, callback: () => void) => void;
 }
 
 export const PaymentCardItem = ({
   participant,
   validateCallback,
-  isLoading,
 }: PaymentCardItemProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   return (
     <Card>
       <CardHeader>
@@ -25,7 +25,12 @@ export const PaymentCardItem = ({
           <p>{"L'inscription à été payée"}</p>
         ) : (
           <LoadingButton
-            onClick={(_) => validateCallback(participant.id)}
+            onClick={(_) => {
+              setIsLoading(true);
+              validateCallback(participant.id, () => {
+                setIsLoading(false);
+              });
+            }}
             isLoading={isLoading}
             label={"Valider le paiement de l'inscription"}
             className="w-full"

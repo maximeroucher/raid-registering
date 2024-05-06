@@ -11,12 +11,13 @@ interface PaymentTabProps {
 }
 
 export const PaymentTab = ({ team }: PaymentTabProps) => {
-  const { validatePayment, isLoading } = usePayment();
+  const { validatePayment } = usePayment();
   const { refetchTeam } = useAdminTeam(team.id);
   const { refetchTeams } = useTeams();
 
-  function validateCallback(participantId: string) {
+  function validateCallback(participantId: string, callback: () => void) {
     validatePayment(participantId, () => {
+      callback();
       refetchTeam();
       refetchTeams();
       toast({
@@ -30,13 +31,11 @@ export const PaymentTab = ({ team }: PaymentTabProps) => {
       <PaymentCardItem
         participant={team.captain}
         validateCallback={validateCallback}
-        isLoading={isLoading}
       />
       {team.second ? (
         <PaymentCardItem
           participant={team.second}
           validateCallback={validateCallback}
-          isLoading={isLoading}
         />
       ) : (
         <Card className="w-full h-full">
