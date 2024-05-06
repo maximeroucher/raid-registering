@@ -14,6 +14,7 @@ import { useParticipantStore } from "../stores/particpant";
 import { useInviteTokenStore } from "../stores/inviteTokenStore";
 import { useQuery } from "@tanstack/react-query";
 import { useCodeVerifierStore } from "../stores/codeVerifier";
+import { is } from "date-fns/locale";
 
 const clientId: string = "RaidRegistering";
 const redirectUrlHost: string =
@@ -83,9 +84,11 @@ export const useAuth = () => {
       setToken(tokenResponse.access_token);
       setRefreshToken(tokenResponse.refresh_token);
     } catch (error) {
-      console.error(error);
       setIsLoading(false);
-      logout();
+      if (isTokenExpired()) {
+        console.error(error);
+        logout();
+      }
     }
   }
 
@@ -208,6 +211,7 @@ export const useAuth = () => {
     queryFn: () => lookToRefreshToken(),
     retry: 0,
     enabled: isTokenQueried,
+    refetchOnMount: false,
   });
 
   useQuery({
@@ -215,6 +219,7 @@ export const useAuth = () => {
     queryFn: () => getTokenFromStorage(),
     retry: 0,
     enabled: !isTokenQueried,
+    refetchOnMount: false,
   });
 
   return {
