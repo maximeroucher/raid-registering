@@ -94,7 +94,6 @@ export const RemoveMemberDialog = ({
             onClick={onValidate}
             label={validateLabel}
             className="w-[100px]"
-            variant="destructive"
             disabled={!selectedMember}
           />
         </div>

@@ -47,7 +47,7 @@ export function DataTableRowActions<TData>({
           isOpened={isDeleteDialogOpen}
           setIsOpened={setIsDeleteDialogOpen}
           isLoading={isDeleteLoading}
-          title="Suppression d'une équipe"
+          title={`Suppression de l'équipe ${(row.original as TeamPreview).name}`}
           description="Etes-vous sûr de vouloir supprimer cette équipe ?"
           validateLabel="Supprimer"
           callback={() => {
