@@ -6,6 +6,7 @@ import { apiFormatDate, formatDateRange } from "@/src/utils/dateFormat";
 import { CardLayout } from "./CardLayout";
 import { useInformation } from "@/src/hooks/useInformation";
 import { LoadingButton } from "../ui/loadingButton";
+import { toDate } from "date-fns";
 
 export const RaidDate = () => {
   const { information, updateInformation } = useInformation();
@@ -14,8 +15,8 @@ export const RaidDate = () => {
   const [dateRange, setDateRange] = useState<DateRange | undefined>(
     information?.raid_start_date && information?.raid_end_date
       ? {
-          from: new Date(information.raid_start_date),
-          to: new Date(information.raid_end_date),
+          from: toDate(information.raid_start_date),
+          to: toDate(information.raid_end_date),
         }
       : undefined,
   );
@@ -66,10 +67,10 @@ export const RaidDate = () => {
       ) : (
         <>
           <div className="text-2xl font-bold">
-            {dateRange && dateRange.from && dateRange.to ? (
+            {information?.raid_start_date && information?.raid_end_date ? (
               formatDateRange(
-                dateRange.from.toString(),
-                dateRange.to.toString(),
+                information.raid_start_date.toString(),
+                information.raid_end_date.toString(),
               )
             ) : (
               <span>Période non définie</span>
