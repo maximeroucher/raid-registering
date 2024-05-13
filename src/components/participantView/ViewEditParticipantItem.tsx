@@ -236,7 +236,6 @@ export const ViewEditParticipantItem = ({
 
     if (values.securityFile.updated) {
       assignSecurityFile(participant.id!, values.securityFile.id!, () => {
-        console.log("Security file updated");
       });
     }
 
@@ -249,7 +248,6 @@ export const ViewEditParticipantItem = ({
             type: doc.type!,
           },
           () => {
-            console.log("Document updated: ", doc.name);
           },
         );
       }

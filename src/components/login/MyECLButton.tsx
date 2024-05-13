@@ -15,8 +15,6 @@ const Login = () => {
   const { codeVerifier } = useCodeVerifierStore();
   const [isLoggingIn, setIsLoggingIn] = useState(false);
 
-  console.log("rebuild");
-
   useEffect(() => {
     if (
       code &&

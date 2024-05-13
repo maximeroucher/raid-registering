@@ -54,7 +54,6 @@ export const useInviteToken = () => {
       {
         // Not using onSucess because of : https://github.com/TanStack/query/discussions/2878
         onSettled: (data, error) => {
-          console.log(data, error);
           // Assuming success in all cases
           // For unknown reasons, the invalidation of the query does not work
           callback();

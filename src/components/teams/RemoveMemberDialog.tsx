@@ -58,7 +58,6 @@ export const RemoveMemberDialog = ({
 
   function onValidate(event: React.MouseEvent<HTMLButtonElement>) {
     event.stopPropagation();
-    console.log(selectedMember);
     if (!selectedMember) return;
     callback(selectedMember?.id);
   }

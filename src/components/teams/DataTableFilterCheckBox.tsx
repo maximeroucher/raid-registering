@@ -25,7 +25,6 @@ export function DataTableFilterCheckBox<TData, TValue>({
       selectedValues.add(null);
     }
     const filterValues = Array.from(selectedValues);
-    console.log(filterValues);
     column?.setFilterValue(filterValues.length ? filterValues : undefined);
   };
 

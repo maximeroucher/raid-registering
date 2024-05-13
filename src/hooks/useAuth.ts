@@ -86,17 +86,14 @@ export const useAuth = () => {
     } catch (error) {
       setIsLoading(false);
       if (isTokenExpired()) {
-        console.error(error);
         logout();
       }
     }
   }
 
   async function refreshTokens(): Promise<string | null> {
-    console.log("refreshing tokens", isLoading);
     if (isLoading) return null;
     setIsLoading(true);
-    console.log("refreshing tokens");
     if (refreshToken) {
       const params: BodyTokenAuthTokenPost = {
         grant_type: "refresh_token",
@@ -119,9 +116,7 @@ export const useAuth = () => {
   }
 
   async function login(code: string, callback?: () => void) {
-    console.log("logging in", isLoading);
     if (!codeVerifier || isLoading) {
-      console.error("Code verifier not set");
       return;
     }
     const params: BodyTokenAuthTokenPost = {
@@ -161,7 +156,6 @@ export const useAuth = () => {
   }
 
   async function getTokenFromStorage(): Promise<string | null> {
-    console.log("getting token from storage");
     if (isLoading) return null;
     setIsLoading(true);
     if (typeof window === "undefined") return null;
@@ -177,19 +171,16 @@ export const useAuth = () => {
   }
 
   function lookToRefreshToken() {
-    console.log("looking to refresh token");
     if (timer.current) {
       clearTimeout(timer.current);
     }
     if (token === null) {
       return null;
     }
-    console.log("token", token ? JSON.parse(atob(token.split(".")[1])).exp : 0);
     const timeToRefreshToken =
       (token ? JSON.parse(atob(token.split(".")[1])).exp : 0) * 1000 -
       Date.now() -
       REFRESH_TOKEN_BUFFER * 1000;
-    console.log("time to refresh token", timeToRefreshToken);
 
     if (timeToRefreshToken <= 0) {
       // server call to update app state with new token and new expirationDate
