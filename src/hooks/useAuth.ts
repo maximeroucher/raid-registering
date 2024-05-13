@@ -93,6 +93,7 @@ export const useAuth = () => {
   }
 
   async function refreshTokens(): Promise<string | null> {
+    console.log("refreshing tokens", isLoading);
     if (isLoading) return null;
     setIsLoading(true);
     console.log("refreshing tokens");
@@ -165,17 +166,13 @@ export const useAuth = () => {
     setIsLoading(true);
     if (typeof window === "undefined") return null;
     if (token !== null) {
-      if (!isTokenExpired()) {
-        setIsLoading(false);
-        console.log("is token queried", isTokenQueried);
-      }
       setIsTokenQueried(true);
     } else {
-      setIsLoading(false);
       if (!["/login", "/recover", "/register"].includes(pathname ?? "")) {
         router.replace("/login");
       }
     }
+    setIsLoading(false);
     return token;
   }
 
