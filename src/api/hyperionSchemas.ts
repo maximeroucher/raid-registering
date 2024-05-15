@@ -1281,6 +1281,12 @@ export type RaidInformation = {
   contact?: string | null;
 };
 
+export type RaidPrice = {
+  student_price?: number | null;
+  partner_price?: number | null;
+  t_shirt_price?: number | null;
+};
+
 export type Recommendation = {
   title: string;
   code?: string | null;
@@ -1359,6 +1365,7 @@ export type SecurityFile = {
   emergency_person_name?: string | null;
   emergency_person_phone?: string | null;
   id: string;
+  file_id?: string | null;
   validation: DocumentValidation;
 };
 
@@ -1377,6 +1384,7 @@ export type SecurityFileBase = {
   emergency_person_name?: string | null;
   emergency_person_phone?: string | null;
   id: string;
+  file_id?: string | null;
 };
 
 export type Size = "XS" | "S" | "M" | "L" | "XL";

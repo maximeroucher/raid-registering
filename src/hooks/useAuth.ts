@@ -156,18 +156,18 @@ export const useAuth = () => {
   }
 
   async function getTokenFromStorage(): Promise<string | null> {
-    if (isLoading) return null;
-    setIsLoading(true);
-    if (typeof window === "undefined") return null;
-    if (token !== null) {
-      setIsTokenQueried(true);
-    } else {
-      if (!["/login", "/recover", "/register"].includes(pathname ?? "")) {
-        router.replace("/login");
-      }
-    }
-    setIsLoading(false);
-    return token;
+    // if (isLoading) return null;
+    // setIsLoading(true);
+    // if (typeof window === "undefined") return null;
+    // if (token !== null) {
+    //   setIsTokenQueried(true);
+    // } else {
+    //   if (!["/login", "/recover", "/register"].includes(pathname ?? "")) {
+    //     router.replace("/login");
+    //   }
+    // }
+    // setIsLoading(false);
+    // return token;
   }
 
   function lookToRefreshToken() {

@@ -14853,6 +14853,97 @@ export const usePatchRaidDrive = (
   });
 };
 
+export type GetRaidPriceError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetRaidPriceVariables = HyperionContext["fetcherOptions"];
+
+/**
+ * Get raid price
+ */
+export const fetchGetRaidPrice = (
+  variables: GetRaidPriceVariables,
+  signal?: AbortSignal,
+) =>
+  hyperionFetch<Schemas.RaidPrice, GetRaidPriceError, undefined, {}, {}, {}>({
+    url: "/raid/price",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Get raid price
+ */
+export const useGetRaidPrice = <TData = Schemas.RaidPrice,>(
+  variables: GetRaidPriceVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<Schemas.RaidPrice, GetRaidPriceError, TData>,
+    "queryKey" | "queryFn" | "initialData"
+  >,
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<Schemas.RaidPrice, GetRaidPriceError, TData>({
+    queryKey: queryKeyFn({
+      path: "/raid/price",
+      operationId: "getRaidPrice",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetRaidPrice({ ...fetcherOptions, ...variables }, signal),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type PatchRaidPriceError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type PatchRaidPriceVariables = {
+  body?: Schemas.RaidPrice;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Update raid price
+ */
+export const fetchPatchRaidPrice = (
+  variables: PatchRaidPriceVariables,
+  signal?: AbortSignal,
+) =>
+  hyperionFetch<undefined, PatchRaidPriceError, Schemas.RaidPrice, {}, {}, {}>({
+    url: "/raid/price",
+    method: "patch",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Update raid price
+ */
+export const usePatchRaidPrice = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      PatchRaidPriceError,
+      PatchRaidPriceVariables
+    >,
+    "mutationFn"
+  >,
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    PatchRaidPriceError,
+    PatchRaidPriceVariables
+  >({
+    mutationFn: (variables: PatchRaidPriceVariables) =>
+      fetchPatchRaidPrice({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
 export type GetRecommendationRecommendationsError =
   Fetcher.ErrorWrapper<undefined>;
 
@@ -15787,6 +15878,11 @@ export type QueryOperation =
       path: "/raid/drive";
       operationId: "getRaidDrive";
       variables: GetRaidDriveVariables;
+    }
+  | {
+      path: "/raid/price";
+      operationId: "getRaidPrice";
+      variables: GetRaidPriceVariables;
     }
   | {
       path: "/recommendation/recommendations";
