@@ -62,7 +62,12 @@ export const RaidPrice = () => {
                   <FormItem>
                     <div className="items-center gap-4">
                       <FormControl>
-                        <PriceInput {...field} />
+                        <PriceInput
+                          onChange={(value, name, values) =>
+                            field.onChange(values?.float)
+                          }
+                          value={field.value}
+                        />
                       </FormControl>
                       <FormMessage />
                     </div>
@@ -90,7 +95,11 @@ export const RaidPrice = () => {
           ) : (
             <>
               <div className="text-2xl font-bold">
-                {price?.student_price ?? <span>{"Prix non fixé"}</span>}
+                {price?.student_price ? (
+                  `${price.student_price} €`
+                ) : (
+                  <span>{"Prix non fixé"}</span>
+                )}
               </div>
               <Button
                 variant="outline"

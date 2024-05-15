@@ -69,9 +69,9 @@ const Dashboard = () => {
     },
   ];
 
-  // if (!isAdmin() && typeof window !== "undefined") {
-  //   router.replace("/?redirect=/admin");
-  // }
+  if (!isAdmin() && typeof window !== "undefined") {
+    router.replace("/?redirect=/admin");
+  }
 
   return (
     <div className="flex min-h-screen w-full flex-col">

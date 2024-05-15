@@ -22,11 +22,11 @@ const InformationPage = () => {
   const { isAdmin } = useUser();
   const router = useRouter();
 
-  // if (!isAdmin() && typeof window !== "undefined") {
-  //   const redirectUrl = new URL(window.location.href);
-  //   const path = redirectUrl.pathname + redirectUrl.search;
-  //   router.replace(`/?redirect=${path}`);
-  // }
+  if (!isAdmin() && typeof window !== "undefined") {
+    const redirectUrl = new URL(window.location.href);
+    const path = redirectUrl.pathname + redirectUrl.search;
+    router.replace(`/?redirect=${path}`);
+  }
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
@@ -38,14 +38,14 @@ const InformationPage = () => {
           </CardHeader>
           <CardContent>
             <div className="grid xl:grid-cols-3 gap-4 w-full grid-cols-1 max-md:p-8 max-md:gap-4">
-              {/* <InscriptionEnd />
+              <InscriptionEnd />
               <RaidDate />
               <ContactMail />
               <PaymentLink />
               <DriveFolder />
               <CardLayout label="Capacité maximale">
                 <>En développement</>
-              </CardLayout> */}
+              </CardLayout>
               <RaidPrice />
             </div>
           </CardContent>
