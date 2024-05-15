@@ -14,8 +14,7 @@ import { Skeleton } from "../ui/skeleton";
 import { useState } from "react";
 import { ViewEditParticipantItem } from "./ViewEditParticipantItem";
 import { ParticipantLoading } from "./ParticipantLoading";
-import { useInformation } from "@/src/hooks/useInformation";
-import { getDaysLeft } from "@/src/utils/dateFormat";
+import { PaymentButton } from "./PaymentButton";
 
 interface ParticipantCardProps {
   participant?: Participant;
@@ -89,10 +88,12 @@ export const ParticipantCard = ({
         <>
           <CardFooter className="w-full">
             {participant ? (
-              <ParticipantCardItem
-                label="Paiement"
-                value={participant.payment}
-              />
+              <div className="grid p-2 grid-cols-6 items-center w-full">
+                <span className="font-semibold text-left my-auto col-span-2">
+                  Paiement
+                </span>
+                <PaymentButton />
+              </div>
             ) : (
               <div className="grid p-2 grid-cols-6 items-center w-full h-[65px]">
                 <span className="font-semibold text-left my-auto col-span-2">
