@@ -132,7 +132,7 @@ export const CreateParticipant = ({
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <DialogHeader>
-              <DialogTitle>Informations personnelles</DialogTitle>
+              <DialogTitle>Vos informations</DialogTitle>
               <DialogDescription>
                 Veuillez renseigner vos information pour pouvoir créer une
                 équipe
