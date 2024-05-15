@@ -27,7 +27,9 @@ export const RaidPrice = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      student_price: price?.student_price ?? undefined,
+      student_price: price?.student_price
+        ? price.student_price / 100
+        : undefined,
     },
   });
 
@@ -36,7 +38,7 @@ export const RaidPrice = () => {
     updatePrice(
       {
         ...price,
-        student_price: values.student_price,
+        student_price: values.student_price * 100,
       },
       () => {
         setIsLoading(false);
@@ -96,7 +98,7 @@ export const RaidPrice = () => {
             <>
               <div className="text-2xl font-bold">
                 {price?.student_price ? (
-                  `${price.student_price} €`
+                  `${(price.student_price / 100).toFixed(2)} €`
                 ) : (
                   <span>{"Prix non fixé"}</span>
                 )}
