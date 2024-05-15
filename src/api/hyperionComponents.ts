@@ -2190,19 +2190,19 @@ export const useGetNotificationTopics = <
   });
 };
 
-export type GetNotificationTopicsTopicStrPathParams = {
-  topicStr: string;
+export type GetNotificationTopicsTopicPathParams = {
+  topic: Schemas.Topic;
 };
 
-export type GetNotificationTopicsTopicStrError = Fetcher.ErrorWrapper<{
+export type GetNotificationTopicsTopicError = Fetcher.ErrorWrapper<{
   status: 422;
   payload: Schemas.HTTPValidationError;
 }>;
 
-export type GetNotificationTopicsTopicStrResponse = string[];
+export type GetNotificationTopicsTopicResponse = string[];
 
-export type GetNotificationTopicsTopicStrVariables = {
-  pathParams: GetNotificationTopicsTopicStrPathParams;
+export type GetNotificationTopicsTopicVariables = {
+  pathParams: GetNotificationTopicsTopicPathParams;
 } & HyperionContext["fetcherOptions"];
 
 /**
@@ -2210,19 +2210,19 @@ export type GetNotificationTopicsTopicStrVariables = {
  *
  * **The user must be authenticated to use this endpoint**
  */
-export const fetchGetNotificationTopicsTopicStr = (
-  variables: GetNotificationTopicsTopicStrVariables,
+export const fetchGetNotificationTopicsTopic = (
+  variables: GetNotificationTopicsTopicVariables,
   signal?: AbortSignal,
 ) =>
   hyperionFetch<
-    GetNotificationTopicsTopicStrResponse,
-    GetNotificationTopicsTopicStrError,
+    GetNotificationTopicsTopicResponse,
+    GetNotificationTopicsTopicError,
     undefined,
     {},
     {},
-    GetNotificationTopicsTopicStrPathParams
+    GetNotificationTopicsTopicPathParams
   >({
-    url: "/notification/topics/{topicStr}",
+    url: "/notification/topics/{topic}",
     method: "get",
     ...variables,
     signal,
@@ -2233,14 +2233,14 @@ export const fetchGetNotificationTopicsTopicStr = (
  *
  * **The user must be authenticated to use this endpoint**
  */
-export const useGetNotificationTopicsTopicStr = <
-  TData = GetNotificationTopicsTopicStrResponse,
+export const useGetNotificationTopicsTopic = <
+  TData = GetNotificationTopicsTopicResponse,
 >(
-  variables: GetNotificationTopicsTopicStrVariables,
+  variables: GetNotificationTopicsTopicVariables,
   options?: Omit<
     reactQuery.UseQueryOptions<
-      GetNotificationTopicsTopicStrResponse,
-      GetNotificationTopicsTopicStrError,
+      GetNotificationTopicsTopicResponse,
+      GetNotificationTopicsTopicError,
       TData
     >,
     "queryKey" | "queryFn" | "initialData"
@@ -2249,17 +2249,17 @@ export const useGetNotificationTopicsTopicStr = <
   const { fetcherOptions, queryOptions, queryKeyFn } =
     useHyperionContext(options);
   return reactQuery.useQuery<
-    GetNotificationTopicsTopicStrResponse,
-    GetNotificationTopicsTopicStrError,
+    GetNotificationTopicsTopicResponse,
+    GetNotificationTopicsTopicError,
     TData
   >({
     queryKey: queryKeyFn({
-      path: "/notification/topics/{topicStr}",
-      operationId: "getNotificationTopicsTopicStr",
+      path: "/notification/topics/{topic}",
+      operationId: "getNotificationTopicsTopic",
       variables,
     }),
     queryFn: ({ signal }) =>
-      fetchGetNotificationTopicsTopicStr(
+      fetchGetNotificationTopicsTopic(
         { ...fetcherOptions, ...variables },
         signal,
       ),
@@ -2268,14 +2268,9 @@ export const useGetNotificationTopicsTopicStr = <
   });
 };
 
-export type PostNotificationSendError = Fetcher.ErrorWrapper<{
-  status: 422;
-  payload: Schemas.HTTPValidationError;
-}>;
+export type PostNotificationSendError = Fetcher.ErrorWrapper<undefined>;
 
-export type PostNotificationSendVariables = {
-  body: Schemas.Message;
-} & HyperionContext["fetcherOptions"];
+export type PostNotificationSendVariables = HyperionContext["fetcherOptions"];
 
 /**
  * Send ourself a test notification.
@@ -2286,7 +2281,7 @@ export const fetchPostNotificationSend = (
   variables: PostNotificationSendVariables,
   signal?: AbortSignal,
 ) =>
-  hyperionFetch<void, PostNotificationSendError, Schemas.Message, {}, {}, {}>({
+  hyperionFetch<void, PostNotificationSendError, undefined, {}, {}, {}>({
     url: "/notification/send",
     method: "post",
     ...variables,
@@ -2316,6 +2311,110 @@ export const usePostNotificationSend = (
   >({
     mutationFn: (variables: PostNotificationSendVariables) =>
       fetchPostNotificationSend({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
+export type PostNotificationSendFutureError = Fetcher.ErrorWrapper<undefined>;
+
+export type PostNotificationSendFutureVariables =
+  HyperionContext["fetcherOptions"];
+
+/**
+ * Send ourself a test notification.
+ *
+ * **Only admins can use this endpoint**
+ */
+export const fetchPostNotificationSendFuture = (
+  variables: PostNotificationSendFutureVariables,
+  signal?: AbortSignal,
+) =>
+  hyperionFetch<void, PostNotificationSendFutureError, undefined, {}, {}, {}>({
+    url: "/notification/send/future",
+    method: "post",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Send ourself a test notification.
+ *
+ * **Only admins can use this endpoint**
+ */
+export const usePostNotificationSendFuture = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      void,
+      PostNotificationSendFutureError,
+      PostNotificationSendFutureVariables
+    >,
+    "mutationFn"
+  >,
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    void,
+    PostNotificationSendFutureError,
+    PostNotificationSendFutureVariables
+  >({
+    mutationFn: (variables: PostNotificationSendFutureVariables) =>
+      fetchPostNotificationSendFuture({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
+export type PostPaymentHelloassoWebhookError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type PostPaymentHelloassoWebhookVariables = {
+  body?:
+    | Schemas.OrganizationNotificationResultContent
+    | Schemas.OrderNotificationResultContent
+    | Schemas.PayementNotificationResultContent
+    | Schemas.FormNotificationResultContent;
+} & HyperionContext["fetcherOptions"];
+
+export const fetchPostPaymentHelloassoWebhook = (
+  variables: PostPaymentHelloassoWebhookVariables,
+  signal?: AbortSignal,
+) =>
+  hyperionFetch<
+    undefined,
+    PostPaymentHelloassoWebhookError,
+    | Schemas.OrganizationNotificationResultContent
+    | Schemas.OrderNotificationResultContent
+    | Schemas.PayementNotificationResultContent
+    | Schemas.FormNotificationResultContent,
+    {},
+    {},
+    {}
+  >({
+    url: "/payment/helloasso/webhook",
+    method: "post",
+    ...variables,
+    signal,
+  });
+
+export const usePostPaymentHelloassoWebhook = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      PostPaymentHelloassoWebhookError,
+      PostPaymentHelloassoWebhookVariables
+    >,
+    "mutationFn"
+  >,
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    PostPaymentHelloassoWebhookError,
+    PostPaymentHelloassoWebhookVariables
+  >({
+    mutationFn: (variables: PostPaymentHelloassoWebhookVariables) =>
+      fetchPostPaymentHelloassoWebhook({ ...fetcherOptions, ...variables }),
     ...options,
   });
 };
@@ -9389,6 +9488,170 @@ export const useGetCinemaSessionsSessionIdPoster = <TData = undefined,>(
   });
 };
 
+export type GetFlappybirdScoresQueryParams = {
+  /**
+   * @default 0
+   */
+  skip?: number;
+  /**
+   * @default 10
+   */
+  limit?: number;
+};
+
+export type GetFlappybirdScoresError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type GetFlappybirdScoresResponse = Schemas.FlappyBirdScoreInDB[];
+
+export type GetFlappybirdScoresVariables = {
+  queryParams?: GetFlappybirdScoresQueryParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Return the leaderboard score of the skip...limit
+ */
+export const fetchGetFlappybirdScores = (
+  variables: GetFlappybirdScoresVariables,
+  signal?: AbortSignal,
+) =>
+  hyperionFetch<
+    GetFlappybirdScoresResponse,
+    GetFlappybirdScoresError,
+    undefined,
+    {},
+    GetFlappybirdScoresQueryParams,
+    {}
+  >({ url: "/flappybird/scores", method: "get", ...variables, signal });
+
+/**
+ * Return the leaderboard score of the skip...limit
+ */
+export const useGetFlappybirdScores = <TData = GetFlappybirdScoresResponse,>(
+  variables: GetFlappybirdScoresVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      GetFlappybirdScoresResponse,
+      GetFlappybirdScoresError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >,
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    GetFlappybirdScoresResponse,
+    GetFlappybirdScoresError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/flappybird/scores",
+      operationId: "getFlappybirdScores",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetFlappybirdScores({ ...fetcherOptions, ...variables }, signal),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type PostFlappybirdScoresError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type PostFlappybirdScoresVariables = {
+  body: Schemas.FlappyBirdScoreBase;
+} & HyperionContext["fetcherOptions"];
+
+export const fetchPostFlappybirdScores = (
+  variables: PostFlappybirdScoresVariables,
+  signal?: AbortSignal,
+) =>
+  hyperionFetch<
+    Schemas.FlappyBirdScoreBase,
+    PostFlappybirdScoresError,
+    Schemas.FlappyBirdScoreBase,
+    {},
+    {},
+    {}
+  >({ url: "/flappybird/scores", method: "post", ...variables, signal });
+
+export const usePostFlappybirdScores = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.FlappyBirdScoreBase,
+      PostFlappybirdScoresError,
+      PostFlappybirdScoresVariables
+    >,
+    "mutationFn"
+  >,
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.FlappyBirdScoreBase,
+    PostFlappybirdScoresError,
+    PostFlappybirdScoresVariables
+  >({
+    mutationFn: (variables: PostFlappybirdScoresVariables) =>
+      fetchPostFlappybirdScores({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
+export type GetFlappybirdScoresMeError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetFlappybirdScoresMeVariables = HyperionContext["fetcherOptions"];
+
+export const fetchGetFlappybirdScoresMe = (
+  variables: GetFlappybirdScoresMeVariables,
+  signal?: AbortSignal,
+) =>
+  hyperionFetch<
+    Schemas.FlappyBirdScoreCompleteFeedBack,
+    GetFlappybirdScoresMeError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: "/flappybird/scores/me", method: "get", ...variables, signal });
+
+export const useGetFlappybirdScoresMe = <
+  TData = Schemas.FlappyBirdScoreCompleteFeedBack,
+>(
+  variables: GetFlappybirdScoresMeVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<
+      Schemas.FlappyBirdScoreCompleteFeedBack,
+      GetFlappybirdScoresMeError,
+      TData
+    >,
+    "queryKey" | "queryFn" | "initialData"
+  >,
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<
+    Schemas.FlappyBirdScoreCompleteFeedBack,
+    GetFlappybirdScoresMeError,
+    TData
+  >({
+    queryKey: queryKeyFn({
+      path: "/flappybird/scores/me",
+      operationId: "getFlappybirdScoresMe",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetFlappybirdScoresMe({ ...fetcherOptions, ...variables }, signal),
+    ...options,
+    ...queryOptions,
+  });
+};
+
 export type GetLoansLoanersError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetLoansLoanersResponse = Schemas.Loaner[];
@@ -14944,6 +15207,49 @@ export const usePatchRaidPrice = (
   });
 };
 
+export type GetRaidPayError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetRaidPayVariables = HyperionContext["fetcherOptions"];
+
+/**
+ * Generate the payment url
+ */
+export const fetchGetRaidPay = (
+  variables: GetRaidPayVariables,
+  signal?: AbortSignal,
+) =>
+  hyperionFetch<Schemas.PaymentUrl, GetRaidPayError, undefined, {}, {}, {}>({
+    url: "/raid/pay",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Generate the payment url
+ */
+export const useGetRaidPay = <TData = Schemas.PaymentUrl,>(
+  variables: GetRaidPayVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<Schemas.PaymentUrl, GetRaidPayError, TData>,
+    "queryKey" | "queryFn" | "initialData"
+  >,
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<Schemas.PaymentUrl, GetRaidPayError, TData>({
+    queryKey: queryKeyFn({
+      path: "/raid/pay",
+      operationId: "getRaidPay",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetRaidPay({ ...fetcherOptions, ...variables }, signal),
+    ...options,
+    ...queryOptions,
+  });
+};
+
 export type GetRecommendationRecommendationsError =
   Fetcher.ErrorWrapper<undefined>;
 
@@ -15480,9 +15786,9 @@ export type QueryOperation =
       variables: GetNotificationTopicsVariables;
     }
   | {
-      path: "/notification/topics/{topicStr}";
-      operationId: "getNotificationTopicsTopicStr";
-      variables: GetNotificationTopicsTopicStrVariables;
+      path: "/notification/topics/{topic}";
+      operationId: "getNotificationTopicsTopic";
+      variables: GetNotificationTopicsTopicVariables;
     }
   | {
       path: "/users/";
@@ -15715,6 +16021,16 @@ export type QueryOperation =
       variables: GetCinemaSessionsSessionIdPosterVariables;
     }
   | {
+      path: "/flappybird/scores";
+      operationId: "getFlappybirdScores";
+      variables: GetFlappybirdScoresVariables;
+    }
+  | {
+      path: "/flappybird/scores/me";
+      operationId: "getFlappybirdScoresMe";
+      variables: GetFlappybirdScoresMeVariables;
+    }
+  | {
       path: "/loans/loaners/";
       operationId: "getLoansLoaners";
       variables: GetLoansLoanersVariables;
@@ -15883,6 +16199,11 @@ export type QueryOperation =
       path: "/raid/price";
       operationId: "getRaidPrice";
       variables: GetRaidPriceVariables;
+    }
+  | {
+      path: "/raid/pay";
+      operationId: "getRaidPay";
+      variables: GetRaidPayVariables;
     }
   | {
       path: "/recommendation/recommendations";

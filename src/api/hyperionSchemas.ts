@@ -616,6 +616,12 @@ export type DocumentCreation = {
   id: string;
 };
 
+export type DocumentModel = {
+  id?: number | null;
+  fileName?: string | null;
+  publicUrl?: string | null;
+};
+
 export type DocumentType =
   | "idCard"
   | "medicalCertificate"
@@ -712,6 +718,17 @@ export type EventReturn = {
   applicant: EventApplicant;
 };
 
+export type FieldType =
+  | "Date"
+  | "TextInput"
+  | "FreeText"
+  | "ChoiceList"
+  | "File"
+  | "YesNo"
+  | "Phone"
+  | "Zipcode"
+  | "Number";
+
 export type FirebaseDevice = {
   /**
    * The Hyperion user id
@@ -721,6 +738,37 @@ export type FirebaseDevice = {
    * @default Firebase device token
    */
   firebase_device_token?: string;
+};
+
+export type FlappyBirdScoreBase = {
+  value: number;
+};
+
+/**
+ * A score, with it's position in the best players leaderboard
+ */
+export type FlappyBirdScoreCompleteFeedBack = {
+  value: number;
+  user: CoreUserSimple;
+  /**
+   * @format date-time
+   */
+  creation_time: string;
+  position: number;
+};
+
+export type FlappyBirdScoreInDB = {
+  value: number;
+  user: CoreUserSimple;
+  /**
+   * @format date-time
+   */
+  creation_time: string;
+  /**
+   * @format uuid
+   */
+  id: string;
+  user_id: string;
 };
 
 export type FloorsType =
@@ -748,6 +796,58 @@ export type FloorsType =
   | "X4"
   | "X5"
   | "X6";
+
+export type FormNotificationResultContent = {
+  eventType: void;
+  data: FormPublicModel;
+};
+
+export type FormPublicModel = {
+  organizationLogo?: string | null;
+  organizationName?: string | null;
+  tiers?: TierPublicModel[] | null;
+  activityType?: string | null;
+  activityTypeId?: number | null;
+  place?: PlaceModel | null;
+  saleEndDate?: string | null;
+  saleStartDate?: string | null;
+  validityType?: MembershipValidityType | null;
+  banner?: DocumentModel | null;
+  currency?: string | null;
+  description?: string | null;
+  startDate?: string | null;
+  endDate?: string | null;
+  logo?: DocumentModel | null;
+  meta?: MetaModel | null;
+  state?: FormState | null;
+  title?: string | null;
+  privateTitle?: string | null;
+  widgetButtonUrl?: string | null;
+  widgetFullUrl?: string | null;
+  widgetVignetteHorizontalUrl?: string | null;
+  widgetVignetteVerticalUrl?: string | null;
+  widgetCounterUrl?: string | null;
+  formSlug?: string | null;
+  formType?: FormType | null;
+  url?: string | null;
+  organizationSlug?: string | null;
+};
+
+export type FormState = "Public" | "Private" | "Draft" | "Disabled";
+
+export type FormType =
+  | "CrowdFunding"
+  | "Membership"
+  | "Event"
+  | "Donation"
+  | "PaymentForm"
+  | "Checkout"
+  | "Shop";
+
+export type GeoLocation = {
+  latitude?: number | null;
+  longitude?: number | null;
+};
 
 export type HTTPValidationError = {
   detail?: ValidationError[];
@@ -804,6 +904,27 @@ export type ItemBorrowed = {
   quantity: number;
 };
 
+export type ItemCustomField = {
+  id?: number | null;
+  name?: string | null;
+  type?: FieldType | null;
+  answer?: string | null;
+};
+
+export type ItemDiscount = {
+  code?: string | null;
+  amount?: number | null;
+};
+
+export type ItemOption = {
+  name?: string | null;
+  amount?: number | null;
+  priceCategory?: PriceCategory | null;
+  isRequired?: boolean | null;
+  customFields?: ItemCustomField[] | null;
+  optionId?: number | null;
+};
+
 /**
  * A schema used to represent Item in a loan with its quantity in a response to the client
  */
@@ -817,6 +938,8 @@ export type ItemSimple = {
   name: string;
   loaner_id: string;
 };
+
+export type ItemState = "Processed" | "Registered" | "Unknown" | "Canceled";
 
 export type ItemUpdate = {
   name?: string | null;
@@ -1030,6 +1153,8 @@ export type MembershipEdit = {
   role_tags?: string | null;
 };
 
+export type MembershipValidityType = "MovingYear" | "Custom" | "Illimited";
+
 export type Message = {
   /**
    * A context represents a topic. There can only by one notification per context.
@@ -1056,6 +1181,11 @@ export type Message = {
   expire_on: string;
 };
 
+export type MetaModel = {
+  createdAt?: string | null;
+  updatedAt?: string | null;
+};
+
 export type ModuleVisibility = {
   root: string;
   allowed_group_ids: string[];
@@ -1066,6 +1196,20 @@ export type ModuleVisibilityCreate = {
   allowed_group_id: string;
 };
 
+export type OperationState =
+  | "UNKNOWN"
+  | "INIT"
+  | "PROCESSING"
+  | "PROCESSED"
+  | "ERROR"
+  | "INTERNAL_ERROR";
+
+export type OrderAmountModel = {
+  total?: number | null;
+  vat?: number | null;
+  discount?: number | null;
+};
+
 export type OrderBase = {
   user_id: string;
   delivery_id: string;
@@ -1074,10 +1218,91 @@ export type OrderBase = {
   products_quantity: number[];
 };
 
+export type OrderDetail = {
+  payer?: Payer | null;
+  items?: OrderItem[] | null;
+  payments?: OrderPayment[] | null;
+  amount?: OrderAmountModel | null;
+  id?: number | null;
+  date?: string | null;
+  formSlug?: string | null;
+  formType?: FormType | null;
+  organizationName?: string | null;
+  organizationSlug?: string | null;
+  organizationType?: OrganizationType | null;
+  organizationIsUnderColucheLaw?: boolean | null;
+  checkoutIntentId?: number | null;
+  meta?: MetaModel | null;
+};
+
 export type OrderEdit = {
   products_ids?: string[] | null;
   collection_slot?: AmapSlotType | null;
   products_quantity?: number[] | null;
+};
+
+export type OrderItem = {
+  payments?: SharePayment[] | null;
+  name?: string | null;
+  user?: User | null;
+  priceCategory?: PriceCategory | null;
+  minAmount?: number | null;
+  discount?: ItemDiscount | null;
+  customFields?: ItemCustomField[] | null;
+  options?: ItemOption[] | null;
+  ticketUrl?: string | null;
+  qrCode?: string | null;
+  membershipCardUrl?: string | null;
+  dayOfLevy?: number | null;
+  tierDescription?: string | null;
+  tierId?: number | null;
+  comment?: string | null;
+  id?: number | null;
+  amount?: number | null;
+  type?: TierType | null;
+  initialAmount?: number | null;
+  state?: ItemState | null;
+};
+
+export type OrderLight = {
+  id?: number | null;
+  date?: string | null;
+  formSlug?: string | null;
+  formType?: FormType | null;
+  organizationName?: string | null;
+  organizationSlug?: string | null;
+  organizationType?: OrganizationType | null;
+  organizationIsUnderColucheLaw?: boolean | null;
+  checkoutIntentId?: number | null;
+  meta?: MetaModel | null;
+};
+
+/**
+ * metadata should contain the metadata sent while creating the checkout intent in `InitCheckoutBody`
+ */
+export type OrderNotificationResultContent = {
+  eventType: void;
+  data: OrderDetail;
+  metadata?: Record<string, any> | null;
+};
+
+export type OrderPayment = {
+  items?: ShareItem[] | null;
+  cashOutDate?: string | null;
+  cashOutState?: PaymentCashOutState | null;
+  paymentReceiptUrl?: string | null;
+  fiscalReceiptUrl?: string | null;
+  id?: number | null;
+  amount?: number | null;
+  amountTip?: number | null;
+  date?: string | null;
+  paymentMeans?: PaymentMeans | null;
+  installmentNumber?: number | null;
+  state?: PaymentState | null;
+  type?: PaymentType | null;
+  meta?: MetaModel | null;
+  paymentOffLineMean?: PaymentMeans | null;
+  refundOperations?: RefundOperationLightModel[] | null;
 };
 
 export type OrderReturn = {
@@ -1096,6 +1321,36 @@ export type OrderReturn = {
    */
   delivery_date: string;
 };
+
+export type OrganizationNotificationResultContent = {
+  eventType: void;
+  data: OrganizationNotificationResultData;
+};
+
+export type OrganizationNotificationResultData = {
+  old_slug_organization: string;
+  new_slug_organization: string;
+};
+
+export type OrganizationType =
+  | "Association1901Rig"
+  | "Association1901Rup"
+  | "Association1901"
+  | "FondationRup"
+  | "FondDotation"
+  | "FondationSousEgide"
+  | "FondationScientifique"
+  | "FondationPartenariale"
+  | "FondationUniversitaire"
+  | "FondationHospitaliere"
+  | "Association1905"
+  | "Association1905Rup"
+  | "Entreprise"
+  | "Cooperative"
+  | "Etablissement"
+  | "Association1908"
+  | "Association1908Rig"
+  | "Association1908Rup";
 
 export type PackTicketBase = {
   price: number;
@@ -1192,6 +1447,109 @@ export type ParticipantUpdate = {
   diet?: string | null;
   attestation_on_honour?: boolean | null;
 };
+
+/**
+ * metadata should contain the metadata sent while creating the checkout intent in `InitCheckoutBody`
+ */
+export type PayementNotificationResultContent = {
+  eventType: void;
+  data: PaymentDetail;
+  metadata?: Record<string, any> | null;
+};
+
+export type Payer = {
+  email?: string | null;
+  address?: string | null;
+  city?: string | null;
+  zipCode?: string | null;
+  country?: string | null;
+  company?: string | null;
+  dateOfBirth?: string | null;
+  firstName?: string | null;
+  lastName?: string | null;
+};
+
+export type PaymentCashOutState =
+  | "MoneyIn"
+  | "CantTransferReceiverFull"
+  | "Transfered"
+  | "Refunded"
+  | "Refunding"
+  | "WaitingForCashOutConfirmation"
+  | "CashedOut"
+  | "Unknown"
+  | "Contested"
+  | "TransferInProgress";
+
+export type PaymentDetail = {
+  order?: OrderLight | null;
+  payer?: Payer | null;
+  items?: PaymentItem[] | null;
+  cashOutDate?: string | null;
+  cashOutState?: PaymentCashOutState | null;
+  paymentReceiptUrl?: string | null;
+  fiscalReceiptUrl?: string | null;
+  id?: number | null;
+  amount?: number | null;
+  amountTip?: number | null;
+  date?: string | null;
+  paymentMeans?: PaymentMeans | null;
+  installmentNumber?: number | null;
+  state?: PaymentState | null;
+  type?: PaymentType | null;
+  meta?: MetaModel | null;
+  paymentOffLineMean?: PaymentMeans | null;
+  refundOperations?: RefundOperationLightModel[] | null;
+};
+
+export type PaymentFrequencyType = "Single" | "Installment" | "Monthly";
+
+export type PaymentItem = {
+  shareAmount?: number | null;
+  shareItemAmount?: number | null;
+  shareOptionsAmount?: number | null;
+  id?: number | null;
+  amount?: number | null;
+  type?: TierType | null;
+  initialAmount?: number | null;
+  state?: ItemState | null;
+  name?: string | null;
+};
+
+export type PaymentMeans =
+  | "None"
+  | "Card"
+  | "Check"
+  | "Cash"
+  | "BankTransfer"
+  | "Other";
+
+export type PaymentState =
+  | "Pending"
+  | "Authorized"
+  | "Refused"
+  | "Unknown"
+  | "Registered"
+  | "Refunded"
+  | "Refunding"
+  | "Contested";
+
+export type PaymentType = "Offline" | "Credit" | "Debit";
+
+export type PaymentUrl = {
+  url: string;
+};
+
+export type PlaceModel = {
+  address?: string | null;
+  name?: string | null;
+  city?: string | null;
+  zipCode?: string | null;
+  country?: string | null;
+  geoLocation?: GeoLocation | null;
+};
+
+export type PriceCategory = "Fixed" | "Pwyw" | "Free";
 
 export type PrizeBase = {
   name: string;
@@ -1316,6 +1674,14 @@ export type RecommendationEdit = {
   description?: string | null;
 };
 
+export type RefundOperationLightModel = {
+  id?: number | null;
+  amount?: number | null;
+  amountTip?: number | null;
+  status?: OperationState | null;
+  meta?: MetaModel | null;
+};
+
 export type ResetPasswordRequest = {
   reset_token: string;
   new_password: string;
@@ -1387,6 +1753,18 @@ export type SecurityFileBase = {
   file_id?: string | null;
 };
 
+export type ShareItem = {
+  id?: number | null;
+  shareAmount?: number | null;
+  shareItemAmount?: number | null;
+  shareOptionsAmount?: number | null;
+};
+
+export type SharePayment = {
+  id?: number | null;
+  shareAmount?: number | null;
+};
+
 export type Size = "XS" | "S" | "M" | "L" | "XL";
 
 /**
@@ -1433,6 +1811,11 @@ export type TeamUpdate = {
   meeting_place?: MeetingPlace | null;
 };
 
+export type TermModel = {
+  date?: string | null;
+  amount?: number | null;
+};
+
 export type TicketComplete = {
   pack_id: string;
   user_id: string;
@@ -1450,6 +1833,36 @@ export type TicketSimple = {
   id: string;
 };
 
+export type TierPublicModel = {
+  id?: number | null;
+  label?: string | null;
+  description?: string | null;
+  tierType?: TierType | null;
+  price?: number | null;
+  vatRate?: number | null;
+  minAmount?: number | null;
+  paymentFrequency?: PaymentFrequencyType | null;
+  maxPerUser?: number | null;
+  meta?: MetaModel | null;
+  saleStartDate?: string | null;
+  saleEndDate?: string | null;
+  isEligibleTaxReceipt?: boolean | null;
+  terms?: TermModel[] | null;
+  picture?: DocumentModel | null;
+};
+
+export type TierType =
+  | "Donation"
+  | "Payment"
+  | "Registration"
+  | "Membership"
+  | "MonthlyDonation"
+  | "MonthlyPayment"
+  | "OfflineDonation"
+  | "Contribution"
+  | "Bonus"
+  | "Product";
+
 export type TokenResponse = {
   access_token: string;
   /**
@@ -1466,6 +1879,24 @@ export type TokenResponse = {
   scope?: string;
   refresh_token: string;
   id_token?: string | null;
+};
+
+/**
+ * A list of topics. An user can suscribe to a topic to receive notifications about it.
+ */
+export type Topic =
+  | "cinema"
+  | "advert"
+  | "amap"
+  | "booking"
+  | "event"
+  | "loan"
+  | "raffle"
+  | "vote";
+
+export type User = {
+  firstName?: string | null;
+  lastName?: string | null;
 };
 
 export type ValidationError = {
