@@ -17,6 +17,7 @@ import { useParticipant } from "@/src/hooks/useParticipant";
 import { toast } from "../ui/use-toast";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { apiFormatDate, formatDate } from "@/src/utils/dateFormat";
+import { useTeam } from "@/src/hooks/useTeam";
 
 interface UserButtonProps {
   me: Participant;
@@ -31,6 +32,7 @@ export const ViewEditUserInfo = ({
   setIsEdit,
   setIsOpen,
 }: UserButtonProps) => {
+  const { refetchTeam } = useTeam();
   const { updateParticipant, isUpdateLoading } = useParticipant();
 
   const formSchema = z.object({
@@ -96,6 +98,7 @@ export const ViewEditUserInfo = ({
         title: "Profil mis à jour",
         description: "Vos informations ont été mises à jour avec succès",
       });
+      refetchTeam();
       setIsEdit(!isEdit);
       setIsOpen(false);
       form.reset({

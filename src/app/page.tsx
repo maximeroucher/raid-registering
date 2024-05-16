@@ -23,7 +23,7 @@ const Home = () => {
   const { isTokenQueried, token } = useAuth();
   const { me, isFetched, refetch } = useParticipant();
   const { me: user, isAdmin } = useUser();
-  const { team, createTeam, refetchTeam } = useTeam();
+  const { team, createTeam, refetchTeam, isLoading: isTeamLoading } = useTeam();
   const [isOpened, setIsOpened] = useState(false);
   const [isEndDialogOpened, setIsEndDialogOpened] = useState(true);
   const searchParams = useSearchParams();
@@ -123,7 +123,7 @@ const Home = () => {
           </>
         </>
       )}
-      {isFetched && me && team === undefined && (
+      {isFetched && me && team === undefined && !isTeamLoading && (
         <WarningDialog
           isOpened={isEndDialogOpened}
           setIsOpened={setIsEndDialogOpened}

@@ -7,9 +7,11 @@ import { TeamBase, TeamUpdate } from "../api/hyperionSchemas";
 import { useQueryClient } from "@tanstack/react-query";
 import { useUser } from "./useUser";
 import { useAuth } from "./useAuth";
+import { useParticipant } from "./useParticipant";
 
 export const useTeam = () => {
   const { token, userId, isTokenExpired } = useAuth();
+  const { me } = useParticipant();
   const { isAdmin } = useUser();
   const queryClient = useQueryClient();
 
@@ -27,7 +29,8 @@ export const useTeam = () => {
       },
     },
     {
-      enabled: userId !== null && !isAdmin() && !isTokenExpired(),
+      enabled:
+        userId !== null && !isAdmin() && !isTokenExpired() && me !== undefined,
       retry: 0,
       queryHash: "getTeamByParticipantId",
     },

@@ -6,7 +6,6 @@ import {
 import { useQueryClient } from "@tanstack/react-query";
 import { ParticipantBase, ParticipantUpdate } from "../api/hyperionSchemas";
 import { useParticipantStore } from "../stores/particpant";
-import { useTeam } from "./useTeam";
 import { useUser } from "./useUser";
 import { useAuth } from "./useAuth";
 
@@ -15,7 +14,6 @@ export const useParticipant = () => {
   const { isAdmin } = useUser();
   const queryClient = useQueryClient();
   const { participant, setParticipant } = useParticipantStore();
-  const { refetchTeam } = useTeam();
 
   const {
     data: me,
@@ -102,7 +100,6 @@ export const useParticipant = () => {
           // Assuming success in all cases
           // For unknown reasons, the invalidation of the query does not work
           refetch();
-          refetchTeam();
           callback();
         },
       },

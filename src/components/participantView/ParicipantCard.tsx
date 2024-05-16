@@ -15,6 +15,7 @@ import { useState } from "react";
 import { ViewEditParticipantItem } from "./ViewEditParticipantItem";
 import { ParticipantLoading } from "./ParticipantLoading";
 import { PaymentButton } from "./PaymentButton";
+import { Checkbox } from "../ui/checkbox";
 
 interface ParticipantCardProps {
   participant?: Participant;
@@ -92,7 +93,12 @@ export const ParticipantCard = ({
                 <span className="font-semibold text-left my-auto col-span-2">
                   Paiement
                 </span>
-                <PaymentButton />
+                {/* <PaymentButton /> */}
+                <Checkbox
+                  checked={participant?.payment}
+                  disabled
+                  className="col-span-4 ml-auto"
+                />
               </div>
             ) : (
               <div className="grid p-2 grid-cols-6 items-center w-full h-[65px]">
