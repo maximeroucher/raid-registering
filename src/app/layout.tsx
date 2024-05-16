@@ -11,20 +11,20 @@ import { Toaster } from "../components/ui/toaster";
 import { toast } from "../components/ui/use-toast";
 import { Suspense } from "react";
 import { ThemeProvider } from "../components/ui/theme";
-import PlausibleProvider from 'next-plausible';
+import PlausibleProvider from "next-plausible";
 
 const inter = Outfit({ subsets: ["latin-ext"] });
 
 const queryClient = new QueryClient({
-  queryCache: new QueryCache({
-    onError: (error) => {
-      toast({
-        title: "Erreur",
-        description: "Une erreur est survenue, veuillez réessayer plus tard",
-        variant: "destructive",
-      });
-    },
-  }),
+  // queryCache: new QueryCache({
+  //   onError: (error) => {
+  //     toast({
+  //       title: "Erreur",
+  //       description: "Une erreur est survenue, veuillez réessayer plus tard",
+  //       variant: "destructive",
+  //     });
+  //   },
+  // }),
 });
 
 export default function RootLayout({
