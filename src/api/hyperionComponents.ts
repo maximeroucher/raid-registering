@@ -10690,6 +10690,378 @@ export const usePostLoansLoanIdExtend = (
   });
 };
 
+export type GetPhPaperIdPdfPathParams = {
+  paperId: string;
+};
+
+export type GetPhPaperIdPdfError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type GetPhPaperIdPdfVariables = {
+  pathParams: GetPhPaperIdPdfPathParams;
+} & HyperionContext["fetcherOptions"];
+
+export const fetchGetPhPaperIdPdf = (
+  variables: GetPhPaperIdPdfVariables,
+  signal?: AbortSignal,
+) =>
+  hyperionFetch<
+    undefined,
+    GetPhPaperIdPdfError,
+    undefined,
+    {},
+    {},
+    GetPhPaperIdPdfPathParams
+  >({ url: "/ph/{paperId}/pdf", method: "get", ...variables, signal });
+
+export const useGetPhPaperIdPdf = <TData = undefined,>(
+  variables: GetPhPaperIdPdfVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<undefined, GetPhPaperIdPdfError, TData>,
+    "queryKey" | "queryFn" | "initialData"
+  >,
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<undefined, GetPhPaperIdPdfError, TData>({
+    queryKey: queryKeyFn({
+      path: "/ph/{paperId}/pdf",
+      operationId: "getPhPaperIdPdf",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetPhPaperIdPdf({ ...fetcherOptions, ...variables }, signal),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type PostPhPaperIdPdfPathParams = {
+  paperId: string;
+};
+
+export type PostPhPaperIdPdfError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type PostPhPaperIdPdfVariables = {
+  body: Schemas.BodyCreatePaperPdfAndCoverPhPaperIdPdfPost;
+  pathParams: PostPhPaperIdPdfPathParams;
+} & HyperionContext["fetcherOptions"];
+
+export const fetchPostPhPaperIdPdf = (
+  variables: PostPhPaperIdPdfVariables,
+  signal?: AbortSignal,
+) =>
+  hyperionFetch<
+    void,
+    PostPhPaperIdPdfError,
+    Schemas.BodyCreatePaperPdfAndCoverPhPaperIdPdfPost,
+    {},
+    {},
+    PostPhPaperIdPdfPathParams
+  >({ url: "/ph/{paperId}/pdf", method: "post", ...variables, signal });
+
+export const usePostPhPaperIdPdf = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      void,
+      PostPhPaperIdPdfError,
+      PostPhPaperIdPdfVariables
+    >,
+    "mutationFn"
+  >,
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    void,
+    PostPhPaperIdPdfError,
+    PostPhPaperIdPdfVariables
+  >({
+    mutationFn: (variables: PostPhPaperIdPdfVariables) =>
+      fetchPostPhPaperIdPdf({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
+export type GetPhError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetPhResponse = Schemas.PaperComplete[];
+
+export type GetPhVariables = HyperionContext["fetcherOptions"];
+
+/**
+ * Return all editions until now, sorted from the latest to the oldest
+ */
+export const fetchGetPh = (variables: GetPhVariables, signal?: AbortSignal) =>
+  hyperionFetch<GetPhResponse, GetPhError, undefined, {}, {}, {}>({
+    url: "/ph/",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Return all editions until now, sorted from the latest to the oldest
+ */
+export const useGetPh = <TData = GetPhResponse,>(
+  variables: GetPhVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<GetPhResponse, GetPhError, TData>,
+    "queryKey" | "queryFn" | "initialData"
+  >,
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<GetPhResponse, GetPhError, TData>({
+    queryKey: queryKeyFn({ path: "/ph/", operationId: "getPh", variables }),
+    queryFn: ({ signal }) =>
+      fetchGetPh({ ...fetcherOptions, ...variables }, signal),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type PostPhError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type PostPhVariables = {
+  body: Schemas.PaperBase;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Create a new paper.
+ */
+export const fetchPostPh = (variables: PostPhVariables, signal?: AbortSignal) =>
+  hyperionFetch<
+    Schemas.PaperComplete,
+    PostPhError,
+    Schemas.PaperBase,
+    {},
+    {},
+    {}
+  >({ url: "/ph/", method: "post", ...variables, signal });
+
+/**
+ * Create a new paper.
+ */
+export const usePostPh = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      Schemas.PaperComplete,
+      PostPhError,
+      PostPhVariables
+    >,
+    "mutationFn"
+  >,
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    Schemas.PaperComplete,
+    PostPhError,
+    PostPhVariables
+  >({
+    mutationFn: (variables: PostPhVariables) =>
+      fetchPostPh({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
+export type GetPhAdminError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetPhAdminResponse = Schemas.PaperComplete[];
+
+export type GetPhAdminVariables = HyperionContext["fetcherOptions"];
+
+/**
+ * Return all editions, sorted from the latest to the oldest
+ */
+export const fetchGetPhAdmin = (
+  variables: GetPhAdminVariables,
+  signal?: AbortSignal,
+) =>
+  hyperionFetch<GetPhAdminResponse, GetPhAdminError, undefined, {}, {}, {}>({
+    url: "/ph/admin",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Return all editions, sorted from the latest to the oldest
+ */
+export const useGetPhAdmin = <TData = GetPhAdminResponse,>(
+  variables: GetPhAdminVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<GetPhAdminResponse, GetPhAdminError, TData>,
+    "queryKey" | "queryFn" | "initialData"
+  >,
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<GetPhAdminResponse, GetPhAdminError, TData>({
+    queryKey: queryKeyFn({
+      path: "/ph/admin",
+      operationId: "getPhAdmin",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetPhAdmin({ ...fetcherOptions, ...variables }, signal),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type GetPhPaperIdCoverPathParams = {
+  paperId: string;
+};
+
+export type GetPhPaperIdCoverError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type GetPhPaperIdCoverVariables = {
+  pathParams: GetPhPaperIdCoverPathParams;
+} & HyperionContext["fetcherOptions"];
+
+export const fetchGetPhPaperIdCover = (
+  variables: GetPhPaperIdCoverVariables,
+  signal?: AbortSignal,
+) =>
+  hyperionFetch<
+    void,
+    GetPhPaperIdCoverError,
+    undefined,
+    {},
+    {},
+    GetPhPaperIdCoverPathParams
+  >({ url: "/ph/{paperId}/cover", method: "get", ...variables, signal });
+
+export const useGetPhPaperIdCover = <TData = void,>(
+  variables: GetPhPaperIdCoverVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<void, GetPhPaperIdCoverError, TData>,
+    "queryKey" | "queryFn" | "initialData"
+  >,
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<void, GetPhPaperIdCoverError, TData>({
+    queryKey: queryKeyFn({
+      path: "/ph/{paperId}/cover",
+      operationId: "getPhPaperIdCover",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetPhPaperIdCover({ ...fetcherOptions, ...variables }, signal),
+    ...options,
+    ...queryOptions,
+  });
+};
+
+export type PatchPhPaperIdPathParams = {
+  paperId: string;
+};
+
+export type PatchPhPaperIdError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type PatchPhPaperIdVariables = {
+  body?: Schemas.PaperUpdate;
+  pathParams: PatchPhPaperIdPathParams;
+} & HyperionContext["fetcherOptions"];
+
+export const fetchPatchPhPaperId = (
+  variables: PatchPhPaperIdVariables,
+  signal?: AbortSignal,
+) =>
+  hyperionFetch<
+    undefined,
+    PatchPhPaperIdError,
+    Schemas.PaperUpdate,
+    {},
+    {},
+    PatchPhPaperIdPathParams
+  >({ url: "/ph/{paperId}", method: "patch", ...variables, signal });
+
+export const usePatchPhPaperId = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      PatchPhPaperIdError,
+      PatchPhPaperIdVariables
+    >,
+    "mutationFn"
+  >,
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    PatchPhPaperIdError,
+    PatchPhPaperIdVariables
+  >({
+    mutationFn: (variables: PatchPhPaperIdVariables) =>
+      fetchPatchPhPaperId({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
+export type DeletePhPaperIdPathParams = {
+  paperId: string;
+};
+
+export type DeletePhPaperIdError = Fetcher.ErrorWrapper<{
+  status: 422;
+  payload: Schemas.HTTPValidationError;
+}>;
+
+export type DeletePhPaperIdVariables = {
+  pathParams: DeletePhPaperIdPathParams;
+} & HyperionContext["fetcherOptions"];
+
+export const fetchDeletePhPaperId = (
+  variables: DeletePhPaperIdVariables,
+  signal?: AbortSignal,
+) =>
+  hyperionFetch<
+    undefined,
+    DeletePhPaperIdError,
+    undefined,
+    {},
+    {},
+    DeletePhPaperIdPathParams
+  >({ url: "/ph/{paperId}", method: "delete", ...variables, signal });
+
+export const useDeletePhPaperId = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      DeletePhPaperIdError,
+      DeletePhPaperIdVariables
+    >,
+    "mutationFn"
+  >,
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    DeletePhPaperIdError,
+    DeletePhPaperIdVariables
+  >({
+    mutationFn: (variables: DeletePhPaperIdVariables) =>
+      fetchDeletePhPaperId({ ...fetcherOptions, ...variables }),
+    ...options,
+  });
+};
+
 export type GetPhonebookAssociationsError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetPhonebookAssociationsResponse = Schemas.AssociationComplete[];
@@ -14434,6 +14806,10 @@ export const usePostRaidDocumentDocumentIdValidate = (
   });
 };
 
+export type PostRaidSecurityFileQueryParams = {
+  participant_id: string;
+};
+
 export type PostRaidSecurityFileError = Fetcher.ErrorWrapper<{
   status: 422;
   payload: Schemas.HTTPValidationError;
@@ -14441,6 +14817,7 @@ export type PostRaidSecurityFileError = Fetcher.ErrorWrapper<{
 
 export type PostRaidSecurityFileVariables = {
   body: Schemas.SecurityFileBase;
+  queryParams: PostRaidSecurityFileQueryParams;
 } & HyperionContext["fetcherOptions"];
 
 /**
@@ -14455,7 +14832,7 @@ export const fetchPostRaidSecurityFile = (
     PostRaidSecurityFileError,
     Schemas.SecurityFileBase,
     {},
-    {},
+    PostRaidSecurityFileQueryParams,
     {}
   >({ url: "/raid/security_file/", method: "post", ...variables, signal });
 
@@ -15204,49 +15581,6 @@ export const usePatchRaidPrice = (
     mutationFn: (variables: PatchRaidPriceVariables) =>
       fetchPatchRaidPrice({ ...fetcherOptions, ...variables }),
     ...options,
-  });
-};
-
-export type GetRaidPayError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetRaidPayVariables = HyperionContext["fetcherOptions"];
-
-/**
- * Generate the payment url
- */
-export const fetchGetRaidPay = (
-  variables: GetRaidPayVariables,
-  signal?: AbortSignal,
-) =>
-  hyperionFetch<Schemas.PaymentUrl, GetRaidPayError, undefined, {}, {}, {}>({
-    url: "/raid/pay",
-    method: "get",
-    ...variables,
-    signal,
-  });
-
-/**
- * Generate the payment url
- */
-export const useGetRaidPay = <TData = Schemas.PaymentUrl,>(
-  variables: GetRaidPayVariables,
-  options?: Omit<
-    reactQuery.UseQueryOptions<Schemas.PaymentUrl, GetRaidPayError, TData>,
-    "queryKey" | "queryFn" | "initialData"
-  >,
-) => {
-  const { fetcherOptions, queryOptions, queryKeyFn } =
-    useHyperionContext(options);
-  return reactQuery.useQuery<Schemas.PaymentUrl, GetRaidPayError, TData>({
-    queryKey: queryKeyFn({
-      path: "/raid/pay",
-      operationId: "getRaidPay",
-      variables,
-    }),
-    queryFn: ({ signal }) =>
-      fetchGetRaidPay({ ...fetcherOptions, ...variables }, signal),
-    ...options,
-    ...queryOptions,
   });
 };
 
@@ -16056,6 +16390,26 @@ export type QueryOperation =
       variables: GetLoansUsersMeLoanersVariables;
     }
   | {
+      path: "/ph/{paperId}/pdf";
+      operationId: "getPhPaperIdPdf";
+      variables: GetPhPaperIdPdfVariables;
+    }
+  | {
+      path: "/ph/";
+      operationId: "getPh";
+      variables: GetPhVariables;
+    }
+  | {
+      path: "/ph/admin";
+      operationId: "getPhAdmin";
+      variables: GetPhAdminVariables;
+    }
+  | {
+      path: "/ph/{paperId}/cover";
+      operationId: "getPhPaperIdCover";
+      variables: GetPhPaperIdCoverVariables;
+    }
+  | {
       path: "/phonebook/associations/";
       operationId: "getPhonebookAssociations";
       variables: GetPhonebookAssociationsVariables;
@@ -16199,11 +16553,6 @@ export type QueryOperation =
       path: "/raid/price";
       operationId: "getRaidPrice";
       variables: GetRaidPriceVariables;
-    }
-  | {
-      path: "/raid/pay";
-      operationId: "getRaidPay";
-      variables: GetRaidPayVariables;
     }
   | {
       path: "/recommendation/recommendations";

@@ -165,6 +165,13 @@ export type BodyCreateCurrentUserProfilePictureUsersMeProfilePicturePost = {
   image: Blob;
 };
 
+export type BodyCreatePaperPdfAndCoverPhPaperIdPdfPost = {
+  /**
+   * @format binary
+   */
+  pdf: Blob;
+};
+
 export type BodyCreatePrizePictureTombolaPrizesPrizeIdPicturePost = {
   /**
    * @format binary
@@ -1371,6 +1378,31 @@ export type PackTicketSimple = {
   id: string;
 };
 
+/**
+ * Base schema for paper's model
+ */
+export type PaperBase = {
+  name: string;
+  /**
+   * @format date
+   */
+  release_date: string;
+};
+
+export type PaperComplete = {
+  name: string;
+  /**
+   * @format date
+   */
+  release_date: string;
+  id: string;
+};
+
+export type PaperUpdate = {
+  name?: string | null;
+  release_date?: string | null;
+};
+
 export type Participant = {
   name: string;
   firstname: string;
@@ -1535,10 +1567,6 @@ export type PaymentState =
   | "Contested";
 
 export type PaymentType = "Offline" | "Credit" | "Debit";
-
-export type PaymentUrl = {
-  url: string;
-};
 
 export type PlaceModel = {
   address?: string | null;
@@ -1892,7 +1920,8 @@ export type Topic =
   | "event"
   | "loan"
   | "raffle"
-  | "vote";
+  | "vote"
+  | "ph";
 
 export type User = {
   firstName?: string | null;

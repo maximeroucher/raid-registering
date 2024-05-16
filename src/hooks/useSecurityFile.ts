@@ -18,6 +18,7 @@ export const useSecurityFile = () => {
 
   const setSecurityFile = (
     securityFile: SecurityFileBase,
+    participantId: string,
     callback: () => void,
   ) => {
     mutateAssignSecurityFile(
@@ -26,6 +27,9 @@ export const useSecurityFile = () => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
+        queryParams: {
+          participant_id: participantId,
+        }
       },
       {
         // FIXME: Not trigger, to investigate

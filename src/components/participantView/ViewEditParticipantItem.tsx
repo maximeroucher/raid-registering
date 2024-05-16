@@ -491,6 +491,7 @@ export const ViewEditParticipantItem = ({
                 id="securityFile"
                 form={form}
                 type={ValueTypes.SECURITYFILE}
+                participantId={participant.id!}
               />
               {participant.is_minor && (
                 <EditParticipantCardItem

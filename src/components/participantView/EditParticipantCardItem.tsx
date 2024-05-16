@@ -210,6 +210,7 @@ export function EditParticipantCardItem<T extends ValueType>({
               </DialogHeader>
               <SecurityFileDialog
                 setIsOpen={setIsOpen}
+                participantId={participantId!}
                 form={form}
               />
             </DialogContent>

@@ -13,11 +13,13 @@ import { HiCheck, HiX } from "react-icons/hi";
 
 interface SecurityFileDialogProps {
   setIsOpen: (value: boolean) => void;
+  participantId: string;
   form: any;
 }
 
 export const SecurityFileDialog = ({
   setIsOpen,
+  participantId,
   form,
 }: SecurityFileDialogProps) => {
   const { setSecurityFile } = useSecurityFile();
@@ -38,7 +40,7 @@ export const SecurityFileDialog = ({
     const securityFile: SecurityFile = {
       ...form.getValues("securityFile"),
     };
-    setSecurityFile(securityFile, () => {});
+    setSecurityFile(securityFile, participantId, () => {});
     setIsOpen(false);
   }
 
