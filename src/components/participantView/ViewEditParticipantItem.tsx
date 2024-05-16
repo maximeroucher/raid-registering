@@ -247,6 +247,7 @@ export const ViewEditParticipantItem = ({
             name: doc.name!,
             type: doc.type!,
           },
+          participant.id!,
           () => {
           },
         );

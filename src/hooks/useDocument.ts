@@ -21,14 +21,18 @@ export const useDocument = () => {
   const { mutate: mutateAssignDocument } =
     usePostRaidParticipantParticipantIdDocument();
 
-  const assignDocument = (file: DocumentCreation, callback: () => void) => {
+  const assignDocument = (
+    file: DocumentCreation,
+    participantId: string,
+    callback: () => void,
+  ) => {
     mutateAssignDocument(
       {
         headers: {
           Authorization: `Bearer ${token}`,
         },
         pathParams: {
-          participantId: userId!,
+          participantId: participantId,
         },
         body: file,
       },
