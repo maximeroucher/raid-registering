@@ -117,6 +117,7 @@ export const useParticipant = () => {
     me: participant,
     isLoading,
     isFetched,
+    refetch,
     createParticipant,
     isCreationSuccess,
     isCreationLoading,

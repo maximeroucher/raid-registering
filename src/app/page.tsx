@@ -17,16 +17,20 @@ import { useInformation } from "../hooks/useInformation";
 import { getDaysLeft } from "../utils/dateFormat";
 import { WarningDialog } from "../components/teams/WarningDialog";
 import { toast } from "../components/ui/use-toast";
+import { StatusDialog } from "../components/participantView/StatusDialog";
 
 const Home = () => {
   const { isTokenQueried, token } = useAuth();
-  const { me, isFetched } = useParticipant();
+  const { me, isFetched, refetch } = useParticipant();
   const { me: user, isAdmin } = useUser();
   const { team, createTeam, refetchTeam } = useTeam();
   const [isOpened, setIsOpened] = useState(false);
   const [isEndDialogOpened, setIsEndDialogOpened] = useState(true);
   const searchParams = useSearchParams();
   const newInviteToken = searchParams.get("invite");
+  const checkoutIntentId = searchParams.get("checkoutIntentId");
+  const code = searchParams.get("code");
+  const orderId = searchParams.get("orderId");
   const { inviteToken, setInviteToken } = useInviteTokenStore();
   const router = useRouter();
   const { information } = useInformation();
@@ -68,6 +72,33 @@ const Home = () => {
 
   return (
     <>
+      {code === "succeeded" && (
+        <StatusDialog
+          isOpened={isEndDialogOpened}
+          setIsOpened={setIsEndDialogOpened}
+          title="Paiement effectué"
+          description="Votre paiement a été effectué avec succès. Vous pouvez terminer votre inscription, si ce n'est pas encore le cas."
+          status="SUCCESS"
+          callback={() => {
+            refetch();
+            setIsEndDialogOpened(false);
+            router.replace("/");
+          }}
+        />
+      )}
+      {code === "refused" && (
+        <StatusDialog
+          isOpened={isEndDialogOpened}
+          setIsOpened={setIsEndDialogOpened}
+          title="Paiement refusé"
+          description="Votre paiement a été refusé. Vous pouvez réessayer de payer, si le problème persiste, veuillez nous contacter."
+          status="ERROR"
+          callback={() => {
+            setIsEndDialogOpened(false);
+            router.replace("/");
+          }}
+        />
+      )}
       {isFetched && me === undefined && isOpened && user && (
         <>
           <CreateParticipant
@@ -92,7 +123,7 @@ const Home = () => {
           </>
         </>
       )}
-      {me && team === undefined && (
+      {isFetched && me && team === undefined && (
         <WarningDialog
           isOpened={isEndDialogOpened}
           setIsOpened={setIsEndDialogOpened}
