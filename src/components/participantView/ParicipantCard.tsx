@@ -14,7 +14,7 @@ import { Skeleton } from "../ui/skeleton";
 import { useState } from "react";
 import { ViewEditParticipantItem } from "./ViewEditParticipantItem";
 import { ParticipantLoading } from "./ParticipantLoading";
-import { PaymentButton } from "./PaymentButton";
+// import { PaymentButton } from "./PaymentButton";
 import { Checkbox } from "../ui/checkbox";
 
 interface ParticipantCardProps {
