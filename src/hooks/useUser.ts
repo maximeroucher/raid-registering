@@ -2,7 +2,7 @@ import { useGetUsersMe } from "@/src/api/hyperionComponents";
 import { useUserStore } from "../stores/user";
 import { useAuth } from "./useAuth";
 
-const RAID_ADMIN_GROUP_ID = "b378b102-4979-4186-8630-d28fe460ee08";
+const RAID_ADMIN_GROUP_ID = "e9e6e3d3-9f5f-4e9b-8e5f-9f5f4e9b8e5f";
 
 export const useUser = () => {
   const { token, isTokenExpired } = useAuth();
