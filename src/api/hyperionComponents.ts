@@ -15584,6 +15584,49 @@ export const usePatchRaidPrice = (
   });
 };
 
+export type GetRaidPayError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetRaidPayVariables = HyperionContext["fetcherOptions"];
+
+/**
+ * Get payment url
+ */
+export const fetchGetRaidPay = (
+  variables: GetRaidPayVariables,
+  signal?: AbortSignal,
+) =>
+  hyperionFetch<Schemas.PaymentUrl, GetRaidPayError, undefined, {}, {}, {}>({
+    url: "/raid/pay",
+    method: "get",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Get payment url
+ */
+export const useGetRaidPay = <TData = Schemas.PaymentUrl,>(
+  variables: GetRaidPayVariables,
+  options?: Omit<
+    reactQuery.UseQueryOptions<Schemas.PaymentUrl, GetRaidPayError, TData>,
+    "queryKey" | "queryFn" | "initialData"
+  >,
+) => {
+  const { fetcherOptions, queryOptions, queryKeyFn } =
+    useHyperionContext(options);
+  return reactQuery.useQuery<Schemas.PaymentUrl, GetRaidPayError, TData>({
+    queryKey: queryKeyFn({
+      path: "/raid/pay",
+      operationId: "getRaidPay",
+      variables,
+    }),
+    queryFn: ({ signal }) =>
+      fetchGetRaidPay({ ...fetcherOptions, ...variables }, signal),
+    ...options,
+    ...queryOptions,
+  });
+};
+
 export type GetRecommendationRecommendationsError =
   Fetcher.ErrorWrapper<undefined>;
 
@@ -16553,6 +16596,11 @@ export type QueryOperation =
       path: "/raid/price";
       operationId: "getRaidPrice";
       variables: GetRaidPriceVariables;
+    }
+  | {
+      path: "/raid/pay";
+      operationId: "getRaidPay";
+      variables: GetRaidPayVariables;
     }
   | {
       path: "/recommendation/recommendations";
