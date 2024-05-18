@@ -18,6 +18,7 @@ import { ParticipantLoading } from "./ParticipantLoading";
 import { Checkbox } from "../ui/checkbox";
 import { getSituationLabel } from "@/src/infra/teamUtils";
 import { PaymentButton } from "./PaymentButton";
+import { usePrice } from "@/src/hooks/usePrice";
 
 interface ParticipantCardProps {
   participant?: Participant;
@@ -28,6 +29,7 @@ export const ParticipantCard = ({
   participant,
   isCaptain,
 }: ParticipantCardProps) => {
+  const { price } = usePrice();
   const [isEdit, setIsEdit] = useState(false);
 
   function toggleEdit() {
@@ -97,7 +99,9 @@ export const ParticipantCard = ({
                 </span>
                 {!participant?.payment &&
                 getSituationLabel(participant?.situation ?? undefined) !==
-                  "corporatepartner" ? (
+                  "corporatepartner" &&
+                !!price?.student_price &&
+                !!price?.t_shirt_price ? (
                   <PaymentButton />
                 ) : (
                   <Checkbox

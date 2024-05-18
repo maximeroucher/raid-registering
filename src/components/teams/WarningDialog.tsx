@@ -8,7 +8,7 @@ interface WarningDialogProps {
   setIsOpened: (value: boolean) => void;
   isLoading: boolean;
   title: string;
-  description: string;
+  description: string | JSX.Element;
   validateLabel: string;
   callback: () => void;
   width?: string;
