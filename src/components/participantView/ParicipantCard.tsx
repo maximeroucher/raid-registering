@@ -16,6 +16,8 @@ import { ViewEditParticipantItem } from "./ViewEditParticipantItem";
 import { ParticipantLoading } from "./ParticipantLoading";
 // import { PaymentButton } from "./PaymentButton";
 import { Checkbox } from "../ui/checkbox";
+import { getSituationLabel } from "@/src/infra/teamUtils";
+import { PaymentButton } from "./PaymentButton";
 
 interface ParticipantCardProps {
   participant?: Participant;
@@ -93,12 +95,17 @@ export const ParticipantCard = ({
                 <span className="font-semibold text-left my-auto col-span-2">
                   Paiement
                 </span>
-                {/* <PaymentButton /> */}
-                <Checkbox
-                  checked={participant?.payment}
-                  disabled
-                  className="col-span-4 ml-auto"
-                />
+                {!participant?.payment &&
+                getSituationLabel(participant?.situation ?? undefined) !==
+                  "corporatepartner" ? (
+                  <PaymentButton />
+                ) : (
+                  <Checkbox
+                    checked={participant?.payment}
+                    disabled
+                    className="col-span-4 ml-auto"
+                  />
+                )}
               </div>
             ) : (
               <div className="grid p-2 grid-cols-6 items-center w-full h-[65px]">

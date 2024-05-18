@@ -1569,7 +1569,7 @@ export type PaymentState =
 export type PaymentType = "Offline" | "Credit" | "Debit";
 
 export type PaymentUrl = {
-  url?: string | null;
+  url: string;
 };
 
 export type PlaceModel = {
