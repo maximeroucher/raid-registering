@@ -8,6 +8,7 @@ import { InscriptionEnd } from "@/src/components/information/InscriptionEnd";
 import { PaymentLink } from "@/src/components/information/PaymentLink";
 import { RaidDate } from "@/src/components/information/RaidDate";
 import { RaidPrice } from "@/src/components/information/RaidPrice";
+import { TShirtPrice } from "@/src/components/information/TShirtPrice";
 import { Button } from "@/src/components/ui/button";
 import {
   Card,
@@ -47,6 +48,7 @@ const InformationPage = () => {
                 <>En développement</>
               </CardLayout>
               <RaidPrice />
+              <TShirtPrice />
             </div>
           </CardContent>
         </Card>
