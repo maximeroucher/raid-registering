@@ -9,9 +9,10 @@ interface WarningDialogProps {
   isLoading: boolean;
   title: string;
   description: string | JSX.Element;
-  validateLabel: string;
-  callback: () => void;
+  validateLabel?: string;
+  callback?: () => void;
   width?: string;
+  customButton?: JSX.Element;
 }
 
 export const WarningDialog = ({
@@ -23,6 +24,7 @@ export const WarningDialog = ({
   validateLabel,
   callback,
   width = "w-[100px]",
+  customButton,
 }: WarningDialogProps) => {
   function closeDialog(event: React.MouseEvent<HTMLButtonElement>) {
     event.stopPropagation();
@@ -31,7 +33,7 @@ export const WarningDialog = ({
 
   function onValidate(event: React.MouseEvent<HTMLButtonElement>) {
     event.stopPropagation();
-    callback();
+    if (callback) callback();
   }
 
   return (
@@ -45,15 +47,22 @@ export const WarningDialog = ({
         </DialogHeader>
         <DialogDescription>{description}</DialogDescription>
         <div className="flex justify-end mt-2 space-x-4">
-          <Button variant="outline" onClick={closeDialog} disabled={isLoading} className={width}>
+          <Button
+            variant="outline"
+            onClick={closeDialog}
+            disabled={isLoading}
+            className={width}
+          >
             Annuler
           </Button>
-          <LoadingButton
-            isLoading={isLoading}
-            onClick={onValidate}
-            label={validateLabel}
-            className={width}
-          />
+          {customButton ?? (
+            <LoadingButton
+              isLoading={isLoading}
+              onClick={onValidate}
+              label={validateLabel}
+              className={width}
+            />
+          )}
         </div>
       </DialogContent>
     </Dialog>

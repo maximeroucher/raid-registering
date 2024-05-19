@@ -7,6 +7,7 @@ import { Button } from "../ui/button";
 import { useParticipant } from "@/src/hooks/useParticipant";
 import { usePrice } from "@/src/hooks/usePrice";
 import { Separator } from "../ui/separator";
+import { HelloAssoButton } from "./HelloAssoButton";
 
 export const PaymentButton = () => {
   const { me } = useParticipant();
@@ -60,10 +61,9 @@ export const PaymentButton = () => {
             </p>
           </div>
         }
-        validateLabel="Payer"
-        callback={() => {
-          refetchUrl();
-        }}
+        customButton={
+          <HelloAssoButton isLoading={isLoading} onClick={() => refetchUrl()} />
+        }
       />
       <Button
         className="col-span-4 ml-auto w-[100px]"
