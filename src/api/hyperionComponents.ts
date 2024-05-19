@@ -14994,6 +14994,71 @@ export const usePostRaidParticipantParticipantIdPayment = (
   });
 };
 
+export type PostRaidParticipantParticipantIdTShirtPaymentPathParams = {
+  participantId: string;
+};
+
+export type PostRaidParticipantParticipantIdTShirtPaymentError =
+  Fetcher.ErrorWrapper<{
+    status: 422;
+    payload: Schemas.HTTPValidationError;
+  }>;
+
+export type PostRaidParticipantParticipantIdTShirtPaymentVariables = {
+  pathParams: PostRaidParticipantParticipantIdTShirtPaymentPathParams;
+} & HyperionContext["fetcherOptions"];
+
+/**
+ * Confirm T shirt payment
+ */
+export const fetchPostRaidParticipantParticipantIdTShirtPayment = (
+  variables: PostRaidParticipantParticipantIdTShirtPaymentVariables,
+  signal?: AbortSignal,
+) =>
+  hyperionFetch<
+    undefined,
+    PostRaidParticipantParticipantIdTShirtPaymentError,
+    undefined,
+    {},
+    {},
+    PostRaidParticipantParticipantIdTShirtPaymentPathParams
+  >({
+    url: "/raid/participant/{participantId}/t_shirt_payment",
+    method: "post",
+    ...variables,
+    signal,
+  });
+
+/**
+ * Confirm T shirt payment
+ */
+export const usePostRaidParticipantParticipantIdTShirtPayment = (
+  options?: Omit<
+    reactQuery.UseMutationOptions<
+      undefined,
+      PostRaidParticipantParticipantIdTShirtPaymentError,
+      PostRaidParticipantParticipantIdTShirtPaymentVariables
+    >,
+    "mutationFn"
+  >,
+) => {
+  const { fetcherOptions } = useHyperionContext();
+  return reactQuery.useMutation<
+    undefined,
+    PostRaidParticipantParticipantIdTShirtPaymentError,
+    PostRaidParticipantParticipantIdTShirtPaymentVariables
+  >({
+    mutationFn: (
+      variables: PostRaidParticipantParticipantIdTShirtPaymentVariables,
+    ) =>
+      fetchPostRaidParticipantParticipantIdTShirtPayment({
+        ...fetcherOptions,
+        ...variables,
+      }),
+    ...options,
+  });
+};
+
 export type PostRaidParticipantParticipantIdHonourPathParams = {
   participantId: string;
 };

@@ -1418,6 +1418,7 @@ export type Participant = {
   situation: string | null;
   validation_progress: number;
   payment: boolean;
+  t_shirt_payment: boolean;
   number_of_document: number;
   number_of_validated_document: number;
   address: string | null;
@@ -1460,6 +1461,7 @@ export type ParticipantPreview = {
   situation: string | null;
   validation_progress: number;
   payment: boolean;
+  t_shirt_payment: boolean;
   number_of_document: number;
   number_of_validated_document: number;
 };

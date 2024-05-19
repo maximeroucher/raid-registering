@@ -36,7 +36,7 @@ export const LoadingButton = ({
       className={className}
       disabled={isLoading || disabled}
     >
-      {isLoading ? <ReloadIcon className="mr-2 h-4 w-4 animate-spin" /> : label}
+      {isLoading ? <ReloadIcon className="h-4 w-4 animate-spin" /> : label}
     </Button>
   );
 };

@@ -143,7 +143,14 @@ export const ViewEditParticipantItem = ({
         })
         .partial(),
       attestationHonour: z.boolean().optional(),
-    });
+    })
+    .refine(
+      (data) => !(data.tShirtSize === "no" && participant.t_shirt_payment),
+      {
+        message: "Vous avez déjà payer pour un t-shirt, veuillez choisir un",
+        path: ["tShirtSize"],
+      },
+    );
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -235,8 +242,7 @@ export const ViewEditParticipantItem = ({
     ].filter((doc) => doc.updated);
 
     if (values.securityFile.updated) {
-      assignSecurityFile(participant.id!, values.securityFile.id!, () => {
-      });
+      assignSecurityFile(participant.id!, values.securityFile.id!, () => {});
     }
 
     for (const doc of documentToUpdate) {
@@ -248,8 +254,7 @@ export const ViewEditParticipantItem = ({
             type: doc.type!,
           },
           participant.id!,
-          () => {
-          },
+          () => {},
         );
       }
     }

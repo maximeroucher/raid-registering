@@ -97,7 +97,8 @@ export const ParticipantCard = ({
                 <span className="font-semibold text-left my-auto col-span-2">
                   Paiement
                 </span>
-                {!participant?.payment &&
+                {(!participant?.payment ||
+                  (participant.t_shirt_size && !participant.t_shirt_payment)) &&
                 getSituationLabel(participant?.situation ?? undefined) !==
                   "corporatepartner" &&
                 !!price?.student_price &&
@@ -107,7 +108,7 @@ export const ParticipantCard = ({
                   <Checkbox
                     checked={participant?.payment}
                     disabled
-                    className="col-span-4 ml-auto"
+                    className="col-span-4 ml-auto disabled:opacity-100"
                   />
                 )}
               </div>

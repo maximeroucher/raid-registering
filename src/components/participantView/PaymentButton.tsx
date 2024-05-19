@@ -1,5 +1,4 @@
 import { usePaymentUrl } from "@/src/hooks/usePaymentUrl";
-import { LoadingButton } from "../ui/loadingButton";
 import { useRouter } from "next/navigation";
 import { WarningDialog } from "../teams/WarningDialog";
 import { useState } from "react";
@@ -18,6 +17,8 @@ export const PaymentButton = () => {
   if (!isLoading && !!paymentUrl) {
     router.push(paymentUrl.url);
   }
+  const mustPayRegistering = !me?.payment;
+  const mustPayTShirt = me?.t_shirt_size && !me?.t_shirt_payment;
   return (
     <>
       <WarningDialog
@@ -29,16 +30,20 @@ export const PaymentButton = () => {
           <div>
             <div className="my-2 font-semibold">Récapitulatif</div>
             <div className="space-y-2">
-              <div className="flex justify-between">
-                <span>Participation</span>
-                <span>{price?.student_price! / 100} €</span>
-              </div>
-              {me?.t_shirt_size && (
+              {mustPayRegistering && (
+                <div className="flex justify-between">
+                  <span>Participation</span>
+                  <span>{price?.student_price! / 100} €</span>
+                </div>
+              )}
+              {mustPayTShirt && (
+                <div className="flex justify-between">
+                  <span>T-Shirt taille {me.t_shirt_size}</span>
+                  <span>{price?.t_shirt_price! / 100} €</span>
+                </div>
+              )}
+              {mustPayRegistering && mustPayTShirt && (
                 <>
-                  <div className="flex justify-between">
-                    <span>T-Shirt taille {me.t_shirt_size}</span>
-                    <span>{price?.t_shirt_price! / 100} €</span>
-                  </div>
                   <Separator />
                   <div className="flex justify-between">
                     <span>Total</span>
