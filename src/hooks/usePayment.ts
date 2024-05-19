@@ -1,11 +1,14 @@
-import { usePostRaidParticipantParticipantIdPayment } from "../api/hyperionComponents";
+import {
+  usePostRaidParticipantParticipantIdPayment,
+  usePostRaidParticipantParticipantIdTShirtPayment,
+} from "../api/hyperionComponents";
 import { toast } from "../components/ui/use-toast";
 import { useAuth } from "./useAuth";
 
 export const usePayment = () => {
   const { token } = useAuth();
 
-  const { mutate: mutateValidatePayment, isPending: isLoading } =
+  const { mutate: mutateValidatePayment, isPending: isPaymentLoading } =
     usePostRaidParticipantParticipantIdPayment();
 
   const validatePayment = (participantId: string, callback: () => void) => {
@@ -19,22 +22,43 @@ export const usePayment = () => {
         },
       },
       {
-        onSettled: (data: any, error: any, variables: any, context: any) => {
-          if (error) {
-            console.log(error);
-            toast({
-              title: "Erreur lors de la validation du paiement",
-              description:
-                "Une erreur est survenue, veuillez réessayer plus tard",
-              variant: "destructive",
-            });
-            return;
-          }
+        onSettled: () => {
           callback();
         },
       },
     );
   };
 
-  return { validatePayment, isLoading };
+  const {
+    mutate: mutateValidateTShirtPayment,
+    isPending: isTshirtPaymentLoading,
+  } = usePostRaidParticipantParticipantIdTShirtPayment();
+
+  const validateTShirtPayment = (
+    participantId: string,
+    callback: () => void,
+  ) => {
+    mutateValidateTShirtPayment(
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        pathParams: {
+          participantId: participantId,
+        },
+      },
+      {
+        onSettled: () => {
+          callback();
+        },
+      },
+    );
+  };
+
+  return {
+    validatePayment,
+    isPaymentLoading,
+    validateTShirtPayment,
+    isTshirtPaymentLoading,
+  };
 };

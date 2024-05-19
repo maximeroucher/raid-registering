@@ -36,17 +36,7 @@ export const usePrice = () => {
       },
       {
         // Not using onSucess because of : https://github.com/TanStack/query/discussions/2878
-        onSettled: (data, error, variables, context) => {
-          if (error) {
-            console.log(error);
-            toast({
-              title: "Erreur lors de la mise à jour du prix",
-              description:
-                "Une erreur est survenue, veuillez réessayer plus tard",
-              variant: "destructive",
-            });
-            return;
-          }
+        onSettled: () => {
           refetchPrice();
           callback();
         },

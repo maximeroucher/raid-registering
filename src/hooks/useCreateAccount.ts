@@ -28,22 +28,7 @@ export const useAccountCreation = () => {
         body: body,
       },
       {
-        onSettled: (
-          data: any,
-          error: any,
-          variables: any,
-          context: any,
-        ) => {
-          if (error) {
-            console.log(error);
-            toast({
-              title: "Erreur lors de la création du compte",
-              description:
-                "Une erreur est survenue, veuillez réessayer plus tard",
-              variant: "destructive",
-            });
-            return;
-          }
+        onSettled: () => {
           callback();
         },
       },

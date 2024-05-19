@@ -11,7 +11,7 @@ interface PaymentTabProps {
 }
 
 export const PaymentTab = ({ team }: PaymentTabProps) => {
-  const { validatePayment } = usePayment();
+  const { validatePayment, validateTShirtPayment } = usePayment();
   const { refetchTeam } = useAdminTeam(team.id);
   const { refetchTeams } = useTeams();
 
@@ -26,16 +26,29 @@ export const PaymentTab = ({ team }: PaymentTabProps) => {
     });
   }
 
+  function validateTShirtCallback(participantId: string, callback: () => void) {
+    validateTShirtPayment(participantId, () => {
+      callback();
+      refetchTeam();
+      refetchTeams();
+      toast({
+        title: "Paiement du T-Shirt validé avec succès",
+      });
+    });
+  }
+
   return (
     <div className="grid xl:grid-cols-2 gap-4 w-full py-6 grid-cols-1 max-md:p-8 max-md:gap-4">
       <PaymentCardItem
         participant={team.captain}
         validateCallback={validateCallback}
+        validateTShirtCallback={validateTShirtCallback}
       />
       {team.second ? (
         <PaymentCardItem
           participant={team.second}
           validateCallback={validateCallback}
+          validateTShirtCallback={validateTShirtCallback}
         />
       ) : (
         <Card className="w-full h-full">

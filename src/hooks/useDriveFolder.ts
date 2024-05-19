@@ -42,24 +42,9 @@ export const useDriveFolder = () => {
       },
       {
         // Not using onSucess because of : https://github.com/TanStack/query/discussions/2878
-        onSettled: (
-          data,
-          error,
-          variables,
-          context,
-        ) => {
+        onSettled: () => {
           // Assuming success in all cases
           // For unknown reasons, the invalidation of the query does not work
-          if (error) {
-            console.error(error);
-            toast({
-              title: "Erreur lors de la mise à jour du dossier Drive",
-              description:
-                "Une erreur est survenue, veuillez réessayer plus tard",
-              variant: "destructive",
-            });
-            return;
-          }
           refetchDriveFolder();
           callback();
         },
