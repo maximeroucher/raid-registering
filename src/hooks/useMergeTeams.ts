@@ -1,6 +1,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { usePostRaidTeamsMerge } from "../api/hyperionComponents";
 import { useAuth } from "./useAuth";
+import { toast } from "../components/ui/use-toast";
 
 export const useMergeTeams = () => {
   const { token } = useAuth();
@@ -30,6 +31,15 @@ export const useMergeTeams = () => {
             },
           });
           callback();
+        },
+        onError(error, variables, context) {
+          console.log(error);
+          toast({
+            title: "Erreur lors de la fusion des équipes",
+            description:
+              "Une erreur est survenue, veuillez réessayer plus tard",
+            variant: "destructive",
+          });
         },
       },
     );

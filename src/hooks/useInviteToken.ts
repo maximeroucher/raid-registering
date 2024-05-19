@@ -4,6 +4,7 @@ import {
 } from "@/src/api/hyperionComponents";
 import { InviteToken } from "../api/hyperionSchemas";
 import { useAuth } from "./useAuth";
+import { toast } from "../components/ui/use-toast";
 
 export const useInviteToken = () => {
   const { token } = useAuth();
@@ -56,6 +57,16 @@ export const useInviteToken = () => {
         onSettled: (data, error) => {
           // Assuming success in all cases
           // For unknown reasons, the invalidation of the query does not work
+          if (error) {
+            console.log(error);
+            toast({
+              title: "Erreur lors du changement d'équipe",
+              description:
+                "Une erreur est survenue, veuillez réessayer plus tard",
+              variant: "destructive",
+            });
+            return;
+          }
           callback();
         },
       },

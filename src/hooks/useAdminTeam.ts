@@ -7,6 +7,7 @@ import {
 } from "../api/hyperionComponents";
 import { useAuth } from "./useAuth";
 import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "../components/ui/use-toast";
 
 export const useAdminTeam = (teamId: string) => {
   const { token, userId, isTokenExpired } = useAuth();
@@ -32,10 +33,7 @@ export const useAdminTeam = (teamId: string) => {
   const { mutate: mutateKickMember, isPending: isKickLoading } =
     usePostRaidTeamsTeamIdKickParticipantId({});
 
-  const kickMember = (
-    participantId: string,
-    callback: () => void,
-  ) => {
+  const kickMember = (participantId: string, callback: () => void) => {
     mutateKickMember(
       {
         headers: {
@@ -54,6 +52,15 @@ export const useAdminTeam = (teamId: string) => {
             },
           });
           callback();
+        },
+        onError(error, variables, context) {
+          console.log(error);
+          toast({
+            title: "Erreur lors de l'exclusion du membre",
+            description:
+              "Une erreur est survenue, veuillez réessayer plus tard",
+            variant: "destructive",
+          });
         },
       },
     );

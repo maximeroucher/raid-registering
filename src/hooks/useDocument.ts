@@ -9,6 +9,7 @@ import axios from "axios";
 import { useDocumentsStore } from "../stores/documents";
 import { useState } from "react";
 import { useAuth } from "./useAuth";
+import { toast } from "../components/ui/use-toast";
 
 export const useDocument = () => {
   const backUrl: string =
@@ -65,7 +66,17 @@ export const useDocument = () => {
           Authorization: `Bearer ${token}`,
         },
       })
-      .then(() => {
+      .then((response) => {
+        if (response.status > 300) {
+          console.error(response.data);
+          toast({
+            title: "Erreur lors de l'ajout du document",
+            description:
+              "Une erreur est survenue, veuillez réessayer plus tard",
+            variant: "destructive",
+          });
+          return;
+        }
         queryClient.invalidateQueries({
           predicate: (query) => {
             return query.queryHash === "getDocument";

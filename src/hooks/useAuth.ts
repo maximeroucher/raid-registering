@@ -15,6 +15,7 @@ import { useInviteTokenStore } from "../stores/inviteTokenStore";
 import { useQuery } from "@tanstack/react-query";
 import { useCodeVerifierStore } from "../stores/codeVerifier";
 import { is } from "date-fns/locale";
+import { toast } from "../components/ui/use-toast";
 
 const clientId: string = "RaidRegistering";
 const redirectUrlHost: string =
@@ -77,6 +78,11 @@ export const useAuth = () => {
       });
       if (result.status != 200) {
         setIsLoading(false);
+        toast({
+          title: "Erreur",
+          description: "Une erreur est survenue lors de la connexion",
+          variant: "destructive",
+        });
         return;
       }
       const tokenResponse: TokenResponse = result.data;

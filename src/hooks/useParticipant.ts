@@ -8,6 +8,7 @@ import { ParticipantBase, ParticipantUpdate } from "../api/hyperionSchemas";
 import { useParticipantStore } from "../stores/particpant";
 import { useUser } from "./useUser";
 import { useAuth } from "./useAuth";
+import { toast } from "../components/ui/use-toast";
 
 export const useParticipant = () => {
   const { token, userId, isTokenExpired } = useAuth();
@@ -69,6 +70,15 @@ export const useParticipant = () => {
           });
           callback();
         },
+        onError: (error, variables, context) => {
+          console.log(error);
+          toast({
+            title: "Erreur lors de la création du participant",
+            description:
+              "Une erreur est survenue, veuillez réessayer plus tard",
+            variant: "destructive",
+          });
+        }
       },
     );
   };

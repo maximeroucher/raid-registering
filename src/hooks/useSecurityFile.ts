@@ -5,6 +5,7 @@ import {
 import { SecurityFileBase } from "../api/hyperionSchemas";
 import { useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "./useAuth";
+import { toast } from "../components/ui/use-toast";
 
 export const useSecurityFile = () => {
   const { token } = useAuth();
@@ -29,12 +30,21 @@ export const useSecurityFile = () => {
         },
         queryParams: {
           participant_id: participantId,
-        }
+        },
       },
       {
         // FIXME: Not trigger, to investigate
         onSuccess(data, variables, context) {
           callback();
+        },
+        onError(error, variables, context) {
+          console.log(error);
+          toast({
+            title: "Erreur lors de la création de la fiche de sécurité",
+            description:
+              "Une erreur est survenue, veuillez réessayer plus tard",
+            variant: "destructive",
+          });
         },
       },
     );
@@ -68,6 +78,14 @@ export const useSecurityFile = () => {
             },
           });
           callback();
+        },
+        onError(error, variables, context) {
+          console.log(error);
+          toast({
+            title: "Erreur lors de l'assignation de la fiche de sécurité",
+            description: "Une erreur est survenue, veuillez réessayer plus tard",
+            variant: "destructive",
+          });
         },
       },
     );

@@ -8,6 +8,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useUser } from "./useUser";
 import { useAuth } from "./useAuth";
 import { useParticipant } from "./useParticipant";
+import { toast } from "../components/ui/use-toast";
 
 export const useTeam = () => {
   const { token, userId, isTokenExpired } = useAuth();
@@ -58,6 +59,14 @@ export const useTeam = () => {
             },
           });
           callback();
+        },
+        onError(error, variables, context) {
+          console.log(error);
+          toast({
+            title: "Erreur lors de la création de l'équipe",
+            description: "Une erreur est survenue, veuillez réessayer plus tard",
+            variant: "destructive",
+          });
         },
       },
     );

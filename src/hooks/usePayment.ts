@@ -1,4 +1,5 @@
 import { usePostRaidParticipantParticipantIdPayment } from "../api/hyperionComponents";
+import { toast } from "../components/ui/use-toast";
 import { useAuth } from "./useAuth";
 
 export const usePayment = () => {
@@ -18,7 +19,17 @@ export const usePayment = () => {
         },
       },
       {
-        onSettled: () => {
+        onSettled: (data: any, error: any, variables: any, context: any) => {
+          if (error) {
+            console.log(error);
+            toast({
+              title: "Erreur lors de la validation du paiement",
+              description:
+                "Une erreur est survenue, veuillez réessayer plus tard",
+              variant: "destructive",
+            });
+            return;
+          }
           callback();
         },
       },

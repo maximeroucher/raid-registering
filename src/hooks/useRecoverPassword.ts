@@ -6,6 +6,7 @@ import {
   BodyRecoverUserUsersRecoverPost,
   ResetPasswordRequest,
 } from "../api/hyperionSchemas";
+import { toast } from "../components/ui/use-toast";
 import { useAuth } from "./useAuth";
 
 export const useRecoverPassword = () => {
@@ -26,8 +27,19 @@ export const useRecoverPassword = () => {
         body: body,
       },
       {
-        onSettled: () => {
-          callback();
+        onSettled: (data, error, variables, context) => {
+          if (error) {
+            console.log(error);
+            toast({
+              title:
+                "Erreur lors de l'envoi du mail de récupération de mot de passe",
+              description:
+                "Une erreur est survenue, veuillez réessayer plus tard",
+              variant: "destructive",
+            });
+          } else {
+            callback();
+          }
         },
       },
     );
@@ -53,7 +65,17 @@ export const useRecoverPassword = () => {
         body: body,
       },
       {
-        onSettled: () => {
+        onSettled: (data, error, variables, context) => {
+          if (error) {
+            console.log(error);
+            toast({
+              title: "Erreur lors de la réinitialisation du mot de passe",
+              description:
+                "Une erreur est survenue, veuillez réessayer plus tard",
+              variant: "destructive",
+            });
+            return;
+          }
           callback();
         },
       },

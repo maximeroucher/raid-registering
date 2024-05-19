@@ -6,6 +6,7 @@ import {
   CoreUserCreateRequest,
   CoreUserActivateRequest,
 } from "../api/hyperionSchemas";
+import { toast } from "../components/ui/use-toast";
 import { useAuth } from "./useAuth";
 
 export const useAccountCreation = () => {
@@ -27,7 +28,22 @@ export const useAccountCreation = () => {
         body: body,
       },
       {
-        onSettled: () => {
+        onSettled: (
+          data: any,
+          error: any,
+          variables: any,
+          context: any,
+        ) => {
+          if (error) {
+            console.log(error);
+            toast({
+              title: "Erreur lors de la création du compte",
+              description:
+                "Une erreur est survenue, veuillez réessayer plus tard",
+              variant: "destructive",
+            });
+            return;
+          }
           callback();
         },
       },
