@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Skeleton } from "../ui/skeleton";
 import { PdfViewer } from "./PdfViewer";
 import { useState } from "react";
+import { ScrollArea } from "../ui/scroll-area";
 
 interface DocumentViewProps {
   userId: string;
@@ -38,9 +39,9 @@ export const DocumentView = ({
     <>
       {file?.size ? (
         file?.type === "application/pdf" ? (
-          <div className="h-[600px]">
+          <ScrollArea className="h-[400px]">
             <PdfViewer file={file} />
-          </div>
+          </ScrollArea>
         ) : (
           <Image
             src={URL.createObjectURL(file)}
