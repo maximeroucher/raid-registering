@@ -13,6 +13,7 @@ interface DocumentViewProps {
   documentKey: string;
   id: string;
   file?: File;
+  width?: number;
 }
 
 export const DocumentView = ({
@@ -20,6 +21,7 @@ export const DocumentView = ({
   documentKey,
   id,
   file,
+  width,
 }: DocumentViewProps) => {
   const { data, setDocumentId, documentId } = useDocument();
   const { setDocument } = useDocumentsStore();
@@ -39,8 +41,8 @@ export const DocumentView = ({
     <>
       {file?.size ? (
         file?.type === "application/pdf" ? (
-          <ScrollArea className="h-[400px]">
-            <PdfViewer file={file} />
+          <ScrollArea className="h-[calc(100vh-180px)] flex mx-auto">
+            <PdfViewer file={file} width={width} />
           </ScrollArea>
         ) : (
           <Image

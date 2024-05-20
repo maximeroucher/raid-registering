@@ -82,6 +82,7 @@ export const DocumentTab = ({ team }: DocumentTabProps) => {
           documentKey={key}
           id={selectedDocument.id}
           file={getDocument(selectedDocumentUser, key)}
+          width={450}
         />
       )}
     </div>

@@ -16,9 +16,10 @@ const options = {
 
 interface PdfViewerProps {
   file: File;
+  width?: number;
 }
 
-export const PdfViewer = ({ file }: PdfViewerProps) => {
+export const PdfViewer = ({ file, width }: PdfViewerProps) => {
   const [numPages, setNumPages] = useState<number>();
 
   function onDocumentLoadSuccess({
@@ -26,21 +27,25 @@ export const PdfViewer = ({ file }: PdfViewerProps) => {
   }: PDFDocumentProxy): void {
     setNumPages(nextNumPages);
   }
+  // get the width of the parent element
+  const maxWidth = self?.innerWidth ?? width ?? 550;
+  console.log(maxWidth);
   return (
-    <Document
-      file={file}
-      onLoadSuccess={onDocumentLoadSuccess}
-      options={options}
-      loading={<Skeleton className="w-full h-80" />}
-      className="w-full aspect-auto overflow-y-scroll"
-    >
-      {Array.from(new Array(numPages), (el, index) => (
-        <Page
-          key={`page_${index + 1}`}
-          pageNumber={index + 1}
-          renderTextLayer={false}
-        />
-      ))}
-    </Document>
+      <Document
+        file={file}
+        onLoadSuccess={onDocumentLoadSuccess}
+        options={options}
+        loading={<Skeleton className="w-full h-80" />}
+      >
+        {Array.from(new Array(numPages), (el, index) => (
+          <Page
+            key={`page_${index + 1}`}
+            pageNumber={index + 1}
+            renderTextLayer={false}
+            className="max-w-full aspect-auto"
+            width={width}
+          />
+        ))}
+      </Document>
   );
 };

@@ -59,7 +59,7 @@ export const DocumentDialog = ({
         <div className="flex flex-col items-center gap-4">
           {image?.type === "application/pdf" ? (
             <ScrollArea className="h-[400px]">
-              <PdfViewer file={image} />
+              <PdfViewer file={image} width={550}/>
             </ScrollArea>
           ) : (
             <Image
