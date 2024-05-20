@@ -34,13 +34,12 @@ export const SecurityFileDialog = ({
 
   function onValidate(_: any) {
     form.setValue("securityFile.updated", true);
-    if (form.getValues("securityFile.id") === undefined) {
-      form.setValue("securityFile.id", crypto.randomUUID());
-    }
     const securityFile: SecurityFile = {
       ...form.getValues("securityFile"),
     };
-    setSecurityFile(securityFile, participantId, () => {});
+    setSecurityFile(securityFile, participantId, (securityFileId) => {
+      form.setValue("securityFile.id", securityFileId);
+    });
     setIsOpen(false);
   }
 

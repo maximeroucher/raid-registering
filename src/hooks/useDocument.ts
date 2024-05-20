@@ -79,7 +79,6 @@ export const useDocument = () => {
             return query.queryHash === "getDocument";
           },
         });
-        console.log(response);
         const documentId = response.data.id as string;
         callback(documentId);
       });

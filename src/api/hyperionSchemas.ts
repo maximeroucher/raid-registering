@@ -1787,7 +1787,7 @@ export type SecurityFileBase = {
   emergency_person_firstname?: string | null;
   emergency_person_name?: string | null;
   emergency_person_phone?: string | null;
-  id: string;
+  id?: string | null;
   file_id?: string | null;
 };
 

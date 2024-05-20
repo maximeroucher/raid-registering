@@ -20,7 +20,7 @@ export const useSecurityFile = () => {
   const setSecurityFile = (
     securityFile: SecurityFileBase,
     participantId: string,
-    callback: () => void,
+    callback: (securityFileId: string) => void,
   ) => {
     mutateAssignSecurityFile(
       {
@@ -35,7 +35,7 @@ export const useSecurityFile = () => {
       {
         // FIXME: Not trigger, to investigate
         onSuccess(data, variables, context) {
-          callback();
+          callback(data.id);
         },
         onError(error, variables, context) {
           console.log(error);
@@ -55,7 +55,7 @@ export const useSecurityFile = () => {
 
   const assignSecurityFile = (
     participantId: string,
-    securityFile_id: string,
+    securityFileId: string,
     callback: () => void,
   ) => {
     mutateAssignSecurityFileRaidParticipant(
@@ -67,25 +67,17 @@ export const useSecurityFile = () => {
           participantId,
         },
         queryParams: {
-          security_file_id: securityFile_id,
+          security_file_id: securityFileId,
         },
       },
       {
-        onSuccess(data, variables, context) {
+        onSettled() {
           queryClient.invalidateQueries({
             predicate: (query) => {
               return query.queryHash === "getTeamByParticipantId";
             },
           });
           callback();
-        },
-        onError(error, variables, context) {
-          console.log(error);
-          toast({
-            title: "Erreur lors de l'assignation de la fiche de sécurité",
-            description: "Une erreur est survenue, veuillez réessayer plus tard",
-            variant: "destructive",
-          });
         },
       },
     );
