@@ -5,11 +5,9 @@ import { CardLayout } from "@/src/components/information/CardLayout";
 import { ContactMail } from "@/src/components/information/ContactMail";
 import { DriveFolder } from "@/src/components/information/DriveFolder";
 import { InscriptionEnd } from "@/src/components/information/InscriptionEnd";
-import { PaymentLink } from "@/src/components/information/PaymentLink";
 import { RaidDate } from "@/src/components/information/RaidDate";
 import { RaidPrice } from "@/src/components/information/RaidPrice";
 import { TShirtPrice } from "@/src/components/information/TShirtPrice";
-import { Button } from "@/src/components/ui/button";
 import {
   Card,
   CardContent,
@@ -42,11 +40,7 @@ const InformationPage = () => {
               <InscriptionEnd />
               <RaidDate />
               <ContactMail />
-              <PaymentLink />
               <DriveFolder />
-              <CardLayout label="Capacité maximale">
-                <>En développement</>
-              </CardLayout>
               <RaidPrice />
               <TShirtPrice />
             </div>
