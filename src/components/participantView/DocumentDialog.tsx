@@ -90,25 +90,18 @@ export const DocumentDialog = ({
               setIsOpen={setIsOpen}
               onDropAccepted={(files, _) => {
                 const file = files[0];
-                const documentId = crypto.randomUUID();
                 setIsUploading(true);
-                uploadDocument(
-                  file,
-                  fileType,
-                  documentId,
-                  participantId,
-                  () => {
-                    field.onChange({
-                      name: file.name,
-                      id: documentId,
-                      type: fileType,
-                      updated: true,
-                    });
-                    setDocument(participantId, fileType, documentId, file);
-                    setDocumentId(documentId);
-                    setIsUploading(false);
-                  },
-                );
+                uploadDocument(file, (documentId) => {
+                  field.onChange({
+                    name: file.name,
+                    id: documentId,
+                    type: fileType,
+                    updated: true,
+                  });
+                  setDocument(participantId, fileType, documentId, file);
+                  setDocumentId(documentId);
+                  setIsUploading(false);
+                });
               }}
             />
           )}

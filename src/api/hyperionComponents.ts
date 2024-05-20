@@ -14558,7 +14558,7 @@ export type PostRaidParticipantParticipantIdDocumentError =
   }>;
 
 export type PostRaidParticipantParticipantIdDocumentVariables = {
-  body: Schemas.DocumentCreation;
+  body: Schemas.DocumentBase;
   pathParams: PostRaidParticipantParticipantIdDocumentPathParams;
 } & HyperionContext["fetcherOptions"];
 
@@ -14572,7 +14572,7 @@ export const fetchPostRaidParticipantParticipantIdDocument = (
   hyperionFetch<
     Schemas.Document,
     PostRaidParticipantParticipantIdDocumentError,
-    Schemas.DocumentCreation,
+    Schemas.DocumentBase,
     {},
     {},
     PostRaidParticipantParticipantIdDocumentPathParams
@@ -14613,62 +14613,52 @@ export const usePostRaidParticipantParticipantIdDocument = (
   });
 };
 
-export type PostRaidDocumentDocumentIdPathParams = {
-  documentId: string;
-};
-
-export type PostRaidDocumentDocumentIdError = Fetcher.ErrorWrapper<{
+export type PostRaidDocumentError = Fetcher.ErrorWrapper<{
   status: 422;
   payload: Schemas.HTTPValidationError;
 }>;
 
-export type PostRaidDocumentDocumentIdVariables = {
-  body: Schemas.BodyUploadDocumentRaidDocumentDocumentIdPost;
-  pathParams: PostRaidDocumentDocumentIdPathParams;
+export type PostRaidDocumentVariables = {
+  body: Schemas.BodyUploadDocumentRaidDocumentPost;
 } & HyperionContext["fetcherOptions"];
 
 /**
  * Upload a document
  */
-export const fetchPostRaidDocumentDocumentId = (
-  variables: PostRaidDocumentDocumentIdVariables,
+export const fetchPostRaidDocument = (
+  variables: PostRaidDocumentVariables,
   signal?: AbortSignal,
 ) =>
   hyperionFetch<
-    Schemas.AppCoreStandardResponsesResult,
-    PostRaidDocumentDocumentIdError,
-    Schemas.BodyUploadDocumentRaidDocumentDocumentIdPost,
+    Schemas.DocumentCreation,
+    PostRaidDocumentError,
+    Schemas.BodyUploadDocumentRaidDocumentPost,
     {},
     {},
-    PostRaidDocumentDocumentIdPathParams
-  >({
-    url: "/raid/document/{documentId}",
-    method: "post",
-    ...variables,
-    signal,
-  });
+    {}
+  >({ url: "/raid/document", method: "post", ...variables, signal });
 
 /**
  * Upload a document
  */
-export const usePostRaidDocumentDocumentId = (
+export const usePostRaidDocument = (
   options?: Omit<
     reactQuery.UseMutationOptions<
-      Schemas.AppCoreStandardResponsesResult,
-      PostRaidDocumentDocumentIdError,
-      PostRaidDocumentDocumentIdVariables
+      Schemas.DocumentCreation,
+      PostRaidDocumentError,
+      PostRaidDocumentVariables
     >,
     "mutationFn"
   >,
 ) => {
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
-    Schemas.AppCoreStandardResponsesResult,
-    PostRaidDocumentDocumentIdError,
-    PostRaidDocumentDocumentIdVariables
+    Schemas.DocumentCreation,
+    PostRaidDocumentError,
+    PostRaidDocumentVariables
   >({
-    mutationFn: (variables: PostRaidDocumentDocumentIdVariables) =>
-      fetchPostRaidDocumentDocumentId({ ...fetcherOptions, ...variables }),
+    mutationFn: (variables: PostRaidDocumentVariables) =>
+      fetchPostRaidDocument({ ...fetcherOptions, ...variables }),
     ...options,
   });
 };

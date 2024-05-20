@@ -4,7 +4,7 @@ import {
   useGetRaidDocumentDocumentId,
   usePostRaidDocumentDocumentIdValidate,
 } from "../api/hyperionComponents";
-import { DocumentCreation, DocumentValidation } from "../api/hyperionSchemas";
+import { DocumentBase, DocumentCreation, DocumentValidation } from "../api/hyperionSchemas";
 import axios from "axios";
 import { useDocumentsStore } from "../stores/documents";
 import { useState } from "react";
@@ -23,7 +23,7 @@ export const useDocument = () => {
     usePostRaidParticipantParticipantIdDocument();
 
   const assignDocument = (
-    file: DocumentCreation,
+    file: DocumentBase,
     participantId: string,
     callback: () => void,
   ) => {
@@ -52,15 +52,12 @@ export const useDocument = () => {
 
   const uploadDocument = (
     file: File,
-    key: string,
-    documentId: string,
-    participantId: string,
-    callback: () => void,
+    callback: (documentId: string) => void,
   ) => {
     const formData = new FormData();
-    formData.append("image", file);
+    formData.append("file", file);
     axios
-      .post(`${backUrl}/raid/document/${documentId}`, formData, {
+      .post(`${backUrl}/raid/document`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
@@ -82,8 +79,9 @@ export const useDocument = () => {
             return query.queryHash === "getDocument";
           },
         });
-        setDocument(participantId, key, documentId!, file);
-        callback();
+        console.log(response);
+        const documentId = response.data.id as string;
+        callback(documentId);
       });
   };
 

@@ -228,11 +228,11 @@ export type BodyTokenAuthTokenPost = {
   code_verifier?: string | null;
 };
 
-export type BodyUploadDocumentRaidDocumentDocumentIdPost = {
+export type BodyUploadDocumentRaidDocumentPost = {
   /**
    * @format binary
    */
-  image: Blob;
+  file: Blob;
 };
 
 export type BookingBase = {
@@ -617,9 +617,13 @@ export type Document = {
   validation: DocumentValidation;
 };
 
-export type DocumentCreation = {
+export type DocumentBase = {
   type: DocumentType;
   name: string;
+  id: string;
+};
+
+export type DocumentCreation = {
   id: string;
 };
 
