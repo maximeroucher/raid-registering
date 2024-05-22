@@ -24,6 +24,7 @@ import {
   AccordionTrigger,
 } from "../ui/accordion";
 import { LoadingButton } from "../ui/loadingButton";
+import { HiCheck } from "react-icons/hi";
 
 export const EmergencyPerson = () => {
   const { information, updateInformation } = useInformation();
@@ -224,30 +225,46 @@ export const EmergencyPerson = () => {
     );
   }
 
-  const numberOfFilledPerson = () => {
-    let count = 0;
-    if (
+  const isPresidentFilled = () => {
+    return (
       form.watch("president.firstname") &&
       form.watch("president.name") &&
       form.watch("president.phone")
-    ) {
-      count++;
-    }
-    if (
+    );
+  };
+
+  const isVolunteerResponsibleFilled = () => {
+    return (
       form.watch("volunteer_responsible.firstname") &&
       form.watch("volunteer_responsible.name") &&
       form.watch("volunteer_responsible.phone")
-    ) {
-      count++;
-    }
-    if (
+    );
+  };
+
+  const isSecurityResponsibleFilled = () => {
+    return (
       form.watch("security_responsible.firstname") &&
       form.watch("security_responsible.name") &&
       form.watch("security_responsible.phone")
-    ) {
+    );
+  };
+
+  const isRescueFilled = () => {
+    return form.watch("rescue.phone");
+  };
+
+  const numberOfFilledPerson = () => {
+    let count = 0;
+    if (isPresidentFilled()) {
       count++;
     }
-    if (form.watch("rescue.phone")) {
+    if (isVolunteerResponsibleFilled()) {
+      count++;
+    }
+    if (isSecurityResponsibleFilled()) {
+      count++;
+    }
+    if (isRescueFilled()) {
       count++;
     }
     return count;
@@ -283,7 +300,12 @@ export const EmergencyPerson = () => {
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <Accordion type="single" collapsible>
               <AccordionItem value="president">
-                <AccordionTrigger>{"Président·e"}</AccordionTrigger>
+                <AccordionTrigger>
+                  <div className="flex flex-row mr-auto items-center">
+                    {isPresidentFilled() && <HiCheck className="mr-4" />}
+                    {"Président·e"}
+                  </div>
+                </AccordionTrigger>
                 <AccordionContent>
                   <div className="grid gap-6 py-4 mr-2">
                     <CreateParticipantField
@@ -333,7 +355,14 @@ export const EmergencyPerson = () => {
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="volunteer_responsible">
-                <AccordionTrigger>{"Responsable bénévole"}</AccordionTrigger>
+                <AccordionTrigger>
+                  <div className="flex flex-row mr-auto items-center">
+                    {isVolunteerResponsibleFilled() && (
+                      <HiCheck className="mr-4" />
+                    )}
+                    {"Responsable Bénévole"}
+                  </div>
+                </AccordionTrigger>
                 <AccordionContent>
                   <div className="grid gap-6 py-4 mr-2">
                     <CreateParticipantField
@@ -383,7 +412,14 @@ export const EmergencyPerson = () => {
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="security_responsible">
-                <AccordionTrigger>{"Responsable Sécurité"}</AccordionTrigger>
+                <AccordionTrigger>
+                  <div className="flex flex-row mr-auto items-center">
+                    {isSecurityResponsibleFilled() && (
+                      <HiCheck className="mr-4" />
+                    )}
+                    {"Responsable Sécurité"}
+                  </div>
+                </AccordionTrigger>
                 <AccordionContent>
                   <div className="grid gap-6 py-4 mr-2">
                     <CreateParticipantField
@@ -433,7 +469,12 @@ export const EmergencyPerson = () => {
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="rescue">
-                <AccordionTrigger>{"Secouristes"}</AccordionTrigger>
+                <AccordionTrigger>
+                  <div className="flex flex-row mr-auto items-center">
+                    {isRescueFilled() && <HiCheck className="mr-4" />}
+                    {"Secouristes"}
+                  </div>
+                </AccordionTrigger>
                 <AccordionContent>
                   <div className="grid gap-6 py-4 mr-2">
                     <FormField
