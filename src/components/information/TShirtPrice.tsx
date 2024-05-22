@@ -43,6 +43,7 @@ export const TShirtPrice = () => {
       () => {
         setIsLoading(false);
         setIsEdit(false);
+        form.reset({ t_shirt_price: values.t_shirt_price });
       },
     );
   }

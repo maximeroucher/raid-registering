@@ -43,6 +43,7 @@ export const ContactMail = () => {
       () => {
         setIsLoading(false);
         setIsEdit(false);
+        form.reset({ email: values.email });
       },
     );
   }

@@ -50,6 +50,7 @@ export const DriveFolder = () => {
         () => {
           setIsLoading(false);
           setIsEdit(false);
+          form.reset({ parent_folder_id: values.parent_folder_id });
         },
       );
     } else {

@@ -4,6 +4,7 @@ import { TopBar } from "@/src/components/admin/TopBar";
 import { CardLayout } from "@/src/components/information/CardLayout";
 import { ContactMail } from "@/src/components/information/ContactMail";
 import { DriveFolder } from "@/src/components/information/DriveFolder";
+import { EmergencyPerson } from "@/src/components/information/EmergencyPersons";
 import { InscriptionEnd } from "@/src/components/information/InscriptionEnd";
 import { RaidDate } from "@/src/components/information/RaidDate";
 import { RaidPrice } from "@/src/components/information/RaidPrice";
@@ -36,13 +37,14 @@ const InformationPage = () => {
             <CardTitle>Informations</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid xl:grid-cols-3 gap-4 w-full grid-cols-1 max-md:p-8 max-md:gap-4">
+            <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-4 w-full grid-cols-1 max-md:p-8 max-md:gap-4">
               <InscriptionEnd />
               <RaidDate />
               <ContactMail />
               <DriveFolder />
               <RaidPrice />
               <TShirtPrice />
+              <EmergencyPerson />
             </div>
           </CardContent>
         </Card>

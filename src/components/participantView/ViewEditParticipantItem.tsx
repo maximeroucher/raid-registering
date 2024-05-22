@@ -133,7 +133,7 @@ export const ViewEditParticipantItem = ({
               required_error: "Veuillez renseigner un numéro de téléphone",
               invalid_type_error: "Veuillez renseigner un numéro de téléphone",
             })
-            .min(11, {
+            .min(10, {
               message: "Veuillez renseigner un numéro de téléphone valide",
             })
             .max(14, {

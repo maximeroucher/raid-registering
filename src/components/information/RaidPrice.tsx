@@ -43,6 +43,7 @@ export const RaidPrice = () => {
       () => {
         setIsLoading(false);
         setIsEdit(false);
+        form.reset({ student_price: values.student_price });
       },
     );
   }
