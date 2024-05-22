@@ -9,6 +9,7 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -470,23 +471,14 @@ export const EmergencyPerson = () => {
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
-            <div className="flex flex-row">
-              <Button
-                variant="outline"
-                className="mt-2 mr-2 w-[120px]"
-                onClick={() => {
-                  setIsOpened(false);
-                }}
-              >
-                Annuler
-              </Button>
+            <DialogFooter>
               <LoadingButton
-                className="mt-2 w-[120px]"
-                type="submit"
-                label="Valider"
                 isLoading={isLoading}
+                label="Valider"
+                type="submit"
+                className="w-full mt-4"
               />
-            </div>
+            </DialogFooter>
           </form>
         </Form>
       </DialogContent>
