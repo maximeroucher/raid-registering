@@ -29,7 +29,6 @@ export const PdfViewer = ({ file, width }: PdfViewerProps) => {
   }
   // get the width of the parent element
   const maxWidth = self?.innerWidth ?? width ?? 550;
-  console.log(maxWidth);
   return (
       <Document
         file={file}

@@ -1,6 +1,5 @@
 import {
   usePostRaidSecurityFile,
-  usePostRaidParticipantParticipantIdSecurityFile,
 } from "@/src/api/hyperionComponents";
 import { SecurityFileBase } from "../api/hyperionSchemas";
 import { useQueryClient } from "@tanstack/react-query";
@@ -9,7 +8,6 @@ import { toast } from "../components/ui/use-toast";
 
 export const useSecurityFile = () => {
   const { token } = useAuth();
-  const queryClient = useQueryClient();
 
   const {
     mutate: mutateAssignSecurityFile,
@@ -50,41 +48,7 @@ export const useSecurityFile = () => {
     );
   };
 
-  const { mutate: mutateAssignSecurityFileRaidParticipant } =
-    usePostRaidParticipantParticipantIdSecurityFile({});
-
-  const assignSecurityFile = (
-    participantId: string,
-    securityFileId: string,
-    callback: () => void,
-  ) => {
-    mutateAssignSecurityFileRaidParticipant(
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        pathParams: {
-          participantId,
-        },
-        queryParams: {
-          security_file_id: securityFileId,
-        },
-      },
-      {
-        onSettled() {
-          queryClient.invalidateQueries({
-            predicate: (query) => {
-              return query.queryHash === "getTeamByParticipantId";
-            },
-          });
-          callback();
-        },
-      },
-    );
-  };
-
   return {
-    assignSecurityFile,
     setSecurityFile,
     isCreationLoading,
     isCreationSuccess,

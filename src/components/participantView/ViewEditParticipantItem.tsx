@@ -2,7 +2,6 @@ import {
   Participant,
   ParticipantUpdate,
   Size,
-  DocumentValidation,
 } from "@/src/api/hyperionSchemas";
 import { CardContent } from "../ui/card";
 import { ParticipantCardItem } from "./ParticipantCardItem";
@@ -18,7 +17,6 @@ import { HiCheck } from "react-icons/hi";
 import { useTeam } from "@/src/hooks/useTeam";
 import { useDocument } from "@/src/hooks/useDocument";
 import { EditParticipantCardItem, ValueTypes } from "./EditParticipantCardItem";
-import { useSecurityFile } from "@/src/hooks/useSecurityFile";
 import { getLabelFromValue, situations } from "@/src/infra/comboboxValues";
 import { getSituationLabel, getSituationTitle } from "@/src/infra/teamUtils";
 
@@ -36,7 +34,6 @@ export const ViewEditParticipantItem = ({
   const { updateParticipant, isUpdateLoading } = useParticipant();
   const { refetchTeam } = useTeam();
   const { assignDocument } = useDocument();
-  const { assignSecurityFile } = useSecurityFile();
   const formSchema = z
     .object({
       address: z
@@ -241,10 +238,6 @@ export const ViewEditParticipantItem = ({
       values.parentAuthorization,
     ].filter((doc) => doc.updated);
 
-    if (values.securityFile.updated) {
-      assignSecurityFile(participant.id!, values.securityFile.id!, () => {});
-    }
-
     for (const doc of documentToUpdate) {
       if (doc) {
         assignDocument(
@@ -335,7 +328,7 @@ export const ViewEditParticipantItem = ({
             values?.securityFile?.surgical_operation ?? undefined,
           trauma: values?.securityFile?.trauma ?? undefined,
           family: values?.securityFile?.family ?? undefined,
-          id: values?.securityFile?.id ?? undefined,
+          id: values?.securityFile?.id ?? participant?.security_file?.id ?? "",
           emergency_person_name:
             values?.securityFile?.emergency_person_name ?? undefined,
           emergency_person_firstname:

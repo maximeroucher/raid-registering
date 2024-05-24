@@ -37,8 +37,8 @@ export const SecurityFileDialog = ({
     const securityFile: SecurityFile = {
       ...form.getValues("securityFile"),
     };
-    setSecurityFile(securityFile, participantId, (securityFileId) => {
-      form.setValue("securityFile.id", securityFileId);
+    setSecurityFile(securityFile, participantId, (_) => {
+      // Not working, to investigate
     });
     setIsOpen(false);
   }

@@ -188,7 +188,7 @@ export function EditParticipantCardItem<T extends ValueType>({
                     <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
                   ) : (
                     <>
-                      {field.value?.id ? (
+                      {field.value?.updated || field.value?.id ? (
                         <span className="text-gray-500 overflow-hidden">
                           {"Fiche de sécurité"}
                         </span>
