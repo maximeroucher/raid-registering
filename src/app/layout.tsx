@@ -1,12 +1,6 @@
 import { Outfit } from "next/font/google";
 import "./globals.css";
-import {
-  QueryCache,
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
 import { Toaster } from "../components/ui/toaster";
-import { toast } from "../components/ui/use-toast";
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { ThemeProvider } from "../components/ui/theme";
