@@ -1,5 +1,3 @@
-"use client";
-
 import { Outfit } from "next/font/google";
 import "./globals.css";
 import {
@@ -10,22 +8,17 @@ import {
 import { Toaster } from "../components/ui/toaster";
 import { toast } from "../components/ui/use-toast";
 import { Suspense } from "react";
+import type { Metadata } from "next";
 import { ThemeProvider } from "../components/ui/theme";
 import PlausibleProvider from "next-plausible";
+import Providers from "./providers";
 
 const inter = Outfit({ subsets: ["latin-ext"] });
 
-const queryClient = new QueryClient({
-  // queryCache: new QueryCache({
-  //   onError: (error) => {
-  //     toast({
-  //       title: "Erreur",
-  //       description: "Une erreur est survenue, veuillez réessayer plus tard",
-  //       variant: "destructive",
-  //     });
-  //   },
-  // }),
-});
+export const metadata: Metadata = {
+  title: "Inscription Raid",
+  description: "Inscription Raid",
+};
 
 export default function RootLayout({
   children,
@@ -36,7 +29,6 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
-        <title>Inscription Raid</title>
         <link rel="shortcut icon" href="/favicon.ico" />
         <PlausibleProvider domain="raid-registering.myecl.fr" />
       </head>
@@ -48,10 +40,10 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Suspense fallback={<div>Loading...</div>}>
-            <QueryClientProvider client={queryClient}>
+            <Providers>
               {children}
               <Toaster />
-            </QueryClientProvider>
+            </Providers>
           </Suspense>
         </ThemeProvider>
       </body>
