@@ -1,6 +1,6 @@
 "use client";
 
-import { Bar, BarChart, Tooltip, ResponsiveContainer, Cell } from "recharts";
+import { Bar, BarChart, ResponsiveContainer, Cell } from "recharts";
 import { useTheme } from "next-themes";
 
 interface CardViewProps {

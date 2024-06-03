@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
 import { useInviteTokenStore } from "@/src/stores/inviteTokenStore";
 import { useInviteToken } from "@/src/hooks/useInviteToken";
 import { useTeam } from "@/src/hooks/useTeam";
-import { LoadingButton } from "../ui/loadingButton";
+import { LoadingButton } from "../custom/LoadingButton";
 
 interface JoinTeamDialogProps {
   isOpened: boolean;
@@ -44,7 +44,11 @@ export const JoinTeamDialog = ({
           équipe.
         </DialogDescription>
         <div className="flex justify-end mt-2 space-x-4">
-          <Button variant="outline" onClick={closeDialog} disabled={isJoinLoading}>
+          <Button
+            variant="outline"
+            onClick={closeDialog}
+            disabled={isJoinLoading}
+          >
             Annuler
           </Button>
           <LoadingButton

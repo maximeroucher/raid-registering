@@ -7,14 +7,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/src/components/ui/card";
-import { DataTable } from "@/src/components/teams/DataTable";
-import { columns } from "@/src/components/teams/Columns";
+import { DataTable } from "@/src/components/admin/teams/DataTable";
+import { columns } from "@/src/components/admin/teams/Columns";
 import { TopBar } from "@/src/components/admin/TopBar";
 import { useTeams } from "@/src/hooks/useTeams";
 import { useUser } from "@/src/hooks/useUser";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import { TeamSheet } from "@/src/components/teamSheet/TeamSheet";
+import { TeamSheet } from "@/src/components/admin/teams/teamSheet/TeamSheet";
 
 const Dashboard = () => {
   const { isAdmin } = useUser();

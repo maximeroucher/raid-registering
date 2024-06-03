@@ -33,10 +33,7 @@ export const StatsView = ({ teams, isLoading }: StatsViewProps) => {
       <CardHeader className="flex flex-col items-center justify-between">
         <div className="flex flex-row justify-between w-full">
           <CardTitle>Statistiques</CardTitle>
-          <Switch
-            checked={seeAll}
-            onCheckedChange={setSeeAll}
-          />
+          <Switch checked={seeAll} onCheckedChange={setSeeAll} />
         </div>
         <div className="ml-auto">
           <CardDescription>

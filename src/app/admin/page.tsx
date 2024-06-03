@@ -1,6 +1,6 @@
 "use client";
 
-import { TeamInfoCard } from "@/src/components/teamCard/TeamInfoCard";
+import { TeamInfoCard } from "@/src/components/home/teamCard/TeamInfoCard";
 import { TopBar } from "@/src/components/admin/TopBar";
 import { TeamsPreview } from "@/src/components/admin/TeamsPreview";
 import { StatsView } from "@/src/components/admin/StatsView";

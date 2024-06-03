@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { AskMail } from "@/src/components/recoverPassword/AskMail";
-import { RecoverPassword } from "@/src/components/recoverPassword/RecoverPassword";
+import { AskMail } from "@/src/components/recover/AskMail";
+import { RecoverPassword } from "@/src/components/recover/RecoverPassword";
 
 const RecoverPage = () => {
   const [showRecover, setShowRecover] = React.useState(true);

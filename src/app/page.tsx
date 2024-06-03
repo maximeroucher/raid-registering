@@ -1,8 +1,8 @@
 "use client";
 
-import { EmptyParticipantCard } from "../components/participantView/EmptyParticipantCard";
-import { ParticipantCard } from "../components/participantView/ParicipantCard";
-import { TeamCard } from "../components/teamCard/TeamCard";
+import { EmptyParticipantCard } from "../components/home/participantView/EmptyParticipantCard";
+import { ParticipantCard } from "../components/home/participantView/ParicipantCard";
+import { TeamCard } from "../components/home/teamCard/TeamCard";
 import { TopBar } from "../components/home/TopBar";
 import { useAuth } from "../hooks/useAuth";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -15,9 +15,9 @@ import { useInviteTokenStore } from "../stores/inviteTokenStore";
 import { JoinTeamDialog } from "../components/home/JoinTeamDialog";
 import { useInformation } from "../hooks/useInformation";
 import { getDaysLeft } from "../utils/dateFormat";
-import { WarningDialog } from "../components/teams/WarningDialog";
+import { WarningDialog } from "../components/custom/WarningDialog";
 import { toast } from "../components/ui/use-toast";
-import { StatusDialog } from "../components/participantView/StatusDialog";
+import { StatusDialog } from "../components/custom/StatusDialog";
 
 const Home = () => {
   const { isTokenQueried, token } = useAuth();

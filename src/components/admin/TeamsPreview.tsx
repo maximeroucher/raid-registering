@@ -20,9 +20,9 @@ import {
 } from "@/src/components/ui/table";
 import { Skeleton } from "../ui/skeleton";
 import { TeamPreview } from "@/src/api/hyperionSchemas";
-import { CircularProgressBar } from "../ui/circularProgressBar";
+import { CircularProgressBar } from "../custom/CircularProgressBar";
 import { useRouter } from "next/navigation";
-import { ProgressBadge } from "../ui/progressBadge";
+import { ProgressBadge } from "../custom/ProgressBadge";
 
 interface TeamsPreviewProps {
   teams?: TeamPreview[];

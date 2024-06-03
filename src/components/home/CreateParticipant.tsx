@@ -6,8 +6,8 @@ import {
   DialogDescription,
   DialogTitle,
 } from "../ui/dialog";
-import { CreateParticipantField } from "./CreateParticipantField";
-import { DatePicker } from "../ui/datePicker";
+import { PersonField } from "../custom/PersonField";
+import { DatePicker } from "../custom/DatePicker";
 import { Form, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
@@ -21,7 +21,7 @@ import PhoneInput from "react-phone-input-2";
 import { useTeam } from "@/src/hooks/useTeam";
 import { useInviteTokenStore } from "@/src/stores/inviteTokenStore";
 import { useInviteToken } from "@/src/hooks/useInviteToken";
-import { LoadingButton } from "../ui/loadingButton";
+import { LoadingButton } from "../custom/LoadingButton";
 import { apiFormatDate } from "@/src/utils/dateFormat";
 
 interface CreateParticipantProps {
@@ -139,19 +139,19 @@ export const CreateParticipant = ({
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-6 py-4">
-              <CreateParticipantField
+              <PersonField
                 form={form}
                 label="Prénom"
                 id="firstname"
                 placeholder="Prénom"
               />
-              <CreateParticipantField
+              <PersonField
                 form={form}
                 label="Nom"
                 id="name"
                 placeholder="Nom"
               />
-              <CreateParticipantField
+              <PersonField
                 form={form}
                 label="Email"
                 id="email"

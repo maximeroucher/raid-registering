@@ -12,10 +12,10 @@ import {
   MenubarTrigger,
 } from "../ui/menubar";
 import { Sheet, SheetContent, SheetTrigger } from "@/src/components/ui/sheet";
-import { ThemeButton } from "../ui/themeButton";
+import { ThemeButton } from "../custom/ThemeButton";
 import { Skeleton } from "../ui/skeleton";
 import { useUser } from "@/src/hooks/useUser";
-import { LogoutButton } from "../userSheet/logoutButton";
+import { LogoutButton } from "../home/userSheet/logoutButton";
 import { useTheme } from "next-themes";
 
 export const TopBar = () => {

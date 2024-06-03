@@ -1,14 +1,13 @@
 "use client";
 
 import { TopBar } from "@/src/components/admin/TopBar";
-import { CardLayout } from "@/src/components/information/CardLayout";
-import { ContactMail } from "@/src/components/information/ContactMail";
-import { DriveFolder } from "@/src/components/information/DriveFolder";
-import { EmergencyPerson } from "@/src/components/information/EmergencyPersons";
-import { InscriptionEnd } from "@/src/components/information/InscriptionEnd";
-import { RaidDate } from "@/src/components/information/RaidDate";
-import { RaidPrice } from "@/src/components/information/RaidPrice";
-import { TShirtPrice } from "@/src/components/information/TShirtPrice";
+import { ContactMail } from "@/src/components/admin/information/ContactMail";
+import { DriveFolder } from "@/src/components/admin/information/DriveFolder";
+import { EmergencyPerson } from "@/src/components/admin/information/EmergencyPersons";
+import { InscriptionEnd } from "@/src/components/admin/information/InscriptionEnd";
+import { RaidDate } from "@/src/components/admin/information/RaidDate";
+import { RaidPrice } from "@/src/components/admin/information/RaidPrice";
+import { TShirtPrice } from "@/src/components/admin/information/TShirtPrice";
 import {
   Card,
   CardContent,

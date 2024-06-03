@@ -4,7 +4,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCodeVerifierStore } from "@/src/stores/codeVerifier";
 import { useEffect, useState } from "react";
-import { LoadingButton } from "../ui/loadingButton";
+import { LoadingButton } from "../custom/LoadingButton";
 
 const Login = () => {
   const { token, isTokenExpired, login, isLoading, getTokenFromRequest } =
