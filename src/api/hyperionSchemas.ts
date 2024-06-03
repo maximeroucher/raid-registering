@@ -1362,6 +1362,8 @@ export type RaidInformation = {
   volunteer_responsible?: EmergencyContact | null;
   security_responsible?: EmergencyContact | null;
   rescue?: EmergencyContact | null;
+  raid_rules_id?: string | null;
+  raid_information_id?: string | null;
 };
 
 export type RaidPrice = {
