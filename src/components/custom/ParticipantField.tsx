@@ -24,7 +24,7 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import { Button } from "../ui/button";
-import { HiArrowNarrowRight } from "react-icons/hi";
+import { HiArrowNarrowRight, HiDownload } from "react-icons/hi";
 import { useState } from "react";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { DocumentDialog } from "../home/participantView/DocumentDialog";
@@ -38,6 +38,7 @@ import {
 } from "@/src/infra/comboboxValues";
 import { ConfirmationCheckbox } from "../home/participantView/ConfirmationCheckbox";
 import PhoneInput from "react-phone-input-2";
+import { useInformation } from "@/src/hooks/useInformation";
 
 type ValueType =
   | string
@@ -92,6 +93,7 @@ export function ParticipantField<T extends ValueType>({
   className,
 }: ParticipantFieldProps<T>) {
   const [isUploading, setIsUploading] = useState(false);
+  const { information } = useInformation();
 
   const valueComponent = (
     field: ControllerRenderProps<FieldValues, string>,
@@ -142,45 +144,61 @@ export function ParticipantField<T extends ValueType>({
         );
       case ValueTypes.DOCUMENT:
         return (
-          <Dialog open={open} onOpenChange={setIsOpen}>
-            <FormMessage />
-            <DialogTrigger asChild>
+          <div className="col-span-4 gap-2 grid grid-cols-3">
+            <Dialog open={open} onOpenChange={setIsOpen}>
+              <FormMessage />
+              <DialogTrigger asChild>
+                <Button
+                  variant="outline"
+                  className={
+                    id === "raidRules" && !!information?.raid_rules_id
+                      ? "col-span-2"
+                      : "col-span-3"
+                  }
+                  disabled={isUploading}
+                >
+                  <div className="flex flex-row items-start w-full">
+                    <>
+                      {field.value?.name ? (
+                        <span className="text-gray-500 overflow-hidden">
+                          {field.value.name ?? "Aucun fichier séléctionné"}
+                        </span>
+                      ) : (
+                        <span className="font-semibold  mr-6">
+                          Choisir un fichier
+                        </span>
+                      )}
+                    </>
+                  </div>
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="md:max-w-2xl top-1/2">
+                <DialogHeader>
+                  <DialogTitle className="text-red sm:text-lg">
+                    {label}
+                  </DialogTitle>
+                </DialogHeader>
+                <DocumentDialog
+                  setIsOpen={setIsOpen}
+                  setIsUploading={setIsUploading}
+                  field={field}
+                  fileType={id}
+                  documentId={field.value?.id}
+                  participantId={participantId!}
+                />
+              </DialogContent>
+            </Dialog>
+            {id === "raidRules" && !!information?.raid_rules_id && (
               <Button
                 variant="outline"
-                className="col-span-4"
-                disabled={isUploading}
+                className="col-span-1"
+                // onClick={(_) => downloadDocument(document)}
               >
-                <div className="flex flex-row items-start w-full">
-                  <>
-                    {field.value?.name ? (
-                      <span className="text-gray-500 overflow-hidden">
-                        {field.value.name ?? "Aucun fichier séléctionné"}
-                      </span>
-                    ) : (
-                      <span className="font-semibold  mr-6">
-                        Choisir un fichier
-                      </span>
-                    )}
-                  </>
-                </div>
+                <HiDownload className="mr-2" />
+                Télécharger
               </Button>
-            </DialogTrigger>
-            <DialogContent className="md:max-w-2xl top-1/2">
-              <DialogHeader>
-                <DialogTitle className="text-red sm:text-lg">
-                  {label}
-                </DialogTitle>
-              </DialogHeader>
-              <DocumentDialog
-                setIsOpen={setIsOpen}
-                setIsUploading={setIsUploading}
-                field={field}
-                fileType={id}
-                documentId={field.value?.id}
-                participantId={participantId!}
-              />
-            </DialogContent>
-          </Dialog>
+            )}
+          </div>
         );
       case ValueTypes.SECURITYFILE:
         return (
