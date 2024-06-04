@@ -19,6 +19,12 @@ import {
 import { useInformation } from "@/src/hooks/useInformation";
 import { useUser } from "@/src/hooks/useUser";
 import { useRouter } from "next/navigation";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/src/components/ui/accordion";
 
 const InformationPage = () => {
   const { isAdmin } = useUser();
@@ -40,17 +46,50 @@ const InformationPage = () => {
             <CardTitle>Informations</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-4 w-full grid-cols-1 max-md:p-8 max-md:gap-4">
-              <InscriptionEnd />
-              <RaidDate />
-              <ContactMail />
-              <DriveFolder />
-              <RaidPrice />
-              <TShirtPrice />
-              <EmergencyPerson />
-              {information && <RaidRules information={information} />}
-              {information && <RaidInformationDocument information={information} />}
-            </div>
+            <Accordion
+              type="multiple"
+              defaultValue={["date", "price", "contact", "files"]}
+            >
+              <AccordionItem value="date">
+                <AccordionTrigger>Dates</AccordionTrigger>
+                <AccordionContent>
+                  <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-4 w-full grid-cols-1 max-md:p-8 max-md:gap-4">
+                    <InscriptionEnd />
+                    <RaidDate />
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="price">
+                <AccordionTrigger>Prix</AccordionTrigger>
+                <AccordionContent>
+                  <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-4 w-full grid-cols-1 max-md:p-8 max-md:gap-4">
+                    <RaidPrice />
+                    <TShirtPrice />
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="contact">
+                <AccordionTrigger>Contact</AccordionTrigger>
+                <AccordionContent>
+                  <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-4 w-full grid-cols-1 max-md:p-8 max-md:gap-4">
+                    <ContactMail />
+                    <EmergencyPerson />
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="files">
+                <AccordionTrigger>Fichiers</AccordionTrigger>
+                <AccordionContent>
+                  <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-4 w-full grid-cols-1 max-md:p-8 max-md:gap-4">
+                    <DriveFolder />
+                    {information && <RaidRules information={information} />}
+                    {information && (
+                      <RaidInformationDocument information={information} />
+                    )}
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </CardContent>
         </Card>
       </main>
