@@ -6,7 +6,7 @@ import { DriveFolder } from "@/src/components/admin/information/DriveFolder";
 import { EmergencyPerson } from "@/src/components/admin/information/EmergencyPersons";
 import { InscriptionEnd } from "@/src/components/admin/information/InscriptionEnd";
 import { RaidDate } from "@/src/components/admin/information/RaidDate";
-import { RaidInformation } from "@/src/components/admin/information/RaidInformation";
+import { RaidInformationDocument } from "@/src/components/admin/information/RaidInformationDocument";
 import { RaidPrice } from "@/src/components/admin/information/RaidPrice";
 import { RaidRules } from "@/src/components/admin/information/RaidRules";
 import { TShirtPrice } from "@/src/components/admin/information/TShirtPrice";
@@ -16,12 +16,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/src/components/ui/card";
+import { useInformation } from "@/src/hooks/useInformation";
 import { useUser } from "@/src/hooks/useUser";
 import { useRouter } from "next/navigation";
 
 const InformationPage = () => {
   const { isAdmin } = useUser();
   const router = useRouter();
+  const { information } = useInformation();
 
   if (!isAdmin() && typeof window !== "undefined") {
     const redirectUrl = new URL(window.location.href);
@@ -46,8 +48,8 @@ const InformationPage = () => {
               <RaidPrice />
               <TShirtPrice />
               <EmergencyPerson />
-              <RaidRules />
-              <RaidInformation />
+              {information && <RaidRules information={information} />}
+              {information && <RaidInformationDocument information={information} />}
             </div>
           </CardContent>
         </Card>

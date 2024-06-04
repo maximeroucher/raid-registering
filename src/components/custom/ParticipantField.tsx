@@ -27,7 +27,7 @@ import { Button } from "../ui/button";
 import { HiArrowNarrowRight, HiDownload } from "react-icons/hi";
 import { useState } from "react";
 import { ReloadIcon } from "@radix-ui/react-icons";
-import { DocumentDialog } from "../home/participantView/DocumentDialog";
+import { DocumentDialog } from "./DocumentDialog";
 import { SecurityFileDialog } from "../home/participantView/SecurityFileDialog";
 import {
   difficulties,

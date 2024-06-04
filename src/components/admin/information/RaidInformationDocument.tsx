@@ -20,50 +20,54 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../../ui/dialog";
-import { DocumentDialog } from "../../custom/DocumentDialog";
 import { RaidInformation } from "@/src/api/hyperionSchemas";
+import { DocumentDialog } from "../../custom/DocumentDialog";
 
-interface RaidRulesProps {
+interface RaidInformationDocumentProps {
   information: RaidInformation;
 }
 
-export const RaidRules = ({ information }: RaidRulesProps) => {
+export const RaidInformationDocument = ({
+  information,
+}: RaidInformationDocumentProps) => {
   const { updateInformation } = useInformation();
   const [isLoading, setIsLoading] = useState(false);
 
   const formSchema = z.object({
-    raid_rules: z.object({
-      name: z.string(),
-      id: z.string(),
-      type: z.string(),
-      updated: z.boolean(),
-    }).partial(),
+    raid_information: z
+      .object({
+        name: z.string(),
+        id: z.string(),
+        type: z.string(),
+        updated: z.boolean(),
+      })
+      .partial(),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      raid_rules: {
-        name: information.raid_rules_id ?? undefined,
-        id: information.raid_rules_id ?? undefined,
-        type: "raid_rules",
+      raid_information: {
+        name: information.raid_information_id ?? undefined,
+        id: information.raid_information_id ?? undefined,
+        type: "raid_information",
       },
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
-    if (!values.raid_rules.id) {
+    if (!values.raid_information.id) {
       setIsLoading(false);
       return;
     }
     updateInformation(
       {
-        raid_rules_id: values.raid_rules.id,
+        raid_information_id: values.raid_information.id,
       },
       () => {
         setIsLoading(false);
-        form.reset({ raid_rules: values.raid_rules });
+        form.reset({ raid_information: values.raid_information });
       },
     );
   }
@@ -74,10 +78,10 @@ export const RaidRules = ({ information }: RaidRulesProps) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <CardLayout label="Réglement du Raid">
+        <CardLayout label="Fiche d'information">
           <FormField
             control={form.control}
-            name="raid_rules"
+            name="raid_information"
             render={({ field }) => (
               <FormItem>
                 <div className="items-center gap-4">
@@ -95,7 +99,7 @@ export const RaidRules = ({ information }: RaidRulesProps) => {
                               {field.value.id ? (
                                 <span className="text-gray-500 overflow-hidden">
                                   {field.value.id
-                                    ? "Réglement du raid"
+                                    ? "Fiche d'information"
                                     : "Aucun fichier séléctionné"}
                                 </span>
                               ) : (
@@ -117,7 +121,7 @@ export const RaidRules = ({ information }: RaidRulesProps) => {
                           setIsOpen={setIsOpen}
                           setIsUploading={setIsUploading}
                           field={field}
-                          fileType="raid_rules"
+                          fileType="raid_information"
                           participantId="admin"
                           documentId={field.value?.id}
                         />
