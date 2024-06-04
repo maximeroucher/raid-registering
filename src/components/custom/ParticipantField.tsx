@@ -39,6 +39,9 @@ import {
 import { ConfirmationCheckbox } from "../home/participantView/ConfirmationCheckbox";
 import PhoneInput from "react-phone-input-2";
 import { useInformation } from "@/src/hooks/useInformation";
+import { useDocument } from "@/src/hooks/useDocument";
+import { toast } from "../ui/use-toast";
+import { LoadingButton } from "./LoadingButton";
 
 type ValueType =
   | string
@@ -92,8 +95,35 @@ export function ParticipantField<T extends ValueType>({
   participantId,
   className,
 }: ParticipantFieldProps<T>) {
+  const [isFileLoading, setIsFileLoading] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const { information } = useInformation();
+  const { refetch, setDocumentId } = useDocument();
+
+  function downloadRaidRules(documentId: string) {
+    setIsFileLoading(true);
+    setDocumentId(documentId);
+    refetch().then((response) => {
+      const data = response.data;
+      if (!data) {
+        toast({
+          title: "Erreur",
+          description: "Impossible de télécharger le fichier",
+        });
+        setIsFileLoading(false);
+        return;
+      }
+      const extension = data.type.split("/")[1];
+      const name = `Réglement_du_raid.${extension}`;
+      const url = window.URL.createObjectURL(new Blob([data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", name);
+      document.body.appendChild(link);
+      setIsFileLoading(false);
+      link.click();
+    });
+  }
 
   const valueComponent = (
     field: ControllerRenderProps<FieldValues, string>,
@@ -189,14 +219,19 @@ export function ParticipantField<T extends ValueType>({
               </DialogContent>
             </Dialog>
             {id === "raidRules" && !!information?.raid_rules_id && (
-              <Button
+              <LoadingButton
                 variant="outline"
                 className="col-span-1"
-                // onClick={(_) => downloadDocument(document)}
-              >
-                <HiDownload className="mr-2" />
-                Télécharger
-              </Button>
+                type="button"
+                onClick={(_) => downloadRaidRules(information.raid_rules_id!)}
+                isLoading={isFileLoading}
+                label={
+                  <>
+                    <HiDownload className="mr-2" />
+                    Télécharger
+                  </>
+                }
+              />
             )}
           </div>
         );
