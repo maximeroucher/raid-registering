@@ -59,6 +59,7 @@ export const RaidRules = ({ information }: RaidRulesProps) => {
     }
     updateInformation(
       {
+        ...information,
         raid_rules_id: values.raid_rules.id,
       },
       () => {

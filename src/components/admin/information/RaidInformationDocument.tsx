@@ -63,6 +63,7 @@ export const RaidInformationDocument = ({
     }
     updateInformation(
       {
+        ...information,
         raid_information_id: values.raid_information.id,
       },
       () => {
