@@ -27,7 +27,6 @@ export const DocumentDialog = ({
   documentId,
   participantId,
 }: DocumentDialogProps) => {
-  console.log("rendering document dialog", field.value);
   const {
     uploadDocument,
     getDocument,
@@ -44,13 +43,11 @@ export const DocumentDialog = ({
     docId !== documentId &&
     data?.size === undefined
   ) {
-    console.log("fetching document, setting id", field.value.id);
     setDocumentId(field.value.id);
     setIsLoading(true);
   }
 
   if (data?.size !== undefined && isLoading) {
-    console.log("setting image");
     setDocument(participantId, fileType, field.value.id, data);
     setImage(data);
     setIsLoading(false);
