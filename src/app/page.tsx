@@ -18,6 +18,8 @@ import { getDaysLeft } from "../utils/dateFormat";
 import { WarningDialog } from "../components/custom/WarningDialog";
 import { toast } from "../components/ui/use-toast";
 import { StatusDialog } from "../components/custom/StatusDialog";
+import { Button } from "../components/ui/button";
+import { RegisteringCompleteDialog } from "../components/home/RegisteringCompleteDialog";
 
 const Home = () => {
   const { isTokenQueried, token } = useAuth();
@@ -97,6 +99,12 @@ const Home = () => {
             setIsEndDialogOpened(false);
             router.replace("/");
           }}
+        />
+      )}
+      {team?.validation_progress === 100 && (
+        <RegisteringCompleteDialog
+          isOpened={isEndDialogOpened}
+          setIsOpened={setIsEndDialogOpened}
         />
       )}
       {isFetched && me === undefined && isOpened && user && (

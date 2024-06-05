@@ -109,6 +109,7 @@ export function ParticipantField<T extends ValueType>({
         toast({
           title: "Erreur",
           description: "Impossible de télécharger le fichier",
+          variant: "destructive",
         });
         setIsFileLoading(false);
         return;

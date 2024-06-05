@@ -12,7 +12,7 @@ interface StatusDialogProps {
   isOpened: boolean;
   setIsOpened: (value: boolean) => void;
   title: string;
-  description: string;
+  description: string | JSX.Element;
   width?: string;
   callback: () => void;
   status?: keyof typeof DialogStatus;
