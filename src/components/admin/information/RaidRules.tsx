@@ -9,7 +9,7 @@ import {
   FormMessage,
 } from "../../ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { ControllerRenderProps, FieldValues, useForm } from "react-hook-form";
 import { z } from "zod";
 import { useInformation } from "@/src/hooks/useInformation";
 import { LoadingButton } from "../../custom/LoadingButton";
@@ -32,12 +32,14 @@ export const RaidRules = ({ information }: RaidRulesProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const formSchema = z.object({
-    raid_rules: z.object({
-      name: z.string(),
-      id: z.string(),
-      type: z.string(),
-      updated: z.boolean(),
-    }).partial(),
+    raid_rules: z
+      .object({
+        name: z.string(),
+        id: z.string(),
+        type: z.string(),
+        updated: z.boolean(),
+      })
+      .partial(),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -93,7 +95,7 @@ export const RaidRules = ({ information }: RaidRulesProps) => {
                         >
                           <div className="flex flex-row items-start w-full">
                             <>
-                              {field.value.id ? (
+                              {field.value?.id ? (
                                 <span className="text-gray-500 overflow-hidden">
                                   {field.value.id
                                     ? "Réglement du raid"
@@ -117,7 +119,12 @@ export const RaidRules = ({ information }: RaidRulesProps) => {
                         <DocumentDialog
                           setIsOpen={setIsOpen}
                           setIsUploading={setIsUploading}
-                          field={field}
+                          field={
+                            field as unknown as ControllerRenderProps<
+                              FieldValues,
+                              string
+                            >
+                          }
                           fileType="raid_rules"
                           participantId="admin"
                           documentId={field.value?.id}
