@@ -3,24 +3,19 @@ import {
   usePatchRaidDrive,
 } from "@/src/api/hyperionComponents";
 import { RaidDriveFoldersCreation } from "../api/hyperionSchemas";
-import { useAuth } from "./useAuth";
-import { toast } from "../components/ui/use-toast";
+import { useUser } from "./useUser";
 
 export const useDriveFolder = () => {
-  const { token, userId } = useAuth();
+  const { me } = useUser();
 
   const {
     data: driveFolder,
     isLoading,
     refetch: refetchDriveFolder,
   } = useGetRaidDrive(
+    {},
     {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
-    {
-      enabled: userId !== null,
+      enabled: me?.id !== undefined,
       retry: 0,
       queryHash: "getRaidDriveFolder",
     },
@@ -36,9 +31,6 @@ export const useDriveFolder = () => {
     mutateUpdateDriveFolder(
       {
         body: driveFolder,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       },
       {
         // Not using onSucess because of : https://github.com/TanStack/query/discussions/2878

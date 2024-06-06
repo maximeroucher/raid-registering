@@ -9,9 +9,7 @@ const RecoverPage = () => {
   return showRecover ? (
     <AskMail onCodeReceived={() => setShowRecover(false)} />
   ) : (
-    <RecoverPassword onCodeNotReceived={
-      () => setShowRecover(true)
-    }/>
+    <RecoverPassword onCodeNotReceived={() => setShowRecover(true)} />
   );
 };
 

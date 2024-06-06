@@ -1,9 +1,7 @@
 import { useGetRaidTeams } from "@/src/api/hyperionComponents";
 import { useUser } from "./useUser";
-import { useAuth } from "./useAuth";
 
 export const useTeams = () => {
-  const { token, isTokenExpired } = useAuth();
   const { isAdmin } = useUser();
 
   const {
@@ -11,13 +9,9 @@ export const useTeams = () => {
     isLoading,
     refetch: refetchTeams,
   } = useGetRaidTeams(
+    {},
     {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
-    {
-      enabled: isAdmin() && !isTokenExpired(),
+      enabled: isAdmin(),
       retry: 0,
       queryHash: "getTeams",
     },

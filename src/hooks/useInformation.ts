@@ -3,24 +3,19 @@ import {
   usePatchRaidInformation,
 } from "@/src/api/hyperionComponents";
 import { RaidInformation } from "../api/hyperionSchemas";
-import { useAuth } from "./useAuth";
-import { toast } from "../components/ui/use-toast";
+import { useUser } from "./useUser";
 
 export const useInformation = () => {
-  const { token, userId } = useAuth();
+  const { me } = useUser();
 
   const {
     data: information,
     isLoading,
     refetch: refetchInformation,
   } = useGetRaidInformation(
+    {},
     {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
-    {
-      enabled: userId !== null,
+      enabled: me?.id !== undefined,
       retry: 0,
       queryHash: "getRaidInformation",
     },
@@ -36,9 +31,6 @@ export const useInformation = () => {
     mutateUpdateInformation(
       {
         body: information,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       },
       {
         // Not using onSucess because of : https://github.com/TanStack/query/discussions/2878

@@ -14,7 +14,7 @@ export const useCodeVerifierStore = create<codeVerifierStore>()(
       (set) => ({
         codeVerifier: undefined,
         setCodeVerifier: (codeVerifier?: string) => {
-          set({ codeVerifier: codeVerifier, isLoading: true});
+          set({ codeVerifier: codeVerifier, isLoading: true });
         },
         resetCodeVerifier: () => {
           set({ codeVerifier: undefined, isLoading: false });

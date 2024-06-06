@@ -2,29 +2,23 @@ import { useUser } from "./useUser";
 import {
   useDeleteRaidTeamsTeamId,
   useGetRaidTeamsTeamId,
-  usePostRaidTeamsMerge,
   usePostRaidTeamsTeamIdKickParticipantId,
 } from "../api/hyperionComponents";
-import { useAuth } from "./useAuth";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "../components/ui/use-toast";
 
 export const useAdminTeam = (teamId: string) => {
-  const { token, userId, isTokenExpired } = useAuth();
-  const { isAdmin } = useUser();
+  const { me, isAdmin } = useUser();
   const queryClient = useQueryClient();
 
   const { data: team, refetch: refetchTeam } = useGetRaidTeamsTeamId(
     {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
       pathParams: {
         teamId: teamId,
       },
     },
     {
-      enabled: userId !== null && isAdmin() && !isTokenExpired(),
+      enabled: me?.id !== undefined && isAdmin(),
       retry: 0,
       queryHash: "getTeamById",
     },
@@ -36,9 +30,6 @@ export const useAdminTeam = (teamId: string) => {
   const kickMember = (participantId: string, callback: () => void) => {
     mutateKickMember(
       {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
         pathParams: {
           teamId,
           participantId,
@@ -72,9 +63,6 @@ export const useAdminTeam = (teamId: string) => {
   const deleteTeam = (callback: () => void) => {
     mutateDeleteTeam(
       {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
         pathParams: {
           teamId,
         },

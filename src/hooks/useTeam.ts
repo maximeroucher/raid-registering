@@ -6,12 +6,10 @@ import {
 import { TeamBase, TeamUpdate } from "../api/hyperionSchemas";
 import { useQueryClient } from "@tanstack/react-query";
 import { useUser } from "./useUser";
-import { useAuth } from "./useAuth";
 import { useParticipant } from "./useParticipant";
 import { toast } from "../components/ui/use-toast";
 
 export const useTeam = () => {
-  const { token, userId, isTokenExpired } = useAuth();
   const { me } = useParticipant();
   const { isAdmin } = useUser();
   const queryClient = useQueryClient();
@@ -22,16 +20,12 @@ export const useTeam = () => {
     refetch: refetchTeam,
   } = useGetRaidParticipantsParticipantIdTeam(
     {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
       pathParams: {
-        participantId: userId!,
+        participantId: me!.id!,
       },
     },
     {
-      enabled:
-        userId !== null && !isAdmin() && !isTokenExpired() && me !== undefined,
+      enabled: me?.id !== undefined && !isAdmin() && me !== undefined,
       retry: 0,
       queryHash: "getTeamByParticipantId",
     },
@@ -47,9 +41,6 @@ export const useTeam = () => {
     mutateCreateTeam(
       {
         body: team,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       },
       {
         onSuccess(data, variables, context) {
@@ -64,7 +55,8 @@ export const useTeam = () => {
           console.log(error);
           toast({
             title: "Erreur lors de la création de l'équipe",
-            description: "Une erreur est survenue, veuillez réessayer plus tard",
+            description:
+              "Une erreur est survenue, veuillez réessayer plus tard",
             variant: "destructive",
           });
         },
@@ -86,9 +78,7 @@ export const useTeam = () => {
     mutateUpdateTeam(
       {
         body: team,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+
         pathParams: {
           teamId,
         },

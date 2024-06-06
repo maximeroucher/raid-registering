@@ -3,12 +3,9 @@ import {
   usePostRaidTeamsJoinToken,
 } from "@/src/api/hyperionComponents";
 import { InviteToken } from "../api/hyperionSchemas";
-import { useAuth } from "./useAuth";
 import { toast } from "../components/ui/use-toast";
 
 export const useInviteToken = () => {
-  const { token } = useAuth();
-
   const {
     mutate: mutateCreateInviteToken,
     isPending: isCreationLoading,
@@ -21,9 +18,6 @@ export const useInviteToken = () => {
   ) => {
     mutateCreateInviteToken(
       {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
         pathParams: {
           teamId: teamId,
         },
@@ -45,9 +39,6 @@ export const useInviteToken = () => {
   const joinTeam = (joinToken: string, callback: () => void) => {
     mutateJoinTeam(
       {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
         pathParams: {
           token: joinToken,
         },

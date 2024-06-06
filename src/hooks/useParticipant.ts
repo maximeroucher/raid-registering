@@ -7,12 +7,12 @@ import { useQueryClient } from "@tanstack/react-query";
 import { ParticipantBase, ParticipantUpdate } from "../api/hyperionSchemas";
 import { useParticipantStore } from "../stores/particpant";
 import { useUser } from "./useUser";
-import { useAuth } from "./useAuth";
 import { toast } from "../components/ui/use-toast";
+import { useTokenStore } from "../stores/token";
 
 export const useParticipant = () => {
-  const { token, userId, isTokenExpired } = useAuth();
   const { isAdmin } = useUser();
+  const { userId } = useTokenStore();
   const queryClient = useQueryClient();
   const { participant, setParticipant } = useParticipantStore();
 
@@ -23,19 +23,12 @@ export const useParticipant = () => {
     refetch,
   } = useGetRaidParticipantsParticipantId(
     {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
       pathParams: {
         participantId: userId!,
       },
     },
     {
-      enabled:
-        userId !== null &&
-        participant === undefined &&
-        !isAdmin() &&
-        !isTokenExpired(),
+      enabled: userId !== null && participant === undefined && !isAdmin(),
       retry: 0,
       queryHash: "getParticipantById",
     },
@@ -54,9 +47,6 @@ export const useParticipant = () => {
     mutateCreateParticipant(
       {
         body: participant,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       },
       {
         onSuccess: () => {
@@ -78,7 +68,7 @@ export const useParticipant = () => {
               "Une erreur est survenue, veuillez réessayer plus tard",
             variant: "destructive",
           });
-        }
+        },
       },
     );
   };
@@ -97,9 +87,7 @@ export const useParticipant = () => {
     mutateUpdateParticipant(
       {
         body: participant,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+
         pathParams: {
           participantId: participantId,
         },
@@ -116,7 +104,7 @@ export const useParticipant = () => {
     );
   };
 
-  if (me !== undefined && participant !== me && token !== null) {
+  if (me !== undefined && participant !== me) {
     setParticipant(me);
   }
 

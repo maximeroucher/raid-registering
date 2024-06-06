@@ -4,7 +4,6 @@ import { EmptyParticipantCard } from "../components/home/participantView/EmptyPa
 import { ParticipantCard } from "../components/home/participantView/ParicipantCard";
 import { TeamCard } from "../components/home/teamCard/TeamCard";
 import { TopBar } from "../components/home/TopBar";
-import { useAuth } from "../hooks/useAuth";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTeam } from "../hooks/useTeam";
 import { CreateParticipant } from "../components/home/CreateParticipant";
@@ -22,7 +21,6 @@ import { Button } from "../components/ui/button";
 import { RegisteringCompleteDialog } from "../components/home/RegisteringCompleteDialog";
 
 const Home = () => {
-  const { isTokenQueried, token } = useAuth();
   const { me, isFetched, refetch } = useParticipant();
   const { me: user, isAdmin } = useUser();
   const { team, createTeam, refetchTeam, isLoading: isTeamLoading } = useTeam();
@@ -47,9 +45,9 @@ const Home = () => {
     router.replace("/");
   }
 
-  if (isTokenQueried && token === null) {
-    router.replace("/login");
-  }
+  // if (token === null) {
+  //   router.replace("/login");
+  // }
 
   if (isAdmin() && typeof window !== "undefined") {
     const redirection = searchParams.get("redirect");

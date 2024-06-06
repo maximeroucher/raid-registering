@@ -1,9 +1,8 @@
-import { useAuth } from "@/src/hooks/useAuth";
 import { HiLogout } from "react-icons/hi";
 import { Button } from "../../ui/button";
 
 export const LogoutButton = () => {
-  const { logout } = useAuth();
+  function logout() {}
 
   return (
     <Button

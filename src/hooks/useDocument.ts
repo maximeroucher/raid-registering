@@ -4,19 +4,17 @@ import {
   useGetRaidDocumentDocumentId,
   usePostRaidDocumentDocumentIdValidate,
 } from "../api/hyperionComponents";
-import { DocumentBase, DocumentCreation, DocumentValidation } from "../api/hyperionSchemas";
+import { DocumentBase, DocumentValidation } from "../api/hyperionSchemas";
 import axios from "axios";
 import { useDocumentsStore } from "../stores/documents";
 import { useState } from "react";
-import { useAuth } from "./useAuth";
 import { toast } from "../components/ui/use-toast";
 
 export const useDocument = () => {
   const backUrl: string =
     process.env.NEXT_PUBLIC_BACKEND_URL || "https://hyperion.myecl.fr";
   const queryClient = useQueryClient();
-  const { token, userId } = useAuth();
-  const { documents, setDocument } = useDocumentsStore();
+  const { documents } = useDocumentsStore();
   const [documentId, setDocumentId] = useState<string>("");
 
   const { mutate: mutateAssignDocument } =
@@ -29,9 +27,6 @@ export const useDocument = () => {
   ) => {
     mutateAssignDocument(
       {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
         pathParams: {
           participantId: participantId,
         },
@@ -60,7 +55,6 @@ export const useDocument = () => {
       .post(`${backUrl}/raid/document`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
@@ -86,9 +80,6 @@ export const useDocument = () => {
 
   const { data, refetch, isPending } = useGetRaidDocumentDocumentId<File>(
     {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
       pathParams: {
         documentId: documentId!,
       },
@@ -108,9 +99,6 @@ export const useDocument = () => {
   ) => {
     mutateValidateDocument(
       {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
         pathParams: {
           documentId: documentId,
         },
