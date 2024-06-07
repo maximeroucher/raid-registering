@@ -21,7 +21,7 @@ export const useTeam = () => {
   } = useGetRaidParticipantsParticipantIdTeam(
     {
       pathParams: {
-        participantId: me!.id!,
+        participantId: me?.id ?? "",
       },
     },
     {
