@@ -19,11 +19,13 @@ import { toast } from "../components/ui/use-toast";
 import { StatusDialog } from "../components/custom/StatusDialog";
 import { Button } from "../components/ui/button";
 import { RegisteringCompleteDialog } from "../components/home/RegisteringCompleteDialog";
+import { useTokenStore } from "../stores/token";
 
 const Home = () => {
   const { me, isFetched, refetch } = useParticipant();
   const { me: user, isAdmin } = useUser();
   const { team, createTeam, refetchTeam, isLoading: isTeamLoading } = useTeam();
+  const { token } = useTokenStore();
   const [isOpened, setIsOpened] = useState(false);
   const [isEndDialogOpened, setIsEndDialogOpened] = useState(true);
   const searchParams = useSearchParams();
@@ -45,9 +47,9 @@ const Home = () => {
     router.replace("/");
   }
 
-  // if (token === null) {
-  //   router.replace("/login");
-  // }
+  if (token === null) {
+    router.replace("/login");
+  }
 
   if (isAdmin() && typeof window !== "undefined") {
     const redirection = searchParams.get("redirect");

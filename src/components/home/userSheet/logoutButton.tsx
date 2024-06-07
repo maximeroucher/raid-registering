@@ -1,8 +1,17 @@
 import { HiLogout } from "react-icons/hi";
 import { Button } from "../../ui/button";
+import { useRouter } from "next/navigation";
+import { useTokenStore } from "@/src/stores/token";
 
 export const LogoutButton = () => {
-  function logout() {}
+  const { setToken, setRefreshToken } = useTokenStore();
+  const router = useRouter();
+
+  function logout() {
+    setToken(null);
+    setRefreshToken(null);
+    router.push("/");
+  }
 
   return (
     <Button
