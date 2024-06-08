@@ -1,10 +1,8 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { usePostRaidTeamsMerge } from "../api/hyperionComponents";
-import { useAuth } from "./useAuth";
 import { toast } from "../components/ui/use-toast";
 
 export const useMergeTeams = () => {
-  const { token } = useAuth();
   const queryClient = useQueryClient();
   const { mutate: mutateMergeTeams, isPending: isMergeLoading } =
     usePostRaidTeamsMerge({});
@@ -15,9 +13,6 @@ export const useMergeTeams = () => {
   ) => {
     mutateMergeTeams(
       {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
         queryParams: {
           team1_id: team1Id,
           team2_id: team2Id,

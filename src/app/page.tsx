@@ -4,7 +4,6 @@ import { EmptyParticipantCard } from "../components/home/participantView/EmptyPa
 import { ParticipantCard } from "../components/home/participantView/ParicipantCard";
 import { TeamCard } from "../components/home/teamCard/TeamCard";
 import { TopBar } from "../components/home/TopBar";
-import { useAuth } from "../hooks/useAuth";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTeam } from "../hooks/useTeam";
 import { CreateParticipant } from "../components/home/CreateParticipant";
@@ -20,12 +19,13 @@ import { toast } from "../components/ui/use-toast";
 import { StatusDialog } from "../components/custom/StatusDialog";
 import { Button } from "../components/ui/button";
 import { RegisteringCompleteDialog } from "../components/home/RegisteringCompleteDialog";
+import { useTokenStore } from "../stores/token";
 
 const Home = () => {
-  const { isTokenQueried, token } = useAuth();
   const { me, isFetched, refetch } = useParticipant();
   const { me: user, isAdmin } = useUser();
   const { team, createTeam, refetchTeam, isLoading: isTeamLoading } = useTeam();
+  const { token } = useTokenStore();
   const [isOpened, setIsOpened] = useState(false);
   const [isEndDialogOpened, setIsEndDialogOpened] = useState(true);
   const searchParams = useSearchParams();
@@ -47,7 +47,7 @@ const Home = () => {
     router.replace("/");
   }
 
-  if (isTokenQueried && token === null) {
+  if (token === null) {
     router.replace("/login");
   }
 

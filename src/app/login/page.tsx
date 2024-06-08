@@ -14,14 +14,15 @@ import {
 import MyECLButton from "../../components/login/MyECLButton";
 import Link from "next/link";
 
-const Login = () => {
+function Login() {
   return (
     <div className="flex [&>div]:w-full h-screen">
       <Card className="rounded-xl border bg-card text-card-foreground shadow max-w-[700px] m-auto text-zinc-700">
         <CardHeader>
           <CardTitle>Se connecter</CardTitle>
           <CardDescription>
-            Si vous possédez déjà un compte MyECL, vous pouvez vous connecter avec.
+            Si vous possédez déjà un compte MyECL, vous pouvez vous connecter
+            avec.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -42,6 +43,6 @@ const Login = () => {
       </Card>
     </div>
   );
-};
+}
 
 export default Login;

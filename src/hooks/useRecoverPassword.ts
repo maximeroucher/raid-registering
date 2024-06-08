@@ -7,11 +7,8 @@ import {
   ResetPasswordRequest,
 } from "../api/hyperionSchemas";
 import { toast } from "../components/ui/use-toast";
-import { useAuth } from "./useAuth";
 
 export const useRecoverPassword = () => {
-  const { token } = useAuth();
-
   const { mutate: mutateRecoverPassword, isPending: isRecoverLoading } =
     usePostUsersRecover();
 
@@ -21,9 +18,6 @@ export const useRecoverPassword = () => {
     };
     mutateRecoverPassword(
       {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
         body: body,
       },
       {
@@ -48,9 +42,6 @@ export const useRecoverPassword = () => {
     };
     mutateResetPassword(
       {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
         body: body,
       },
       {

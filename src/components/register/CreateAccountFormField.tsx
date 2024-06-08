@@ -11,14 +11,16 @@ interface CreateAccountFormFieldProps {
   form: any;
   label: string;
   name: string;
-  render: (field: ControllerRenderProps<FieldValues, string>) => React.ReactNode;
+  render: (
+    field: ControllerRenderProps<FieldValues, string>,
+  ) => React.ReactNode;
 }
 
 export const CreateAccountFormField = ({
   form,
   label,
   name,
-    render,
+  render,
 }: CreateAccountFormFieldProps) => {
   return (
     <FormField
@@ -27,9 +29,7 @@ export const CreateAccountFormField = ({
       render={({ field }) => (
         <FormItem className="grid gap-2">
           <FormLabel>{label}</FormLabel>
-          <FormControl>
-            {render(field)}
-          </FormControl>
+          <FormControl>{render(field)}</FormControl>
           <FormMessage />
         </FormItem>
       )}

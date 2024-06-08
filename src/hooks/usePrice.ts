@@ -1,23 +1,19 @@
 import { useGetRaidPrice, usePatchRaidPrice } from "../api/hyperionComponents";
 import { RaidPrice } from "../api/hyperionSchemas";
 import { toast } from "../components/ui/use-toast";
-import { useAuth } from "./useAuth";
+import { useUser } from "./useUser";
 
 export const usePrice = () => {
-  const { token, userId } = useAuth();
+  const { me } = useUser();
 
   const {
     data: price,
     isLoading,
     refetch: refetchPrice,
   } = useGetRaidPrice(
+    {},
     {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
-    {
-      enabled: userId !== null,
+      enabled: me?.id !== undefined,
       retry: 0,
       queryHash: "getRaidPrice",
     },
@@ -30,9 +26,6 @@ export const usePrice = () => {
     mutateUpdatePrice(
       {
         body: price,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       },
       {
         // Not using onSucess because of : https://github.com/TanStack/query/discussions/2878

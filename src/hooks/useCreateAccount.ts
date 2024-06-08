@@ -6,12 +6,8 @@ import {
   CoreUserCreateRequest,
   CoreUserActivateRequest,
 } from "../api/hyperionSchemas";
-import { toast } from "../components/ui/use-toast";
-import { useAuth } from "./useAuth";
 
 export const useAccountCreation = () => {
-  const { token } = useAuth();
-
   const { mutate: mutateRegister, isPending: isRegisteringLoading } =
     usePostUsersCreate();
 
@@ -22,9 +18,6 @@ export const useAccountCreation = () => {
     };
     mutateRegister(
       {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
         body: body,
       },
       {
@@ -44,9 +37,6 @@ export const useAccountCreation = () => {
   ) => {
     mutateActivateAccount(
       {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
         body: body,
       },
       {

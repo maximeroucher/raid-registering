@@ -1,5 +1,6 @@
 import type { QueryKey, UseQueryOptions } from "@tanstack/react-query";
 import { QueryOperation } from "./hyperionComponents";
+import { useToken } from "../hooks/useToken";
 
 export type HyperionContext = {
   fetcherOptions: {
@@ -11,6 +12,7 @@ export type HyperionContext = {
      * Query params to inject in the fetcher
      */
     queryParams?: {};
+    getToken?: () => Promise<string | null | undefined>;
   };
   queryOptions: {
     /**
@@ -41,8 +43,13 @@ export function useHyperionContext<
     "queryKey" | "queryFn"
   >,
 ): HyperionContext {
+
+  const { getToken } = useToken();
+
   return {
-    fetcherOptions: {},
+    fetcherOptions: {
+      getToken
+    },
     queryOptions: {},
     queryKeyFn,
   };

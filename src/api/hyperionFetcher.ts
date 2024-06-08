@@ -33,6 +33,7 @@ export async function hyperionFetch<
   pathParams,
   queryParams,
   signal,
+  getToken,
 }: HyperionFetcherOptions<
   TBody,
   THeaders,
@@ -59,6 +60,13 @@ export async function hyperionFetch<
       delete requestHeaders["Content-Type"];
     }
 
+    if (getToken) {
+      const token = await getToken();
+      if (token) {
+        requestHeaders["Authorization"]= `Bearer ${token}`;
+      }
+    }
+    
     const response = await window.fetch(
       `${baseUrl}${resolveUrl(url, queryParams, pathParams)}`,
       {
