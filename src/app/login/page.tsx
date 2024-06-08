@@ -13,10 +13,6 @@ import {
 } from "@/src/components/ui/card";
 import MyECLButton from "../../components/login/MyECLButton";
 import Link from "next/link";
-import * as auth from "oauth4webapi";
-import { useRouter } from "next/navigation";
-import { useCodeVerifierStore } from "@/src/stores/codeVerifier";
-import { LoadingButton } from "@/src/components/custom/LoadingButton";
 
 function Login() {
   return (

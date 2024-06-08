@@ -29,6 +29,7 @@ const MyECLButton = () => {
 
   if (code && !isLoading && typeof window !== "undefined" && codeVerifier) {
     login(new URL(window.location.href));
+    router.replace("/login");
   }
 
   async function login(url: URL) {
