@@ -64,7 +64,8 @@ export const useTeam = () => {
           console.log(error);
           toast({
             title: "Erreur lors de la création de l'équipe",
-            description: "Une erreur est survenue, veuillez réessayer plus tard",
+            description:
+              "Une erreur est survenue, veuillez réessayer plus tard",
             variant: "destructive",
           });
         },

@@ -19,6 +19,7 @@ import { useDocument } from "@/src/hooks/useDocument";
 import { ParticipantField, ValueTypes } from "../../custom/ParticipantField";
 import { getLabelFromValue, situations } from "@/src/infra/comboboxValues";
 import { getSituationLabel, getSituationTitle } from "@/src/infra/teamUtils";
+import { ca } from "date-fns/locale";
 
 interface ViewEditParticipantProps {
   participant: Participant;
@@ -33,7 +34,6 @@ export const ViewEditParticipant = ({
 }: ViewEditParticipantProps) => {
   const { updateParticipant, isUpdateLoading } = useParticipant();
   const { refetchTeam } = useTeam();
-  const { assignDocument } = useDocument();
   const formSchema = z
     .object({
       address: z
@@ -238,121 +238,109 @@ export const ViewEditParticipant = ({
       values.parentAuthorization,
     ].filter((doc) => doc.updated);
 
-    let remainingDoc: number = documentToUpdate.length;
-
+    const updatedParticipant: ParticipantUpdate = {
+      bike_size: (values.bikeSize?.toUpperCase() as Size) ?? null,
+      t_shirt_size:
+        (values.tShirtSize === "no"
+          ? null
+          : (values.tShirtSize?.toUpperCase() as Size)) ?? null,
+      situation: switchSituation(values),
+      address: values.address ?? null,
+      diet: values.diet ?? null,
+      attestation_on_honour: values.attestationHonour,
+    };
     for (const doc of documentToUpdate) {
-      if (doc) {
-        assignDocument(
-          {
-            id: doc.id!,
-            name: doc.name!,
-            type: doc.type!,
-          },
-          participant.id!,
-          () => {
-            remainingDoc--;
-            if (remainingDoc === 0) {
-              patchParticipant()
-            }
-          },
-        );
-      } else {
-        remainingDoc--;
+      switch (doc.type) {
+        case "idCard":
+          updatedParticipant["id_card_id"] = doc.id;
+        case "medicalCertificate":
+          updatedParticipant["medical_certificate_id"] = doc.id;
+        case "parentAuthorization":
+          updatedParticipant["student_card_id"] = doc.id;
+        case "raidRules":
+          updatedParticipant["raid_rules_id"] = doc.id;
+        case "studentCard":
+          updatedParticipant["parent_authorization_id"] = doc.id;
       }
     }
-
-    function patchParticipant() {
-      const updatedParticipant: ParticipantUpdate = {
-        bike_size: (values.bikeSize?.toUpperCase() as Size) ?? null,
-        t_shirt_size:
-          (values.tShirtSize === "no"
-            ? null
-            : (values.tShirtSize?.toUpperCase() as Size)) ?? null,
-        situation: switchSituation(values),
-        address: values.address ?? null,
-        diet: values.diet ?? null,
-        attestation_on_honour: values.attestationHonour,
-      };
-      updateParticipant(updatedParticipant, participant.id, () => {
-        toast({
-          title: "Profil mis à jour",
-          description: "Vos informations ont été mises à jour avec succès",
-        });
-        refetchTeam();
-        setIsEdit(!isEdit);
-        form.reset({
-          address: values.address ?? undefined,
-          bikeSize: values.bikeSize?.toLowerCase() ?? undefined,
-          tShirtSize: values.tShirtSize?.toLowerCase() ?? undefined,
-          situation: getSituationLabel(values.situation ?? undefined),
-          other:
-            getSituationLabel(values.situation ?? undefined) === "other"
-              ? getSituationTitle(values.situation ?? undefined)
-              : undefined,
-          otherSchool:
-            getSituationLabel(values.situation ?? undefined) === "otherschool"
-              ? getSituationTitle(values.situation ?? undefined)
-              : undefined,
-          company:
-            getSituationLabel(values.situation ?? undefined) ===
-            "corporatepartner"
-              ? getSituationTitle(values.situation ?? undefined)
-              : undefined,
-          diet: values.diet ?? undefined,
-          idCard: {
-            name: values.idCard?.name ?? undefined,
-            id: values.idCard?.id ?? undefined,
-            type: "idCard",
-          },
-          medicalCertificate: {
-            name: values.medicalCertificate?.name ?? undefined,
-            id: values.medicalCertificate?.id ?? undefined,
-            type: "medicalCertificate",
-          },
-          studentCard: {
-            name: values.studentCard?.name ?? undefined,
-            id: values.studentCard?.id ?? undefined,
-            type: "studentCard",
-          },
-          raidRules: {
-            name: values.raidRules?.name ?? undefined,
-            id: values.raidRules?.id ?? undefined,
-            type: "raidRules",
-          },
-          parentAuthorization: {
-            name: values.parentAuthorization?.name ?? undefined,
-            id: values.parentAuthorization?.id ?? undefined,
-            type: "parentAuthorization",
-          },
-          securityFile: {
-            allergy: values?.securityFile?.allergy ?? undefined,
-            asthma: values?.securityFile?.asthma ?? false,
-            intensive_care_unit:
-              values?.securityFile?.intensive_care_unit ?? false,
-            intensive_care_unit_when:
-              values?.securityFile?.intensive_care_unit_when ?? undefined,
-            ongoing_treatment:
-              values?.securityFile?.ongoing_treatment ?? undefined,
-            sicknesses: values?.securityFile?.sicknesses ?? undefined,
-            hospitalization: values?.securityFile?.hospitalization ?? undefined,
-            surgical_operation:
-              values?.securityFile?.surgical_operation ?? undefined,
-            trauma: values?.securityFile?.trauma ?? undefined,
-            family: values?.securityFile?.family ?? undefined,
-            id:
-              values?.securityFile?.id ?? participant?.security_file?.id ?? "",
-            emergency_person_name:
-              values?.securityFile?.emergency_person_name ?? undefined,
-            emergency_person_firstname:
-              values?.securityFile?.emergency_person_firstname ?? undefined,
-            emergency_person_phone:
-              values?.securityFile?.emergency_person_phone ?? undefined,
-            validation: values?.securityFile?.validation ?? undefined,
-          },
-          attestationHonour: values.attestationHonour,
-        });
+    updateParticipant(updatedParticipant, participant.id, () => {
+      toast({
+        title: "Profil mis à jour",
+        description: "Vos informations ont été mises à jour avec succès",
       });
-    }
+      refetchTeam();
+      setIsEdit(!isEdit);
+      form.reset({
+        address: values.address ?? undefined,
+        bikeSize: values.bikeSize?.toLowerCase() ?? undefined,
+        tShirtSize: values.tShirtSize?.toLowerCase() ?? undefined,
+        situation: getSituationLabel(values.situation ?? undefined),
+        other:
+          getSituationLabel(values.situation ?? undefined) === "other"
+            ? getSituationTitle(values.situation ?? undefined)
+            : undefined,
+        otherSchool:
+          getSituationLabel(values.situation ?? undefined) === "otherschool"
+            ? getSituationTitle(values.situation ?? undefined)
+            : undefined,
+        company:
+          getSituationLabel(values.situation ?? undefined) ===
+          "corporatepartner"
+            ? getSituationTitle(values.situation ?? undefined)
+            : undefined,
+        diet: values.diet ?? undefined,
+        idCard: {
+          name: values.idCard?.name ?? undefined,
+          id: values.idCard?.id ?? undefined,
+          type: "idCard",
+        },
+        medicalCertificate: {
+          name: values.medicalCertificate?.name ?? undefined,
+          id: values.medicalCertificate?.id ?? undefined,
+          type: "medicalCertificate",
+        },
+        studentCard: {
+          name: values.studentCard?.name ?? undefined,
+          id: values.studentCard?.id ?? undefined,
+          type: "studentCard",
+        },
+        raidRules: {
+          name: values.raidRules?.name ?? undefined,
+          id: values.raidRules?.id ?? undefined,
+          type: "raidRules",
+        },
+        parentAuthorization: {
+          name: values.parentAuthorization?.name ?? undefined,
+          id: values.parentAuthorization?.id ?? undefined,
+          type: "parentAuthorization",
+        },
+        securityFile: {
+          allergy: values?.securityFile?.allergy ?? undefined,
+          asthma: values?.securityFile?.asthma ?? false,
+          intensive_care_unit:
+            values?.securityFile?.intensive_care_unit ?? false,
+          intensive_care_unit_when:
+            values?.securityFile?.intensive_care_unit_when ?? undefined,
+          ongoing_treatment:
+            values?.securityFile?.ongoing_treatment ?? undefined,
+          sicknesses: values?.securityFile?.sicknesses ?? undefined,
+          hospitalization: values?.securityFile?.hospitalization ?? undefined,
+          surgical_operation:
+            values?.securityFile?.surgical_operation ?? undefined,
+          trauma: values?.securityFile?.trauma ?? undefined,
+          family: values?.securityFile?.family ?? undefined,
+          id: values?.securityFile?.id ?? participant?.security_file?.id ?? "",
+          emergency_person_name:
+            values?.securityFile?.emergency_person_name ?? undefined,
+          emergency_person_firstname:
+            values?.securityFile?.emergency_person_firstname ?? undefined,
+          emergency_person_phone:
+            values?.securityFile?.emergency_person_phone ?? undefined,
+          validation: values?.securityFile?.validation ?? undefined,
+        },
+        attestationHonour: values.attestationHonour,
+      });
+    });
   }
 
   function switchSituation(values: z.infer<typeof formSchema>) {

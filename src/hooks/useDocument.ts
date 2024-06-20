@@ -1,10 +1,9 @@
 import { useQueryClient } from "@tanstack/react-query";
 import {
-  usePostRaidParticipantParticipantIdDocument,
   useGetRaidDocumentDocumentId,
   usePostRaidDocumentDocumentIdValidate,
 } from "../api/hyperionComponents";
-import { DocumentBase, DocumentCreation, DocumentValidation } from "../api/hyperionSchemas";
+import { DocumentValidation } from "../api/hyperionSchemas";
 import axios from "axios";
 import { useDocumentsStore } from "../stores/documents";
 import { useState } from "react";
@@ -15,40 +14,9 @@ export const useDocument = () => {
   const backUrl: string =
     process.env.NEXT_PUBLIC_BACKEND_URL || "https://hyperion.myecl.fr";
   const queryClient = useQueryClient();
-  const { token, userId } = useAuth();
-  const { documents, setDocument } = useDocumentsStore();
+  const { token } = useAuth();
+  const { documents } = useDocumentsStore();
   const [documentId, setDocumentId] = useState<string>("");
-
-  const { mutate: mutateAssignDocument } =
-    usePostRaidParticipantParticipantIdDocument();
-
-  const assignDocument = (
-    file: DocumentBase,
-    participantId: string,
-    callback: () => void,
-  ) => {
-    mutateAssignDocument(
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        pathParams: {
-          participantId: participantId,
-        },
-        body: file,
-      },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
-            predicate: (query) => {
-              return query.queryHash === "getTeamByParticipantId";
-            },
-          });
-          callback();
-        },
-      },
-    );
-  };
 
   const uploadDocument = (
     file: File,
@@ -133,7 +101,6 @@ export const useDocument = () => {
   };
 
   return {
-    assignDocument,
     uploadDocument,
     getDocument,
     data,

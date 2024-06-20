@@ -21,7 +21,8 @@ const Login = () => {
         <CardHeader>
           <CardTitle>Se connecter</CardTitle>
           <CardDescription>
-            Si vous possédez déjà un compte MyECL, vous pouvez vous connecter avec.
+            Si vous possédez déjà un compte MyECL, vous pouvez vous connecter
+            avec.
           </CardDescription>
         </CardHeader>
         <CardContent>

@@ -3,7 +3,7 @@
 import { withPlausibleProxy } from "next-plausible";
 
 const nextConfig = {
-  output: 'export',
+  output: "export",
   webpack: (config, { isServer }) => {
     config.resolve.alias.canvas = false;
     return config;
