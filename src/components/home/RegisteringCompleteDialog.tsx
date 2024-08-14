@@ -29,7 +29,7 @@ export const RegisteringCompleteDialog = ({
         toast({
           title: "Erreur",
           description: "Impossible de télécharger le fichier",
-          variant: "destructive"
+          variant: "destructive",
         });
         setIsFileLoading(false);
         return;

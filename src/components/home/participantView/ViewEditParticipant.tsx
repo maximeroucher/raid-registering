@@ -19,6 +19,7 @@ import { useDocument } from "@/src/hooks/useDocument";
 import { ParticipantField, ValueTypes } from "../../custom/ParticipantField";
 import { getLabelFromValue, situations } from "@/src/infra/comboboxValues";
 import { getSituationLabel, getSituationTitle } from "@/src/infra/teamUtils";
+import { ca } from "date-fns/locale";
 
 interface ViewEditParticipantProps {
   participant: Participant;
@@ -33,7 +34,6 @@ export const ViewEditParticipant = ({
 }: ViewEditParticipantProps) => {
   const { updateParticipant, isUpdateLoading } = useParticipant();
   const { refetchTeam } = useTeam();
-  const { assignDocument } = useDocument();
   const formSchema = z
     .object({
       address: z
@@ -225,7 +225,7 @@ export const ViewEditParticipant = ({
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     if (!form.formState.isDirty) {
       setIsEdit(!isEdit);
       return;
@@ -238,19 +238,6 @@ export const ViewEditParticipant = ({
       values.parentAuthorization,
     ].filter((doc) => doc.updated);
 
-    for (const doc of documentToUpdate) {
-      if (doc) {
-        assignDocument(
-          {
-            id: doc.id!,
-            name: doc.name!,
-            type: doc.type!,
-          },
-          participant.id!,
-          () => {},
-        );
-      }
-    }
     const updatedParticipant: ParticipantUpdate = {
       bike_size: (values.bikeSize?.toUpperCase() as Size) ?? null,
       t_shirt_size:
@@ -262,6 +249,20 @@ export const ViewEditParticipant = ({
       diet: values.diet ?? null,
       attestation_on_honour: values.attestationHonour,
     };
+    for (const doc of documentToUpdate) {
+      switch (doc.type) {
+        case "idCard":
+          updatedParticipant["id_card_id"] = doc.id;
+        case "medicalCertificate":
+          updatedParticipant["medical_certificate_id"] = doc.id;
+        case "parentAuthorization":
+          updatedParticipant["student_card_id"] = doc.id;
+        case "raidRules":
+          updatedParticipant["raid_rules_id"] = doc.id;
+        case "studentCard":
+          updatedParticipant["parent_authorization_id"] = doc.id;
+      }
+    }
     updateParticipant(updatedParticipant, participant.id, () => {
       toast({
         title: "Profil mis à jour",

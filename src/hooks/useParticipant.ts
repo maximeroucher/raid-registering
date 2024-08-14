@@ -78,7 +78,7 @@ export const useParticipant = () => {
               "Une erreur est survenue, veuillez réessayer plus tard",
             variant: "destructive",
           });
-        }
+        },
       },
     );
   };
