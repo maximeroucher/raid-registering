@@ -64,8 +64,8 @@ const InformationPage = () => {
                 <AccordionTrigger>Prix</AccordionTrigger>
                 <AccordionContent>
                   <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-4 w-full grid-cols-1 max-md:p-8 max-md:gap-4">
-                    <RaidPrice />
-                    <TShirtPrice />
+                    {/* <RaidPrice />
+                    <TShirtPrice /> */}
                     <PaymentLink />
                   </div>
                 </AccordionContent>
