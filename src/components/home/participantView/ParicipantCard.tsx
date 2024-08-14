@@ -18,6 +18,7 @@ import { getSituationLabel } from "@/src/infra/teamUtils";
 import { PaymentButton } from "./PaymentButton";
 import { usePrice } from "@/src/hooks/usePrice";
 import { ViewEditParticipant } from "./ViewEditParticipant";
+import { useInformation } from "@/src/hooks/useInformation";
 
 interface ParticipantCardProps {
   participant?: Participant;
@@ -28,7 +29,8 @@ export const ParticipantCard = ({
   participant,
   isCaptain,
 }: ParticipantCardProps) => {
-  const { price } = usePrice();
+  // const { price } = usePrice();
+  const { information } = useInformation();
   const [isEdit, setIsEdit] = useState(false);
 
   function toggleEdit() {
@@ -96,13 +98,39 @@ export const ParticipantCard = ({
                 <span className="font-semibold text-left my-auto col-span-2">
                   Paiement
                 </span>
-                {(!participant?.payment ||
+                {/* When paying by HelloAsso */}
+                {/* {(!participant?.payment ||
                   (participant.t_shirt_size && !participant.t_shirt_payment)) &&
                 getSituationLabel(participant?.situation ?? undefined) !==
                   "corporatepartner" &&
                 !!price?.student_price &&
                 !!price?.t_shirt_price ? (
                   <PaymentButton />
+                ) : (
+                  <Checkbox
+                    checked={participant?.payment}
+                    disabled
+                    className="col-span-4 ml-auto disabled:opacity-100"
+                  />
+                )} */}
+                {(!participant?.payment ||
+                  (participant.t_shirt_size && !participant.t_shirt_payment)) &&
+                getSituationLabel(participant?.situation ?? undefined) !==
+                  "corporatepartner" ? (
+                  <>
+                    {information?.payment_link ? (
+                      <Button
+                        className="col-span-4 ml-auto w-[100px]"
+                        onClick={() => {
+                          window.open(information!.payment_link!, "_blank");
+                        }}
+                      >
+                        {"Payer"}
+                      </Button>
+                    ) : (
+                      <span>{"Aucun lien"}</span>
+                    )}
+                  </>
                 ) : (
                   <Checkbox
                     checked={participant?.payment}
