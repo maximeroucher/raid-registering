@@ -11,7 +11,7 @@ import { Toaster } from "../components/ui/toaster";
 import { toast } from "../components/ui/use-toast";
 import { Suspense } from "react";
 import { ThemeProvider } from "../components/ui/theme";
-import PlausibleProvider from "next-plausible";
+import Script from "next/script";
 
 const inter = Outfit({ subsets: ["latin-ext"] });
 
@@ -38,8 +38,14 @@ export default function RootLayout({
         <meta charSet="utf-8" />
         <title>Inscription Raid</title>
         <link rel="shortcut icon" href="/favicon.ico" />
-        <PlausibleProvider domain="raid-registering.myecl.fr" />
       </head>
+
+      <Script
+        defer
+        data-domain="raid-registering.myecl.fr"
+        src="https://plausible.eclair.ec-lyon.fr/js/script.js"
+        strategy="lazyOnload"
+      />
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
