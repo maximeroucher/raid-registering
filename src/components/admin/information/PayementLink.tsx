@@ -43,7 +43,8 @@ export const PaymentLink = () => {
         setIsLoading(false);
         setIsEdit(false);
         form.reset({
-          payment_link: values.payment_link, });
+          payment_link: values.payment_link,
+        });
       },
     );
   }
@@ -96,12 +97,7 @@ export const PaymentLink = () => {
                 className={`$information?.payment_link && "text-green-700 hover:text-green-800 underline"} text-2xl font-bold h-8`}
               >
                 {information?.payment_link ? (
-                  <a
-                    target="_blank"
-                    href={
-                      information?.payment_link
-                    }
-                  >
+                  <a target="_blank" href={information?.payment_link}>
                     {"Lien de paiement"}
                   </a>
                 ) : (
