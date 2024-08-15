@@ -18,8 +18,7 @@ import { is } from "date-fns/locale";
 import { toast } from "../components/ui/use-toast";
 
 const clientId: string = "RaidRegistering";
-const redirectUrlHost: string =
-  process.env.NEXT_PUBLIC_REDIRECT_URL || "https://myecl.fr/static.html";
+const redirectUrlHost: string = `${process.env.NEXT_PUBLIC_FRONTEND_URL}/login`;
 const backUrl: string =
   process.env.NEXT_PUBLIC_BACKEND_URL || "https://hyperion.myecl.fr";
 const scopes: string[] = ["API"];
