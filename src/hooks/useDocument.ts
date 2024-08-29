@@ -1,14 +1,16 @@
 import { useQueryClient } from "@tanstack/react-query";
 import {
   useGetRaidDocumentDocumentId,
+  usePostRaidDocument,
   usePostRaidDocumentDocumentIdValidate,
 } from "../api/hyperionComponents";
-import { DocumentValidation } from "../api/hyperionSchemas";
+import { DocumentValidation, DocumentType } from "../api/hyperionSchemas";
 import axios from "axios";
 import { useDocumentsStore } from "../stores/documents";
 import { useState } from "react";
 import { useAuth } from "./useAuth";
 import { toast } from "../components/ui/use-toast";
+import { on } from "events";
 
 export const useDocument = () => {
   const backUrl: string =
@@ -17,15 +19,17 @@ export const useDocument = () => {
   const { token } = useAuth();
   const { documents } = useDocumentsStore();
   const [documentId, setDocumentId] = useState<string>("");
+  const { mutate: mutateUploadDocument } = usePostRaidDocument();
 
   const uploadDocument = (
     file: File,
+    documentType: string,
     callback: (documentId: string) => void,
   ) => {
     const formData = new FormData();
     formData.append("file", file);
     axios
-      .post(`${backUrl}/raid/document`, formData, {
+      .post(`${backUrl}/raid/document/${documentType}/`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
