@@ -26,7 +26,7 @@ export const useDocument = () => {
     const formData = new FormData();
     formData.append("file", file);
     axios
-      .post(`${backUrl}/raid/document/${documentType}/`, formData, {
+      .post(`${backUrl}/raid/document/${documentType}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
