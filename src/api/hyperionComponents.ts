@@ -18880,40 +18880,50 @@ export const useDeleteRaidTeamsTeamId = (
   });
 };
 
-export type PostRaidDocumentError = Fetcher.ErrorWrapper<{
+export type PostRaidDocumentDocumentTypePathParams = {
+  documentType: Schemas.DocumentType;
+};
+
+export type PostRaidDocumentDocumentTypeError = Fetcher.ErrorWrapper<{
   status: 422;
   payload: Schemas.HTTPValidationError;
 }>;
 
-export type PostRaidDocumentVariables = {
-  body: Schemas.BodyUploadDocumentRaidDocumentPost;
+export type PostRaidDocumentDocumentTypeVariables = {
+  body: Schemas.BodyUploadDocumentRaidDocumentDocumentTypePost;
+  pathParams: PostRaidDocumentDocumentTypePathParams;
 } & HyperionContext["fetcherOptions"];
 
 /**
  * Upload a document
  */
-export const fetchPostRaidDocument = (
-  variables: PostRaidDocumentVariables,
+export const fetchPostRaidDocumentDocumentType = (
+  variables: PostRaidDocumentDocumentTypeVariables,
   signal?: AbortSignal,
 ) =>
   hyperionFetch<
     Schemas.DocumentCreation,
-    PostRaidDocumentError,
-    Schemas.BodyUploadDocumentRaidDocumentPost,
+    PostRaidDocumentDocumentTypeError,
+    Schemas.BodyUploadDocumentRaidDocumentDocumentTypePost,
     {},
     {},
-    {}
-  >({ url: "/raid/document", method: "post", ...variables, signal });
+    PostRaidDocumentDocumentTypePathParams
+  >({
+    url: "/raid/document/{documentType}/",
+    method: "post",
+    ...variables,
+    signal,
+  });
 
 /**
  * Upload a document
  */
-export const usePostRaidDocument = (
+export const usePostRaidDocumentDocumentType = (
   options?: Omit<
     reactQuery.UseMutationOptions<
       Schemas.DocumentCreation,
-      PostRaidDocumentError,
-      PostRaidDocumentVariables
+      PostRaidDocumentDocumentTypeError,
+      PostRaidDocumentDocumentTypeVariables
     >,
     "mutationFn"
   >,
@@ -18921,11 +18931,11 @@ export const usePostRaidDocument = (
   const { fetcherOptions } = useHyperionContext();
   return reactQuery.useMutation<
     Schemas.DocumentCreation,
-    PostRaidDocumentError,
-    PostRaidDocumentVariables
+    PostRaidDocumentDocumentTypeError,
+    PostRaidDocumentDocumentTypeVariables
   >({
-    mutationFn: (variables: PostRaidDocumentVariables) =>
-      fetchPostRaidDocument({ ...fetcherOptions, ...variables }),
+    mutationFn: (variables: PostRaidDocumentDocumentTypeVariables) =>
+      fetchPostRaidDocumentDocumentType({ ...fetcherOptions, ...variables }),
     ...options,
   });
 };

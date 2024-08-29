@@ -237,7 +237,7 @@ export type BodyTokenAuthTokenPost = {
   code_verifier?: string | null;
 };
 
-export type BodyUploadDocumentRaidDocumentPost = {
+export type BodyUploadDocumentRaidDocumentDocumentTypePost = {
   /**
    * @format binary
    */
@@ -1731,7 +1731,7 @@ export type SignatureComplete = {
   document_id: string;
 };
 
-export type Size = "XS" | "S" | "M" | "L" | "XL";
+export type Size = "XS" | "S" | "M" | "L" | "XL" | "None";
 
 export type Status = {
   /**
