@@ -242,7 +242,7 @@ export const ViewEditParticipant = ({
       bike_size: (values.bikeSize?.toUpperCase() as Size) ?? null,
       t_shirt_size:
         (values.tShirtSize === "no"
-          ? null
+          ? "None"
           : (values.tShirtSize?.toUpperCase() as Size)) ?? null,
       situation: switchSituation(values),
       address: values.address ?? null,

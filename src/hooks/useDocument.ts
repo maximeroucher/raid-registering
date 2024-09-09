@@ -20,12 +20,13 @@ export const useDocument = () => {
 
   const uploadDocument = (
     file: File,
+    documentType: string,
     callback: (documentId: string) => void,
   ) => {
     const formData = new FormData();
     formData.append("file", file);
     axios
-      .post(`${backUrl}/raid/document`, formData, {
+      .post(`${backUrl}/raid/document/${documentType}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,

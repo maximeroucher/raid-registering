@@ -101,7 +101,7 @@ export const DocumentDialog = ({
               onDropAccepted={(files, _) => {
                 const file = files[0];
                 setIsUploading(true);
-                uploadDocument(file, (documentId) => {
+                uploadDocument(file, fileType, (documentId) => {
                   field.onChange({
                     name: file.name,
                     id: documentId,
