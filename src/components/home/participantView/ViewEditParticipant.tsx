@@ -255,11 +255,11 @@ export const ViewEditParticipant = ({
           updatedParticipant["id_card_id"] = doc.id;
         case "medicalCertificate":
           updatedParticipant["medical_certificate_id"] = doc.id;
-        case "parentAuthorization":
+        case "studentCard":
           updatedParticipant["student_card_id"] = doc.id;
         case "raidRules":
           updatedParticipant["raid_rules_id"] = doc.id;
-        case "studentCard":
+        case "parentAuthorization":
           updatedParticipant["parent_authorization_id"] = doc.id;
       }
     }
