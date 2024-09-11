@@ -125,7 +125,7 @@ export const RaidRules = ({ information }: RaidRulesProps) => {
                               string
                             >
                           }
-                          fileType="raid_rules"
+                          fileType="raidRules"
                           participantId="admin"
                           documentId={field.value?.id}
                         />
