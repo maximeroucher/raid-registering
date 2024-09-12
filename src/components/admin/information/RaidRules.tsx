@@ -48,7 +48,7 @@ export const RaidRules = ({ information }: RaidRulesProps) => {
       raid_rules: {
         name: information.raid_rules_id ?? undefined,
         id: information.raid_rules_id ?? undefined,
-        type: "raid_rules",
+        type: "raidRules",
       },
     },
   });
