@@ -10,7 +10,9 @@ export interface Stats {
 }
 
 export function getStats(seeAll: boolean, teams?: TeamPreview[]): Stats {
-  const filteredTeams = teams?.filter((team) => seeAll); // TODO: filter teams with a valid status
+  const filteredTeams = teams?.filter(
+    (team) => team.validation_progress === 100 || seeAll,
+  );
   const difficultyData = getDifficultyData(seeAll, filteredTeams);
   const meetingPlaceData = getMeetingPlaceData(seeAll, filteredTeams);
   const bikeSizeData = getBikeSizeData(seeAll, filteredTeams);
