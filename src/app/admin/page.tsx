@@ -43,7 +43,7 @@ const Dashboard = () => {
     {
       title: "Binômes constitués",
       value: twoMembersTeam?.length.toString() || "0",
-      description: `${allParticipants?.length - (twoMembersTeam?.length || 0)} participants sans binôme`,
+      description: `${allParticipants?.length - 2 * (twoMembersTeam?.length || 0)} participants sans binôme`,
       unit: undefined,
     },
     {
