@@ -37,7 +37,7 @@ const Dashboard = () => {
     {
       title: "Participants inscrits",
       value: allParticipants?.length.toString() || "0",
-      description: "inscription débutée",
+      description: "inscriptions débutées",
       unit: undefined,
     },
     {
@@ -58,7 +58,7 @@ const Dashboard = () => {
         teams
           ?.filter((team) => team.validation_progress === 100)
           .length.toString() || "0",
-      description: "dossier complet validé et payé",
+      description: "dossiers complets validés et payés",
       unit: undefined,
     },
     {
