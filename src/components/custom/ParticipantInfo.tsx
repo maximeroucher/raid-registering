@@ -147,7 +147,9 @@ export const ParticipantInfo = ({
       case isSize(value):
         return (
           <div className=" col-start-6 col-span-1">
-            <div className={`bg-zinc-200 px-2 rounded-md ${value !== "None" ? "w-8" : "w-28"} flex justify-center ml-auto dark:bg-zinc-700`}>
+            <div
+              className={`bg-zinc-200 px-2 rounded-md ${value !== "None" ? "w-8" : "w-28"} flex justify-center ml-auto dark:bg-zinc-700`}
+            >
               <span>{value !== "None" ? value : "Pas de TShirt"}</span>
             </div>
           </div>
