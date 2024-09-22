@@ -17,6 +17,8 @@ const Dashboard = () => {
   const { information } = useInformation();
   const router = useRouter();
 
+  const twoMembersTeam = teams?.filter((team) => team.second !== null);
+
   const allParticipants =
     (teams
       ?.map((team) => [team.captain, team.second])
@@ -36,6 +38,12 @@ const Dashboard = () => {
       title: "Participants inscrits",
       value: allParticipants?.length.toString() || "0",
       description: "inscription débutée",
+      unit: undefined,
+    },
+    {
+      title: "Binômes constitués",
+      value: twoMembersTeam?.length.toString() || "0",
+      description: `${allParticipants?.length - (twoMembersTeam?.length || 0)} participants sans binôme`,
       unit: undefined,
     },
     {
@@ -77,7 +85,7 @@ const Dashboard = () => {
     <div className="flex min-h-screen w-full flex-col">
       <TopBar />
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
-        <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
+        <div className="grid gap-4 md:grid-cols-3 md:gap-8 lg:grid-cols-5">
           {informationCard.map((info) => (
             <TeamInfoCard info={info} key={info.title} isLoaded={!isLoading} />
           ))}
