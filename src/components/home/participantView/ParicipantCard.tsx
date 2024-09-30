@@ -113,8 +113,7 @@ export const ParticipantCard = ({
                     className="col-span-4 ml-auto disabled:opacity-100"
                   />
                 )} */}
-                {(!participant?.payment ||
-                  (participant.t_shirt_size && !participant.t_shirt_payment)) &&
+                {!participant?.payment &&
                 getSituationLabel(participant?.situation ?? undefined) !==
                   "corporatepartner" ? (
                   <>
